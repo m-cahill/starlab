@@ -76,12 +76,12 @@ The project is also being built to be **clean enough to buy**: legible, ownable,
 
 The current high-level program shape is:
 
-1. **Foundation & Environment Lock**  
-2. **Replay & Data Plane**  
-3. **State & Representation**  
-4. **Evaluation & Baselines**  
-5. **Learning Agents & Showcase**  
-6. **Platform Expansion** *(only if earned)*
+1. **Governance, Runtime Surface, and Deterministic Run Substrate**  
+2. **Replay Intake, Provenance, and Data Plane**  
+3. **State, Representation, and Perception Bridge**  
+4. **Benchmark Contracts, Baselines, and Evaluation**  
+5. **Learning Paths, Evidence Surfaces, and Flagship Proof**  
+6. **Expansion Decision and Platform Boundary Review** *(only if earned)*
 
 STARLAB is intentionally **SC2-first**. Multi-environment expansion is a later possibility, not a starting assumption.
 
@@ -106,13 +106,13 @@ These are planning lenses, not promises. The realistic early path is:
 
 ## Current status
 
-**Status:** Post-M00 — next: M01 (environment lock)
+**Status:** M00 merged to `main`; **M01** delivered on branch — [PR #2](https://github.com/m-cahill/starlab/pull/2) (pending merge); next: **M02** (deterministic match execution harness) after M01 lands.
 
-STARLAB has completed governance bootstrap (**M00**, merged [PR #1](https://github.com/m-cahill/starlab/pull/1) to `main`): canonical ledger, governance docs, minimal CI, and deployment **posture** (Netlify / Render targets; no live deploys).
+STARLAB completed governance bootstrap (**M00**, [PR #1](https://github.com/m-cahill/starlab/pull/1)) and implements **M01** (SC2 runtime surface decision and environment lock): runtime docs under `docs/runtime/`, typed path probe in `starlab.sc2`, ledger and rights updates — **without** claiming match execution or replay parsing correctness yet.
 
 Up next:
 
-- environment lock and runtime baseline (M01)
+- merge **M01** ([PR #2](https://github.com/m-cahill/starlab/pull/2)), then **M02**
 
 ---
 
@@ -145,6 +145,8 @@ Other supporting docs should stay aligned to it.
 | `docs/public_private_boundary.md` | Public vs protected surfaces |
 | `docs/replay_data_provenance.md` | Replay/data interim policy |
 | `docs/rights_register.md` | Rights and provenance inventory |
+| `docs/runtime/sc2_runtime_surface.md` | SC2 runtime boundary decision (M01) |
+| `docs/runtime/environment_lock.md` | Environment lock and local install posture (M01) |
 | `docs/branding_and_naming.md` | Naming and brand diligence |
 | `docs/deployment/deployment_posture.md` | Future Netlify / Render posture (not active deployment) |
 | `CONTRIBUTING.md` | Contribution expectations |
@@ -202,3 +204,5 @@ Use is limited to evaluation and verification as described in the LICENSE.
 The current objective is simple:
 
 > Build a credible RTS research lab before trying to build a headline-grabbing agent.
+
+**M01 note:** live Battle.net / local SC2 installs may exist on developer machines; that **presence** is not the same as **governed execution proof** — see `docs/runtime/environment_lock.md` and milestone M02.

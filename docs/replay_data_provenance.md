@@ -2,7 +2,9 @@
 
 ## Purpose
 
-Replay files, maps, ladder-derived data, screenshots, and derived labels have **independent rights risk** from source code. This policy defines interim rules until a fuller corpus program exists (refine in M01+ as needed).
+Replay files, maps, ladder-derived data, screenshots, and derived labels have **independent rights risk** from source code. This policy defines interim rules until a fuller corpus program exists (refine with replay intake milestones, e.g. M07+).
+
+**Blizzard materials:** Official SC2 API resources reference Linux packages, map packs, and replay packs; access may require agreement to Blizzard’s **AI and Machine Learning License** and other applicable terms. STARLAB does **not** commit those assets to the repository; acquire locally under the governing terms and record posture in `docs/rights_register.md`.
 
 ## Allowed sources (interim)
 
@@ -57,6 +59,10 @@ If provenance or redistribution rights are **unclear**, the asset:
 | Screenshots | Blizzard/content policy; avoid bulk redistribution |
 | Derived labels | Provenance follows parent replay; no cleaner rights than source |
 
-## M01 follow-up (conditionally)
+## M01 / M02+ follow-up (conditionally)
 
-Tighten ingestion paths, hash formats, and registry fields once environment lock and first replay binding exist.
+Tighten ingestion paths, hash formats, and registry fields once replay intake policy (M07) and binding pipelines exist. M01 documents environment lock and runtime boundary only — not ingestion automation.
+
+## Canonical corpus promotion (ledger rule)
+
+No replay, map, ladder-derived asset, or derived label is promoted into a **canonical** STARLAB corpus without explicit provenance status and redistribution posture recorded (see `docs/starlab.md` §9).

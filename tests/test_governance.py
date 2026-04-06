@@ -13,6 +13,8 @@ _GOVERNANCE_DOCS = [
     "docs/branding_and_naming.md",
     "docs/deployment/deployment_posture.md",
     "docs/deployment/env_matrix.md",
+    "docs/runtime/sc2_runtime_surface.md",
+    "docs/runtime/environment_lock.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -62,3 +64,59 @@ def test_ci_workflow_exists() -> None:
 
 def test_pyproject_exists() -> None:
     assert (REPO_ROOT / "pyproject.toml").is_file()
+
+
+def test_ledger_has_m01_runtime_title_and_m32_map() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "SC2 Runtime Surface Decision & Environment Lock" in text
+    assert "M32" in text
+    assert "Platform Boundary Review & Multi-Environment Charter" in text
+    assert "Governance, Runtime Surface, and Deterministic Run Substrate" in text
+
+
+def test_ledger_canonical_corpus_promotion_rule() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "Canonical corpus promotion" in text
+    assert "canonical STARLAB corpus" in text
+
+
+def test_od005_resolved_row() -> None:
+    lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("| OD-005"):
+            assert "Resolved" in stripped
+            assert "s2client-proto" in stripped or "s2client" in stripped.lower()
+            return
+    raise AssertionError("OD-005 row not found in ledger")
+
+
+def test_current_milestone_is_m02() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M02" in section
+    assert "Deterministic Match Execution Harness" in section
+
+
+def test_m01_complete_in_milestone_table() -> None:
+    lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
+    for line in lines:
+        if line.strip().startswith("| M01 "):
+            assert "Complete" in line
+            return
+    raise AssertionError("M01 milestone row not found")
+
+
+def test_m02_planned_next_in_milestone_table() -> None:
+    lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
+    for line in lines:
+        if line.strip().startswith("| M02 "):
+            assert "Planned" in line
+            return
+    raise AssertionError("M02 milestone row not found")
+
+
+def test_m01_changelog_entry_present() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "### 2026-04-06 — M01 closeout" in text
+    assert "OD-005" in text

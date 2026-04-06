@@ -67,7 +67,7 @@ jobs:
         shell: bash
         run: |
           {
-            echo "## M00 governance CI"
+            echo "## STARLAB CI summary"
             echo ""
             echo "| Step | Result |"
             echo "|------|--------|"
