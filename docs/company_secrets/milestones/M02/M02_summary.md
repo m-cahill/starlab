@@ -52,7 +52,7 @@ Without M02, the project would have **no** governed execution harness or normali
 | Layer | Evidence |
 |-------|----------|
 | Local (2026-04-06) | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — all exit 0; `python -m starlab.sc2.run_match --help` exit 0. |
-| PR-head CI | Run `24053430560` — **success** on head `3952c4071d82a77e633b0cd428da19caac2720ff` — see `M02_run1.md`. |
+| PR-head CI | Run `24053475644` — **success** on head `bfab038a8f7a4908a5a909131b402ba7909463da` — see `M02_run1.md`. |
 | **Missing for full M02 claim** | Two local **burnysc2** runs on the same machine with matching normalized `artifact_hash` **not yet recorded** in milestone evidence files (templates only). |
 
 ---
@@ -94,7 +94,7 @@ Without M02, the project would have **no** governed execution harness or normali
 |-----------|--------|----------|
 | Harness + fake path + tests + docs | **Met** | Code + PR #3 + green PR-head CI |
 | Optional real adapter behind extra | **Met** | `sc2-harness` / `burnysc2_adapter.py` |
-| CI green without SC2 | **Met** | Run `24053430560` |
+| CI green without SC2 | **Met** | Run `24053475644` |
 | Local real execution + determinism check | **Not met in repo evidence** | Templates unfilled |
 | Merge to `main` | **Pending** | PR open |
 
@@ -119,7 +119,7 @@ Without M02, the project would have **no** governed execution harness or normali
 |-----------|--------|
 | Branch | `m02-deterministic-match-execution-harness` |
 | PR | https://github.com/m-cahill/starlab/pull/3 |
-| PR head (at CI) | `3952c4071d82a77e633b0cd428da19caac2720ff` |
-| PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24053430560 |
+| PR head (at CI) | `bfab038a8f7a4908a5a909131b402ba7909463da` |
+| PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24053475644 |
 | Plan | `docs/company_secrets/milestones/M02/M02_plan.md` |
 | Run analysis | `M02_run1.md` |
