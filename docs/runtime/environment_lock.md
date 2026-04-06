@@ -13,11 +13,11 @@
 - **Python 3.11.x** only, as pinned in `pyproject.toml` (`requires-python = ">=3.11,<3.12"`).  
 - CI runs on **3.11**; local dev should match CI for governance checks.
 
-## Package / dependency posture (M01)
+## Package / dependency posture (M01 / M02)
 
-- **No SC2-related Python packages** are required in M01 (`pyproject.toml` remains free of `s2protocol`, `python-sc2`, PySC2, etc.).  
-- **M02** is intended to introduce **optional** runtime dependencies and wiring (e.g. `s2protocol` for decode experiments, clients/adapters) under explicit milestone scope.  
-- M01’s **probe** is **path/config detection only** — no Blizzard binaries shipped, no PyPI SC2 stack in CI.
+- **M01:** Default install has **no** SC2-related Python packages (`pyproject.toml` has no SC2 stack by default).  
+- **M02:** Optional extra **`sc2-harness`** installs **`burnysc2`** for the real match harness adapter only; CI continues to use **`pip install -e ".[dev]"`** (no SC2 client libraries).  
+- The **probe** remains **path/config detection only** — no Blizzard binaries shipped from PyPI.
 
 ## Environment variables and path conventions
 
@@ -31,6 +31,7 @@ The following variables are read by `starlab.sc2.env_probe` (see precedence in c
 | `STARLAB_SC2_REPLAYS_DIR` | Directory for local replay storage (replays not committed). |
 | `STARLAB_SC2_BASE_BUILD` | Optional string for build / base version reporting (e.g. for lineage). |
 | `STARLAB_SC2_DATA_VERSION` | Optional string for data version / bundle identity when known. |
+| `SC2PATH` | Used by BurnySc2 to locate the SC2 install; the M02 harness sets this from `STARLAB_SC2_ROOT` when that variable is set (see `docs/runtime/match_execution_harness.md`). |
 
 **Precedence (summary):**
 
@@ -80,6 +81,12 @@ Developers with a local SC2 install may run:
 
 ```bash
 python -m starlab.sc2.env_probe --json
+```
+
+For bounded match execution (M02), after `pip install -e ".[sc2-harness]"`, use a JSON config and:
+
+```bash
+python -m starlab.sc2.run_match --config path/to/config.json --output-dir path/to/out
 ```
 
 Use **`--redact`** when pasting output into milestone artifacts (user-specific path segments).

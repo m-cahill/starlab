@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, and `docs/runtime/environment_lock.md`.  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, and (for execution harness scope) `docs/runtime/match_execution_harness.md`.  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -311,6 +311,8 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Benchmark integrity | Not yet proved |
 | Learning or agent capability | Not yet proved |
 
+**Local harness vs portability:** a **local deterministic harness proof** (same machine, same config, normalized STARLAB artifact hash) is a **narrower** claim than **cross-host reproducibility** or **cross-install portability**. The ledger uses “controlled deterministic match execution” only in the harness-scoped sense once M02 is closed with evidence.
+
 ### Assumed vs owned guarantees
 
 | Class | Meaning |
@@ -337,11 +339,13 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ### M02 — Deterministic Match Execution Harness
 
-**Status:** Planned (next)
+**Status:** Planned (next) — harness code, fake adapter (CI), and BurnySc2 adapter (optional extra) land on the milestone branch; **controlled deterministic match execution** is claimed only after local evidence and honest ledger closeout.
 
 **Goal:** Build a deterministic match execution harness that proves controlled execution under the M01 runtime boundary — without claiming full replay analytics or benchmark validity.
 
-**Note:** M00 and M01 closeout details are recorded in §18 and the changelog.
+**Primary references:** `docs/runtime/match_execution_harness.md`, optional dependency group `sc2-harness` (`burnysc2`), CLI `python -m starlab.sc2.run_match`.
+
+**Note:** M00 and M01 closeout details are recorded in §18 and the changelog. Replay binding, canonical run artifacts, and benchmark integrity remain **not** proved in M02.
 
 ---
 

@@ -15,6 +15,7 @@ _GOVERNANCE_DOCS = [
     "docs/deployment/env_matrix.md",
     "docs/runtime/sc2_runtime_surface.md",
     "docs/runtime/environment_lock.md",
+    "docs/runtime/match_execution_harness.md",
 ]
 
 _PLACEHOLDER_READMES = [

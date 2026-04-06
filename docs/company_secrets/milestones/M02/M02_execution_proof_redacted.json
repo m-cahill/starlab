@@ -1,0 +1,5 @@
+{
+  "_comment": "Replace with a redacted copy of match_execution_proof.json after a local burnysc2 run (use --redact on CLI).",
+  "artifact_hash": "<fill>",
+  "schema_version": "match_execution_proof.v1"
+}
