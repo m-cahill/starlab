@@ -2,8 +2,8 @@
 
 **Audit mode:** DELTA AUDIT  
 **Milestone ID:** M02  
-**Current SHA (PR head):** `bfab038a8f7a4908a5a909131b402ba7909463da`  
-**Diff range (informative):** `main...bfab038a8f7a4908a5a909131b402ba7909463da` (merge base not re-resolved in this document)  
+**Current SHA (PR head):** `061c2126cc59b3ce4d662c58240216343c21f71a`  
+**Diff range (informative):** `main...061c2126cc59b3ce4d662c58240216343c21f71a` (merge base not re-resolved in this document)  
 **Authoritative CI:** [CI run 24053475644](https://github.com/m-cahill/starlab/actions/runs/24053475644) — **success** (PR event, head SHA above)  
 **Date:** 2026-04-06
 
@@ -63,7 +63,7 @@ M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **
 
 ## 6. Verdict
 
-**AUDIT RESULT:** ✅ **Approve merge from engineering/CI perspective** for PR #3 at SHA `bfab038…`, conditioned on **maintaining honest ledger wording** until local evidence is filed.
+**AUDIT RESULT:** ✅ **Approve merge from engineering/CI perspective** for PR #3 at SHA `061c212…`, conditioned on **maintaining honest ledger wording** until local evidence is filed.
 
 **Do not** certify M02 **milestone closeout** until:
 
