@@ -454,7 +454,8 @@ This section should be filled as milestones close.
 | Event | Workflow run | Conclusion | URL |
 | ----- | ------------ | ---------- | --- |
 | PR #1 head | `24015581129` | success | https://github.com/m-cahill/starlab/actions/runs/24015581129 |
-| `main` after merge | `24015599413` | success | https://github.com/m-cahill/starlab/actions/runs/24015599413 |
+| `main` after merge (`f9203dd…`) | `24015599413` | success | https://github.com/m-cahill/starlab/actions/runs/24015599413 |
+| `main` after M00 evidence finalization (`523993e…`) | `24015634285` | success | https://github.com/m-cahill/starlab/actions/runs/24015634285 |
 
 **M00 milestone artifacts:** `docs/company_secrets/milestones/M00/` (`M00_summary.md`, `M00_audit.md`, `M00_run1.md`, etc.)
 
@@ -517,7 +518,7 @@ It should always answer, with minimal ambiguity:
 ### 2026-04-06 — M00 evidence finalization (PR #1 merged)
 
 - Merged [PR #1](https://github.com/m-cahill/starlab/pull/1); merge commit `f9203dd555ea267bc2d72c3470b174ca35a23788`; PR head `5dcb6cf6f95af23b58c6af202d58a7bcad1d0b91`
-- Authoritative CI: PR-head run `24015581129` (success); post-merge `main` run `24015599413` (success)
+- Authoritative CI: PR-head run `24015581129` (success); post-merge `main` run `24015599413` (success); post–evidence-finalization `main` run `24015634285` (success) on `523993edb22938e13bdbf308bb511c204ddd71a6`
 - Completed `M00_summary.md`, `M00_audit.md`, `M00_run1.md` under `docs/company_secrets/milestones/M00/`
 - Updated §18 closeout ledger and score trend with concrete evidence
 
