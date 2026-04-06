@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M01 merged to `main` ([PR #2](https://github.com/m-cahill/starlab/pull/2)); **M02** is next  
+**Status:** Active — M01 on `main` ([PR #2](https://github.com/m-cahill/starlab/pull/2)); **M02** harness in [PR #3](https://github.com/m-cahill/starlab/pull/3) (pre-merge; PR-head CI green; **local narrow-harness evidence recorded** — two `burnysc2` runs, matching `artifact_hash`; see `docs/company_secrets/milestones/M02/`)  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, and `docs/runtime/environment_lock.md`.  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, and (for execution harness scope) `docs/runtime/match_execution_harness.md`.  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -155,7 +155,7 @@ Planned program arc (33 milestones, M00–M32):
 | --------- | ---- | ----- | ------ | --- | ----------- |
 | M00 | Governance Bootstrap & Ledger Initialization | I | Complete | v0.0.0-m00 | — |
 | M01 | SC2 Runtime Surface Decision & Environment Lock | I | Complete | v0.0.1-m01 | — |
-| M02 | Deterministic Match Execution Harness | I | Planned | v0.0.2-m02 | — |
+| M02 | Deterministic Match Execution Harness | I | Planned (PR [#3](https://github.com/m-cahill/starlab/pull/3) open) | v0.0.2-m02 | — |
 | M03 | Run Identity & Lineage Seed | I | Planned | v0.0.3-m03 | — |
 | M04 | Replay Binding to Run Identity | I | Planned | v0.0.4-m04 | — |
 | M05 | Canonical Run Artifact v0 | I | Planned | v0.0.5-m05 | — |
@@ -311,6 +311,8 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Benchmark integrity | Not yet proved |
 | Learning or agent capability | Not yet proved |
 
+**Local harness vs portability:** a **local deterministic harness proof** (same machine, same config, normalized STARLAB artifact hash) is a **narrower** claim than **cross-host reproducibility** or **cross-install portability**. The ledger uses “controlled deterministic match execution” only in the harness-scoped sense once M02 is closed with evidence.
+
 ### Assumed vs owned guarantees
 
 | Class | Meaning |
@@ -337,11 +339,13 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ### M02 — Deterministic Match Execution Harness
 
-**Status:** Planned (next)
+**Status:** **Pre-merge / merge-readiness** — implementation on branch [`m02-deterministic-match-execution-harness`](https://github.com/m-cahill/starlab/tree/m02-deterministic-match-execution-harness); PR [#3](https://github.com/m-cahill/starlab/pull/3) open; **authoritative PR-head CI** run [`24054732181`](https://github.com/m-cahill/starlab/actions/runs/24054732181) (**success**) on PR head `290304a3ad3986029879c183f4e40159e7f5792c` (re-verify after newer pushes). **Local burny evidence (2026-04-06 recovery):** two successful same-config runs produced **matching** normalized `artifact_hash` values (`b23172cb457b7645d796c30cf36baf96229efa3af954190788370ba5ea464e53`) — see `M02_determinism_check.md`, `M02_local_execution_note.md`, `M02_execution_proof_redacted.json`. Formal **§10** ledger “proved” language for **controlled deterministic match execution** still awaits **M02 closeout on `main`** (merge + governance rows), not merely local evidence.
 
 **Goal:** Build a deterministic match execution harness that proves controlled execution under the M01 runtime boundary — without claiming full replay analytics or benchmark validity.
 
-**Note:** M00 and M01 closeout details are recorded in §18 and the changelog.
+**Primary references:** `docs/runtime/match_execution_harness.md`, optional dependency group `sc2-harness` (`burnysc2`), CLI `python -m starlab.sc2.run_match`.
+
+**Note:** M00 and M01 closeout details are recorded in §18 and the changelog. Replay binding, canonical run artifacts, benchmark integrity, and **cross-host reproducibility** remain **not** proved in M02.
 
 ---
 
@@ -567,6 +571,19 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-06 — M02 local evidence recovery (map path + two successful burny runs)
+
+- **Recovery session:** placed a real `.SC2Map` file (pysc2 mini-game `MoveToBeacon`; see `M02_local_execution_note.md`) under gitignored `_local_maps/`; fixed explicit map path resolution to **absolute** paths in `starlab.sc2.maps` so python-sc2 does not mis-resolve repo-relative paths under install `Maps/`.
+- **Result:** two `python -m starlab.sc2.run_match … --redact` runs with the same committed config — **exit 0**; **matching** `artifact_hash` recorded in `M02_determinism_check.md`; redacted proof JSON committed as `M02_execution_proof_redacted.json`.
+- **Not merged** to `main` in this update; PR **#3** remains the merge vehicle when review completes.
+
+### 2026-04-06 — M02 harness: PR #3 opened (pre-merge; not closed on `main`)
+
+- Opened [PR #3](https://github.com/m-cahill/starlab/pull/3) (**M02: deterministic match execution harness**) from `m02-deterministic-match-execution-harness`; current PR head `290304a3ad3986029879c183f4e40159e7f5792c` (supersede with current branch tip after pushes; early local evidence in commit `5ec0ccb…` was **blocked** — see milestone files)
+- **Authoritative PR-head CI** for that tip: workflow **CI** run [`24054732181`](https://github.com/m-cahill/starlab/actions/runs/24054732181) — **success** (earlier green runs on older tips: `24054586191` on `c03691b…`; `24054529734` on `5ec0ccb…`; `24053526611` on `061c212…`; `24053475644` on `bfab038…`; `24053430560` on `3952c40…`; `24053381609` on `08fb582…`; `24053317502` on `10a2b13…`; `24053264747` on `22b2b57…`; `24053218335` on `d80ae12…`; `24052325999` on `f457cf5…`; `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`)
+- **Not merged** to `main` at this changelog entry; **local real-execution / determinism evidence** for M02 remains **pending** (CI is SC2-free by design)
+- Milestone artifacts: `M02_run1.md`, `M02_summary.md`, `M02_audit.md` under `docs/company_secrets/milestones/M02/`
 
 ### 2026-04-06 — M01 merged to `main` (PR #2)
 

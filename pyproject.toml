@@ -13,6 +13,10 @@ authors = [{ name = "Michael Cahill" }]
 dependencies = []
 
 [project.optional-dependencies]
+# Local SC2 match harness (BurnySc2); not used in CI.
+sc2-harness = [
+    "burnysc2>=7.2,<8",
+]
 dev = [
     "ruff>=0.4",
     "mypy>=1.8",
@@ -41,6 +45,10 @@ packages = ["starlab", "tests"]
 [[tool.mypy.overrides]]
 module = "tests.*"
 disallow_untyped_defs = false
+
+[[tool.mypy.overrides]]
+module = "starlab.sc2.adapters.burnysc2_adapter"
+ignore_errors = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -147,6 +147,7 @@ Other supporting docs should stay aligned to it.
 | `docs/rights_register.md` | Rights and provenance inventory |
 | `docs/runtime/sc2_runtime_surface.md` | SC2 runtime boundary decision (M01) |
 | `docs/runtime/environment_lock.md` | Environment lock and local install posture (M01) |
+| `docs/runtime/match_execution_harness.md` | Bounded match harness and proof artifact (M02) |
 | `docs/branding_and_naming.md` | Naming and brand diligence |
 | `docs/deployment/deployment_posture.md` | Future Netlify / Render posture (not active deployment) |
 | `CONTRIBUTING.md` | Contribution expectations |
@@ -206,3 +207,7 @@ The current objective is simple:
 > Build a credible RTS research lab before trying to build a headline-grabbing agent.
 
 **M01 note:** live Battle.net / local SC2 installs may exist on developer machines; that **presence** is not the same as **governed execution proof** — see `docs/runtime/environment_lock.md` and milestone M02.
+
+**M02 harness (local):** optional `pip install -e ".[sc2-harness]"`, then `python -m starlab.sc2.run_match --config ... --output-dir ...` (see `docs/runtime/match_execution_harness.md`). CI uses the **fake** adapter only.
+
+**M02 merge status:** [PR #3](https://github.com/m-cahill/starlab/pull/3) tracks the harness; PR-head CI is green at the recorded tip. **Local burny session** is documented under `docs/company_secrets/milestones/M02/` (2026-04-06: **no** successful proof-producing runs — missing map file). **Two successful runs with `artifact_hash` comparison** is still required before the narrow harness proof can be claimed and M02 closed on `main` (see `docs/starlab.md` §11).
