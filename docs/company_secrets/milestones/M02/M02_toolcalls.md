@@ -28,7 +28,7 @@ Initialize when M02 work begins.
 
 **Branch:** `m02-deterministic-match-execution-harness`  
 **Commit SHA (pre–closeout-prep verification):** `888407868cbdd00ca124e2b496f9ca14f909b0fc`  
-**Commit SHA (current PR tip after CI reference alignment):** `5f5c8a52684b7bc29642b8d52ba5758d21f28f20`
+**Commit SHA (current PR tip after ledger alignment):** `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a`
 
 | Command | Result |
 |---------|--------|
@@ -49,37 +49,32 @@ Initialize when M02 work begins.
 | Branch | `m02-deterministic-match-execution-harness` |
 | PR | **#3** — https://github.com/m-cahill/starlab/pull/3 |
 | Title | M02: deterministic match execution harness |
-| PR head SHA | `5f5c8a52684b7bc29642b8d52ba5758d21f28f20` |
+| PR head SHA | `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a` |
 
 ---
 
-## 2026-04-06 — Authoritative PR-head CI (merge gating)
+## 2026-04-06 — Authoritative PR-head CI (merge gating) — **single reference**
 
 | Field | Value |
 |-------|--------|
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
-| Run ID (authoritative, current tip) | **24052230417** |
-| URL | https://github.com/m-cahill/starlab/actions/runs/24052230417 |
+| Run ID (authoritative, current tip) | **24052325999** |
+| URL | https://github.com/m-cahill/starlab/actions/runs/24052325999 |
 | Event | `pull_request` |
-| Head SHA | `5f5c8a52684b7bc29642b8d52ba5758d21f28f20` |
+| Head SHA | `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a` |
 | Conclusion | **success** |
-| Authoritative for merge? | **Yes** — green run on latest PR tip |
+| Authoritative for merge? | **Yes** — green run on latest PR tip (verified `gh run list` / `gh pr view 3`) |
 
-**Earlier PR-head runs (superseded):** `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
+**Earlier PR-head runs (older tips; not the current ledger contract):** `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
 
 **Analysis document:** `M02_run1.md`
 
-**Local evidence gap:** Real SC2 runs **not** performed in CI; evidence files explicitly **PENDING** until human completes burny×2 locally.
+**Local evidence gap (Case B):** Real SC2 runs **not** performed in CI; `M02_local_execution_note.md` / `M02_determinism_check.md` / redacted proof JSON remain **PENDING** until human completes burny×2 locally.
 
 ---
 
-## 2026-04-06 — PR tip after final doc commit (supersedes rows above for “latest green”)
+## 2026-04-06 — Case B: ledger alignment to latest PR-head CI (no merge)
 
-| Field | Value |
-|-------|--------|
-| PR head SHA | `79b341aa53a7102b17db102c8e402d89d04875d4` |
-| CI run | **24052291273** — https://github.com/m-cahill/starlab/actions/runs/24052291273 — **success** |
-
-Ledger §11 / `M02_run1.md` may still cite the prior witnessed pair (`5f5c8a5` + `24052230417`); the **latest** authoritative green for merge gating is **24052291273** on **`79b341a`**. Refresh cross-references on the next doc pass if you need a single consistent SHA everywhere.
+- **Tool:** Write — **Purpose:** Align `docs/starlab.md` §11 + §23, `M02_run1.md`, `M02_summary.md`, `M02_audit.md`, `M02_toolcalls.md`, and `docs/runtime/match_execution_harness.md` to authoritative pair **PR head** `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a` + **CI** run `24052325999` (single reference; supersede stale `5f5c8a5…` / `24052230417` rows). **Did not** merge PR #3; local real-execution evidence still **pending**.
 
 ---
