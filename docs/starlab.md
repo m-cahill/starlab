@@ -339,7 +339,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ### M02 — Deterministic Match Execution Harness
 
-**Status:** **Pre-merge / merge-readiness** — implementation on branch [`m02-deterministic-match-execution-harness`](https://github.com/m-cahill/starlab/tree/m02-deterministic-match-execution-harness); PR [#3](https://github.com/m-cahill/starlab/pull/3) open; **authoritative PR-head CI** run [`24053381609`](https://github.com/m-cahill/starlab/actions/runs/24053381609) (**success**) on PR head `08fb582fa8fe969a02de82257d64dedfea2ff35f`. **Local burny×2 determinism evidence** is **not** yet recorded in-repo (see `docs/company_secrets/milestones/M02/`). **Do not** mark “controlled deterministic match execution” as **proved** in §10 until that evidence exists and closeout is completed on `main`.
+**Status:** **Pre-merge / merge-readiness** — implementation on branch [`m02-deterministic-match-execution-harness`](https://github.com/m-cahill/starlab/tree/m02-deterministic-match-execution-harness); PR [#3](https://github.com/m-cahill/starlab/pull/3) open; **authoritative PR-head CI** run [`24053430560`](https://github.com/m-cahill/starlab/actions/runs/24053430560) (**success**) on PR head `3952c4071d82a77e633b0cd428da19caac2720ff`. **Local burny×2 determinism evidence** is **not** yet recorded in-repo (see `docs/company_secrets/milestones/M02/`). **Do not** mark “controlled deterministic match execution” as **proved** in §10 until that evidence exists and closeout is completed on `main`.
 
 **Goal:** Build a deterministic match execution harness that proves controlled execution under the M01 runtime boundary — without claiming full replay analytics or benchmark validity.
 
@@ -574,8 +574,8 @@ It should always answer, with minimal ambiguity:
 
 ### 2026-04-06 — M02 harness: PR #3 opened (pre-merge; not closed on `main`)
 
-- Opened [PR #3](https://github.com/m-cahill/starlab/pull/3) (**M02: deterministic match execution harness**) from `m02-deterministic-match-execution-harness`; current PR head `08fb582fa8fe969a02de82257d64dedfea2ff35f` (ledger aligned to latest witnessed green tip; **Case B** — local real-execution evidence still pending)
-- **Authoritative PR-head CI** for that tip: workflow **CI** run [`24053381609`](https://github.com/m-cahill/starlab/actions/runs/24053381609) — **success** (earlier green runs on older tips: `24053317502` on `10a2b13…`; `24053264747` on `22b2b57…`; `24053218335` on `d80ae12…`; `24052325999` on `f457cf5…`; `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`)
+- Opened [PR #3](https://github.com/m-cahill/starlab/pull/3) (**M02: deterministic match execution harness**) from `m02-deterministic-match-execution-harness`; current PR head `3952c4071d82a77e633b0cd428da19caac2720ff` (ledger aligned to latest witnessed green tip; **Case B** — local real-execution evidence still pending)
+- **Authoritative PR-head CI** for that tip: workflow **CI** run [`24053430560`](https://github.com/m-cahill/starlab/actions/runs/24053430560) — **success** (earlier green runs on older tips: `24053381609` on `08fb582…`; `24053317502` on `10a2b13…`; `24053264747` on `22b2b57…`; `24053218335` on `d80ae12…`; `24052325999` on `f457cf5…`; `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`)
 - **Not merged** to `main` at this changelog entry; **local real-execution / determinism evidence** for M02 remains **pending** (CI is SC2-free by design)
 - Milestone artifacts: `M02_run1.md`, `M02_summary.md`, `M02_audit.md` under `docs/company_secrets/milestones/M02/`
 
