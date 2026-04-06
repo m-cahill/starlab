@@ -96,6 +96,15 @@ This file records PR-head CI for **M01** on [PR #2](https://github.com/m-cahill/
 | Conclusion | **success** |
 | URL | https://github.com/m-cahill/starlab/actions/runs/24049868109 |
 
+**Run 3 — §18 / `M01_run1` post-merge alignment**
+
+| Field | Value |
+|-------|--------|
+| Trigger commit | `aa46fc42ea8377fa193bd7d77a6915ad9399f977` |
+| Run ID | `24049956985` |
+| Conclusion | **success** |
+| URL | https://github.com/m-cahill/starlab/actions/runs/24049956985 |
+
 ---
 
 ## Next actions
