@@ -1,5 +1,6 @@
 {
-  "_comment": "Replace with a redacted copy of match_execution_proof.json after a local burnysc2 run (use --redact on CLI).",
-  "artifact_hash": "<fill>",
+  "_status": "PENDING",
+  "_comment": "Replace this stub with a redacted copy of match_execution_proof.json after a successful local burnysc2 run. Use: python -m starlab.sc2.run_match --config ... --output-dir ... --redact",
+  "artifact_hash": null,
   "schema_version": "match_execution_proof.v1"
 }

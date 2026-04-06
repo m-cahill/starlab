@@ -1,8 +1,13 @@
-# M02 — Local real-execution note (template)
+# M02 — Local real-execution note
 
-**Status:** Fill after two local runs with `adapter: burnysc2` on the same machine.
+**Status:** **PENDING — not executed in Cursor / CI.**  
+This file remains a **template** until the repository owner runs two local `burnysc2` harness invocations on a machine with a configured StarCraft II install and fills the sections below.
 
-Record:
+**Why pending:** Real SC2 execution cannot be completed in GitHub Actions; it is intentionally **out of CI** for M02.
+
+---
+
+## When completed, record
 
 - Date/time (UTC)
 - `STARLAB_SC2_ROOT` / `STARLAB_SC2_MAPS_DIR` posture (redacted if needed)

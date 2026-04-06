@@ -209,3 +209,5 @@ The current objective is simple:
 **M01 note:** live Battle.net / local SC2 installs may exist on developer machines; that **presence** is not the same as **governed execution proof** — see `docs/runtime/environment_lock.md` and milestone M02.
 
 **M02 harness (local):** optional `pip install -e ".[sc2-harness]"`, then `python -m starlab.sc2.run_match --config ... --output-dir ...` (see `docs/runtime/match_execution_harness.md`). CI uses the **fake** adapter only.
+
+**M02 merge status:** [PR #3](https://github.com/m-cahill/starlab/pull/3) tracks the harness; PR-head CI is green at the recorded tip. **Local burny×2 determinism evidence** is still required before M02 can be honestly closed on `main` (see `docs/starlab.md` §11).
