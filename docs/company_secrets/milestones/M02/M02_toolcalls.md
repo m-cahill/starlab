@@ -72,3 +72,14 @@ Initialize when M02 work begins.
 **Local evidence gap:** Real SC2 runs **not** performed in CI; evidence files explicitly **PENDING** until human completes burny×2 locally.
 
 ---
+
+## 2026-04-06 — PR tip after final doc commit (supersedes rows above for “latest green”)
+
+| Field | Value |
+|-------|--------|
+| PR head SHA | `79b341aa53a7102b17db102c8e402d89d04875d4` |
+| CI run | **24052291273** — https://github.com/m-cahill/starlab/actions/runs/24052291273 — **success** |
+
+Ledger §11 / `M02_run1.md` may still cite the prior witnessed pair (`5f5c8a5` + `24052230417`); the **latest** authoritative green for merge gating is **24052291273** on **`79b341a`**. Refresh cross-references on the next doc pass if you need a single consistent SHA everywhere.
+
+---
