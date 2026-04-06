@@ -75,3 +75,9 @@ Monitored: `gh run watch 24048416111 --exit-status` and `gh run watch 2404849820
 **After merge to `main` (manual):** replace `(pending merge)` merge commit in §18; add post-merge `main` workflow run ID/URL; optionally add changelog line for merge SHA.
 
 ---
+
+## Ledger alignment (2026-04-06)
+
+`docs/starlab.md` §18 now lists **three** witnessed green PR-head runs on PR #2 (`378c864…` / `24048416111`, `260c4e0…` / `24048498203`, `88b06db…` / `24048576545`). GitHub PR #2 is authoritative for the **current** tip OID at merge time.
+
+---
