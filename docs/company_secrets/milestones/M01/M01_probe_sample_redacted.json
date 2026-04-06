@@ -1,0 +1,26 @@
+{
+  "base_build": null,
+  "data_version": null,
+  "interface_modes": {
+    "feature_layer_interface": true,
+    "raw_interface": true,
+    "rendered_interface": true
+  },
+  "notes": [],
+  "paths": {
+    "binary": "~/Games/StarCraft II/Versions/base86753/SC2_x64.exe",
+    "maps_dir": "~/Games/StarCraft II/Maps",
+    "replays_dir": "~/Games/StarCraft II/Replays",
+    "root": "~/Games/StarCraft II"
+  },
+  "present": {
+    "binary": true,
+    "maps_dir": true,
+    "replays_dir": true,
+    "root": true
+  },
+  "spec": {
+    "control_observation_surface": "s2client_proto_sc2api",
+    "replay_decode_surface": "s2protocol"
+  }
+}

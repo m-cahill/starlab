@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active / post-M00 (M01 next)  
+**Status:** Active / post-M01 (M02 next)  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, and `docs/deployment/deployment_posture.md`.  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, and `docs/runtime/environment_lock.md`.  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -92,92 +92,100 @@ As of project initialization, STARLAB is defined as:
 
 The current program is expected to proceed through the following phases.
 
-### Phase I — Foundation & Environment Lock
+### Phase I — Governance, Runtime Surface, and Deterministic Run Substrate
 
 Focus:
 
-- repo governance
-- runtime/environment lock
-- replay capture
-- deterministic artifact beginnings
+- repo governance (M00)
+- SC2 runtime boundary decision and environment lock (M01)
+- deterministic match execution harness (M02+)
+- run identity, replay binding, canonical run artifacts (M03–M05)
+- environment drift and runtime smoke matrix (M06)
 
-### Phase II — Replay & Data Plane
-
-Focus:
-
-- replay metadata
-- timeline extraction
-- build-order/event extraction
-- replay lineage
-
-### Phase III — State & Representation
+### Phase II — Replay Intake, Provenance, and Data Plane
 
 Focus:
 
-- canonical state surfaces
-- structured-state baseline
-- perceptual bridge planning
-- cross-representation evaluation posture
+- replay intake policy and provenance enforcement
+- parser substrate and metadata/timeline/event extraction
+- build-order/economy and combat/scouting planes
+- replay slices, bundles, and lineage contracts
 
-### Phase IV — Evaluation & Baselines
-
-Focus:
-
-- scripted / heuristic baselines
-- benchmark scorecards
-- regression harnesses
-- replay-grounded evaluation
-
-### Phase V — Learning Agents & Showcase
+### Phase III — State, Representation, and Perception Bridge
 
 Focus:
 
-- imitation-learning baseline
-- hierarchical agent interfaces
-- first learned agent surfaces
-- replay explorer / evidence demo
+- canonical state schema and structured pipeline
+- observation surface contract
+- perceptual bridge prototype
+- cross-mode reconciliation and representation audit
 
-### Phase VI — Platform Expansion (conditional / later)
+### Phase IV — Benchmark Contracts, Baselines, and Evaluation
 
 Focus:
 
-- multi-environment readiness
-- optional second environment
-- platformization only if earned by milestones below
+- benchmark contracts and scorecard semantics
+- scripted and heuristic baselines
+- evaluation runner and tournament harness
+- attribution/diagnostics and baseline evidence packs
+
+### Phase V — Learning Paths, Evidence Surfaces, and Flagship Proof
+
+Focus:
+
+- replay-derived imitation baseline
+- hierarchical agent interface and first learned agent
+- replay explorer / operator evidence surface
+- public flagship proof pack
+
+### Phase VI — Expansion Decision and Platform Boundary Review
+
+Focus:
+
+- SC2 substrate review and expansion decision
+- platform boundary review and multi-environment charter (earned only)
 
 ---
 
 ## 7. Milestone table
 
-Planned initial arc:
+Planned program arc (33 milestones, M00–M32):
 
-| Milestone | Name                                          | Phase | Status  | Tag         | Audit Score |
-| --------- | --------------------------------------------- | ----- | ------- | ----------- | ----------- |
-| M00       | Governance Bootstrap & Ledger Initialization  | I     | Complete | v0.0.0-m00  | —           |
-| M01       | Environment Lock & Runtime Baseline           | I     | Planned | v0.0.1-m01  | —           |
-| M02       | Match Execution Harness                       | I     | Planned | v0.0.2-m02  | —           |
-| M03       | Replay Capture & Binding                      | I     | Planned | v0.0.3-m03  | —           |
-| M04       | Canonical Run Artifact                        | I     | Planned | v0.0.4-m04  | —           |
-| M05       | Replay Parser Substrate                       | II    | Planned | v0.0.5-m05  | —           |
-| M06       | Build-Order & Economy Extraction              | II    | Planned | v0.0.6-m06  | —           |
-| M07       | Combat & Scouting Windows                     | II    | Planned | v0.0.7-m07  | —           |
-| M08       | Curriculum Slice Generation                   | II    | Planned | v0.0.8-m08  | —           |
-| M09       | Replay Bundle & Lineage Surface               | II    | Planned | v0.0.9-m09  | —           |
-| M10       | Canonical State Schema                        | III   | Planned | v0.0.10-m10 | —           |
-| M11       | Structured-State Pipeline                     | III   | Planned | v0.0.11-m11 | —           |
-| M12       | Perceptual-State Bridge (initial)             | III   | Planned | v0.0.12-m12 | —           |
-| M13       | Cross-Mode Reconciliation                     | III   | Planned | v0.0.13-m13 | —           |
-| M14       | Scripted Baseline Suite                       | IV    | Planned | v0.0.14-m14 | —           |
-| M15       | Benchmark Harness & Scorecards                | IV    | Planned | v0.0.15-m15 | —           |
-| M16       | Tournament / Evaluation Runner                | IV    | Planned | v0.0.16-m16 | —           |
-| M17       | Layer-Wise Attribution & Evaluation Views     | IV    | Planned | v0.0.17-m17 | —           |
-| M18       | Baseline Evidence Pack                        | IV    | Planned | v0.0.18-m18 | —           |
-| M19       | Replay-Derived Imitation Baseline             | V     | Planned | v0.0.19-m19 | —           |
-| M20       | Hierarchical Agent Interface Layer            | V     | Planned | v0.0.20-m20 | —           |
-| M21       | First Hierarchical Learned Agent              | V     | Planned | v0.0.21-m21 | —           |
-| M22       | Replay Explorer / Operator Evidence Surface   | V     | Planned | v0.0.22-m22 | —           |
-| M23       | Public Flagship Proof Pack                    | V     | Planned | v0.0.23-m23 | —           |
-| M24       | Platform Boundary Review & Expansion Decision | VI    | Planned | v0.0.24-m24 | —           |
+| Milestone | Name | Phase | Status | Tag | Audit Score |
+| --------- | ---- | ----- | ------ | --- | ----------- |
+| M00 | Governance Bootstrap & Ledger Initialization | I | Complete | v0.0.0-m00 | — |
+| M01 | SC2 Runtime Surface Decision & Environment Lock | I | Complete | v0.0.1-m01 | — |
+| M02 | Deterministic Match Execution Harness | I | Planned | v0.0.2-m02 | — |
+| M03 | Run Identity & Lineage Seed | I | Planned | v0.0.3-m03 | — |
+| M04 | Replay Binding to Run Identity | I | Planned | v0.0.4-m04 | — |
+| M05 | Canonical Run Artifact v0 | I | Planned | v0.0.5-m05 | — |
+| M06 | Environment Drift & Runtime Smoke Matrix | I | Planned | v0.0.6-m06 | — |
+| M07 | Replay Intake Policy & Provenance Enforcement | II | Planned | v0.0.7-m07 | — |
+| M08 | Replay Parser Substrate | II | Planned | v0.0.8-m08 | — |
+| M09 | Replay Metadata Extraction | II | Planned | v0.0.9-m09 | — |
+| M10 | Timeline & Event Extraction | II | Planned | v0.0.10-m10 | — |
+| M11 | Build-Order & Economy Plane | II | Planned | v0.0.11-m11 | — |
+| M12 | Combat, Scouting, and Visibility Windows | II | Planned | v0.0.12-m12 | — |
+| M13 | Replay Slice Generator | II | Planned | v0.0.13-m13 | — |
+| M14 | Replay Bundle & Lineage Contract v1 | II | Planned | v0.0.14-m14 | — |
+| M15 | Canonical State Schema v1 | III | Planned | v0.0.15-m15 | — |
+| M16 | Structured State Pipeline | III | Planned | v0.0.16-m16 | — |
+| M17 | Observation Surface Contract | III | Planned | v0.0.17-m17 | — |
+| M18 | Perceptual Bridge Prototype | III | Planned | v0.0.18-m18 | — |
+| M19 | Cross-Mode Reconciliation & Representation Audit | III | Planned | v0.0.19-m19 | — |
+| M20 | Benchmark Contract & Scorecard Semantics | IV | Planned | v0.0.20-m20 | — |
+| M21 | Scripted Baseline Suite | IV | Planned | v0.0.21-m21 | — |
+| M22 | Heuristic Baseline Suite | IV | Planned | v0.0.22-m22 | — |
+| M23 | Evaluation Runner & Tournament Harness | IV | Planned | v0.0.23-m23 | — |
+| M24 | Attribution, Diagnostics, and Failure Views | IV | Planned | v0.0.24-m24 | — |
+| M25 | Baseline Evidence Pack | IV | Planned | v0.0.25-m25 | — |
+| M26 | Replay-Derived Imitation Baseline | V | Planned | v0.0.26-m26 | — |
+| M27 | Hierarchical Agent Interface Layer | V | Planned | v0.0.27-m27 | — |
+| M28 | First Learned Hierarchical Agent | V | Planned | v0.0.28-m28 | — |
+| M29 | Replay Explorer / Operator Evidence Surface | V | Planned | v0.0.29-m29 | — |
+| M30 | Public Flagship Proof Pack | V | Planned | v0.0.30-m30 | — |
+| M31 | SC2 Substrate Review & Expansion Decision | VI | Planned | v0.0.31-m31 | — |
+| M32 | Platform Boundary Review & Multi-Environment Charter | VI | Planned | v0.0.32-m32 | — |
 
 **Rule:** milestone names may tighten over time, but scope should remain small and reversible by default.
 
@@ -187,33 +195,41 @@ Planned initial arc:
 
 This section exists so each milestone has a stable “why,” not just a title.
 
-| Milestone | Intent                                                      |
-| --------- | ----------------------------------------------------------- |
-| M00       | Make the project legible, governed, and safe to start       |
-| M01       | Lock the environment and remove avoidable runtime ambiguity |
-| M02       | Prove that controlled execution is possible                 |
-| M03       | Prove replay capture exists and can be tied to runs         |
-| M04       | Establish the first canonical artifact boundary             |
-| M05       | Turn replays into a real analyzable substrate               |
-| M06       | Extract macro-game structure                                |
-| M07       | Extract tactical and scouting structure                     |
-| M08       | Turn replays into reusable benchmark slices                 |
-| M09       | Package replay evidence coherently                          |
-| M10       | Define what the lab considers “state”                       |
-| M11       | Build the structured-state baseline                         |
-| M12       | Add an initial perceptual path without overcommitting       |
-| M13       | Make structured vs perceptual comparisons possible          |
-| M14       | Create simple baseline agents                               |
-| M15       | Create benchmark and scoring credibility                    |
-| M16       | Run controlled comparisons at scale                         |
-| M17       | Make evaluation more interpretable                          |
-| M18       | Publish a baseline-quality evidence pack                    |
-| M19       | Add the first learning-based path safely                    |
-| M20       | Prevent agent growth from becoming monolithic               |
-| M21       | Demonstrate the first learned hierarchical result           |
-| M22       | Make the lab easier to inspect publicly                     |
-| M23       | Produce a flagship proof package                            |
-| M24       | Decide whether the project has earned platform expansion    |
+| Milestone | Intent |
+| --------- | ------ |
+| M00 | Make the project legible, governed, and safe to start |
+| M01 | Decide the SC2 runtime boundary and lock the environment posture |
+| M02 | Prove deterministic, controlled match execution is possible |
+| M03 | Seed run identity and lineage primitives |
+| M04 | Bind replays to run identity |
+| M05 | Establish the first canonical run artifact boundary |
+| M06 | Detect environment drift and define runtime smoke expectations |
+| M07 | Enforce replay intake and provenance rules |
+| M08 | Stand up replay parsing substrate |
+| M09 | Extract replay metadata reliably |
+| M10 | Extract timelines and event streams |
+| M11 | Extract build-order and economy structure |
+| M12 | Extract combat, scouting, and visibility windows |
+| M13 | Generate reusable replay slices |
+| M14 | Package replay bundles with lineage contract v1 |
+| M15 | Define canonical state schema v1 |
+| M16 | Build structured state pipeline |
+| M17 | Define observation surface contract |
+| M18 | Prototype perceptual bridge |
+| M19 | Reconcile modes and audit representations |
+| M20 | Define benchmark contracts and scorecard semantics |
+| M21 | Scripted baseline suite |
+| M22 | Heuristic baseline suite |
+| M23 | Evaluation runner and tournament harness |
+| M24 | Attribution, diagnostics, and failure views |
+| M25 | Baseline evidence pack |
+| M26 | Replay-derived imitation baseline |
+| M27 | Hierarchical agent interface layer |
+| M28 | First learned hierarchical agent |
+| M29 | Replay explorer / operator evidence surface |
+| M30 | Public flagship proof pack |
+| M31 | SC2 substrate review and expansion decision |
+| M32 | Platform boundary review and multi-environment charter |
 
 ---
 
@@ -241,6 +257,8 @@ This section exists so each milestone has a stable “why,” not just a title.
 7. The project should prefer smaller reversible milestones over sprawling implementation waves.
 
 8. This document must be updated after each milestone closeout.
+
+9. **Canonical corpus promotion:** no replay, map, ladder-derived asset, or derived label enters a canonical STARLAB corpus until explicit provenance status and redistribution posture are recorded (see `docs/replay_data_provenance.md` and `docs/rights_register.md`).
 
 ---
 
@@ -283,7 +301,8 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Milestone governance posture and tracked milestone path exist | Proved (M00) |
 | Source-available license posture recorded | Proved (M00) |
 | Minimal governance CI is truthful | Proved (M00) |
-| Environment stability | Not yet proved |
+| SC2 runtime boundary decision + environment lock (documented; typed probe) | Proved (M01) |
+| Controlled deterministic match execution | Not yet proved (target M02) |
 | Replay capture / binding | Not yet proved |
 | Canonical run artifacts | Not yet proved |
 | Parser substrate | Not yet proved |
@@ -314,13 +333,13 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-### M01 — Environment Lock & Runtime Baseline
+### M02 — Deterministic Match Execution Harness
 
 **Status:** Planned (next)
 
-**Goal:** Lock the environment and remove avoidable runtime ambiguity (see milestone table).
+**Goal:** Build a deterministic match execution harness that proves controlled execution under the M01 runtime boundary — without claiming full replay analytics or benchmark validity.
 
-**Note:** M00 closeout details are recorded in §18 and the changelog.
+**Note:** M00 and M01 closeout details are recorded in §18 and the changelog.
 
 ---
 
@@ -330,11 +349,11 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 | ------ | -------------------------------- | -------- | ---------------- | ------------------------------------------------------------------ |
 | OD-001 | License posture                  | Resolved | M00              | Custom source-available terms in `LICENSE` (evaluation/verification); public/private surfaces governed by `docs/public_private_boundary.md` |
 | OD-002 | Public/private boundary          | Resolved | M00              | `docs/public_private_boundary.md`                                  |
-| OD-003 | Replay/data provenance policy    | Conditionally resolved | M00 / M01 | Interim policy in `docs/replay_data_provenance.md`; refine with ingestion in M01+ |
+| OD-003 | Replay/data provenance policy    | Conditionally resolved | M00 / M07+ | Interim policy in `docs/replay_data_provenance.md`; tighten with replay intake (M07) |
 | OD-004 | Naming / brand diligence posture | Resolved | M00              | `docs/branding_and_naming.md`                                      |
-| OD-005 | SC2 runtime surface selection    | Open     | M01              | Must remain a boundary decision, not a scattered dependency choice |
+| OD-005 | SC2 runtime surface selection    | Resolved | M01              | Canonical: SC2API/`s2client-proto` + `s2protocol`; optional `python-sc2` as adapter only; PySC2 deferred — see `docs/runtime/sc2_runtime_surface.md` |
 | OD-006 | Rights register format           | Resolved | M00              | `docs/rights_register.md` (canonical); this ledger summarizes      |
-| OD-007 | Second-environment posture       | Deferred | M24              | Explicitly not a starting decision                                 |
+| OD-007 | Second-environment posture       | Deferred | M32              | Explicitly not a starting decision                                 |
 
 ---
 
@@ -414,6 +433,8 @@ This section starts simple and should become more explicit as the project mature
 | ---------------------------------- | -------------------------------------------------------------- | ---------------------- |
 | Code ownership                     | Expected to be first-party and traceable                       | Initial                |
 | Documentation ownership            | Expected to be first-party and traceable                       | Initial                |
+| SC2 client / Battle.net runtime    | Acquire under Blizzard terms (EULA / AI & ML license as applicable); **not** redistributed via this repo; see `docs/runtime/*` | Governed (M01) |
+| SC2 maps / replay packs            | Local-only; **not** committed; rights per Blizzard / pack terms; quarantine if unclear | Governed (M01) |
 | Replay/data rights                 | Interim policy in `docs/replay_data_provenance.md`              | Conditionally resolved |
 | Third-party dependency obligations | CI: pip-audit + CycloneDX SBOM artifact (`pyproject.toml` dev) | Initial                |
 | Public/private split               | `docs/public_private_boundary.md`                              | Initial                |
@@ -446,6 +467,7 @@ This section should be filled as milestones close.
 | Milestone | Closeout Date | PR | Merge commit | Notes |
 | --------- | ------------- | -- | ------------ | ----- |
 | M00       | 2026-04-06    | [#1](https://github.com/m-cahill/starlab/pull/1) | `f9203dd555ea267bc2d72c3470b174ca35a23788` | Governance bootstrap; merged to `main`; see CI evidence below |
+| M01       | 2026-04-06    | (pending merge) | (pending merge) | SC2 runtime surface decision, environment lock docs, `starlab.sc2` probe; OD-005 resolved — update PR/SHA after merge |
 
 **M00 PR head (pre-merge):** `5dcb6cf6f95af23b58c6af202d58a7bcad1d0b91`
 
@@ -458,6 +480,15 @@ This section should be filled as milestones close.
 | `main` after M00 evidence finalization (`523993e…`) | `24015634285` | success | https://github.com/m-cahill/starlab/actions/runs/24015634285 |
 
 **M00 milestone artifacts:** `docs/company_secrets/milestones/M00/` (`M00_summary.md`, `M00_audit.md`, `M00_run1.md`, etc.)
+
+**M01 CI evidence (authoritative)** — populate workflow run URLs after the M01 PR is opened and merged to `main`.
+
+| Event | Workflow run | Conclusion | URL |
+| ----- | ------------ | ---------- | --- |
+| M01 PR head | TBD | TBD | TBD |
+| `main` after M01 merge | TBD | TBD | TBD |
+
+**M01 milestone artifacts:** `docs/company_secrets/milestones/M01/` (`M01_plan.md`, `M01_toolcalls.md`, optional redacted probe sample, etc.)
 
 ---
 
@@ -481,6 +512,7 @@ This is a placeholder table for future audit tracking once milestones begin clos
 | Milestone | Arch | Governance | Evidence | CI  | Diligence | Docs | Overall |
 | --------- | ---- | ---------- | -------- | --- | --------- | ---- | ------- |
 | M00       | 3.5  | +          | +        | +   | +         | +    | 4.0     |
+| M01       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 
 ---
 
@@ -514,6 +546,13 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-06 — M01 closeout (SC2 runtime surface & environment lock)
+
+- Resolved **OD-005**: canonical control/observation boundary = Blizzard SC2 API / `s2client-proto`; canonical replay decode boundary = `s2protocol`; optional `python-sc2` only behind adapter boundaries; PySC2 deferred for substrate — see `docs/runtime/sc2_runtime_surface.md`
+- Added `docs/runtime/environment_lock.md` and deterministic `starlab.sc2` path/config probe (`run_probe`, `probe_result_to_json`); **no** SC2 Python packages added in M01
+- Updated `docs/rights_register.md`, `docs/replay_data_provenance.md`, 33-milestone ledger map, phase names, and canonical corpus promotion rule
+- **Does not claim:** controlled match execution, replay parsing correctness, or benchmark validity (M02+)
 
 ### 2026-04-06 — M00 evidence finalization (PR #1 merged)
 
