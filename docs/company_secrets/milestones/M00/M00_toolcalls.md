@@ -39,3 +39,11 @@ Workstream-level log (not per-file). Timestamps UTC where noted.
 
 - **Purpose:** `M00_plan.md`, this file, `M00_summary.md` / `M00_audit.md` stubs, `M01_plan.md` / `M01_toolcalls.md` stubs.
 - **Status:** complete
+
+---
+
+## Closeout (2026-04-06)
+
+- Pushed branch `m00-governance-bootstrap`; opened PR #1; CI run `24015581129` **success**
+- Merged PR #1 to `main` (merge `f9203dd555ea267bc2d72c3470b174ca35a23788`); post-merge CI `24015599413` **success**
+- Finalized `M00_run1.md`, `M00_summary.md`, `M00_audit.md`; updated `docs/starlab.md` §18 + changelog

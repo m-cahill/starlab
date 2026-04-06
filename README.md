@@ -108,7 +108,7 @@ These are planning lenses, not promises. The realistic early path is:
 
 **Status:** Post-M00 — next: M01 (environment lock)
 
-STARLAB has completed governance bootstrap (M00): canonical ledger, governance docs, minimal CI, and deployment **posture** (Netlify / Render targets; no live deploys).
+STARLAB has completed governance bootstrap (**M00**, merged [PR #1](https://github.com/m-cahill/starlab/pull/1) to `main`): canonical ledger, governance docs, minimal CI, and deployment **posture** (Netlify / Render targets; no live deploys).
 
 Up next:
 
