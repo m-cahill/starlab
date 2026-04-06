@@ -2,9 +2,9 @@
 
 **Audit mode:** DELTA AUDIT  
 **Milestone ID:** M02  
-**Current SHA (PR head):** `10a2b13ba8115e50037948c014facaa502da6978`  
-**Diff range (informative):** `main...10a2b13ba8115e50037948c014facaa502da6978` (merge base not re-resolved in this document)  
-**Authoritative CI:** [CI run 24053317502](https://github.com/m-cahill/starlab/actions/runs/24053317502) — **success** (PR event, head SHA above)  
+**Current SHA (PR head):** `08fb582fa8fe969a02de82257d64dedfea2ff35f`  
+**Diff range (informative):** `main...08fb582fa8fe969a02de82257d64dedfea2ff35f` (merge base not re-resolved in this document)  
+**Authoritative CI:** [CI run 24053381609](https://github.com/m-cahill/starlab/actions/runs/24053381609) — **success** (PR event, head SHA above)  
 **Date:** 2026-04-06
 
 ---
@@ -46,7 +46,7 @@ M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **
 
 ## 4. CI / test / lint (record)
 
-- **Lint/format/types:** Ruff + Mypy — pass (run `24053317502`).
+- **Lint/format/types:** Ruff + Mypy — pass (run `24053381609`).
 - **Tests:** Pytest — pass; covers fake path, not live SC2.
 - **Supply chain:** pip-audit, SBOM, Gitleaks — pass.
 
@@ -63,7 +63,7 @@ M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **
 
 ## 6. Verdict
 
-**AUDIT RESULT:** ✅ **Approve merge from engineering/CI perspective** for PR #3 at SHA `10a2b13…`, conditioned on **maintaining honest ledger wording** until local evidence is filed.
+**AUDIT RESULT:** ✅ **Approve merge from engineering/CI perspective** for PR #3 at SHA `08fb582…`, conditioned on **maintaining honest ledger wording** until local evidence is filed.
 
 **Do not** certify M02 **milestone closeout** until:
 

@@ -28,7 +28,7 @@ Initialize when M02 work begins.
 
 **Branch:** `m02-deterministic-match-execution-harness`  
 **Commit SHA (pre–closeout-prep verification):** `888407868cbdd00ca124e2b496f9ca14f909b0fc`  
-**Commit SHA (current PR tip after ledger alignment):** `10a2b13ba8115e50037948c014facaa502da6978`
+**Commit SHA (current PR tip after ledger alignment):** `08fb582fa8fe969a02de82257d64dedfea2ff35f`
 
 | Command | Result |
 |---------|--------|
@@ -49,7 +49,7 @@ Initialize when M02 work begins.
 | Branch | `m02-deterministic-match-execution-harness` |
 | PR | **#3** — https://github.com/m-cahill/starlab/pull/3 |
 | Title | M02: deterministic match execution harness |
-| PR head SHA | `10a2b13ba8115e50037948c014facaa502da6978` |
+| PR head SHA | `08fb582fa8fe969a02de82257d64dedfea2ff35f` |
 
 ---
 
@@ -58,14 +58,14 @@ Initialize when M02 work begins.
 | Field | Value |
 |-------|--------|
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
-| Run ID (authoritative, current tip) | **24053317502** |
-| URL | https://github.com/m-cahill/starlab/actions/runs/24053317502 |
+| Run ID (authoritative, current tip) | **24053381609** |
+| URL | https://github.com/m-cahill/starlab/actions/runs/24053381609 |
 | Event | `pull_request` |
-| Head SHA | `10a2b13ba8115e50037948c014facaa502da6978` |
+| Head SHA | `08fb582fa8fe969a02de82257d64dedfea2ff35f` |
 | Conclusion | **success** |
 | Authoritative for merge? | **Yes** — green run on latest PR tip (verified `gh run list` / `gh pr view 3`) |
 
-**Earlier PR-head runs (older tips; not the current ledger contract):** `24053264747` on `22b2b57…`; `24053218335` on `d80ae12…`; `24052325999` on `f457cf5…`; `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
+**Earlier PR-head runs (older tips; not the current ledger contract):** `24053317502` on `10a2b13…`; `24053264747` on `22b2b57…`; `24053218335` on `d80ae12…`; `24052325999` on `f457cf5…`; `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
 
 **Analysis document:** `M02_run1.md`
 
@@ -81,6 +81,6 @@ Initialize when M02 work begins.
 
 ## 2026-04-06 — Post-push: authoritative pair bumped to doc commit tip
 
-- After push of doc alignment commit `d80ae12322c3d2c45c754bb298ac895a8cbe7335`, GitHub **CI** run **`24053218335`** (success) was the gate for that tip; intermediate tips included **`22b2b57654c9bc5124059227f363b27ccc63ed6f`** + **`24053264747`**. **Current** ledger row (above): **`10a2b13ba8115e50037948c014facaa502da6978`** + **`24053317502`** — **stop** further doc-only SHA/CI churn unless the PR head moves again for substantive changes.
+- After push of doc alignment commit `d80ae12322c3d2c45c754bb298ac895a8cbe7335`, GitHub **CI** run **`24053218335`** (success) was the gate for that tip; intermediate tips included **`22b2b57654c9bc5124059227f363b27ccc63ed6f`** + **`24053264747`**, then **`10a2b13ba8115e50037948c014facaa502da6978`** + **`24053317502`**. **Current** ledger row (above): **`08fb582fa8fe969a02de82257d64dedfea2ff35f`** + **`24053381609`** — **no further** doc-only SHA/CI updates in this session.
 
 ---
