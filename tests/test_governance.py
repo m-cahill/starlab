@@ -92,11 +92,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m02() -> None:
+def test_current_milestone_is_m03() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M02" in section
-    assert "Deterministic Match Execution Harness" in section
+    assert "M03" in section
+    assert "Run Identity" in section
 
 
 def test_m01_complete_in_milestone_table() -> None:
@@ -108,13 +108,19 @@ def test_m01_complete_in_milestone_table() -> None:
     raise AssertionError("M01 milestone row not found")
 
 
-def test_m02_planned_next_in_milestone_table() -> None:
+def test_m02_complete_in_milestone_table() -> None:
     lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
     for line in lines:
         if line.strip().startswith("| M02 "):
-            assert "Planned" in line
+            assert "Complete" in line
             return
     raise AssertionError("M02 milestone row not found")
+
+
+def test_m03_stub_milestone_files_exist() -> None:
+    m03 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M03"
+    assert (m03 / "M03_plan.md").is_file()
+    assert (m03 / "M03_toolcalls.md").is_file()
 
 
 def test_m01_changelog_entry_present() -> None:

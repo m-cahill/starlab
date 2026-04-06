@@ -106,13 +106,13 @@ These are planning lenses, not promises. The realistic early path is:
 
 ## Current status
 
-**Status:** M00 and **M01** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2)); next: **M02** — deterministic match execution harness.
+**Status:** M00, **M01**, and **M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); next: **M03** — Run Identity & Lineage Seed (stubs only; see `docs/company_secrets/milestones/M03/`).
 
-STARLAB completed governance bootstrap (**M00**) and **M01** (SC2 runtime surface decision and environment lock): runtime docs under `docs/runtime/`, typed path probe in `starlab.sc2`, ledger and rights updates — **without** claiming match execution or replay parsing correctness yet (that is **M02**).
+STARLAB completed governance bootstrap (**M00**), **M01** (SC2 runtime surface and environment lock), and **M02** (bounded match harness + STARLAB execution proof artifact; CI uses the **fake** adapter; optional local `burnysc2` runs documented under `docs/company_secrets/milestones/M02/`).
 
 Up next:
 
-- **M02** — deterministic match execution harness
+- **M03** — Run Identity & Lineage Seed — **planning/implementation not started** (stub milestone folder only)
 
 ---
 
@@ -210,4 +210,4 @@ The current objective is simple:
 
 **M02 harness (local):** optional `pip install -e ".[sc2-harness]"`, then `python -m starlab.sc2.run_match --config ... --output-dir ...` (see `docs/runtime/match_execution_harness.md`). CI uses the **fake** adapter only.
 
-**M02 merge status:** [PR #3](https://github.com/m-cahill/starlab/pull/3) tracks the harness; PR-head CI is green at the recorded tip. **Local burny session** is documented under `docs/company_secrets/milestones/M02/` (2026-04-06: **no** successful proof-producing runs — missing map file). **Two successful runs with `artifact_hash` comparison** is still required before the narrow harness proof can be claimed and M02 closed on `main` (see `docs/starlab.md` §11).
+**M02 closeout:** merged **2026-04-06** ([PR #3](https://github.com/m-cahill/starlab/pull/3)). **Narrow** same-machine harness evidence (two successful `burnysc2` runs, matching normalized `artifact_hash`) is recorded under `docs/company_secrets/milestones/M02/`. This does **not** claim replay binding, canonical run artifacts, benchmark validity, or cross-host reproducibility — see `docs/starlab.md` §10.

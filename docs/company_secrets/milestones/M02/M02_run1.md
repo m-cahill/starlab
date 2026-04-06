@@ -1,31 +1,60 @@
-# M02 — CI workflow analysis (PR-head run 1)
+# M02 — CI workflow analysis (PR-head + merge closeout)
+
+## A) Authoritative PR-head CI (final tip before merge)
 
 **Workflow:** `CI` (`.github/workflows/ci.yml`)  
-**Authoritative run ID (current PR tip):** `24054732181`  
-**URL:** https://github.com/m-cahill/starlab/actions/runs/24054732181  
+**Authoritative run ID (final PR head):** `24055678613`  
+**URL:** https://github.com/m-cahill/starlab/actions/runs/24055678613  
 **Trigger:** `pull_request`  
 **Branch:** `m02-deterministic-match-execution-harness`  
-**Head SHA (authoritative for merge gating at this revision):** `290304a3ad3986029879c183f4e40159e7f5792c`  
-**PR:** [#3 — M02: deterministic match execution harness](https://github.com/m-cahill/starlab/pull/3)  
+**Head SHA (merge gate):** `e88ca20424410cd99f834eeec92a5ec5d8034284`  
+**PR:** [#3 — M02: deterministic match execution harness](https://github.com/m-cahill/starlab/pull/3) (merged)  
 **Conclusion:** **success**  
-**Recorded:** 2026-04-06 (analysis)
+**Recorded:** 2026-04-06
 
-**Earlier green PR-head runs (superseded by tip update):** `24054586191` on `c03691b61b8d11aafda55f866232f6d623c70628` (ledger alignment); `24054529734` on `5ec0ccb17c15f6b549da12719369ce1478e31212` (local evidence commit); `24053526611` on `061c2126cc59b3ce4d662c58240216343c21f71a` (prior tip before local-evidence commit); `24053475644` on `bfab038a8f7a4908a5a909131b402ba7909463da` (ledger alignment commit prior to latest tip); `24053430560` on `3952c4071d82a77e633b0cd428da19caac2720ff` (ledger alignment commit prior to that); `24053381609` on `08fb582fa8fe969a02de82257d64dedfea2ff35f` (ledger witness commit prior to that); `24053317502` on `10a2b13ba8115e50037948c014facaa502da6978` (ledger witness commit prior to that); `24053264747` on `22b2b57654c9bc5124059227f363b27ccc63ed6f` (ledger witness commit prior to that); `24053218335` on `d80ae12322c3d2c45c754bb298ac895a8cbe7335` (ledger bump prior to that); `24052325999` on `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a` (doc alignment commit prior to that); `24052230417` on `5f5c8a52684b7bc29642b8d52ba5758d21f28f20` (ledger row prior to that); `24052291273` on `79b341aa53a7102b17db102c8e402d89d04875d4`; `24052172714` on `59dcf15e9912c5f6c1920a495150ff03a5a5af7d` (CI reference alignment); `24052112581` on `1bd98f181c8a65568f8ec4b7d8e6e1fa2bf3431f` (closeout-prep docs); `24052043305` on `888407868cbdd00ca124e2b496f9ca14f909b0fc` (harness implementation only).
+**Superseded PR-head run (older tip, not the merge gate):** `24054732181` on `290304a3ad3986029879c183f4e40159e7f5792c` — success (historical).
 
 ---
 
-## 1. Workflow identity (inputs)
+## B) Merge record
+
+| Field | Value |
+|-------|--------|
+| **Merged at (UTC)** | `2026-04-06T23:35:21Z` |
+| **Merge method** | **Merge commit** (not squash) |
+| **Merge commit SHA** | `53a24a4a6106168afe79e0a70d51a20bfef4ea18` |
+| **PR final state** | **MERGED** |
+| **Head branch** | `m02-deterministic-match-execution-harness` — **deleted** after merge (GitHub default for `gh pr merge --delete-branch`) |
+
+---
+
+## C) Authoritative post-merge `main` CI (merge commit)
+
+| Field | Value |
+|-------|--------|
+| **Event** | `push` to `main` |
+| **Workflow** | **CI** |
+| **Run ID** | `24056523452` |
+| **URL** | https://github.com/m-cahill/starlab/actions/runs/24056523452 |
+| **Head SHA** | `53a24a4a6106168afe79e0a70d51a20bfef4ea18` (merge commit) |
+| **Conclusion** | **success** |
+
+*Later documentation-only pushes to `main` (e.g. M02 closeout ledger alignment) re-run CI; treat those as follow-up rows in `docs/starlab.md` §18, distinct from the merge-boundary run above.*
+
+---
+
+## 1. Workflow identity (PR-head inputs)
 
 | Field | Value |
 |-------|--------|
 | Workflow name | CI |
-| Run ID | 24054732181 |
+| Run ID | 24055678613 |
 | Trigger | PR against `main` |
-| Commit | `290304a…` (PR tip) |
+| Commit | `e88ca20…` (final PR tip) |
 | Milestone | M02 — Deterministic Match Execution Harness |
-| Intent | Land harness + docs + tests; keep CI SC2-free |
+| Intent | Land harness + local evidence + docs + tests; keep CI SC2-free |
 
-**Baseline:** prior trusted green on `main` (M01 era); this run validates the M02 delta on the PR branch.
+**Baseline:** prior trusted green on `main` (M01 era); this run validates the M02 delta including map-resolution fix and evidence files.
 
 ---
 
@@ -58,23 +87,17 @@ No `continue-on-error` on required checks.
 
 - **Tier:** unit / governance smoke + SC2 harness fake path + probe tests.
 - **What CI proves:** Config parsing, artifact hashing, fake-adapter harness, map helpers, governance doc presence — all without a StarCraft II install.
-- **What CI does not prove:** Real `burnysc2` execution against a live SC2 client, determinism of two real runs on a developer machine, replay binding, or benchmark validity.
+- **What CI does not prove:** Live `burnysc2` execution (optional extra); cross-host reproducibility; replay binding; benchmark validity.
 
-### Static / policy gates
+### Local evidence (out of CI)
 
-- Ruff + Mypy enforce current Python policy; aligned with M02 code changes.
-
-### SC2 / runtime
-
-- **CI remains SC2-free:** default install has no `burnysc2`; optional `sc2-harness` is not installed in CI.
+- **Recorded** under `docs/company_secrets/milestones/M02/`: two successful same-machine `burnysc2` runs, matching normalized `artifact_hash` — **narrow** harness claim only.
 
 ---
 
 ## 4. Step 3 — Delta (M02 scope)
 
-**Changed surface:** `starlab/sc2` harness modules, adapters, tests, runtime docs, ledger/README alignment, milestone secrets templates.
-
-**Expected CI coupling:** New tests must pass under fake adapter only — satisfied.
+**Changed surface:** `starlab/sc2` harness modules, adapters, tests, runtime docs, ledger/README alignment, milestone evidence.
 
 ---
 
@@ -82,23 +105,19 @@ No `continue-on-error` on required checks.
 
 - Required checks remain enforced; none weakened for M02.
 - No benchmark or replay-scope expansion in CI.
-- Consumer contract for STARLAB remains: proof artifact and harness docs are milestone-scoped; non-claims preserved in docs.
 
 ---
 
 ## 6. Step 6 — Verdict
 
-> **Verdict:** This PR-head run is **green** and is the **authoritative merge gate** for the current PR tip (`290304a…`). It validates repository governance and the **CI-safe** portion of M02 (code + fake path). It does **not** certify local real-match execution or cross-host reproducibility.
+> **Verdict:** Final PR-head run **`24055678613`** on **`e88ca20…`** is **green** and was the **authoritative merge gate**. Post-merge **`24056523452`** on merge commit **`53a24a4…`** is **green**. Merge is **consistent with** governance CI. Local real-execution evidence supports the **narrow** same-machine harness claim only.
 
-**Merge from CI/governance:** ✅ **Merge approved** from a **CI signal** standpoint (all required checks passed on authoritative tip `290304a…`).  
-Final milestone **closeout** on `main` still requires **merge**, **post-merge `main` CI** (per project practice), and **two successful** local burny runs with a recorded hash outcome before claiming “controlled deterministic match execution” in the ledger (2026-04-06 session documented a **blocked** attempt — no proof hashes).
+**Merge from CI/governance:** ✅ **Merged** — PR #3 closed with green checks on the final tip.
 
 ---
 
-## 7. Step 7 — Next actions
+## 7. Step 7 — Next actions (post–M02 merge)
 
 | Owner | Action |
 |-------|--------|
-| Human | Obtain a valid `.SC2Map` path; repeat two successful `burnysc2` runs; update determinism docs with real `artifact_hash` values (or document mismatch). |
-| Human | Merge PR #3 when ready; record post-merge `main` CI in §18 at closeout. |
-| — | Do not treat CI green alone as M02 **fully closed** without local evidence per plan. |
+| Project | M03 planning / implementation per `docs/company_secrets/milestones/M03/M03_plan.md` when authorized — **stubs only** at closeout. |

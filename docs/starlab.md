@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M01 on `main` ([PR #2](https://github.com/m-cahill/starlab/pull/2)); **M02** harness in [PR #3](https://github.com/m-cahill/starlab/pull/3) (pre-merge; PR-head CI green; **local narrow-harness evidence recorded** — two `burnysc2` runs, matching `artifact_hash`; see `docs/company_secrets/milestones/M02/`)  
+**Status:** Active — M00–**M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); **next:** **M03** — Run Identity & Lineage Seed (stubs only; see `docs/company_secrets/milestones/M03/`)  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -98,7 +98,7 @@ Focus:
 
 - repo governance (M00)
 - SC2 runtime boundary decision and environment lock (M01)
-- deterministic match execution harness (M02+)
+- deterministic match execution harness (**M02** — complete on `main`)
 - run identity, replay binding, canonical run artifacts (M03–M05)
 - environment drift and runtime smoke matrix (M06)
 
@@ -155,7 +155,7 @@ Planned program arc (33 milestones, M00–M32):
 | --------- | ---- | ----- | ------ | --- | ----------- |
 | M00 | Governance Bootstrap & Ledger Initialization | I | Complete | v0.0.0-m00 | — |
 | M01 | SC2 Runtime Surface Decision & Environment Lock | I | Complete | v0.0.1-m01 | — |
-| M02 | Deterministic Match Execution Harness | I | Planned (PR [#3](https://github.com/m-cahill/starlab/pull/3) open) | v0.0.2-m02 | — |
+| M02 | Deterministic Match Execution Harness | I | Complete | v0.0.2-m02 | — |
 | M03 | Run Identity & Lineage Seed | I | Planned | v0.0.3-m03 | — |
 | M04 | Replay Binding to Run Identity | I | Planned | v0.0.4-m04 | — |
 | M05 | Canonical Run Artifact v0 | I | Planned | v0.0.5-m05 | — |
@@ -189,7 +189,9 @@ Planned program arc (33 milestones, M00–M32):
 
 **Rule:** milestone names may tighten over time, but scope should remain small and reversible by default.
 
-**M01 note:** M01 is **merged** to `main` (see §18). “Complete” in the table reflects closed milestone scope on `main`, not deterministic match execution (M02).
+**M01 note:** M01 is **merged** to `main` (see §18). “Complete” in the table reflects closed milestone scope on `main`.
+
+**M02 note:** M02 is **merged** to `main` (see §18). “Complete” reflects **bounded harness + deterministic proof artifact + CI** on `main`; the **narrow** same-machine harness claim is documented in `docs/company_secrets/milestones/M02/` (not a cross-host or replay-binding claim).
 
 ---
 
@@ -304,14 +306,14 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Source-available license posture recorded | Proved (M00) |
 | Minimal governance CI is truthful | Proved (M00) |
 | SC2 runtime boundary decision + environment lock (documented; typed probe) | Proved (M01) |
-| Controlled deterministic match execution | Not yet proved (target M02) |
+| Controlled deterministic match execution | **Proved (narrow sense only):** same machine, same committed config, two successful proof-producing runs, matching normalized STARLAB `artifact_hash` — see `docs/company_secrets/milestones/M02/` (M02). **Not** proved: cross-host reproducibility, cross-install portability, or equivalence to replay bytes. |
 | Replay capture / binding | Not yet proved |
 | Canonical run artifacts | Not yet proved |
 | Parser substrate | Not yet proved |
 | Benchmark integrity | Not yet proved |
 | Learning or agent capability | Not yet proved |
 
-**Local harness vs portability:** a **local deterministic harness proof** (same machine, same config, normalized STARLAB artifact hash) is a **narrower** claim than **cross-host reproducibility** or **cross-install portability**. The ledger uses “controlled deterministic match execution” only in the harness-scoped sense once M02 is closed with evidence.
+**Local harness vs portability:** a **local deterministic harness proof** (same machine, same config, normalized STARLAB artifact hash) is a **narrower** claim than **cross-host reproducibility** or **cross-install portability**. The ledger uses “controlled deterministic match execution” **only** in that **narrow harness-scoped** sense for M02.
 
 ### Assumed vs owned guarantees
 
@@ -337,15 +339,15 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-### M02 — Deterministic Match Execution Harness
+### M03 — Run Identity & Lineage Seed
 
-**Status:** **Pre-merge / merge-readiness** — implementation on branch [`m02-deterministic-match-execution-harness`](https://github.com/m-cahill/starlab/tree/m02-deterministic-match-execution-harness); PR [#3](https://github.com/m-cahill/starlab/pull/3) open; **authoritative PR-head CI** run [`24054732181`](https://github.com/m-cahill/starlab/actions/runs/24054732181) (**success**) on PR head `290304a3ad3986029879c183f4e40159e7f5792c` (re-verify after newer pushes). **Local burny evidence (2026-04-06 recovery):** two successful same-config runs produced **matching** normalized `artifact_hash` values (`b23172cb457b7645d796c30cf36baf96229efa3af954190788370ba5ea464e53`) — see `M02_determinism_check.md`, `M02_local_execution_note.md`, `M02_execution_proof_redacted.json`. Formal **§10** ledger “proved” language for **controlled deterministic match execution** still awaits **M02 closeout on `main`** (merge + governance rows), not merely local evidence.
+**Status:** **Planned** — stubs only (`docs/company_secrets/milestones/M03/M03_plan.md`, `M03_toolcalls.md`). **No** M03 implementation has started on `main`.
 
-**Goal:** Build a deterministic match execution harness that proves controlled execution under the M01 runtime boundary — without claiming full replay analytics or benchmark validity.
+**Goal (high level):** Seed run identity and lineage primitives building on the M02 proof surface — **without** claiming replay binding (M04), canonical run artifact v0 (M05), or benchmark validity.
 
-**Primary references:** `docs/runtime/match_execution_harness.md`, optional dependency group `sc2-harness` (`burnysc2`), CLI `python -m starlab.sc2.run_match`.
+**Primary references:** `docs/starlab.md` milestone table; prior milestone artifacts under `docs/company_secrets/milestones/M02/`.
 
-**Note:** M00 and M01 closeout details are recorded in §18 and the changelog. Replay binding, canonical run artifacts, benchmark integrity, and **cross-host reproducibility** remain **not** proved in M02.
+**Note:** M02 merged **2026-04-06** — [PR #3](https://github.com/m-cahill/starlab/pull/3) — merge commit `53a24a4a6106168afe79e0a70d51a20bfef4ea18`. **Local harness evidence** for the **narrow** same-machine claim is in `M02_determinism_check.md` and related M02 files. Replay binding, canonical run artifacts, benchmark integrity, and **cross-host reproducibility** remain **not** proved.
 
 ---
 
@@ -474,6 +476,7 @@ This section should be filled as milestones close.
 | --------- | ------------- | -- | ------------ | ----- |
 | M00       | 2026-04-06    | [#1](https://github.com/m-cahill/starlab/pull/1) | `f9203dd555ea267bc2d72c3470b174ca35a23788` | Governance bootstrap; merged to `main`; see CI evidence below |
 | M01       | 2026-04-06    | [#2](https://github.com/m-cahill/starlab/pull/2) | `4a916033f55c6b8c4a582f985233a64ca039ead3` | SC2 runtime surface decision, environment lock docs, `starlab.sc2` probe; OD-005 resolved; merged to `main`; see CI evidence below |
+| M02       | 2026-04-06    | [#3](https://github.com/m-cahill/starlab/pull/3) | `53a24a4a6106168afe79e0a70d51a20bfef4ea18` | Deterministic match harness, proof artifact, fake + BurnySc2 adapters; merged to `main`; narrow local harness evidence in `docs/company_secrets/milestones/M02/`; see CI evidence below |
 
 **M00 PR head (pre-merge):** `5dcb6cf6f95af23b58c6af202d58a7bcad1d0b91`
 
@@ -515,6 +518,24 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 
 **M01 milestone artifacts:** `docs/company_secrets/milestones/M01/` (`M01_plan.md`, `M01_toolcalls.md`, `M01_run1.md`, `M01_summary.md`, `M01_audit.md`, optional redacted probe sample, etc.)
 
+**M02 merge:** [PR #3](https://github.com/m-cahill/starlab/pull/3) merged **2026-04-06** (UTC `2026-04-06T23:35:21Z`) via **merge commit** `53a24a4a6106168afe79e0a70d51a20bfef4ea18`. Remote branch `m02-deterministic-match-execution-harness` was **deleted** after merge. Final PR head before merge: `e88ca20424410cd99f834eeec92a5ec5d8034284`.
+
+**M02 CI evidence (PR-head run — authoritative merge gate)**
+
+| Commit (short) | Workflow run | Conclusion | URL |
+| -------------- | ------------ | ---------- | --- |
+| `e88ca20…` | `24055678613` | success | https://github.com/m-cahill/starlab/actions/runs/24055678613 |
+
+**M02 CI evidence (post-merge `main`)**
+
+| Event | Workflow run | Conclusion | URL |
+| ----- | ------------ | ---------- | --- |
+| `main` after M02 merge (`53a24a4…`) | `24056523452` | success | https://github.com/m-cahill/starlab/actions/runs/24056523452 |
+
+*Follow-up documentation pushes to `main` after the merge commit may produce additional green CI runs; distinguish them in §23 if they record ledger-only updates.*
+
+**M02 milestone artifacts:** `docs/company_secrets/milestones/M02/` (`M02_plan.md`, `M02_toolcalls.md`, `M02_run1.md`, `M02_summary.md`, `M02_audit.md`, `M02_local_execution_note.md`, `M02_determinism_check.md`, `M02_execution_proof_redacted.json`, `m02_local_config.json`, etc.)
+
 ---
 
 ## 19. Deferred items / future-only tracks
@@ -538,6 +559,9 @@ This is a placeholder table for future audit tracking once milestones begin clos
 | --------- | ---- | ---------- | -------- | --- | --------- | ---- | ------- |
 | M00       | 3.5  | +          | +        | +   | +         | +    | 4.0     |
 | M01       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
+| M02       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
+
+**M02 note:** Evidence column reflects **narrow** local harness proof + CI; not benchmark or cross-host certification.
 
 ---
 
@@ -571,6 +595,15 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-06 — M02 merged to `main` (PR #3) + closeout
+
+- Merged [PR #3](https://github.com/m-cahill/starlab/pull/3) to `main` at **2026-04-06T23:35:21Z**; merge commit `53a24a4a6106168afe79e0a70d51a20bfef4ea18` (merge method: **merge commit**); remote branch `m02-deterministic-match-execution-harness` **deleted**
+- Final PR head `e88ca20424410cd99f834eeec92a5ec5d8034284` — authoritative PR-head CI: [`24055678613`](https://github.com/m-cahill/starlab/actions/runs/24055678613) (**success**)
+- Post-merge `main` CI on merge commit: [`24056523452`](https://github.com/m-cahill/starlab/actions/runs/24056523452) (**success**)
+- Local evidence (narrow same-machine harness): two `burnysc2` runs, matching normalized `artifact_hash` — `docs/company_secrets/milestones/M02/`
+- §10 updated: **controlled deterministic match execution** proved **only** in that narrow sense; replay binding, canonical run artifact v0, benchmark validity, cross-host reproducibility — **not** proved
+- M03 stubs seeded: `docs/company_secrets/milestones/M03/M03_plan.md`, `M03_toolcalls.md` — **no** M03 implementation
 
 ### 2026-04-06 — M02 local evidence recovery (map path + two successful burny runs)
 

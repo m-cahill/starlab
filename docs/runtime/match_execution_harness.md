@@ -83,7 +83,7 @@ CI runs **fake adapter** tests only — no SC2 installation required.
 
 ## Evidence status in repo (M02)
 
-GitHub **CI** on PR **#3** validates the harness and fake path only. **Local** burny sessions are recorded under `docs/company_secrets/milestones/M02/`. A **2026-04-06 recovery** session documented **two successful** same-config runs with **matching** normalized `artifact_hash` (see `M02_determinism_check.md` and `M02_execution_proof_redacted.json`). The ledger still treats formal **§10** “proved” language as **pending** until M02 **merge to `main`** and closeout. Explicit map paths in config are resolved to **absolute** paths before CreateGame (repo-relative paths require running the CLI from the repository root).
+GitHub **CI** on `main` validates the harness and fake path only (no SC2 in CI). **Local** burny evidence is recorded under `docs/company_secrets/milestones/M02/`: **two successful** same-config runs with **matching** normalized `artifact_hash` (see `M02_determinism_check.md` and `M02_execution_proof_redacted.json`). The ledger (see `docs/starlab.md` §10) records **controlled deterministic match execution** as **proved only in the narrow same-machine harness sense** evidenced there — **not** a cross-host, replay-binding, or benchmark claim. Explicit map paths in config are resolved to **absolute** paths before CreateGame (repo-relative paths require running the CLI from the repository root).
 
 ## Example config (shape)
 

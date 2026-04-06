@@ -195,3 +195,41 @@ Initialize when M02 work begins.
 - `python -m starlab.sc2 --redact` with `STARLAB_SC2_ROOT` set — JSON output; `present.maps_dir` **false** (install `Maps/` directory still absent on disk; harness used explicit path to repo-local `.SC2Map` file).
 
 ---
+
+## 2026-04-06 — M02 final closeout (merge PR #3 + ledger)
+
+**Evidence re-verified:** `M02_local_execution_note.md`, `M02_determinism_check.md`, `M02_execution_proof_redacted.json` — two successful same-machine `burnysc2` runs, same config, matching `artifact_hash` `b23172cb457b7645d796c30cf36baf96229efa3af954190788370ba5ea464e53`.
+
+### GitHub (authoritative)
+
+| Field | Value |
+|-------|--------|
+| **Final PR head SHA** | `e88ca20424410cd99f834eeec92a5ec5d8034284` |
+| **PR-head CI run ID** | `24055678613` |
+| **PR-head CI URL** | https://github.com/m-cahill/starlab/actions/runs/24055678613 |
+| **PR-head conclusion** | **success** |
+| **Merge method** | **Merge commit** |
+| **Merge commit SHA** | `53a24a4a6106168afe79e0a70d51a20bfef4ea18` |
+| **Merged at (UTC)** | `2026-04-06T23:35:21Z` |
+| **Branch deleted** | **Yes** (`m02-deterministic-match-execution-harness`) |
+
+### Post-merge `main` CI (merge commit)
+
+| Field | Value |
+|-------|--------|
+| **Workflow** | CI |
+| **Run ID** | `24056523452` |
+| **URL** | https://github.com/m-cahill/starlab/actions/runs/24056523452 |
+| **Conclusion** | **success** |
+| **Head SHA** | `53a24a4a6106168afe79e0a70d51a20bfef4ea18` |
+
+### Documentation
+
+- Updated `docs/starlab.md` (§7 table, §10, §11, §18, §20, §23), `README.md`, `M02_run1.md`, `M02_summary.md`, `M02_audit.md`, `docs/runtime/match_execution_harness.md` as needed.
+- Seeded **M03** stubs: `docs/company_secrets/milestones/M03/M03_plan.md`, `M03_toolcalls.md` — **no** M03 implementation.
+
+### Non-claims (preserved)
+
+- No replay binding proof, no canonical run artifact v0, no benchmark validity, no cross-host reproducibility.
+
+---
