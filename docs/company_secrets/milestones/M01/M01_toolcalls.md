@@ -80,4 +80,6 @@ Monitored: `gh run watch 24048416111 --exit-status` and `gh run watch 2404849820
 
 `docs/starlab.md` §18 now lists **three** witnessed green PR-head runs on PR #2 (`378c864…` / `24048416111`, `260c4e0…` / `24048498203`, `88b06db…` / `24048576545`). GitHub PR #2 is authoritative for the **current** tip OID at merge time.
 
+**Latest tip at end of closeout session (after amend + force-push):** `29d1eb6e16efa44b77b67699492aad3ce8ee57e9` — PR-head CI run `24048658186` (success): https://github.com/m-cahill/starlab/actions/runs/24048658186
+
 ---
