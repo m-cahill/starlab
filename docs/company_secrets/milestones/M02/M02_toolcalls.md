@@ -139,3 +139,59 @@ Initialize when M02 work begins.
 - **Purpose:** Match §11 / milestone rows to **`gh pr view 3`** head **`061c2126cc59b3ce4d662c58240216343c21f71a`** and successful run **`24053526611`** (witnessed after parent commit **`061c212`**). Further doc-only commits advance the tip; use **`gh pr checks 3`** for merge if the SHA drifts again.
 
 ---
+
+## 2026-04-06 — Map-path recovery / local evidence retry (successful)
+
+**Pass label:** map-path recovery / local evidence retry (per M02 workflow).
+
+**Branch:** `m02-deterministic-match-execution-harness`
+
+### Blocker reconfirmed (prior state)
+
+- `M02_local_execution_note.md` / `M02_determinism_check.md` previously recorded: install **`Maps/`** tree missing or unusable; configured tutorial path absent; ProgramData cache paths not valid single-file maps for `CreateGame`.
+
+### Map discovery
+
+| Field | Value |
+|-------|-------|
+| **How found** | No `.SC2Map` **files** under `C:\Program Files (x86)\StarCraft II` (no `Maps` directory) or user profile search; **downloaded** a known-good file from public OSS. |
+| **Source** | `https://raw.githubusercontent.com/google-deepmind/pysc2/master/pysc2/maps/mini_games/MoveToBeacon.SC2Map` (DeepMind pysc2 mini-game). |
+| **Raw local path** | `C:\coding\starlab\docs\company_secrets\milestones\M02\_local_maps\MoveToBeacon.SC2Map` |
+| **Redacted / committed reference** | `docs/company_secrets/milestones/M02/_local_maps/MoveToBeacon.SC2Map` (relative to repo root; directory `_local_maps/` gitignored — **do not** commit the binary). |
+
+### Config / code
+
+- **Updated** `m02_local_config.json` — `map.path` → repo-relative path above.
+- **Added** `.gitignore` entry for `docs/company_secrets/milestones/M02/_local_maps/`.
+- **Code fix:** `starlab/sc2/maps.py` — `resolve_local_map_path` now uses `Path(...).resolve()` for explicit paths so python-sc2 does not interpret repo-relative paths as under install `Maps/` (fixes `CreateGameError.InvalidMapPath` for valid files).
+- **Tests:** `tests/test_sc2_maps.py` — directory-bundle test expects `bundle.resolve()`.
+
+### Harness runs (same config, two output dirs)
+
+**Environment:** `$env:STARLAB_SC2_ROOT = "C:\Program Files (x86)\StarCraft II"`; **cwd:** repo root.
+
+| Run | Command | Result |
+|-----|---------|--------|
+| 1 | `python -m starlab.sc2.run_match --config docs/company_secrets/milestones/M02/m02_local_config.json --output-dir docs/company_secrets/milestones/M02/_local_runs/run1 --redact` | **Exit 0** |
+| 2 | same; `--output-dir` …`/run2` | **Exit 0** |
+
+### Hash comparison
+
+- **`artifact_hash` run1:** `b23172cb457b7645d796c30cf36baf96229efa3af954190788370ba5ea464e53`
+- **`artifact_hash` run2:** `b23172cb457b7645d796c30cf36baf96229efa3af954190788370ba5ea464e53` (**match**)
+
+### Evidence files updated (truthful)
+
+- `M02_local_execution_note.md`, `M02_determinism_check.md`, `M02_execution_proof_redacted.json` (full redacted JSON from run 1).
+- Ledger/runtime: `docs/starlab.md` (§23 changelog + §11), `M02_summary.md`, `M02_audit.md`, `docs/runtime/match_execution_harness.md`.
+
+### Governance
+
+- **Did not** merge PR #3 in this pass.
+- Non-claims unchanged: no replay binding, no canonical run artifact v0, no benchmark validity, no cross-host reproducibility.
+
+### Optional probe (post-recovery)
+
+- `python -m starlab.sc2 --redact` with `STARLAB_SC2_ROOT` set — JSON output; `present.maps_dir` **false** (install `Maps/` directory still absent on disk; harness used explicit path to repo-local `.SC2Map` file).
+
+---

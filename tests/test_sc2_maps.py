@@ -16,6 +16,17 @@ def test_discover_sorted_order(tmp_path: Path) -> None:
     assert first.name == "m1.SC2Map"
 
 
+def test_explicit_path_directory_bundle(tmp_path: Path) -> None:
+    """Blizzard often stores ``*.SC2Map`` as a directory bundle on disk."""
+
+    bundle = tmp_path / "Tutorial01.SC2Map"
+    bundle.mkdir()
+    (bundle / "placeholder.txt").write_text("x", encoding="ascii")
+    r = resolve_local_map_path(maps_root=None, explicit_path=str(bundle), discover=False)
+    assert r.resolution == "explicit_path"
+    assert r.map_path == bundle.resolve()
+
+
 def test_explicit_path_key(tmp_path: Path) -> None:
     maps_root = tmp_path / "Maps"
     maps_root.mkdir()

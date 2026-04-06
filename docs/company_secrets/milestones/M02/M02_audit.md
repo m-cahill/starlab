@@ -11,7 +11,7 @@
 
 ## Executive summary
 
-M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **adapter isolation** (fake + BurnySc2). **PR-head CI is green** and **no CI weakening** was observed. **HIGH (still):** A **2026-04-06** local **burnysc2** session is **documented** in `M02_local_execution_note.md` / `M02_determinism_check.md`, but **both** harness attempts **failed** before writing `match_execution_proof.json` (configured map path missing on disk). The **narrow** same-machine deterministic harness claim is **not** substantiated — **no** `artifact_hash` pair. **No blocking code defects** identified from CI signal for the merged-intent delta.
+M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **adapter isolation** (fake + BurnySc2). **PR-head CI is green** and **no CI weakening** was observed. A **2026-04-06 recovery** local **burnysc2** session is **documented** in `M02_local_execution_note.md` / `M02_determinism_check.md`: **two successful** runs wrote `match_execution_proof.json` with **matching** normalized `artifact_hash` (narrow same-machine harness; **not** cross-host). Earlier blocked session (missing install map) is **superseded** for evidence by this recovery. **No blocking code defects** identified from CI signal for the merged-intent delta.
 
 ---
 
@@ -22,7 +22,7 @@ M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **
 | Dependency hygiene | Optional `burnysc2` not in default/CI install | OK — intentional |
 | Adapter leakage | STARLAB models avoid `sc2` types on public surfaces | OK |
 | CI truthfulness | Same gates as prior milestones; all passed | OK |
-| Local evidence | Burny×2 **successful** runs + hash comparison **not** achieved (blocked: no map file) | **HIGH (governance)** — blocks honest “proved” claim; evidence files now record attempt |
+| Local evidence | Burny×2 **successful** runs + **matching** hashes **recorded** (recovery session; pysc2 mini-game map + absolute-path fix) | **OK for narrow harness evidence** — formal §10 “proved” rows still await merge/closeout on `main` |
 
 ---
 
@@ -38,7 +38,7 @@ M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **
 
 | Guardrail | Status |
 |-----------|--------|
-| Ledger must not mark “controlled deterministic match execution” **proved** without local evidence | **Enforce at closeout** |
+| Ledger must not mark “controlled deterministic match execution” **proved** without local evidence + **main** closeout | **Enforce at closeout** — local hash pair now exists; merge still pending |
 | Keep `sc2-harness` optional | **Holds** |
 | Do not expand CI to require SC2 | **Holds** |
 

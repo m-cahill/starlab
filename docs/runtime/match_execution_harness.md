@@ -83,7 +83,7 @@ CI runs **fake adapter** tests only — no SC2 installation required.
 
 ## Evidence status in repo (M02)
 
-GitHub **CI** on PR **#3** validates the harness and fake path only. **Local** burny sessions are recorded under `docs/company_secrets/milestones/M02/`; a **2026-04-06** attempt documented **two failed runs** (map file not on disk) — **no** `artifact_hash` pair. The ledger does **not** treat “controlled deterministic match execution” as **proved** until **two successful** same-config runs yield comparable hashes (or an honest mismatch) (same-machine harness only; not portability).
+GitHub **CI** on PR **#3** validates the harness and fake path only. **Local** burny sessions are recorded under `docs/company_secrets/milestones/M02/`. A **2026-04-06 recovery** session documented **two successful** same-config runs with **matching** normalized `artifact_hash` (see `M02_determinism_check.md` and `M02_execution_proof_redacted.json`). The ledger still treats formal **§10** “proved” language as **pending** until M02 **merge to `main`** and closeout. Explicit map paths in config are resolved to **absolute** paths before CreateGame (repo-relative paths require running the CLI from the repository root).
 
 ## Example config (shape)
 
@@ -93,7 +93,7 @@ GitHub **CI** on PR **#3** validates the harness and fake path only. **Local** b
   "adapter": "burnysc2",
   "seed": 42,
   "bounded_horizon": { "max_game_steps": 100, "game_step": 1 },
-  "map": { "path": "C:/Program Files (x86)/StarCraft II/Maps/Tutorial/Tutorial01.SC2Map" },
+  "map": { "path": "docs/company_secrets/milestones/M02/_local_maps/MoveToBeacon.SC2Map" },
   "interface": {
     "raw_interface": true,
     "score_interface": true,
@@ -104,4 +104,4 @@ GitHub **CI** on PR **#3** validates the harness and fake path only. **Local** b
 }
 ```
 
-Use `"adapter": "fake"` for CI-safe runs. Prefer a real map path you control or `"discover_under_maps_dir": true` when `STARLAB_SC2_MAPS_DIR` (or `STARLAB_SC2_ROOT`) resolves to a `Maps/` tree.
+Use `"adapter": "fake"` for CI-safe runs. Prefer a real `.SC2Map` **file** path you control (the example filename matches the pysc2 mini-game often placed under gitignored `M02/_local_maps/`) or `"discover_under_maps_dir": true` when `STARLAB_SC2_MAPS_DIR` (or `STARLAB_SC2_ROOT`) resolves to a `Maps/` tree that contains playable map files.

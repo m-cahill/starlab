@@ -15,6 +15,16 @@ class ResolvedMap:
     map_path: Path
 
 
+def _is_playable_sc2_map(p: Path) -> bool:
+    """True if ``p`` is a file map or a directory ``*.SC2Map`` bundle (common on disk)."""
+
+    if not p.exists():
+        return False
+    if p.is_file():
+        return p.suffix.lower() == ".sc2map"
+    return p.is_dir() and p.name.lower().endswith(".sc2map")
+
+
 def _stable_key_under_maps_root(maps_root: Path, map_path: Path) -> str:
     try:
         rel = map_path.resolve().relative_to(maps_root.resolve())
@@ -30,7 +40,7 @@ def discover_first_map_sorted(maps_dir: Path) -> Path:
         raise FileNotFoundError(f"maps directory does not exist: {maps_dir}")
     candidates: list[Path] = []
     for p in maps_dir.rglob("*.SC2Map"):
-        if p.is_file():
+        if _is_playable_sc2_map(p):
             candidates.append(p)
     candidates.sort(key=lambda x: x.as_posix().lower())
     if not candidates:
@@ -47,13 +57,15 @@ def resolve_local_map_path(
     """
     Resolve a playable map path.
 
-    - If ``explicit_path`` is set, use that file (must exist).
+    - If ``explicit_path`` is set, use that path (``.SC2Map`` file or directory bundle; must exist).
     - If ``discover`` is True, pick the first sorted ``*.SC2Map`` under ``maps_root``.
     """
 
     if explicit_path is not None:
-        p = Path(explicit_path).expanduser()
-        if not p.is_file():
+        # Absolute path required: python-sc2's Map passes this to CreateGame; relative
+        # paths are incorrectly resolved under install Maps/ (see burnysc2 adapter).
+        p = Path(explicit_path).expanduser().resolve()
+        if not _is_playable_sc2_map(p):
             raise FileNotFoundError(f"configured map path not found: {p}")
         if maps_root is not None:
             key = _stable_key_under_maps_root(maps_root, p)

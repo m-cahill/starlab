@@ -1,6 +1,538 @@
 {
-  "_status": "NO_SUCCESSFUL_RUN",
-  "_comment": "No match_execution_proof.json was produced in the 2026-04-06 local session: both burnysc2 harness attempts failed with 'configured map path not found' before proof write. Replace this file with output from `python -m starlab.sc2.run_match ... --redact` after a successful run when a valid .SC2Map is available.",
-  "artifact_hash": null,
-  "schema_version": "match_execution_proof.v1"
+  "action_count": 0,
+  "adapter_name": "burnysc2",
+  "artifact_hash": "b23172cb457b7645d796c30cf36baf96229efa3af954190788370ba5ea464e53",
+  "base_build": "95841",
+  "data_version": "AC2E912BA9FEB25765FC69B171E1A58F",
+  "final_status": "Defeat",
+  "interface": {
+    "feature_layer_interface": false,
+    "raw_interface": true,
+    "rendered_interface": false,
+    "score_interface": true
+  },
+  "map_logical_key": "MoveToBeacon.SC2Map",
+  "map_resolution": "explicit_path",
+  "observation_summaries": [
+    {
+      "game_loop": 0,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 1,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 2,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 3,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 4,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 5,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 6,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 7,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 8,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 9,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 10,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 11,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 12,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 13,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 14,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 15,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 16,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 17,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 18,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 19,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 20,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 21,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 22,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 23,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 24,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 25,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 26,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 27,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 28,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 29,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 30,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 31,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 32,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 33,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 34,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 35,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 36,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 37,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 38,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 39,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 40,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 41,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 42,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 43,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 44,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 45,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 46,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 47,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 48,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 49,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 50,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 51,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 52,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 53,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 54,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 55,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 56,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 57,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 58,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 59,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 60,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 61,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 62,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 63,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 64,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 65,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 66,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 67,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 68,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 69,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 70,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 71,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 72,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 73,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 74,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 75,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 76,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 77,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 78,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 79,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 80,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 81,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 82,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 83,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 84,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 85,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 86,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 87,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 88,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 89,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 90,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 91,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 92,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 93,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 94,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 95,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 96,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 97,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 98,
+      "minerals": 0,
+      "vespene": 0
+    },
+    {
+      "game_loop": 99,
+      "minerals": 0,
+      "vespene": 0
+    }
+  ],
+  "replay": {
+    "note": "replay save not requested",
+    "replay_file_name": null,
+    "replay_file_sha256": null,
+    "replay_saved": false
+  },
+  "runtime_boundary_name": "s2client_proto_sc2api",
+  "schema_version": "match_execution_proof.v1",
+  "seed": 424242,
+  "status_sequence": [
+    "configure",
+    "launch",
+    "in_game",
+    "bounded_exit",
+    "result:Defeat"
+  ],
+  "step_policy": {
+    "game_step": 1,
+    "max_game_steps": 100
+  }
 }

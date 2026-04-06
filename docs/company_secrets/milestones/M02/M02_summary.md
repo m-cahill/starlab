@@ -4,7 +4,7 @@
 **Phase:** I — Governance, Runtime Surface, and Deterministic Run Substrate  
 **Milestone:** M02 — Deterministic Match Execution Harness  
 **Timeframe:** 2026-04-06 → **Open** (implementation + pre-merge validation on branch; **not** closed on `main` at this document revision)  
-**Status:** **Open** — PR [#3](https://github.com/m-cahill/starlab/pull/3) open; PR-head CI green; **local burny session recorded** — **two successful runs + `artifact_hash` pair not achieved** (map file missing on disk; see `M02_local_execution_note.md`)
+**Status:** **Open** (implementation + local evidence on branch; **not** closed on `main` until PR **#3** merges and closeout runs) — PR [#3](https://github.com/m-cahill/starlab/pull/3) open; PR-head CI green; **local burny session (2026-04-06 recovery)** — **two successful runs** with **matching** normalized `artifact_hash` (see `M02_determinism_check.md`, `M02_local_execution_note.md`)
 
 ---
 
@@ -53,8 +53,8 @@ Without M02, the project would have **no** governed execution harness or normali
 |-------|----------|
 | Local (2026-04-06) | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — all exit 0; `python -m starlab.sc2.run_match --help` exit 0. |
 | PR-head CI | Run `24054732181` — **success** on head `290304a3ad3986029879c183f4e40159e7f5792c` — see `M02_run1.md`. |
-| Local burny (2026-04-06) | **`pip install -e ".[sc2-harness]"`** exit 0; **`python -m starlab.sc2 --redact`**: install/binary detected; **no** `Maps` dir at probe path; **two** `run_match` attempts with committed `m02_local_config.json` — **both failed** (map path not found); **no** `artifact_hash` — see `M02_local_execution_note.md`, `M02_determinism_check.md`. |
-| **Missing for narrow harness proof** | Two **successful** local **burnysc2** runs emitting `match_execution_proof.json` and a **hash comparison** (match or honest mismatch) — **not** satisfied until a valid `.SC2Map` is available at the configured path (or config updated). |
+| Local burny (2026-04-06 recovery) | **`pip install -e ".[sc2-harness]"`** exit 0; pysc2 **`MoveToBeacon.SC2Map`** in gitignored `_local_maps/`; **two** `run_match` attempts with committed `m02_local_config.json` — **both exit 0**; **matching** `artifact_hash` — see `M02_local_execution_note.md`, `M02_determinism_check.md`, `M02_execution_proof_redacted.json`. |
+| **Narrow harness hash check** | **Satisfied on recorded host** — two successful runs, **matching** hashes (not a cross-host or cross-install claim). |
 
 ---
 
@@ -96,21 +96,21 @@ Without M02, the project would have **no** governed execution harness or normali
 | Harness + fake path + tests + docs | **Met** | Code + PR #3 + green PR-head CI |
 | Optional real adapter behind extra | **Met** | `sc2-harness` / `burnysc2_adapter.py` |
 | CI green without SC2 | **Met** | Run `24054732181` |
-| Local real execution + determinism check | **Not met** | Evidence files record **blocked** session — no proof hashes |
+| Local real execution + determinism check | **Met on recorded Windows host** | Two successful runs + matching `artifact_hash` — see determinism check and redacted proof JSON |
 | Merge to `main` | **Pending** | PR open |
 
 ---
 
 ## 10. Final Verdict
 
-**Milestone implementation is in place and PR-head CI is green.** **Local evidence files are no longer empty templates** — they document a **real** burny attempt on Windows where **both runs failed before proof write** (missing map). M02 is **not** closeable as a **proof** milestone for the **narrow same-machine deterministic harness** claim until **two successful** runs yield comparable `artifact_hash` values (or a documented honest mismatch). Merge and post-merge `main` CI are still **pending** for formal ledger closeout.
+**Milestone implementation is in place and PR-head CI is green.** **Local evidence** documents **two successful** burny runs on Windows with **matching** normalized `artifact_hash` values for the committed config (narrow same-machine harness). **Formal** M02 **closeout on `main`** (merge PR **#3**, §18/§23 rows, tag if applicable) remains **pending** — this summary does **not** assert merge or §10 “proved” rows until that workflow completes.
 
 ---
 
 ## 11. Authorized Next Step
 
-- Merge **PR #3** when human review is complete (CI already green at recorded tip).
-- Run local burny evidence; then perform **formal closeout** (ledger §7/§18/§23, tag, M03 planning) per project workflow — **not** started here.
+- **Local burny evidence:** recorded (2026-04-06 recovery). **Merge PR #3** when human review is complete; re-run CI on the merge tip if the branch advanced.
+- Perform **formal closeout** on `main` (ledger §7/§18/§23, tag, M03 planning) per project workflow after merge — **not** executed in the evidence-recovery commit alone.
 
 ---
 
