@@ -83,7 +83,7 @@ CI runs **fake adapter** tests only — no SC2 installation required.
 
 ## Evidence status in repo (M02)
 
-GitHub **CI** on PR **#3** validates the harness and fake path only. **Local** burny×2 runs with compared STARLAB `artifact_hash` values are recorded under `docs/company_secrets/milestones/M02/` when available; until those files are completed, the ledger does **not** treat “controlled deterministic match execution” as **proved** (same-machine harness only; not portability).
+GitHub **CI** on PR **#3** validates the harness and fake path only. **Local** burny sessions are recorded under `docs/company_secrets/milestones/M02/`; a **2026-04-06** attempt documented **two failed runs** (map file not on disk) — **no** `artifact_hash` pair. The ledger does **not** treat “controlled deterministic match execution” as **proved** until **two successful** same-config runs yield comparable hashes (or an honest mismatch) (same-machine harness only; not portability).
 
 ## Example config (shape)
 
