@@ -1,0 +1,16 @@
+{
+  "schema_version": "1",
+  "adapter": "burnysc2",
+  "seed": 424242,
+  "bounded_horizon": { "max_game_steps": 100, "game_step": 1 },
+  "map": {
+    "path": "C:/Program Files (x86)/StarCraft II/Maps/Tutorial/Tutorial01.SC2Map"
+  },
+  "interface": {
+    "raw_interface": true,
+    "score_interface": true,
+    "feature_layer_interface": false,
+    "rendered_interface": false
+  },
+  "save_replay": false
+}

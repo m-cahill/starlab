@@ -1,6 +1,6 @@
 {
-  "_status": "PENDING",
-  "_comment": "Replace this stub with a redacted copy of match_execution_proof.json after a successful local burnysc2 run. Use: python -m starlab.sc2.run_match --config ... --output-dir ... --redact",
+  "_status": "NO_SUCCESSFUL_RUN",
+  "_comment": "No match_execution_proof.json was produced in the 2026-04-06 local session: both burnysc2 harness attempts failed with 'configured map path not found' before proof write. Replace this file with output from `python -m starlab.sc2.run_match ... --redact` after a successful run when a valid .SC2Map is available.",
   "artifact_hash": null,
   "schema_version": "match_execution_proof.v1"
 }

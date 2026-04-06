@@ -73,6 +73,50 @@ Initialize when M02 work begins.
 
 ---
 
+## 2026-04-06 — Local evidence session (burnysc2; blocked — no map file)
+
+**Branch:** `m02-deterministic-match-execution-harness`  
+**HEAD at session start (before evidence commit):** `1ce6b42f0e2bc5e2e0470e552d3cf038cafad579`
+
+### Optional harness install
+
+| Command | Result |
+|---------|--------|
+| `python -m pip install -e ".[sc2-harness]"` | **Exit 0** — editable install; `burnysc2` already present (7.2.1) |
+
+### SC2 environment
+
+| Step | Result |
+|------|--------|
+| `STARLAB_SC2_ROOT` | Set to standard Windows x86 install root for the session |
+| `python -m starlab.sc2 --redact` | JSON: `root` + `binary` **present**; `maps_dir` **not** present on disk (`present.maps_dir`: false); `base_build` / `data_version`: null |
+
+**Note:** CLI is `python -m starlab.sc2` (JSON always; `--redact` for path redaction). There is no separate `env_probe` module entry — probe lives under `starlab.sc2`.
+
+### Config (committed)
+
+- **File:** `docs/company_secrets/milestones/M02/m02_local_config.json`
+- **Map mode:** `explicit_path` — `…/Maps/Tutorial/Tutorial01.SC2Map` under install root
+
+### Harness runs (same config, two output dirs)
+
+| Run | Command | Result |
+|-----|---------|--------|
+| 1 | `python -m starlab.sc2.run_match --config docs/company_secrets/milestones/M02/m02_local_config.json --output-dir docs/company_secrets/milestones/M02/_local_runs/run1` | **Exit 2** — `configured map path not found` |
+| 2 | same `--config`; `--output-dir` …`/run2` | **Exit 2** — same error |
+
+**Proof files:** none written. **`_local_runs/`** is gitignored.
+
+### Hash comparison
+
+- **Not applicable** — no `artifact_hash` values produced.
+
+### Evidence files updated
+
+- `M02_local_execution_note.md`, `M02_determinism_check.md`, `M02_execution_proof_redacted.json` — **truthful blocked session** (not a successful determinism proof).
+
+---
+
 ## 2026-04-06 — Case B: ledger alignment to latest PR-head CI (no merge)
 
 - **Tool:** Write — **Purpose:** Align `docs/starlab.md` §11 + §23, `M02_run1.md`, `M02_summary.md`, `M02_audit.md`, `M02_toolcalls.md`, and `docs/runtime/match_execution_harness.md` to authoritative pair **PR head** `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a` + **CI** run `24052325999` (single reference; supersede stale `5f5c8a5…` / `24052230417` rows). **Did not** merge PR #3; local real-execution evidence still **pending**.

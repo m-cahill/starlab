@@ -1,28 +1,29 @@
 # M02 — Determinism check
 
-**Status:** **PENDING — not performed in Cursor / CI.**
+**Status:** **NOT COMPLETED — blocked (no proof artifacts).**
 
-Two runs on the **same machine** with the **same config** must be executed locally; then compare **normalized** `artifact_hash` values from each `match_execution_proof.json`. See `docs/runtime/match_execution_harness.md`.
+Two attempts on the **same machine** with the **same** committed config were executed. **Neither run** produced `match_execution_proof.json`, so **no** normalized `artifact_hash` values exist to compare. See `M02_local_execution_note.md` for the failure mode (configured map path not found on disk).
 
-Until this section is filled, M02 **must not** be described as having completed the **local deterministic harness proof** in the public ledger.
+This outcome **does not** prove nondeterminism; it proves **the harness never reached proof emission** for this environment.
 
 ---
 
-## Run 1 (template)
+## Run 1
 
-- Output directory: `<fill>`
-- `artifact_hash`: `<fill>`
+- **Output directory (intended):** `docs/company_secrets/milestones/M02/_local_runs/run1`
+- **`artifact_hash`:** **N/A** — no `match_execution_proof.json` produced (harness exited with error before write).
 
-## Run 2 (template)
+## Run 2
 
-- Output directory: `<fill>`
-- `artifact_hash`: `<fill>`
+- **Output directory (intended):** `docs/company_secrets/milestones/M02/_local_runs/run2`
+- **`artifact_hash`:** **N/A** — same as run 1.
 
-## Result (template)
+## Result
 
 - [ ] Hashes match
 - [ ] Hashes differ — explanation recorded in milestone summary/audit
+- [x] **Neither run produced hashes** — comparison **not applicable** until two successful runs exist
 
 ## Notes
 
-STARLAB compares **STARLAB-owned normalized proof hashes**, not raw replay bytes or absolute paths.
+STARLAB compares **STARLAB-owned normalized proof hashes**, not raw replay bytes or absolute paths. **Replay binding, benchmarks, canonical run artifacts, and cross-host reproducibility** remain **out of scope** for this check.

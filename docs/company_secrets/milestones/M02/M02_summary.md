@@ -4,7 +4,7 @@
 **Phase:** I — Governance, Runtime Surface, and Deterministic Run Substrate  
 **Milestone:** M02 — Deterministic Match Execution Harness  
 **Timeframe:** 2026-04-06 → **Open** (implementation + pre-merge validation on branch; **not** closed on `main` at this document revision)  
-**Status:** **Open** — PR [#3](https://github.com/m-cahill/starlab/pull/3) open; PR-head CI green; **local real-execution evidence pending**
+**Status:** **Open** — PR [#3](https://github.com/m-cahill/starlab/pull/3) open; PR-head CI green; **local burny session recorded** — **two successful runs + `artifact_hash` pair not achieved** (map file missing on disk; see `M02_local_execution_note.md`)
 
 ---
 
@@ -53,7 +53,8 @@ Without M02, the project would have **no** governed execution harness or normali
 |-------|----------|
 | Local (2026-04-06) | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — all exit 0; `python -m starlab.sc2.run_match --help` exit 0. |
 | PR-head CI | Run `24053526611` — **success** on head `061c2126cc59b3ce4d662c58240216343c21f71a` — see `M02_run1.md`. |
-| **Missing for full M02 claim** | Two local **burnysc2** runs on the same machine with matching normalized `artifact_hash` **not yet recorded** in milestone evidence files (templates only). |
+| Local burny (2026-04-06) | **`pip install -e ".[sc2-harness]"`** exit 0; **`python -m starlab.sc2 --redact`**: install/binary detected; **no** `Maps` dir at probe path; **two** `run_match` attempts with committed `m02_local_config.json` — **both failed** (map path not found); **no** `artifact_hash` — see `M02_local_execution_note.md`, `M02_determinism_check.md`. |
+| **Missing for narrow harness proof** | Two **successful** local **burnysc2** runs emitting `match_execution_proof.json` and a **hash comparison** (match or honest mismatch) — **not** satisfied until a valid `.SC2Map` is available at the configured path (or config updated). |
 
 ---
 
@@ -95,14 +96,14 @@ Without M02, the project would have **no** governed execution harness or normali
 | Harness + fake path + tests + docs | **Met** | Code + PR #3 + green PR-head CI |
 | Optional real adapter behind extra | **Met** | `sc2-harness` / `burnysc2_adapter.py` |
 | CI green without SC2 | **Met** | Run `24053526611` |
-| Local real execution + determinism check | **Not met in repo evidence** | Templates unfilled |
+| Local real execution + determinism check | **Not met** | Evidence files record **blocked** session — no proof hashes |
 | Merge to `main` | **Pending** | PR open |
 
 ---
 
 ## 10. Final Verdict
 
-**Milestone implementation is in place and PR-head CI is green**, but M02 is **not fully closeable** as a **governed milestone on `main`** until: (1) PR merge and post-merge CI recorded, and (2) **local real-execution evidence** is completed and written to the M02 evidence files. Until then, treat M02 as **implementation-complete with an explicit local-evidence gap**.
+**Milestone implementation is in place and PR-head CI is green.** **Local evidence files are no longer empty templates** — they document a **real** burny attempt on Windows where **both runs failed before proof write** (missing map). M02 is **not** closeable as a **proof** milestone for the **narrow same-machine deterministic harness** claim until **two successful** runs yield comparable `artifact_hash` values (or a documented honest mismatch). Merge and post-merge `main` CI are still **pending** for formal ledger closeout.
 
 ---
 

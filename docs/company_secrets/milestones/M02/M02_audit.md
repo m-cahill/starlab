@@ -4,14 +4,14 @@
 **Milestone ID:** M02  
 **Current SHA (PR head):** `061c2126cc59b3ce4d662c58240216343c21f71a`  
 **Diff range (informative):** `main...061c2126cc59b3ce4d662c58240216343c21f71a` (merge base not re-resolved in this document)  
-**Authoritative CI:** [CI run 24053475644](https://github.com/m-cahill/starlab/actions/runs/24053475644) — **success** (PR event, head SHA above)  
+**Authoritative CI:** [CI run 24053526611](https://github.com/m-cahill/starlab/actions/runs/24053526611) — **success** (PR event, head SHA above)  
 **Date:** 2026-04-06
 
 ---
 
 ## Executive summary
 
-M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **adapter isolation** (fake + BurnySc2). **PR-head CI is green** and **no CI weakening** was observed. **HIGH:** Local **real SC2** execution evidence is **not** present in-repo; the milestone must **not** be overstated as “fully proved” until that evidence exists. **No blocking code defects** identified from CI signal for the merged-intent delta.
+M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **adapter isolation** (fake + BurnySc2). **PR-head CI is green** and **no CI weakening** was observed. **HIGH (still):** A **2026-04-06** local **burnysc2** session is **documented** in `M02_local_execution_note.md` / `M02_determinism_check.md`, but **both** harness attempts **failed** before writing `match_execution_proof.json` (configured map path missing on disk). The **narrow** same-machine deterministic harness claim is **not** substantiated — **no** `artifact_hash` pair. **No blocking code defects** identified from CI signal for the merged-intent delta.
 
 ---
 
@@ -22,7 +22,7 @@ M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **
 | Dependency hygiene | Optional `burnysc2` not in default/CI install | OK — intentional |
 | Adapter leakage | STARLAB models avoid `sc2` types on public surfaces | OK |
 | CI truthfulness | Same gates as prior milestones; all passed | OK |
-| Local evidence | Burny×2 determinism not documented | **HIGH (governance)** — blocks honest “proved” claim, not code merge |
+| Local evidence | Burny×2 **successful** runs + hash comparison **not** achieved (blocked: no map file) | **HIGH (governance)** — blocks honest “proved” claim; evidence files now record attempt |
 
 ---
 
@@ -46,7 +46,7 @@ M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **
 
 ## 4. CI / test / lint (record)
 
-- **Lint/format/types:** Ruff + Mypy — pass (run `24053475644`).
+- **Lint/format/types:** Ruff + Mypy — pass (run `24053526611`).
 - **Tests:** Pytest — pass; covers fake path, not live SC2.
 - **Supply chain:** pip-audit, SBOM, Gitleaks — pass.
 
@@ -68,7 +68,7 @@ M02 adds a **bounded match harness**, a **deterministic proof artifact**, and **
 **Do not** certify M02 **milestone closeout** until:
 
 1. Merge + post-merge `main` CI (project convention), and  
-2. Local real-execution evidence per M02 plan.
+2. **Successful** local real-execution + determinism record per M02 plan (two proof-producing runs, or honest mismatch between hashes).
 
 **Deferred (explicit):** Replay binding, canonical run artifact, benchmarks — unchanged.
 
