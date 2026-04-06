@@ -532,7 +532,9 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 | ----- | ------------ | ---------- | --- |
 | `main` after M02 merge (`53a24a4…`) | `24056523452` | success | https://github.com/m-cahill/starlab/actions/runs/24056523452 |
 
-*Follow-up documentation pushes to `main` after the merge commit may produce additional green CI runs; distinguish them in §23 if they record ledger-only updates.*
+*M02 closeout documentation push:* `main` @ `d81a0952335cbc93d2144da1c428a42287561793` — workflow run `24056595358` (success): https://github.com/m-cahill/starlab/actions/runs/24056595358
+
+*Further documentation-only pushes to `main` after this row may produce additional green CI runs; distinguish them in §23 if they record ledger-only updates.*
 
 **M02 milestone artifacts:** `docs/company_secrets/milestones/M02/` (`M02_plan.md`, `M02_toolcalls.md`, `M02_run1.md`, `M02_summary.md`, `M02_audit.md`, `M02_local_execution_note.md`, `M02_determinism_check.md`, `M02_execution_proof_redacted.json`, `m02_local_config.json`, etc.)
 
@@ -601,6 +603,7 @@ It should always answer, with minimal ambiguity:
 - Merged [PR #3](https://github.com/m-cahill/starlab/pull/3) to `main` at **2026-04-06T23:35:21Z**; merge commit `53a24a4a6106168afe79e0a70d51a20bfef4ea18` (merge method: **merge commit**); remote branch `m02-deterministic-match-execution-harness` **deleted**
 - Final PR head `e88ca20424410cd99f834eeec92a5ec5d8034284` — authoritative PR-head CI: [`24055678613`](https://github.com/m-cahill/starlab/actions/runs/24055678613) (**success**)
 - Post-merge `main` CI on merge commit: [`24056523452`](https://github.com/m-cahill/starlab/actions/runs/24056523452) (**success**)
+- Closeout doc push on `main` (`d81a095…`): CI [`24056595358`](https://github.com/m-cahill/starlab/actions/runs/24056595358) (**success**)
 - Local evidence (narrow same-machine harness): two `burnysc2` runs, matching normalized `artifact_hash` — `docs/company_secrets/milestones/M02/`
 - §10 updated: **controlled deterministic match execution** proved **only** in that narrow sense; replay binding, canonical run artifact v0, benchmark validity, cross-host reproducibility — **not** proved
 - M03 stubs seeded: `docs/company_secrets/milestones/M03/M03_plan.md`, `M03_toolcalls.md` — **no** M03 implementation

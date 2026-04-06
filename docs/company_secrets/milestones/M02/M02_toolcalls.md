@@ -223,6 +223,16 @@ Initialize when M02 work begins.
 | **Conclusion** | **success** |
 | **Head SHA** | `53a24a4a6106168afe79e0a70d51a20bfef4ea18` |
 
+### Post-merge `main` CI (M02 closeout documentation commit)
+
+| Field | Value |
+|-------|--------|
+| **Workflow** | CI |
+| **Run ID** | `24056595358` |
+| **URL** | https://github.com/m-cahill/starlab/actions/runs/24056595358 |
+| **Conclusion** | **success** |
+| **Head SHA** | `d81a0952335cbc93d2144da1c428a42287561793` |
+
 ### Documentation
 
 - Updated `docs/starlab.md` (§7 table, §10, §11, §18, §20, §23), `README.md`, `M02_run1.md`, `M02_summary.md`, `M02_audit.md`, `docs/runtime/match_execution_harness.md` as needed.
