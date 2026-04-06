@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "starlab"
+version = "0.0.0"
+description = "STARLAB: governed RTS research substrate (bootstrap)"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = { text = "LicenseRef-LICENSE" }
+authors = [{ name = "Michael Cahill" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.4",
+    "mypy>=1.8",
+    "pytest>=8.0",
+    "pip-audit>=2.7",
+    "cyclonedx-bom>=4.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["starlab*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["starlab", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "W"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+packages = ["starlab", "tests"]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
