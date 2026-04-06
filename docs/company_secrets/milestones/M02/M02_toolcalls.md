@@ -28,7 +28,7 @@ Initialize when M02 work begins.
 
 **Branch:** `m02-deterministic-match-execution-harness`  
 **Commit SHA (pre–closeout-prep verification):** `888407868cbdd00ca124e2b496f9ca14f909b0fc`  
-**Commit SHA (current PR tip after ledger alignment):** `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a`
+**Commit SHA (current PR tip after ledger alignment):** `d80ae12322c3d2c45c754bb298ac895a8cbe7335`
 
 | Command | Result |
 |---------|--------|
@@ -49,7 +49,7 @@ Initialize when M02 work begins.
 | Branch | `m02-deterministic-match-execution-harness` |
 | PR | **#3** — https://github.com/m-cahill/starlab/pull/3 |
 | Title | M02: deterministic match execution harness |
-| PR head SHA | `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a` |
+| PR head SHA | `d80ae12322c3d2c45c754bb298ac895a8cbe7335` |
 
 ---
 
@@ -58,14 +58,14 @@ Initialize when M02 work begins.
 | Field | Value |
 |-------|--------|
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
-| Run ID (authoritative, current tip) | **24052325999** |
-| URL | https://github.com/m-cahill/starlab/actions/runs/24052325999 |
+| Run ID (authoritative, current tip) | **24053218335** |
+| URL | https://github.com/m-cahill/starlab/actions/runs/24053218335 |
 | Event | `pull_request` |
-| Head SHA | `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a` |
+| Head SHA | `d80ae12322c3d2c45c754bb298ac895a8cbe7335` |
 | Conclusion | **success** |
 | Authoritative for merge? | **Yes** — green run on latest PR tip (verified `gh run list` / `gh pr view 3`) |
 
-**Earlier PR-head runs (older tips; not the current ledger contract):** `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
+**Earlier PR-head runs (older tips; not the current ledger contract):** `24052325999` on `f457cf5…`; `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
 
 **Analysis document:** `M02_run1.md`
 
@@ -76,5 +76,11 @@ Initialize when M02 work begins.
 ## 2026-04-06 — Case B: ledger alignment to latest PR-head CI (no merge)
 
 - **Tool:** Write — **Purpose:** Align `docs/starlab.md` §11 + §23, `M02_run1.md`, `M02_summary.md`, `M02_audit.md`, `M02_toolcalls.md`, and `docs/runtime/match_execution_harness.md` to authoritative pair **PR head** `f457cf54bb9e49a991de7605bc0c2c87b97c9c6a` + **CI** run `24052325999` (single reference; supersede stale `5f5c8a5…` / `24052230417` rows). **Did not** merge PR #3; local real-execution evidence still **pending**.
+
+---
+
+## 2026-04-06 — Post-push: authoritative pair bumped to doc commit tip
+
+- After push of doc alignment commit `d80ae12322c3d2c45c754bb298ac895a8cbe7335`, GitHub **CI** run **`24053218335`** (success) is the current PR-head gate. Ledger rows above supersede the intermediate `f457cf5…` + `24052325999` pair for **current** merge-readiness wording.
 
 ---
