@@ -83,3 +83,19 @@ Monitored: `gh run watch 24048416111 --exit-status` and `gh run watch 2404849820
 **Merge gate:** confirm the latest green PR-head CI run on [PR #2](https://github.com/m-cahill/starlab/pull/2) before merging (`gh pr view 2 --json statusCheckRollup,headRefOid`). Do not rely on a fixed OID in this log after further pushes.
 
 ---
+
+## Merge to `main` (2026-04-06)
+
+| Item | Value |
+|------|--------|
+| PR state | **MERGED** |
+| Merge method | **Merge commit** (not squash) |
+| Merge commit | `4a916033f55c6b8c4a582f985233a64ca039ead3` |
+| Merged at (GitHub) | `2026-04-06T20:26:27Z` |
+| Remote branch deleted | **Yes** (`m01-sc2-runtime-surface-env-lock` — 404 on GitHub API) |
+| Post-merge `main` CI | Run `24049637412` — **success** — https://github.com/m-cahill/starlab/actions/runs/24049637412 |
+| `main` tip after merge | `4a916033f55c6b8c4a582f985233a64ca039ead3` (same as merge commit until further commits) |
+
+Ledger updated in `docs/starlab.md` §18 and changelog on `main` in the same closeout commit as this appendix.
+
+---

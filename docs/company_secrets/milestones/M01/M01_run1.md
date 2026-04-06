@@ -74,12 +74,26 @@ This file records PR-head CI for **M01** on [PR #2](https://github.com/m-cahill/
 
 ---
 
+## Post-merge `main` CI (authoritative for merged state)
+
+| Field | Value |
+|-------|--------|
+| Workflow | CI |
+| Event | `push` to `main` |
+| Trigger commit | `4a916033f55c6b8c4a582f985233a64ca039ead3` (merge commit for PR #2) |
+| Run ID | `24049637412` |
+| Conclusion | **success** |
+| URL | https://github.com/m-cahill/starlab/actions/runs/24049637412 |
+
+---
+
 ## Next actions
 
 | Action | Owner |
 |--------|--------|
-| Merge PR #2 when ready | Human |
-| Record merge SHA + post-merge `main` CI in `docs/starlab.md` §18 | After merge |
+| ~~Merge PR #2~~ | **Done** — merged 2026-04-06T20:26:27Z |
+| ~~Record merge SHA + post-merge `main` CI in `docs/starlab.md` §18~~ | **Done** on `main` |
+| Begin M02 on a new branch | Next milestone |
 
 ---
 

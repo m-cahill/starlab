@@ -4,7 +4,7 @@
 **Phase:** I — Governance, Runtime Surface, and Deterministic Run Substrate  
 **Milestone:** M01 — SC2 Runtime Surface Decision & Environment Lock  
 **Timeframe:** 2026-04-06 → 2026-04-06 (implementation + closeout prep on branch)  
-**Status:** **Closed** (deliverables complete on branch; merge to `main` via [PR #2](https://github.com/m-cahill/starlab/pull/2) pending at documentation time)
+**Status:** **Closed on `main`** — [PR #2](https://github.com/m-cahill/starlab/pull/2) merged 2026-04-06 (`4a916033f55c6b8c4a582f985233a64ca039ead3`); post-merge `main` CI recorded in `docs/starlab.md` §18
 
 ---
 
@@ -120,10 +120,10 @@ No new issues were introduced during this milestone that block merge from a CI p
 | Reference | Value |
 |-----------|--------|
 | Branch | `m01-sc2-runtime-surface-env-lock` |
-| PR tip at closeout prep | `88b06db78fa9cb2b71217c03c752232df3a743ba` (confirm on PR #2) |
-| Base (`main`) | `725250018bb09ce84e772ded0c7a184cc7d764ea` |
+| Merge to `main` | `4a916033f55c6b8c4a582f985233a64ca039ead3` (2026-04-06T20:26:27Z) |
+| Base (`main` pre-M01) | `725250018bb09ce84e772ded0c7a184cc7d764ea` |
 | PR | https://github.com/m-cahill/starlab/pull/2 |
-| CI (witnessed) | https://github.com/m-cahill/starlab/actions/runs/24048576545 (latest at prep; see §18 for full set) |
+| Post-merge `main` CI | https://github.com/m-cahill/starlab/actions/runs/24049637412 |
 | Ledger | `docs/starlab.md` |
 | Plan | `docs/company_secrets/milestones/M01/M01_plan.md` |
 | Run analysis | `docs/company_secrets/milestones/M01/M01_run1.md` |

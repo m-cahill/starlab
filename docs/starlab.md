@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M01 delivered ([PR #2](https://github.com/m-cahill/starlab/pull/2) pending merge); M02 next after merge  
+**Status:** Active — M01 merged to `main` ([PR #2](https://github.com/m-cahill/starlab/pull/2)); **M02** is next  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -189,7 +189,7 @@ Planned program arc (33 milestones, M00–M32):
 
 **Rule:** milestone names may tighten over time, but scope should remain small and reversible by default.
 
-**M01 note:** “Complete” reflects deliverables implemented and PR-head CI green on [PR #2](https://github.com/m-cahill/starlab/pull/2); merge commit and post-merge `main` CI are recorded in §18 when merged.
+**M01 note:** M01 is **merged** to `main` (see §18). “Complete” in the table reflects closed milestone scope on `main`, not deterministic match execution (M02).
 
 ---
 
@@ -469,7 +469,7 @@ This section should be filled as milestones close.
 | Milestone | Closeout Date | PR | Merge commit | Notes |
 | --------- | ------------- | -- | ------------ | ----- |
 | M00       | 2026-04-06    | [#1](https://github.com/m-cahill/starlab/pull/1) | `f9203dd555ea267bc2d72c3470b174ca35a23788` | Governance bootstrap; merged to `main`; see CI evidence below |
-| M01       | 2026-04-06    | [#2](https://github.com/m-cahill/starlab/pull/2) | (pending merge) | SC2 runtime surface decision, environment lock docs, `starlab.sc2` probe; OD-005 resolved — update merge SHA after merge to `main` |
+| M01       | 2026-04-06    | [#2](https://github.com/m-cahill/starlab/pull/2) | `4a916033f55c6b8c4a582f985233a64ca039ead3` | SC2 runtime surface decision, environment lock docs, `starlab.sc2` probe; OD-005 resolved; merged to `main`; see CI evidence below |
 
 **M00 PR head (pre-merge):** `5dcb6cf6f95af23b58c6af202d58a7bcad1d0b91`
 
@@ -483,11 +483,11 @@ This section should be filled as milestones close.
 
 **M00 milestone artifacts:** `docs/company_secrets/milestones/M00/` (`M00_summary.md`, `M00_audit.md`, `M00_run1.md`, etc.)
 
-**M01 PR head (pre-merge):** confirm current OID on [PR #2](https://github.com/m-cahill/starlab/pull/2) (GitHub is authoritative for the moving tip).
+**M01 merge:** [PR #2](https://github.com/m-cahill/starlab/pull/2) merged **2026-04-06** (UTC `2026-04-06T20:26:27Z`) via **merge commit** `4a916033f55c6b8c4a582f985233a64ca039ead3`. Remote branch `m01-sc2-runtime-surface-env-lock` was **deleted** after merge.
 
-**M01 CI evidence (PR-head runs witnessed on PR #2)**
+**M01 CI evidence (PR-head runs witnessed before merge)**
 
-Each row is a green `pull_request` run on branch `m01-sc2-runtime-surface-env-lock` at the listed commit. Merge gating should use the **latest** green run for the PR tip at merge time.
+Each row is a green `pull_request` run on branch `m01-sc2-runtime-surface-env-lock` at the listed commit (historical record).
 
 | Commit (short) | Workflow run | Conclusion | URL |
 | -------------- | ------------ | ---------- | --- |
@@ -495,13 +495,13 @@ Each row is a green `pull_request` run on branch `m01-sc2-runtime-surface-env-lo
 | `260c4e0…` | `24048498203` | success | https://github.com/m-cahill/starlab/actions/runs/24048498203 |
 | `88b06db…` | `24048576545` | success | https://github.com/m-cahill/starlab/actions/runs/24048576545 |
 
-Further commits on PR #2 after `88b06db…` (for example, documentation-only updates) will have their own PR-head CI runs on GitHub; use the PR checks panel as the live merge gate.
+Further commits on the PR after `88b06db…` had additional green PR-head runs on GitHub before the final merge tip.
 
-**Post-merge `main` (pending)**
+**M01 CI evidence (post-merge `main` — authoritative for `main` @ merge)**
 
 | Event | Workflow run | Conclusion | URL |
 | ----- | ------------ | ---------- | --- |
-| `main` after M01 merge | TBD | TBD | TBD |
+| `main` after M01 merge (`4a91603…`) | `24049637412` | success | https://github.com/m-cahill/starlab/actions/runs/24049637412 |
 
 **M01 milestone artifacts:** `docs/company_secrets/milestones/M01/` (`M01_plan.md`, `M01_toolcalls.md`, `M01_run1.md`, `M01_summary.md`, `M01_audit.md`, optional redacted probe sample, etc.)
 
@@ -562,13 +562,19 @@ It should always answer, with minimal ambiguity:
 
 ## 23. Changelog
 
+### 2026-04-06 — M01 merged to `main` (PR #2)
+
+- Merged [PR #2](https://github.com/m-cahill/starlab/pull/2) to `main` at **2026-04-06T20:26:27Z**; merge commit `4a916033f55c6b8c4a582f985233a64ca039ead3` (merge method: **merge commit**); remote branch `m01-sc2-runtime-surface-env-lock` **deleted**
+- Post-merge `main` CI: workflow run `24049637412` (success): https://github.com/m-cahill/starlab/actions/runs/24049637412
+- §18 ledger and this changelog updated with merge/post-merge evidence
+
 ### 2026-04-06 — M01 closeout (SC2 runtime surface & environment lock)
 
 - Resolved **OD-005**: canonical control/observation boundary = Blizzard SC2 API / `s2client-proto`; canonical replay decode boundary = `s2protocol`; optional `python-sc2` only behind adapter boundaries; PySC2 deferred for substrate — see `docs/runtime/sc2_runtime_surface.md`
 - Added `docs/runtime/environment_lock.md` and deterministic `starlab.sc2` path/config probe (`run_probe`, `probe_result_to_json`); **no** SC2 Python packages added in M01
 - Updated `docs/rights_register.md`, `docs/replay_data_provenance.md`, 33-milestone ledger map, phase names, and canonical corpus promotion rule
 - **Does not claim:** controlled match execution, replay parsing correctness, or benchmark validity (M02+)
-- [PR #2](https://github.com/m-cahill/starlab/pull/2) (open at closeout prep); witnessed PR-head CI runs `24048416111` (`378c864…`), `24048498203` (`260c4e0…`), `24048576545` (`88b06db…`) — all success; confirm latest OID on the PR before merge; post-merge `main` CI pending until merge
+- Witnessed PR-head CI runs before merge: `24048416111` (`378c864…`), `24048498203` (`260c4e0…`), `24048576545` (`88b06db…`) — all success
 
 ### 2026-04-06 — M00 evidence finalization (PR #1 merged)
 

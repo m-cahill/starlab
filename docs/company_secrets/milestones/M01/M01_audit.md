@@ -5,6 +5,7 @@
 - **Milestone:** M01 — SC2 Runtime Surface Decision & Environment Lock  
 - **Mode:** DELTA AUDIT  
 - **Range:** `725250018bb09ce84e772ded0c7a184cc7d764ea...88b06db78fa9cb2b71217c03c752232df3a743ba` (merge-base `origin/main` → PR tip at closeout prep; confirm on PR #2)  
+- **Post-merge:** PR #2 merged to `main` at `4a916033f55c6b8c4a582f985233a64ca039ead3`; post-merge `main` CI run `24049637412` (success). Ledger finalization commits on `main` may add further `push` runs — see `docs/starlab.md` §18 for the canonical list.  
 - **CI Status:** Green  
 - **Audit Verdict:** 🟢 **Pass** — PR-head CI success; no gate regression; scope matches milestone plan; explicit non-claims preserved.
 
@@ -21,10 +22,10 @@
 
 **Risks**
 
-- **Merge lag:** Value is on branch until PR merges; post-merge `main` CI must be recorded (tracked in §18).
+- **Merge lag:** Resolved — merged to `main`; §18 records merge and post-merge CI.
 - **Probe scope:** Path detection only — must not be mistaken for execution proof (documented).
 
-**Single most important next action:** Merge PR #2 when human review is complete; then record merge SHA + post-merge `main` CI in `docs/starlab.md` §18.
+**Single most important next action:** Begin **M02 — Deterministic Match Execution Harness** on a new branch per milestone workflow.
 
 ---
 
