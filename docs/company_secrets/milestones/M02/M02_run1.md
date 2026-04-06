@@ -1,14 +1,16 @@
 # M02 — CI workflow analysis (PR-head run 1)
 
 **Workflow:** `CI` (`.github/workflows/ci.yml`)  
-**Run ID:** `24052043305`  
-**URL:** https://github.com/m-cahill/starlab/actions/runs/24052043305  
+**Authoritative run ID (current PR tip):** `24052112581`  
+**URL:** https://github.com/m-cahill/starlab/actions/runs/24052112581  
 **Trigger:** `pull_request`  
 **Branch:** `m02-deterministic-match-execution-harness`  
-**Head SHA (authoritative for this run):** `888407868cbdd00ca124e2b496f9ca14f909b0fc`  
+**Head SHA (authoritative for merge gating at this revision):** `1bd98f181c8a65568f8ec4b7d8e6e1fa2bf3431f`  
 **PR:** [#3 — M02: deterministic match execution harness](https://github.com/m-cahill/starlab/pull/3)  
 **Conclusion:** **success**  
 **Recorded:** 2026-04-06 (analysis)
+
+**Earlier green PR-head run (superseded by tip update):** `24052043305` on `888407868cbdd00ca124e2b496f9ca14f909b0fc` (harness implementation only, before closeout-prep docs commit).
 
 ---
 
@@ -17,9 +19,9 @@
 | Field | Value |
 |-------|--------|
 | Workflow name | CI |
-| Run ID | 24052043305 |
+| Run ID | 24052112581 |
 | Trigger | PR against `main` |
-| Commit | `8884078…` (PR tip) |
+| Commit | `1bd98f1…` (PR tip) |
 | Milestone | M02 — Deterministic Match Execution Harness |
 | Intent | Land harness + docs + tests; keep CI SC2-free |
 
@@ -86,9 +88,9 @@ No `continue-on-error` on required checks.
 
 ## 6. Step 6 — Verdict
 
-> **Verdict:** This PR-head run is **green** and is the **authoritative merge gate** for the current PR tip (`8884078…`). It validates repository governance and the **CI-safe** portion of M02 (code + fake path). It does **not** certify local real-match execution or cross-host reproducibility.
+> **Verdict:** This PR-head run is **green** and is the **authoritative merge gate** for the current PR tip (`1bd98f1…`). It validates repository governance and the **CI-safe** portion of M02 (code + fake path). It does **not** certify local real-match execution or cross-host reproducibility.
 
-**Merge from CI/governance:** ✅ **Merge approved** from a **CI signal** standpoint (all required checks passed).  
+**Merge from CI/governance:** ✅ **Merge approved** from a **CI signal** standpoint (all required checks passed on authoritative tip `1bd98f1…`).  
 Final milestone **closeout** on `main` still requires **merge**, **post-merge `main` CI** (per project practice), and **local real-execution evidence** before claiming “controlled deterministic match execution” in the ledger.
 
 ---
