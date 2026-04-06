@@ -52,7 +52,7 @@ Without M02, the project would have **no** governed execution harness or normali
 | Layer | Evidence |
 |-------|----------|
 | Local (2026-04-06) | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — all exit 0; `python -m starlab.sc2.run_match --help` exit 0. |
-| PR-head CI | Run `24053526611` — **success** on head `061c2126cc59b3ce4d662c58240216343c21f71a` — see `M02_run1.md`. |
+| PR-head CI | Run `24054529734` — **success** on head `5ec0ccb17c15f6b549da12719369ce1478e31212` — see `M02_run1.md`. |
 | Local burny (2026-04-06) | **`pip install -e ".[sc2-harness]"`** exit 0; **`python -m starlab.sc2 --redact`**: install/binary detected; **no** `Maps` dir at probe path; **two** `run_match` attempts with committed `m02_local_config.json` — **both failed** (map path not found); **no** `artifact_hash` — see `M02_local_execution_note.md`, `M02_determinism_check.md`. |
 | **Missing for narrow harness proof** | Two **successful** local **burnysc2** runs emitting `match_execution_proof.json` and a **hash comparison** (match or honest mismatch) — **not** satisfied until a valid `.SC2Map` is available at the configured path (or config updated). |
 
@@ -95,7 +95,7 @@ Without M02, the project would have **no** governed execution harness or normali
 |-----------|--------|----------|
 | Harness + fake path + tests + docs | **Met** | Code + PR #3 + green PR-head CI |
 | Optional real adapter behind extra | **Met** | `sc2-harness` / `burnysc2_adapter.py` |
-| CI green without SC2 | **Met** | Run `24053526611` |
+| CI green without SC2 | **Met** | Run `24054529734` |
 | Local real execution + determinism check | **Not met** | Evidence files record **blocked** session — no proof hashes |
 | Merge to `main` | **Pending** | PR open |
 
@@ -120,7 +120,7 @@ Without M02, the project would have **no** governed execution harness or normali
 |-----------|--------|
 | Branch | `m02-deterministic-match-execution-harness` |
 | PR | https://github.com/m-cahill/starlab/pull/3 |
-| PR head (at CI) | `061c2126cc59b3ce4d662c58240216343c21f71a` |
-| PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24053526611 |
+| PR head (at CI) | `5ec0ccb17c15f6b549da12719369ce1478e31212` |
+| PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24054529734 |
 | Plan | `docs/company_secrets/milestones/M02/M02_plan.md` |
 | Run analysis | `M02_run1.md` |

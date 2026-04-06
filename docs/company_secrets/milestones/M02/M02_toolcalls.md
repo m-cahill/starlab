@@ -28,7 +28,7 @@ Initialize when M02 work begins.
 
 **Branch:** `m02-deterministic-match-execution-harness`  
 **Commit SHA (pre–closeout-prep verification):** `888407868cbdd00ca124e2b496f9ca14f909b0fc`  
-**Commit SHA (current PR tip after ledger alignment):** `061c2126cc59b3ce4d662c58240216343c21f71a`
+**Commit SHA (current PR tip after ledger alignment):** `5ec0ccb17c15f6b549da12719369ce1478e31212`
 
 | Command | Result |
 |---------|--------|
@@ -49,7 +49,7 @@ Initialize when M02 work begins.
 | Branch | `m02-deterministic-match-execution-harness` |
 | PR | **#3** — https://github.com/m-cahill/starlab/pull/3 |
 | Title | M02: deterministic match execution harness |
-| PR head SHA | `061c2126cc59b3ce4d662c58240216343c21f71a` |
+| PR head SHA | `5ec0ccb17c15f6b549da12719369ce1478e31212` |
 
 ---
 
@@ -58,14 +58,14 @@ Initialize when M02 work begins.
 | Field | Value |
 |-------|--------|
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
-| Run ID (authoritative, current tip) | **24053526611** |
-| URL | https://github.com/m-cahill/starlab/actions/runs/24053526611 |
+| Run ID (authoritative, current tip) | **24054529734** |
+| URL | https://github.com/m-cahill/starlab/actions/runs/24054529734 |
 | Event | `pull_request` |
-| Head SHA | `061c2126cc59b3ce4d662c58240216343c21f71a` |
+| Head SHA | `5ec0ccb17c15f6b549da12719369ce1478e31212` |
 | Conclusion | **success** |
 | Authoritative for merge? | **Yes** — green run on latest PR tip (verified `gh run list` / `gh pr view 3`) |
 
-**Earlier PR-head runs (older tips; not the current ledger contract):** `24053475644` on `bfab038…`; `24053430560` on `3952c40…`; `24053381609` on `08fb582…`; `24053317502` on `10a2b13…`; `24053264747` on `22b2b57…`; `24053218335` on `d80ae12…`; `24052325999` on `f457cf5…`; `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
+**Earlier PR-head runs (older tips; not the current ledger contract):** `24053526611` on `061c212…`; `24053475644` on `bfab038…`; `24053430560` on `3952c40…`; `24053381609` on `08fb582…`; `24053317502` on `10a2b13…`; `24053264747` on `22b2b57…`; `24053218335` on `d80ae12…`; `24052325999` on `f457cf5…`; `24052291273` on `79b341a…`; `24052230417` on `5f5c8a5…`; `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
 
 **Analysis document:** `M02_run1.md`
 
