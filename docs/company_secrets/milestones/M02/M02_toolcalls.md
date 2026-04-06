@@ -28,7 +28,7 @@ Initialize when M02 work begins.
 
 **Branch:** `m02-deterministic-match-execution-harness`  
 **Commit SHA (pre–closeout-prep verification):** `888407868cbdd00ca124e2b496f9ca14f909b0fc`  
-**Commit SHA (current PR tip after CI reference alignment):** `59dcf15e9912c5f6c1920a495150ff03a5a5af7d`
+**Commit SHA (current PR tip after CI reference alignment):** `5f5c8a52684b7bc29642b8d52ba5758d21f28f20`
 
 | Command | Result |
 |---------|--------|
@@ -49,7 +49,7 @@ Initialize when M02 work begins.
 | Branch | `m02-deterministic-match-execution-harness` |
 | PR | **#3** — https://github.com/m-cahill/starlab/pull/3 |
 | Title | M02: deterministic match execution harness |
-| PR head SHA | `59dcf15e9912c5f6c1920a495150ff03a5a5af7d` |
+| PR head SHA | `5f5c8a52684b7bc29642b8d52ba5758d21f28f20` |
 
 ---
 
@@ -58,14 +58,14 @@ Initialize when M02 work begins.
 | Field | Value |
 |-------|--------|
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
-| Run ID (authoritative, current tip) | **24052172714** |
-| URL | https://github.com/m-cahill/starlab/actions/runs/24052172714 |
+| Run ID (authoritative, current tip) | **24052230417** |
+| URL | https://github.com/m-cahill/starlab/actions/runs/24052230417 |
 | Event | `pull_request` |
-| Head SHA | `59dcf15e9912c5f6c1920a495150ff03a5a5af7d` |
+| Head SHA | `5f5c8a52684b7bc29642b8d52ba5758d21f28f20` |
 | Conclusion | **success** |
 | Authoritative for merge? | **Yes** — green run on latest PR tip |
 
-**Earlier PR-head runs (superseded):** `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
+**Earlier PR-head runs (superseded):** `24052172714` on `59dcf15…`; `24052112581` on `1bd98f1…`; `24052043305` on `8884078…`.
 
 **Analysis document:** `M02_run1.md`
 
