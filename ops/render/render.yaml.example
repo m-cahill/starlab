@@ -1,0 +1,9 @@
+# NON-OPERATIVE EXAMPLE — not used as a Render Blueprint until backend services exist.
+# Render Blueprints: https://render.com/docs/infrastructure-as-code
+#
+# services:
+#   - type: web
+#     name: starlab-api-placeholder
+#     runtime: python
+#     buildCommand: pip install -e .
+#     startCommand: uvicorn starlab.api:app --host 0.0.0.0 --port $PORT

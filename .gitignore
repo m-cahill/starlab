@@ -1,0 +1,54 @@
+# Company secrets (tracked exception: docs/company_secrets/milestones/ for governance)
+docs/company_secrets/manuals/
+docs/company_secrets/prompts/
+docs/company_secrets/rediai33/
+docs/company_secrets/enhancements/
+
+# Cursor
+.cursorrules
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.whl
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Env (allow *.example)
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Frontend (future)
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/playwright-report/
+frontend/test-results/
+
+# Backend (future)
+backend/.venv/
+
+# Ops / local
+ops/.env
+ops/.env.*
+
+# Generated SBOM (CI artifact)
+sbom.json

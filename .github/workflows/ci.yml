@@ -1,0 +1,80 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install package (dev)
+        run: |
+          python -m pip install --upgrade pip setuptools
+          pip install -e ".[dev]"
+
+      - name: Ruff check
+        run: ruff check starlab tests
+
+      - name: Ruff format check
+        run: ruff format --check starlab tests
+
+      - name: Mypy
+        run: mypy starlab tests
+
+      - name: Pytest
+        run: pytest -q
+
+      - name: pip-audit
+        run: python -m pip_audit
+
+      - name: CycloneDX SBOM
+        run: python -m cyclonedx_py environment -o sbom.json
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-cyclonedx-json
+          path: sbom.json
+          if-no-files-found: error
+
+      - name: Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Job summary
+        shell: bash
+        run: |
+          {
+            echo "## M00 governance CI"
+            echo ""
+            echo "| Step | Result |"
+            echo "|------|--------|"
+            echo "| Ruff / format / Mypy / Pytest | ok |"
+            echo "| pip-audit | ok |"
+            echo "| CycloneDX SBOM | artifact uploaded |"
+            echo "| Gitleaks | ok |"
+            echo ""
+            echo "Green means governance-safe for this milestone, not feature-complete."
+          } >> "$GITHUB_STEP_SUMMARY"

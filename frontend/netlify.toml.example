@@ -1,0 +1,10 @@
+# NON-OPERATIVE EXAMPLE — not used as Netlify config until a site is authorized.
+# Rename to netlify.toml only when a real deployment is approved under milestone governance.
+#
+# [build]
+#   base = "frontend"
+#   command = "npm run build"
+#   publish = "dist"
+#
+# [context.deploy-preview]
+#   command = "npm run build"
