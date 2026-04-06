@@ -1,112 +1,89 @@
 # M01 — CI workflow analysis (run 1)
 
+This file records PR-head CI for **M01** on [PR #2](https://github.com/m-cahill/starlab/pull/2). Two runs occurred on the branch: (1) implementation commit, (2) closeout documentation commit. **Merge-gating evidence for the current PR tip** is **Run B** below.
+
+---
+
+## Run B — authoritative (current PR head)
+
 **Workflow:** CI (`ci.yml`)  
-**Run ID:** `24048416111`  
-**URL:** https://github.com/m-cahill/starlab/actions/runs/24048416111  
+**Run ID:** `24048498203`  
+**URL:** https://github.com/m-cahill/starlab/actions/runs/24048498203  
 **Trigger:** `pull_request`  
 **Branch:** `m01-sc2-runtime-surface-env-lock`  
-**Head SHA:** `378c86425b63b7b0c048a011644333058a548e80`  
+**Head SHA:** `260c4e022db06a4e02f2827ec1efec8fa9b3c992`  
 **PR:** [#2](https://github.com/m-cahill/starlab/pull/2) — *M01: SC2 runtime surface decision and environment lock*  
 **Conclusion:** **success**  
 **Analyzed:** 2026-04-06 (UTC)
 
-**Milestone context:** M01 — SC2 runtime surface decision & environment lock (decision docs, environment lock, typed probe, ledger/governance updates). **Not** match execution or replay parsing proof.
+**Milestone context:** M01 — SC2 runtime surface decision & environment lock, including closeout artifacts (`M01_run1.md`, `M01_summary.md`, `M01_audit.md`) and ledger updates for PR #2 / CI evidence.
 
-**Baseline reference:** `origin/main` at `725250018bb09ce84e772ded0c7a184cc7d764ea` (pre-M01 merge).
+**Baseline reference:** `origin/main` at `725250018bb09ce84e772ded0c7a184cc7d764ea`.
 
 ---
 
-## 1. Workflow inventory
+## Run A — prior tip (implementation only)
+
+**Run ID:** `24048416111`  
+**URL:** https://github.com/m-cahill/starlab/actions/runs/24048416111  
+**Head SHA:** `378c86425b63b7b0c048a011644333058a548e80`  
+**Conclusion:** **success**  
+**Notes:** First push of M01 implementation; superseded by Run B after closeout docs commit.
+
+---
+
+## Workflow inventory (Run B — same structure as Run A)
 
 | Job / Check | Required? | Purpose | Pass/Fail | Notes |
 |-------------|-----------|---------|-----------|----------|
-| `governance` job (single job) | Yes | Full governance pipeline | Pass | Merge-blocking for this repo’s CI gate |
-| Checkout | Yes | Source at PR head | Pass | `actions/checkout@v4`, `fetch-depth: 0` |
-| Set up Python 3.11 | Yes | Toolchain | Pass | `actions/setup-python@v5`, cache pip |
-| Install package (dev) | Yes | Editable install + dev deps | Pass | `pip install -e ".[dev]"` |
+| `governance` job | Yes | Full governance pipeline | Pass | Merge-blocking |
+| Checkout | Yes | Source at PR head | Pass | `actions/checkout@v4` |
+| Set up Python 3.11 | Yes | Toolchain | Pass | |
+| Install package (dev) | Yes | Editable install | Pass | |
 | Ruff check | Yes | Lint | Pass | `ruff check starlab tests` |
-| Ruff format check | Yes | Format | Pass | `ruff format --check starlab tests` |
-| Mypy | Yes | Static typing | Pass | `mypy starlab tests` |
-| Pytest | Yes | Tests | Pass | `pytest -q` |
-| pip-audit | Yes | Supply chain | Pass | `python -m pip_audit` |
-| CycloneDX SBOM | Yes | SBOM artifact | Pass | `cyclonedx_py environment -o sbom.json` |
-| Upload SBOM artifact | Yes | Artifact retention | Pass | `actions/upload-artifact@v4`; `if-no-files-found: error` |
-| Gitleaks | Yes | Secret leak scan | Pass | `gitleaks/gitleaks-action@v2` |
-| Job summary | Yes | Human-readable summary | Pass | Writes “STARLAB CI summary” to `$GITHUB_STEP_SUMMARY` |
+| Ruff format check | Yes | Format | Pass | |
+| Mypy | Yes | Types | Pass | |
+| Pytest | Yes | Tests | Pass | |
+| pip-audit | Yes | Supply chain | Pass | |
+| CycloneDX SBOM + upload | Yes | SBOM | Pass | |
+| Gitleaks | Yes | Secrets | Pass | |
+| Job summary | Yes | Summary | Pass | “STARLAB CI summary” |
 
-**No `continue-on-error`** observed on required steps. No required checks muted or bypassed.
-
----
-
-## 2. Signal integrity
-
-### A) Tests
-
-- **Tier:** Unit / governance smoke (pytest on `tests/`).
-- **Result:** All tests passed on the PR head (32 tests).
-- **Scope:** Covers governance doc presence, ledger strings, SC2 probe determinism and env precedence — appropriate for M01; no SC2 binary execution in CI (by design).
-
-### B) Coverage
-
-- **Enforced in CI:** No explicit coverage gate in workflow; not a coverage milestone.
-- **Assessment:** Acceptable for M01; new logic has dedicated tests.
-
-### C) Static / policy gates
-
-- Ruff, Mypy enforce current Python 3.11 + strict typing on `starlab` + `tests`.
-- Gitleaks + pip-audit + SBOM align with M00 governance posture.
-
-### D) Performance / benchmarks
-
-- Not present. N/A.
+**Annotation (informational):** GitHub reported Node.js 20 deprecation notice for some actions — **not** a failure; track upstream action updates outside M01 scope.
 
 ---
 
-## 3. Delta analysis (change impact)
+## Signal integrity
 
-**Diff:** `725250018bb09ce84e772ded0c7a184cc7d764ea...378c86425b63b7b0c048a011644333058a548e80` — 18 files, +1327 / −117 lines (per `git diff --stat`).
-
-**Direct CI impact:**  
-- Workflow job summary text only (M00 → milestone-neutral label).  
-- All steps still execute the same commands; no gate removal.
-
-**Unexpected deltas:** None observed. Green run on first PR-head execution for this push.
+- **Tests:** 32 passed on PR head `260c4e0…` (Run B).
+- **Static gates:** Ruff, Mypy unchanged in behavior vs M00.
+- **Coverage:** Not gated in CI (unchanged).
 
 ---
 
-## 4. Failure analysis
+## Delta analysis
 
-**None.** No failures in this run.
+**Full PR diff (current tip vs `origin/main`):** `725250018bb09ce84e772ded0c7a184cc7d764ea...260c4e022db06a4e02f2827ec1efec8fa9b3c992` — 21 files, +1822 / −117 lines (per `git diff --stat origin/main...HEAD`).
 
----
-
-## 5. Invariants & guardrails
-
-| Invariant | Held? |
-|-----------|--------|
-| Required CI checks enforced | Yes |
-| No `continue-on-error` on merge-critical steps | Yes |
-| No new SC2 runtime dependencies in `pyproject.toml` | Yes (verified in diff) |
-| No licensed game assets committed | Yes |
+Run B validates the same workflow on the expanded tree (implementation + closeout markdown).
 
 ---
 
-## 6. Verdict
+## Verdict
 
-> **Verdict:** This PR-head run is **green** with all required governance steps passing on commit `378c86425b63b7b0c048a011644333058a548e80`. The signals match the declared M01 scope (docs + probe + tests + governance). No evidence of weakened gates or misleading success.
+> **Verdict (Run B):** **Green** on `260c4e022db06a4e02f2827ec1efec8fa9b3c992`. Required governance steps passed. Suitable as **authoritative PR-head CI** for merge gating at the current PR tip.
 
-**Merge recommendation:** **Merge approved** from a **CI / governance** standpoint, subject to human review of content (not CI).
-
----
-
-## 7. Next actions
-
-| Action | Owner | Notes |
-|--------|--------|------|
-| Human code review + merge PR #2 | Human | When satisfied |
-| Record merge SHA + post-merge `main` CI run in `docs/starlab.md` §18 | Human or agent post-merge | Do not fabricate |
-| Run M02 on new branch after merge | Human | Per milestone plan |
+**Merge recommendation:** **Merge approved** from a **CI / governance** standpoint (subject to human content review).
 
 ---
 
-*Analysis produced using structure from `docs/company_secrets/prompts/workflowprompt.md`.*
+## Next actions
+
+| Action | Owner |
+|--------|--------|
+| Merge PR #2 when ready | Human |
+| Record merge SHA + post-merge `main` CI in `docs/starlab.md` §18 | After merge |
+
+---
+
+*Structure aligned with `docs/company_secrets/prompts/workflowprompt.md`.*

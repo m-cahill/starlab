@@ -483,7 +483,7 @@ This section should be filled as milestones close.
 
 **M00 milestone artifacts:** `docs/company_secrets/milestones/M00/` (`M00_summary.md`, `M00_audit.md`, `M00_run1.md`, etc.)
 
-**M01 PR head (pre-merge):** `378c86425b63b7b0c048a011644333058a548e80`
+**M01 PR head (pre-merge):** `260c4e022db06a4e02f2827ec1efec8fa9b3c992`
 
 **M01 CI evidence (authoritative)**
 
@@ -491,7 +491,7 @@ PR-head CI is merge-gating for this repository’s branch protection expectation
 
 | Event | Workflow run | Conclusion | URL |
 | ----- | ------------ | ---------- | --- |
-| PR #2 head (`378c864…`) | `24048416111` | success | https://github.com/m-cahill/starlab/actions/runs/24048416111 |
+| PR #2 head (`260c4e0…`) | `24048498203` | success | https://github.com/m-cahill/starlab/actions/runs/24048498203 |
 | `main` after M01 merge | TBD | TBD | TBD |
 
 **M01 milestone artifacts:** `docs/company_secrets/milestones/M01/` (`M01_plan.md`, `M01_toolcalls.md`, `M01_run1.md`, `M01_summary.md`, `M01_audit.md`, optional redacted probe sample, etc.)
@@ -559,7 +559,7 @@ It should always answer, with minimal ambiguity:
 - Added `docs/runtime/environment_lock.md` and deterministic `starlab.sc2` path/config probe (`run_probe`, `probe_result_to_json`); **no** SC2 Python packages added in M01
 - Updated `docs/rights_register.md`, `docs/replay_data_provenance.md`, 33-milestone ledger map, phase names, and canonical corpus promotion rule
 - **Does not claim:** controlled match execution, replay parsing correctness, or benchmark validity (M02+)
-- [PR #2](https://github.com/m-cahill/starlab/pull/2) (open at closeout prep); PR head `378c86425b63b7b0c048a011644333058a548e80`; authoritative PR-head CI run `24048416111` (success): https://github.com/m-cahill/starlab/actions/runs/24048416111 — post-merge `main` CI pending until merge
+- [PR #2](https://github.com/m-cahill/starlab/pull/2) (open at closeout prep); PR head `260c4e022db06a4e02f2827ec1efec8fa9b3c992`; authoritative PR-head CI run `24048498203` (success): https://github.com/m-cahill/starlab/actions/runs/24048498203 — prior run `24048416111` on implementation commit `378c864…`; post-merge `main` CI pending until merge
 
 ### 2026-04-06 — M00 evidence finalization (PR #1 merged)
 

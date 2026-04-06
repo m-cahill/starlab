@@ -4,7 +4,7 @@
 
 - **Milestone:** M01 — SC2 Runtime Surface Decision & Environment Lock  
 - **Mode:** DELTA AUDIT  
-- **Range:** `725250018bb09ce84e772ded0c7a184cc7d764ea...378c86425b63b7b0c048a011644333058a548e80` (merge-base `origin/main` → PR head)  
+- **Range:** `725250018bb09ce84e772ded0c7a184cc7d764ea...260c4e022db06a4e02f2827ec1efec8fa9b3c992` (merge-base `origin/main` → current PR head)  
 - **CI Status:** Green  
 - **Audit Verdict:** 🟢 **Pass** — PR-head CI success; no gate regression; scope matches milestone plan; explicit non-claims preserved.
 
@@ -17,7 +17,7 @@
 - Canonical written decision for OD-005 (`docs/runtime/sc2_runtime_surface.md`) and environment lock (`docs/runtime/environment_lock.md`).
 - Deterministic, test-covered probe (`starlab/sc2/`) without adding SC2 PyPI dependencies.
 - Ledger expanded to 33 milestones with honest PR-vs-merge documentation in `docs/starlab.md` and `README.md`.
-- Authoritative PR-head CI run `24048416111` success on [PR #2](https://github.com/m-cahill/starlab/pull/2).
+- Authoritative PR-head CI on current tip: run `24048498203` success on [PR #2](https://github.com/m-cahill/starlab/pull/2); prior run `24048416111` on implementation commit also green.
 
 **Risks**
 
@@ -87,7 +87,7 @@
           } >> "$GITHUB_STEP_SUMMARY"
 ```
 
-**PR-head run:** `24048416111` — **success** — https://github.com/m-cahill/starlab/actions/runs/24048416111
+**PR-head runs:** `24048416111` (implementation) and `24048498203` (current tip) — **success** — https://github.com/m-cahill/starlab/actions/runs/24048498203 (authoritative for merge)
 
 ---
 
@@ -106,7 +106,7 @@
 ## 7. Security & Supply Chain
 
 - **Dependencies:** No new runtime dependencies; dev toolchain unchanged in scope.
-- **pip-audit / SBOM / Gitleaks:** Passed in run `24048416111`.
+- **pip-audit / SBOM / Gitleaks:** Passed in runs `24048416111` and `24048498203`.
 - **Secrets:** No secrets in diff; redacted probe sample uses illustrative paths only.
 
 ---
@@ -165,8 +165,8 @@ No HIGH or CRITICAL issues identified.
 {
   "milestone": "M01",
   "mode": "delta",
-  "commit": "378c86425b63b7b0c048a011644333058a548e80",
-  "range": "725250018bb09ce84e772ded0c7a184cc7d764ea...378c86425b63b7b0c048a011644333058a548e80",
+  "commit": "260c4e022db06a4e02f2827ec1efec8fa9b3c992",
+  "range": "725250018bb09ce84e772ded0c7a184cc7d764ea...260c4e022db06a4e02f2827ec1efec8fa9b3c992",
   "verdict": "green",
   "quality_gates": {
     "ci": "pass",

@@ -9,14 +9,15 @@ Session: 2026-04-06 — M01 (SC2 runtime surface & environment lock): implementa
 | Item | Value |
 |------|--------|
 | Branch | `m01-sc2-runtime-surface-env-lock` |
-| Implementation commit | `378c86425b63b7b0c048a011644333058a548e80` |
+| Implementation commit (first push) | `378c86425b63b7b0c048a011644333058a548e80` |
+| Closeout commit (current PR tip) | `260c4e022db06a4e02f2827ec1efec8fa9b3c992` |
 | Base (`origin/main` at branch creation) | `725250018bb09ce84e772ded0c7a184cc7d764ea` |
 
 ---
 
 ## Pre-push verification (local)
 
-Run on branch `m01-sc2-runtime-surface-env-lock` at `378c86425b63b7b0c048a011644333058a548e80` after docstring line-length fix.
+Run on branch `m01-sc2-runtime-surface-env-lock` at `378c86425b63b7b0c048a011644333058a548e80` after docstring line-length fix (implementation); closeout commit `260c4e0…` is docs-only — same Ruff/Mypy/pytest surface.
 
 | Command | Result |
 |---------|--------|
@@ -38,28 +39,34 @@ Probe CLI: output is always JSON; there is no separate `--json` flag. Invocation
 |------|--------|
 | PR | [#2](https://github.com/m-cahill/starlab/pull/2) |
 | Title | M01: SC2 runtime surface decision and environment lock |
-| PR head SHA | `378c86425b63b7b0c048a011644333058a548e80` |
+| PR head SHA (current) | `260c4e022db06a4e02f2827ec1efec8fa9b3c992` |
 
 ---
 
-## Authoritative PR-head CI
+## Authoritative PR-head CI (current tip)
+
+Two PR-head runs executed:
+
+| Run | Commit | Run ID | URL | Conclusion |
+|-----|--------|--------|-----|------------|
+| A (implementation) | `378c864…` | `24048416111` | https://github.com/m-cahill/starlab/actions/runs/24048416111 | success |
+| B (closeout docs) | `260c4e0…` | `24048498203` | https://github.com/m-cahill/starlab/actions/runs/24048498203 | success |
+
+**Authoritative for merge gating at current PR tip:** **Run B** — `24048498203` on `260c4e022db06a4e02f2827ec1efec8fa9b3c992`.
 
 | Item | Value |
 |------|--------|
 | Workflow name | CI |
-| Run ID | `24048416111` |
-| URL | https://github.com/m-cahill/starlab/actions/runs/24048416111 |
 | Event | `pull_request` |
-| Conclusion | **success** |
-| Merge-gating | Yes — single `governance` job; required checks match repo workflow (Ruff, format, Mypy, Pytest, pip-audit, CycloneDX SBOM upload, Gitleaks) |
+| Merge-gating | Yes — single `governance` job |
 
-Monitored to completion via `gh run watch 24048416111 --exit-status` (exit 0).
+Monitored: `gh run watch 24048416111 --exit-status` and `gh run watch 24048498203 --exit-status` (both exit 0).
 
 ---
 
 ## Closeout artifacts (this session)
 
-- `M01_run1.md` — workflow analysis
+- `M01_run1.md` — workflow analysis (runs A + B)
 - `M01_summary.md` — milestone summary
 - `M01_audit.md` — milestone audit
 - `docs/starlab.md` — §1 status, §7 M01 note, §18 PR/CI evidence, changelog PR #2 line

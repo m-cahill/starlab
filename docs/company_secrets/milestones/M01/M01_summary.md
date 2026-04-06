@@ -38,7 +38,7 @@ Resolve **OD-005** by selecting STARLAB’s canonical StarCraft II runtime bound
 - **Documentation:** New runtime decision and environment lock docs; rights/provenance updates for Blizzard runtime and AI/ML license posture; ledger expanded to 33 milestones with renamed phases; canonical corpus promotion rule; README and ledger status aligned with PR-pending merge.
 - **Code:** New `starlab.sc2` package with deterministic JSON probe; path normalization and env precedence; no SC2 process execution.
 - **Tests:** 32 pytest tests; governance assertions for ledger + runtime docs; probe tests for determinism, precedence, partial config, redaction.
-- **CI:** PR #2 head run `24048416111` **success** — same workflow as M00 (Ruff, format, Mypy, Pytest, pip-audit, CycloneDX SBOM, Gitleaks).
+- **CI:** PR #2 head runs **24048416111** (implementation commit) and **24048498203** (closeout tip) **success** — same workflow as M00 (Ruff, format, Mypy, Pytest, pip-audit, CycloneDX SBOM, Gitleaks).
 
 ---
 
@@ -46,9 +46,9 @@ Resolve **OD-005** by selecting STARLAB’s canonical StarCraft II runtime bound
 
 | Layer | Evidence |
 |-------|----------|
-| Local | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — all green at `378c86425b63b7b0c048a011644333058a548e80` |
+| Local | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — all green at implementation commit; closeout commit is docs-only |
 | Probe | `python -W error -m starlab.sc2.env_probe` — exit 0, JSON output |
-| CI | Authoritative PR-head: [run 24048416111](https://github.com/m-cahill/starlab/actions/runs/24048416111), **success** |
+| CI | Authoritative PR tip: [run 24048498203](https://github.com/m-cahill/starlab/actions/runs/24048498203) on `260c4e0…`, **success**; prior [24048416111](https://github.com/m-cahill/starlab/actions/runs/24048416111) on `378c864…` |
 
 Post-merge `main` CI not yet recorded (merge pending).
 
@@ -96,7 +96,7 @@ No new issues were introduced during this milestone that block merge from a CI p
 | Tests for probe + ledger | **Met** | 32 tests; pytest |
 | Rights/provenance updates | **Met** | `docs/rights_register.md`, `docs/replay_data_provenance.md` |
 | Ledger + README | **Met** | `docs/starlab.md`, `README.md` |
-| CI green, gates not weakened | **Met** | Run `24048416111` |
+| CI green, gates not weakened | **Met** | Runs `24048416111`, `24048498203` |
 | No SC2 deps in pyproject | **Met** | `pyproject.toml` unchanged for SC2 |
 | No execution / replay correctness claims | **Met** | Explicit in docs and ledger |
 
@@ -104,7 +104,7 @@ No new issues were introduced during this milestone that block merge from a CI p
 
 ## 10. Final Verdict
 
-**Milestone objectives met** for deliverables on branch `m01-sc2-runtime-surface-env-lock` at `378c86425b63b7b0c048a011644333058a548e80` with authoritative PR-head CI green. **Merge to `main`** is the remaining governance step for full repo-wide “closed on main” status; post-merge CI and merge SHA must be recorded in §18.
+**Milestone objectives met** for deliverables on branch `m01-sc2-runtime-surface-env-lock` at `260c4e022db06a4e02f2827ec1efec8fa9b3c992` (current PR tip) with authoritative PR-head CI green on [run 24048498203](https://github.com/m-cahill/starlab/actions/runs/24048498203). **Merge to `main`** is the remaining governance step for full repo-wide “closed on main” status; post-merge CI and merge SHA must be recorded in §18.
 
 ---
 
@@ -120,10 +120,10 @@ No new issues were introduced during this milestone that block merge from a CI p
 | Reference | Value |
 |-----------|--------|
 | Branch | `m01-sc2-runtime-surface-env-lock` |
-| Commit | `378c86425b63b7b0c048a011644333058a548e80` |
+| Commit (PR tip) | `260c4e022db06a4e02f2827ec1efec8fa9b3c992` |
 | Base (`main`) | `725250018bb09ce84e772ded0c7a184cc7d764ea` |
 | PR | https://github.com/m-cahill/starlab/pull/2 |
-| CI run | https://github.com/m-cahill/starlab/actions/runs/24048416111 |
+| CI run (authoritative) | https://github.com/m-cahill/starlab/actions/runs/24048498203 |
 | Ledger | `docs/starlab.md` |
 | Plan | `docs/company_secrets/milestones/M01/M01_plan.md` |
 | Run analysis | `docs/company_secrets/milestones/M01/M01_run1.md` |
