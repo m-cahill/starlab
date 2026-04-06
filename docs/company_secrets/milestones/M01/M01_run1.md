@@ -76,6 +76,8 @@ This file records PR-head CI for **M01** on [PR #2](https://github.com/m-cahill/
 
 ## Post-merge `main` CI (authoritative for merged state)
 
+**Run 1 — merge commit**
+
 | Field | Value |
 |-------|--------|
 | Workflow | CI |
@@ -84,6 +86,15 @@ This file records PR-head CI for **M01** on [PR #2](https://github.com/m-cahill/
 | Run ID | `24049637412` |
 | Conclusion | **success** |
 | URL | https://github.com/m-cahill/starlab/actions/runs/24049637412 |
+
+**Run 2 — M01 merge closeout / ledger update on `main`**
+
+| Field | Value |
+|-------|--------|
+| Trigger commit | `c920876a82961203df9c96dd2c43fae7753fb525` |
+| Run ID | `24049868109` |
+| Conclusion | **success** |
+| URL | https://github.com/m-cahill/starlab/actions/runs/24049868109 |
 
 ---
 
