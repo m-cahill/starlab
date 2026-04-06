@@ -106,13 +106,13 @@ These are planning lenses, not promises. The realistic early path is:
 
 ## Current status
 
-**Status:** Post-M01 — next: M02 (deterministic match execution harness)
+**Status:** M00 merged to `main`; **M01** delivered on branch — [PR #2](https://github.com/m-cahill/starlab/pull/2) (pending merge); next: **M02** (deterministic match execution harness) after M01 lands.
 
-STARLAB has completed governance bootstrap (**M00**, merged [PR #1](https://github.com/m-cahill/starlab/pull/1) to `main`) and the SC2 runtime surface / environment-lock milestone (**M01**): runtime decision docs under `docs/runtime/`, typed path probe in `starlab.sc2`, and ledger updates — **without** claiming match execution or replay parsing correctness yet.
+STARLAB completed governance bootstrap (**M00**, [PR #1](https://github.com/m-cahill/starlab/pull/1)) and implements **M01** (SC2 runtime surface decision and environment lock): runtime docs under `docs/runtime/`, typed path probe in `starlab.sc2`, ledger and rights updates — **without** claiming match execution or replay parsing correctness yet.
 
 Up next:
 
-- deterministic match execution harness (**M02**)
+- merge **M01** ([PR #2](https://github.com/m-cahill/starlab/pull/2)), then **M02**
 
 ---
 
