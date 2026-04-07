@@ -34,4 +34,4 @@ Deliver STARLAB’s first governed **combat / scouting / visibility plane** with
 - Ledger proved vs not proved, changelog, M13 stubs
 - Audit/summary per prompts
 
-**Status:** Implementation complete on branch pending review/merge; closeout artifacts follow merge discipline.
+**Status:** **Complete** — merged [PR #13](https://github.com/m-cahill/starlab/pull/13) (`2026-04-07`); authoritative PR-head CI [`24109242392`](https://github.com/m-cahill/starlab/actions/runs/24109242392); merge-boundary `main` CI [`24109269513`](https://github.com/m-cahill/starlab/actions/runs/24109269513); closeout docs in `M12_run1.md`, `M12_summary.md`, `M12_audit.md`, ledger §23.

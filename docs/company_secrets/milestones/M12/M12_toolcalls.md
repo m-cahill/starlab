@@ -29,3 +29,12 @@ Commands run from repo root (`c:\coding\starlab`), Windows PowerShell.
 | `mypy starlab tests` | `Success: no issues found in 85 source files`, exit **0** |
 
 **Note:** Earlier mypy failures in `combat_scouting_visibility_extraction.py` (duplicate `name` binding vs combat loop `c` shadowing) were fixed by renaming to `death`/`victim_type` and `identity_name`, and using `step_row`/`cat_raw` for M11 category hints.
+
+---
+
+## 2026-04-07 — Merge + closeout (post-merge)
+
+* **PR:** [#13](https://github.com/m-cahill/starlab/pull/13); final head `59adce3422a840692a4961278c995c5029da43bb`; merge commit `78528958a616177b564e603c193fb0d7f8af734e`; merged `2026-04-07T23:23:48Z`; branch `m12-combat-scouting-visibility-windows` **deleted** on merge.
+* **Authoritative green PR-head CI:** [`24109242392`](https://github.com/m-cahill/starlab/actions/runs/24109242392) (**success**).
+* **Merge-boundary `main` CI:** [`24109269513`](https://github.com/m-cahill/starlab/actions/runs/24109269513) (**success**).
+* **Closeout:** `M12_run1.md`, `M12_summary.md`, `M12_audit.md`, `M12_plan.md` (complete), `docs/starlab.md` ledger, `docs/company_secrets/milestones/M13/` stubs (`M13_plan.md`, `M13_toolcalls.md`).
