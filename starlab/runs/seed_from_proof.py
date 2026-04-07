@@ -47,6 +47,32 @@ def _load_env_optional(path: Path | None) -> dict[str, Any] | None:
     return data
 
 
+def _find_repo_root(*paths: Path) -> Path:
+    """Locate a directory containing ``pyproject.toml`` (STARLAB repo root)."""
+
+    for p in paths:
+        cur = p.resolve()
+        for parent in [cur, *cur.parents]:
+            if (parent / "pyproject.toml").is_file():
+                return parent
+    cwd = Path.cwd().resolve()
+    if (cwd / "pyproject.toml").is_file():
+        return cwd
+    msg = "could not locate repo root (pyproject.toml) from config/proof paths"
+    raise ValueError(msg)
+
+
+def _repo_relative_posix(path: Path, repo_root: Path) -> str:
+    """Stable path string for lineage ``input_references`` (POSIX, repo-relative)."""
+
+    resolved = path.resolve()
+    root = repo_root.resolve()
+    try:
+        return resolved.relative_to(root).as_posix()
+    except ValueError:
+        return resolved.as_posix()
+
+
 def build_seed_from_paths(
     *,
     proof_path: Path,
@@ -80,17 +106,18 @@ def build_seed_from_paths(
     )
     proof_digest = _sha256_file(proof_path)
     config_digest = _sha256_file(config_path)
+    repo_root = _find_repo_root(config_path, proof_path)
     input_refs = [
         ArtifactReference(
             content_sha256=config_digest,
             logical_name="match_config",
-            path=str(config_path),
+            path=_repo_relative_posix(config_path, repo_root),
             role="config",
         ),
         ArtifactReference(
             content_sha256=proof_digest,
             logical_name="match_execution_proof",
-            path=str(proof_path),
+            path=_repo_relative_posix(proof_path, repo_root),
             role="proof",
         ),
     ]
