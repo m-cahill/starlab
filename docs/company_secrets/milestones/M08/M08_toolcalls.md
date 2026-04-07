@@ -42,6 +42,15 @@
 
 ---
 
+## 2026-04-07 — CI fix: cross-platform opaque replay fixture bytes
+
+* **Tool:** Shell / Write — `.gitattributes`, rewrite `tests/fixtures/replay_m07_*.SC2Replay` with LF-only newlines, regenerate `tests/fixtures/m05_expected/*`.
+* **Purpose:** PR-head CI run `24069652969` failed **Pytest** on `test_end_to_end_fixture_chain_matches_golden`: Linux hashed `replay_m07_generated.SC2Replay` as `75d471bb…` while goldens expected `7aa01b43…` (Windows working tree had CRLF). Align repo bytes with LF so CI and dev match.
+* **Superseded run:** [`24069652969`](https://github.com/m-cahill/starlab/actions/runs/24069652969) — **failure** at Pytest (manifest/hash drift).
+* **Timestamp:** 2026-04-07 (session)
+
+---
+
 ## 2026-04-06 — Stub seeded (no implementation)
 
 * **Purpose:** Milestone folder and stub plan created at **M07** closeout per project workflow.

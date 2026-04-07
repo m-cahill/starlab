@@ -1,0 +1,2 @@
+# Opaque replay fixtures (tests only) must be byte-identical on Linux CI and Windows.
+tests/fixtures/**/*.SC2Replay -text
