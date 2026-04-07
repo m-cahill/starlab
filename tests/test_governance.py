@@ -327,6 +327,9 @@ def test_m10_milestone_files_exist() -> None:
     m10 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M10"
     assert (m10 / "M10_plan.md").is_file()
     assert (m10 / "M10_toolcalls.md").is_file()
+    assert (m10 / "M10_run1.md").is_file()
+    assert (m10 / "M10_summary.md").is_file()
+    assert (m10 / "M10_audit.md").is_file()
 
 
 def test_m11_stub_milestone_files_exist() -> None:

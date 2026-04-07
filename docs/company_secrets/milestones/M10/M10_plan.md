@@ -6,7 +6,7 @@
 **Suggested branch:** `m10-timeline-event-extraction`  
 **Suggested PR title:** `M10: timeline & event extraction`  
 **Target tag:** `v0.0.10-m10`  
-**Status:** Complete (implementation in repository; merge to `main` pending PR — fill merge commit + CI at merge boundary)
+**Status:** Complete — merged to `main` ([PR #11](https://github.com/m-cahill/starlab/pull/11)); merge commit `cb3e581f70f85653477081eb1ef4772229f05983`; merge-push CI failed Mypy — repaired on `cf2074e10ec8a38b22bd7b75ffeb4ec22a71485b` (green `main` [`24104197912`](https://github.com/m-cahill/starlab/actions/runs/24104197912)); see `M10_run1.md`.
 
 ## 1. Objective
 
