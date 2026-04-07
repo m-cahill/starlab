@@ -491,7 +491,7 @@ def run_replay_parse(
         )
         return status, receipt, report, raw_parse
 
-    raw_parse: dict[str, Any] = {
+    parsed_raw: dict[str, Any] = {
         "event_streams_available": event_avail,
         "normalization_profile": NORMALIZATION_PROFILE_V1,
         "parser_family": adapter.parser_family(),
@@ -502,7 +502,7 @@ def run_replay_parse(
         "schema_version": schema_ver,
     }
     if raw_streams_norm is not None:
-        raw_parse["raw_event_streams"] = raw_streams_norm
+        parsed_raw["raw_event_streams"] = raw_streams_norm
 
     checks.append(
         CheckResult(
@@ -525,7 +525,7 @@ def run_replay_parse(
     receipt = _build_receipt(
         adapter=adapter,
         parse_input_artifacts=parse_input_artifacts,
-        raw_parse_sha256=sha256_hex_of_canonical_json(raw_parse),
+        raw_parse_sha256=sha256_hex_of_canonical_json(parsed_raw),
         replay_path=replay_path,
         replay_sha256=replay_sha256,
     )
@@ -537,7 +537,7 @@ def run_replay_parse(
         replay_sha256=replay_sha256,
         status=status,
     )
-    return status, receipt, report, raw_parse
+    return status, receipt, report, parsed_raw
 
 
 def load_optional_replay_binding(path: Path) -> tuple[dict[str, Any] | None, str | None]:

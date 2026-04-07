@@ -233,7 +233,7 @@ def run_timeline_extraction(
     contract_failed = contract_failed or not meta_ok or not meta_rep_ok
 
     if contract_failed:
-        timeline = {
+        timeline: dict[str, Any] = {
             "entries": [],
             "event_streams_available": raw_parse.get("event_streams_available"),
             "merge_order_policy": MERGE_ORDER_POLICY,
