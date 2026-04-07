@@ -3,7 +3,7 @@
 **Status:** Governed contract (M08)  
 **Policy / contract:** `policy_version` `starlab.replay_parser_substrate.v1`  
 **Parser contract version:** `parser_contract_version` `starlab.replay_parser_contract.v1`  
-**Scope:** Deterministic lowering of **raw** parser output into STARLAB JSON artifacts; **no** normalized public metadata contract (M09), **no** timeline/event semantics (M10).
+**Scope:** Deterministic lowering of **raw** parser output into STARLAB JSON artifacts; **no** normalized public metadata contract (M09). **M10** may extend `replay_raw_parse.json` with an optional **`raw_event_streams`** payload (schema `starlab.replay_raw_parse.v2`) decoded behind the same adapter boundary — **public timeline semantics** remain **M10 extraction**, not M08 proof claims.
 
 ---
 
@@ -29,7 +29,7 @@ This document defines the **M08** replay parser substrate contract:
 | M07 | Optional `replay_intake_receipt.json` / `replay_intake_report.json`; hash linkage only — intake report is **advisory** unless extended elsewhere. |
 | M04 | Optional `replay_binding.json` — `replay_content_sha256` must match observed replay when supplied. |
 | M09 | Owns **stable normalized replay metadata** derived from raw sections — **out of scope** for M08. |
-| M10 | Owns **timeline / event stream semantics** — M08 only exposes **availability flags**. |
+| M10 | Owns **decoded event stream lowering** (`raw_event_streams`) when emitted, plus **public timeline contract** in M10 modules — M08’s standing claim remains **availability flags** + raw sections; interpret M08 historical text as **not** requiring event bodies until v2. |
 
 ---
 

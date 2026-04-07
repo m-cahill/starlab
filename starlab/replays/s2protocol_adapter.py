@@ -10,6 +10,7 @@ from starlab.replays.parser_interfaces import (
     AdapterFailure,
     AdapterOutcome,
     AdapterSuccess,
+    RawEventStreams,
     RawParseSections,
     ReplayParserAdapter,
 )
@@ -132,6 +133,43 @@ class S2ProtocolReplayAdapter:
             tracker_events_available=tracker_ok,
         )
 
+        game_events: list[dict[str, Any]] | None
+        if game_bin is not None:
+            try:
+                game_events = list(protocol.decode_replay_game_events(game_bin))
+            except Exception as exc:  # noqa: BLE001 — boundary: surface as parse_failed
+                return AdapterFailure(
+                    kind="parse_failed",
+                    message=f"decode replay.game.events failed: {exc}",
+                )
+        else:
+            game_events = None
+
+        message_events: list[dict[str, Any]] | None
+        if msg_bin is not None:
+            try:
+                message_events = list(protocol.decode_replay_message_events(msg_bin))
+            except Exception as exc:  # noqa: BLE001
+                return AdapterFailure(
+                    kind="parse_failed",
+                    message=f"decode replay.message.events failed: {exc}",
+                )
+        else:
+            message_events = None
+
+        tracker_events: list[dict[str, Any]] | None
+        if tracker_ok and trk_bin is not None:
+            try:
+                decode_trk = getattr(protocol, "decode_replay_tracker_events")
+                tracker_events = list(decode_trk(trk_bin))
+            except Exception as exc:  # noqa: BLE001
+                return AdapterFailure(
+                    kind="parse_failed",
+                    message=f"decode replay.tracker.events failed: {exc}",
+                )
+        else:
+            tracker_events = None
+
         return AdapterSuccess(
             protocol_context=protocol_context,
             raw_sections=RawParseSections(
@@ -141,6 +179,11 @@ class S2ProtocolReplayAdapter:
                 init_data=init_data,
             ),
             availability=availability,
+            raw_event_streams=RawEventStreams(
+                game_events=game_events,
+                message_events=message_events,
+                tracker_events=tracker_events,
+            ),
         )
 
 

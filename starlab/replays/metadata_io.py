@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from starlab.replays.metadata_extraction import (
-    RAW_PARSE_SCHEMA_EXPECTED,
+    RAW_PARSE_SCHEMA_ACCEPTED,
     build_metadata_envelope,
     core_metadata_ok,
     player_rows_complete,
@@ -76,7 +76,7 @@ def _emit_load_failure(
             detail=None,
             severity="required",
             status="pass"
-            if raw_parse.get("schema_version") == RAW_PARSE_SCHEMA_EXPECTED
+            if raw_parse.get("schema_version") in RAW_PARSE_SCHEMA_ACCEPTED
             else "fail",
         ),
         MetadataCheckResult(
@@ -163,14 +163,14 @@ def run_metadata_extraction(
         and raw_parse.get(
             "schema_version",
         )
-        == RAW_PARSE_SCHEMA_EXPECTED
+        in RAW_PARSE_SCHEMA_ACCEPTED
     )
     if not schema_ok:
         reason_codes.append("raw_parse_schema_invalid")
         checks.append(
             MetadataCheckResult(
                 check_id="raw_parse_schema_valid",
-                detail="schema_version must be starlab.replay_raw_parse.v1",
+                detail="schema_version must be starlab.replay_raw_parse.v1 or .v2",
                 severity="required",
                 status="fail",
             ),

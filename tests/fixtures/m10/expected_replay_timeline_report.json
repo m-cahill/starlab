@@ -1,0 +1,66 @@
+{
+  "advisory_notes": [],
+  "check_results": [
+    {
+      "check_id": "raw_parse_schema_valid",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "replay_hash_present",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "source_raw_parse_sha256_computed",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "parse_receipt_hash_match",
+      "severity": "warning",
+      "status": "not_evaluated"
+    },
+    {
+      "check_id": "parse_report_status_parsed",
+      "severity": "warning",
+      "status": "not_evaluated"
+    },
+    {
+      "check_id": "metadata_hash_match",
+      "severity": "warning",
+      "status": "not_evaluated"
+    },
+    {
+      "check_id": "metadata_report_hash_match",
+      "severity": "warning",
+      "status": "not_evaluated"
+    },
+    {
+      "check_id": "raw_event_streams_present",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "check_id": "timeline_emitted",
+      "severity": "required",
+      "status": "pass"
+    }
+  ],
+  "counts_by_semantic_kind": {
+    "command_issued": 1,
+    "unit_born": 1
+  },
+  "counts_by_stream": {
+    "game": 1,
+    "message": 0,
+    "tracker": 1
+  },
+  "extraction_status": "ok",
+  "reason_codes": [],
+  "schema_version": "starlab.replay_timeline_report.v1",
+  "timeline_contract_version": "starlab.replay_timeline_contract.v1",
+  "timeline_profile": "starlab.replay_timeline.m10.v1",
+  "unsupported_event_names": [],
+  "warnings": []
+}

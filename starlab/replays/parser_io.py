@@ -10,6 +10,7 @@ from typing import Any
 from starlab.replays.parser_interfaces import (
     AdapterFailure,
     AdapterSuccess,
+    RawEventStreams,
     RawParseSections,
     ReplayParserAdapter,
 )
@@ -18,7 +19,9 @@ from starlab.replays.parser_models import (
     PARSE_CHECK_IDS,
     PARSER_CONTRACT_VERSION,
     POLICY_VERSION,
-    RAW_PARSE_SCHEMA_VERSION,
+    RAW_EVENT_STREAMS_SCHEMA_VERSION,
+    RAW_PARSE_SCHEMA_VERSION_V1,
+    RAW_PARSE_SCHEMA_VERSION_V2,
     RECEIPT_SCHEMA_VERSION,
     REPORT_SCHEMA_VERSION,
     CheckResult,
@@ -442,6 +445,11 @@ def run_replay_parse(
             "tracker_events_available": outcome.availability.tracker_events_available,
         }
         protocol_ctx = normalize_value(outcome.protocol_context)
+        raw_streams_norm: dict[str, Any] | None = None
+        schema_ver = RAW_PARSE_SCHEMA_VERSION_V1
+        if outcome.raw_event_streams is not None:
+            raw_streams_norm = _normalize_raw_event_streams(outcome.raw_event_streams)
+            schema_ver = RAW_PARSE_SCHEMA_VERSION_V2
     except NormalizationError as exc:
         status = "parse_failed"
         reason_codes.append("normalization_failed")
@@ -483,7 +491,7 @@ def run_replay_parse(
         )
         return status, receipt, report, raw_parse
 
-    raw_parse = {
+    raw_parse: dict[str, Any] = {
         "event_streams_available": event_avail,
         "normalization_profile": NORMALIZATION_PROFILE_V1,
         "parser_family": adapter.parser_family(),
@@ -491,8 +499,10 @@ def run_replay_parse(
         "protocol_context": protocol_ctx,
         "raw_sections": raw_sections_norm,
         "replay_content_sha256": replay_sha256,
-        "schema_version": RAW_PARSE_SCHEMA_VERSION,
+        "schema_version": schema_ver,
     }
+    if raw_streams_norm is not None:
+        raw_parse["raw_event_streams"] = raw_streams_norm
 
     checks.append(
         CheckResult(
@@ -577,8 +587,24 @@ def _build_raw_parse_empty(
             "init_data": None,
         },
         "replay_content_sha256": replay_sha256,
-        "schema_version": RAW_PARSE_SCHEMA_VERSION,
+        "schema_version": RAW_PARSE_SCHEMA_VERSION_V1,
     }
+
+
+def _normalize_raw_event_streams(streams: RawEventStreams) -> dict[str, Any]:
+    """Lower decoded event lists to JSON-safe trees (M10-owned payload area)."""
+
+    out: dict[str, Any] = {"raw_event_streams_schema": RAW_EVENT_STREAMS_SCHEMA_VERSION}
+    for key, val in (
+        ("game_events", streams.game_events),
+        ("message_events", streams.message_events),
+        ("tracker_events", streams.tracker_events),
+    ):
+        if val is None:
+            out[key] = None
+        else:
+            out[key] = normalize_value(val)
+    return out
 
 
 def _build_receipt(

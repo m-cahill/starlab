@@ -7,7 +7,12 @@ from typing import Any, Literal
 
 RECEIPT_SCHEMA_VERSION = "starlab.replay_parse_receipt.v1"
 REPORT_SCHEMA_VERSION = "starlab.replay_parse_report.v1"
-RAW_PARSE_SCHEMA_VERSION = "starlab.replay_raw_parse.v1"
+RAW_PARSE_SCHEMA_VERSION_V1 = "starlab.replay_raw_parse.v1"
+RAW_PARSE_SCHEMA_VERSION_V2 = "starlab.replay_raw_parse.v2"
+# Historical alias: M08 receipts referred to v1; v2 adds optional ``raw_event_streams`` (M10-owned).
+RAW_PARSE_SCHEMA_VERSION = RAW_PARSE_SCHEMA_VERSION_V2
+
+RAW_EVENT_STREAMS_SCHEMA_VERSION = "starlab.raw_event_streams.v1"
 POLICY_VERSION = "starlab.replay_parser_substrate.v1"
 PARSER_CONTRACT_VERSION = "starlab.replay_parser_contract.v1"
 

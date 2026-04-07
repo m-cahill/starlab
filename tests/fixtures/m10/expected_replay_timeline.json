@@ -1,0 +1,53 @@
+{
+  "entries": [
+    {
+      "gameloop": 10,
+      "payload": {
+        "_event": "NNet.Game.SCmdEvent",
+        "_eventid": 27,
+        "_gameloop": 10,
+        "_userid": {
+          "m_userId": 1
+        }
+      },
+      "player_index": 1,
+      "semantic_kind": "command_issued",
+      "source_event_index": 0,
+      "source_event_name": "NNet.Game.SCmdEvent",
+      "source_stream": "game",
+      "timeline_index": 0
+    },
+    {
+      "gameloop": 10,
+      "payload": {
+        "_event": "NNet.Replay.Tracker.SUnitBornEvent",
+        "_eventid": 1,
+        "_gameloop": 10,
+        "m_unitTagIndex": 1,
+        "m_unitTagRecycle": 0
+      },
+      "semantic_kind": "unit_born",
+      "source_event_index": 0,
+      "source_event_name": "NNet.Replay.Tracker.SUnitBornEvent",
+      "source_stream": "tracker",
+      "timeline_index": 1,
+      "unit_tag": "0000000000040000"
+    }
+  ],
+  "event_streams_available": {
+    "attribute_events_available": false,
+    "game_events_available": true,
+    "message_events_available": false,
+    "tracker_events_available": true
+  },
+  "merge_order_policy": "Sort by gameloop ascending, then by source_stream_precedence ['game', 'message', 'tracker'], then by source_event_index ascending. This is a canonical merge order for artifact determinism only; it does not prove exact cross-stream causality within a single gameloop.",
+  "replay_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "schema_version": "starlab.replay_timeline.v1",
+  "source_metadata_report_sha256": null,
+  "source_metadata_sha256": null,
+  "source_parse_receipt_sha256": null,
+  "source_parse_report_sha256": null,
+  "source_raw_parse_sha256": "7af0d8da29a1a051bacdc0eece40007b35ce08288da2b4febadd13e46eedda1a",
+  "timeline_contract_version": "starlab.replay_timeline_contract.v1",
+  "timeline_profile": "starlab.replay_timeline.m10.v1"
+}
