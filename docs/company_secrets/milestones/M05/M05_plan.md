@@ -3,9 +3,9 @@
 **Milestone ID:** M05  
 **Title:** Canonical Run Artifact v0  
 **Phase:** I — Governance, Runtime Surface, and Deterministic Run Substrate  
-**Status:** In progress (implementation on branch `m05-canonical-run-artifact-v0`; merge + CI evidence tracked at closeout)  
+**Status:** **Complete on `main`** ([PR #6](https://github.com/m-cahill/starlab/pull/6); merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0`)  
 **Target tag:** `v0.0.5-m05`  
-**Branch name:** `m05-canonical-run-artifact-v0`
+**Branch name:** `m05-canonical-run-artifact-v0` (**merged**; remote **deleted**)
 
 ---
 

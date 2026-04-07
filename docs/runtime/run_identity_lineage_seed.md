@@ -4,6 +4,10 @@ This document defines the **M03** contract: deterministic **run spec identity**,
 
 **These records are not the canonical run artifact (M05).** They are **seed** artifacts that STARLAB can emit without replay binding (M04) or full run packaging.
 
+### Implementation note — `seed_from_proof` / `input_references`
+
+When deriving artifacts from proof + config paths via `starlab.runs.seed_from_proof`, **`input_references[].path`** is stored as a **repo-relative POSIX path** (discovered via `pyproject.toml`), and **`content_sha256`** for **JSON** fixture files is the SHA-256 hex of **canonical JSON** of the parsed object (not raw file bytes). This keeps lineage **deterministic across OS checkouts** (for example CRLF vs LF) and supports **cross-platform CI** for downstream milestones (including M05 golden fixtures).
+
 ---
 
 ## What M03 proves

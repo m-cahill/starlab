@@ -161,6 +161,12 @@ def test_m05_stub_milestone_files_exist() -> None:
     assert (m05 / "M05_toolcalls.md").is_file()
 
 
+def test_m06_stub_milestone_files_exist() -> None:
+    m06 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M06"
+    assert (m06 / "M06_plan.md").is_file()
+    assert (m06 / "M06_toolcalls.md").is_file()
+
+
 def test_starlab_runs_package_exists() -> None:
     runs_init = REPO_ROOT / "starlab" / "runs" / "__init__.py"
     assert runs_init.is_file()
