@@ -1,0 +1,76 @@
+{
+  "check_results": [
+    {
+      "check_id": "timeline_schema_valid",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "build_order_economy_schema_valid",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "timeline_boe_hash_consistent",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "replay_hash_present",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "source_timeline_sha256_computed",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "source_build_order_economy_sha256_computed",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "source_raw_parse_identity_match",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "check_id": "combat_scouting_visibility_emitted",
+      "severity": "required",
+      "status": "pass"
+    }
+  ],
+  "combat_scouting_visibility_contract_version": "starlab.replay_combat_scouting_visibility_contract.v1",
+  "combat_scouting_visibility_profile": "starlab.replay_combat_scouting_visibility.m12.v1",
+  "counts_by_player": {
+    "1": {
+      "combat_windows": 3,
+      "scouting_observations": 3,
+      "visibility_windows": 4
+    },
+    "2": {
+      "combat_windows": 1,
+      "scouting_observations": 2,
+      "visibility_windows": 1
+    }
+  },
+  "counts_by_role": {
+    "army": 6,
+    "gas_structure": 1,
+    "scout": 2,
+    "townhall": 3,
+    "worker": 2
+  },
+  "counts_by_surface": {
+    "combat_windows": 3,
+    "scouting_observations": 5,
+    "visibility_windows": 5
+  },
+  "extraction_status": "ok",
+  "reason_codes": [],
+  "schema_version": "starlab.replay_combat_scouting_visibility_report.v1",
+  "unclassified_entity_names": [],
+  "unsupported_signal_kinds": [],
+  "warnings": []
+}

@@ -1,0 +1,155 @@
+{
+  "event_streams_available": {
+    "attribute_events_available": false,
+    "game_events_available": false,
+    "message_events_available": false,
+    "tracker_events_available": true
+  },
+  "normalization_profile": "starlab.parser_normalization.v1",
+  "parser_family": "fixture",
+  "parser_version": "0.0.test-m12",
+  "protocol_context": {
+    "m_baseBuild": 12345,
+    "m_dataBuild": 67890,
+    "m_revision": 1
+  },
+  "raw_event_streams": {
+    "game_events": [],
+    "message_events": null,
+    "raw_event_streams_schema": "starlab.raw_event_streams.v1",
+    "tracker_events": [
+      {
+        "_event": "NNet.Replay.Tracker.SUnitInitEvent",
+        "_eventid": 5,
+        "_gameloop": 100,
+        "m_controlPlayerId": 1,
+        "m_unitTypeName": "CommandCenter"
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitBornEvent",
+        "_eventid": 1,
+        "_gameloop": 101,
+        "m_controlPlayerId": 1,
+        "m_unitTagIndex": 2,
+        "m_unitTagRecycle": 0,
+        "m_unitTypeName": "SCV"
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitInitEvent",
+        "_eventid": 5,
+        "_gameloop": 200,
+        "m_controlPlayerId": 2,
+        "m_unitTypeName": "Hatchery"
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitInitEvent",
+        "_eventid": 5,
+        "_gameloop": 205,
+        "m_controlPlayerId": 2,
+        "m_unitTypeName": "Hatchery"
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitBornEvent",
+        "_eventid": 1,
+        "_gameloop": 250,
+        "m_controlPlayerId": 1,
+        "m_unitTagIndex": 10,
+        "m_unitTagRecycle": 0,
+        "m_unitTypeName": "Reaper"
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitInitEvent",
+        "_eventid": 5,
+        "_gameloop": 300,
+        "m_controlPlayerId": 1,
+        "m_unitTypeName": "Refinery"
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitBornEvent",
+        "_eventid": 1,
+        "_gameloop": 400,
+        "m_controlPlayerId": 1,
+        "m_unitTagIndex": 20,
+        "m_unitTagRecycle": 0,
+        "m_unitTypeName": "Marine"
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitDiedEvent",
+        "_eventid": 2,
+        "_gameloop": 700,
+        "m_controlPlayerId": 1,
+        "m_unitTagIndex": 20,
+        "m_unitTagRecycle": 0,
+        "m_unitTypeName": "Marine",
+        "m_x": 10.0,
+        "m_y": 20.0
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitDiedEvent",
+        "_eventid": 2,
+        "_gameloop": 720,
+        "m_controlPlayerId": 2,
+        "m_unitTagIndex": 21,
+        "m_unitTagRecycle": 0,
+        "m_unitTypeName": "Marine",
+        "m_x": 11.0,
+        "m_y": 21.0
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitDiedEvent",
+        "_eventid": 2,
+        "_gameloop": 1000,
+        "m_controlPlayerId": 1,
+        "m_unitTagIndex": 22,
+        "m_unitTagRecycle": 0,
+        "m_unitTypeName": "Zealot",
+        "m_x": 12.0,
+        "m_y": 22.0
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitDiedEvent",
+        "_eventid": 2,
+        "_gameloop": 1200,
+        "m_controlPlayerId": 1,
+        "m_unitTagIndex": 2,
+        "m_unitTagRecycle": 0,
+        "m_unitTypeName": "SCV",
+        "m_x": 5.0,
+        "m_y": 6.0
+      }
+    ]
+  },
+  "raw_sections": {
+    "attribute_events": null,
+    "details": {
+      "m_gameDurationLoops": 5000,
+      "m_playerList": [
+        {
+          "m_control": 1,
+          "m_race": "Terran",
+          "m_result": 1,
+          "m_workingSetSlotId": 0
+        },
+        {
+          "m_control": 2,
+          "m_race": "Zerg",
+          "m_result": 2,
+          "m_workingSetSlotId": 1
+        }
+      ],
+      "m_title": "M12 Combined Fixture Map"
+    },
+    "header": {
+      "m_version": {
+        "m_baseBuild": 12345,
+        "m_dataBuild": 67890,
+        "m_revision": 1
+      }
+    },
+    "init_data": {
+      "m_syncLobbyState": {}
+    }
+  },
+  "replay_content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "schema_version": "starlab.replay_raw_parse.v2"
+}
