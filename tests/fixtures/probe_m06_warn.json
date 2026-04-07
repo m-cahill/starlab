@@ -1,0 +1,26 @@
+{
+  "base_build": null,
+  "data_version": null,
+  "interface_modes": {
+    "feature_layer_interface": true,
+    "raw_interface": true,
+    "rendered_interface": true
+  },
+  "notes": [],
+  "paths": {
+    "binary": null,
+    "maps_dir": null,
+    "replays_dir": null,
+    "root": null
+  },
+  "present": {
+    "binary": false,
+    "maps_dir": false,
+    "replays_dir": false,
+    "root": false
+  },
+  "spec": {
+    "control_observation_surface": "s2client_proto_sc2api",
+    "replay_decode_surface": "s2protocol"
+  }
+}

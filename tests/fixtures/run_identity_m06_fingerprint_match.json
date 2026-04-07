@@ -1,0 +1,9 @@
+{
+  "environment_fingerprint": {
+    "adapter_name": "fake",
+    "base_build": "12345",
+    "data_version": "test-dv",
+    "runtime_boundary_label": "s2client_proto_sc2api"
+  },
+  "schema_version": "starlab.run_identity.v1"
+}

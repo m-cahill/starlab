@@ -1,0 +1,26 @@
+{
+  "base_build": "12345",
+  "data_version": "test-dv",
+  "interface_modes": {
+    "feature_layer_interface": true,
+    "raw_interface": true,
+    "rendered_interface": true
+  },
+  "notes": [],
+  "paths": {
+    "binary": "/fake/sc2/SC2_x64.exe",
+    "maps_dir": "/fake/sc2/Maps",
+    "replays_dir": "/fake/sc2/Replays",
+    "root": "/fake/sc2"
+  },
+  "present": {
+    "binary": true,
+    "maps_dir": true,
+    "replays_dir": true,
+    "root": true
+  },
+  "spec": {
+    "control_observation_surface": "s2client_proto_sc2api",
+    "replay_decode_surface": "s2protocol"
+  }
+}

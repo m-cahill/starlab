@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), and `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary).  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), and `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract).  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -110,6 +110,7 @@ Focus:
 | M03 | `run_identity.json`, `lineage_seed.json` | M02 proof + match config (deterministic IDs) | STARLAB JSON artifacts | Replay binding, canonical run artifact v0, benchmarks |
 | M04 | `replay_binding.json` | M03 `run_identity` / `lineage_seed` + opaque replay bytes (`replay_content_sha256`) | M03 JSON + `replay_binding.json` (replay bytes hashed, not shipped) | Replay parser semantics, replay↔proof equivalence, canonical run artifact v0, benchmarks |
 | M05 | `manifest.json`, `hashes.json`, plus M03/M04 JSON (directory bundle) | M03 + M04 JSON only | **Included:** STARLAB-owned JSON only. **External:** raw replay bytes, raw proof/config (never in bundle) | Parser substrate (M08), full benchmark semantics (later) |
+| M06 | `runtime_smoke_matrix.json`, `environment_drift_report.json` | M01 probe JSON; optional M03 `environment_fingerprint` | STARLAB JSON artifacts (fixture-driven in CI) | Replay parser, provenance closure, benchmark integrity, cross-host portability, live SC2 in CI |
 
 ### Phase II — Replay Intake, Provenance, and Data Plane
 
