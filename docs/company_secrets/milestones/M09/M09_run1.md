@@ -57,5 +57,6 @@ After the merge commit, any additional `push` to `main` that updates only milest
 | Commit | Workflow run | Conclusion | Notes |
 | ------ | ------------ | ---------- | ----- |
 | `147b1f4810ad2e0dbb926c7a971748c4db68bdbc` | [`24102029092`](https://github.com/m-cahill/starlab/actions/runs/24102029092) | **success** | M09 closeout: `M09_run1.md`, `M09_summary.md`, `M09_audit.md`, `docs/starlab.md`, M10 stubs — **not** a merge-boundary event. |
+| `44a0bce631854e6039442ca49609228a0650adf3` | [`24102071251`](https://github.com/m-cahill/starlab/actions/runs/24102071251) | **success** | Ledger §23 / `M09_run1` non-merge-boundary CI row sync — **not** a merge-boundary event. |
 
 **Authoritative merge-boundary** post-merge `main` CI for M09 remains **`24101900950`** on merge commit **`fc9b442…`** (above).

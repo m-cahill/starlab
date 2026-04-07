@@ -868,6 +868,7 @@ It should always answer, with minimal ambiguity:
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23 updated: **stable normalized replay metadata** (narrow) **proved on `main`**; Phase II artifact row (M09); metadata field glossary; **current milestone** → **M10** (stub only)
 - Milestone closeout: `M09_run1.md`, `M09_summary.md`, `M09_audit.md`, `M09_plan.md` (**Status: Complete**), `M09_toolcalls.md`; **M10** stubs seeded (`M10_plan.md`, `M10_toolcalls.md`).
 - **Non-merge-boundary** `main` CI — closeout commit `147b1f4810ad2e0dbb926c7a971748c4db68bdbc`: [`24102029092`](https://github.com/m-cahill/starlab/actions/runs/24102029092) (**success**) — ledger + milestone artifacts only; **authoritative** merge-boundary post-merge `main` CI for M09 remains [`24101900950`](https://github.com/m-cahill/starlab/actions/runs/24101900950) on merge commit `fc9b442d66abe9a2922e93051c7d0a22ccb133d1`.
+- **Non-merge-boundary** `main` CI — follow-up commit `44a0bce631854e6039442ca49609228a0650adf3`: [`24102071251`](https://github.com/m-cahill/starlab/actions/runs/24102071251) (**success**) — ledger / `M09_run1` non-merge-boundary row hygiene — **not** a merge-boundary event; **authoritative** merge-boundary post-merge `main` CI for M09 remains [`24101900950`](https://github.com/m-cahill/starlab/actions/runs/24101900950) on merge commit `fc9b442d66abe9a2922e93051c7d0a22ccb133d1`.
 
 ### 2026-04-07 — M08 merged to `main` (PR #9) + closeout
 
