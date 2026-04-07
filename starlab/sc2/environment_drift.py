@@ -165,11 +165,7 @@ def evaluate_environment_drift(
     probe_ok = not validation_errors
 
     probe_schema_status: CheckStatus = "pass" if probe_ok else "fail"
-    probe_schema_observed = (
-        "valid M01 probe surface"
-        if probe_ok
-        else "; ".join(validation_errors)
-    )
+    probe_schema_observed = "valid M01 probe surface" if probe_ok else "; ".join(validation_errors)
     checks: list[dict[str, Any]] = [
         _check_result(
             check_id="probe_schema_valid",
