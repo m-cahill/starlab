@@ -55,7 +55,9 @@ Those runs (if any) are recorded in `docs/starlab.md` §23 and in the **Non-merg
 
 ### Non-merge-boundary (doc-only / ledger-only)
 
-*(Populated when a post-merge documentation commit is pushed — CI run ID and commit SHA listed here and in `docs/starlab.md` §23.)*
+**Superseded (not ledger authority):** run [`24070704576`](https://github.com/m-cahill/starlab/actions/runs/24070704576) — **failure** at **Pytest** (`test_current_milestone_is_m08` vs §11 **M09**); fixed by updating `tests/test_governance.py` in the follow-up commit.
+
+*(Green non-merge-boundary run for closeout commits — recorded below after the fix push.)*
 
 ---
 
