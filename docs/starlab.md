@@ -903,7 +903,7 @@ It should always answer, with minimal ambiguity:
 - **Mypy repair** `cf2074e10ec8a38b22bd7b75ffeb4ec22a71485b` — **authoritative green `main` CI:** [`24104197912`](https://github.com/m-cahill/starlab/actions/runs/24104197912) (**success**) — **not** a merge-boundary event
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23 updated: **governed event/timeline extraction** (narrow) **proved on `main`**; **current milestone** → **M11** (stub); closeout ledger M10 row; score trend M10 note
 - Milestone closeout: `M10_run1.md`, `M10_summary.md`, `M10_audit.md`, `M10_plan.md` (**Status: Complete**), `M10_toolcalls.md`; **M11** remains stub-only (`M11_plan.md`, `M11_toolcalls.md`)
-- **Non-claim:** merged timeline order is **deterministic canonicalization** only, **not** proof of exact intra-gameloop causality across streams
+- **Non-merge-boundary** `main` CI — closeout commit `f78a435e50e27b725b34548d0037771d3bfccf49`: [`24104280039`](https://github.com/m-cahill/starlab/actions/runs/24104280039) (**success**) — **not** merge-boundary; **authoritative** green repair `main` remains `cf2074e…` / [`24104197912`](https://github.com/m-cahill/starlab/actions/runs/24104197912)
 
 ### 2026-04-07 — M10: timeline & event extraction (pre-merge implementation log)
 

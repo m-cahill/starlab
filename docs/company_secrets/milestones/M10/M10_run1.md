@@ -51,7 +51,11 @@ This is the **authoritative green `main` CI** demonstrating Ruff, Mypy, Pytest, 
 
 ## Non-merge-boundary runs (documentation / ledger closeout)
 
-The next `push` to `main` that records M10 closeout docs and ledger updates **may** produce an additional green CI run; if so, treat it as **non-merge-boundary** unless it is a PR merge. Prefer **capping** extra rows here (M09 lesson — avoid an endless doc/CI loop table).
+| Commit (short) | Workflow run | Conclusion | Notes |
+| -------------- | ------------ | ---------- | ----- |
+| `f78a435…` | [`24104280039`](https://github.com/m-cahill/starlab/actions/runs/24104280039) | **success** | M10 closeout: ledger + `M10_run1` / summary / audit + governance test — **not** merge-boundary; **authoritative** green repair remains `cf2074e…` / `24104197912`. |
+
+*Further doc-only pushes to `main` after this row may produce more green runs; add §23 bullets or short notes rather than extending this table indefinitely (M09 lesson).*
 
 ---
 
