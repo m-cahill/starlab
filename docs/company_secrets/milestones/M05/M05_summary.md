@@ -50,6 +50,7 @@ Establish the first **canonical STARLAB run package boundary** by deterministica
 | PR-head CI | Run **`24062592376`** — **success** on `53ace08…` — merge gate |
 | Post-merge `main` | Run **`24062610358`** — **success** on merge commit `bad27db…` |
 | Post-closeout `main` (non–merge-boundary) | Run **`24062664914`** — **success** on `6edeb8a…` (ledger / M06 stubs) |
+| Further doc-only `main` (non–merge-boundary) | Run **`24062700534`** — **success** on `ebca1e9…` (§18/§23 CI cross-reference) |
 | Local | Ruff, pytest, mypy (before push) |
 
 ---
@@ -122,5 +123,6 @@ Establish the first **canonical STARLAB run package boundary** by deterministica
 | Merge method | **merge commit** |
 | Post-merge `main` CI (merge boundary) | https://github.com/m-cahill/starlab/actions/runs/24062610358 |
 | Post-closeout `main` CI (docs/governance push; not merge boundary) | https://github.com/m-cahill/starlab/actions/runs/24062664914 |
+| Further doc-only `main` CI (not merge boundary) | https://github.com/m-cahill/starlab/actions/runs/24062700534 |
 | Contract | `docs/runtime/canonical_run_artifact_v0.md` |
 | Public ledger | `docs/starlab.md` |

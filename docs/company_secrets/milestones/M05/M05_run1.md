@@ -84,6 +84,8 @@ After M05 milestone artifacts and ledger updates landed on `main` in commit `6ed
 
 **Distinction:** This is **not** the merge-commit boundary (that remains `bad27db…` / run `24062610358`). It confirms docs/governance changes did not break the pipeline.
 
+A subsequent documentation-only push (`ebca1e964c0539c78165bfab72c249a2157402cc`) updated §18/§23 cross-references; CI run **`24062700534`** (**success**) — also **non–merge-boundary**.
+
 ---
 
 ## E. Next actions

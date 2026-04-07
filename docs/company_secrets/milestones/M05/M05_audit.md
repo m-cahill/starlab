@@ -7,6 +7,7 @@
 **Final PR head:** `53ace08e2ec9d29c780f31593bd945e82e1dfcac` — PR-head CI [24062592376](https://github.com/m-cahill/starlab/actions/runs/24062592376) — **success**  
 **Merge commit:** `bad27db36c135fd772e38dcafa64d6fa59577db0` — merged **2026-04-07T03:20:10Z** — post-merge `main` CI [24062610358](https://github.com/m-cahill/starlab/actions/runs/24062610358) — **success**  
 **Post-closeout `main` (ledger / M06 stubs; not merge boundary):** `6edeb8af845d9cbfaed5c329c1c9a3398acac9dd` — CI [24062664914](https://github.com/m-cahill/starlab/actions/runs/24062664914) — **success**  
+**Further doc-only `main` (§18/§23 CI cross-reference; not merge boundary):** `ebca1e964c0539c78165bfab72c249a2157402cc` — CI [24062700534](https://github.com/m-cahill/starlab/actions/runs/24062700534) — **success**  
 **Date:** 2026-04-07
 
 ---
@@ -95,6 +96,7 @@
   "merge_commit": "bad27db36c135fd772e38dcafa64d6fa59577db0",
   "post_merge_main_ci": "24062610358",
   "post_closeout_main_ci_non_merge_boundary": "24062664914",
+  "further_doc_only_main_ci_non_merge_boundary": "24062700534",
   "verdict": "green_closed_on_main",
   "merged_to_main": true,
   "quality_gates": {
