@@ -61,7 +61,8 @@ After the merge commit, any additional `push` to `main` that updates only milest
 | `2d3bc95d97b14a01d40d41b84565f270ca6b22ab` | [`24102113672`](https://github.com/m-cahill/starlab/actions/runs/24102113672) | **success** | Follow-up §23 / `M09_run1` row for prior non-merge-boundary commit — **not** a merge-boundary event. |
 | `bdd75b95af1de4fae1ee1bf3f5dea0d0d6aabaec` | [`24102151912`](https://github.com/m-cahill/starlab/actions/runs/24102151912) | **success** | Ledger §23 / `M09_run1` sync for `2d3bc95…` non-merge-boundary CI — **not** a merge-boundary event. |
 | `cedcd410b829261bc479ef4eb2a3faab2a07fd0c` | [`24102190259`](https://github.com/m-cahill/starlab/actions/runs/24102190259) | **success** | Ledger §23 / `M09_run1` sync for `bdd75b9…` non-merge-boundary CI — **not** a merge-boundary event. |
+| `887037bb6af16cf3205423fc33ef71cd619d040d` | [`24102230285`](https://github.com/m-cahill/starlab/actions/runs/24102230285) | **success** | Ledger §23 / `M09_run1` sync for `cedcd41…` non-merge-boundary CI — **not** a merge-boundary event. |
 
 **Authoritative merge-boundary** post-merge `main` CI for M09 remains **`24101900950`** on merge commit **`fc9b442…`** (above).
 
-*Further documentation-only pushes to `main` after this table may produce additional green CI runs; distinguish them in §23 — **not** merge-boundary events. The table above is complete through the last row; do not imply merge-boundary authority for those rows.*
+*Further documentation-only pushes to `main` after this table may produce additional green CI runs; distinguish them in §23 — **not** merge-boundary events. Rows above are **not** merge-boundary authority.*
