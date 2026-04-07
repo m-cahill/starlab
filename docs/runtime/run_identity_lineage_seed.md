@@ -218,4 +218,4 @@ No StarCraft II execution is required for this example.
 
 - `docs/runtime/match_execution_harness.md` — M02 proof artifact and hashing
 - `docs/runtime/environment_lock.md` — environment lock (separate from M03 fingerprint)
-- `docs/starlab.md` — public ledger (proved vs not yet proved)
+- `docs/starlab.md` — public ledger (proved vs not yet proved; §11 for current M03 PR / merge status)

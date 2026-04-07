@@ -45,5 +45,17 @@ Initialize when M03 work begins.
 
 ### PR / CI (record after push)
 
-- **PR:** *filled after `gh pr create`*
-- **Authoritative PR-head CI:** *filled after green run*
+- **PR:** [#4 — M03: run identity and lineage seed](https://github.com/m-cahill/starlab/pull/4)  
+- **PR title:** M03: run identity and lineage seed  
+- **Branch:** `m03-run-identity-lineage-seed`  
+- **PR head SHA (at green run):** `4dbd9ba7fd57aaf835592024ee0577352a918c9e`  
+- **Workflow:** `CI` (`.github/workflows/ci.yml`)  
+- **Authoritative PR-head run ID:** `24058700007`  
+- **Run URL:** https://github.com/m-cahill/starlab/actions/runs/24058700007  
+- **Conclusion:** **success** (merge gate for current tip)  
+- **Post-merge `main` CI:** *not recorded — merge not performed in this step*
+
+### Milestone artifacts added (pre-merge)
+
+- `M03_run1.md`, `M03_summary.md`, `M03_audit.md` (this push)  
+- Ledger/README updated for **PR-open** / **not on `main` yet** honesty

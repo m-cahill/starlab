@@ -106,7 +106,7 @@ These are planning lenses, not promises. The realistic early path is:
 
 ## Current status
 
-**Status:** M00, **M01**, and **M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); **M03** — Run Identity & Lineage Seed **in development** (`docs/runtime/run_identity_lineage_seed.md`, `starlab/runs/`; merge pending).
+**Status:** M00, **M01**, and **M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); **M03** — Run Identity & Lineage Seed — open [**PR #4**](https://github.com/m-cahill/starlab/pull/4) (green PR-head CI on latest tip; merge to `main` pending).
 
 STARLAB completed governance bootstrap (**M00**), **M01** (SC2 runtime surface and environment lock), and **M02** (bounded match harness + STARLAB execution proof artifact; CI uses the **fake** adapter; optional local `burnysc2` runs documented under `docs/company_secrets/milestones/M02/`).
 
