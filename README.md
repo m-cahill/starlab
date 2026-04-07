@@ -214,3 +214,5 @@ The current objective is simple:
 **M03 run identity (no SC2):** `python -m starlab.runs.seed_from_proof --proof ... --config ... --output-dir ...` (see `docs/runtime/run_identity_lineage_seed.md`).
 
 **M02 closeout:** merged **2026-04-06** ([PR #3](https://github.com/m-cahill/starlab/pull/3)). **Narrow** same-machine harness evidence (two successful `burnysc2` runs, matching normalized `artifact_hash`) is recorded under `docs/company_secrets/milestones/M02/`. This does **not** claim replay binding, canonical run artifacts, benchmark validity, or cross-host reproducibility — see `docs/starlab.md` §10.
+
+**M03 closeout:** merged **2026-04-07** ([PR #4](https://github.com/m-cahill/starlab/pull/4)). Deterministic run identity + lineage **seed** records and stable JSON from proof/config inputs are on `main`; **not** replay binding, **not** canonical run artifact v0 — see `docs/starlab.md` §10 and `docs/company_secrets/milestones/M03/`.
