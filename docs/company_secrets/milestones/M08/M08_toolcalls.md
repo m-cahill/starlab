@@ -51,6 +51,15 @@
 
 ---
 
+## 2026-04-07 — Authoritative PR-head CI (green)
+
+* **PR:** [#9](https://github.com/m-cahill/starlab/pull/9) — **M08: replay parser substrate**
+* **PR head (authoritative):** `e76b1acef28405c1c2f4569e146eee46969f7adb`
+* **Authoritative PR-head workflow run:** [`24069782159`](https://github.com/m-cahill/starlab/actions/runs/24069782159) — **success** (CI job `governance`, conclusion `success`)
+* **Superseded:** [`24069652969`](https://github.com/m-cahill/starlab/actions/runs/24069652969) — **failure** (Pytest: M05 golden vs Linux replay hash mismatch; fixed in `e76b1ac` via LF-aligned goldens + `.gitattributes`)
+
+---
+
 ## 2026-04-06 — Stub seeded (no implementation)
 
 * **Purpose:** Milestone folder and stub plan created at **M07** closeout per project workflow.
