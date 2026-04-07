@@ -69,7 +69,23 @@ Earlier PR-head runs on branch tips **`24062532070`**, **`24062562563`** failed 
 
 ---
 
-## D. Next actions
+## D. Post-closeout `main` CI (non–merge-boundary)
 
-- Record this run in `docs/starlab.md` §18 / §23.
+After M05 milestone artifacts and ledger updates landed on `main` in commit `6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`, CI re-ran on push.
+
+| Field | Value |
+| ----- | ----- |
+| **Workflow name** | CI |
+| **Run ID** | `24062664914` |
+| **URL** | https://github.com/m-cahill/starlab/actions/runs/24062664914 |
+| **Trigger** | `push` to `main` |
+| **Commit** | `6edeb8af845d9cbfaed5c329c1c9a3398acac9dd` |
+| **Conclusion** | **success** |
+
+**Distinction:** This is **not** the merge-commit boundary (that remains `bad27db…` / run `24062610358`). It confirms docs/governance changes did not break the pipeline.
+
+---
+
+## E. Next actions
+
 - Proceed to **M06** planning (stubs only) — **no** M06 product implementation until authorized.

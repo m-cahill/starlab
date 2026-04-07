@@ -6,6 +6,7 @@
 **PR:** [#6](https://github.com/m-cahill/starlab/pull/6) — **merged**  
 **Final PR head:** `53ace08e2ec9d29c780f31593bd945e82e1dfcac` — PR-head CI [24062592376](https://github.com/m-cahill/starlab/actions/runs/24062592376) — **success**  
 **Merge commit:** `bad27db36c135fd772e38dcafa64d6fa59577db0` — merged **2026-04-07T03:20:10Z** — post-merge `main` CI [24062610358](https://github.com/m-cahill/starlab/actions/runs/24062610358) — **success**  
+**Post-closeout `main` (ledger / M06 stubs; not merge boundary):** `6edeb8af845d9cbfaed5c329c1c9a3398acac9dd` — CI [24062664914](https://github.com/m-cahill/starlab/actions/runs/24062664914) — **success**  
 **Date:** 2026-04-07
 
 ---
@@ -14,8 +15,8 @@
 
 - **Milestone:** M05 — Canonical Run Artifact v0  
 - **Mode:** DELTA AUDIT  
-- **Range:** `main` @ prior tip … `bad27db36c135fd772e38dcafa64d6fa59577db0` (merge of PR #6)  
-- **CI Status:** Green (PR-head + post-merge `main`)  
+- **Range:** `main` @ prior tip … `bad27db36c135fd772e38dcafa64d6fa59577db0` (merge of PR #6); closeout docs on `6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`  
+- **CI Status:** Green (PR-head + post-merge `main` on merge commit; additional green run on post-closeout push — **not** merge authority)  
 - **Audit Verdict:** **Green** — M05 remained **below** replay parser substrate, benchmark certification, and raw-asset shipping; **no** CI guardrail weakening observed.
 
 ---
@@ -52,6 +53,7 @@
 
 - Required jobs unchanged; **no** `continue-on-error` on merge gates.
 - **Pytest** failure on early PR tips **fixed** before merge — truth signal restored.
+- Post-closeout push (`6edeb8a…`, run `24062664914`) re-validated the pipeline after ledger/milestone-only changes — **supplementary**, not a substitute for merge-commit CI.
 
 ---
 
@@ -92,6 +94,7 @@
   "authoritative_pr_head_ci": "24062592376",
   "merge_commit": "bad27db36c135fd772e38dcafa64d6fa59577db0",
   "post_merge_main_ci": "24062610358",
+  "post_closeout_main_ci_non_merge_boundary": "24062664914",
   "verdict": "green_closed_on_main",
   "merged_to_main": true,
   "quality_gates": {
