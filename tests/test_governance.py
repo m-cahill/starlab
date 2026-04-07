@@ -16,6 +16,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/sc2_runtime_surface.md",
     "docs/runtime/environment_lock.md",
     "docs/runtime/match_execution_harness.md",
+    "docs/runtime/run_identity_lineage_seed.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -121,6 +122,19 @@ def test_m03_stub_milestone_files_exist() -> None:
     m03 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M03"
     assert (m03 / "M03_plan.md").is_file()
     assert (m03 / "M03_toolcalls.md").is_file()
+
+
+def test_starlab_runs_package_exists() -> None:
+    runs_init = REPO_ROOT / "starlab" / "runs" / "__init__.py"
+    assert runs_init.is_file()
+    seed = REPO_ROOT / "starlab" / "runs" / "seed_from_proof.py"
+    assert seed.is_file()
+
+
+def test_m03_fixture_pair_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures"
+    assert (fx / "m02_match_config.json").is_file()
+    assert (fx / "m02_match_execution_proof.json").is_file()
 
 
 def test_m01_changelog_entry_present() -> None:
