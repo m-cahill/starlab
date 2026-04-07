@@ -1,0 +1,49 @@
+{
+  "event_streams_available": {
+    "attribute_events_available": false,
+    "game_events_available": true,
+    "message_events_available": false,
+    "tracker_events_available": true
+  },
+  "normalization_profile": "starlab.parser_normalization.v1",
+  "parser_family": "fixture",
+  "parser_version": "0.0.test",
+  "protocol_context": {
+    "m_baseBuild": 12345,
+    "m_dataBuild": 67890,
+    "m_revision": 1
+  },
+  "raw_sections": {
+    "attribute_events": null,
+    "details": {
+      "m_gameDurationLoops": 1000,
+      "m_playerList": [
+        {
+          "m_control": 1,
+          "m_race": "Terran",
+          "m_result": 1,
+          "m_workingSetSlotId": 0
+        },
+        {
+          "m_control": 2,
+          "m_race": "Zerg",
+          "m_result": 2,
+          "m_workingSetSlotId": 1
+        }
+      ],
+      "m_title": "Test Map"
+    },
+    "header": {
+      "m_version": {
+        "m_baseBuild": 12345,
+        "m_dataBuild": 67890,
+        "m_revision": 1
+      }
+    },
+    "init_data": {
+      "m_syncLobbyState": {}
+    }
+  },
+  "replay_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "schema_version": "starlab.replay_raw_parse.v1"
+}

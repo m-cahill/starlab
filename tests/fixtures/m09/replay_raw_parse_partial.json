@@ -1,0 +1,32 @@
+{
+  "event_streams_available": {
+    "attribute_events_available": false,
+    "game_events_available": false,
+    "message_events_available": false,
+    "tracker_events_available": false
+  },
+  "normalization_profile": "starlab.parser_normalization.v1",
+  "parser_family": "fixture",
+  "parser_version": "0.0.test",
+  "protocol_context": {
+    "m_baseBuild": 999,
+    "m_dataBuild": 0,
+    "m_revision": null
+  },
+  "raw_sections": {
+    "attribute_events": null,
+    "details": {
+      "m_playerList": [],
+      "m_title": null
+    },
+    "header": {
+      "m_version": {
+        "m_baseBuild": 999,
+        "m_dataBuild": 0
+      }
+    },
+    "init_data": null
+  },
+  "replay_content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "schema_version": "starlab.replay_raw_parse.v1"
+}

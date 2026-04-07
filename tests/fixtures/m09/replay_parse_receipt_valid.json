@@ -1,0 +1,15 @@
+{
+  "observed_filename": "fixture.SC2Replay",
+  "parse_input_artifacts": {
+    "replay_binding.json": null,
+    "replay_intake_receipt.json": null,
+    "replay_intake_report.json": null
+  },
+  "parser_contract_version": "starlab.replay_parser_contract.v1",
+  "parser_family": "fixture",
+  "parser_version": "0.0.test",
+  "policy_version": "starlab.replay_parser_substrate.v1",
+  "raw_parse_sha256": "7379c337658d130750837327be0068ffc62ab854469531a32cfdb9f0c3995df6",
+  "replay_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "schema_version": "starlab.replay_parse_receipt.v1"
+}
