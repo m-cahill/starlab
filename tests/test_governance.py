@@ -19,6 +19,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/run_identity_lineage_seed.md",
     "docs/runtime/replay_binding.md",
     "docs/runtime/canonical_run_artifact_v0.md",
+    "docs/runtime/environment_drift_smoke_matrix.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -200,10 +201,24 @@ def test_canonical_run_artifact_modules_exist() -> None:
     assert cli.is_file()
 
 
+def test_m06_environment_drift_modules_exist() -> None:
+    assert (REPO_ROOT / "starlab" / "sc2" / "environment_drift.py").is_file()
+    assert (REPO_ROOT / "starlab" / "sc2" / "evaluate_environment_drift.py").is_file()
+    assert (REPO_ROOT / "starlab" / "sc2" / "runtime_smoke_matrix.py").is_file()
+
+
 def test_m05_expected_golden_fixtures_exist() -> None:
     exp = REPO_ROOT / "tests" / "fixtures" / "m05_expected"
     assert (exp / "manifest.json").is_file()
     assert (exp / "hashes.json").is_file()
+
+
+def test_m06_probe_fixtures_exist() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures"
+    assert (fx / "probe_m06_valid.json").is_file()
+    assert (fx / "probe_m06_warn.json").is_file()
+    assert (fx / "probe_m06_fail_invalid_surface.json").is_file()
+    assert (fx / "run_identity_m06_fingerprint.json").is_file()
 
 
 def test_synthetic_replay_fixture_exists() -> None:
