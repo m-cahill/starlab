@@ -17,6 +17,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/environment_lock.md",
     "docs/runtime/match_execution_harness.md",
     "docs/runtime/run_identity_lineage_seed.md",
+    "docs/runtime/replay_binding.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -156,3 +157,15 @@ def test_m01_changelog_entry_present() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "### 2026-04-06 — M01 closeout" in text
     assert "OD-005" in text
+
+
+def test_replay_binding_module_exists() -> None:
+    rb = REPO_ROOT / "starlab" / "runs" / "replay_binding.py"
+    assert rb.is_file()
+    cli = REPO_ROOT / "starlab" / "runs" / "bind_replay.py"
+    assert cli.is_file()
+
+
+def test_synthetic_replay_fixture_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "synthetic_opaque_test.SC2Replay"
+    assert fx.is_file()
