@@ -3,18 +3,18 @@
 ## A) Authoritative PR-head CI (current PR tip — merge gate candidate)
 
 **Workflow:** `CI` (`.github/workflows/ci.yml`)  
-**Authoritative run ID (PR head at analysis time):** `24058833260`  
-**URL:** https://github.com/m-cahill/starlab/actions/runs/24058833260  
+**Authoritative run ID (PR head at analysis time):** `24058879334`  
+**URL:** https://github.com/m-cahill/starlab/actions/runs/24058879334  
 **Trigger:** `pull_request`  
 **Branch:** `m03-run-identity-lineage-seed`  
-**Head SHA (merge gate candidate):** `8634da377fedf61c436f8b3678648b35e45067c3`  
+**Head SHA (merge gate candidate):** `8e751429c315601a5c85b8b349c6cb1f4b06796d`  
 **PR:** [#4 — M03: run identity and lineage seed](https://github.com/m-cahill/starlab/pull/4) (**open** at analysis time)  
 **Conclusion:** **success**  
 **Recorded:** 2026-04-07
 
-**Superseded PR-head runs (older tips, not the merge gate):** `24058700007` on `4dbd9ba7fd57aaf835592024ee0577352a918c9e` — **success**; `24058752461` on `3e78e71a872086a787fe59c16fe6caa3ef6dbd99` — **success**; `24058791683` on `1ab53f287ece4d862e0ac752208ba8d1e817b491` — **success** (intermediate doc batches).
+**Superseded PR-head runs (older tips, not the merge gate):** `24058700007` on `4dbd9ba7fd57aaf835592024ee0577352a918c9e` — **success**; `24058752461` on `3e78e71a872086a787fe59c16fe6caa3ef6dbd99` — **success**; `24058791683` on `1ab53f287ece4d862e0ac752208ba8d1e817b491` — **success**; `24058833260` on `8634da377fedf61c436f8b3678648b35e45067c3` — **success** (superseded commit before history amend to current tip).
 
-**Authoritative for merge gating:** **Yes** — this run is the latest `pull_request` CI on the current PR tip (`8634da3…`) and completed **success**; treat it as the merge gate signal until a newer commit invalidates it.
+**Authoritative for merge gating:** **Yes** — this run is the latest `pull_request` CI on the current PR tip (`8e75142…`) and completed **success**; treat it as the merge gate signal until a newer commit invalidates it.
 
 ---
 
@@ -29,9 +29,9 @@
 | Field | Value |
 |-------|--------|
 | Workflow name | CI |
-| Run ID | 24058833260 |
+| Run ID | 24058879334 |
 | Trigger | PR against `main` |
-| Commit | `8634da377fedf61c436f8b3678648b35e45067c3` |
+| Commit | `8e751429c315601a5c85b8b349c6cb1f4b06796d` |
 | Milestone | M03 — Run Identity & Lineage Seed |
 | Intent | Land `starlab/runs/`, runtime contract, tests/fixtures, ledger/README alignment; keep CI SC2-free |
 
@@ -90,7 +90,7 @@ No `continue-on-error` on required checks.
 
 ## 6. Verdict
 
-> **Verdict:** PR-head run **`24058833260`** on **`8634da3…`** is **green** and is the **authoritative merge gate** for the current PR tip. **Merge to `main` has not occurred** in this step; post-merge `main` CI is **out of scope** until merge.
+> **Verdict:** PR-head run **`24058879334`** on **`8e75142…`** is **green** and is the **authoritative merge gate** for the current PR tip. **Merge to `main` has not occurred** in this step; post-merge `main` CI is **out of scope** until merge.
 
 **Merge from CI/governance:** ✅ **CI green** — from an automation/governance standpoint, the PR is **eligible to merge** on the basis of required checks; **final merge** remains a human / permissioned action per project rules.
 
