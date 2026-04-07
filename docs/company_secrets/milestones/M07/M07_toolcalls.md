@@ -28,3 +28,13 @@ Commands run from repo root `c:\coding\starlab` (PowerShell), **before** branch 
 | `mypy starlab tests` | **Exit 0** — `Success: no issues found in 50 source files` |
 
 Governance tests are included in pytest; M07 remains fixture-driven and SC2-free (no live SC2 in CI).
+
+---
+
+## 2026-04-06 — Branch push & PR #8 (authoritative PR-head CI)
+
+- **Branch:** `m07-replay-intake-policy-provenance-enforcement`
+- **Commit (PR head):** `ae909a392c67ce35d7865e1d1c76647963c988f7`
+- **PR:** [#8](https://github.com/m-cahill/starlab/pull/8) — **M07: replay intake policy and provenance enforcement**
+- **Authoritative PR-head CI (merge gate):** workflow **CI**, run [`24065537231`](https://github.com/m-cahill/starlab/actions/runs/24065537231), **conclusion: success** (PR event `pull_request` on branch `m07-replay-intake-policy-provenance-enforcement`)
+- **Superseded failed runs:** none for this PR tip
