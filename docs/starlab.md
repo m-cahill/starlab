@@ -943,6 +943,7 @@ It should always answer, with minimal ambiguity:
 - **Merge-push `main` CI** on merge commit: [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347) (**success**)
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23 updated: **governed build-order / economy plane** (narrow) **proved on `main`**; **current milestone** → **M12** (stub); closeout ledger M11 row; score trend M11 note; Phase II layering chain + parser glossary alignment
 - Milestone closeout: `M11_run1.md`, `M11_summary.md`, `M11_audit.md`, `M11_plan.md` (**Status: Complete**), `M11_toolcalls.md`; **M12** stubs seeded (`M12_plan.md`, `M12_toolcalls.md`)
+- **Non-merge-boundary** `main` CI — closeout commit `0ebc81b6044c39809aa94f5e7f04915936b00e1e`: [`24106210049`](https://github.com/m-cahill/starlab/actions/runs/24106210049) (**success**) — ledger + milestone artifacts only; **authoritative** PR-head / merge-boundary CI for M11 product merge remains [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320) / [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347)
 
 ### 2026-04-07 — M10 merged to `main` (PR #11) + closeout
 

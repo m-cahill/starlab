@@ -38,7 +38,7 @@ This run is the **witnessed merge-push** for the M11 merge commit **and is green
 
 | Commit (short) | Workflow run | Conclusion | Notes |
 | -------------- | ------------ | ---------- | ----- |
-| *(pending)* | — | — | **At most one** post-merge closeout/ledger commit on `main` for M11; **not** a merge-boundary event unless the row records a PR merge. |
+| `0ebc81b…` | [`24106210049`](https://github.com/m-cahill/starlab/actions/runs/24106210049) | **success** | M11 closeout: ledger + `M11_run1` / summary / audit + M12 stubs + governance — **not** merge-boundary; **authoritative** merge-gate + merge-push evidence remains PR-head [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320) + merge [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347). |
 
 *Further doc-only pushes to `main` after this row may produce more green runs; add §23 bullets or short notes rather than extending this table indefinitely (M09 lesson).*
 
