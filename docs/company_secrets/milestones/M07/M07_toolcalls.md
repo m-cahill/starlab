@@ -34,9 +34,9 @@ Governance tests are included in pytest; M07 remains fixture-driven and SC2-free
 ## 2026-04-06 — Branch push & PR #8 (authoritative PR-head CI)
 
 - **Branch:** `m07-replay-intake-policy-provenance-enforcement`
-- **Final PR head (tip):** `7d4b9b90a3104014c6245e665bc54c9bdd6114a7` (includes `docs(m07): record PR #8 and authoritative PR-head CI in toolcalls`)
-- **Initial implementation commit on PR:** `ae909a392c67ce35d7865e1d1c76647963c988f7`
+- **Final PR head (tip):** `5af455b48684472ae7d8480f734ae09a83e5561f` (`docs(m07): clarify final PR head vs superseded PR-head CI run`)
+- **Earlier commits on same PR:** `ae909a392c67ce35d7865e1d1c76647963c988f7` (feat M07), `7d4b9b90a3104014c6245e665bc54c9bdd6114a7` (toolcalls: PR #8 + first CI id)
 - **PR:** [#8](https://github.com/m-cahill/starlab/pull/8) — **M07: replay intake policy and provenance enforcement**
-- **Authoritative PR-head CI (merge gate, final tip):** workflow **CI**, run [`24065563616`](https://github.com/m-cahill/starlab/actions/runs/24065563616), **conclusion: success** (`headSha` matches final PR tip)
-- **Earlier PR-head run (superseded by push of toolcalls commit):** run [`24065537231`](https://github.com/m-cahill/starlab/actions/runs/24065537231), **success**, for PR head `ae909a392c67ce35d7865e1d1c76647963c988f7` — not the final merge gate after the follow-up commit
+- **Authoritative PR-head CI (merge gate, final tip `5af455b…`):** workflow **CI**, run [`24065616533`](https://github.com/m-cahill/starlab/actions/runs/24065616533), **conclusion: success** (`headSha` = `5af455b48684472ae7d8480f734ae09a83e5561f`)
+- **Superseded PR-head runs (success, not final tip):** [`24065537231`](https://github.com/m-cahill/starlab/actions/runs/24065537231) (head `ae909a3…`); [`24065563616`](https://github.com/m-cahill/starlab/actions/runs/24065563616) (head `7d4b9b9…`)
 - **Superseded failed runs:** none
