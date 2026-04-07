@@ -57,3 +57,12 @@ Initialize when M03 work begins.
 
 - `M03_run1.md`, `M03_summary.md`, `M03_audit.md` (this push)  
 - Ledger/README updated for **PR-open** / **not on `main` yet** honesty
+
+---
+
+## 2026-04-07 — M03 closeout on `main`
+
+- **PR #4** merged to `main` **2026-04-07T01:10:32Z** — merge commit `6bfe6a7b32a004f62a491bf31573e12cd211118a` — merge method: **merge commit** — remote branch `m03-run-identity-lineage-seed` **deleted**.
+- **Final PR head:** `884055c34b78f182c704df5a10a9eced5515fa78` — **CI** run **`24059095399`** (success): https://github.com/m-cahill/starlab/actions/runs/24059095399  
+- **Post-merge `main` CI** on merge commit: run **`24059246337`** (success): https://github.com/m-cahill/starlab/actions/runs/24059246337  
+- **Closeout:** `docs/starlab.md` §10 / §11 / §18 / §20 / §23; `README.md`; `M03_run1.md` / `M03_summary.md` / `M03_audit.md` finalized; **M04** stubs `M04_plan.md`, `M04_toolcalls.md` — **no** M04 implementation.

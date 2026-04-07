@@ -1,67 +1,74 @@
-# M03 — CI workflow analysis (PR-head only; pre-merge)
+# M03 — CI workflow analysis (PR-head + post-merge `main`)
 
-## A) Authoritative PR-head CI (current PR tip — merge gate candidate)
+## A) Final PR-head CI (merge gate — merged PR #4)
 
 **Workflow:** `CI` (`.github/workflows/ci.yml`)  
-**Authoritative run ID (PR head at analysis time):** `24058918126`  
-**URL:** https://github.com/m-cahill/starlab/actions/runs/24058918126  
+**Authoritative run ID (final PR head before merge):** `24059095399`  
+**URL:** https://github.com/m-cahill/starlab/actions/runs/24059095399  
 **Trigger:** `pull_request`  
-**Branch:** `m03-run-identity-lineage-seed`  
-**Head SHA (merge gate candidate):** `72aff7050f6ae0807b875993d577cb6d6eeeded6`  
-**PR:** [#4 — M03: run identity and lineage seed](https://github.com/m-cahill/starlab/pull/4) (**open** at analysis time)  
+**Branch:** `m03-run-identity-lineage-seed` (merged; remote branch **deleted** after merge)  
+**Head SHA (merged tip):** `884055c34b78f182c704df5a10a9eced5515fa78`  
+**PR:** [#4 — M03: run identity and lineage seed](https://github.com/m-cahill/starlab/pull/4) (**merged**)  
 **Conclusion:** **success**  
 **Recorded:** 2026-04-07
 
-**Superseded PR-head runs (older tips, not the merge gate):** `24058700007` on `4dbd9ba7fd57aaf835592024ee0577352a918c9e` — **success**; `24058752461` on `3e78e71a872086a787fe59c16fe6caa3ef6dbd99` — **success**; `24058791683` on `1ab53f287ece4d862e0ac752208ba8d1e817b491` — **success**; `24058833260` on `8634da377fedf61c436f8b3678648b35e45067c3` — **success**; `24058879334` on `8e751429c315601a5c85b8b349c6cb1f4b06796d` — **success** (amended-tip / doc-alignment iterations before final tip).
+**Superseded / historical PR-head runs (older tips):** includes `24058918126` on `72aff7050f6ae0807b875993d577cb6d6eeeded6` — **success** (implementation-focused tree); earlier green runs on older SHAs superseded by later PR tips before the final merge head above.
 
-**What this run proves:** **Yes** — `pull_request` CI **success** for **Git commit** `72aff7050f6ae0807b875993d577cb6d6eeeded6` (the tree that triggered this run). **Merge gating on GitHub** always uses **required checks on the latest PR head**; any **new** commits (including documentation-only) need their **own** green run. See **§C** below for the **current** tip after follow-up pushes.
-
----
-
-## B) Merge / post-merge `main` CI
-
-**Not applicable in this document.** M03 is **not** merged to `main` in this milestone step. **Do not** record a merge commit SHA or post-merge workflow run here until after an actual merge and closeout.
+**What this run proves:** `pull_request` CI **success** on the **exact** Git commit that was merged as the PR tip (`884055c…`). Required checks were **green** before merge.
 
 ---
 
-## C) Current PR tip (after documentation / evidence updates)
+## B) Merge to `main`
 
-**Purpose:** Section **A** records a **specific** historical `pull_request` run. After **additional** commits on `m03-run-identity-lineage-seed`, the **authoritative merge gate** is the **latest successful required check** on the **current** PR head — see [workflow runs for this branch](https://github.com/m-cahill/starlab/actions?query=branch%3Am03-run-identity-lineage-seed) and the latest entry in `M03_toolcalls.md`.
+**Merge commit:** `6bfe6a7b32a004f62a491bf31573e12cd211118a`  
+**Merged at (UTC):** `2026-04-07T01:10:32Z`  
+**Merge method:** **Merge commit** (GitHub “Create a merge commit” — message: `Merge pull request #4 from m-cahill/m03-run-identity-lineage-seed`).  
+**Remote branch after merge:** `m03-run-identity-lineage-seed` **deleted** on origin.
 
 ---
 
-## 1. Workflow identity (PR-head inputs)
+## C) Authoritative post-merge `main` CI (push on merge commit)
+
+**Workflow:** `CI`  
+**Run ID:** `24059246337`  
+**URL:** https://github.com/m-cahill/starlab/actions/runs/24059246337  
+**Trigger:** `push` to `main`  
+**Head SHA:** `6bfe6a7b32a004f62a491bf31573e12cd211118a` (merge commit)  
+**Conclusion:** **success**
+
+*Follow-up documentation-only pushes to `main` after closeout may produce additional green `push` runs; distinguish them in `docs/starlab.md` §23.*
+
+---
+
+## 1. Workflow identity
 
 | Field | Value |
 |-------|--------|
 | Workflow name | CI |
-| Run ID | 24058918126 |
-| Trigger | PR against `main` |
-| Commit | `72aff7050f6ae0807b875993d577cb6d6eeeded6` |
+| Merge gate (PR) | Run `24059095399` on `884055c…` |
+| Post-merge (`main`) | Run `24059246337` on `6bfe6a7…` |
 | Milestone | M03 — Run Identity & Lineage Seed |
-| Intent | Land `starlab/runs/`, runtime contract, tests/fixtures, ledger/README alignment; keep CI SC2-free |
 
 ---
 
-## 2. Step 1 — Workflow inventory
+## 2. Step 1 — Workflow inventory (PR-head and `main` use same job)
 
 Single job: **`governance`**.
 
-| Step / check | Merge-blocking | Purpose | Result |
-|--------------|----------------|---------|--------|
+| Step / check | Merge-blocking | Purpose | Result (PR-head run) |
+|--------------|----------------|---------|------------------------|
 | Checkout | Yes | Reproducible source | Pass |
 | Python 3.11 | Yes | Version lock | Pass |
-| `pip install -e ".[dev]"` | Yes | Dev deps only (no `sc2-harness`) | Pass |
+| `pip install -e ".[dev]"` | Yes | Dev deps only | Pass |
 | Ruff check | Yes | Lint | Pass |
 | Ruff format --check | Yes | Format | Pass |
 | Mypy | Yes | Types | Pass |
-| Pytest | Yes | Tests (61); fixture-driven M03 + existing SC2 tests | Pass |
+| Pytest | Yes | Tests (61); fixture-driven M03 + SC2 tests | Pass |
 | pip-audit | Yes | Supply chain | Pass |
 | CycloneDX SBOM + upload | Yes | SBOM artifact | Pass |
 | Gitleaks | Yes | Secret scan | Pass |
 | Job summary | Informational | Markdown summary | Pass |
 
-No `continue-on-error` on required checks.  
 **Annotation (informational):** Node.js 20 deprecation notice for GitHub Actions may appear — does not fail the job.
 
 ---
@@ -71,7 +78,7 @@ No `continue-on-error` on required checks.
 ### Tests
 
 - **Tier:** unit / governance + M03 identity/lineage/CLI + existing SC2 harness fake path + probe tests.
-- **What CI proves:** Deterministic identity/lineage derivation, stable JSON writers, CLI wiring, governance doc presence — all **without** a StarCraft II install and **without** replay binding or canonical run artifacts.
+- **What CI proves:** Deterministic identity/lineage derivation, stable JSON writers, CLI wiring, governance doc presence — **without** a StarCraft II install and **without** replay binding or canonical run artifacts.
 - **What CI does not prove:** Live `burnysc2` execution; replay file binding; canonical run artifact v0; benchmark validity; cross-host reproducibility.
 
 ### M03 boundary (fixture-driven)
@@ -96,13 +103,12 @@ No `continue-on-error` on required checks.
 
 ## 6. Verdict
 
-> **Verdict:** PR-head run **`24058918126`** on **`72aff70…`** is **green** for **that** commit tree. **Merge to `main` has not occurred** in this step; post-merge `main` CI is **out of scope** until merge.
+> **Verdict:** PR-head run **`24059095399`** on **`884055c…`** was **green**; merge to `main` completed at **`6bfe6a7…`**; post-merge `main` CI run **`24059246337`** on that merge commit — **success**. M03 scope remains **fixture/proof-driven**; **not** replay binding; **not** canonical run artifact v0.
 
-**Merge from CI/governance:** ✅ **This run** shows the **implementation** commit passed required automation. **Whether** the PR is merge-eligible **now** depends on **required checks on the latest PR head** (see §C). **Final merge** remains a human / permissioned action per project rules.
+**Merge from CI/governance:** ✅ **Green** PR-head before merge; ✅ **Green** post-merge `main` CI on the merge commit.
 
 ---
 
-## 7. Next actions (post–PR merge, when authorized)
+## 7. Next actions
 
-- Record merge commit + post-merge `main` CI in `docs/starlab.md` §18 (closeout).
-- **Do not** start M04 implementation without a new milestone plan.
+- **M04** — Replay binding to run identity: plan only until authorized; **no** implementation without milestone plan update.

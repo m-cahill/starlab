@@ -106,13 +106,13 @@ These are planning lenses, not promises. The realistic early path is:
 
 ## Current status
 
-**Status:** M00, **M01**, and **M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); **M03** — Run Identity & Lineage Seed — open [**PR #4**](https://github.com/m-cahill/starlab/pull/4) (green PR-head CI on latest tip; merge to `main` pending).
+**Status:** M00–**M03** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3), [PR #4](https://github.com/m-cahill/starlab/pull/4)); **M04** — Replay Binding to Run Identity — **next** (plan stub only under `docs/company_secrets/milestones/M04/`).
 
-STARLAB completed governance bootstrap (**M00**), **M01** (SC2 runtime surface and environment lock), and **M02** (bounded match harness + STARLAB execution proof artifact; CI uses the **fake** adapter; optional local `burnysc2` runs documented under `docs/company_secrets/milestones/M02/`).
+STARLAB completed governance bootstrap (**M00**), **M01** (SC2 runtime surface and environment lock), **M02** (bounded match harness + STARLAB execution proof artifact; CI uses the **fake** adapter; optional local `burnysc2` runs documented under `docs/company_secrets/milestones/M02/`), and **M03** (deterministic run identity + lineage seed from proof + config — `python -m starlab.runs.seed_from_proof`; see `docs/runtime/run_identity_lineage_seed.md`).
 
 Up next:
 
-- **M03** — Run Identity & Lineage Seed — deterministic `run_identity.json` / `lineage_seed.json` from M02 proof + config (`python -m starlab.runs.seed_from_proof`), documented in `docs/runtime/run_identity_lineage_seed.md`
+- **M04** — Replay Binding to Run Identity — stub plan only; **no** implementation yet
 
 ---
 

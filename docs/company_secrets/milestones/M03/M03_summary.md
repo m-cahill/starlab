@@ -1,10 +1,10 @@
-# Milestone Summary — M03: Run Identity & Lineage Seed (pre-merge)
+# Milestone Summary — M03: Run Identity & Lineage Seed (closed on `main`)
 
 **Project:** STARLAB  
 **Phase:** I — Governance, Runtime Surface, and Deterministic Run Substrate  
 **Milestone:** M03 — Run Identity & Lineage Seed  
-**Timeframe:** 2026-04-06 → **2026-04-07** (implementation + PR; **not** closed on `main` at this summary)  
-**Status:** **PR open** — [PR #4](https://github.com/m-cahill/starlab/pull/4); **implementation** commit `72aff7050f6ae0807b875993d577cb6d6eeeded6` has a recorded **green** `pull_request` CI run [`24058918126`](https://github.com/m-cahill/starlab/actions/runs/24058918126) (see `M03_run1.md`). **Latest** PR head must show **green** required checks before merge ([branch workflow runs](https://github.com/m-cahill/starlab/actions?query=branch%3Am03-run-identity-lineage-seed)); **merge to `main` and formal closeout are pending** user permission and follow-up ledger steps.
+**Timeframe:** 2026-04-06 → **2026-04-07**  
+**Status:** **Complete on `main`** — merged [PR #4](https://github.com/m-cahill/starlab/pull/4) **2026-04-07**; merge commit `6bfe6a7b32a004f62a491bf31573e12cd211118a`; final PR head `884055c34b78f182c704df5a10a9eced5515fa78` — authoritative PR-head CI [`24059095399`](https://github.com/m-cahill/starlab/actions/runs/24059095399) (**success**); post-merge `main` CI [`24059246337`](https://github.com/m-cahill/starlab/actions/runs/24059246337) (**success**) on merge commit. See `M03_run1.md`.
 
 ---
 
@@ -29,7 +29,6 @@ Establish deterministic STARLAB **run spec identity**, **execution identity**, a
 - Canonical run artifact v0 (M05)
 - Benchmarks / tournament infrastructure
 - New SC2 execution proof in CI
-- Merge to `main` / post-merge `main` CI (tracked at closeout after merge)
 
 ---
 
@@ -38,8 +37,7 @@ Establish deterministic STARLAB **run spec identity**, **execution identity**, a
 - Implemented deterministic IDs (`run_spec_id`, `execution_id`, `lineage_seed_id`), path-stable config normalization, optional `EnvironmentFingerprint`, `ArtifactReference`, and writers for `run_identity.json` / `lineage_seed.json`.
 - CLI: `python -m starlab.runs.seed_from_proof` (proof + config + output dir; optional env JSON).
 - **`starlab.runs` package `__init__` does not import `seed_from_proof`** — avoids `runpy` warnings when using `-m starlab.runs.seed_from_proof`.
-- Updated `docs/starlab.md`, `README.md`, and milestone plan/toolcalls; **M03_plan.md** contains the full approved plan.
-- Opened **PR #4** from `m03-run-identity-lineage-seed`; current PR tip `72aff70…` (includes pre-merge milestone docs + CI evidence alignment).
+- Ledger/README and milestone artifacts updated; **`M04` stubs** seeded at M03 closeout (`M04_plan.md`, `M04_toolcalls.md`) — **no** M04 implementation.
 
 ---
 
@@ -47,38 +45,47 @@ Establish deterministic STARLAB **run spec identity**, **execution identity**, a
 
 | Layer | Evidence |
 |-------|----------|
-| Local | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — exit 0 before push |
-| PR-head CI | Run **`24058918126`** — **success** on **`72aff70…`** — see `M03_run1.md` |
-| Post-merge `main` | **Pending** — not applicable until merge |
+| Local | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — green before merge |
+| Final PR-head CI | Run **`24059095399`** — **success** on **`884055c…`** — see `M03_run1.md` |
+| Post-merge `main` | Run **`24059246337`** — **success** on merge commit **`6bfe6a7…`** |
 
 ---
 
-## 5. Governance Outcomes
+## 5. Governance Outcomes (narrow claims only)
 
-- M03 claims remain **narrow**: deterministic identity/lineage **seed** records from normalized proof + config; **not** replay-bound lineage, **not** canonical run artifact.
-- **M04** milestone folder is **not** seeded in this step (optional at future closeout).
+**Proved on `main` (M03):**
 
----
+- Deterministic **run spec identity** and **execution identity** primitives from normalized match config + execution proof inputs.
+- Deterministic **lineage seed** derivation and stable **`run_identity.json` / `lineage_seed.json`** emission from those inputs (fixtures in CI; optional local proof paths).
 
-## 6. Exit Criteria (M03 closeout on `main`)
+**Explicitly not proved (unchanged):**
 
-Full closeout requires merge to `main`, post-merge CI evidence, and ledger §7/§18/§23 updates — **deferred** until authorized.
-
----
-
-## 7. Final Verdict (this step)
-
-**M03 implementation is on the PR branch** with a **recorded** green CI run on the **implementation** commit (see §4 and `M03_run1.md`). **Do not** treat M03 as **proved on `main`** until merge and closeout documentation.
+- Replay capture / **binding** to run identity (M04).
+- **Canonical run artifact** v0 packaging (M05).
+- Benchmark semantics, cross-host reproducibility, new live SC2 execution proof in CI.
 
 ---
 
-## 8. Canonical References (this step)
+## 6. Exit Criteria
+
+Met: merge to `main`, green post-merge `main` CI, ledger §10 / §18 / §23 / §20 / §11 updated, M04 stubs only.
+
+---
+
+## 7. Final Verdict
+
+**M03 is closed on `main`** with CI evidence recorded in `M03_run1.md` and `docs/starlab.md` §18. **Next:** M04 planning only until authorized.
+
+---
+
+## 8. Canonical References
 
 | Reference | Value |
-|-----------|--------|
+|-----------|-------|
 | PR | https://github.com/m-cahill/starlab/pull/4 |
-| Recorded implementation commit | `72aff7050f6ae0807b875993d577cb6d6eeeded6` |
-| Recorded CI (implementation) | https://github.com/m-cahill/starlab/actions/runs/24058918126 |
-| Latest PR head / merge gate | [Branch workflow runs](https://github.com/m-cahill/starlab/actions?query=branch%3Am03-run-identity-lineage-seed) |
+| Final PR head | `884055c34b78f182c704df5a10a9eced5515fa78` |
+| Authoritative PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24059095399 |
+| Merge commit | `6bfe6a7b32a004f62a491bf31573e12cd211118a` |
+| Post-merge `main` CI | https://github.com/m-cahill/starlab/actions/runs/24059246337 |
 | Run analysis | `M03_run1.md` |
 | Audit | `M03_audit.md` |

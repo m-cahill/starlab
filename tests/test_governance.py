@@ -93,11 +93,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m03() -> None:
+def test_current_milestone_is_m04() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M03" in section
-    assert "Run Identity" in section
+    assert "M04" in section
+    assert "Replay Binding" in section
 
 
 def test_m01_complete_in_milestone_table() -> None:
@@ -118,10 +118,25 @@ def test_m02_complete_in_milestone_table() -> None:
     raise AssertionError("M02 milestone row not found")
 
 
+def test_m03_complete_in_milestone_table() -> None:
+    lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
+    for line in lines:
+        if line.strip().startswith("| M03 "):
+            assert "Complete" in line
+            return
+    raise AssertionError("M03 milestone row not found")
+
+
 def test_m03_stub_milestone_files_exist() -> None:
     m03 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M03"
     assert (m03 / "M03_plan.md").is_file()
     assert (m03 / "M03_toolcalls.md").is_file()
+
+
+def test_m04_stub_milestone_files_exist() -> None:
+    m04 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M04"
+    assert (m04 / "M04_plan.md").is_file()
+    assert (m04 / "M04_toolcalls.md").is_file()
 
 
 def test_starlab_runs_package_exists() -> None:
