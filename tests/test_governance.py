@@ -99,11 +99,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m09() -> None:
+def test_current_milestone_is_m10() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M09" in section
-    assert "Metadata" in section
+    assert "M10" in section
+    assert "Timeline" in section or "Event" in section
 
 
 def _milestone_table_section() -> str:
@@ -172,6 +172,15 @@ def test_m08_complete_in_milestone_table() -> None:
             assert "Complete" in stripped
             return
     raise AssertionError("M08 milestone row not found")
+
+
+def test_m09_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M09 |") and "Replay Metadata Extraction" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M09 milestone row not found")
 
 
 def test_m03_stub_milestone_files_exist() -> None:
@@ -308,6 +317,15 @@ def test_m09_milestone_files_exist() -> None:
     m09 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M09"
     assert (m09 / "M09_plan.md").is_file()
     assert (m09 / "M09_toolcalls.md").is_file()
+    assert (m09 / "M09_run1.md").is_file()
+    assert (m09 / "M09_summary.md").is_file()
+    assert (m09 / "M09_audit.md").is_file()
+
+
+def test_m10_stub_milestone_files_exist() -> None:
+    m10 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M10"
+    assert (m10 / "M10_plan.md").is_file()
+    assert (m10 / "M10_toolcalls.md").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:

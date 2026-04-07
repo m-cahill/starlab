@@ -1,5 +1,7 @@
 # M09 Plan — Replay Metadata Extraction
 
+**Status: Complete**
+
 ## Objective
 
 Define and implement a **stable, deterministic, public replay metadata contract** derived from **M08 raw parse artifacts**, without pulling forward event/timeline semantics, build-order extraction, or benchmark claims.
