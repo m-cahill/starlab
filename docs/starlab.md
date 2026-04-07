@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), and `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract).  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract), and `docs/runtime/replay_combat_scouting_visibility_extraction.md` (M12 combat / scouting / visibility contract).  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -121,6 +121,7 @@ Focus:
 | M09 | `replay_metadata.json`, `replay_metadata_report.json` | M08 `replay_raw_parse.json` (+ optional parse receipt/report for linkage) | STARLAB JSON; fixture-driven CI default; smaller public metadata surface than raw parse | Event/timeline semantics (M10), build-order extraction (M11), broad parser correctness, benchmark integrity, live SC2 in CI |
 | M10 | `replay_timeline.json`, `replay_timeline_report.json` | M08 `replay_raw_parse.json` (v2 `raw_event_streams` + optional lineage receipts) | STARLAB JSON; fixture-driven CI default; bounded semantic kinds | Build-order / economy (M11), combat/scouting, broad parser correctness, replay↔execution equivalence, benchmark integrity, live SC2 in CI |
 | M11 | `replay_build_order_economy.json`, `replay_build_order_economy_report.json` | M10 `replay_timeline.json` (primary); optional M08 v2 `replay_raw_parse.json` `raw_event_streams` for entity identity only | STARLAB JSON; fixture-driven CI default; conservative catalog | Combat/scouting (M12), exact resource reconstruction, replay↔execution equivalence, benchmark integrity, live SC2 in CI |
+| M12 | `replay_combat_scouting_visibility.json`, `replay_combat_scouting_visibility_report.json` | M10 `replay_timeline.json` + M11 `replay_build_order_economy.json` (required); optional M08 v2 `replay_raw_parse.json` for identity / position / explicit visibility fields only | STARLAB JSON; fixture-driven CI default; conservative combat/scouting/proxy visibility | Replay slices (M13), true fog-of-war certification, replay↔execution equivalence, benchmark integrity, live SC2 in CI |
 
 ### Phase II — Replay Intake, Provenance, and Data Plane
 
@@ -395,11 +396,24 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | **Event semantics** | Ordered interpretation of game/message/tracker streams (timeline, unit births, commands) — **M10+** scope; M08 may record **availability** only. |
 | **Normalized timeline entry** | One row in `replay_timeline.json` `entries[]` after deterministic merge, semantic mapping, and privacy scrub — **M10** public contract. |
 | **Event semantic** | The `semantic_kind` field — a small STARLAB enum mapped conservatively from Blizzard `_event` typenames. |
-| **Strategic derivation** | Build order / economy plane — **M11** public contract (`replay_build_order_economy.json`); combat / scouting — **M12+**; not the M10 timeline contract. |
+| **Strategic derivation** | Build order / economy plane — **M11** (`replay_build_order_economy.json`); combat / scouting / visibility — **M12** (`replay_combat_scouting_visibility.json`); not the M10 timeline contract by itself. |
 
 ### Phase II layering chain (compact)
 
-M08 raw parse → M09 metadata → M10 timeline → **M11 build-order/economy** (primary: `replay_timeline.json`; optional: `replay_raw_parse.json` v2 for identity only).
+M08 raw parse → M09 metadata → M10 timeline → **M11 build-order/economy** (primary: `replay_timeline.json`; optional: `replay_raw_parse.json` v2 for identity only) → **M12 combat/scouting/visibility** (primary: `replay_timeline.json` + `replay_build_order_economy.json`; optional: `replay_raw_parse.json` v2 supplemental).
+
+### Phase II signal planes (compact)
+
+- **M10** — merged event timeline (`replay_timeline.json`).  
+- **M11** — macro / build-order economy (`replay_build_order_economy.json`).  
+- **M12** — combat windows, scouting first-seen signals, visibility proxies (`replay_combat_scouting_visibility.json`).
+
+### Visibility glossary (M12)
+
+| Term | Meaning |
+| ---- | ------- |
+| **Explicit visibility** | Visibility state or transitions **directly** supported by governed upstream fields; M12 emits `explicit_visibility` only when unambiguous. |
+| **Observation proxy** | Conservative presence interval from timeline/replay-visible signals (e.g. `unit_tag` span); **not** certified fog-of-war truth and **not** implied when observer identity is absent. |
 
 ### Metadata field glossary (M09)
 
