@@ -15,6 +15,12 @@ from starlab.replays.metadata_models import (
 )
 
 RAW_PARSE_SCHEMA_EXPECTED = "starlab.replay_raw_parse.v1"
+RAW_PARSE_SCHEMA_ACCEPTED = frozenset(
+    {
+        "starlab.replay_raw_parse.v1",
+        "starlab.replay_raw_parse.v2",
+    },
+)
 
 
 def _as_int(v: Any) -> int | None:
@@ -335,6 +341,7 @@ def player_rows_complete(players: list[dict[str, Any]]) -> bool:
 
 
 __all__ = [
+    "RAW_PARSE_SCHEMA_ACCEPTED",
     "RAW_PARSE_SCHEMA_EXPECTED",
     "build_metadata_envelope",
     "build_normalized_metadata",

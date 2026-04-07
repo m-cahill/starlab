@@ -8,6 +8,7 @@ from typing import Any
 
 import pytest
 from starlab.replays.metadata_extraction import (
+    RAW_PARSE_SCHEMA_ACCEPTED,
     RAW_PARSE_SCHEMA_EXPECTED,
     build_metadata_envelope,
     build_normalized_metadata,
@@ -173,6 +174,7 @@ def test_build_metadata_envelope_schema_version() -> None:
 @pytest.mark.parametrize("fname", ["replay_raw_parse_valid.json", "replay_raw_parse_partial.json"])
 def test_raw_fixture_schema_matches_m08(fname: str) -> None:
     raw = _load(fname)
+    assert raw["schema_version"] in RAW_PARSE_SCHEMA_ACCEPTED
     assert raw["schema_version"] == RAW_PARSE_SCHEMA_EXPECTED
 
 

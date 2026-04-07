@@ -28,12 +28,22 @@ class RawParseSections:
 
 
 @dataclass(frozen=True)
+class RawEventStreams:
+    """Decoded game / message / tracker streams (M10-owned lowerings; not public semantics)."""
+
+    game_events: list[dict[str, Any]] | None
+    message_events: list[dict[str, Any]] | None
+    tracker_events: list[dict[str, Any]] | None
+
+
+@dataclass(frozen=True)
 class AdapterSuccess:
     """Successful adapter decode (pre-normalization)."""
 
     protocol_context: dict[str, Any]
     raw_sections: RawParseSections
     availability: AdapterAvailability
+    raw_event_streams: RawEventStreams | None = None
 
 
 @dataclass(frozen=True)

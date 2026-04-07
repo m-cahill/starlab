@@ -10,10 +10,11 @@ from starlab.replays.parser_interfaces import (
     AdapterFailure,
     AdapterOutcome,
     AdapterSuccess,
+    RawEventStreams,
     RawParseSections,
 )
 from starlab.replays.parser_io import run_replay_parse
-from starlab.replays.parser_models import PARSE_CHECK_IDS
+from starlab.replays.parser_models import PARSE_CHECK_IDS, RAW_PARSE_SCHEMA_VERSION_V2
 from starlab.runs.json_util import sha256_hex_of_canonical_json
 from starlab.runs.replay_binding import (
     build_replay_binding_record,
@@ -187,6 +188,59 @@ def test_binding_hash_mismatch(tmp_path: Path) -> None:
         replay_path=OPAQUE_REPLAY,
     )
     assert status == "input_contract_failed"
+
+
+class _StreamsAdapter:
+    """Fixture adapter with M10 raw_event_streams (v2 parse artifact)."""
+
+    def parser_family(self) -> str:
+        return "fixture"
+
+    def parser_version(self) -> str:
+        return "0.0.test"
+
+    def dependency_available(self) -> bool:
+        return True
+
+    def parse_replay_file(self, replay_path: Path) -> AdapterOutcome:
+        return AdapterSuccess(
+            availability=AdapterAvailability(
+                attribute_events_available=False,
+                game_events_available=True,
+                message_events_available=False,
+                tracker_events_available=False,
+            ),
+            protocol_context={"m_baseBuild": 12345},
+            raw_event_streams=RawEventStreams(
+                game_events=[{"_event": "NNet.Game.SCmdEvent", "_gameloop": 1, "_eventid": 27}],
+                message_events=None,
+                tracker_events=None,
+            ),
+            raw_sections=RawParseSections(
+                attribute_events=None,
+                details={"m_playerList": []},
+                header={"m_version": {"m_baseBuild": 12345}},
+                init_data={
+                    "m_syncLobbyState": {"m_gameDescription": {"m_cacheHandles": []}},
+                },
+            ),
+        )
+
+
+def test_parsed_status_emits_v2_when_streams_present() -> None:
+    status, _, _, raw_parse = run_replay_parse(
+        adapter=_StreamsAdapter(),
+        intake_receipt_path=None,
+        intake_report_path=None,
+        replay_binding_path=None,
+        replay_path=OPAQUE_REPLAY,
+    )
+    assert status == "parsed"
+    assert raw_parse["schema_version"] == RAW_PARSE_SCHEMA_VERSION_V2
+    assert "raw_event_streams" in raw_parse
+    assert (
+        raw_parse["raw_event_streams"]["raw_event_streams_schema"] == "starlab.raw_event_streams.v1"
+    )
 
 
 def test_deterministic_repeat_run() -> None:
