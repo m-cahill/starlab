@@ -45,11 +45,16 @@ This run is the **authoritative post-merge `main`** evidence for the M07 merge b
 
 ---
 
-## C. Non-merge-boundary CI (not yet present)
+## C. Non-merge-boundary CI (doc / ledger follow-up)
 
-Any **later** documentation-only or ledger-only push to `main` after this closeout would produce additional green runs — classify those explicitly as **not** merge-boundary events when they appear in §23.
+These runs are **`push`** triggers on `main` **after** the merge commit; they are **not** the merge-boundary post-merge run.
 
-**As of closeout:** no additional post-merge doc follow-up run beyond [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) is recorded for M07.
+| Field | Value |
+| ----- | ----- |
+| **Commit** | `2ccac7ed1d9d3fc3c466916f41f1c4d6e9d6a2cc` (`docs(m07): finalize M07 closeout ledger and milestone artifacts`) |
+| **Workflow run** | [`24066606427`](https://github.com/m-cahill/starlab/actions/runs/24066606427) |
+| **Conclusion** | **success** |
+| **Classification** | **Ledger / milestone closeout only** — **not** a merge-boundary event; authoritative merge-boundary post-merge `main` CI remains [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) on merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a`. |
 
 ---
 

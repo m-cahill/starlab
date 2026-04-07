@@ -696,8 +696,11 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 | Event | Workflow run | Conclusion | URL |
 | ----- | ------------ | ---------- | --- |
 | `main` after M07 merge (`1c7bb0c…`) | `24066550699` | success | https://github.com/m-cahill/starlab/actions/runs/24066550699 |
+| `main` after M07 closeout docs (`2ccac7e…`) | `24066606427` | success | https://github.com/m-cahill/starlab/actions/runs/24066606427 |
 
-*Further documentation-only pushes to `main` after this row (for example M07 closeout ledger / milestone artifacts) may produce additional green CI runs; distinguish them in §23 — **not** merge-boundary events unless explicitly labeled.*
+*Row `24066606427` is **ledger / milestone closeout only** — **not** a merge-boundary event. Merge-boundary post-merge `main` CI for M07 remains `24066550699` on merge commit `1c7bb0c…`.*
+
+*Further documentation-only pushes to `main` after these rows may produce additional green CI runs; distinguish them in §23.*
 
 **M07 milestone artifacts:** `docs/company_secrets/milestones/M07/` (`M07_plan.md`, `M07_toolcalls.md`, `M07_run1.md`, `M07_summary.md`, `M07_audit.md`, etc.)
 
@@ -783,19 +786,19 @@ It should always answer, with minimal ambiguity:
 - **Authoritative post-merge `main` CI** on merge commit: [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) (**success**)
 - §7 / §10 / §11 / §16 / §18 / §20 / §23 updated: **replay intake / provenance gate** (narrow) **proved on `main`**; **current milestone** → **M08** (stub only); **replay parser substrate** — **not** proved
 - Milestone closeout: `M07_run1.md`, `M07_summary.md`, `M07_audit.md`, `M07_plan.md` (**Status: Complete**), `M07_toolcalls.md`; **M08** remains stub-only (`M08_plan.md`, `M08_toolcalls.md`)
-- Any **later** CI run on `main` from this documentation push — **not** a merge-boundary event; merge-boundary post-merge evidence remains run **`24066550699`**
+- **Non-merge-boundary** `main` CI on closeout commit `2ccac7ed1d9d3fc3c466916f41f1c4d6e9d6a2cc`: [`24066606427`](https://github.com/m-cahill/starlab/actions/runs/24066606427) (**success**) — ledger/milestone docs only; **authoritative** merge-boundary post-merge `main` CI remains [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) on merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a`
 
 ### 2026-04-06 — M07 replay intake policy & provenance enforcement (pre-merge branch; superseded by PR #8 merge)
 
-
-- **Branch:** `m07-replay-intake-policy-provenance-enforcement` (recommended); **merge to `main` pending** (PR TBD)
+- **Historical:** development log before **PR #8** merged **2026-04-07**; authoritative merge + CI — see §18 and changelog entry **2026-04-07 — M07 merged to `main` (PR #8) + closeout**
+- **Branch:** `m07-replay-intake-policy-provenance-enforcement`; **superseded:** merged via [PR #8](https://github.com/m-cahill/starlab/pull/8)
 - **Contract:** `docs/runtime/replay_intake_policy.md`; **policy version** `starlab.replay_intake_policy.v1`
 - **Code:** `starlab/replays/` (`intake_models.py`, `intake_policy.py`, `intake_io.py`, `intake_cli.py`); `load_canonical_manifest` in `starlab/runs/canonical_run_artifact.py`
 - **Artifacts:** `replay_intake_receipt.json`, `replay_intake_report.json` (deterministic JSON; exit codes 0/2/3/4)
 - **Tests:** `tests/test_replay_intake.py`, `tests/test_replay_intake_cli.py`; fixtures `replay_m07_sample.SC2Replay`, `replay_m07_generated.SC2Replay`
 - **Ledger:** Phase II artifact-contract row (M07), intake status glossary (§9), rights/provenance tracker split (§16), **OD-003** resolved (M07); **§11** current milestone → **M08**; **M08** stubs under `docs/company_secrets/milestones/M08/`
 - **Explicit non-proofs:** replay parser, replay semantic extraction, benchmark integrity, live SC2 in CI, legal certification of third-party rights
-- **Closeout docs:** `M07_run1.md` (pending PR CI), `M07_summary.md`, `M07_audit.md`
+- **Closeout docs:** finalized in **2026-04-07** entry after merge — `M07_run1.md`, `M07_summary.md`, `M07_audit.md`, `M07_plan.md` (**Status: Complete**)
 
 ### 2026-04-07 — M06 merged to `main` (PR #7) + closeout
 
