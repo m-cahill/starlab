@@ -94,38 +94,52 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m04() -> None:
+def test_current_milestone_is_m05() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M04" in section
-    assert "Replay Binding" in section
+    assert "M05" in section
+    assert "Canonical Run Artifact" in section
+
+
+def _milestone_table_section() -> str:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    return text.split("## 7. Milestone table")[1].split("## 8")[0]
 
 
 def test_m01_complete_in_milestone_table() -> None:
-    lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
-    for line in lines:
-        if line.strip().startswith("| M01 "):
-            assert "Complete" in line
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M01 |") and "SC2 Runtime Surface Decision" in stripped:
+            assert "Complete" in stripped
             return
     raise AssertionError("M01 milestone row not found")
 
 
 def test_m02_complete_in_milestone_table() -> None:
-    lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
-    for line in lines:
-        if line.strip().startswith("| M02 "):
-            assert "Complete" in line
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M02 |") and "Deterministic Match Execution Harness" in stripped:
+            assert "Complete" in stripped
             return
     raise AssertionError("M02 milestone row not found")
 
 
 def test_m03_complete_in_milestone_table() -> None:
-    lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
-    for line in lines:
-        if line.strip().startswith("| M03 "):
-            assert "Complete" in line
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M03 |") and "Lineage Seed" in stripped:
+            assert "Complete" in stripped
             return
     raise AssertionError("M03 milestone row not found")
+
+
+def test_m04_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M04 |") and "Replay Binding" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M04 milestone row not found")
 
 
 def test_m03_stub_milestone_files_exist() -> None:
@@ -134,10 +148,16 @@ def test_m03_stub_milestone_files_exist() -> None:
     assert (m03 / "M03_toolcalls.md").is_file()
 
 
-def test_m04_stub_milestone_files_exist() -> None:
+def test_m04_milestone_files_exist() -> None:
     m04 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M04"
     assert (m04 / "M04_plan.md").is_file()
     assert (m04 / "M04_toolcalls.md").is_file()
+
+
+def test_m05_stub_milestone_files_exist() -> None:
+    m05 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M05"
+    assert (m05 / "M05_plan.md").is_file()
+    assert (m05 / "M05_toolcalls.md").is_file()
 
 
 def test_starlab_runs_package_exists() -> None:
