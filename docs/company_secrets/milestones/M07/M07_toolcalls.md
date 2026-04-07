@@ -34,9 +34,9 @@ Governance tests are included in pytest; M07 remains fixture-driven and SC2-free
 ## 2026-04-06 — Branch push & PR #8 (authoritative PR-head CI)
 
 - **Branch:** `m07-replay-intake-policy-provenance-enforcement`
-- **Final PR head (tip):** `cdd9b12e5286bc84078b04816543bdc654b76b0f` (`docs(m07): record final PR head SHA and authoritative PR-head CI`)
-- **Earlier commits on same PR:** `ae909a3…` (feat M07), `7d4b9b9…` / `5af455b…` (toolcalls iterations)
+- **Final PR head (tip):** `9f8d602799ea937a2470d04a26d00c37e556dcf7` (`docs(m07): align toolcalls with final PR tip and authoritative CI run`)
+- **Earlier commits on same PR:** `ae909a3…` (feat M07); toolcalls-only commits through `cdd9b12…`
 - **PR:** [#8](https://github.com/m-cahill/starlab/pull/8) — **M07: replay intake policy and provenance enforcement**
-- **Authoritative PR-head CI (merge gate, matches final tip `cdd9b12…`):** workflow **CI**, run [`24065644646`](https://github.com/m-cahill/starlab/actions/runs/24065644646), **conclusion: success** (`headSha` = `cdd9b12e5286bc84078b04816543bdc654b76b0f`)
-- **Superseded PR-head runs (success, earlier tips):** [`24065537231`](https://github.com/m-cahill/starlab/actions/runs/24065537231) (`ae909a3…`); [`24065563616`](https://github.com/m-cahill/starlab/actions/runs/24065563616) (`7d4b9b9…`); [`24065616533`](https://github.com/m-cahill/starlab/actions/runs/24065616533) (`5af455b…`)
+- **Authoritative PR-head CI (merge gate, matches final tip `9f8d602…`):** workflow **CI**, run [`24065673229`](https://github.com/m-cahill/starlab/actions/runs/24065673229), **conclusion: success** (`headSha` = `9f8d602799ea937a2470d04a26d00c37e556dcf7`)
+- **Superseded PR-head runs (success, earlier tips):** [`24065537231`](https://github.com/m-cahill/starlab/actions/runs/24065537231) (`ae909a3…`); [`24065563616`](https://github.com/m-cahill/starlab/actions/runs/24065563616) (`7d4b9b9…`); [`24065616533`](https://github.com/m-cahill/starlab/actions/runs/24065616533) (`5af455b…`); [`24065644646`](https://github.com/m-cahill/starlab/actions/runs/24065644646) (`cdd9b12…`)
 - **Superseded failed runs:** none
