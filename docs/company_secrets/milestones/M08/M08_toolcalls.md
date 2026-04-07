@@ -68,7 +68,9 @@
 ## 2026-04-07 — Milestone closeout (documentation push on `main`)
 
 * **Purpose:** `M08_run1.md`, `M08_summary.md`, `M08_audit.md`, `M08_plan.md` (**Status: Complete**), `M08_toolcalls.md` hygiene, `docs/starlab.md` ledger (M08 → M09).
-* **Classification:** **Non-merge-boundary** — does not change the M08 merge commit or authoritative post-merge CI `24070602968` on `b99233e…`. Any CI run for this commit is **doc/ledger-only** (record run ID in `M08_run1.md` and §23 when available).
+* **Classification:** **Non-merge-boundary** — does not change the M08 merge commit or authoritative post-merge CI `24070602968` on `b99233e…`.
+* **Closeout commit `a089f18…`:** CI [`24070704576`](https://github.com/m-cahill/starlab/actions/runs/24070704576) — **failure** (Pytest: governance drift).
+* **Fix commit `c3b6f2c…`:** `tests/test_governance.py` — CI [`24070774045`](https://github.com/m-cahill/starlab/actions/runs/24070774045) — **success**.
 
 ---
 
