@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M00–**M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); **next:** **M03** — Run Identity & Lineage Seed (stubs only; see `docs/company_secrets/milestones/M03/`)  
+**Status:** Active — M00–**M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); **M03** — Run Identity & Lineage Seed **in development** (`docs/runtime/run_identity_lineage_seed.md`, `starlab/runs/`; **not** replay binding; **not** canonical run artifact v0; merge to `main` pending M03 PR + closeout)  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, and (for execution harness scope) `docs/runtime/match_execution_harness.md`.  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), and `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract).  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -307,6 +307,7 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Minimal governance CI is truthful | Proved (M00) |
 | SC2 runtime boundary decision + environment lock (documented; typed probe) | Proved (M01) |
 | Controlled deterministic match execution | **Proved (narrow sense only):** same machine, same committed config, two successful proof-producing runs, matching normalized STARLAB `artifact_hash` — see `docs/company_secrets/milestones/M02/` (M02). **Not** proved: cross-host reproducibility, cross-install portability, or equivalence to replay bytes. |
+| Run identity + lineage seed records (deterministic `run_identity.json` / `lineage_seed.json` from proof + config) | **In development** (M03); see `docs/runtime/run_identity_lineage_seed.md` and `starlab/runs/`. **Not** proved until M03 is merged to `main` with CI evidence. **Does not** claim replay binding or canonical run artifact v0. |
 | Replay capture / binding | Not yet proved |
 | Canonical run artifacts | Not yet proved |
 | Parser substrate | Not yet proved |
@@ -314,6 +315,16 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Learning or agent capability | Not yet proved |
 
 **Local harness vs portability:** a **local deterministic harness proof** (same machine, same config, normalized STARLAB artifact hash) is a **narrower** claim than **cross-host reproducibility** or **cross-install portability**. The ledger uses “controlled deterministic match execution” **only** in that **narrow harness-scoped** sense for M02.
+
+**Execution / substrate claims (split for audits):**
+
+| Subclaim | Milestone | Notes |
+| -------- | --------- | ----- |
+| Runtime boundary + environment lock | M01 | Probe + docs; not full execution proof |
+| Deterministic match harness + M02 proof artifact | M02 | Narrow same-machine harness claim only |
+| Run identity + lineage seed primitives | M03 | Distinct from replay binding and canonical run packaging |
+| Replay binding to run identity | M04 | Not started |
+| Canonical run artifact v0 | M05 | Not started |
 
 ### Assumed vs owned guarantees
 
@@ -341,11 +352,11 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ### M03 — Run Identity & Lineage Seed
 
-**Status:** **Planned** — stubs only (`docs/company_secrets/milestones/M03/M03_plan.md`, `M03_toolcalls.md`). **No** M03 implementation has started on `main`.
+**Status:** **In development** — contract + implementation: `docs/runtime/run_identity_lineage_seed.md`, `starlab/runs/` (e.g. `python -m starlab.runs.seed_from_proof`), tests + fixtures under `tests/`; milestone plan `docs/company_secrets/milestones/M03/M03_plan.md`. **Not** merged to `main` until M03 PR passes CI and closeout.
 
 **Goal (high level):** Seed run identity and lineage primitives building on the M02 proof surface — **without** claiming replay binding (M04), canonical run artifact v0 (M05), or benchmark validity.
 
-**Primary references:** `docs/starlab.md` milestone table; prior milestone artifacts under `docs/company_secrets/milestones/M02/`.
+**Primary references:** `docs/runtime/run_identity_lineage_seed.md`; `docs/starlab.md` milestone table; prior milestone artifacts under `docs/company_secrets/milestones/M02/`.
 
 **Note:** M02 merged **2026-04-06** — [PR #3](https://github.com/m-cahill/starlab/pull/3) — merge commit `53a24a4a6106168afe79e0a70d51a20bfef4ea18`. **Local harness evidence** for the **narrow** same-machine claim is in `M02_determinism_check.md` and related M02 files. Replay binding, canonical run artifacts, benchmark integrity, and **cross-host reproducibility** remain **not** proved.
 
