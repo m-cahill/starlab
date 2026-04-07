@@ -53,6 +53,12 @@ Initialize when M03 work begins.
 - **Merge gate (GitHub):** required checks on the **latest** PR head — [branch workflow runs](https://github.com/m-cahill/starlab/actions?query=branch%3Am03-run-identity-lineage-seed). After doc/evidence commits, append the **new** green run + head SHA below.  
 - **Post-merge `main` CI:** *not recorded — merge not performed in this step*
 
+#### Latest PR tip after doc-sync commit (2026-04-07)
+
+- **Head SHA:** `e4b77cceb38024302a0ab86400ebda9cb8157f3c`  
+- **`pull_request` CI:** run **`24059001760`** — **success** — https://github.com/m-cahill/starlab/actions/runs/24059001760  
+- **Authoritative for merge gating (this tip):** **Yes** — this run is the **latest** green `CI` workflow on this SHA at the time of this log entry; supersedes run `24058918126` on parent `72aff70…` for **this** head.
+
 ### Milestone artifacts added (pre-merge)
 
 - `M03_run1.md`, `M03_summary.md`, `M03_audit.md` (this push)  
