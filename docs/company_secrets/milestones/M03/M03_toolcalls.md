@@ -25,7 +25,7 @@ Initialize when M03 work begins.
 ## 2026-04-06 — Pre-push verification + merge-readiness (branch)
 
 **Branch:** `m03-run-identity-lineage-seed`  
-**HEAD SHA (after commit):** *recorded below after `git commit`*
+**HEAD SHA (after commit):** `31ffbc33296231cab8cffd2da6c97d2fbff6778d`
 
 ### Commands run (repo root `c:\coding\starlab`)
 
