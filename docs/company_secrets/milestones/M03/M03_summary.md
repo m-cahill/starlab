@@ -47,7 +47,8 @@ Establish deterministic STARLAB **run spec identity**, **execution identity**, a
 |-------|----------|
 | Local | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — green before merge |
 | Final PR-head CI | Run **`24059095399`** — **success** on **`884055c…`** — see `M03_run1.md` |
-| Post-merge `main` | Run **`24059246337`** — **success** on merge commit **`6bfe6a7…`** |
+| Post-merge `main` (merge push) | Run **`24059246337`** — **success** on merge commit **`6bfe6a7…`** |
+| Post-merge `main` (closeout push) | Run **`24059294330`** — **success** on **`43d99f6…`** |
 
 ---
 
@@ -86,6 +87,7 @@ Met: merge to `main`, green post-merge `main` CI, ledger §10 / §18 / §23 / §
 | Final PR head | `884055c34b78f182c704df5a10a9eced5515fa78` |
 | Authoritative PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24059095399 |
 | Merge commit | `6bfe6a7b32a004f62a491bf31573e12cd211118a` |
-| Post-merge `main` CI | https://github.com/m-cahill/starlab/actions/runs/24059246337 |
+| Post-merge `main` CI (merge) | https://github.com/m-cahill/starlab/actions/runs/24059246337 |
+| Post-merge `main` CI (closeout) | https://github.com/m-cahill/starlab/actions/runs/24059294330 |
 | Run analysis | `M03_run1.md` |
 | Audit | `M03_audit.md` |

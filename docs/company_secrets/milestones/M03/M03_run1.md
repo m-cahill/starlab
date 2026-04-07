@@ -38,6 +38,8 @@
 
 *Follow-up documentation-only pushes to `main` after closeout may produce additional green `push` runs; distinguish them in `docs/starlab.md` §23.*
 
+**M03 closeout ledger push:** `main` @ `43d99f65b9b82d4d64906c48c310daad5efd95eb` — workflow run **`24059294330`** (**success**): https://github.com/m-cahill/starlab/actions/runs/24059294330
+
 ---
 
 ## 1. Workflow identity

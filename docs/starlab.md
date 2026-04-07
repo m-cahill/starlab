@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M00–**M03** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3), [PR #4](https://github.com/m-cahill/starlab/pull/4)); **M04** — Replay Binding to Run Identity — **next** (plan stub only under `docs/company_secrets/milestones/M04/`). **M03** merge commit `6bfe6a7b32a004f62a491bf31573e12cd211118a`; post-merge `main` CI [`24059246337`](https://github.com/m-cahill/starlab/actions/runs/24059246337) (**success**). **Replay binding** and **canonical run artifact v0** remain **not** proved (M04 / M05).  
+**Status:** Active — M00–**M03** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3), [PR #4](https://github.com/m-cahill/starlab/pull/4)); **M04** — Replay Binding to Run Identity — **next** (plan stub only under `docs/company_secrets/milestones/M04/`). **M03** merge commit `6bfe6a7b32a004f62a491bf31573e12cd211118a` — post-merge `main` CI on merge push [`24059246337`](https://github.com/m-cahill/starlab/actions/runs/24059246337) (**success**); M03 **closeout** documentation push `43d99f65b9b82d4d64906c48c310daad5efd95eb` — [`24059294330`](https://github.com/m-cahill/starlab/actions/runs/24059294330) (**success**). **Replay binding** and **canonical run artifact v0** remain **not** proved (M04 / M05).  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -565,8 +565,9 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 | Event | Workflow run | Conclusion | URL |
 | ----- | ------------ | ---------- | --- |
 | `main` after M03 merge (`6bfe6a7…`) | `24059246337` | success | https://github.com/m-cahill/starlab/actions/runs/24059246337 |
+| `main` after M03 closeout / ledger + M04 stubs (`43d99f6…`) | `24059294330` | success | https://github.com/m-cahill/starlab/actions/runs/24059294330 |
 
-*Follow-up documentation-only pushes to `main` after M03 closeout may produce additional green CI runs; distinguish them in §23.*
+*Further documentation-only pushes to `main` after these rows may produce additional green CI runs; distinguish them in §23.*
 
 **M03 milestone artifacts:** `docs/company_secrets/milestones/M03/` (`M03_plan.md`, `M03_toolcalls.md`, `M03_run1.md`, `M03_summary.md`, `M03_audit.md`, etc.)
 
@@ -640,7 +641,7 @@ It should always answer, with minimal ambiguity:
 - Post-merge `main` CI on merge commit: [`24059246337`](https://github.com/m-cahill/starlab/actions/runs/24059246337) (**success**)
 - §10 updated: **run identity + lineage seed** (narrow) **proved on `main`** from proof/config inputs; **replay binding**, **canonical run artifact v0**, **benchmark validity** — **not** proved
 - M04 stubs seeded: `docs/company_secrets/milestones/M04/M04_plan.md`, `M04_toolcalls.md` — **no** M04 implementation
-- Closeout documentation commit(s) on `main` after merge may add additional green CI runs; ledger rows in §18 reference the merge boundary
+- M03 closeout documentation push on `main` (`43d99f6…`): CI [`24059294330`](https://github.com/m-cahill/starlab/actions/runs/24059294330) (**success**)
 
 ### 2026-04-06 — M02 merged to `main` (PR #3) + closeout
 
