@@ -4,8 +4,8 @@
 **Milestone ID:** M03  
 **Branch:** `m03-run-identity-lineage-seed`  
 **PR:** [#4](https://github.com/m-cahill/starlab/pull/4) — **open** (at audit time)  
-**PR head (audit time):** `3e78e71a872086a787fe59c16fe6caa3ef6dbd99`  
-**Authoritative PR-head CI:** [CI run 24058752461](https://github.com/m-cahill/starlab/actions/runs/24058752461) — **success**  
+**PR head (audit time):** `8634da377fedf61c436f8b3678648b35e45067c3`  
+**Authoritative PR-head CI:** [CI run 24058833260](https://github.com/m-cahill/starlab/actions/runs/24058833260) — **success**  
 **Date:** 2026-04-07
 
 ---
@@ -39,7 +39,7 @@ M03 adds **STARLAB-owned run identity and lineage seed** primitives on top of th
 
 ## 3. CI / test / lint (record)
 
-- **Lint/format/types:** Ruff + Mypy — pass on PR-head `24058752461`.
+- **Lint/format/types:** Ruff + Mypy — pass on PR-head `24058833260`.
 - **Tests:** Pytest — 61 passed; includes M03 tests and governance.
 - **Supply chain:** pip-audit, SBOM, Gitleaks — pass on PR-head run.
 
@@ -67,8 +67,8 @@ M03 adds **STARLAB-owned run identity and lineage seed** primitives on top of th
   "milestone": "M03",
   "mode": "DELTA_AUDIT_PRE_MERGE",
   "pr": 4,
-  "pr_head": "3e78e71a872086a787fe59c16fe6caa3ef6dbd99",
-  "authoritative_pr_head_ci": "24058752461",
+  "pr_head": "8634da377fedf61c436f8b3678648b35e45067c3",
+  "authoritative_pr_head_ci": "24058833260",
   "verdict": "green_pr_head_ci",
   "merged_to_main": false
 }
