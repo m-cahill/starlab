@@ -96,11 +96,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m06() -> None:
+def test_current_milestone_is_m07() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M06" in section
-    assert "Environment Drift" in section
+    assert "M07" in section
+    assert "Replay Intake" in section
 
 
 def _milestone_table_section() -> str:
@@ -144,6 +144,24 @@ def test_m04_complete_in_milestone_table() -> None:
     raise AssertionError("M04 milestone row not found")
 
 
+def test_m05_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M05 |") and "Canonical Run Artifact" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M05 milestone row not found")
+
+
+def test_m06_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M06 |") and "Environment Drift" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M06 milestone row not found")
+
+
 def test_m03_stub_milestone_files_exist() -> None:
     m03 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M03"
     assert (m03 / "M03_plan.md").is_file()
@@ -166,6 +184,12 @@ def test_m06_stub_milestone_files_exist() -> None:
     m06 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M06"
     assert (m06 / "M06_plan.md").is_file()
     assert (m06 / "M06_toolcalls.md").is_file()
+
+
+def test_m07_stub_milestone_files_exist() -> None:
+    m07 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M07"
+    assert (m07 / "M07_plan.md").is_file()
+    assert (m07 / "M07_toolcalls.md").is_file()
 
 
 def test_starlab_runs_package_exists() -> None:

@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M00–**M05** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3), [PR #4](https://github.com/m-cahill/starlab/pull/4), [PR #5](https://github.com/m-cahill/starlab/pull/5), [PR #6](https://github.com/m-cahill/starlab/pull/6)); **M06** — Environment Drift & Runtime Smoke Matrix — **next** (plan stub only under `docs/company_secrets/milestones/M06/`). **M05** merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0` — post-merge `main` CI on merge push [`24062610358`](https://github.com/m-cahill/starlab/actions/runs/24062610358) (**success**). **M05** closeout / ledger push on `main` (`6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`): CI [`24062664914`](https://github.com/m-cahill/starlab/actions/runs/24062664914) (**success**). Follow-up ledger cross-reference (`ebca1e964c0539c78165bfab72c249a2157402cc`): CI [`24062700534`](https://github.com/m-cahill/starlab/actions/runs/24062700534) (**success**) — **not** merge-boundary events. **Replay binding** (narrow, M04) and **canonical run artifact v0** (narrow, M05) are **proved on `main`**; **replay parser substrate**, **full replay provenance finalization**, and **benchmark integrity** remain **not** proved (M07+ / Phase II+).  
+**Status:** Active — M00–**M06** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1) through [PR #7](https://github.com/m-cahill/starlab/pull/7)); **M07** — Replay Intake Policy & Provenance Enforcement — **next** (stub only under `docs/company_secrets/milestones/M07/`). **M06** merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` — post-merge `main` CI on merge push [`24064229874`](https://github.com/m-cahill/starlab/actions/runs/24064229874) (**success**). **M05** merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0` — post-merge `main` CI [`24062610358`](https://github.com/m-cahill/starlab/actions/runs/24062610358) (**success**). **M05** closeout / ledger push on `main` (`6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`): CI [`24062664914`](https://github.com/m-cahill/starlab/actions/runs/24062664914) (**success**). Follow-up ledger cross-reference (`ebca1e964c0539c78165bfab72c249a2157402cc`): CI [`24062700534`](https://github.com/m-cahill/starlab/actions/runs/24062700534) (**success**) — **not** merge-boundary events. **Environment drift / smoke matrix** (narrow, M06), **replay binding** (narrow, M04), and **canonical run artifact v0** (narrow, M05) are **proved on `main`**; **replay intake / provenance enforcement** (M07+), **replay parser substrate**, **full replay provenance finalization**, and **benchmark integrity** remain **not** proved (M07+ / Phase II+).  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -100,7 +100,7 @@ Focus:
 - SC2 runtime boundary decision and environment lock (M01)
 - deterministic match execution harness (**M02** — complete on `main`)
 - run identity and lineage seed (**M03** — complete on `main`); replay binding (**M04** — complete on `main`); canonical run artifact v0 (**M05** — complete on `main`)
-- environment drift and runtime smoke matrix (M06)
+- environment drift and runtime smoke matrix (**M06** — complete on `main`)
 
 #### Phase I — artifact contracts by milestone (compact)
 
@@ -169,7 +169,7 @@ Planned program arc (33 milestones, M00–M32):
 | M03 | Run Identity & Lineage Seed | I | Complete | v0.0.3-m03 | — |
 | M04 | Replay Binding to Run Identity | I | Complete | v0.0.4-m04 | — |
 | M05 | Canonical Run Artifact v0 | I | Complete | v0.0.5-m05 | — |
-| M06 | Environment Drift & Runtime Smoke Matrix | I | Planned | v0.0.6-m06 | — |
+| M06 | Environment Drift & Runtime Smoke Matrix | I | Complete | v0.0.6-m06 | — |
 | M07 | Replay Intake Policy & Provenance Enforcement | II | Planned | v0.0.7-m07 | — |
 | M08 | Replay Parser Substrate | II | Planned | v0.0.8-m08 | — |
 | M09 | Replay Metadata Extraction | II | Planned | v0.0.9-m09 | — |
@@ -208,6 +208,8 @@ Planned program arc (33 milestones, M00–M32):
 **M04 note:** M04 is **merged** to `main` (see §18). “Complete” reflects **narrow, deterministic `replay_binding.json`** from **opaque replay bytes** + existing M03 artifacts (fixture-driven, **SC2-free** CI) — **not** replay parser correctness, **not** replay semantic equivalence to execution proof, **not** canonical run artifact v0, **not** benchmark validity.
 
 **M05 note:** M05 is **merged** to `main` (see §18). “Complete” reflects **narrow canonical packaging** (`manifest.json` / `hashes.json` + canonical M03/M04 JSON; **no** raw replay bytes, **no** raw proof/config in-bundle) — **not** replay parser substrate, **not** benchmark validity, **not** replay semantic equivalence.
+
+**M06 note:** M06 is **merged** to `main` (see §18). “Complete” reflects **deterministic smoke matrix + environment drift report** from **fixture-driven** M01 probe JSON (optional M03 `environment_fingerprint` hint) — **not** cross-host portability, **not** replay parser correctness, **not** replay provenance finalization, **not** benchmark validity, **not** replay semantic extraction, **not** new live SC2 execution in CI.
 
 ---
 
@@ -326,6 +328,7 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Run identity + lineage seed records (deterministic `run_identity.json` / `lineage_seed.json` from proof + config) | **Proved (narrow, M03):** deterministic IDs and stable JSON emission from normalized proof + config inputs — see `docs/runtime/run_identity_lineage_seed.md`, `starlab/runs/`, `docs/company_secrets/milestones/M03/`. **Does not** (by itself) claim replay binding, canonical run artifact v0, or benchmark validity. |
 | Replay binding (opaque replay bytes → `replay_binding.json` linked to M03 IDs) | **Proved (narrow, M04):** deterministic `replay_content_sha256` + `replay_binding_id` from M03 `run_identity` / `lineage_seed` + opaque replay file bytes — see `docs/runtime/replay_binding.md`, `starlab/runs/replay_binding.py`, `starlab/runs/bind_replay.py`, `docs/company_secrets/milestones/M04/`. **Does not** claim replay parser correctness, replay↔proof semantic equivalence, replay event extraction, canonical run artifact v0, benchmark validity, cross-host reproducibility, or new live SC2 execution in CI (fixtures only). |
 | Canonical run artifacts | **Proved (narrow, M05):** deterministic directory bundle (`manifest.json`, `hashes.json`, canonical M03/M04 JSON only; `run_artifact_id`) — see `docs/runtime/canonical_run_artifact_v0.md`, `starlab/runs/canonical_run_artifact.py`, `starlab/runs/build_canonical_run_artifact.py`, `docs/company_secrets/milestones/M05/`. **Does not** claim replay parser semantics, replay↔proof equivalence, replay event extraction, **raw replay bytes or raw proof/config in the bundle**, benchmark validity, cross-host reproducibility, or new live SC2 execution in CI. |
+| Environment drift / runtime smoke matrix | **Proved (narrow, M06):** deterministic `runtime_smoke_matrix.json` + `environment_drift_report.json` from validated M01 probe JSON; optional advisory comparison with M03 `environment_fingerprint` — see `docs/runtime/environment_drift_smoke_matrix.md`, `starlab/sc2/environment_drift.py`, `starlab/sc2/evaluate_environment_drift.py`, `docs/company_secrets/milestones/M06/`. **Does not** claim cross-host portability, cross-install portability, replay parser correctness, replay semantic extraction, replay provenance finalization, benchmark integrity, or new live SC2 execution in CI. |
 | Parser substrate | Not yet proved |
 | Benchmark integrity | Not yet proved |
 | Learning or agent capability | Not yet proved |
@@ -341,6 +344,7 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Run identity + lineage seed primitives | M03 | **On `main`** — narrow claim; distinct from replay binding and canonical run packaging |
 | Replay binding to run identity | M04 | **On `main`** — **narrow** opaque-bytes binding to M03 records; not parser/canonical-run/benchmark claims |
 | Canonical run artifact v0 | M05 | **On `main`** — narrow packaging only; see `docs/runtime/canonical_run_artifact_v0.md` |
+| Environment drift / smoke matrix | M06 | **On `main`** — fixture-driven probe + drift report; not portability/parser/benchmark claims |
 
 ### Assumed vs owned guarantees
 
@@ -366,22 +370,22 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-### M06 — Environment Drift & Runtime Smoke Matrix
+### M07 — Replay Intake Policy & Provenance Enforcement
 
-**Status:** **Planned** — next after M05 merges to `main` and M05 closeout artifacts land.
+**Status:** **Planned** — next after M06 merges to `main` and M06 closeout artifacts land.
 
-**Goal (high level):** Detect environment drift and define runtime smoke expectations — **without** widening replay parser or benchmark claims unless separately governed.
+**Goal (high level):** Enforce replay intake **policy** and strengthen **provenance** posture — **without** claiming replay parser substrate (M08) or benchmark semantics unless separately governed.
 
-**Primary references:** `docs/company_secrets/milestones/M06/M06_plan.md` (stub); `docs/starlab.md` §10 (proved vs not yet proved).
+**Primary references:** `docs/company_secrets/milestones/M07/M07_plan.md` (stub); `docs/replay_data_provenance.md`; `docs/starlab.md` §10 (proved vs not yet proved).
 
-**Note:** **M05** merged **2026-04-07** — [PR #6](https://github.com/m-cahill/starlab/pull/6) — merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0`. **Canonical run artifact v0** (narrow) is **proved on `main`**; **environment drift / smoke matrix** is **not** proved until M06.
+**Note:** **M06** merged **2026-04-07** — [PR #7](https://github.com/m-cahill/starlab/pull/7) — merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a`. **Environment drift / smoke matrix** (narrow) is **proved on `main`**; **replay intake / provenance enforcement** is **not** proved until M07.
 
 #### Current milestone — explicit non-claims (standing)
 
-Until a milestone explicitly closes a claim, treat the following as **not proved** for **M06** planning:
+Until a milestone explicitly closes a claim, treat the following as **not proved** for **M07** planning:
 
 - **Replay parser correctness** or **replay semantic extraction** (deferred to **M08+** in Phase II).
-- **Benchmark integrity** / leaderboard claims (**not** a Phase I default proof).
+- **Benchmark integrity** / leaderboard claims (**not** a Phase II default proof).
 - **New live SC2 execution proof in CI** (CI remains **fixture-driven** unless a milestone explicitly changes that posture).
 
 ---
@@ -515,6 +519,7 @@ This section should be filled as milestones close.
 | M03       | 2026-04-07    | [#4](https://github.com/m-cahill/starlab/pull/4) | `6bfe6a7b32a004f62a491bf31573e12cd211118a` | Run identity + lineage seed (`starlab/runs/`), runtime contract, fixtures/tests; merged to `main`; narrow claims only — see CI evidence below |
 | M04       | 2026-04-07    | [#5](https://github.com/m-cahill/starlab/pull/5) | `c38de5d920ca9fb18cef46da9be7f0ef812ed7ed` | Replay binding (`replay_binding.json`), `docs/runtime/replay_binding.md`, synthetic replay fixture, tests/CLI; merged to `main`; narrow opaque-bytes claim only — see CI evidence below |
 | M05       | 2026-04-07    | [#6](https://github.com/m-cahill/starlab/pull/6) | `bad27db36c135fd772e38dcafa64d6fa59577db0` | Canonical run artifact v0 (`manifest.json` / `hashes.json` + M03/M04 JSON); merged to `main`; narrow packaging only — see CI evidence below |
+| M06       | 2026-04-07    | [#7](https://github.com/m-cahill/starlab/pull/7) | `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` | Environment drift + smoke matrix (`runtime_smoke_matrix.json` / `environment_drift_report.json`); merged to `main`; narrow fixture-driven claims only — see CI evidence below |
 
 **M00 PR head (pre-merge):** `5dcb6cf6f95af23b58c6af202d58a7bcad1d0b91`
 
@@ -633,6 +638,26 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 
 **M05 milestone artifacts:** `docs/company_secrets/milestones/M05/` (`M05_plan.md`, `M05_toolcalls.md`, `M05_run1.md`, `M05_summary.md`, `M05_audit.md`, etc.)
 
+**M06 merge:** [PR #7](https://github.com/m-cahill/starlab/pull/7) merged **2026-04-07** (UTC `2026-04-07T04:26:10Z`) via **merge commit** `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a`. Remote branch `m06-environment-drift-runtime-smoke-matrix` was **deleted** after merge. Final PR head before merge: `6f9ef463f90abe914f3c98c8977d49f8da0102cb`.
+
+**M06 CI evidence (PR-head run — authoritative merge gate)**
+
+| Commit (short) | Workflow run | Conclusion | URL |
+| -------------- | ------------ | ---------- | --- |
+| `6f9ef46…` | `24064200725` | success | https://github.com/m-cahill/starlab/actions/runs/24064200725 |
+
+**Superseded (not merge authority):** earlier PR-head run `24064181198` failed at **Ruff format** — fixed on tip `6f9ef46…`.
+
+**M06 CI evidence (post-merge `main`)**
+
+| Event | Workflow run | Conclusion | URL |
+| ----- | ------------ | ---------- | --- |
+| `main` after M06 merge (`4953d7a…`) | `24064229874` | success | https://github.com/m-cahill/starlab/actions/runs/24064229874 |
+
+*Further documentation-only pushes to `main` after these rows may produce additional green CI runs; distinguish them in §23 — **not** merge-boundary events unless they record ledger closeout for M06.*
+
+**M06 milestone artifacts:** `docs/company_secrets/milestones/M06/` (`M06_plan.md`, `M06_toolcalls.md`, `M06_run1.md`, `M06_summary.md`, `M06_audit.md`, etc.)
+
 ---
 
 ## 19. Deferred items / future-only tracks
@@ -660,6 +685,7 @@ This is a placeholder table for future audit tracking once milestones begin clos
 | M03       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 | M04       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 | M05       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
+| M06       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 
 **M02 note:** Evidence column reflects **narrow** local harness proof + CI; not benchmark or cross-host certification.
 
@@ -668,6 +694,8 @@ This is a placeholder table for future audit tracking once milestones begin clos
 **M04 note:** Evidence column reflects **fixture-driven replay binding** (`replay_binding.json`) + CI on `main`; **not** replay parser semantics, replay↔proof equivalence, canonical run artifact v0, or benchmark certification.
 
 **M05 note:** Evidence column reflects **fixture-driven canonical bundle** (`manifest.json` / `hashes.json` + M03/M04 JSON) **on `main`**; **not** replay parser semantics, raw replay/proof shipping, benchmark validity, or cross-host reproducibility.
+
+**M06 note:** Evidence column reflects **fixture-driven** smoke matrix + drift report + CI on `main`; **not** replay parser semantics, portability certification, benchmark validity, provenance closure, or live SC2 execution in CI.
 
 ---
 
@@ -701,6 +729,15 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-07 — M06 merged to `main` (PR #7) + closeout
+
+- Merged [PR #7](https://github.com/m-cahill/starlab/pull/7) to `main` at **2026-04-07T04:26:10Z**; merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` (merge method: **merge commit**); remote branch `m06-environment-drift-runtime-smoke-matrix` **deleted**
+- Final PR head `6f9ef463f90abe914f3c98c8977d49f8da0102cb` — authoritative PR-head CI: [`24064200725`](https://github.com/m-cahill/starlab/actions/runs/24064200725) (**success**); superseded failed run [`24064181198`](https://github.com/m-cahill/starlab/actions/runs/24064181198) (Ruff format only — fixed before merge)
+- Post-merge `main` CI on merge commit: [`24064229874`](https://github.com/m-cahill/starlab/actions/runs/24064229874) (**success**)
+- §10 updated: **environment drift / smoke matrix** (narrow) **proved on `main`** — deterministic `runtime_smoke_matrix.json` + `environment_drift_report.json` from M01 probe surface + optional M03 `environment_fingerprint` hint; **cross-host portability**, **replay parser substrate**, **replay semantic extraction**, **replay provenance finalization**, **benchmark integrity**, **new live SC2 execution in CI** — **not** proved
+- M07 stubs seeded: `docs/company_secrets/milestones/M07/M07_plan.md`, `M07_toolcalls.md` — **no** M07 implementation
+- Milestone artifacts: `M06_run1.md`, `M06_summary.md`, `M06_audit.md`; contract `docs/runtime/environment_drift_smoke_matrix.md`; modules `starlab/sc2/runtime_smoke_matrix.py`, `environment_drift.py`, `evaluate_environment_drift.py`
 
 ### 2026-04-07 — M05 merged to `main` (PR #6) + closeout
 

@@ -3,7 +3,7 @@
 **Milestone ID:** M06  
 **Title:** Environment Drift & Runtime Smoke Matrix  
 **Phase:** I — Governance, Runtime Surface, and Deterministic Run Substrate  
-**Status:** Planned  
+**Status:** Complete (on `main`, merge `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a`)  
 **Target tag:** `v0.0.6-m06`  
 **Branch name:** `m06-environment-drift-runtime-smoke-matrix`
 
