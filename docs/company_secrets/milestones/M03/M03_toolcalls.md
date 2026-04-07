@@ -50,19 +50,8 @@ Initialize when M03 work begins.
 - **Branch:** `m03-run-identity-lineage-seed`  
 - **Recorded `pull_request` CI (implementation tree):** commit `72aff7050f6ae0807b875993d577cb6d6eeeded6` — run **`24058918126`** — https://github.com/m-cahill/starlab/actions/runs/24058918126 — **success**  
 - **Workflow:** `CI` (`.github/workflows/ci.yml`)  
-- **Merge gate (GitHub):** required checks on the **latest** PR head — [branch workflow runs](https://github.com/m-cahill/starlab/actions?query=branch%3Am03-run-identity-lineage-seed). After doc/evidence commits, append the **new** green run + head SHA below.  
+- **Merge gate (GitHub):** required checks on the **latest** PR head — [PR #4 checks](https://github.com/m-cahill/starlab/pull/4/checks) and [branch workflow runs](https://github.com/m-cahill/starlab/actions?query=branch%3Am03-run-identity-lineage-seed). **Do not** treat a **historical** run ID recorded elsewhere as authoritative if the PR head has **moved** (doc-only commits re-trigger `pull_request` CI).  
 - **Post-merge `main` CI:** *not recorded — merge not performed in this step*
-
-#### Doc-sync commit (ledger + milestone wording; 2026-04-07)
-
-- **Head SHA:** `e4b77cceb38024302a0ab86400ebda9cb8157f3c`  
-- **`pull_request` CI:** run **`24059001760`** — **success** — https://github.com/m-cahill/starlab/actions/runs/24059001760  
-
-#### Current PR tip (after toolcalls log commit — merge gate for this branch tip)
-
-- **Head SHA:** `9e304001ae1bedbcbf7722240d0e0ae9c7b95eda`  
-- **`pull_request` CI:** run **`24059031497`** — **success** — https://github.com/m-cahill/starlab/actions/runs/24059031497  
-- **Authoritative for merge gating (current tip):** **Yes** — this is the **latest** green `CI` run on the **current** PR head at closeout of this log entry.
 
 ### Milestone artifacts added (pre-merge)
 
