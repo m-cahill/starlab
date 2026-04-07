@@ -71,6 +71,7 @@
 * **Classification:** **Non-merge-boundary** — does not change the M08 merge commit or authoritative post-merge CI `24070602968` on `b99233e…`.
 * **Closeout commit `a089f18…`:** CI [`24070704576`](https://github.com/m-cahill/starlab/actions/runs/24070704576) — **failure** (Pytest: governance drift).
 * **Fix commit `c3b6f2c…`:** `tests/test_governance.py` — CI [`24070774045`](https://github.com/m-cahill/starlab/actions/runs/24070774045) — **success**.
+* **Ledger sync commit `1cca021…`:** CI [`24070813310`](https://github.com/m-cahill/starlab/actions/runs/24070813310) — **success**.
 
 ---
 

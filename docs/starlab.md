@@ -736,8 +736,9 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 | `main` after M08 merge (`b99233e…`) | `24070602968` | success | https://github.com/m-cahill/starlab/actions/runs/24070602968 |
 | `main` after M08 closeout docs (`a089f18…`) | `24070704576` | failure | https://github.com/m-cahill/starlab/actions/runs/24070704576 |
 | `main` after M08 governance test fix (`c3b6f2c…`) | `24070774045` | success | https://github.com/m-cahill/starlab/actions/runs/24070774045 |
+| `main` after M08 ledger CI record sync (`1cca021…`) | `24070813310` | success | https://github.com/m-cahill/starlab/actions/runs/24070813310 |
 
-*Rows `24070704576` and `24070774045` are **not** merge-boundary events — closeout documentation + governance test alignment after M08 merge. **Authoritative** merge-boundary post-merge `main` CI for M08 remains `24070602968` on merge commit `b99233e…`.*
+*Rows `24070704576`, `24070774045`, and `24070813310` are **not** merge-boundary events — closeout documentation + governance test alignment + ledger CI hygiene after M08 merge. **Authoritative** merge-boundary post-merge `main` CI for M08 remains `24070602968` on merge commit `b99233e…`.*
 
 *Further documentation-only pushes to `main` after these rows may produce additional green CI runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge.*
 
@@ -828,7 +829,7 @@ It should always answer, with minimal ambiguity:
 - **Authoritative post-merge `main` CI** on merge commit: [`24070602968`](https://github.com/m-cahill/starlab/actions/runs/24070602968) (**success**)
 - §7 / §10 / §11 / §18 / §20 / §23 updated: **governed replay parser substrate** (narrow) **proved on `main`**; Phase II artifact row (M08); parser glossary (raw blocks vs normalized metadata vs event semantics); **current milestone** → **M09** (stub only)
 - Milestone closeout: `M08_run1.md`, `M08_summary.md`, `M08_audit.md`, `M08_plan.md` (**Status: Complete**), `M08_toolcalls.md`; **M09** remains stub-only (`M09_plan.md`, `M09_toolcalls.md`)
-- **Non-merge-boundary** `main` CI — closeout commit `a089f18dfa1306ab041b32430dcbfbf2339eb8de`: [`24070704576`](https://github.com/m-cahill/starlab/actions/runs/24070704576) (**failure** — Pytest: governance test expected §11 **M08**); fix commit `c3b6f2c25efe2252d27d2d78065035f8965edc48`: [`24070774045`](https://github.com/m-cahill/starlab/actions/runs/24070774045) (**success**) — **authoritative** merge-boundary post-merge `main` CI remains [`24070602968`](https://github.com/m-cahill/starlab/actions/runs/24070602968) on merge commit `b99233e807177d65737beaba5246efa67a3edce2`
+- **Non-merge-boundary** `main` CI — closeout commit `a089f18dfa1306ab041b32430dcbfbf2339eb8de`: [`24070704576`](https://github.com/m-cahill/starlab/actions/runs/24070704576) (**failure** — Pytest: governance test expected §11 **M08**); fix commit `c3b6f2c25efe2252d27d2d78065035f8965edc48`: [`24070774045`](https://github.com/m-cahill/starlab/actions/runs/24070774045) (**success**); ledger CI record commit `1cca0219350237c7288ceb2d5d814bb1b5224a03`: [`24070813310`](https://github.com/m-cahill/starlab/actions/runs/24070813310) (**success**) — **authoritative** merge-boundary post-merge `main` CI remains [`24070602968`](https://github.com/m-cahill/starlab/actions/runs/24070602968) on merge commit `b99233e807177d65737beaba5246efa67a3edce2`
 
 ### 2026-04-07 — M07 merged to `main` (PR #8) + closeout
 

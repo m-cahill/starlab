@@ -59,6 +59,7 @@ Those runs (if any) are recorded in `docs/starlab.md` §23 and in the **Non-merg
 | ------ | ------------ | ---------- | ----- |
 | `a089f18dfa1306ab041b32430dcbfbf2339eb8de` | [`24070704576`](https://github.com/m-cahill/starlab/actions/runs/24070704576) | **failure** | Pytest: governance test still expected §11 **M08** as current milestone. |
 | `c3b6f2c25efe2252d27d2d78065035f8965edc48` | [`24070774045`](https://github.com/m-cahill/starlab/actions/runs/24070774045) | **success** | Governance tests updated for **M09** current milestone + **M08** complete row; **not** a merge-boundary event. |
+| `1cca0219350237c7288ceb2d5d814bb1b5224a03` | [`24070813310`](https://github.com/m-cahill/starlab/actions/runs/24070813310) | **success** | Ledger §18 / §23 / `M08_toolcalls` CI record sync; **not** a merge-boundary event. |
 
 **Authoritative merge-boundary** post-merge `main` CI remains **`24070602968`** on merge commit **`b99233e…`** (above).
 
