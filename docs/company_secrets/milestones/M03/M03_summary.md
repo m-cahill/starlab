@@ -4,7 +4,7 @@
 **Phase:** I — Governance, Runtime Surface, and Deterministic Run Substrate  
 **Milestone:** M03 — Run Identity & Lineage Seed  
 **Timeframe:** 2026-04-06 → **2026-04-07** (implementation + PR; **not** closed on `main` at this summary)  
-**Status:** **Merge-ready on CI** — [PR #4](https://github.com/m-cahill/starlab/pull/4) **open**; authoritative PR-head CI run [`24058700007`](https://github.com/m-cahill/starlab/actions/runs/24058700007) — **success** on head `4dbd9ba7fd57aaf835592024ee0577352a918c9e`. **Merge to `main` and formal closeout are pending** user permission and follow-up ledger steps.
+**Status:** **Merge-ready on CI** — [PR #4](https://github.com/m-cahill/starlab/pull/4) **open**; authoritative PR-head CI run [`24058752461`](https://github.com/m-cahill/starlab/actions/runs/24058752461) — **success** on head `3e78e71a872086a787fe59c16fe6caa3ef6dbd99`. **Merge to `main` and formal closeout are pending** user permission and follow-up ledger steps.
 
 ---
 
@@ -39,7 +39,7 @@ Establish deterministic STARLAB **run spec identity**, **execution identity**, a
 - CLI: `python -m starlab.runs.seed_from_proof` (proof + config + output dir; optional env JSON).
 - **`starlab.runs` package `__init__` does not import `seed_from_proof`** — avoids `runpy` warnings when using `-m starlab.runs.seed_from_proof`.
 - Updated `docs/starlab.md`, `README.md`, and milestone plan/toolcalls; **M03_plan.md** contains the full approved plan.
-- Opened **PR #4** from `m03-run-identity-lineage-seed`; pushed tip `4dbd9ba…`.
+- Opened **PR #4** from `m03-run-identity-lineage-seed`; current PR tip `3e78e71…` (includes pre-merge milestone docs).
 
 ---
 
@@ -48,7 +48,7 @@ Establish deterministic STARLAB **run spec identity**, **execution identity**, a
 | Layer | Evidence |
 |-------|----------|
 | Local | `ruff check .`, `ruff format --check .`, `mypy starlab tests`, `pytest` — exit 0 before push |
-| PR-head CI | Run **`24058700007`** — **success** on **`4dbd9ba…`** — see `M03_run1.md` |
+| PR-head CI | Run **`24058752461`** — **success** on **`3e78e71…`** — see `M03_run1.md` |
 | Post-merge `main` | **Pending** — not applicable until merge |
 
 ---
@@ -77,7 +77,7 @@ Full closeout requires merge to `main`, post-merge CI evidence, and ledger §7/�
 | Reference | Value |
 |-----------|--------|
 | PR | https://github.com/m-cahill/starlab/pull/4 |
-| PR head (at summary) | `4dbd9ba7fd57aaf835592024ee0577352a918c9e` |
-| Authoritative PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24058700007 |
+| PR head (at summary) | `3e78e71a872086a787fe59c16fe6caa3ef6dbd99` |
+| Authoritative PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24058752461 |
 | Run analysis | `M03_run1.md` |
 | Audit | `M03_audit.md` |

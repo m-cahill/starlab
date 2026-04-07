@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M00–**M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); **M03** — Run Identity & Lineage Seed **PR open** — [PR #4](https://github.com/m-cahill/starlab/pull/4) on branch `m03-run-identity-lineage-seed`; authoritative **PR-head CI** [`24058700007`](https://github.com/m-cahill/starlab/actions/runs/24058700007) (**success**) on PR head `4dbd9ba7fd57aaf835592024ee0577352a918c9e`. **Not** merged to `main` yet; **not** replay binding; **not** canonical run artifact v0. Merge + closeout pending.  
+**Status:** Active — M00–**M02** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3)); **M03** — Run Identity & Lineage Seed **PR open** — [PR #4](https://github.com/m-cahill/starlab/pull/4) on branch `m03-run-identity-lineage-seed`; authoritative **PR-head CI** [`24058752461`](https://github.com/m-cahill/starlab/actions/runs/24058752461) (**success**) on PR head `3e78e71a872086a787fe59c16fe6caa3ef6dbd99`. **Not** merged to `main` yet; **not** replay binding; **not** canonical run artifact v0. Merge + closeout pending.  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -352,7 +352,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ### M03 — Run Identity & Lineage Seed
 
-**Status:** **PR open (merge-ready on CI)** — [PR #4](https://github.com/m-cahill/starlab/pull/4) (`m03-run-identity-lineage-seed`). Contract + implementation: `docs/runtime/run_identity_lineage_seed.md`, `starlab/runs/` (e.g. `python -m starlab.runs.seed_from_proof`), tests + fixtures under `tests/`; milestone plan `docs/company_secrets/milestones/M03/M03_plan.md`. **Authoritative PR-head CI** for current tip: [`24058700007`](https://github.com/m-cahill/starlab/actions/runs/24058700007) — **success** on `4dbd9ba7fd57aaf835592024ee0577352a918c9e`. **Not** merged to `main` until merge + closeout.
+**Status:** **PR open (merge-ready on CI)** — [PR #4](https://github.com/m-cahill/starlab/pull/4) (`m03-run-identity-lineage-seed`). Contract + implementation: `docs/runtime/run_identity_lineage_seed.md`, `starlab/runs/` (e.g. `python -m starlab.runs.seed_from_proof`), tests + fixtures under `tests/`; milestone plan `docs/company_secrets/milestones/M03/M03_plan.md`. **Authoritative PR-head CI** for current tip: [`24058752461`](https://github.com/m-cahill/starlab/actions/runs/24058752461) — **success** on `3e78e71a872086a787fe59c16fe6caa3ef6dbd99`. **Not** merged to `main` until merge + closeout.
 
 **Goal (high level):** Seed run identity and lineage primitives building on the M02 proof surface — **without** claiming replay binding (M04), canonical run artifact v0 (M05), or benchmark validity.
 
