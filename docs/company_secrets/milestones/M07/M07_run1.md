@@ -1,5 +1,64 @@
-# M07 — CI run 1
+# M07 — CI run 1 (workflow analysis)
 
-**Status:** Pending PR merge to `main`
+**Milestone:** M07 — Replay Intake Policy & Provenance Enforcement  
+**Project:** STARLAB  
+**Analysis format:** `docs/company_secrets/prompts/workflowprompt.md`
 
-After opening the M07 PR, record the authoritative **CI** workflow run URL for the merge gate (PR head) and post-merge `main` here per `docs/company_secrets/prompts/workflowprompt.md`.
+---
+
+## A. Authoritative PR-head CI (merge gate)
+
+These runs are **`pull_request`** triggers on branch `m07-replay-intake-policy-provenance-enforcement`. They are **not** post-merge `main` runs.
+
+| Field | Value |
+| ----- | ----- |
+| **Final PR head SHA** | `a5188ad88bab688ab40136dea77a8b4d3caa0495` |
+| **Authoritative PR-head run (final tip)** | [`24065819186`](https://github.com/m-cahill/starlab/actions/runs/24065819186) |
+| **Conclusion** | **success** |
+| **`headSha` match** | Yes — matches final PR tip |
+
+**Earlier PR-head runs (all success, superseded by later pushes on the same PR):**  
+`24065537231`, `24065563616`, `24065616533`, `24065644646`, `24065673229`, `24065716156`, `24065746526`, `24065772651`, and others — see `M07_toolcalls.md`. None failed on the merge path.
+
+**Superseded failed runs:** none on PR #8.
+
+---
+
+## B. Authoritative post-merge `main` CI (merge boundary)
+
+| Field | Value |
+| ----- | ----- |
+| **PR** | [#8](https://github.com/m-cahill/starlab/pull/8) — **M07: replay intake policy and provenance enforcement** |
+| **Merge method** | Merge commit |
+| **Merge commit SHA** | `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a` |
+| **Merged at (GitHub)** | `2026-04-07T05:50:09Z` |
+| **Remote branch deleted** | Yes (`m07-replay-intake-policy-provenance-enforcement`) |
+
+| Field | Value |
+| ----- | ----- |
+| **Post-merge `main` CI run** | [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) |
+| **Trigger** | `push` to `main` (merge commit) |
+| **Conclusion** | **success** |
+| **`headSha`** | `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a` (merge commit) |
+
+This run is the **authoritative post-merge `main`** evidence for the M07 merge boundary.
+
+---
+
+## C. Non-merge-boundary CI (not yet present)
+
+Any **later** documentation-only or ledger-only push to `main` after this closeout would produce additional green runs — classify those explicitly as **not** merge-boundary events when they appear in §23.
+
+**As of closeout:** no additional post-merge doc follow-up run beyond [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) is recorded for M07.
+
+---
+
+## D. Workflow inventory (representative — CI job)
+
+For run [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699): job **governance** — Ruff check, Ruff format, Mypy, Pytest, pip-audit, CycloneDX SBOM upload, Gitleaks — **all required steps passed** (merge gate posture unchanged).
+
+---
+
+## E. Verdict
+
+**Green** — PR-head and post-merge `main` CI both **success**. M07 merge is **suitable for ledger closeout** from a CI truth-signal perspective.

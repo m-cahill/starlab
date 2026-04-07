@@ -16,4 +16,4 @@ This stub exists so the next milestone has a named home. **Do not** treat this f
 
 ## Status
 
-**Stub only** — seeded at **M07** closeout (**2026-04-06**). **No** M08 implementation, tests, or feature work started.
+**Stub only** — seeded at **M07** closeout (**2026-04-07**). **No** M08 implementation, tests, or feature work started.

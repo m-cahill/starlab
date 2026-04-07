@@ -37,5 +37,29 @@ Governance tests are included in pytest; M07 remains fixture-driven and SC2-free
 - **PR:** [#8](https://github.com/m-cahill/starlab/pull/8) — **M07: replay intake policy and provenance enforcement**
 - **Implementation commit (M07 scope):** `ae909a392c67ce35d7865e1d1c76647963c988f7` — `feat(m07): replay intake policy and provenance enforcement`
 - **Merge gate:** GitHub **CI** workflow on `pull_request` must be **success** for the PR tip at merge time (see PR **Checks** for current head SHA and run id).
-- **PR-head CI runs witnessed (all success, chronological):** [`24065537231`](https://github.com/m-cahill/starlab/actions/runs/24065537231) → [`24065563616`](https://github.com/m-cahill/starlab/actions/runs/24065563616) → [`24065616533`](https://github.com/m-cahill/starlab/actions/runs/24065616533) → [`24065644646`](https://github.com/m-cahill/starlab/actions/runs/24065644646) → [`24065673229`](https://github.com/m-cahill/starlab/actions/runs/24065673229) → [`24065716156`](https://github.com/m-cahill/starlab/actions/runs/24065716156) → [`24065746526`](https://github.com/m-cahill/starlab/actions/runs/24065746526) → [`24065772651`](https://github.com/m-cahill/starlab/actions/runs/24065772651) (merge-ready tip `88a72257132a5bc344d51a022baa59d75e1cdef0`)
+- **PR-head CI runs witnessed (all success, chronological):** [`24065537231`](https://github.com/m-cahill/starlab/actions/runs/24065537231) → [`24065563616`](https://github.com/m-cahill/starlab/actions/runs/24065563616) → [`24065616533`](https://github.com/m-cahill/starlab/actions/runs/24065616533) → [`24065644646`](https://github.com/m-cahill/starlab/actions/runs/24065644646) → [`24065673229`](https://github.com/m-cahill/starlab/actions/runs/24065673229) → [`24065716156`](https://github.com/m-cahill/starlab/actions/runs/24065716156) → [`24065746526`](https://github.com/m-cahill/starlab/actions/runs/24065746526) → [`24065772651`](https://github.com/m-cahill/starlab/actions/runs/24065772651) → … → **authoritative PR-head (final tip):** [`24065819186`](https://github.com/m-cahill/starlab/actions/runs/24065819186) — **success** — head `a5188ad88bab688ab40136dea77a8b4d3caa0495`
 - **Superseded failed runs:** none
+
+---
+
+## 2026-04-07 — Merge to `main` (PR #8) + post-merge CI
+
+| Field | Value |
+| ----- | ----- |
+| **PR** | [#8](https://github.com/m-cahill/starlab/pull/8) |
+| **Merge method** | Merge commit |
+| **Merge commit** | `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a` |
+| **Merged at (GitHub)** | `2026-04-07T05:50:09Z` |
+| **Final PR head (pre-merge)** | `a5188ad88bab688ab40136dea77a8b4d3caa0495` |
+| **Remote branch deleted** | Yes (`m07-replay-intake-policy-provenance-enforcement`) |
+
+**Authoritative CI (do not blur):**
+
+| Category | Run | Conclusion | `headSha` / notes |
+| -------- | --- | ---------- | ----------------- |
+| **PR-head (merge gate, final tip)** | [`24065819186`](https://github.com/m-cahill/starlab/actions/runs/24065819186) | success | `a5188ad…` |
+| **Post-merge `main` (merge boundary)** | [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) | success | `1c7bb0c…` (merge commit) |
+
+**Later runs:** any **post-closeout** documentation-only push to `main` will produce additional CI — classify in `M07_run1.md` / §23 as **non-merge-boundary** when they appear.
+
+**Closeout:** `M07_run1.md`, `M07_summary.md`, `M07_audit.md`, `M07_plan.md` (**Status: Complete**), ledger `docs/starlab.md` — committed after merge as **doc follow-up** (CI run TBD at push time; **not** the merge-boundary run `24066550699`).

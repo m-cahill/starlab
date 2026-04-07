@@ -1,5 +1,7 @@
 # M07 Plan — Replay Intake Policy & Provenance Enforcement
 
+**Status: Complete**
+
 ## Objective
 
 Build a **narrow, deterministic, CI-safe replay intake gate** for opaque replay files that:
