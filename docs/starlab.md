@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M00–**M04** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3), [PR #4](https://github.com/m-cahill/starlab/pull/4), [PR #5](https://github.com/m-cahill/starlab/pull/5)); **M05** — Canonical Run Artifact v0 — **next** (plan stub only under `docs/company_secrets/milestones/M05/`). **M04** merge commit `c38de5d920ca9fb18cef46da9be7f0ef812ed7ed` — post-merge `main` CI on merge push [`24060997255`](https://github.com/m-cahill/starlab/actions/runs/24060997255) (**success**). **Replay binding** (narrow, opaque-bytes) is **proved on `main` (M04)**; **canonical run artifact v0**, **replay parser substrate**, and **benchmark integrity** remain **not** proved (M05+).  
+**Status:** Active — M00–**M04** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1), [PR #2](https://github.com/m-cahill/starlab/pull/2), [PR #3](https://github.com/m-cahill/starlab/pull/3), [PR #4](https://github.com/m-cahill/starlab/pull/4), [PR #5](https://github.com/m-cahill/starlab/pull/5)); **M05** — Canonical Run Artifact v0 — **next** (plan stub only under `docs/company_secrets/milestones/M05/`). **M04** merge commit `c38de5d920ca9fb18cef46da9be7f0ef812ed7ed` — post-merge `main` CI on merge push [`24060997255`](https://github.com/m-cahill/starlab/actions/runs/24060997255) (**success**); M04 **closeout** documentation push `c0997527a28c7b0b007b5232713884904b3bbfa8` — [`24061285459`](https://github.com/m-cahill/starlab/actions/runs/24061285459) (**success**). **Replay binding** (narrow, opaque-bytes) is **proved on `main` (M04)**; **canonical run artifact v0**, **replay parser substrate**, and **benchmark integrity** remain **not** proved (M05+).  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -605,8 +605,9 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 | Event | Workflow run | Conclusion | URL |
 | ----- | ------------ | ---------- | --- |
 | `main` after M04 merge (`c38de5d…`) | `24060997255` | success | https://github.com/m-cahill/starlab/actions/runs/24060997255 |
+| `main` after M04 closeout / ledger + M05 stubs (`c099752…`) | `24061285459` | success | https://github.com/m-cahill/starlab/actions/runs/24061285459 |
 
-*Further documentation-only pushes to `main` after this row may produce additional green CI runs; distinguish them in §23.*
+*Further documentation-only pushes to `main` after these rows may produce additional green CI runs; distinguish them in §23.*
 
 **M04 milestone artifacts:** `docs/company_secrets/milestones/M04/` (`M04_plan.md`, `M04_toolcalls.md`, `M04_run1.md`, `M04_summary.md`, `M04_audit.md`, etc.)
 
@@ -683,6 +684,7 @@ It should always answer, with minimal ambiguity:
 - Post-merge `main` CI on merge commit: [`24060997255`](https://github.com/m-cahill/starlab/actions/runs/24060997255) (**success**)
 - §10 updated: **replay binding** (opaque replay bytes → `replay_binding.json` linked to M03 IDs) **proved on `main` (narrow)**; **canonical run artifact v0**, **replay parser substrate**, **benchmark validity**, **replay semantic equivalence**, **new live SC2 execution in CI** — **not** proved
 - M05 stubs seeded: `docs/company_secrets/milestones/M05/M05_plan.md`, `M05_toolcalls.md` — **no** M05 implementation
+- M04 closeout documentation push on `main` (`c099752…`): CI [`24061285459`](https://github.com/m-cahill/starlab/actions/runs/24061285459) (**success**) — **not** a merge-boundary event; ledger / milestone artifacts update
 
 ### 2026-04-07 — M03 merged to `main` (PR #4) + closeout
 

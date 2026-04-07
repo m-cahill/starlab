@@ -50,7 +50,8 @@ Add a **narrow, deterministic, CI-safe replay binding surface** that links a rep
 |-------|----------|
 | Local | Ruff, Ruff format, Mypy strict, Pytest — green before merge |
 | PR-head CI | Run **`24060734950`** — **success** on **`6991978…`** — see `M04_run1.md` |
-| Post-merge `main` | Run **`24060997255`** — **success** on merge commit **`c38de5d…`** |
+| Post-merge `main` (merge commit) | Run **`24060997255`** — **success** on merge commit **`c38de5d…`** |
+| Post-merge `main` (closeout doc push) | Run **`24061285459`** — **success** on **`c099752…`** (ledger / milestone artifacts; **not** merge-boundary) |
 
 ---
 
@@ -120,7 +121,8 @@ No new issues were introduced during this milestone that block closeout.
 | Authoritative PR-head CI | https://github.com/m-cahill/starlab/actions/runs/24060734950 |
 | Merge commit | `c38de5d920ca9fb18cef46da9be7f0ef812ed7ed` |
 | Merged at (UTC) | 2026-04-07T02:17:04Z |
-| Post-merge `main` CI | https://github.com/m-cahill/starlab/actions/runs/24060997255 |
+| Post-merge `main` CI (merge) | https://github.com/m-cahill/starlab/actions/runs/24060997255 |
+| Post-merge `main` CI (closeout docs) | https://github.com/m-cahill/starlab/actions/runs/24061285459 |
 | Contract | `docs/runtime/replay_binding.md` |
 | Run analysis | `M04_run1.md` |
 | Public ledger | `docs/starlab.md` |

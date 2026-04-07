@@ -70,3 +70,17 @@ No CI failures, no flaky tests, no weakened checks.
 **URL:** https://github.com/m-cahill/starlab/actions/runs/24060997255
 
 This is the authoritative **post-merge `main`** CI run on the **M04 merge commit** (merge-boundary). Later documentation-only pushes may produce additional green runs; those are **not** merge-boundary events unless explicitly noted in `docs/starlab.md` §23.
+
+---
+
+## Post-merge `main` — M04 closeout documentation push (non–merge-boundary)
+
+**Commit:** `c0997527a28c7b0b007b5232713884904b3bbfa8` (docs: ledger, M05 stubs, `M04_summary` / `M04_audit`, governance tests)
+
+**Workflow:** CI  
+**Run ID:** `24061285459`  
+**Event:** `push`  
+**Conclusion:** **success**  
+**URL:** https://github.com/m-cahill/starlab/actions/runs/24061285459
+
+This run validates the **closeout documentation** push only, not the M04 feature merge boundary (`c38de5d…`).
