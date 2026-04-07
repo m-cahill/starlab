@@ -1,0 +1,10 @@
+{
+  "advisory_notes": [],
+  "check_results": [],
+  "parser_family": "fixture",
+  "parser_version": "0.0.test",
+  "parse_status": "parsed",
+  "reason_codes": [],
+  "replay_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "schema_version": "starlab.replay_parse_report.v1"
+}

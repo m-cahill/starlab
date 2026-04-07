@@ -22,6 +22,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/environment_drift_smoke_matrix.md",
     "docs/runtime/replay_intake_policy.md",
     "docs/runtime/replay_parser_substrate.md",
+    "docs/runtime/replay_metadata_extraction.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -303,7 +304,26 @@ def test_m08_replay_parser_modules_exist() -> None:
         assert (rp / name).is_file()
 
 
-def test_m09_stub_milestone_files_exist() -> None:
+def test_m09_milestone_files_exist() -> None:
     m09 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M09"
     assert (m09 / "M09_plan.md").is_file()
     assert (m09 / "M09_toolcalls.md").is_file()
+
+
+def test_m09_metadata_modules_exist() -> None:
+    rp = REPO_ROOT / "starlab" / "replays"
+    for name in (
+        "metadata_models.py",
+        "metadata_extraction.py",
+        "metadata_io.py",
+        "extract_replay_metadata.py",
+    ):
+        assert (rp / name).is_file()
+
+
+def test_m09_fixture_raw_parse_fixtures_exist() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m09"
+    assert (fx / "replay_raw_parse_valid.json").is_file()
+    assert (fx / "replay_raw_parse_partial.json").is_file()
+    assert (fx / "replay_parse_receipt_valid.json").is_file()
+    assert (fx / "replay_parse_report_valid.json").is_file()
