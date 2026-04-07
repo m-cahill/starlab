@@ -1,3 +1,5 @@
+**Status: Complete**
+
 # M08 Plan — Replay Parser Substrate
 
 ## Objective
@@ -400,4 +402,4 @@ Two improvements to make at M08 closeout:
 
 ## Status
 
-**Active** — replaced stub plan at **M08** kickoff (**2026-04-07**).
+**Closed** — merged to `main` via [PR #9](https://github.com/m-cahill/starlab/pull/9) (**2026-04-07**). Authoritative PR-head CI [`24069974048`](https://github.com/m-cahill/starlab/actions/runs/24069974048); authoritative post-merge `main` CI [`24070602968`](https://github.com/m-cahill/starlab/actions/runs/24070602968). See `M08_run1.md`, `M08_summary.md`, `M08_audit.md`.

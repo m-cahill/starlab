@@ -51,13 +51,24 @@
 
 ---
 
-## 2026-04-07 — Authoritative PR-head CI (green)
+## 2026-04-07 — Authoritative merge-gate pair (final)
 
 * **PR:** [#9](https://github.com/m-cahill/starlab/pull/9) — **M08: replay parser substrate**
-* **PR head (current tip, authoritative):** `440f55ea4a8b4278cc6516fe6ffb4fafe3c4ade9`
-* **Authoritative PR-head workflow run (latest tip):** [`24069937757`](https://github.com/m-cahill/starlab/actions/runs/24069937757) — **success** (full `governance` job)
-* **Also green:** [`24069894682`](https://github.com/m-cahill/starlab/actions/runs/24069894682); [`24069835276`](https://github.com/m-cahill/starlab/actions/runs/24069835276); [`24069782159`](https://github.com/m-cahill/starlab/actions/runs/24069782159)
-* **Superseded:** [`24069652969`](https://github.com/m-cahill/starlab/actions/runs/24069652969) — **failure** (Pytest: M05 golden vs Linux replay hash mismatch; fixed in `e76b1ac` via LF-aligned goldens + `.gitattributes`)
+* **Final PR head SHA (authoritative):** `a65fabfa7fd76d94a250208fe20c2c4dfdf57105`
+* **Authoritative PR-head CI run:** [`24069974048`](https://github.com/m-cahill/starlab/actions/runs/24069974048) — **success**
+* **Merge commit:** `b99233e807177d65737beaba5246efa67a3edce2` — merged **2026-04-07T07:52:12Z** — **merge method:** merge commit — remote branch **`m08-replay-parser-substrate` deleted**
+* **Authoritative post-merge `main` CI:** [`24070602968`](https://github.com/m-cahill/starlab/actions/runs/24070602968) — **success** — commit `b99233e807177d65737beaba5246efa67a3edce2`
+
+**Superseded PR-head / intermediate:** [`24069937757`](https://github.com/m-cahill/starlab/actions/runs/24069937757), [`24069894682`](https://github.com/m-cahill/starlab/actions/runs/24069894682), [`24069835276`](https://github.com/m-cahill/starlab/actions/runs/24069835276), [`24069782159`](https://github.com/m-cahill/starlab/actions/runs/24069782159) — historical greens before final tip; **not** the authoritative merge gate.
+
+* **Superseded (failure):** [`24069652969`](https://github.com/m-cahill/starlab/actions/runs/24069652969) — **failure** (Pytest: M05 golden vs Linux replay hash mismatch; fixed before final tip)
+
+---
+
+## 2026-04-07 — Milestone closeout (documentation push on `main`)
+
+* **Purpose:** `M08_run1.md`, `M08_summary.md`, `M08_audit.md`, `M08_plan.md` (**Status: Complete**), `M08_toolcalls.md` hygiene, `docs/starlab.md` ledger (M08 → M09).
+* **Classification:** **Non-merge-boundary** — does not change the M08 merge commit or authoritative post-merge CI `24070602968` on `b99233e…`. Any CI run for this commit is **doc/ledger-only** (record run ID in `M08_run1.md` and §23 when available).
 
 ---
 
