@@ -267,4 +267,4 @@ Advance the current milestone to M12 after closeout.
 
 ---
 
-**Status:** Execution plan — replace stub only when superseded by milestone governance.
+**Status:** **Complete** — merged to `main` via [PR #12](https://github.com/m-cahill/starlab/pull/12) (`38c15302badd49966b17f9195ddb139f6ae9a9b4`). Execution plan preserved above for audit; authoritative CI — `M11_run1.md`.

@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M00–**M10** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1) through [PR #11](https://github.com/m-cahill/starlab/pull/11)). **M10** merge commit `cb3e581f70f85653477081eb1ef4772229f05983` — merge-push `main` CI [`24104111851`](https://github.com/m-cahill/starlab/actions/runs/24104111851) (**failure** — Mypy); **authoritative green `main`** after M10 repair (`cf2074e10ec8a38b22bd7b75ffeb4ec22a71485b`): [`24104197912`](https://github.com/m-cahill/starlab/actions/runs/24104197912) (**success**). **M09** merge commit `fc9b442d66abe9a2922e93051c7d0a22ccb133d1` — authoritative post-merge `main` CI on merge push [`24101900950`](https://github.com/m-cahill/starlab/actions/runs/24101900950) (**success**). **M08** merge commit `b99233e807177d65737beaba5246efa67a3edce2` — authoritative post-merge `main` CI [`24070602968`](https://github.com/m-cahill/starlab/actions/runs/24070602968) (**success**). **M07** merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a` — authoritative post-merge `main` CI on merge push [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) (**success**). **M06** merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` — post-merge `main` CI on merge push [`24064229874`](https://github.com/m-cahill/starlab/actions/runs/24064229874) (**success**). **M05** merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0` — post-merge `main` CI [`24062610358`](https://github.com/m-cahill/starlab/actions/runs/24062610358) (**success**). **M05** closeout / ledger push on `main` (`6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`): CI [`24062664914`](https://github.com/m-cahill/starlab/actions/runs/24062664914) (**success**). Follow-up ledger cross-reference (`ebca1e964c0539c78165bfab72c249a2157402cc`): CI [`24062700534`](https://github.com/m-cahill/starlab/actions/runs/24062700534) (**success**) — **not** merge-boundary events. **Replay intake / provenance enforcement** (narrow, M07), **governed replay parser substrate** (narrow, M08 — deterministic parse artifacts; `s2protocol` isolated), **stable normalized replay metadata** (narrow, M09 — pure extraction over M08 artifacts), and **governed event/timeline extraction** (narrow, M10 — deterministic timeline artifacts; optional `raw_event_streams` on `replay_raw_parse.json` v2) are **proved on `main`** (M10 merge-push CI failed Mypy; **green `main`** restored on repair commit — see §18). **Build-order extraction** (M11), **replay↔execution equivalence**, and **benchmark integrity** remain **not** proved.  
+**Status:** Active — M00–**M11** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1) through [PR #12](https://github.com/m-cahill/starlab/pull/12)). **M10** merge commit `cb3e581f70f85653477081eb1ef4772229f05983` — merge-push `main` CI [`24104111851`](https://github.com/m-cahill/starlab/actions/runs/24104111851) (**failure** — Mypy); **authoritative green `main`** after M10 repair (`cf2074e10ec8a38b22bd7b75ffeb4ec22a71485b`): [`24104197912`](https://github.com/m-cahill/starlab/actions/runs/24104197912) (**success**). **M09** merge commit `fc9b442d66abe9a2922e93051c7d0a22ccb133d1` — authoritative post-merge `main` CI on merge push [`24101900950`](https://github.com/m-cahill/starlab/actions/runs/24101900950) (**success**). **M08** merge commit `b99233e807177d65737beaba5246efa67a3edce2` — authoritative post-merge `main` CI [`24070602968`](https://github.com/m-cahill/starlab/actions/runs/24070602968) (**success**). **M07** merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a` — authoritative post-merge `main` CI on merge push [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) (**success**). **M06** merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` — post-merge `main` CI on merge push [`24064229874`](https://github.com/m-cahill/starlab/actions/runs/24064229874) (**success**). **M05** merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0` — post-merge `main` CI [`24062610358`](https://github.com/m-cahill/starlab/actions/runs/24062610358) (**success**). **M05** closeout / ledger push on `main` (`6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`): CI [`24062664914`](https://github.com/m-cahill/starlab/actions/runs/24062664914) (**success**). Follow-up ledger cross-reference (`ebca1e964c0539c78165bfab72c249a2157402cc`): CI [`24062700534`](https://github.com/m-cahill/starlab/actions/runs/24062700534) (**success**) — **not** merge-boundary events. **Replay intake / provenance enforcement** (narrow, M07), **governed replay parser substrate** (narrow, M08 — deterministic parse artifacts; `s2protocol` isolated), **stable normalized replay metadata** (narrow, M09 — pure extraction over M08 artifacts), and **governed event/timeline extraction** (narrow, M10 — deterministic timeline artifacts; optional `raw_event_streams` on `replay_raw_parse.json` v2) are **proved on `main`** (M10 merge-push CI failed Mypy; **green `main`** restored on repair commit — see §18). **Governed build-order / economy plane** (narrow, M11 — `replay_build_order_economy.json` / `replay_build_order_economy_report.json`; [PR #12](https://github.com/m-cahill/starlab/pull/12) merge commit `38c15302badd49966b17f9195ddb139f6ae9a9b4`; **authoritative green PR-head CI** [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320) (**success**); **merge-boundary post-merge `main` CI** [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347) (**success**)) is **proved on `main`**. **Combat/scouting / visibility** (M12), **replay↔execution equivalence**, and **benchmark integrity** remain **not** proved.  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -184,7 +184,7 @@ Planned program arc (33 milestones, M00–M32):
 | M08 | Replay Parser Substrate | II | Complete | v0.0.8-m08 | — |
 | M09 | Replay Metadata Extraction | II | Complete | v0.0.9-m09 | — |
 | M10 | Timeline & Event Extraction | II | Complete | v0.0.10-m10 | — |
-| M11 | Build-Order & Economy Plane | II | Planned | v0.0.11-m11 | — |
+| M11 | Build-Order & Economy Plane | II | Complete | v0.0.11-m11 | — |
 | M12 | Combat, Scouting, and Visibility Windows | II | Planned | v0.0.12-m12 | — |
 | M13 | Replay Slice Generator | II | Planned | v0.0.13-m13 | — |
 | M14 | Replay Bundle & Lineage Contract v1 | II | Planned | v0.0.14-m14 | — |
@@ -228,6 +228,8 @@ Planned program arc (33 milestones, M00–M32):
 **M09 note:** M09 is **merged** to `main` (see §18). “Complete” reflects **stable normalized replay metadata** — deterministic `replay_metadata.json`, `replay_metadata_report.json` from M08 `replay_raw_parse.json` (optional parse receipt/report linkage); **no** `s2protocol` in M09 — see `docs/runtime/replay_metadata_extraction.md`, `starlab/replays/extract_replay_metadata.py`. **Not** event/timeline semantics (M10), **not** build-order extraction (M11), **not** replay↔execution equivalence, **not** benchmark integrity, **not** broad Blizzard parser correctness beyond the explicit mapping, **not** live SC2 in CI, **not** legal certification of replay rights.
 
 **M10 note:** M10 is **merged** to `main` (see §18). “Complete” reflects **governed timeline & event extraction** — deterministic `replay_timeline.json`, `replay_timeline_report.json`; `replay_raw_parse.json` may use schema `starlab.replay_raw_parse.v2` with M10-owned `raw_event_streams` lowered inside the existing parser boundary; **merged timeline order is a deterministic canonicalization policy, not a proof of exact intra-gameloop causality** — see `docs/runtime/replay_timeline_event_extraction.md`, `starlab/replays/extract_replay_timeline.py`. **Not** build-order / economy (M11), **not** combat/scouting semantics, **not** benchmark integrity, **not** broad upstream parser certification, **not** live SC2 in CI, **not** player display names or raw chat text in the public timeline contract.
+
+**M11 note:** M11 is **merged** to `main` (see §18). “Complete” reflects **governed build-order / economy extraction** — deterministic `replay_build_order_economy.json`, `replay_build_order_economy_report.json` from M10 `replay_timeline.json` with optional supplemental `replay_raw_parse.json` v2 `raw_event_streams` for entity identity only; **no** `s2protocol` in M11 — see `docs/runtime/replay_build_order_economy_extraction.md`, `starlab/replays/extract_replay_build_order_economy.py`. **Not** combat/scouting (M12), **not** exact resource reconstruction, **not** replay↔execution equivalence, **not** benchmark integrity, **not** broad upstream parser certification, **not** live SC2 in CI, **not** legal certification of replay rights.
 
 ---
 
@@ -361,7 +363,8 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Replay intake policy & provenance gate | **Proved (narrow, M07):** deterministic `replay_intake_receipt.json` + `replay_intake_report.json` from opaque replay bytes + declared intake metadata; optional M03/M04/M05 cross-check — see `docs/runtime/replay_intake_policy.md`, `starlab/replays/`, `docs/company_secrets/milestones/M07/`. **Does not** claim replay parser correctness, replay semantic extraction, build-order extraction, replay equivalence to execution proof, benchmark integrity, cross-host portability, live SC2 in CI, or legal certification of third-party rights as a matter of law. |
 | Parser substrate (governed replay parse artifacts) | **Proved (narrow, M08):** deterministic `replay_parse_receipt.json`, `replay_parse_report.json`, `replay_raw_parse.json`; deterministic normalization of parser-native output to JSON-safe trees; **`s2protocol` isolated** behind adapter — see `docs/runtime/replay_parser_substrate.md`, `starlab/replays/`, `docs/company_secrets/milestones/M08/`. **Does not** claim broad parser correctness, stable **public** normalized metadata (delivered in **M09**), event/timeline semantics (M10), build-order extraction, replay↔execution equivalence, benchmark integrity, live SC2 in CI, or legal certification of replay rights. |
 | Stable normalized replay metadata (public contract) | **Proved (narrow, M09):** deterministic `replay_metadata.json` + `replay_metadata_report.json` from M08 `replay_raw_parse.json` (optional parse receipt/report linkage); **no** `s2protocol` in M09 — see `docs/runtime/replay_metadata_extraction.md`, `starlab/replays/`, `docs/company_secrets/milestones/M09/`. **Does not** claim event/timeline semantics (M10), build-order extraction (M11), replay↔execution equivalence, benchmark integrity, broad Blizzard parser correctness beyond the mapping, live SC2 in CI, or legal certification of replay rights. |
-| Governed replay timeline (public contract) | **Proved (narrow, M10):** deterministic `replay_timeline.json` + `replay_timeline_report.json` from `replay_raw_parse.json` (v1 or v2; v2 includes `raw_event_streams`); fixture-driven CI; **no** build-order/economy — see `docs/runtime/replay_timeline_event_extraction.md`, `starlab/replays/`, `docs/company_secrets/milestones/M10/`. **Does not** claim build-order (M11), combat/scouting, benchmark integrity, upstream semantic certification, replay↔execution equivalence, live SC2 in CI, or legal certification of replay rights. |
+| Governed replay timeline (public contract) | **Proved (narrow, M10):** deterministic `replay_timeline.json` + `replay_timeline_report.json` from `replay_raw_parse.json` (v1 or v2; v2 includes `raw_event_streams`); fixture-driven CI — see `docs/runtime/replay_timeline_event_extraction.md`, `starlab/replays/`, `docs/company_secrets/milestones/M10/`. **Does not** claim build-order/economy (that is **M11**), combat/scouting, benchmark integrity, upstream semantic certification, replay↔execution equivalence, live SC2 in CI, or legal certification of replay rights. |
+| Governed build-order / economy plane | **Proved (narrow, M11):** deterministic `replay_build_order_economy.json` + `replay_build_order_economy_report.json` from M10 `replay_timeline.json` with optional supplemental `replay_raw_parse.json` v2 identity lookup only — see `docs/runtime/replay_build_order_economy_extraction.md`, `starlab/replays/`, `docs/company_secrets/milestones/M11/`. **Does not** claim combat/scouting (M12), exact resource reconstruction, replay↔execution equivalence, benchmark integrity, live SC2 in CI, or legal certification of replay rights. |
 | Benchmark integrity | Not yet proved |
 | Learning or agent capability | Not yet proved |
 
@@ -381,8 +384,9 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Parser substrate (replay parse artifacts) | M08 | **On `main`** — raw sections + availability flags; deterministic artifacts; not normalized-metadata/event-semantics claims |
 | Normalized replay metadata (public contract) | M09 | **On `main`** — small deterministic projection from M08 raw parse; not event semantics or build-order claims |
 | Governed timeline / event extraction | M10 | **On `main`** — bounded semantic kinds + deterministic merge; not build-order or benchmark claims |
+| Build-order / economy plane | M11 | **On `main`** — narrow extraction over timeline (+ optional raw-parse identity); not combat/scouting or benchmark claims |
 
-### Parser glossary (M08–M10)
+### Parser glossary (M08–M11)
 
 | Term | Meaning |
 | ---- | ------- |
@@ -391,7 +395,11 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | **Event semantics** | Ordered interpretation of game/message/tracker streams (timeline, unit births, commands) — **M10+** scope; M08 may record **availability** only. |
 | **Normalized timeline entry** | One row in `replay_timeline.json` `entries[]` after deterministic merge, semantic mapping, and privacy scrub — **M10** public contract. |
 | **Event semantic** | The `semantic_kind` field — a small STARLAB enum mapped conservatively from Blizzard `_event` typenames. |
-| **Strategic derivation** | Build order / economy plane — **M11+**; combat / scouting — **M12+**; not the M10 timeline contract. |
+| **Strategic derivation** | Build order / economy plane — **M11** public contract (`replay_build_order_economy.json`); combat / scouting — **M12+**; not the M10 timeline contract. |
+
+### Phase II layering chain (compact)
+
+M08 raw parse → M09 metadata → M10 timeline → **M11 build-order/economy** (primary: `replay_timeline.json`; optional: `replay_raw_parse.json` v2 for identity only).
 
 ### Metadata field glossary (M09)
 
@@ -427,21 +435,20 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-### M11 — Build-Order & Economy Plane
+### M12 — Combat, Scouting, and Visibility Windows
 
-**Status:** **Planned** — **current** milestone; **M10** is **closed** on `main` (see §18). **M09** remains **closed** on `main` (see §18).
+**Status:** **Planned** — **current** milestone; **M11** is **closed** on `main` (see §18).
 
-**Goal (high level):** Extract **build-order and economy-relevant structure** from governed replay/timeline surfaces — **without** claiming full strategic AI, benchmark integrity, or replay↔execution equivalence unless separately governed.
+**Goal (high level):** Extract **combat-relevant, scouting, and visibility-window structure** from governed replay/timeline surfaces — **without** claiming benchmark integrity, replay↔execution equivalence, or full game simulation unless separately governed.
 
-**Primary references:** `docs/company_secrets/milestones/M11/M11_plan.md` (stub); `docs/starlab.md` §10 (proved vs not yet proved); `docs/runtime/replay_timeline_event_extraction.md` (M10 timeline boundary).
+**Primary references:** `docs/company_secrets/milestones/M12/M12_plan.md` (stub); `docs/starlab.md` §10 (proved vs not yet proved); `docs/runtime/replay_timeline_event_extraction.md` (M10 timeline boundary); `docs/runtime/replay_build_order_economy_extraction.md` (M11 macro plane boundary).
 
-**Note:** **M10** timeline artifacts (`replay_timeline.json`, `replay_timeline_report.json`) are **proved on `main`** (narrow); **build-order / economy** is **not** proved until M11 closes.
+**Note:** **M11** build-order/economy artifacts (`replay_build_order_economy.json`, `replay_build_order_economy_report.json`) are **proved on `main`** (narrow); **combat/scouting/visibility** is **not** proved until M12 closes.
 
 #### Current milestone — explicit non-claims (standing)
 
-Until a milestone explicitly closes a claim, treat the following as **not proved** for **M11** planning:
+Until a milestone explicitly closes a claim, treat the following as **not proved** for **M12** planning:
 
-- **Combat, scouting, visibility windows** (M12) unless separately scoped.
 - **Benchmark integrity** / leaderboard claims (**not** a Phase II default proof).
 - **New live SC2 execution proof in CI** (CI remains **fixture-driven** unless a milestone explicitly changes that posture).
 
@@ -567,6 +574,15 @@ Every closed milestone should update this ledger with:
 
 **Closeout hygiene:** Prefer **at most one** post-merge `main` documentation-only commit per milestone closeout; if further fixes are needed afterward, land them on the **next milestone branch** rather than repeated doc-only churn on `main` (see M09 run-record footnotes on merge-boundary vs non-merge-boundary CI).
 
+### CI authority glossary (compact)
+
+| Term | Meaning |
+| ---- | ------- |
+| **Authoritative green PR-head CI** | A completed **success** `pull_request` workflow run on the **final PR head SHA** before merge — primary **merge-gate** evidence when present. |
+| **Merge-boundary `main` CI** | First `push` workflow run to `main` triggered by merging a PR (merge commit or squash), before unrelated follow-up commits. |
+| **Repaired green `main` CI** | A later `main` run that fixes red merge-boundary CI (e.g. M10 Mypy repair) — **not** a substitute for PR-head green when citing merge discipline. |
+| **Non-merge-boundary runs** | Doc-only, ledger, or chore pushes to `main` after the merge boundary — **not** merge authority; keep tables capped (M09 lesson). |
+
 ---
 
 ## 18. Milestone closeout ledger
@@ -586,6 +602,7 @@ This section should be filled as milestones close.
 | M08       | 2026-04-07    | [#9](https://github.com/m-cahill/starlab/pull/9) | `b99233e807177d65737beaba5246efa67a3edce2` | Replay parser substrate (`replay_parse_receipt.json` / `replay_parse_report.json` / `replay_raw_parse.json`); merged to `main`; narrow substrate + deterministic artifacts only — see CI evidence below |
 | M09       | 2026-04-07    | [#10](https://github.com/m-cahill/starlab/pull/10) | `fc9b442d66abe9a2922e93051c7d0a22ccb133d1` | Replay metadata extraction (`replay_metadata.json` / `replay_metadata_report.json`); merged to `main`; narrow pure extraction over M08 artifacts — see CI evidence below |
 | M10       | 2026-04-07    | [#11](https://github.com/m-cahill/starlab/pull/11) | `cb3e581f70f85653477081eb1ef4772229f05983` | Timeline & event extraction (`replay_timeline.json` / `replay_timeline_report.json`, optional `replay_raw_parse` v2 `raw_event_streams`); merge-push CI failed Mypy — repaired on `main` (`cf2074e10ec8a38b22bd7b75ffeb4ec22a71485b`); see §18 / `M10_run1.md` |
+| M11       | 2026-04-07    | [#12](https://github.com/m-cahill/starlab/pull/12) | `38c15302badd49966b17f9195ddb139f6ae9a9b4` | Build-order & economy plane (`replay_build_order_economy.json` / `replay_build_order_economy_report.json`); **green PR-head** [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320); **green merge-push `main`** [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347); see §18 / `M11_run1.md` |
 
 **M00 PR head (pre-merge):** `5dcb6cf6f95af23b58c6af202d58a7bcad1d0b91`
 
@@ -812,6 +829,26 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 
 **M10 milestone artifacts:** `docs/company_secrets/milestones/M10/` (`M10_plan.md`, `M10_toolcalls.md`, `M10_run1.md`, `M10_summary.md`, `M10_audit.md`, etc.)
 
+**M11 merge:** [PR #12](https://github.com/m-cahill/starlab/pull/12) merged **2026-04-07** (UTC `2026-04-07T21:49:23Z`) via **merge commit** `38c15302badd49966b17f9195ddb139f6ae9a9b4`. Remote branch `m11-build-order-economy-plane` was **deleted** after merge. Final PR head before merge: `88ce7f9615c6c462b76674e1afb0734fc3dcc5be`.
+
+**M11 CI evidence (PR-head run — authoritative merge gate)**
+
+| Commit (short) | Workflow run | Conclusion | URL |
+| -------------- | ------------ | ---------- | --- |
+| `88ce7f9…` | `24106029320` | success | https://github.com/m-cahill/starlab/actions/runs/24106029320 |
+
+**Authoritative green PR-head CI:** [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320) — **success** on final tip `88ce7f9…` (contrast M10 cancelled merge-gate run).
+
+**M11 CI evidence (post-merge `main` — merge boundary)**
+
+| Event | Workflow run | Conclusion | URL |
+| ----- | ------------ | ---------- | --- |
+| `main` after M11 merge (`38c1530…`) | `24106124347` | success | https://github.com/m-cahill/starlab/actions/runs/24106124347 |
+
+*Closeout / ledger documentation pushes after this row may produce additional green `main` runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge. Prefer **at most one** post-merge doc-only commit per closeout hygiene.*
+
+**M11 milestone artifacts:** `docs/company_secrets/milestones/M11/` (`M11_plan.md`, `M11_toolcalls.md`, `M11_run1.md`, `M11_summary.md`, `M11_audit.md`, etc.)
+
 ---
 
 ## 19. Deferred items / future-only tracks
@@ -844,6 +881,7 @@ This is a placeholder table for future audit tracking once milestones begin clos
 | M08       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 | M09       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 | M10       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
+| M11       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 
 **M02 note:** Evidence column reflects **narrow** local harness proof + CI; not benchmark or cross-host certification.
 
@@ -862,6 +900,8 @@ This is a placeholder table for future audit tracking once milestones begin clos
 **M09 note:** Evidence column reflects **fixture-driven** metadata extraction + deterministic metadata artifacts + CI **on `main`**; **not** event/timeline semantics (M10), build-order extraction (M11), or benchmark validity.
 
 **M10 note:** Evidence column reflects **fixture-driven** timeline extraction + deterministic timeline artifacts + CI **on `main`** (merge-push on merge commit failed Mypy — **authoritative green `main`** on repair `cf2074e…`, run `24104197912`); **not** build-order/economy (M11), combat/scouting, benchmark validity, or live SC2 execution in CI.
+
+**M11 note:** Evidence column reflects **fixture-driven** build-order/economy extraction + deterministic artifacts + CI **on `main`** (**green PR-head** [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320) on `88ce7f9…`; **green merge-push** [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347) on `38c1530…`); **not** combat/scouting (M12), exact resource reconstruction, benchmark validity, replay↔execution equivalence, or live SC2 execution in CI.
 
 ---
 
@@ -895,6 +935,14 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-07 — M11 merged to `main` (PR #12) + closeout
+
+- Merged [PR #12](https://github.com/m-cahill/starlab/pull/12) to `main` at **2026-04-07T21:49:23Z**; merge commit `38c15302badd49966b17f9195ddb139f6ae9a9b4` (merge method: **merge commit**); remote branch `m11-build-order-economy-plane` **deleted**
+- Final PR head `88ce7f9615c6c462b76674e1afb0734fc3dcc5be` — **authoritative green PR-head CI:** [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320) (**success**)
+- **Merge-push `main` CI** on merge commit: [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347) (**success**)
+- §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23 updated: **governed build-order / economy plane** (narrow) **proved on `main`**; **current milestone** → **M12** (stub); closeout ledger M11 row; score trend M11 note; Phase II layering chain + parser glossary alignment
+- Milestone closeout: `M11_run1.md`, `M11_summary.md`, `M11_audit.md`, `M11_plan.md` (**Status: Complete**), `M11_toolcalls.md`; **M12** stubs seeded (`M12_plan.md`, `M12_toolcalls.md`)
 
 ### 2026-04-07 — M10 merged to `main` (PR #11) + closeout
 

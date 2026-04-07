@@ -101,11 +101,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m11() -> None:
+def test_current_milestone_is_m12() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M11" in section
-    assert "Build-Order" in section or "Economy" in section
+    assert "M12" in section
+    assert "Combat" in section or "Scouting" in section or "Visibility" in section
 
 
 def _milestone_table_section() -> str:
@@ -333,10 +333,19 @@ def test_m10_milestone_files_exist() -> None:
     assert (m10 / "M10_audit.md").is_file()
 
 
-def test_m11_stub_milestone_files_exist() -> None:
+def test_m11_milestone_files_exist() -> None:
     m11 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M11"
     assert (m11 / "M11_plan.md").is_file()
     assert (m11 / "M11_toolcalls.md").is_file()
+    assert (m11 / "M11_run1.md").is_file()
+    assert (m11 / "M11_summary.md").is_file()
+    assert (m11 / "M11_audit.md").is_file()
+
+
+def test_m12_stub_milestone_files_exist() -> None:
+    m12 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M12"
+    assert (m12 / "M12_plan.md").is_file()
+    assert (m12 / "M12_toolcalls.md").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
@@ -368,6 +377,15 @@ def test_m10_complete_in_milestone_table() -> None:
             assert "Complete" in stripped
             return
     raise AssertionError("M10 milestone row not found or not complete")
+
+
+def test_m11_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M11 |") and "Build-Order" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M11 milestone row not found or not complete")
 
 
 def test_m10_fixture_dir_exists() -> None:
