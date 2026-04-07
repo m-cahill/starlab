@@ -5,6 +5,7 @@ Does not include raw replay bytes or raw proof/config. Does not claim parser sem
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 from typing import Any
 
@@ -161,6 +162,41 @@ def build_hashes_mapping(*, artifact_hashes: dict[str, str]) -> dict[str, Any]:
         "run_artifact_id": run_artifact_id,
         "schema_version": CANONICAL_RUN_ARTIFACT_HASHES_SCHEMA_VERSION,
     }
+
+
+def load_canonical_manifest(path: Path) -> dict[str, Any]:
+    """Load and validate M05 ``manifest.json`` (canonical run artifact v0)."""
+
+    raw = path.read_text(encoding="utf-8")
+    data = json.loads(raw)
+    if not isinstance(data, dict):
+        msg = "manifest.json root must be a JSON object"
+        raise ValueError(msg)
+    for key in (
+        "bundle_mode",
+        "execution_id",
+        "external_references",
+        "included_artifacts",
+        "later_milestones",
+        "lineage_seed_id",
+        "parent_references",
+        "proof_artifact_hash",
+        "replay_binding_id",
+        "replay_content_sha256",
+        "run_spec_id",
+        "schema_version",
+    ):
+        if key not in data:
+            msg = f"manifest.json missing required field: {key}"
+            raise ValueError(msg)
+    if data["schema_version"] != CANONICAL_RUN_ARTIFACT_SCHEMA_VERSION:
+        msg = f"unexpected manifest schema_version: {data['schema_version']}"
+        raise ValueError(msg)
+    if data["bundle_mode"] != BUNDLE_MODE:
+        msg = f"manifest bundle_mode must be {BUNDLE_MODE!r}"
+        raise ValueError(msg)
+    validate_included_artifacts(list(data["included_artifacts"]))
+    return data
 
 
 def load_validated_upstream(

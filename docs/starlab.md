@@ -1,6 +1,6 @@
 # STARLAB — Canonical Project Ledger
 
-**Status:** Active — M00–**M06** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1) through [PR #7](https://github.com/m-cahill/starlab/pull/7)); **M07** — Replay Intake Policy & Provenance Enforcement — **next** (stub only under `docs/company_secrets/milestones/M07/`). **M06** merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` — post-merge `main` CI on merge push [`24064229874`](https://github.com/m-cahill/starlab/actions/runs/24064229874) (**success**). **M05** merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0` — post-merge `main` CI [`24062610358`](https://github.com/m-cahill/starlab/actions/runs/24062610358) (**success**). **M05** closeout / ledger push on `main` (`6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`): CI [`24062664914`](https://github.com/m-cahill/starlab/actions/runs/24062664914) (**success**). Follow-up ledger cross-reference (`ebca1e964c0539c78165bfab72c249a2157402cc`): CI [`24062700534`](https://github.com/m-cahill/starlab/actions/runs/24062700534) (**success**) — **not** merge-boundary events. **Environment drift / smoke matrix** (narrow, M06), **replay binding** (narrow, M04), and **canonical run artifact v0** (narrow, M05) are **proved on `main`**; **replay intake / provenance enforcement** (M07+), **replay parser substrate**, **full replay provenance finalization**, and **benchmark integrity** remain **not** proved (M07+ / Phase II+).  
+**Status:** Active — M00–**M06** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1) through [PR #7](https://github.com/m-cahill/starlab/pull/7)); **M07** — Replay Intake Policy & Provenance Enforcement — **implementation complete** on branch `m07-replay-intake-policy-provenance-enforcement` (**merge to `main` pending** — PR TBD). **M06** merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` — post-merge `main` CI on merge push [`24064229874`](https://github.com/m-cahill/starlab/actions/runs/24064229874) (**success**). **M05** merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0` — post-merge `main` CI [`24062610358`](https://github.com/m-cahill/starlab/actions/runs/24062610358) (**success**). **M05** closeout / ledger push on `main` (`6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`): CI [`24062664914`](https://github.com/m-cahill/starlab/actions/runs/24062664914) (**success**). Follow-up ledger cross-reference (`ebca1e964c0539c78165bfab72c249a2157402cc`): CI [`24062700534`](https://github.com/m-cahill/starlab/actions/runs/24062700534) (**success**) — **not** merge-boundary events. **Environment drift / smoke matrix** (narrow, M06), **replay binding** (narrow, M04), and **canonical run artifact v0** (narrow, M05) are **proved on `main`**; **replay intake / provenance enforcement** (M07) is **implemented** on the M07 branch and **not** proved on `main` until merge; **replay parser substrate**, **full replay provenance finalization**, and **benchmark integrity** remain **not** proved (M08+ / Phase II+).  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), and `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract).  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), and `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate).  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -112,6 +112,12 @@ Focus:
 | M05 | `manifest.json`, `hashes.json`, plus M03/M04 JSON (directory bundle) | M03 + M04 JSON only | **Included:** STARLAB-owned JSON only. **External:** raw replay bytes, raw proof/config (never in bundle) | Parser substrate (M08), full benchmark semantics (later) |
 | M06 | `runtime_smoke_matrix.json`, `environment_drift_report.json` | M01 probe JSON; optional M03 `environment_fingerprint` | STARLAB JSON artifacts (fixture-driven in CI) | Replay parser, provenance closure, benchmark integrity, cross-host portability, live SC2 in CI |
 
+#### Phase II — artifact contracts by milestone (compact)
+
+| Milestone | Primary artifact(s) | Binds to / upstream | Included vs external (Phase II boundary) | Explicitly **not** proved here |
+| --------- | -------------------- | --------------------- | ---------------------------------------- | ------------------------------ |
+| M07 | `replay_intake_receipt.json`, `replay_intake_report.json` | Opaque replay bytes + declared intake metadata; optional M03/M04/M05 JSON | STARLAB JSON artifacts; replay bytes hashed, not parsed | Replay parser semantics, semantic extraction, benchmark integrity, cross-host portability, live SC2 in CI |
+
 ### Phase II — Replay Intake, Provenance, and Data Plane
 
 Focus:
@@ -170,7 +176,7 @@ Planned program arc (33 milestones, M00–M32):
 | M04 | Replay Binding to Run Identity | I | Complete | v0.0.4-m04 | — |
 | M05 | Canonical Run Artifact v0 | I | Complete | v0.0.5-m05 | — |
 | M06 | Environment Drift & Runtime Smoke Matrix | I | Complete | v0.0.6-m06 | — |
-| M07 | Replay Intake Policy & Provenance Enforcement | II | Planned | v0.0.7-m07 | — |
+| M07 | Replay Intake Policy & Provenance Enforcement | II | Complete (pending merge) | v0.0.7-m07 | — |
 | M08 | Replay Parser Substrate | II | Planned | v0.0.8-m08 | — |
 | M09 | Replay Metadata Extraction | II | Planned | v0.0.9-m09 | — |
 | M10 | Timeline & Event Extraction | II | Planned | v0.0.10-m10 | — |
@@ -282,6 +288,17 @@ This section exists so each milestone has a stable “why,” not just a title.
 
 9. **Canonical corpus promotion:** no replay, map, ladder-derived asset, or derived label enters a canonical STARLAB corpus until explicit provenance status and redistribution posture are recorded (see `docs/replay_data_provenance.md` and `docs/rights_register.md`).
 
+### Intake status glossary (M07)
+
+| Status | Meaning |
+| ------ | ------- |
+| `eligible_for_canonical_review` | Declared metadata and optional lineage evidence satisfy the **narrow** review bar for further governance review; **not** automatic corpus promotion. |
+| `accepted_local_only` | Structurally valid; suitable for **local/private** experimentation only; **not** sufficient for canonical-review corpus posture. |
+| `quarantined` | Structurally valid input, but **policy conflict** or **unsafe** posture (for example **forbidden** redistribution or **evidence conflict**). |
+| `rejected` | Hard failure: unreadable replay, invalid metadata, hash mismatch, or malformed linked artifact. |
+
+See `docs/runtime/replay_intake_policy.md`.
+
 ---
 
 ## 10. Standing invariants
@@ -329,6 +346,7 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Replay binding (opaque replay bytes → `replay_binding.json` linked to M03 IDs) | **Proved (narrow, M04):** deterministic `replay_content_sha256` + `replay_binding_id` from M03 `run_identity` / `lineage_seed` + opaque replay file bytes — see `docs/runtime/replay_binding.md`, `starlab/runs/replay_binding.py`, `starlab/runs/bind_replay.py`, `docs/company_secrets/milestones/M04/`. **Does not** claim replay parser correctness, replay↔proof semantic equivalence, replay event extraction, canonical run artifact v0, benchmark validity, cross-host reproducibility, or new live SC2 execution in CI (fixtures only). |
 | Canonical run artifacts | **Proved (narrow, M05):** deterministic directory bundle (`manifest.json`, `hashes.json`, canonical M03/M04 JSON only; `run_artifact_id`) — see `docs/runtime/canonical_run_artifact_v0.md`, `starlab/runs/canonical_run_artifact.py`, `starlab/runs/build_canonical_run_artifact.py`, `docs/company_secrets/milestones/M05/`. **Does not** claim replay parser semantics, replay↔proof equivalence, replay event extraction, **raw replay bytes or raw proof/config in the bundle**, benchmark validity, cross-host reproducibility, or new live SC2 execution in CI. |
 | Environment drift / runtime smoke matrix | **Proved (narrow, M06):** deterministic `runtime_smoke_matrix.json` + `environment_drift_report.json` from validated M01 probe JSON; optional advisory comparison with M03 `environment_fingerprint` — see `docs/runtime/environment_drift_smoke_matrix.md`, `starlab/sc2/environment_drift.py`, `starlab/sc2/evaluate_environment_drift.py`, `docs/company_secrets/milestones/M06/`. **Does not** claim cross-host portability, cross-install portability, replay parser correctness, replay semantic extraction, replay provenance finalization, benchmark integrity, or new live SC2 execution in CI. |
+| Replay intake policy & provenance gate | **Implemented (narrow, M07 branch):** deterministic `replay_intake_receipt.json` + `replay_intake_report.json` from opaque replay bytes + declared intake metadata; optional M03/M04/M05 cross-check — see `docs/runtime/replay_intake_policy.md`, `starlab/replays/`. **Not** proved on `main` until M07 merge. **Does not** claim replay parser correctness, replay semantic extraction, replay equivalence to execution proof, benchmark integrity, cross-host portability, live SC2 in CI, or legal certification of third-party rights. |
 | Parser substrate | Not yet proved |
 | Benchmark integrity | Not yet proved |
 | Learning or agent capability | Not yet proved |
@@ -345,6 +363,7 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Replay binding to run identity | M04 | **On `main`** — **narrow** opaque-bytes binding to M03 records; not parser/canonical-run/benchmark claims |
 | Canonical run artifact v0 | M05 | **On `main`** — narrow packaging only; see `docs/runtime/canonical_run_artifact_v0.md` |
 | Environment drift / smoke matrix | M06 | **On `main`** — fixture-driven probe + drift report; not portability/parser/benchmark claims |
+| Replay intake / provenance gate | M07 | **On branch** (pending merge) — opaque bytes + declared metadata; not parser/benchmark/live-SC2 claims |
 
 ### Assumed vs owned guarantees
 
@@ -370,21 +389,21 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-### M07 — Replay Intake Policy & Provenance Enforcement
+### M08 — Replay Parser Substrate
 
-**Status:** **Planned** — next after M06 merges to `main` and M06 closeout artifacts land.
+**Status:** **Planned** — next after M07 merges to `main` and M07 closeout artifacts land.
 
-**Goal (high level):** Enforce replay intake **policy** and strengthen **provenance** posture — **without** claiming replay parser substrate (M08) or benchmark semantics unless separately governed.
+**Goal (high level):** Stand up replay parsing substrate — **without** claiming full benchmark semantics unless separately governed.
 
-**Primary references:** `docs/company_secrets/milestones/M07/M07_plan.md` (stub); `docs/replay_data_provenance.md`; `docs/starlab.md` §10 (proved vs not yet proved).
+**Primary references:** `docs/company_secrets/milestones/M08/M08_plan.md` (stub); `docs/starlab.md` §10 (proved vs not yet proved).
 
-**Note:** **M06** merged **2026-04-07** — [PR #7](https://github.com/m-cahill/starlab/pull/7) — merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a`. **Environment drift / smoke matrix** (narrow) is **proved on `main`**; **replay intake / provenance enforcement** is **not** proved until M07.
+**Note:** **M07** replay intake policy (`starlab.replays`, `docs/runtime/replay_intake_policy.md`) is **implemented** on branch `m07-replay-intake-policy-provenance-enforcement` (**merge pending**). **Replay parser substrate** is **not** proved until M08.
 
 #### Current milestone — explicit non-claims (standing)
 
-Until a milestone explicitly closes a claim, treat the following as **not proved** for **M07** planning:
+Until a milestone explicitly closes a claim, treat the following as **not proved** for **M08** planning:
 
-- **Replay parser correctness** or **replay semantic extraction** (deferred to **M08+** in Phase II).
+- **Replay semantic extraction** beyond parser substrate scope (deferred to **M09+**).
 - **Benchmark integrity** / leaderboard claims (**not** a Phase II default proof).
 - **New live SC2 execution proof in CI** (CI remains **fixture-driven** unless a milestone explicitly changes that posture).
 
@@ -396,7 +415,7 @@ Until a milestone explicitly closes a claim, treat the following as **not proved
 | ------ | -------------------------------- | -------- | ---------------- | ------------------------------------------------------------------ |
 | OD-001 | License posture                  | Resolved | M00              | Custom source-available terms in `LICENSE` (evaluation/verification); public/private surfaces governed by `docs/public_private_boundary.md` |
 | OD-002 | Public/private boundary          | Resolved | M00              | `docs/public_private_boundary.md`                                  |
-| OD-003 | Replay/data provenance policy    | Conditionally resolved | M00 / M07+ | Interim policy in `docs/replay_data_provenance.md`; tighten with replay intake (M07) |
+| OD-003 | Replay/data provenance policy    | Resolved | M07 | Governed intake gate (`docs/runtime/replay_intake_policy.md`, `starlab/replays/`); interim policy remains in `docs/replay_data_provenance.md` for broader context |
 | OD-004 | Naming / brand diligence posture | Resolved | M00              | `docs/branding_and_naming.md`                                      |
 | OD-005 | SC2 runtime surface selection    | Resolved | M01              | Canonical: SC2API/`s2client-proto` + `s2protocol`; optional `python-sc2` as adapter only; PySC2 deferred — see `docs/runtime/sc2_runtime_surface.md` |
 | OD-006 | Rights register format           | Resolved | M00              | `docs/rights_register.md` (canonical); this ledger summarizes      |
@@ -482,7 +501,10 @@ This section starts simple and should become more explicit as the project mature
 | Documentation ownership            | Expected to be first-party and traceable                       | Initial                |
 | SC2 client / Battle.net runtime    | Acquire under Blizzard terms (EULA / AI & ML license as applicable); **not** redistributed via this repo; see `docs/runtime/*` | Governed (M01) |
 | SC2 maps / replay packs            | Local-only; **not** committed; rights per Blizzard / pack terms; quarantine if unclear | Governed (M01) |
-| Replay/data rights                 | Interim policy in `docs/replay_data_provenance.md`              | Conditionally resolved |
+| Raw replay bytes (third-party / ladder) | Local-only; **not** committed; rights per Blizzard / pack terms; quarantine if unclear; **M07** records **declared** posture only | Governed (M07) |
+| Replay intake receipts / reports (`replay_intake_*.json`) | STARLAB **governed** JSON; operator-declared metadata + policy outcome; **not** legal certification | Governed (M07) |
+| Canonical-reviewed corpus assets | **No** corpus promotion without explicit provenance + redistribution posture; see `docs/replay_data_provenance.md`, `docs/rights_register.md`, and M07 intake statuses | Governed (M01 / M07) |
+| Replay/data rights (interim policy) | `docs/replay_data_provenance.md` + M07 intake contract | Resolved (M07) |
 | Third-party dependency obligations | CI: pip-audit + CycloneDX SBOM artifact (`pyproject.toml` dev) | Initial                |
 | Public/private split               | `docs/public_private_boundary.md`                              | Initial                |
 | Contributor policy                 | `CONTRIBUTING.md`                                              | Initial                |
@@ -686,6 +708,7 @@ This is a placeholder table for future audit tracking once milestones begin clos
 | M04       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 | M05       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 | M06       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
+| M07       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 
 **M02 note:** Evidence column reflects **narrow** local harness proof + CI; not benchmark or cross-host certification.
 
@@ -696,6 +719,8 @@ This is a placeholder table for future audit tracking once milestones begin clos
 **M05 note:** Evidence column reflects **fixture-driven canonical bundle** (`manifest.json` / `hashes.json` + M03/M04 JSON) **on `main`**; **not** replay parser semantics, raw replay/proof shipping, benchmark validity, or cross-host reproducibility.
 
 **M06 note:** Evidence column reflects **fixture-driven** smoke matrix + drift report + CI on `main`; **not** replay parser semantics, portability certification, benchmark validity, provenance closure, or live SC2 execution in CI.
+
+**M07 note:** Evidence column reflects **fixture-driven** replay intake receipt/report + CI on the M07 branch; **not** replay parser semantics, benchmark validity, live SC2 execution in CI, or legal certification of third-party replay rights.
 
 ---
 
@@ -729,6 +754,17 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-06 — M07 replay intake policy & provenance enforcement (pre-merge branch)
+
+- **Branch:** `m07-replay-intake-policy-provenance-enforcement` (recommended); **merge to `main` pending** (PR TBD)
+- **Contract:** `docs/runtime/replay_intake_policy.md`; **policy version** `starlab.replay_intake_policy.v1`
+- **Code:** `starlab/replays/` (`intake_models.py`, `intake_policy.py`, `intake_io.py`, `intake_cli.py`); `load_canonical_manifest` in `starlab/runs/canonical_run_artifact.py`
+- **Artifacts:** `replay_intake_receipt.json`, `replay_intake_report.json` (deterministic JSON; exit codes 0/2/3/4)
+- **Tests:** `tests/test_replay_intake.py`, `tests/test_replay_intake_cli.py`; fixtures `replay_m07_sample.SC2Replay`, `replay_m07_generated.SC2Replay`
+- **Ledger:** Phase II artifact-contract row (M07), intake status glossary (§9), rights/provenance tracker split (§16), **OD-003** resolved (M07); **§11** current milestone → **M08**; **M08** stubs under `docs/company_secrets/milestones/M08/`
+- **Explicit non-proofs:** replay parser, replay semantic extraction, benchmark integrity, live SC2 in CI, legal certification of third-party rights
+- **Closeout docs:** `M07_run1.md` (pending PR CI), `M07_summary.md`, `M07_audit.md`
 
 ### 2026-04-07 — M06 merged to `main` (PR #7) + closeout
 
