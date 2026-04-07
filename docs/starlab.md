@@ -697,10 +697,11 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 | ----- | ------------ | ---------- | --- |
 | `main` after M07 merge (`1c7bb0c…`) | `24066550699` | success | https://github.com/m-cahill/starlab/actions/runs/24066550699 |
 | `main` after M07 closeout docs (`2ccac7e…`) | `24066606427` | success | https://github.com/m-cahill/starlab/actions/runs/24066606427 |
+| `main` after M07 doc CI cross-reference (`20a1870…`) | `24066644075` | success | https://github.com/m-cahill/starlab/actions/runs/24066644075 |
 
-*Row `24066606427` is **ledger / milestone closeout only** — **not** a merge-boundary event. Merge-boundary post-merge `main` CI for M07 remains `24066550699` on merge commit `1c7bb0c…`.*
+*Rows `24066606427` and `24066644075` are **ledger / documentation only** — **not** merge-boundary events. Merge-boundary post-merge `main` CI for M07 remains `24066550699` on merge commit `1c7bb0c…`.*
 
-*Further documentation-only pushes to `main` after these rows may produce additional green CI runs; distinguish them in §23.*
+*Further documentation-only pushes to `main` after these rows may produce additional green CI runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge.*
 
 **M07 milestone artifacts:** `docs/company_secrets/milestones/M07/` (`M07_plan.md`, `M07_toolcalls.md`, `M07_run1.md`, `M07_summary.md`, `M07_audit.md`, etc.)
 
@@ -786,7 +787,7 @@ It should always answer, with minimal ambiguity:
 - **Authoritative post-merge `main` CI** on merge commit: [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) (**success**)
 - §7 / §10 / §11 / §16 / §18 / §20 / §23 updated: **replay intake / provenance gate** (narrow) **proved on `main`**; **current milestone** → **M08** (stub only); **replay parser substrate** — **not** proved
 - Milestone closeout: `M07_run1.md`, `M07_summary.md`, `M07_audit.md`, `M07_plan.md` (**Status: Complete**), `M07_toolcalls.md`; **M08** remains stub-only (`M08_plan.md`, `M08_toolcalls.md`)
-- **Non-merge-boundary** `main` CI on closeout commit `2ccac7ed1d9d3fc3c466916f41f1c4d6e9d6a2cc`: [`24066606427`](https://github.com/m-cahill/starlab/actions/runs/24066606427) (**success**) — ledger/milestone docs only; **authoritative** merge-boundary post-merge `main` CI remains [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) on merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a`
+- **Non-merge-boundary** `main` CI — closeout commit `2ccac7ed1d9d3fc3c466916f41f1c4d6e9d6a2cc`: [`24066606427`](https://github.com/m-cahill/starlab/actions/runs/24066606427) (**success**); ledger/CI-ID hygiene commit `20a18706fe0c7338fbe4e1922e1a84ae7dc800d9`: [`24066644075`](https://github.com/m-cahill/starlab/actions/runs/24066644075) (**success**) — both **doc-only**; **authoritative** merge-boundary post-merge `main` CI remains [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) on merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a`
 
 ### 2026-04-06 — M07 replay intake policy & provenance enforcement (pre-merge branch; superseded by PR #8 merge)
 

@@ -49,12 +49,14 @@ This run is the **authoritative post-merge `main`** evidence for the M07 merge b
 
 These runs are **`push`** triggers on `main` **after** the merge commit; they are **not** the merge-boundary post-merge run.
 
-| Field | Value |
-| ----- | ----- |
-| **Commit** | `2ccac7ed1d9d3fc3c466916f41f1c4d6e9d6a2cc` (`docs(m07): finalize M07 closeout ledger and milestone artifacts`) |
-| **Workflow run** | [`24066606427`](https://github.com/m-cahill/starlab/actions/runs/24066606427) |
-| **Conclusion** | **success** |
-| **Classification** | **Ledger / milestone closeout only** — **not** a merge-boundary event; authoritative merge-boundary post-merge `main` CI remains [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) on merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a`. |
+| # | Commit | Workflow run | Conclusion | Notes |
+| - | ------ | ------------ | ---------- | ----- |
+| 1 | `2ccac7ed1d9d3fc3c466916f41f1c4d6e9d6a2cc` | [`24066606427`](https://github.com/m-cahill/starlab/actions/runs/24066606427) | **success** | Milestone closeout artifacts + ledger (first doc push after merge) |
+| 2 | `20a18706fe0c7338fbe4e1922e1a84ae7dc800d9` | [`24066644075`](https://github.com/m-cahill/starlab/actions/runs/24066644075) | **success** | Record run **24066606427** in `M07_run1` / §18; changelog hygiene — **not** merge-boundary |
+
+**Classification:** both rows are **ledger / documentation only** — **not** merge-boundary events. **Authoritative** merge-boundary post-merge `main` CI remains [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) on merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a`.
+
+*Any further doc-only push (including a commit that records this table) may produce additional green runs — classify as **non-merge-boundary** unless the push is itself a PR merge to `main`.*
 
 ---
 

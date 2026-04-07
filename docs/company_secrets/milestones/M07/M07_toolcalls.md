@@ -60,6 +60,13 @@ Governance tests are included in pytest; M07 remains fixture-driven and SC2-free
 | **PR-head (merge gate, final tip)** | [`24065819186`](https://github.com/m-cahill/starlab/actions/runs/24065819186) | success | `a5188ad…` |
 | **Post-merge `main` (merge boundary)** | [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) | success | `1c7bb0c…` (merge commit) |
 
-**Non-merge-boundary doc follow-up (after merge):** commit `2ccac7ed1d9d3fc3c466916f41f1c4d6e9d6a2cc` — CI [`24066606427`](https://github.com/m-cahill/starlab/actions/runs/24066606427) (**success**) — ledger + milestone artifacts; **not** merge-boundary evidence (merge-boundary remains `24066550699`).
+**Non-merge-boundary doc follow-up (after merge):**
+
+| Commit | Run | Role |
+| ------ | --- | ---- |
+| `2ccac7e…` | [`24066606427`](https://github.com/m-cahill/starlab/actions/runs/24066606427) | Milestone closeout + ledger |
+| `20a1870…` | [`24066644075`](https://github.com/m-cahill/starlab/actions/runs/24066644075) | Record first doc-run ID in `M07_run1` / §18; **not** merge-boundary |
+
+Merge-boundary post-merge `main` CI remains **`24066550699`** on `1c7bb0c…`.
 
 **Closeout:** `M07_run1.md`, `M07_summary.md`, `M07_audit.md`, `M07_plan.md` (**Status: Complete**), ledger `docs/starlab.md` — pushed to `main` as above.
