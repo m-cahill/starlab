@@ -14,7 +14,7 @@ from starlab.runs.seed_from_proof import build_seed_from_paths
 from starlab.runs.writer import write_json_record
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
-SYNTHETIC_REPLAY = FIXTURE_DIR / "synthetic_opaque_test.SC2Replay"
+OPAQUE_REPLAY_FIXTURE = FIXTURE_DIR / "replay_m07_generated.SC2Replay"
 
 
 def _generate_m03_artifacts(tmp_path: Path) -> tuple[Path, Path]:
@@ -53,7 +53,7 @@ def test_bind_replay_writes_artifact(tmp_path: Path) -> None:
         "--lineage-seed",
         str(ls_path),
         "--replay",
-        str(SYNTHETIC_REPLAY),
+        str(OPAQUE_REPLAY_FIXTURE),
         "--output-dir",
         str(out),
     ]
@@ -64,7 +64,7 @@ def test_bind_replay_writes_artifact(tmp_path: Path) -> None:
     data = json.loads(rb.read_text(encoding="utf-8"))
     assert data["schema_version"] == REPLAY_BINDING_SCHEMA_VERSION
     assert len(data["replay_binding_id"]) == 64
-    assert data["replay_reference"]["basename"] == "synthetic_opaque_test.SC2Replay"
+    assert data["replay_reference"]["basename"] == "replay_m07_generated.SC2Replay"
     assert data["binding_mode"] == "opaque_content_sha256"
 
 
@@ -81,7 +81,7 @@ def test_bind_replay_deterministic_across_runs(tmp_path: Path) -> None:
             "--lineage-seed",
             str(ls_path),
             "--replay",
-            str(SYNTHETIC_REPLAY),
+            str(OPAQUE_REPLAY_FIXTURE),
             "--output-dir",
             str(out_dir),
         ]
@@ -101,7 +101,7 @@ def test_bind_replay_rejects_missing_run_identity(tmp_path: Path) -> None:
         "--lineage-seed",
         str(ls_path),
         "--replay",
-        str(SYNTHETIC_REPLAY),
+        str(OPAQUE_REPLAY_FIXTURE),
         "--output-dir",
         str(out),
     ]
@@ -135,7 +135,7 @@ def test_bind_replay_rejects_malformed_run_identity(tmp_path: Path) -> None:
         "--lineage-seed",
         str(ls_path),
         "--replay",
-        str(SYNTHETIC_REPLAY),
+        str(OPAQUE_REPLAY_FIXTURE),
         "--output-dir",
         str(out),
     ]
@@ -155,7 +155,7 @@ def test_bind_replay_rejects_wrong_schema_version(tmp_path: Path) -> None:
         "--lineage-seed",
         str(ls_path),
         "--replay",
-        str(SYNTHETIC_REPLAY),
+        str(OPAQUE_REPLAY_FIXTURE),
         "--output-dir",
         str(out),
     ]

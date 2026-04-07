@@ -138,4 +138,4 @@ The CLI accepts **only** those three JSON paths plus `--output-dir`. It does **n
 
 ## Worked fixture example (CI)
 
-The test suite derives **M03** artifacts from `tests/fixtures/m02_match_config.json` + `tests/fixtures/m02_match_execution_proof.json`, builds **M04** `replay_binding.json` using `tests/fixtures/synthetic_opaque_test.SC2Replay`, then builds **M05** output and checks **`manifest.json` / `hashes.json`** against golden files under `tests/fixtures/m05_expected/`.
+The test suite derives **M03** artifacts from `tests/fixtures/m02_match_config.json` + `tests/fixtures/m02_match_execution_proof.json`, builds **M04** `replay_binding.json` using `tests/fixtures/replay_m07_generated.SC2Replay`, then builds **M05** output and checks **`manifest.json` / `hashes.json`** against golden files under `tests/fixtures/m05_expected/`.

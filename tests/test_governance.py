@@ -21,6 +21,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/canonical_run_artifact_v0.md",
     "docs/runtime/environment_drift_smoke_matrix.md",
     "docs/runtime/replay_intake_policy.md",
+    "docs/runtime/replay_parser_substrate.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -257,9 +258,12 @@ def test_m06_probe_fixtures_exist() -> None:
     assert (fx / "run_identity_m06_fingerprint.json").is_file()
 
 
-def test_synthetic_replay_fixture_exists() -> None:
-    fx = REPO_ROOT / "tests" / "fixtures" / "synthetic_opaque_test.SC2Replay"
-    assert fx.is_file()
+def test_opaque_replay_fixtures_exist() -> None:
+    """Governed opaque replay bytes used by M04/M05/M07/M08 tests (not Blizzard MPQ files)."""
+
+    fx = REPO_ROOT / "tests" / "fixtures"
+    assert (fx / "replay_m07_generated.SC2Replay").is_file()
+    assert (fx / "replay_m07_sample.SC2Replay").is_file()
 
 
 def test_m07_opaque_replay_fixtures_exist() -> None:
@@ -268,7 +272,26 @@ def test_m07_opaque_replay_fixtures_exist() -> None:
     assert (fx / "replay_m07_generated.SC2Replay").is_file()
 
 
-def test_m08_stub_milestone_files_exist() -> None:
+def test_m08_milestone_files_exist() -> None:
     m08 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M08"
     assert (m08 / "M08_plan.md").is_file()
     assert (m08 / "M08_toolcalls.md").is_file()
+
+
+def test_m08_replay_parser_modules_exist() -> None:
+    rp = REPO_ROOT / "starlab" / "replays"
+    for name in (
+        "parse_replay.py",
+        "parser_io.py",
+        "parser_interfaces.py",
+        "parser_models.py",
+        "parser_normalization.py",
+        "s2protocol_adapter.py",
+    ):
+        assert (rp / name).is_file()
+
+
+def test_m09_stub_milestone_files_exist() -> None:
+    m09 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M09"
+    assert (m09 / "M09_plan.md").is_file()
+    assert (m09 / "M09_toolcalls.md").is_file()

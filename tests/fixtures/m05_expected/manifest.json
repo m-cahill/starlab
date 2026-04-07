@@ -18,8 +18,8 @@
   "lineage_seed_id": "a17d046478b43358647ab599baf5ef95bf9e61e0cdc31b4adb09fd34b9692833",
   "parent_references": [],
   "proof_artifact_hash": "d8e2fcb2e227c7c3e7e908c0df140586572f7c8c25fb67db1be823f445062774",
-  "replay_binding_id": "3e4fb0f7a7386fc79380a336d7de29a271a27af3dcbd7844161c0c8552f04fc4",
-  "replay_content_sha256": "171507ff6f9014db1971cd339dbfc45696dd9ae232cc3bac04aa78994878f33d",
+  "replay_binding_id": "aa2b2ed2653471aaeadd1f4748e3672d701cfe430eaebc464418b496c12371ed",
+  "replay_content_sha256": "75d471bb536f299d292dc94cc4cc2e01660e835efce3f2bd7c1c3a385def133b",
   "run_spec_id": "7fed18301cec0c910fb1ed246db46fd80088514d98fd058dd08dd99052450321",
   "schema_version": "starlab.canonical_run_artifact.v0"
 }

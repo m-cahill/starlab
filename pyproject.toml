@@ -17,6 +17,10 @@ dependencies = []
 sc2-harness = [
     "burnysc2>=7.2,<8",
 ]
+# Canonical replay decode (Blizzard s2protocol + mpyq); CI uses fixture/mocked paths by default.
+replay-parser = [
+    "s2protocol>=5,<6",
+]
 dev = [
     "ruff>=0.4",
     "mypy>=1.8",
@@ -48,6 +52,10 @@ disallow_untyped_defs = false
 
 [[tool.mypy.overrides]]
 module = "starlab.sc2.adapters.burnysc2_adapter"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
+module = "starlab.replays.s2protocol_adapter"
 ignore_errors = true
 
 [tool.pytest.ini_options]

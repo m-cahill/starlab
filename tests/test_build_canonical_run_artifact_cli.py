@@ -17,7 +17,7 @@ from starlab.runs.seed_from_proof import build_seed_from_paths
 from starlab.runs.writer import write_json_record
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
-SYNTHETIC_REPLAY = FIXTURE_DIR / "synthetic_opaque_test.SC2Replay"
+OPAQUE_REPLAY_FIXTURE = FIXTURE_DIR / "replay_m07_generated.SC2Replay"
 
 
 def _write_upstream(tmp_path: Path) -> tuple[Path, Path, Path]:
@@ -31,8 +31,8 @@ def _write_upstream(tmp_path: Path) -> tuple[Path, Path, Path]:
         execution_id=ri["execution_id"],
         lineage_seed_id=ls["lineage_seed_id"],
         proof_artifact_hash=ri["proof_artifact_hash"],
-        replay_content_sha256=compute_replay_content_sha256(SYNTHETIC_REPLAY),
-        replay_reference=build_replay_reference(SYNTHETIC_REPLAY),
+        replay_content_sha256=compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE),
+        replay_reference=build_replay_reference(OPAQUE_REPLAY_FIXTURE),
         run_spec_id=ri["run_spec_id"],
     )
     ri_path = tmp_path / "run_identity.json"

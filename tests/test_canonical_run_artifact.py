@@ -30,7 +30,7 @@ from starlab.runs.seed_from_proof import build_seed_from_paths
 from starlab.runs.writer import write_json_record
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
-SYNTHETIC_REPLAY = FIXTURE_DIR / "synthetic_opaque_test.SC2Replay"
+OPAQUE_REPLAY_FIXTURE = FIXTURE_DIR / "replay_m07_generated.SC2Replay"
 M05_EXPECTED = FIXTURE_DIR / "m05_expected"
 
 
@@ -45,8 +45,8 @@ def _m03_from_fixtures() -> tuple[dict[str, Any], dict[str, Any]]:
 
 
 def _m04_record(ri: dict[str, Any], ls: dict[str, Any]) -> dict[str, Any]:
-    sha = compute_replay_content_sha256(SYNTHETIC_REPLAY)
-    ref = build_replay_reference(SYNTHETIC_REPLAY)
+    sha = compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE)
+    ref = build_replay_reference(OPAQUE_REPLAY_FIXTURE)
     return build_replay_binding_record(
         execution_id=ri["execution_id"],
         lineage_seed_id=ls["lineage_seed_id"],
