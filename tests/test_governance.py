@@ -20,6 +20,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_binding.md",
     "docs/runtime/canonical_run_artifact_v0.md",
     "docs/runtime/environment_drift_smoke_matrix.md",
+    "docs/runtime/replay_intake_policy.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -96,11 +97,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m07() -> None:
+def test_current_milestone_is_m08() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M07" in section
-    assert "Replay Intake" in section
+    assert "M08" in section
+    assert "Parser" in section
 
 
 def _milestone_table_section() -> str:
@@ -186,10 +187,13 @@ def test_m06_stub_milestone_files_exist() -> None:
     assert (m06 / "M06_toolcalls.md").is_file()
 
 
-def test_m07_stub_milestone_files_exist() -> None:
+def test_m07_milestone_files_exist() -> None:
     m07 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M07"
     assert (m07 / "M07_plan.md").is_file()
     assert (m07 / "M07_toolcalls.md").is_file()
+    assert (m07 / "M07_run1.md").is_file()
+    assert (m07 / "M07_summary.md").is_file()
+    assert (m07 / "M07_audit.md").is_file()
 
 
 def test_starlab_runs_package_exists() -> None:
@@ -231,6 +235,14 @@ def test_m06_environment_drift_modules_exist() -> None:
     assert (REPO_ROOT / "starlab" / "sc2" / "runtime_smoke_matrix.py").is_file()
 
 
+def test_m07_replay_intake_modules_exist() -> None:
+    rp = REPO_ROOT / "starlab" / "replays"
+    assert (rp / "intake_models.py").is_file()
+    assert (rp / "intake_policy.py").is_file()
+    assert (rp / "intake_io.py").is_file()
+    assert (rp / "intake_cli.py").is_file()
+
+
 def test_m05_expected_golden_fixtures_exist() -> None:
     exp = REPO_ROOT / "tests" / "fixtures" / "m05_expected"
     assert (exp / "manifest.json").is_file()
@@ -248,3 +260,15 @@ def test_m06_probe_fixtures_exist() -> None:
 def test_synthetic_replay_fixture_exists() -> None:
     fx = REPO_ROOT / "tests" / "fixtures" / "synthetic_opaque_test.SC2Replay"
     assert fx.is_file()
+
+
+def test_m07_opaque_replay_fixtures_exist() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures"
+    assert (fx / "replay_m07_sample.SC2Replay").is_file()
+    assert (fx / "replay_m07_generated.SC2Replay").is_file()
+
+
+def test_m08_stub_milestone_files_exist() -> None:
+    m08 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M08"
+    assert (m08 / "M08_plan.md").is_file()
+    assert (m08 / "M08_toolcalls.md").is_file()
