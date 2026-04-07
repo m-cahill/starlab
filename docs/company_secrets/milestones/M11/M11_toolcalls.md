@@ -38,3 +38,11 @@
 | `python -m mypy starlab tests` | **1** | **ImportError:** `DLL load failed while importing tvar_scope: An Application Control policy has blocked this file` (local environment / policy; not a project typing regression). **Authoritative mypy:** GitHub Actions `CI` workflow on the PR head. |
 
 * **Next:** Create branch `m11-build-order-economy-plane`, commit, push, open PR, wait for **green PR-head** CI before merge.
+
+---
+
+## 2026-04-07 / 2026-04-08 — PR #12 merge + M11 closeout
+
+* **PR #12:** merged to `main`; final PR head `88ce7f9…`; **green PR-head CI** [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320); merge commit `38c1530…`; **green merge-push `main`** [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347).
+* **Closeout commits on `main`:** `0ebc81b…` (ledger + M11 artifacts + M12 stubs) — CI [`24106210049`](https://github.com/m-cahill/starlab/actions/runs/24106210049) success; `b625649…` (non-merge-boundary CI row sync) — follow-up push.
+* **Remote branch:** `m11-build-order-economy-plane` deleted after merge.
