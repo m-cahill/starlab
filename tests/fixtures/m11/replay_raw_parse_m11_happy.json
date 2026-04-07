@@ -1,0 +1,66 @@
+{
+  "event_streams_available": {
+    "attribute_events_available": false,
+    "game_events_available": false,
+    "message_events_available": false,
+    "tracker_events_available": true
+  },
+  "normalization_profile": "starlab.parser_normalization.v1",
+  "parser_family": "fixture",
+  "parser_version": "0.0.test-m11",
+  "protocol_context": {
+    "m_baseBuild": 12345,
+    "m_dataBuild": 67890,
+    "m_revision": 1
+  },
+  "raw_event_streams": {
+    "game_events": [],
+    "message_events": null,
+    "raw_event_streams_schema": "starlab.raw_event_streams.v1",
+    "tracker_events": [
+      {
+        "_event": "NNet.Replay.Tracker.SUnitInitEvent",
+        "_eventid": 5,
+        "_gameloop": 100,
+        "m_controlPlayerId": 1,
+        "m_unitTypeName": "CommandCenter"
+      },
+      {
+        "_event": "NNet.Replay.Tracker.SUnitBornEvent",
+        "_eventid": 1,
+        "_gameloop": 101,
+        "m_controlPlayerId": 1,
+        "m_unitTagIndex": 2,
+        "m_unitTypeName": "SCV",
+        "m_unitTagRecycle": 0
+      }
+    ]
+  },
+  "raw_sections": {
+    "attribute_events": null,
+    "details": {
+      "m_gameDurationLoops": 1000,
+      "m_playerList": [
+        {
+          "m_control": 1,
+          "m_race": "Terran",
+          "m_result": 1,
+          "m_workingSetSlotId": 0
+        }
+      ],
+      "m_title": "M11 Fixture Map"
+    },
+    "header": {
+      "m_version": {
+        "m_baseBuild": 12345,
+        "m_dataBuild": 67890,
+        "m_revision": 1
+      }
+    },
+    "init_data": {
+      "m_syncLobbyState": {}
+    }
+  },
+  "replay_content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "schema_version": "starlab.replay_raw_parse.v2"
+}

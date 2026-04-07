@@ -24,6 +24,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_parser_substrate.md",
     "docs/runtime/replay_metadata_extraction.md",
     "docs/runtime/replay_timeline_event_extraction.md",
+    "docs/runtime/replay_build_order_economy_extraction.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -373,6 +374,25 @@ def test_m10_fixture_dir_exists() -> None:
     fx = REPO_ROOT / "tests" / "fixtures" / "m10"
     assert fx.is_dir()
     assert (fx / "replay_raw_parse_timeline_happy.json").is_file()
+
+
+def test_m11_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m11"
+    assert fx.is_dir()
+    assert (fx / "replay_raw_parse_m11_happy.json").is_file()
+    assert (fx / "expected_replay_build_order_economy.json").is_file()
+
+
+def test_m11_build_order_economy_modules_exist() -> None:
+    rp = REPO_ROOT / "starlab" / "replays"
+    for name in (
+        "build_order_economy_models.py",
+        "build_order_economy_catalog.py",
+        "build_order_economy_extraction.py",
+        "build_order_economy_io.py",
+        "extract_replay_build_order_economy.py",
+    ):
+        assert (rp / name).is_file()
 
 
 def test_m09_fixture_raw_parse_fixtures_exist() -> None:

@@ -1,0 +1,51 @@
+{
+  "build_order_economy_contract_version": "starlab.replay_build_order_economy_contract.v1",
+  "build_order_economy_profile": "starlab.replay_build_order_economy.m11.v1",
+  "check_results": [
+    {
+      "check_id": "timeline_schema_valid",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "replay_hash_present",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "source_timeline_sha256_computed",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "source_raw_parse_identity_match",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "check_id": "build_order_economy_emitted",
+      "severity": "required",
+      "status": "pass"
+    }
+  ],
+  "counts_by_category": {
+    "townhall": 1,
+    "worker": 1
+  },
+  "counts_by_phase": {
+    "completed": 1,
+    "started": 1
+  },
+  "counts_by_player": {
+    "1": {
+      "steps": 2
+    }
+  },
+  "extraction_status": "ok",
+  "ignored_timeline_semantic_kinds": {},
+  "reason_codes": [],
+  "schema_version": "starlab.replay_build_order_economy_report.v1",
+  "unclassified_unit_names": [],
+  "unclassified_upgrade_names": [],
+  "warnings": []
+}
