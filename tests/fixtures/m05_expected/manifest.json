@@ -1,0 +1,25 @@
+{
+  "bundle_mode": "starlab_owned_records_only",
+  "execution_id": "20b20f825be41bd4a6b73c5a771eae30da19c832c9e1ba59ac229ad13b9b62c3",
+  "external_references": {
+    "proof_json_included": false,
+    "replay_bytes_included": false
+  },
+  "included_artifacts": [
+    "run_identity.json",
+    "lineage_seed.json",
+    "replay_binding.json"
+  ],
+  "later_milestones": [
+    "M06 environment drift & runtime smoke matrix",
+    "M07 replay intake policy & provenance enforcement",
+    "M08 replay parser substrate"
+  ],
+  "lineage_seed_id": "a17d046478b43358647ab599baf5ef95bf9e61e0cdc31b4adb09fd34b9692833",
+  "parent_references": [],
+  "proof_artifact_hash": "d8e2fcb2e227c7c3e7e908c0df140586572f7c8c25fb67db1be823f445062774",
+  "replay_binding_id": "3e4fb0f7a7386fc79380a336d7de29a271a27af3dcbd7844161c0c8552f04fc4",
+  "replay_content_sha256": "171507ff6f9014db1971cd339dbfc45696dd9ae232cc3bac04aa78994878f33d",
+  "run_spec_id": "7fed18301cec0c910fb1ed246db46fd80088514d98fd058dd08dd99052450321",
+  "schema_version": "starlab.canonical_run_artifact.v0"
+}

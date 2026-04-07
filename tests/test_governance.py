@@ -18,6 +18,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/match_execution_harness.md",
     "docs/runtime/run_identity_lineage_seed.md",
     "docs/runtime/replay_binding.md",
+    "docs/runtime/canonical_run_artifact_v0.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -94,11 +95,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m05() -> None:
+def test_current_milestone_is_m06() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M05" in section
-    assert "Canonical Run Artifact" in section
+    assert "M06" in section
+    assert "Environment Drift" in section
 
 
 def _milestone_table_section() -> str:
@@ -184,6 +185,19 @@ def test_replay_binding_module_exists() -> None:
     assert rb.is_file()
     cli = REPO_ROOT / "starlab" / "runs" / "bind_replay.py"
     assert cli.is_file()
+
+
+def test_canonical_run_artifact_modules_exist() -> None:
+    cr = REPO_ROOT / "starlab" / "runs" / "canonical_run_artifact.py"
+    assert cr.is_file()
+    cli = REPO_ROOT / "starlab" / "runs" / "build_canonical_run_artifact.py"
+    assert cli.is_file()
+
+
+def test_m05_expected_golden_fixtures_exist() -> None:
+    exp = REPO_ROOT / "tests" / "fixtures" / "m05_expected"
+    assert (exp / "manifest.json").is_file()
+    assert (exp / "hashes.json").is_file()
 
 
 def test_synthetic_replay_fixture_exists() -> None:
