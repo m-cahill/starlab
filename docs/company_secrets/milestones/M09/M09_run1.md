@@ -50,8 +50,12 @@ This run validates **`main` at the merge commit** immediately after PR #10 lande
 
 ## Non-merge-boundary runs (documentation / ledger closeout)
 
-After the merge commit, any additional `push` to `main` that updates only milestone closeout docs, `docs/starlab.md`, or `M09_toolcalls.md` hygiene **is not** a merge-boundary event unless explicitly recorded below.
+After the merge commit, any additional `push` to `main` that updates only milestone closeout docs, `docs/starlab.md`, or `M09_toolcalls.md` hygiene **is not** a merge-boundary event.
 
-*No non-merge-boundary doc/ledger runs exist for M09 at initial closeout — distinguish any future rows in `docs/starlab.md` §23.*
+### Non-merge-boundary (doc-only / ledger-only)
+
+| Commit | Workflow run | Conclusion | Notes |
+| ------ | ------------ | ---------- | ----- |
+| `147b1f4810ad2e0dbb926c7a971748c4db68bdbc` | [`24102029092`](https://github.com/m-cahill/starlab/actions/runs/24102029092) | **success** | M09 closeout: `M09_run1.md`, `M09_summary.md`, `M09_audit.md`, `docs/starlab.md`, M10 stubs — **not** a merge-boundary event. |
 
 **Authoritative merge-boundary** post-merge `main` CI for M09 remains **`24101900950`** on merge commit **`fc9b442…`** (above).
