@@ -38,3 +38,4 @@ Commands run from repo root (`c:\coding\starlab`), Windows PowerShell.
 * **Authoritative green PR-head CI:** [`24109242392`](https://github.com/m-cahill/starlab/actions/runs/24109242392) (**success**).
 * **Merge-boundary `main` CI:** [`24109269513`](https://github.com/m-cahill/starlab/actions/runs/24109269513) (**success**).
 * **Closeout:** `M12_run1.md`, `M12_summary.md`, `M12_audit.md`, `M12_plan.md` (complete), `docs/starlab.md` ledger, `docs/company_secrets/milestones/M13/` stubs (`M13_plan.md`, `M13_toolcalls.md`).
+* **Non-merge-boundary closeout `main` CI:** commit `87ab90fd9bec523409c609c9adb8d5465406f9c1` — run [`24109339683`](https://github.com/m-cahill/starlab/actions/runs/24109339683) (**success**); recorded in `M12_run1.md` + §23 (not merge authority).

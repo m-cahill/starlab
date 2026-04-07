@@ -55,7 +55,11 @@ This run is the **witnessed merge-push** for the M12 merge commit **and is green
 
 ## Non-merge-boundary runs (documentation / ledger closeout)
 
-*None recorded for M12 — merge authority is PR-head [`24109242392`](https://github.com/m-cahill/starlab/actions/runs/24109242392) + merge-boundary `main` [`24109269513`](https://github.com/m-cahill/starlab/actions/runs/24109269513). A single post-merge ledger closeout commit may still trigger a green `push` run on `main`; that run is **not** merge-gate authority (see §17 / §23).*
+| Commit (short) | Workflow run | Conclusion | Notes |
+| -------------- | ------------ | ---------- | ----- |
+| `87ab90f…` | [`24109339683`](https://github.com/m-cahill/starlab/actions/runs/24109339683) | **success** | M12 closeout: ledger + `M12_run1` / summary / audit + M13 stubs + governance — **not** merge-boundary; **authoritative** merge-gate + merge-push evidence remains PR-head [`24109242392`](https://github.com/m-cahill/starlab/actions/runs/24109242392) + merge [`24109269513`](https://github.com/m-cahill/starlab/actions/runs/24109269513). |
+
+*Further doc-only pushes to `main` after this row may produce more green runs; add §23 bullets or short notes rather than extending this table indefinitely (M09 lesson).*
 
 ---
 

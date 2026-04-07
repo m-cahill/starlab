@@ -985,6 +985,7 @@ It should always answer, with minimal ambiguity:
 - **Merge-push `main` CI** on merge commit: [`24109269513`](https://github.com/m-cahill/starlab/actions/runs/24109269513) (**success**)
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23 updated: **governed combat / scouting / visibility plane** (narrow) **proved on `main`**; **current milestone** → **M13** (stub); closeout ledger M12 row; score trend M12 note
 - Milestone closeout: `M12_run1.md`, `M12_summary.md`, `M12_audit.md`, `M12_plan.md` (**Status: Complete**), `M12_toolcalls.md`; **M13** stubs seeded (`M13_plan.md`, `M13_toolcalls.md`)
+- **Non-merge-boundary** `main` CI — closeout commit `87ab90fd9bec523409c609c9adb8d5465406f9c1`: [`24109339683`](https://github.com/m-cahill/starlab/actions/runs/24109339683) (**success**) — ledger + milestone artifacts only; **authoritative** PR-head / merge-boundary CI for M12 product merge remains [`24109242392`](https://github.com/m-cahill/starlab/actions/runs/24109242392) / [`24109269513`](https://github.com/m-cahill/starlab/actions/runs/24109269513)
 
 ### 2026-04-07 — M11 merged to `main` (PR #12) + closeout
 
