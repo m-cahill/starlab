@@ -182,11 +182,11 @@ python -m starlab.runs.bind_replay \
 
 - `run_identity.json` — generated from M02 fake-adapter fixtures via `seed_from_proof`
 - `lineage_seed.json` — generated alongside `run_identity.json`
-- `synthetic_opaque_test.SC2Replay` — small deterministic byte fixture (not a real Blizzard replay)
+- `replay_m07_generated.SC2Replay` — small opaque byte fixture used in CI (not a real Blizzard MPQ replay)
 
 **Flow:**
 
-1. Compute `replay_content_sha256` = SHA-256 of `synthetic_opaque_test.SC2Replay` bytes.
+1. Compute `replay_content_sha256` = SHA-256 of `replay_m07_generated.SC2Replay` bytes.
 2. Read `run_spec_id`, `execution_id`, `proof_artifact_hash` from `run_identity.json`.
 3. Read `lineage_seed_id` from `lineage_seed.json`.
 4. Build hash payload with `kind: "starlab.replay_binding.v1"` and sorted keys.

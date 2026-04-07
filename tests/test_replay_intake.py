@@ -19,7 +19,7 @@ from starlab.runs.seed_from_proof import build_seed_from_paths
 from starlab.runs.writer import write_json_record
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
-SYNTHETIC_REPLAY = FIXTURE_DIR / "synthetic_opaque_test.SC2Replay"
+OPAQUE_REPLAY_FIXTURE = FIXTURE_DIR / "replay_m07_generated.SC2Replay"
 M07_SAMPLE = FIXTURE_DIR / "replay_m07_sample.SC2Replay"
 M05_EXPECTED_MANIFEST = FIXTURE_DIR / "m05_expected" / "manifest.json"
 
@@ -223,7 +223,7 @@ def test_rejected_invalid_metadata(tmp_path: Path) -> None:
 
 
 def test_rejected_binding_hash_mismatch(tmp_path: Path) -> None:
-    ri, _ls, rb = _m03_and_binding(SYNTHETIC_REPLAY)
+    ri, _ls, rb = _m03_and_binding(OPAQUE_REPLAY_FIXTURE)
     rb_path = tmp_path / "replay_binding.json"
     write_json_record(rb_path, rb)
     meta_path = tmp_path / "m.json"
@@ -252,7 +252,7 @@ def test_rejected_binding_hash_mismatch(tmp_path: Path) -> None:
 
 
 def test_eligible_with_binding_and_lineage(tmp_path: Path) -> None:
-    ri, ls, rb = _m03_and_binding(SYNTHETIC_REPLAY)
+    ri, ls, rb = _m03_and_binding(OPAQUE_REPLAY_FIXTURE)
     ri_path = tmp_path / "run_identity.json"
     rb_path = tmp_path / "replay_binding.json"
     man_path = tmp_path / "manifest.json"
@@ -271,7 +271,9 @@ def test_eligible_with_binding_and_lineage(tmp_path: Path) -> None:
                 "declared_provenance_status": "verified",
                 "declared_redistribution_posture": "allowed",
                 "declared_source_label": "x",
-                "expected_replay_content_sha256": compute_replay_content_sha256(SYNTHETIC_REPLAY),
+                "expected_replay_content_sha256": compute_replay_content_sha256(
+                    OPAQUE_REPLAY_FIXTURE
+                ),
             },
         ),
         encoding="utf-8",
@@ -280,7 +282,7 @@ def test_eligible_with_binding_and_lineage(tmp_path: Path) -> None:
         manifest_path=man_path,
         metadata_path=meta_path,
         replay_binding_path=rb_path,
-        replay_path=SYNTHETIC_REPLAY,
+        replay_path=OPAQUE_REPLAY_FIXTURE,
         run_identity_path=ri_path,
     )
     assert out.intake_status == "eligible_for_canonical_review"
@@ -289,7 +291,7 @@ def test_eligible_with_binding_and_lineage(tmp_path: Path) -> None:
 
 
 def test_quarantine_identity_conflict(tmp_path: Path) -> None:
-    ri, _ls, rb = _m03_and_binding(SYNTHETIC_REPLAY)
+    ri, _ls, rb = _m03_and_binding(OPAQUE_REPLAY_FIXTURE)
     bad_ri = dict(ri)
     bad_ri["execution_id"] = "f" * 64
     ri_path = tmp_path / "run_identity.json"
@@ -307,7 +309,9 @@ def test_quarantine_identity_conflict(tmp_path: Path) -> None:
                 "declared_provenance_status": "verified",
                 "declared_redistribution_posture": "allowed",
                 "declared_source_label": "x",
-                "expected_replay_content_sha256": compute_replay_content_sha256(SYNTHETIC_REPLAY),
+                "expected_replay_content_sha256": compute_replay_content_sha256(
+                    OPAQUE_REPLAY_FIXTURE
+                ),
             },
         ),
         encoding="utf-8",
@@ -316,7 +320,7 @@ def test_quarantine_identity_conflict(tmp_path: Path) -> None:
         manifest_path=None,
         metadata_path=meta_path,
         replay_binding_path=rb_path,
-        replay_path=SYNTHETIC_REPLAY,
+        replay_path=OPAQUE_REPLAY_FIXTURE,
         run_identity_path=ri_path,
     )
     assert out.intake_status == "quarantined"

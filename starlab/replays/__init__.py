@@ -1,4 +1,5 @@
-"""Replay intake and provenance policy (M07).
+"""Replay intake (M07) and replay parser substrate (M08).
 
-Treats replay files as opaque bytes. Does not parse replay semantics (M08+).
+M07 treats replay files as opaque bytes for policy. M08 adds a governed parser
+boundary (optional ``s2protocol``) behind ``ReplayParserAdapter``.
 """

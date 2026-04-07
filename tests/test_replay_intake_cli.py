@@ -16,7 +16,7 @@ from starlab.runs.seed_from_proof import build_seed_from_paths
 from starlab.runs.writer import write_json_record
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
-SYNTHETIC_REPLAY = FIXTURE_DIR / "synthetic_opaque_test.SC2Replay"
+OPAQUE_REPLAY_FIXTURE = FIXTURE_DIR / "replay_m07_generated.SC2Replay"
 M07_SAMPLE = FIXTURE_DIR / "replay_m07_sample.SC2Replay"
 
 
@@ -94,13 +94,13 @@ def test_cli_optional_linked_artifacts(tmp_path: Path) -> None:
         include_fingerprint=False,
         proof_path=FIXTURE_DIR / "m02_match_execution_proof.json",
     )
-    sha = compute_replay_content_sha256(SYNTHETIC_REPLAY)
+    sha = compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE)
     rb = build_replay_binding_record(
         execution_id=ri["execution_id"],
         lineage_seed_id=ls["lineage_seed_id"],
         proof_artifact_hash=ri["proof_artifact_hash"],
         replay_content_sha256=sha,
-        replay_reference=build_replay_reference(SYNTHETIC_REPLAY),
+        replay_reference=build_replay_reference(OPAQUE_REPLAY_FIXTURE),
         run_spec_id=ri["run_spec_id"],
     )
     ri_path = tmp_path / "run_identity.json"
@@ -128,7 +128,7 @@ def test_cli_optional_linked_artifacts(tmp_path: Path) -> None:
         "-m",
         "starlab.replays.intake_cli",
         "--replay",
-        str(SYNTHETIC_REPLAY),
+        str(OPAQUE_REPLAY_FIXTURE),
         "--metadata",
         str(meta),
         "--output-dir",

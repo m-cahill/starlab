@@ -12,6 +12,12 @@ python -m pip install --upgrade pip setuptools
 pip install -e ".[dev]"
 ```
 
+Optional — Blizzard **`s2protocol`** replay decode for local runs of `python -m starlab.replays.parse_replay` with a real `.SC2Replay` (CI stays fixture-driven without this extra):
+
+```bash
+pip install -e ".[dev,replay-parser]"
+```
+
 Then run `ruff check starlab tests`, `mypy starlab tests`, `pytest`, and `python -m pip_audit` as needed.
 
 STARLAB is milestone-driven. Until broader contribution is opened:

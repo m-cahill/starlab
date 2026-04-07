@@ -22,7 +22,7 @@ from starlab.runs.seed_from_proof import build_seed_from_paths
 from starlab.runs.writer import write_json_record
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
-SYNTHETIC_REPLAY = FIXTURE_DIR / "synthetic_opaque_test.SC2Replay"
+OPAQUE_REPLAY_FIXTURE = FIXTURE_DIR / "replay_m07_generated.SC2Replay"
 
 
 def _generate_m03_artifacts(tmp_path: Path) -> tuple[Path, Path]:
@@ -42,15 +42,15 @@ def _generate_m03_artifacts(tmp_path: Path) -> tuple[Path, Path]:
 
 
 def test_replay_content_sha256_stable() -> None:
-    h1 = compute_replay_content_sha256(SYNTHETIC_REPLAY)
-    h2 = compute_replay_content_sha256(SYNTHETIC_REPLAY)
+    h1 = compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE)
+    h2 = compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE)
     assert h1 == h2
     assert len(h1) == 64
 
 
 def test_replay_reference_metadata() -> None:
-    ref = build_replay_reference(SYNTHETIC_REPLAY)
-    assert ref["basename"] == "synthetic_opaque_test.SC2Replay"
+    ref = build_replay_reference(OPAQUE_REPLAY_FIXTURE)
+    assert ref["basename"] == "replay_m07_generated.SC2Replay"
     assert ref["suffix"] == ".SC2Replay"
     assert isinstance(ref["size_bytes"], int)
     assert ref["size_bytes"] > 0
@@ -175,8 +175,8 @@ def test_end_to_end_deterministic(tmp_path: Path) -> None:
     for out_dir in (out1, out2):
         ri = load_run_identity(ri_path)
         ls = load_lineage_seed(ls_path)
-        sha = compute_replay_content_sha256(SYNTHETIC_REPLAY)
-        ref = build_replay_reference(SYNTHETIC_REPLAY)
+        sha = compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE)
+        ref = build_replay_reference(OPAQUE_REPLAY_FIXTURE)
         record = build_replay_binding_record(
             execution_id=ri["execution_id"],
             lineage_seed_id=ls["lineage_seed_id"],
@@ -192,7 +192,7 @@ def test_end_to_end_deterministic(tmp_path: Path) -> None:
     assert text1 == text2
 
     data = json.loads(text1)
-    assert data["replay_content_sha256"] == compute_replay_content_sha256(SYNTHETIC_REPLAY)
+    assert data["replay_content_sha256"] == compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE)
     assert len(data["replay_binding_id"]) == 64
     assert data["run_spec_id"] == load_run_identity(ri_path)["run_spec_id"]
 
@@ -201,8 +201,8 @@ def test_load_replay_binding_round_trip(tmp_path: Path) -> None:
     ri_path, ls_path = _generate_m03_artifacts(tmp_path)
     ri = load_run_identity(ri_path)
     ls = load_lineage_seed(ls_path)
-    sha = compute_replay_content_sha256(SYNTHETIC_REPLAY)
-    ref = build_replay_reference(SYNTHETIC_REPLAY)
+    sha = compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE)
+    ref = build_replay_reference(OPAQUE_REPLAY_FIXTURE)
     record = build_replay_binding_record(
         execution_id=ri["execution_id"],
         lineage_seed_id=ls["lineage_seed_id"],
@@ -221,8 +221,8 @@ def test_load_replay_binding_rejects_wrong_binding_id(tmp_path: Path) -> None:
     ri_path, ls_path = _generate_m03_artifacts(tmp_path)
     ri = load_run_identity(ri_path)
     ls = load_lineage_seed(ls_path)
-    sha = compute_replay_content_sha256(SYNTHETIC_REPLAY)
-    ref = build_replay_reference(SYNTHETIC_REPLAY)
+    sha = compute_replay_content_sha256(OPAQUE_REPLAY_FIXTURE)
+    ref = build_replay_reference(OPAQUE_REPLAY_FIXTURE)
     record = build_replay_binding_record(
         execution_id=ri["execution_id"],
         lineage_seed_id=ls["lineage_seed_id"],
