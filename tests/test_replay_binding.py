@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
 from starlab.runs.replay_binding import (
     BINDING_MODE,
     REPLAY_BINDING_SCHEMA_VERSION,
@@ -13,6 +14,7 @@ from starlab.runs.replay_binding import (
     compute_replay_binding_id,
     compute_replay_content_sha256,
     load_lineage_seed,
+    load_replay_binding,
     load_run_identity,
     write_replay_binding,
 )
@@ -193,3 +195,44 @@ def test_end_to_end_deterministic(tmp_path: Path) -> None:
     assert data["replay_content_sha256"] == compute_replay_content_sha256(SYNTHETIC_REPLAY)
     assert len(data["replay_binding_id"]) == 64
     assert data["run_spec_id"] == load_run_identity(ri_path)["run_spec_id"]
+
+
+def test_load_replay_binding_round_trip(tmp_path: Path) -> None:
+    ri_path, ls_path = _generate_m03_artifacts(tmp_path)
+    ri = load_run_identity(ri_path)
+    ls = load_lineage_seed(ls_path)
+    sha = compute_replay_content_sha256(SYNTHETIC_REPLAY)
+    ref = build_replay_reference(SYNTHETIC_REPLAY)
+    record = build_replay_binding_record(
+        execution_id=ri["execution_id"],
+        lineage_seed_id=ls["lineage_seed_id"],
+        proof_artifact_hash=ri["proof_artifact_hash"],
+        replay_content_sha256=sha,
+        replay_reference=ref,
+        run_spec_id=ri["run_spec_id"],
+    )
+    out = write_replay_binding(tmp_path, record)
+    loaded = load_replay_binding(out)
+    assert loaded["replay_binding_id"] == record["replay_binding_id"]
+    assert loaded["binding_mode"] == BINDING_MODE
+
+
+def test_load_replay_binding_rejects_wrong_binding_id(tmp_path: Path) -> None:
+    ri_path, ls_path = _generate_m03_artifacts(tmp_path)
+    ri = load_run_identity(ri_path)
+    ls = load_lineage_seed(ls_path)
+    sha = compute_replay_content_sha256(SYNTHETIC_REPLAY)
+    ref = build_replay_reference(SYNTHETIC_REPLAY)
+    record = build_replay_binding_record(
+        execution_id=ri["execution_id"],
+        lineage_seed_id=ls["lineage_seed_id"],
+        proof_artifact_hash=ri["proof_artifact_hash"],
+        replay_content_sha256=sha,
+        replay_reference=ref,
+        run_spec_id=ri["run_spec_id"],
+    )
+    record["replay_binding_id"] = "0" * 64
+    bad = tmp_path / "bad.json"
+    bad.write_text(json.dumps(record), encoding="utf-8")
+    with pytest.raises(ValueError, match="recomputed"):
+        load_replay_binding(bad)

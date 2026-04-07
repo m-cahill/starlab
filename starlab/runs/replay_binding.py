@@ -138,3 +138,43 @@ def write_replay_binding(output_dir: Path, record: dict[str, Any]) -> Path:
     out_path = output_dir / "replay_binding.json"
     out_path.write_text(canonical_json_dumps(record), encoding="utf-8")
     return out_path
+
+
+def load_replay_binding(path: Path) -> dict[str, Any]:
+    """Load and validate M04 ``replay_binding.json``."""
+
+    raw = path.read_text(encoding="utf-8")
+    data = json.loads(raw)
+    if not isinstance(data, dict):
+        msg = "replay_binding.json root must be a JSON object"
+        raise ValueError(msg)
+    for key in (
+        "binding_mode",
+        "execution_id",
+        "lineage_seed_id",
+        "proof_artifact_hash",
+        "replay_binding_id",
+        "replay_content_sha256",
+        "run_spec_id",
+        "schema_version",
+    ):
+        if key not in data:
+            msg = f"replay_binding.json missing required field: {key}"
+            raise ValueError(msg)
+    if data["schema_version"] != REPLAY_BINDING_SCHEMA_VERSION:
+        msg = f"unexpected replay_binding schema_version: {data['schema_version']}"
+        raise ValueError(msg)
+    if data["binding_mode"] != BINDING_MODE:
+        msg = f"unexpected replay_binding binding_mode: {data['binding_mode']!r}"
+        raise ValueError(msg)
+    expected_id = compute_replay_binding_id(
+        execution_id=data["execution_id"],
+        lineage_seed_id=data["lineage_seed_id"],
+        proof_artifact_hash=data["proof_artifact_hash"],
+        replay_content_sha256=data["replay_content_sha256"],
+        run_spec_id=data["run_spec_id"],
+    )
+    if data["replay_binding_id"] != expected_id:
+        msg = "replay_binding_id does not match recomputed binding id from M03 fields + replay hash"
+        raise ValueError(msg)
+    return data
