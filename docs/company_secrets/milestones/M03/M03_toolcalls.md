@@ -48,11 +48,9 @@ Initialize when M03 work begins.
 - **PR:** [#4 — M03: run identity and lineage seed](https://github.com/m-cahill/starlab/pull/4)  
 - **PR title:** M03: run identity and lineage seed  
 - **Branch:** `m03-run-identity-lineage-seed`  
-- **PR head SHA (at green run):** `8e751429c315601a5c85b8b349c6cb1f4b06796d`  
+- **Recorded `pull_request` CI (implementation tree):** commit `72aff7050f6ae0807b875993d577cb6d6eeeded6` — run **`24058918126`** — https://github.com/m-cahill/starlab/actions/runs/24058918126 — **success**  
 - **Workflow:** `CI` (`.github/workflows/ci.yml`)  
-- **Authoritative PR-head run ID:** `24058879334`  
-- **Run URL:** https://github.com/m-cahill/starlab/actions/runs/24058879334  
-- **Conclusion:** **success** (merge gate for current tip; supersedes earlier green runs on older tips)  
+- **Merge gate (GitHub):** required checks on the **latest** PR head — [branch workflow runs](https://github.com/m-cahill/starlab/actions?query=branch%3Am03-run-identity-lineage-seed). After doc/evidence commits, append the **new** green run + head SHA below.  
 - **Post-merge `main` CI:** *not recorded — merge not performed in this step*
 
 ### Milestone artifacts added (pre-merge)

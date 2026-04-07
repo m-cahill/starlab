@@ -4,17 +4,16 @@
 **Milestone ID:** M03  
 **Branch:** `m03-run-identity-lineage-seed`  
 **PR:** [#4](https://github.com/m-cahill/starlab/pull/4) — **open** (at audit time)  
-**PR head (audit time):** `8e751429c315601a5c85b8b349c6cb1f4b06796d`  
-**Authoritative PR-head CI:** [CI run 24058879334](https://github.com/m-cahill/starlab/actions/runs/24058879334) — **success**  
+**Recorded implementation commit:** `72aff7050f6ae0807b875993d577cb6d6eeeded6` (green `pull_request` CI [24058918126](https://github.com/m-cahill/starlab/actions/runs/24058918126); see `M03_run1.md`). **Latest** PR tip: [branch CI runs](https://github.com/m-cahill/starlab/actions?query=branch%3Am03-run-identity-lineage-seed); merge requires green **required** checks on the **current** head.  
 **Date:** 2026-04-07
 
 ---
 
 ## Executive summary
 
-M03 adds **STARLAB-owned run identity and lineage seed** primitives on top of the M02 proof surface: `starlab/runs/`, runtime contract doc, CLI, fixtures, and tests. **PR #4** is **open** with **green** CI on the current PR tip. **No merge to `main`** has been performed in this audit step. **No** replay binding, **no** canonical run artifact v0, **no** benchmark claims.
+M03 adds **STARLAB-owned run identity and lineage seed** primitives on top of the M02 proof surface: `starlab/runs/`, runtime contract doc, CLI, fixtures, and tests. **PR #4** is **open**; **recorded** green CI on the **implementation** commit (see `M03_run1.md`). **No merge to `main`** has been performed in this audit step. **No** replay binding, **no** canonical run artifact v0, **no** benchmark claims.
 
-**Audit Verdict:** **Green (CI)** — merge gate checks pass on the authoritative PR-head run; **formal “proved on `main`”** status awaits merge + closeout ledger updates.
+**Audit Verdict:** **Green (CI) on recorded implementation run** — **latest** PR head must still satisfy **required** checks before merge; **formal “proved on `main`”** status awaits merge + closeout ledger updates.
 
 ---
 
@@ -39,7 +38,7 @@ M03 adds **STARLAB-owned run identity and lineage seed** primitives on top of th
 
 ## 3. CI / test / lint (record)
 
-- **Lint/format/types:** Ruff + Mypy — pass on PR-head `24058879334`.
+- **Lint/format/types:** Ruff + Mypy — pass on PR-head `24058918126`.
 - **Tests:** Pytest — 61 passed; includes M03 tests and governance.
 - **Supply chain:** pip-audit, SBOM, Gitleaks — pass on PR-head run.
 
@@ -67,9 +66,10 @@ M03 adds **STARLAB-owned run identity and lineage seed** primitives on top of th
   "milestone": "M03",
   "mode": "DELTA_AUDIT_PRE_MERGE",
   "pr": 4,
-  "pr_head": "8e751429c315601a5c85b8b349c6cb1f4b06796d",
-  "authoritative_pr_head_ci": "24058879334",
-  "verdict": "green_pr_head_ci",
+  "recorded_implementation_commit": "72aff7050f6ae0807b875993d577cb6d6eeeded6",
+  "recorded_ci_run_implementation": "24058918126",
+  "merge_gate": "required_checks_on_latest_pr_head",
+  "verdict": "green_ci_on_recorded_implementation_commit",
   "merged_to_main": false
 }
 ```
