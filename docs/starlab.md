@@ -738,6 +738,7 @@ It should always answer, with minimal ambiguity:
 - §10 updated: **environment drift / smoke matrix** (narrow) **proved on `main`** — deterministic `runtime_smoke_matrix.json` + `environment_drift_report.json` from M01 probe surface + optional M03 `environment_fingerprint` hint; **cross-host portability**, **replay parser substrate**, **replay semantic extraction**, **replay provenance finalization**, **benchmark integrity**, **new live SC2 execution in CI** — **not** proved
 - M07 stubs seeded: `docs/company_secrets/milestones/M07/M07_plan.md`, `M07_toolcalls.md` — **no** M07 implementation
 - Milestone artifacts: `M06_run1.md`, `M06_summary.md`, `M06_audit.md`; contract `docs/runtime/environment_drift_smoke_matrix.md`; modules `starlab/sc2/runtime_smoke_matrix.py`, `environment_drift.py`, `evaluate_environment_drift.py`
+- M06 post-closeout documentation push on `main` (`1f5bbc2…`): CI [`24064323510`](https://github.com/m-cahill/starlab/actions/runs/24064323510) (**success**) — **not** a merge-boundary event; ledger / M07 stubs / governance tests
 
 ### 2026-04-07 — M05 merged to `main` (PR #6) + closeout
 

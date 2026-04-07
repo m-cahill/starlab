@@ -78,3 +78,19 @@ Earlier PR-head run on branch tip **`714994a…`**: workflow run **`24064181198`
 | **Final PR head** | `6f9ef463f90abe914f3c98c8977d49f8da0102cb` |
 | **Merge commit** | `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` |
 | **Remote branch after merge** | **deleted** (`m06-environment-drift-runtime-smoke-matrix`) |
+
+---
+
+## E. Post-closeout `main` CI (non–merge-boundary)
+
+After M06 milestone artifacts and ledger updates landed on `main` in commit `1f5bbc2b3ebdc9e5d2dc53e4d8db9064da4fc88a`, CI re-ran on push.
+
+| Field | Value |
+| ----- | ----- |
+| **Workflow name** | CI |
+| **Run ID** | `24064323510` |
+| **URL** | https://github.com/m-cahill/starlab/actions/runs/24064323510 |
+| **Trigger** | `push` to `main` |
+| **Conclusion** | **success** |
+
+**Distinction:** This run validates the **closeout documentation commit**, not the merge commit `4953d7a…`.
