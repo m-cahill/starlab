@@ -7,7 +7,7 @@
 * **Suggested branch:** `m16-structured-state-pipeline`
 * **Suggested PR title:** *(set at PR open — e.g. “M16: structured canonical state pipeline”)*
 * **Target tag:** `v0.0.16-m16`
-* **Status at kickoff:** Planned; replace this file’s “stub only” history — full scope below
+* **Status:** **Complete** — closed 2026-04-08; see `M16_summary.md`, `M16_audit.md`, `M16_run1.md`, `M16_toolcalls.md`
 
 ## Handoff context (M15 closeout)
 
