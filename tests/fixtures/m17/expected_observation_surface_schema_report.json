@@ -1,0 +1,46 @@
+{
+  "action_mask_family_names": [
+    "no_op",
+    "selection",
+    "camera_or_view",
+    "production",
+    "build",
+    "unit_command",
+    "research_or_upgrade"
+  ],
+  "contract": "starlab.observation_surface.v1",
+  "example_fixture_hashes": {
+    "invalid": "3f1c6d0d041430d9b2dbaed5636a2819722124804f04afc9a38082485d96d7a5",
+    "valid": "b46ae1b067950cd46f083d5731a165fa0de7c9a33b113c6a08dc00dabb20648e"
+  },
+  "feature_families_summary": "metadata; viewpoint; scalar_features (ordered); entity_rows; spatial_plane_family (structural shapes); action_mask_families (family-level masks).",
+  "non_claims": [
+    "Does not prove canonical-state→observation materialization or projection (M18+).",
+    "Does not prove perceptual bridge, pixels, or image-space feature extraction.",
+    "Does not prove full SC2 action coverage, mask legality, or dynamic mask generation.",
+    "Does not prove exact banked resources or certified fog-of-war truth (inherits M11/M12/M16).",
+    "Does not prove replay↔execution equivalence, benchmark integrity, or live SC2 in CI.",
+    "Spatial plane shape metadata is structural only — not bound to M09 map dimensions."
+  ],
+  "ordered_scalar_feature_names": [
+    "economy.resource_signal_category",
+    "economy.structure_train_events_total",
+    "economy.unit_train_events_total",
+    "global.active_combat_window_count",
+    "global.active_slice_count",
+    "production.active_build_queue_count",
+    "production.tech_upgrades_started_total",
+    "race.actual",
+    "result.known",
+    "scouting.recent_scout_events_count",
+    "visibility.proxy_level"
+  ],
+  "profile": "starlab.observation_surface.m17.v1",
+  "report_version": "starlab.observation_surface_report.v1",
+  "schema_sha256": "e6b45a2be8bc9b17957df28bcbc5ede2aa0e4cff3ec78d0ba279d5469c5cee2b",
+  "upstream_lineage_notes": [
+    "M15 canonical state schema: docs/runtime/canonical_state_schema_v1.md; artifact canonical_state_schema.json.",
+    "M16 canonical state pipeline: docs/runtime/canonical_state_pipeline_v1.md; artifacts canonical_state.json, canonical_state_report.json.",
+    "M17 binds observation contract semantics to M16 canonical state as upstream — not to raw replay bundles or replay_raw_parse.json."
+  ]
+}

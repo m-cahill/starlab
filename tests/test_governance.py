@@ -30,6 +30,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_bundle_lineage_contract.md",
     "docs/runtime/canonical_state_schema_v1.md",
     "docs/runtime/canonical_state_pipeline_v1.md",
+    "docs/runtime/observation_surface_contract_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -106,11 +107,20 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m17() -> None:
+def test_current_milestone_is_m18() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M17" in section
-    assert "Observation" in section or "observation" in section.lower()
+    assert "M18" in section
+    assert "Perceptual" in section or "perceptual" in section.lower()
+
+
+def test_m17_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M17 |") and "Observation" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M17 milestone row not found or not complete")
 
 
 def test_m12_complete_in_milestone_table() -> None:
@@ -428,10 +438,16 @@ def test_m16_milestone_files_exist() -> None:
     assert (m16 / "M16_audit.md").is_file()
 
 
-def test_m17_stub_milestone_files_exist() -> None:
+def test_m17_milestone_files_exist() -> None:
     m17 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M17"
     assert (m17 / "M17_plan.md").is_file()
     assert (m17 / "M17_toolcalls.md").is_file()
+
+
+def test_m18_stub_milestone_files_exist() -> None:
+    m18 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M18"
+    assert (m18 / "M18_plan.md").is_file()
+    assert (m18 / "M18_toolcalls.md").is_file()
 
 
 def test_m16_complete_in_milestone_table() -> None:
@@ -483,6 +499,27 @@ def test_m16_fixture_dir_exists() -> None:
     b = fx / "bundle"
     assert (b / "replay_bundle_manifest.json").is_file()
     assert (b / "replay_metadata.json").is_file()
+
+
+def test_m17_observation_surface_modules_exist() -> None:
+    obs = REPO_ROOT / "starlab" / "observation"
+    for name in (
+        "observation_surface_models.py",
+        "observation_surface_catalog.py",
+        "observation_surface_schema.py",
+        "observation_surface_io.py",
+        "emit_observation_surface_schema.py",
+    ):
+        assert (obs / name).is_file()
+
+
+def test_m17_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m17"
+    assert fx.is_dir()
+    assert (fx / "observation_surface_valid_example.json").is_file()
+    assert (fx / "observation_surface_invalid_example_bad_schema_version.json").is_file()
+    assert (fx / "expected_observation_surface_schema.json").is_file()
+    assert (fx / "expected_observation_surface_schema_report.json").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
