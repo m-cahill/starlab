@@ -1,0 +1,108 @@
+{
+  "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+  "contract": "starlab.replay_bundle_contract.v1",
+  "edges": [
+    {
+      "from": "m09_metadata",
+      "to": "m10_timeline"
+    },
+    {
+      "from": "m10_timeline",
+      "to": "m11_build_order_economy"
+    },
+    {
+      "from": "m11_build_order_economy",
+      "to": "m12_combat_scouting_visibility"
+    },
+    {
+      "from": "m12_combat_scouting_visibility",
+      "to": "m13_replay_slices"
+    },
+    {
+      "from": "m13_replay_slices",
+      "to": "m14_replay_bundle"
+    }
+  ],
+  "lineage_failures": [],
+  "nodes": [
+    {
+      "artifact_filename": "replay_metadata.json",
+      "content_sha256": "d1bf603d0fac56bd1db17a8a483a60d51911c9c9c9cacb4e8092247443f39574",
+      "contextual_ancestry": false,
+      "label": "Replay metadata (M09)",
+      "milestone": "M09",
+      "node_id": "m09_metadata",
+      "proof_surface_required": true
+    },
+    {
+      "artifact_filename": "replay_metadata_report.json",
+      "content_sha256": "08c075292712bc7f36af9c975a78f0ff493c10eb12c9088ec87da84172b27e90",
+      "contextual_ancestry": false,
+      "label": "Replay metadata report (M09)",
+      "milestone": "M09",
+      "node_id": "m09_metadata_report",
+      "proof_surface_required": false
+    },
+    {
+      "artifact_filename": "replay_timeline.json",
+      "content_sha256": "dc68119639ccee6eb19b76e86a953938e6aabfb8d7ef6edf9b2012c9168aa432",
+      "contextual_ancestry": false,
+      "label": "Replay timeline (M10)",
+      "milestone": "M10",
+      "node_id": "m10_timeline",
+      "proof_surface_required": true
+    },
+    {
+      "artifact_filename": "replay_build_order_economy.json",
+      "content_sha256": "665c9f40ee26f6e182570b39bb4a58c6afc5d7d86430685be98335af5d14487c",
+      "contextual_ancestry": false,
+      "label": "Build-order / economy (M11)",
+      "milestone": "M11",
+      "node_id": "m11_build_order_economy",
+      "proof_surface_required": true
+    },
+    {
+      "artifact_filename": "replay_combat_scouting_visibility.json",
+      "content_sha256": "42cadbcc884037a0c5ccab7225403a2e00b04541916859bf0757b89879fb6f47",
+      "contextual_ancestry": false,
+      "label": "Combat / scouting / visibility (M12)",
+      "milestone": "M12",
+      "node_id": "m12_combat_scouting_visibility",
+      "proof_surface_required": true
+    },
+    {
+      "artifact_filename": "replay_slices.json",
+      "content_sha256": "0bb7e09e1a080b124c8039b19c9f77c64738a8997c07c16724aacd4e91da5480",
+      "contextual_ancestry": false,
+      "label": "Replay slice definitions (M13)",
+      "milestone": "M13",
+      "node_id": "m13_replay_slices",
+      "proof_surface_required": true
+    },
+    {
+      "artifact_filename": "replay_slices_report.json",
+      "content_sha256": "453376403d4227fa56848af044817aa533813daf4d489be45b387e6de0f516bf",
+      "contextual_ancestry": false,
+      "label": "Replay slices report (M13)",
+      "milestone": "M13",
+      "node_id": "m13_replay_slices_report",
+      "proof_surface_required": false
+    },
+    {
+      "content_sha256": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "contextual_ancestry": false,
+      "label": "Replay bundle packaging (M14)",
+      "milestone": "M14",
+      "node_id": "m14_replay_bundle",
+      "proof_surface_required": true
+    }
+  ],
+  "optional_contextual_ancestry_note": "Optional M07 intake and M08 parser-substrate lineage nodes (when present) are contextual ancestry only; they are not part of the required M14 proof surface.",
+  "profile": "starlab.replay_bundle.m14.v1",
+  "root_hashes": [
+    "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+    "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457"
+  ],
+  "schema_version": "starlab.replay_bundle_lineage.v1",
+  "upstream_requirements_satisfied": true
+}

@@ -1,0 +1,48 @@
+{
+  "artifact_hashes": {
+    "replay_build_order_economy.json": "665c9f40ee26f6e182570b39bb4a58c6afc5d7d86430685be98335af5d14487c",
+    "replay_combat_scouting_visibility.json": "42cadbcc884037a0c5ccab7225403a2e00b04541916859bf0757b89879fb6f47",
+    "replay_metadata.json": "d1bf603d0fac56bd1db17a8a483a60d51911c9c9c9cacb4e8092247443f39574",
+    "replay_metadata_report.json": "08c075292712bc7f36af9c975a78f0ff493c10eb12c9088ec87da84172b27e90",
+    "replay_slices.json": "0bb7e09e1a080b124c8039b19c9f77c64738a8997c07c16724aacd4e91da5480",
+    "replay_slices_report.json": "453376403d4227fa56848af044817aa533813daf4d489be45b387e6de0f516bf",
+    "replay_timeline.json": "dc68119639ccee6eb19b76e86a953938e6aabfb8d7ef6edf9b2012c9168aa432"
+  },
+  "bundle_created_from": "tests/fixtures/m14",
+  "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+  "contract": "starlab.replay_bundle_contract.v1",
+  "determinism_notes": "Manifest and lineage are emitted from canonical JSON hashes of governed inputs; ordering is deterministic; no wall-clock timestamps or local filesystem paths.",
+  "exclusions": [
+    "archive_compression_not_required_in_v1",
+    "clipped_sub_replays",
+    "parser_owned_binary_blobs",
+    "raw_replay_bytes_sc2replay",
+    "replay_raw_parse_json",
+    "videos_images_unless_future_milestone"
+  ],
+  "generation_parameters": {
+    "replay_bundle_catalog": "starlab.replay_bundle_catalog.m14.v1"
+  },
+  "included_milestones": [
+    "M09",
+    "M10",
+    "M11",
+    "M12",
+    "M13"
+  ],
+  "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+  "primary_artifacts": [
+    "replay_metadata.json",
+    "replay_timeline.json",
+    "replay_build_order_economy.json",
+    "replay_combat_scouting_visibility.json",
+    "replay_slices.json"
+  ],
+  "profile": "starlab.replay_bundle.m14.v1",
+  "schema_version": "starlab.replay_bundle_manifest.v1",
+  "secondary_report_artifacts": [
+    "replay_metadata_report.json",
+    "replay_slices_report.json"
+  ],
+  "source_replay_identity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

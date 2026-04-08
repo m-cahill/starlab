@@ -1,0 +1,56 @@
+{
+  "advisory_notes": [],
+  "check_results": [
+    {
+      "check_id": "raw_parse_schema_valid",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "replay_hash_present",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "source_raw_parse_sha256_computed",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "parse_receipt_hash_match",
+      "severity": "warning",
+      "status": "not_evaluated"
+    },
+    {
+      "check_id": "parse_report_status_parsed",
+      "severity": "warning",
+      "status": "not_evaluated"
+    },
+    {
+      "check_id": "required_sections_present",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "core_metadata_extracted",
+      "severity": "required",
+      "status": "pass"
+    },
+    {
+      "check_id": "player_metadata_extracted",
+      "severity": "warning",
+      "status": "pass"
+    },
+    {
+      "check_id": "metadata_emitted",
+      "severity": "required",
+      "status": "pass"
+    }
+  ],
+  "extraction_status": "extracted",
+  "metadata_contract_version": "starlab.replay_metadata_contract.v1",
+  "reason_codes": [],
+  "replay_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "schema_version": "starlab.replay_metadata_report.v1",
+  "source_raw_parse_sha256": "3435519b1952c16145c58a4f74381ce6b24166929593913c12b67371548c44ba"
+}
