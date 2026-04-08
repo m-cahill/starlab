@@ -1,0 +1,124 @@
+{
+  "action_mask_families": {
+    "families": [
+      {
+        "family_name": "no_op",
+        "ordered_mask_values": [
+          1
+        ]
+      },
+      {
+        "family_name": "selection",
+        "ordered_mask_values": [
+          1,
+          0
+        ]
+      },
+      {
+        "family_name": "camera_or_view",
+        "ordered_mask_values": [
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "family_name": "production",
+        "ordered_mask_values": [
+          1,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "family_name": "build",
+        "ordered_mask_values": [
+          1,
+          1
+        ]
+      },
+      {
+        "family_name": "unit_command",
+        "ordered_mask_values": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "family_name": "research_or_upgrade",
+        "ordered_mask_values": [
+          1
+        ]
+      }
+    ]
+  },
+  "contract_id": "starlab.observation_surface.v1",
+  "entity_rows": {
+    "rows": []
+  },
+  "metadata": {
+    "gameloop": 0,
+    "observation_contract_version": "1",
+    "perspective_player_index": 0,
+    "source_canonical_state_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "scalar_features": {
+    "ordered_entries": [
+      {
+        "name": "economy.resource_signal_category",
+        "value": null
+      },
+      {
+        "name": "economy.structure_train_events_total",
+        "value": 0
+      },
+      {
+        "name": "economy.unit_train_events_total",
+        "value": 0
+      },
+      {
+        "name": "global.active_combat_window_count",
+        "value": 0
+      },
+      {
+        "name": "global.active_slice_count",
+        "value": 0
+      },
+      {
+        "name": "production.active_build_queue_count",
+        "value": 0
+      },
+      {
+        "name": "production.tech_upgrades_started_total",
+        "value": 0
+      },
+      {
+        "name": "race.actual",
+        "value": ""
+      },
+      {
+        "name": "result.known",
+        "value": ""
+      },
+      {
+        "name": "scouting.recent_scout_events_count",
+        "value": 0
+      },
+      {
+        "name": "visibility.proxy_level",
+        "value": null
+      }
+    ]
+  },
+  "schema_version": "starlab.observation_frame.BAD",
+  "spatial_plane_family": {
+    "planes": []
+  },
+  "viewpoint": {
+    "player_index": 0,
+    "single_player_relative_viewpoint": true,
+    "visibility_policy": "proxy_bounded"
+  }
+}

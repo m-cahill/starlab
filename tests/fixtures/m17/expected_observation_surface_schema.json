@@ -1,0 +1,695 @@
+{
+  "$id": "starlab.observation_frame.m17.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Single player-relative observation frame at one gameloop; upstream: M16 canonical state. Contract-only — no materialization proof.",
+  "properties": {
+    "action_mask_families": {
+      "additionalProperties": false,
+      "properties": {
+        "families": {
+          "items": false,
+          "maxItems": 7,
+          "minItems": 7,
+          "prefixItems": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "family_name": {
+                  "const": "no_op",
+                  "type": "string"
+                },
+                "ordered_mask_values": {
+                  "items": {
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "type": "integer"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "family_name",
+                "ordered_mask_values"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "family_name": {
+                  "const": "selection",
+                  "type": "string"
+                },
+                "ordered_mask_values": {
+                  "items": {
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "type": "integer"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "family_name",
+                "ordered_mask_values"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "family_name": {
+                  "const": "camera_or_view",
+                  "type": "string"
+                },
+                "ordered_mask_values": {
+                  "items": {
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "type": "integer"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "family_name",
+                "ordered_mask_values"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "family_name": {
+                  "const": "production",
+                  "type": "string"
+                },
+                "ordered_mask_values": {
+                  "items": {
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "type": "integer"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "family_name",
+                "ordered_mask_values"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "family_name": {
+                  "const": "build",
+                  "type": "string"
+                },
+                "ordered_mask_values": {
+                  "items": {
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "type": "integer"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "family_name",
+                "ordered_mask_values"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "family_name": {
+                  "const": "unit_command",
+                  "type": "string"
+                },
+                "ordered_mask_values": {
+                  "items": {
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "type": "integer"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "family_name",
+                "ordered_mask_values"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "family_name": {
+                  "const": "research_or_upgrade",
+                  "type": "string"
+                },
+                "ordered_mask_values": {
+                  "items": {
+                    "enum": [
+                      0,
+                      1
+                    ],
+                    "type": "integer"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "family_name",
+                "ordered_mask_values"
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "array"
+        }
+      },
+      "required": [
+        "families"
+      ],
+      "type": "object"
+    },
+    "contract_id": {
+      "const": "starlab.observation_surface.v1",
+      "type": "string"
+    },
+    "entity_rows": {
+      "additionalProperties": false,
+      "properties": {
+        "rows": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "count": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "energy": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "health": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "is_visible": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "owner_view": {
+                "enum": [
+                  "self",
+                  "ally",
+                  "enemy",
+                  "neutral"
+                ],
+                "type": "string"
+              },
+              "position": {
+                "oneOf": [
+                  {
+                    "type": "null"
+                  },
+                  {
+                    "additionalProperties": false,
+                    "properties": {
+                      "x": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "y": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      }
+                    },
+                    "type": "object"
+                  }
+                ]
+              },
+              "row_kind": {
+                "enum": [
+                  "aggregated_category",
+                  "unit_instance"
+                ],
+                "type": "string"
+              },
+              "shield": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "unit_tag": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "row_kind",
+              "owner_view",
+              "category"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "rows"
+      ],
+      "type": "object"
+    },
+    "metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "gameloop": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "observation_contract_version": {
+          "const": "1",
+          "type": "string"
+        },
+        "perspective_player_index": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "source_bundle_id": {
+          "type": "string"
+        },
+        "source_canonical_state_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "source_lineage_root": {
+          "type": "string"
+        },
+        "source_replay_identity": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "observation_contract_version",
+        "source_canonical_state_sha256",
+        "gameloop",
+        "perspective_player_index"
+      ],
+      "type": "object"
+    },
+    "scalar_features": {
+      "additionalProperties": false,
+      "properties": {
+        "ordered_entries": {
+          "items": false,
+          "maxItems": 11,
+          "minItems": 11,
+          "prefixItems": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "economy.resource_signal_category",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "economy.structure_train_events_total",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "economy.unit_train_events_total",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "global.active_combat_window_count",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "global.active_slice_count",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "production.active_build_queue_count",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "production.tech_upgrades_started_total",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "race.actual",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "result.known",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "scouting.recent_scout_events_count",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "const": "visibility.proxy_level",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "type": "object"
+            }
+          ],
+          "type": "array"
+        }
+      },
+      "required": [
+        "ordered_entries"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "starlab.observation_frame.v1",
+      "type": "string"
+    },
+    "spatial_plane_family": {
+      "additionalProperties": false,
+      "properties": {
+        "planes": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "channel_count": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "channel_order": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "coordinate_frame": {
+                "enum": [
+                  "starlab.spatial.not_bound_to_replay_map"
+                ],
+                "type": "string"
+              },
+              "grid_height": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "grid_width": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "plane_id": {
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "plane_id",
+              "grid_height",
+              "grid_width",
+              "channel_count",
+              "channel_order"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "planes"
+      ],
+      "type": "object"
+    },
+    "viewpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "player_index": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "single_player_relative_viewpoint": {
+          "const": true,
+          "type": "boolean"
+        },
+        "visibility_policy": {
+          "enum": [
+            "proxy_bounded"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "player_index",
+        "visibility_policy",
+        "single_player_relative_viewpoint"
+      ],
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "contract_id",
+    "metadata",
+    "viewpoint",
+    "scalar_features",
+    "entity_rows",
+    "spatial_plane_family",
+    "action_mask_families"
+  ],
+  "title": "STARLAB observation surface frame v1 (M17 profile)",
+  "type": "object"
+}
