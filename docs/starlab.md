@@ -1057,6 +1057,7 @@ It should always answer, with minimal ambiguity:
 - **Merge-push `main` CI** on merge commit: [`24118654909`](https://github.com/m-cahill/starlab/actions/runs/24118654909) (**success**)
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23 updated: **governed replay bundle packaging + lineage contract v1** (narrow) **proved on `main`**; Phase II artifact row (M14); **current milestone** → **M15** (stub); closeout ledger M14 row; score trend M14 note; Phase II complete with M14
 - Milestone closeout: `M14_run1.md`, `M14_summary.md`, `M14_audit.md`, `M14_plan.md` (**Status: Complete**), `M14_toolcalls.md`; **M15** stubs seeded (`M15_plan.md`, `M15_toolcalls.md`)
+- **Non-merge-boundary** `main` CI — closeout commit `680d966b5115e22cb67fee76da15c9a2c261de10` (short `680d966…`): [`24118726116`](https://github.com/m-cahill/starlab/actions/runs/24118726116) (**success**) — ledger + milestone artifacts only; **authoritative** PR-head / merge-boundary CI for M14 product merge remains [`24118622373`](https://github.com/m-cahill/starlab/actions/runs/24118622373) / [`24118654909`](https://github.com/m-cahill/starlab/actions/runs/24118654909)
 
 ### 2026-04-08 — M13 merged to `main` (PR #14) + closeout
 
