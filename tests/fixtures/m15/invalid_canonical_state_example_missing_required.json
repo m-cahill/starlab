@@ -1,0 +1,22 @@
+{
+  "frame_kind": "replay_derived",
+  "global_context": {},
+  "players": [
+    {
+      "army_summary": {},
+      "economy_summary": {},
+      "player_index": 0,
+      "production_summary": {},
+      "race_actual": "Protoss"
+    }
+  ],
+  "provenance": {
+    "uses_build_order_economy_plane": true,
+    "uses_combat_scouting_visibility_plane": true,
+    "uses_metadata_plane": true,
+    "uses_replay_bundle_plane": true,
+    "uses_slice_plane": true,
+    "uses_timeline_plane": true
+  },
+  "source": {}
+}

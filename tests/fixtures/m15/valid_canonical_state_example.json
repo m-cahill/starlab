@@ -1,0 +1,55 @@
+{
+  "frame_kind": "replay_derived",
+  "gameloop": 1200,
+  "global_context": {
+    "active_combat_window_ids": [
+      "cw_1"
+    ],
+    "active_slice_ids": [
+      "slice_1"
+    ],
+    "map_name": "Abyssal Reef LE"
+  },
+  "players": [
+    {
+      "army_summary": {
+        "army_unit_category_counts": {
+          "heavy": 2,
+          "light": 12
+        }
+      },
+      "economy_summary": {
+        "resource_signal_category": "medium",
+        "structure_train_events_total": 4,
+        "unit_train_events_total": 20
+      },
+      "player_index": 0,
+      "production_summary": {
+        "active_build_queue_count": 1,
+        "tech_upgrades_started_total": 0
+      },
+      "race_actual": "Terran"
+    },
+    {
+      "army_summary": {},
+      "economy_summary": {},
+      "player_index": 1,
+      "production_summary": {},
+      "race_actual": "Terran",
+      "result": "unknown"
+    }
+  ],
+  "provenance": {
+    "uses_build_order_economy_plane": true,
+    "uses_combat_scouting_visibility_plane": true,
+    "uses_metadata_plane": true,
+    "uses_replay_bundle_plane": true,
+    "uses_slice_plane": true,
+    "uses_timeline_plane": true
+  },
+  "schema_version": "starlab.canonical_state_frame.v1",
+  "source": {
+    "source_bundle_id": "bundle_example_m15_fixture_only",
+    "source_lineage_root": "lineage_root_example_m15_fixture"
+  }
+}

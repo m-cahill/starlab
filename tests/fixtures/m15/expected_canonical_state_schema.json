@@ -1,0 +1,238 @@
+{
+  "$id": "starlab.canonical_state_frame.m15.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Single replay-derived state frame at one gameloop. Bounded to M09–M14 replay planes; no extraction pipeline proof.",
+  "properties": {
+    "frame_kind": {
+      "enum": [
+        "replay_snapshot",
+        "replay_derived"
+      ],
+      "type": "string"
+    },
+    "gameloop": {
+      "minimum": 0,
+      "type": "integer"
+    },
+    "global_context": {
+      "additionalProperties": false,
+      "properties": {
+        "active_combat_window_ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "active_slice_ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "map_name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "players": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "army_summary": {
+            "additionalProperties": false,
+            "properties": {
+              "army_unit_category_counts": {
+                "additionalProperties": {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "combat_context": {
+            "additionalProperties": false,
+            "properties": {
+              "active_combat_window_ids": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "economy_summary": {
+            "additionalProperties": false,
+            "properties": {
+              "resource_signal_category": {
+                "enum": [
+                  "low",
+                  "medium",
+                  "high",
+                  null
+                ],
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "structure_train_events_total": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "unit_train_events_total": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "player_index": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "production_summary": {
+            "additionalProperties": false,
+            "properties": {
+              "active_build_queue_count": {
+                "minimum": 0,
+                "type": "integer"
+              },
+              "tech_upgrades_started_total": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "race_actual": {
+            "enum": [
+              "Terran",
+              "Protoss",
+              "Zerg",
+              "Random"
+            ],
+            "type": "string"
+          },
+          "result": {
+            "enum": [
+              "win",
+              "loss",
+              "tie",
+              "unknown"
+            ],
+            "type": "string"
+          },
+          "scouting_context": {
+            "additionalProperties": false,
+            "properties": {
+              "recent_scout_events_count": {
+                "minimum": 0,
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "visibility_context": {
+            "additionalProperties": false,
+            "properties": {
+              "visibility_proxy_level": {
+                "enum": [
+                  "low",
+                  "medium",
+                  "high",
+                  null
+                ],
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "visibility_signal_non_truth_disclaimer": {
+                "const": "starlab.visibility_proxy_not_fog_of_war_truth",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "required": [
+          "player_index",
+          "race_actual",
+          "economy_summary",
+          "production_summary",
+          "army_summary"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "uses_build_order_economy_plane": {
+          "type": "boolean"
+        },
+        "uses_combat_scouting_visibility_plane": {
+          "type": "boolean"
+        },
+        "uses_metadata_plane": {
+          "type": "boolean"
+        },
+        "uses_replay_bundle_plane": {
+          "type": "boolean"
+        },
+        "uses_slice_plane": {
+          "type": "boolean"
+        },
+        "uses_timeline_plane": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "uses_metadata_plane",
+        "uses_timeline_plane",
+        "uses_build_order_economy_plane",
+        "uses_combat_scouting_visibility_plane",
+        "uses_slice_plane",
+        "uses_replay_bundle_plane"
+      ],
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "starlab.canonical_state_frame.v1",
+      "type": "string"
+    },
+    "source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_bundle_id": {
+          "type": "string"
+        },
+        "source_lineage_root": {
+          "type": "string"
+        },
+        "source_replay_identity": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "frame_kind",
+    "source",
+    "gameloop",
+    "players",
+    "global_context",
+    "provenance"
+  ],
+  "title": "STARLAB canonical state frame v1 (M15 profile)",
+  "type": "object"
+}
