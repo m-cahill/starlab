@@ -177,7 +177,9 @@ def load_m14_bundle(bundle_dir: Path) -> tuple[M14BundleInputs | None, str | Non
             lineage=lineage,
             manifest=manifest,
             replay_build_order_economy=primary_objects["replay_build_order_economy.json"],
-            replay_combat_scouting_visibility=primary_objects["replay_combat_scouting_visibility.json"],
+            replay_combat_scouting_visibility=primary_objects[
+                "replay_combat_scouting_visibility.json"
+            ],
             replay_metadata=primary_objects["replay_metadata.json"],
             replay_slices=primary_objects["replay_slices.json"],
             replay_timeline=primary_objects["replay_timeline.json"],
