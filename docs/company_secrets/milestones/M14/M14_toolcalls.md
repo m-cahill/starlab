@@ -26,4 +26,11 @@
 ## 2026-04-08 — PR / CI / closeout workflow
 
 * **Purpose:** Branch `m14-replay-bundle-lineage-contract-v1`, single implementation commit, push, PR, CI gate, merge, closeout docs + ledger + M15 stubs.
-* **Status:** In progress.
+* **Status:** PR [#15](https://github.com/m-cahill/starlab/pull/15) merged; PR-head CI [`24118622373`](https://github.com/m-cahill/starlab/actions/runs/24118622373); merge `main` CI [`24118654909`](https://github.com/m-cahill/starlab/actions/runs/24118654909).
+
+---
+
+## 2026-04-08 — M14 closeout (ledger + milestone docs)
+
+* **Purpose:** `M14_run1.md`, `M14_summary.md`, `M14_audit.md`, finalize `M14_plan.md`, `docs/starlab.md`, `tests/test_governance.py`, seed `M15_plan.md` / `M15_toolcalls.md`.
+* **Status:** Complete pending push + green post-closeout `main` CI.

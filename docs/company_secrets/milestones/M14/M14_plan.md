@@ -59,4 +59,4 @@ Replay clipping, bundle archives with replay bytes, `s2protocol`, parser CLI, ra
 
 ## Status
 
-**In progress** — implementation on branch `m14-replay-bundle-lineage-contract-v1` (see PR when opened).
+**Complete** — merged [PR #15](https://github.com/m-cahill/starlab/pull/15) (`2026-04-08T05:00:41Z`); merge commit `8a0439a9a2970a74f3a5087390fc080f02852246`; **authoritative green PR-head CI** [`24118622373`](https://github.com/m-cahill/starlab/actions/runs/24118622373) (**success** on `42e29f2a64fa4672dbd2df435a04836c379b5258`); **merge-boundary post-merge `main` CI** [`24118654909`](https://github.com/m-cahill/starlab/actions/runs/24118654909) (**success**); closeout docs in `M14_run1.md`, `M14_summary.md`, `M14_audit.md`, ledger §23; **M15** stubs in `docs/company_secrets/milestones/M15/`.

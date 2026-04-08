@@ -104,11 +104,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m14() -> None:
+def test_current_milestone_is_m15() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M14" in section
-    assert "Bundle" in section or "bundle" in section.lower()
+    assert "M15" in section
+    assert "Canonical State" in section or "canonical state" in section.lower()
 
 
 def test_m12_complete_in_milestone_table() -> None:
@@ -385,6 +385,24 @@ def test_m14_milestone_files_exist() -> None:
     m14 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M14"
     assert (m14 / "M14_plan.md").is_file()
     assert (m14 / "M14_toolcalls.md").is_file()
+    assert (m14 / "M14_run1.md").is_file()
+    assert (m14 / "M14_summary.md").is_file()
+    assert (m14 / "M14_audit.md").is_file()
+
+
+def test_m14_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M14 |") and "Replay Bundle" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M14 milestone row not found or not complete")
+
+
+def test_m15_stub_milestone_files_exist() -> None:
+    m15 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M15"
+    assert (m15 / "M15_plan.md").is_file()
+    assert (m15 / "M15_toolcalls.md").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
