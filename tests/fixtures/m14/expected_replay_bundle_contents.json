@@ -1,0 +1,33 @@
+{
+  "artifact_roles": {
+    "replay_build_order_economy.json": "primary_governed_data",
+    "replay_combat_scouting_visibility.json": "primary_governed_data",
+    "replay_metadata.json": "primary_governed_data",
+    "replay_metadata_report.json": "secondary_report",
+    "replay_slices.json": "primary_governed_data",
+    "replay_slices_report.json": "secondary_report",
+    "replay_timeline.json": "primary_governed_data"
+  },
+  "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+  "excluded_artifacts": [
+    "archive_compression_not_required_in_v1",
+    "clipped_sub_replays",
+    "parser_owned_binary_blobs",
+    "raw_replay_bytes_sc2replay",
+    "replay_raw_parse_json",
+    "videos_images_unless_future_milestone"
+  ],
+  "primary_artifacts": [
+    "replay_metadata.json",
+    "replay_timeline.json",
+    "replay_build_order_economy.json",
+    "replay_combat_scouting_visibility.json",
+    "replay_slices.json"
+  ],
+  "profile": "starlab.replay_bundle.m14.v1",
+  "report_artifacts": [
+    "replay_metadata_report.json",
+    "replay_slices_report.json"
+  ],
+  "schema_version": "starlab.replay_bundle_contents.v1"
+}
