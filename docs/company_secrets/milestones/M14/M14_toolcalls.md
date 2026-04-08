@@ -33,4 +33,4 @@
 ## 2026-04-08 — M14 closeout (ledger + milestone docs)
 
 * **Purpose:** `M14_run1.md`, `M14_summary.md`, `M14_audit.md`, finalize `M14_plan.md`, `docs/starlab.md`, `tests/test_governance.py`, seed `M15_plan.md` / `M15_toolcalls.md`.
-* **Status:** Complete pending push + green post-closeout `main` CI.
+* **Status:** Pushed `680d966b5115e22cb67fee76da15c9a2c261de10`; green post-closeout `main` CI [`24118726116`](https://github.com/m-cahill/starlab/actions/runs/24118726116). Follow-up changelog SHA fix `4c24c2b` (small ledger-only correction).
