@@ -1,8 +1,11 @@
-"""JSON Schema for canonical state frame v1 + subset validator (M15)."""
+"""JSON Schema for canonical state frame v1 (M15); validation via jsonschema (Draft 2020-12)."""
 
 from __future__ import annotations
 
 from typing import Any
+
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import ValidationError
 
 from starlab.state.canonical_state_catalog import (
     FRAME_KIND_VALUES,
@@ -177,111 +180,21 @@ def build_canonical_state_json_schema() -> dict[str, Any]:
     }
 
 
-def _schema_types(schema: dict[str, Any]) -> list[str]:
-    t = schema.get("type")
-    if t is None:
-        return []
-    return t if isinstance(t, list) else [t]
+def _instance_location(err: ValidationError) -> str:
+    parts = [str(p) for p in err.absolute_path]
+    if not parts:
+        return "$"
+    return "$." + ".".join(parts)
 
 
-def _matches_json_type(instance: Any, json_type: str) -> bool:
-    if json_type == "null":
-        return instance is None
-    if json_type == "boolean":
-        return isinstance(instance, bool)
-    if json_type == "string":
-        return isinstance(instance, str)
-    if json_type == "integer":
-        return isinstance(instance, int) and not isinstance(instance, bool)
-    if json_type == "number":
-        return isinstance(instance, (int, float)) and not isinstance(instance, bool)
-    if json_type == "array":
-        return isinstance(instance, list)
-    if json_type == "object":
-        return isinstance(instance, dict)
-    return False
-
-
-def validate_json_schema_subset(
-    instance: Any,
-    schema: dict[str, Any],
-    path: str = "$",
-) -> list[str]:
-    """Validate ``instance`` against a **subset** of JSON Schema used by M15 (no $ref)."""
-
-    errors: list[str] = []
-
-    if "const" in schema:
-        if instance != schema["const"]:
-            errors.append(f"{path}: expected const {schema['const']!r}, got {instance!r}")
-        return errors
-
-    if "enum" in schema:
-        if instance not in schema["enum"]:
-            errors.append(f"{path}: must be one of {schema['enum']!r}")
-        return errors
-
-    type_list = _schema_types(schema)
-    if type_list:
-        if not any(_matches_json_type(instance, t) for t in type_list):
-            errors.append(f"{path}: type must be {type_list!r}, got {type(instance).__name__}")
-            return errors
-
-    if "object" in type_list and isinstance(instance, dict):
-        req = schema.get("required") or []
-        for key in req:
-            if key not in instance:
-                errors.append(f"{path}: missing required property {key!r}")
-        props = schema.get("properties") or {}
-        extra_keys = set(instance) - set(props)
-        ap = schema.get("additionalProperties", True)
-        if ap is False and extra_keys:
-            errors.append(f"{path}: additional properties not allowed: {sorted(extra_keys)!r}")
-        elif isinstance(ap, dict):
-            for key in extra_keys:
-                errors.extend(
-                    validate_json_schema_subset(instance[key], ap, f"{path}.{key}"),
-                )
-        for key, sub in props.items():
-            if key not in instance:
-                continue
-            errors.extend(validate_json_schema_subset(instance[key], sub, f"{path}.{key}"))
-        return errors
-
-    if "array" in type_list and isinstance(instance, list):
-        min_items = schema.get("minItems")
-        if isinstance(min_items, int) and len(instance) < min_items:
-            errors.append(f"{path}: array shorter than minItems {min_items}")
-        items_schema = schema.get("items")
-        if isinstance(items_schema, dict):
-            for i, item in enumerate(instance):
-                errors.extend(
-                    validate_json_schema_subset(item, items_schema, f"{path}[{i}]"),
-                )
-        return errors
-
-    if "integer" in type_list and isinstance(instance, int) and not isinstance(instance, bool):
-        if "minimum" in schema and instance < schema["minimum"]:
-            errors.append(f"{path}: must be >= {schema['minimum']}")
-        return errors
-
-    if (
-        "number" in type_list
-        and isinstance(instance, (int, float))
-        and not isinstance(
-            instance,
-            bool,
-        )
-    ):
-        if "minimum" in schema and instance < schema["minimum"]:
-            errors.append(f"{path}: must be >= {schema['minimum']}")
-        return errors
-
-    return errors
+def _format_validation_error(err: ValidationError) -> str:
+    return f"{_instance_location(err)}: {err.message}"
 
 
 def validate_canonical_state_frame(instance: Any) -> list[str]:
     """Validate a parsed state frame object against the M15 JSON Schema."""
 
     schema = build_canonical_state_json_schema()
-    return validate_json_schema_subset(instance, schema)
+    validator = Draft202012Validator(schema)
+    errors = [_format_validation_error(e) for e in validator.iter_errors(instance)]
+    return sorted(errors)
