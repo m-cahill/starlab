@@ -50,3 +50,16 @@ python -m pytest -q
 * **Mypy:** `Success: no issues found in 120 source files`
 * **Pytest:** `310 passed`, `1 warning` in `1.57s` (same run)
 * **Warning (noted):** `DeprecationWarning: the imp module is deprecated` from `s2protocol` during `tests/test_parse_replay_cli.py::test_cli_writes_three_json_files` — upstream / optional replay-parser extra; **not** introduced by M17 observation modules.
+
+---
+
+## 2026-04-08 — PR #18, merge, CI, closeout docs
+
+* **PR:** [#18](https://github.com/m-cahill/starlab/pull/18) — `m17-observation-surface-contract` → `main`
+* **Final PR-head SHA:** `801af8b9c1a525e19fe3804cb7ed968e80d8b0f6`
+* **Authoritative PR-head CI:** [`24164045530`](https://github.com/m-cahill/starlab/actions/runs/24164045530) — **success**
+* **Merged at (UTC):** 2026-04-08T23:30:53Z — merge commit `f63c8e93cb0a2943b9149f4384dbde68b74f9e76` — merge method **merge commit** — remote branch **deleted**
+* **Merge-boundary `main` CI:** [`24164075167`](https://github.com/m-cahill/starlab/actions/runs/24164075167) — **success** (first `push` workflow on `main` for the merge)
+* **Tools:** `gh pr create`, `gh pr merge --merge --delete-branch`, `gh run watch`
+* **Closeout (this commit):** `M17_run1.md`, `M17_summary.md`, `M17_audit.md`, `M17_plan.md` (closed), `docs/starlab.md` ledger updates, `tests/test_governance.py` (M17 milestone file list)
+* **Status:** M17 milestone closed; **M18** stubs only (no M18 product code)

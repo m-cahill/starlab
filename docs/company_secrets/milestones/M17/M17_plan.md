@@ -2,8 +2,10 @@
 
 **Milestone:** M17 — Observation Surface Contract  
 **Phase:** III — State, Representation, and Perception Bridge  
-**Suggested branch:** `m17-observation-surface-contract`  
-**Target tag:** `v0.0.17-m17`
+**Branch:** `m17-observation-surface-contract` (merged; remote deleted)  
+**PR:** [#18](https://github.com/m-cahill/starlab/pull/18)  
+**Target tag:** `v0.0.17-m17`  
+**Status:** **Closed** (2026-04-08)
 
 ## Objective
 
@@ -24,6 +26,12 @@ Freeze the **observation surface semantics and schema** for **one** player-relat
 - **Example fixture:** source-informed by `tests/fixtures/m16/expected_canonical_state.json`, **authored** as a contract example (not normative projection algorithm).
 - **Action-mask families:** concrete initial set — `no_op`, `selection`, `camera_or_view`, `production`, `build`, `unit_command`, `research_or_upgrade` — family-level contract only.
 
-## Status
+## Merge evidence
 
-**Implementation complete in-repo.** Record **PR / merge commit / authoritative PR-head CI / merge-boundary `main` CI** at merge boundary; update §18 and this plan with run evidence as needed.
+- **Merge commit:** `f63c8e93cb0a2943b9149f4384dbde68b74f9e76` — **2026-04-08T23:30:53Z** (UTC), merge method **merge commit**
+- **Authoritative PR-head CI:** [`24164045530`](https://github.com/m-cahill/starlab/actions/runs/24164045530) — **success** (final tip `801af8b9c1a525e19fe3804cb7ed968e80d8b0f6`)
+- **Merge-boundary `main` CI:** [`24164075167`](https://github.com/m-cahill/starlab/actions/runs/24164075167) — **success**
+
+## Closeout artifacts
+
+- `M17_run1.md`, `M17_summary.md`, `M17_audit.md`, `M17_toolcalls.md` (finalized), ledger `docs/starlab.md`
