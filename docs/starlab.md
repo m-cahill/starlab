@@ -1103,6 +1103,7 @@ It should always answer, with minimal ambiguity:
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23 updated: **governed canonical state schema v1** (narrow) **proved on `main`**; Phase III artifact row (M15); Phase III glossary (M15 vs M16 vs M17); **current milestone** → **M16** (stub); closeout ledger M15 row + compact table M14/M15 rows; score trend M15 note
 - Milestone closeout: `M15_run1.md`, `M15_summary.md`, `M15_audit.md`, `M15_plan.md` (**Status: Complete**), `M15_toolcalls.md`; **M16** stubs seeded (`M16_plan.md`, `M16_toolcalls.md`)
 - **Non-merge-boundary** `main` CI — closeout commit `1c1e89ed8137c5df9d2c0d7e0ee4e5ff886c00e0` (short `1c1e89e…`): [`24122183559`](https://github.com/m-cahill/starlab/actions/runs/24122183559) (**success**) — ledger + milestone artifacts only; **authoritative** PR-head / merge-boundary CI for M15 product merge remains [`24122064141`](https://github.com/m-cahill/starlab/actions/runs/24122064141) / [`24122092800`](https://github.com/m-cahill/starlab/actions/runs/24122092800)
+- **Non-merge-boundary** `main` CI — follow-up commit `0764cae100848b52eb18933ce630daa7629c5ac3`: [`24122213663`](https://github.com/m-cahill/starlab/actions/runs/24122213663) (**success**) — changelog row for prior closeout run; **not** merge authority
 
 ### 2026-04-08 — M14 merged to `main` (PR #15) + closeout
 
