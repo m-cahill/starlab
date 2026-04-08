@@ -21,3 +21,10 @@
 * **Purpose:** Restore working tree to commit `0ebb730` M15 implementation; switch `validate_canonical_state_frame` to **jsonschema** `Draft202012Validator` per locked decision; add `jsonschema` to `pyproject.toml` dependencies; remove duplicate untracked `tests/fixtures/m15/canonical_state_schema.json`.
 * **Files:** `pyproject.toml`, `starlab/state/canonical_state_schema.py`
 * **Status:** Done — full pytest / ruff / mypy green locally.
+
+---
+
+## 2026-04-08 — CI: Mypy stubs for jsonschema
+
+* **Purpose:** PR #16 CI failed Mypy (`import-untyped` for `jsonschema`); add `types-jsonschema` to `[project.optional-dependencies] dev` in `pyproject.toml`.
+* **Status:** Done — full `mypy starlab tests` green locally.
