@@ -1,0 +1,228 @@
+{
+  "contract": "starlab.replay_slices_contract.v1",
+  "generation_parameters": {
+    "replay_max_gameloop": 1200,
+    "replay_slice_catalog": "starlab.replay_slice_catalog.m13.v1",
+    "slice_padding_post_loops": 160,
+    "slice_padding_pre_loops": 160
+  },
+  "profile": "starlab.replay_slices.m13.v1",
+  "schema_version": "starlab.replay_slices.v1",
+  "slices": [
+    {
+      "anchor_gameloop": 100,
+      "anchor_ref": {
+        "scouting_observation_id": "scouting_observation:0"
+      },
+      "duration_loops": 261,
+      "end_gameloop": 260,
+      "opponent_player_index": null,
+      "overlapping_build_order_step_ids": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "overlapping_visibility_window_ids": [
+        "0",
+        "1"
+      ],
+      "slice_id": "7554208cc39cf53607776a96aca04d7d72db84abf9bc38c6a580747d8f512a4a",
+      "slice_kind": "scouting_observation",
+      "start_gameloop": 0,
+      "subject_player_index": 1,
+      "tags": [
+        "proxy_visibility_overlap",
+        "scouting"
+      ]
+    },
+    {
+      "anchor_gameloop": 200,
+      "anchor_ref": {
+        "scouting_observation_id": "scouting_observation:1"
+      },
+      "duration_loops": 321,
+      "end_gameloop": 360,
+      "opponent_player_index": null,
+      "overlapping_build_order_step_ids": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "overlapping_visibility_window_ids": [
+        "0",
+        "1"
+      ],
+      "slice_id": "b835f70734f6559e2136da176f0177afef7f5638938e62dc046614c89c99fe30",
+      "slice_kind": "scouting_observation",
+      "start_gameloop": 40,
+      "subject_player_index": 2,
+      "tags": [
+        "proxy_visibility_overlap",
+        "scouting"
+      ]
+    },
+    {
+      "anchor_gameloop": 205,
+      "anchor_ref": {
+        "scouting_observation_id": "scouting_observation:2"
+      },
+      "duration_loops": 321,
+      "end_gameloop": 365,
+      "opponent_player_index": null,
+      "overlapping_build_order_step_ids": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "overlapping_visibility_window_ids": [
+        "0",
+        "1"
+      ],
+      "slice_id": "5ecd12513a3a74d3fe6b1ab3bd44d8bda823a131765046cbfa6bbe765152e177",
+      "slice_kind": "scouting_observation",
+      "start_gameloop": 45,
+      "subject_player_index": 2,
+      "tags": [
+        "proxy_visibility_overlap",
+        "scouting"
+      ]
+    },
+    {
+      "anchor_gameloop": 250,
+      "anchor_ref": {
+        "scouting_observation_id": "scouting_observation:3"
+      },
+      "duration_loops": 321,
+      "end_gameloop": 410,
+      "opponent_player_index": null,
+      "overlapping_build_order_step_ids": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "overlapping_visibility_window_ids": [
+        "0",
+        "1",
+        "2"
+      ],
+      "slice_id": "34fbe5a3d29ca69115426e09b69e6785563656f894a787b3e97e7e8a9f6a6d36",
+      "slice_kind": "scouting_observation",
+      "start_gameloop": 90,
+      "subject_player_index": 1,
+      "tags": [
+        "proxy_visibility_overlap",
+        "scouting"
+      ]
+    },
+    {
+      "anchor_gameloop": 300,
+      "anchor_ref": {
+        "scouting_observation_id": "scouting_observation:4"
+      },
+      "duration_loops": 321,
+      "end_gameloop": 460,
+      "opponent_player_index": null,
+      "overlapping_build_order_step_ids": [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "overlapping_visibility_window_ids": [
+        "0",
+        "1",
+        "2"
+      ],
+      "slice_id": "b0c09737b26d1f8fa24141ca4275e9ad7ab571e8ae91b20bd50606d822fbd572",
+      "slice_kind": "scouting_observation",
+      "start_gameloop": 140,
+      "subject_player_index": 1,
+      "tags": [
+        "proxy_visibility_overlap",
+        "scouting"
+      ]
+    },
+    {
+      "anchor_gameloop": 700,
+      "anchor_ref": {
+        "combat_window_id": "combat_window:0"
+      },
+      "duration_loops": 341,
+      "end_gameloop": 880,
+      "opponent_player_index": 2,
+      "overlapping_build_order_step_ids": [],
+      "overlapping_visibility_window_ids": [
+        "0",
+        "2",
+        "3"
+      ],
+      "slice_id": "c3bf709dfb01d3d12fafc537cf78d7b7673a735d137f25d4051a9e867f1015d0",
+      "slice_kind": "combat_window",
+      "start_gameloop": 540,
+      "subject_player_index": 1,
+      "tags": [
+        "combat",
+        "proxy_visibility_overlap"
+      ]
+    },
+    {
+      "anchor_gameloop": 1000,
+      "anchor_ref": {
+        "combat_window_id": "combat_window:1"
+      },
+      "duration_loops": 321,
+      "end_gameloop": 1160,
+      "opponent_player_index": null,
+      "overlapping_build_order_step_ids": [],
+      "overlapping_visibility_window_ids": [
+        "0",
+        "4"
+      ],
+      "slice_id": "678885a40eae3dd955ac470e1a6f28b64b55cbbdc75d8296cdecdbb1543e140d",
+      "slice_kind": "combat_window",
+      "start_gameloop": 840,
+      "subject_player_index": 1,
+      "tags": [
+        "combat",
+        "proxy_visibility_overlap"
+      ]
+    },
+    {
+      "anchor_gameloop": 1200,
+      "anchor_ref": {
+        "combat_window_id": "combat_window:2"
+      },
+      "duration_loops": 161,
+      "end_gameloop": 1200,
+      "opponent_player_index": null,
+      "overlapping_build_order_step_ids": [],
+      "overlapping_visibility_window_ids": [
+        "0"
+      ],
+      "slice_id": "676c8e6625340d6af24bb3cbf454ce497afbd173762428f15e5ea6fe6dde5585",
+      "slice_kind": "combat_window",
+      "start_gameloop": 1040,
+      "subject_player_index": 1,
+      "tags": [
+        "combat",
+        "proxy_visibility_overlap"
+      ]
+    }
+  ],
+  "source_build_order_economy_sha256": "665c9f40ee26f6e182570b39bb4a58c6afc5d7d86430685be98335af5d14487c",
+  "source_combat_scouting_visibility_sha256": "42cadbcc884037a0c5ccab7225403a2e00b04541916859bf0757b89879fb6f47",
+  "source_timeline_sha256": "dc68119639ccee6eb19b76e86a953938e6aabfb8d7ef6edf9b2012c9168aa432"
+}

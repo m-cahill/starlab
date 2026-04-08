@@ -26,6 +26,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_timeline_event_extraction.md",
     "docs/runtime/replay_build_order_economy_extraction.md",
     "docs/runtime/replay_combat_scouting_visibility_extraction.md",
+    "docs/runtime/replay_slice_generation.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -444,11 +445,33 @@ def test_m12_combat_scouting_visibility_modules_exist() -> None:
         assert (rp / name).is_file()
 
 
+def test_m13_replay_slice_modules_exist() -> None:
+    rp = REPO_ROOT / "starlab" / "replays"
+    for name in (
+        "replay_slice_models.py",
+        "replay_slice_catalog.py",
+        "replay_slice_generation.py",
+        "replay_slice_io.py",
+        "extract_replay_slices.py",
+    ):
+        assert (rp / name).is_file()
+
+
 def test_m12_fixture_dir_exists() -> None:
     fx = REPO_ROOT / "tests" / "fixtures" / "m12"
     assert fx.is_dir()
     assert (fx / "replay_raw_parse_m12_combined.json").is_file()
     assert (fx / "expected_replay_combat_scouting_visibility_combined.json").is_file()
+
+
+def test_m13_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m13"
+    assert fx.is_dir()
+    assert (fx / "replay_timeline.json").is_file()
+    assert (fx / "replay_build_order_economy.json").is_file()
+    assert (fx / "replay_combat_scouting_visibility.json").is_file()
+    assert (fx / "expected_replay_slices.json").is_file()
+    assert (fx / "expected_replay_slices_report.json").is_file()
 
 
 def test_m09_fixture_raw_parse_fixtures_exist() -> None:
