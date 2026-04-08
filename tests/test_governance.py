@@ -29,6 +29,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_slice_generation.md",
     "docs/runtime/replay_bundle_lineage_contract.md",
     "docs/runtime/canonical_state_schema_v1.md",
+    "docs/runtime/canonical_state_pipeline_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -443,6 +444,27 @@ def test_m15_fixture_dir_exists() -> None:
     assert (fx / "invalid_canonical_state_example_missing_required.json").is_file()
     assert (fx / "expected_canonical_state_schema.json").is_file()
     assert (fx / "expected_canonical_state_schema_report.json").is_file()
+
+
+def test_m16_canonical_state_pipeline_modules_exist() -> None:
+    st = REPO_ROOT / "starlab" / "state"
+    for name in (
+        "canonical_state_inputs.py",
+        "canonical_state_derivation.py",
+        "canonical_state_pipeline.py",
+        "emit_canonical_state.py",
+    ):
+        assert (st / name).is_file()
+
+
+def test_m16_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m16"
+    assert fx.is_dir()
+    assert (fx / "expected_canonical_state.json").is_file()
+    assert (fx / "expected_canonical_state_report.json").is_file()
+    b = fx / "bundle"
+    assert (b / "replay_bundle_manifest.json").is_file()
+    assert (b / "replay_metadata.json").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:

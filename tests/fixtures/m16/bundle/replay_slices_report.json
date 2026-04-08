@@ -1,0 +1,51 @@
+{
+  "clipped_to_end_count": 1,
+  "clipped_to_start_count": 1,
+  "contract": "starlab.replay_slices_contract.v1",
+  "duration_summary_by_kind": {
+    "combat_window": {
+      "count": 3,
+      "max": 341,
+      "mean_loops": 274,
+      "min": 161,
+      "sum_loops": 823
+    },
+    "scouting_observation": {
+      "count": 5,
+      "max": 321,
+      "mean_loops": 309,
+      "min": 261,
+      "sum_loops": 1545
+    }
+  },
+  "generation_parameters": {
+    "replay_max_gameloop": 1200,
+    "replay_slice_catalog": "starlab.replay_slice_catalog.m13.v1",
+    "slice_padding_post_loops": 160,
+    "slice_padding_pre_loops": 160
+  },
+  "omitted_candidates_by_reason": {},
+  "overlap_summary": {
+    "build_order_overlap_total": 29,
+    "visibility_overlap_total": 18
+  },
+  "profile": "starlab.replay_slices.m13.v1",
+  "schema_version": "starlab.replay_slices_report.v1",
+  "slice_counts_by_kind": {
+    "combat_window": 3,
+    "scouting_observation": 5
+  },
+  "slice_counts_by_player": {
+    "1": {
+      "combat_window": 3,
+      "scouting_observation": 3
+    },
+    "2": {
+      "combat_window": 1,
+      "scouting_observation": 2
+    }
+  },
+  "source_build_order_economy_sha256": "665c9f40ee26f6e182570b39bb4a58c6afc5d7d86430685be98335af5d14487c",
+  "source_combat_scouting_visibility_sha256": "42cadbcc884037a0c5ccab7225403a2e00b04541916859bf0757b89879fb6f47",
+  "source_timeline_sha256": "dc68119639ccee6eb19b76e86a953938e6aabfb8d7ef6edf9b2012c9168aa432"
+}
