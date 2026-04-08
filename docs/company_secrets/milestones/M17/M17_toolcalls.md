@@ -63,3 +63,11 @@ python -m pytest -q
 * **Tools:** `gh pr create`, `gh pr merge --merge --delete-branch`, `gh run watch`
 * **Closeout (this commit):** `M17_run1.md`, `M17_summary.md`, `M17_audit.md`, `M17_plan.md` (closed), `docs/starlab.md` ledger updates, `tests/test_governance.py` (M17 milestone file list)
 * **Status:** M17 milestone closed; **M18** stubs only (no M18 product code)
+
+---
+
+## 2026-04-08 — Closeout doc push (non-merge-boundary `main` CI)
+
+* **Commit:** `87fd04617ad06522efca8d6a89e31d74c83e12cb` — `docs(m17): milestone closeout — run1, summary, audit, ledger`
+* **Workflow:** [`24164136804`](https://github.com/m-cahill/starlab/actions/runs/24164136804) — **success** (push to `main`, **not** M17 merge-boundary authority)
+* **Note:** M17 **product** merge authority remains **PR-head** [`24164045530`](https://github.com/m-cahill/starlab/actions/runs/24164045530) + **merge-boundary** [`24164075167`](https://github.com/m-cahill/starlab/actions/runs/24164075167)
