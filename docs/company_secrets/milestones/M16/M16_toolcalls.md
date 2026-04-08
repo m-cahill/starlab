@@ -56,3 +56,5 @@ Commands run from repo root (`c:\coding\starlab`):
 * **Commit:** `a6a3ea62e8bfa036b87727e1d8e93a60176c4ef8` — `docs(m16): complete milestone closeout and M17 handoff`
 * **Workflow run:** [`24160991810`](https://github.com/m-cahill/starlab/actions/runs/24160991810) — **success** (`push` to `main`)
 * **Note:** Doc/ledger/governance-only follow-up to the M16 merge boundary; **not** merge authority for M16 product evidence (that remains PR-head [`24160830775`](https://github.com/m-cahill/starlab/actions/runs/24160830775) / merge-boundary [`24160871811`](https://github.com/m-cahill/starlab/actions/runs/24160871811)).
+
+* **Follow-up doc-only push:** commit `7b1731f151a3ae75006f039a0b79cdec48561289` — `docs(starlab): record M16 closeout main CI run` — **green** `main` CI [`24161024608`](https://github.com/m-cahill/starlab/actions/runs/24161024608) — **not** merge authority (changelog pointer only).
