@@ -58,3 +58,5 @@ Commands run from repo root (`c:\coding\starlab`):
 * **Note:** Doc/ledger/governance-only follow-up to the M16 merge boundary; **not** merge authority for M16 product evidence (that remains PR-head [`24160830775`](https://github.com/m-cahill/starlab/actions/runs/24160830775) / merge-boundary [`24160871811`](https://github.com/m-cahill/starlab/actions/runs/24160871811)).
 
 * **Follow-up doc-only push:** commit `7b1731f151a3ae75006f039a0b79cdec48561289` — `docs(starlab): record M16 closeout main CI run` — **green** `main` CI [`24161024608`](https://github.com/m-cahill/starlab/actions/runs/24161024608) — **not** merge authority (changelog pointer only).
+
+* **Follow-up doc-only push:** commit `dd7c204ab1440ec51c71be90eca623e39c912a2d` — `docs(starlab): record M16 closeout follow-up CI run` — **green** `main` CI [`24161067580`](https://github.com/m-cahill/starlab/actions/runs/24161067580) — **not** merge authority (ledger/toolcalls only; no further changelog cascade).
