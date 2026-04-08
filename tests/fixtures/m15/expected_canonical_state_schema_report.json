@@ -1,0 +1,50 @@
+{
+  "contract": "starlab.canonical_state_schema.v1",
+  "example_fixture_hashes": {
+    "invalid": "6f2ad8f11e610cd5b570fa38051f694345e26290021e110a242ea5c80ccf819a",
+    "valid": "5cfeabcff44cd6ec7308d42b6805697db59cbf9d848d05c5793191732cb4b26c"
+  },
+  "non_claims": [
+    "Does not prove replay-to-state extraction from bundles (M16).",
+    "Does not prove observation surface semantics (M17) or perceptual bridge behavior (M18).",
+    "Does not prove replay↔execution equivalence, benchmark integrity, or live SC2 in CI.",
+    "Does not certify omniscient or hidden game truth; bounded to replay-derived artifacts only."
+  ],
+  "omission_rules": [
+    "Optional fields are omitted when not derivable from governed replay planes (M09–M14).",
+    "Use JSON null only when a field is applicable but intentionally unresolved; do not invent defaults.",
+    "Do not include player display names, chat text, or other PII in public contract documents.",
+    "Economy and resource fields are summaries or categories only — not exact banked minerals/gas (M11 non-claim).",
+    "Visibility-related fields are proxy signals only — not certified fog-of-war truth (M12 non-claim)."
+  ],
+  "optional_sections": [
+    "source.source_bundle_id",
+    "source.source_lineage_root",
+    "source.source_replay_identity",
+    "players[].result",
+    "players[].combat_context",
+    "players[].scouting_context",
+    "players[].visibility_context",
+    "global_context.map_name",
+    "global_context.active_slice_ids",
+    "global_context.active_combat_window_ids"
+  ],
+  "profile": "starlab.canonical_state_schema.m15.v1",
+  "required_player_fields": [
+    "player_index",
+    "race_actual",
+    "economy_summary",
+    "production_summary",
+    "army_summary"
+  ],
+  "required_top_level_fields": [
+    "schema_version",
+    "frame_kind",
+    "source",
+    "gameloop",
+    "players",
+    "global_context",
+    "provenance"
+  ],
+  "schema_sha256": "83d07e123cabee05e971f7d3a39dc29a5b8aaad1c75c5a4a7a83cbb2c7f9af6e"
+}
