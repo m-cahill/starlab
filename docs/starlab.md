@@ -1111,6 +1111,7 @@ It should always answer, with minimal ambiguity:
 - **Merge-push `main` CI** on merge commit: [`24160871811`](https://github.com/m-cahill/starlab/actions/runs/24160871811) (**success**)
 - §3 / §6 / §7 / §8 / §10 / §11 / §18 / §20 / §23 updated: **governed structured state pipeline** (narrow) **proved on `main`**; Phase III artifact row (M16); Phase III glossary (M15 schema-only vs M16 pipeline vs M17 observation); **current milestone** → **M17** (stub); closeout ledger M16 row + compact table M16 row; score trend M16 note
 - Milestone closeout: `M16_run1.md`, `M16_summary.md`, `M16_audit.md`, `M16_plan.md` (**Status: Complete**), `M16_toolcalls.md`; **M17** stubs present (`M17_plan.md`, `M17_toolcalls.md`) — **no** M17 product code in this pass
+- **Non-merge-boundary** `main` CI — closeout commit `a6a3ea62e8bfa036b87727e1d8e93a60176c4ef8` (short `a6a3ea6…`): [`24160991810`](https://github.com/m-cahill/starlab/actions/runs/24160991810) (**success**) — ledger + milestone artifacts + governance tests only; **authoritative** PR-head / merge-boundary CI for M16 product merge remains [`24160830775`](https://github.com/m-cahill/starlab/actions/runs/24160830775) / [`24160871811`](https://github.com/m-cahill/starlab/actions/runs/24160871811)
 
 ### 2026-04-08 — M15 merged to `main` (PR #16) + closeout
 
