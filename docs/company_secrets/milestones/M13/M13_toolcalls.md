@@ -17,6 +17,14 @@
 
 ---
 
+## 2026-04-08 — Closeout (ledger, milestone docs, M14 stubs)
+
+* **Tool:** git commit / git push; file writes for `docs/starlab.md`, `M13_run1.md`, `M13_summary.md`, `M13_audit.md`, `M13_plan.md`, `M14_plan.md`, `M14_toolcalls.md`, `tests/test_governance.py`
+* **Purpose:** Single doc closeout commit on `main` after green merge-boundary CI; canonical ledger + M14 folder seed
+* **Timestamp:** 2026-04-08 (session)
+
+---
+
 ## 2026-04-08 — Branch, commit, push, PR (M13 merge gate)
 
 * **Tool:** git checkout / git add / git commit / git push; gh pr create

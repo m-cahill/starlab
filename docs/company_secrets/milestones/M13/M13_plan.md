@@ -68,4 +68,4 @@ Raw replay byte slicing, `s2protocol`, parser CLI, benchmark labels, simulation,
 
 ## Status
 
-**In progress** — implementation branch (replace with PR/CI IDs at closeout).
+**Complete** — merged [PR #14](https://github.com/m-cahill/starlab/pull/14) (`2026-04-08`); merge commit `f86e36837e81b8552639c5a885a13a773b96215c`; **authoritative green PR-head CI** [`24112526047`](https://github.com/m-cahill/starlab/actions/runs/24112526047) (**success**); **merge-boundary post-merge `main` CI** [`24112556177`](https://github.com/m-cahill/starlab/actions/runs/24112556177) (**success**); closeout docs in `M13_run1.md`, `M13_summary.md`, `M13_audit.md`, ledger §23.
