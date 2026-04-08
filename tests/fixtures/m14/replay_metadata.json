@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "game": {
+      "event_streams_available": {
+        "attribute_events_available": false,
+        "game_events_available": true,
+        "message_events_available": false,
+        "tracker_events_available": true
+      },
+      "game_length_loops": 1000,
+      "player_count": 2
+    },
+    "map": {
+      "map_name": "Test Map"
+    },
+    "players": [
+      {
+        "player_index": 0,
+        "player_kind": "human",
+        "race_actual": "terran",
+        "race_requested": "terran",
+        "result": "win"
+      },
+      {
+        "player_index": 1,
+        "player_kind": "computer",
+        "race_actual": "zerg",
+        "race_requested": "zerg",
+        "result": "loss"
+      }
+    ],
+    "protocol": {
+      "base_build": 12345,
+      "data_build": 67890,
+      "data_version": 1
+    }
+  },
+  "metadata_contract_version": "starlab.replay_metadata_contract.v1",
+  "metadata_profile": "starlab.replay_metadata_profile.v1",
+  "parser_family": "fixture",
+  "parser_version": "0.0.test",
+  "replay_content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "schema_version": "starlab.replay_metadata.v1",
+  "source_raw_parse_sha256": "3435519b1952c16145c58a4f74381ce6b24166929593913c12b67371548c44ba",
+  "source_sections_present": [
+    "details",
+    "header",
+    "init_data"
+  ]
+}

@@ -27,6 +27,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_build_order_economy_extraction.md",
     "docs/runtime/replay_combat_scouting_visibility_extraction.md",
     "docs/runtime/replay_slice_generation.md",
+    "docs/runtime/replay_bundle_lineage_contract.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -380,7 +381,7 @@ def test_m13_milestone_files_exist() -> None:
     assert (m13 / "M13_audit.md").is_file()
 
 
-def test_m14_stub_milestone_files_exist() -> None:
+def test_m14_milestone_files_exist() -> None:
     m14 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M14"
     assert (m14 / "M14_plan.md").is_file()
     assert (m14 / "M14_toolcalls.md").is_file()
@@ -475,6 +476,18 @@ def test_m13_replay_slice_modules_exist() -> None:
         assert (rp / name).is_file()
 
 
+def test_m14_replay_bundle_modules_exist() -> None:
+    rp = REPO_ROOT / "starlab" / "replays"
+    for name in (
+        "replay_bundle_models.py",
+        "replay_bundle_catalog.py",
+        "replay_bundle_generation.py",
+        "replay_bundle_io.py",
+        "extract_replay_bundle.py",
+    ):
+        assert (rp / name).is_file()
+
+
 def test_m12_fixture_dir_exists() -> None:
     fx = REPO_ROOT / "tests" / "fixtures" / "m12"
     assert fx.is_dir()
@@ -490,6 +503,19 @@ def test_m13_fixture_dir_exists() -> None:
     assert (fx / "replay_combat_scouting_visibility.json").is_file()
     assert (fx / "expected_replay_slices.json").is_file()
     assert (fx / "expected_replay_slices_report.json").is_file()
+
+
+def test_m14_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m14"
+    assert fx.is_dir()
+    assert (fx / "replay_metadata.json").is_file()
+    assert (fx / "replay_timeline.json").is_file()
+    assert (fx / "replay_build_order_economy.json").is_file()
+    assert (fx / "replay_combat_scouting_visibility.json").is_file()
+    assert (fx / "replay_slices.json").is_file()
+    assert (fx / "expected_replay_bundle_manifest.json").is_file()
+    assert (fx / "expected_replay_bundle_lineage.json").is_file()
+    assert (fx / "expected_replay_bundle_contents.json").is_file()
 
 
 def test_m09_fixture_raw_parse_fixtures_exist() -> None:
