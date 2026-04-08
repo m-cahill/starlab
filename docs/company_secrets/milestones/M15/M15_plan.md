@@ -330,4 +330,4 @@ That will make the Phase III boundary as clear as the M13/M14 slice-versus-bundl
 
 ## Status
 
-**Implementation in progress** on branch `m15-canonical-state-schema-v1` — ledger and closeout artifacts pending green CI and merge.
+**Complete** — merged to `main` via [PR #16](https://github.com/m-cahill/starlab/pull/16) (merge commit `b0f7132a54508f35d54406011cd3b37bce776927`). Authoritative green PR-head CI [`24122064141`](https://github.com/m-cahill/starlab/actions/runs/24122064141); merge-boundary `main` CI [`24122092800`](https://github.com/m-cahill/starlab/actions/runs/24122092800). Closeout: `M15_run1.md`, `M15_summary.md`, `M15_audit.md`, ledger §23 — **M16** stubs seeded (`M16_plan.md`, `M16_toolcalls.md`).

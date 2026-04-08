@@ -28,3 +28,11 @@
 
 * **Purpose:** PR #16 CI failed Mypy (`import-untyped` for `jsonschema`); add `types-jsonschema` to `[project.optional-dependencies] dev` in `pyproject.toml`.
 * **Status:** Done — full `mypy starlab tests` green locally.
+
+---
+
+## 2026-04-08 — Closeout (ledger + M16 stubs)
+
+* **Purpose:** After green PR-head + merge-boundary `main` CI for PR #16, add `M15_run1.md`, `M15_summary.md`, `M15_audit.md`; update `docs/starlab.md`; finalize `M15_plan.md`; seed `docs/company_secrets/milestones/M16/` stubs; governance tests → current milestone **M16**.
+* **Files:** `docs/starlab.md`, `docs/company_secrets/milestones/M15/*`, `docs/company_secrets/milestones/M16/*`, `tests/test_governance.py`
+* **Status:** Done — closeout commit pushed to `main`.
