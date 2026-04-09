@@ -1193,6 +1193,7 @@ It should always answer, with minimal ambiguity:
 - Phase IV artifact row + Phase IV scorecard glossary (`scored` / `unscored` / `disqualified` / `comparable` / `provisional` / `non_comparable`)
 - §3 / §6 / §10 / §11 / §18 / §20 / §23: **governed benchmark contract + scorecard schemas** (narrow) **proved on `main`**; **current milestone** → **M21** (stub); closeout ledger M20 row; score trend M20 note
 - Milestone closeout: `M20_run1.md`, `M20_summary.md`, `M20_audit.md`, `M20_plan.md` (**closed**), `M20_toolcalls.md`; **M21** stubs (`M21_plan.md`, `M21_toolcalls.md`) — **no** M21 product code
+- **Non-merge-boundary** `main` CI — closeout commit `8d6a1135bc2f71a729cf81cad4b5ee6adb022626`: [`24173318958`](https://github.com/m-cahill/starlab/actions/runs/24173318958) (**success**) — milestone docs + ledger + governance test only; **authoritative** M20 product merge evidence remains PR-head [`24173251270`](https://github.com/m-cahill/starlab/actions/runs/24173251270) + merge-boundary [`24173270201`](https://github.com/m-cahill/starlab/actions/runs/24173270201)
 
 ### 2026-04-09 — M18 merged to `main` (PR #19) + closeout
 
