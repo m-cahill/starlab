@@ -54,6 +54,11 @@ Single job **governance**: Ruff check, Ruff format check, Mypy, Pytest, pip-audi
 * **Step 1 — inventory:** Required merge-blocking job **governance** — all passed on authoritative PR-head and merge-boundary runs.
 * **Verdict:** **24218875847** and **24218902938** are **safe to treat as merge authority** for M27: PR-head green on final tip + merge-boundary `main` green on merge commit.
 
-## Milestone closeout (this commit / follow-up)
+## Milestone closeout (non-merge-boundary `main` push)
 
-* Closeout documentation and ledger updates may land in a **single** follow-up commit on `main` (this milestone closeout). That **non-merge-boundary** `main` CI run (if any) is **not** substitute merge authority for M27 **product** — **authoritative** remains PR-head [`24218875847`](https://github.com/m-cahill/starlab/actions/runs/24218875847) + merge-boundary [`24218902938`](https://github.com/m-cahill/starlab/actions/runs/24218902938).
+* **headSha:** `f41ba737855367136083a6c20d471fbff9b70070` (short `f41ba73…`)
+* **Workflow run ID:** `24218984682`
+* **Conclusion:** success
+* **URL:** https://github.com/m-cahill/starlab/actions/runs/24218984682
+
+This run is **documentation + governance + M28 stubs only** — **not** substitute merge authority for M27 **product** — **authoritative** remains PR-head [`24218875847`](https://github.com/m-cahill/starlab/actions/runs/24218875847) + merge-boundary [`24218902938`](https://github.com/m-cahill/starlab/actions/runs/24218902938).

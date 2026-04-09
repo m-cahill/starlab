@@ -1361,7 +1361,15 @@ Milestone docs + ledger + governance tests + **M27** stubs only — **not** subs
 | ----- | ------------ | ---------- | --- |
 | `main` after M27 merge (`49b4582…`) | `24218902938` | success | https://github.com/m-cahill/starlab/actions/runs/24218902938 |
 
-*Closeout / ledger documentation pushes after this row may produce additional green `main` runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge. Prefer **at most one** post-merge doc-only commit per closeout hygiene. **Non-merge-boundary** closeout CI (if any) is **not** substitute merge authority for M27 **product** — **authoritative** remains PR-head [`24218875847`](https://github.com/m-cahill/starlab/actions/runs/24218875847) + merge-boundary [`24218902938`](https://github.com/m-cahill/starlab/actions/runs/24218902938).*
+**M27 CI evidence (post-merge `main` — non-merge-boundary closeout)**
+
+| Event | Workflow run | Conclusion | URL |
+| ----- | ------------ | ---------- | --- |
+| `main` after M27 closeout (`f41ba73…`) | `24218984682` | success | https://github.com/m-cahill/starlab/actions/runs/24218984682 |
+
+Milestone docs + ledger + governance tests + **M28** stubs only — **not** substitute merge authority for M27 **product** (**authoritative** remains PR-head [`24218875847`](https://github.com/m-cahill/starlab/actions/runs/24218875847) + merge-boundary [`24218902938`](https://github.com/m-cahill/starlab/actions/runs/24218902938)).
+
+*Further documentation-only pushes to `main` after this row may produce additional green CI runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge.*
 
 **M27 milestone artifacts:** `docs/company_secrets/milestones/M27/` (`M27_plan.md`, `M27_toolcalls.md`, `M27_run1.md`, `M27_summary.md`, `M27_audit.md`, etc.)
 
@@ -1509,7 +1517,7 @@ It should always answer, with minimal ambiguity:
 - **M27 proof (narrow):** **first** deterministic **offline** **replay-derived trained imitation baseline** artifact over governed **M26** + **M14**; **in-process M16 → M18** seam; majority-label-per-signature + lexicographic tie-break + global fallback; **`agreement_by_split`** = internal smoke only — **not** benchmark integrity, live SC2, **M28** harness semantics, hierarchy, or replay↔execution equivalence
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23: **M27** **Complete**; **current milestone** → **M28** (**stub-only**); **35-milestone (M00–M34)** plan unchanged; historical **M00–M26** facts unchanged in substance
 - Milestone closeout: `M27_run1.md`, `M27_summary.md`, `M27_audit.md`, `M27_plan.md` (**Complete**), `M27_toolcalls.md`; **M28** stubs (`M28_plan.md`, `M28_toolcalls.md`) — **no** M28 product code
-- **Non-merge-boundary** `main` CI on this closeout commit: *listed in this row after push* — documentation + governance only; **not** substitute merge authority for M27 **product** (authoritative remains [`24218875847`](https://github.com/m-cahill/starlab/actions/runs/24218875847) + [`24218902938`](https://github.com/m-cahill/starlab/actions/runs/24218902938))
+- **Non-merge-boundary** `main` CI on closeout commit `f41ba737855367136083a6c20d471fbff9b70070` (short `f41ba73…`): [`24218984682`](https://github.com/m-cahill/starlab/actions/runs/24218984682) (**success**) — documentation + governance only; **not** substitute merge authority for M27 **product** (authoritative remains [`24218875847`](https://github.com/m-cahill/starlab/actions/runs/24218875847) + [`24218902938`](https://github.com/m-cahill/starlab/actions/runs/24218902938))
 
 ### 2026-04-09 — M26 closeout CI recorded (§18 / `M26_run1.md`)
 
