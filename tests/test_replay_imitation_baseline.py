@@ -168,6 +168,7 @@ def test_majority_tie_break_lexicographic(tmp_path: Path) -> None:
         "label_policy_id": "starlab.m26.label.coarse_action_v1",
         "warnings": [],
     }
+
     def fake_sig(**_kwargs: object) -> str:
         return "same_sig"
 

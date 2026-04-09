@@ -206,4 +206,3 @@ def build_context_signature(
 
     # Single-line signature: sorted ``key=value`` joined by ``|`` (keys are ASCII).
     return "|".join(f"{k}={parts[k]}" for k in sorted(parts.keys()))
-
