@@ -1234,6 +1234,7 @@ It should always answer, with minimal ambiguity:
 - **Superseded** red PR-head [`24174444383`](https://github.com/m-cahill/starlab/actions/runs/24174444383) (Ruff format — **not** merge authority, **M21**)
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23: **governed scripted baseline suite** (narrow) **proved on `main`**; **current milestone** → **M22** (stub); closeout ledger M21 row; score trend M21 note
 - Milestone closeout: `M21_run1.md`, `M21_summary.md`, `M21_audit.md`, `M21_plan.md` (**closed**), `M21_toolcalls.md`; **M22** stubs (`M22_plan.md`, `M22_toolcalls.md`) — **no** M22 product code
+- **Non-merge-boundary** `main` CI — closeout commit `25719da03418c729143c9c48d8106e76a51c2de9` (short `25719da…`): [`24174583165`](https://github.com/m-cahill/starlab/actions/runs/24174583165) (**success**) — milestone docs + ledger + governance tests only; **authoritative** M21 product merge evidence remains PR-head [`24174468912`](https://github.com/m-cahill/starlab/actions/runs/24174468912) + merge-boundary [`24174498486`](https://github.com/m-cahill/starlab/actions/runs/24174498486)
 
 ### 2026-04-09 — M20 merged to `main` (PR #21) + closeout
 
