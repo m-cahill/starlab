@@ -2,7 +2,7 @@
 
 **Milestone:** M27  
 **Phase:** V — Learning Paths, Evidence Surfaces, and Flagship Proof  
-**Status:** **Authorized** — implementation on branch `m27-replay-derived-imitation-baseline`; **M26** closed on `main`.
+**Status:** **Complete** — merged to `main` ([PR #33](https://github.com/m-cahill/starlab/pull/33)); **M28** seeded as stub-only.
 
 ## Objective
 
@@ -46,3 +46,5 @@ python -m starlab.imitation.emit_replay_imitation_baseline \
 
 - Contract + code + tests + governance green (Ruff, Mypy, pytest, CI).
 - Narrow claim preserved: trained baseline artifact only; explicit non-claims everywhere.
+
+**Closeout (2026-04-09):** Authoritative PR-head CI [`24218875847`](https://github.com/m-cahill/starlab/actions/runs/24218875847); merge-boundary `main` [`24218902938`](https://github.com/m-cahill/starlab/actions/runs/24218902938); merge commit `49b45825b65e56deb5cf991c5f74889e3daf2f59`. `M27_run1.md`, `M27_summary.md`, `M27_audit.md` recorded; ledger `docs/starlab.md` updated; current milestone → **M28** (stub).

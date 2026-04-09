@@ -117,12 +117,12 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m27() -> None:
+def test_current_milestone_is_m28() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M27" in section
-    assert "Imitation" in section
     assert "M28" in section
+    assert "Learned-Agent" in section or "Evaluation Harness" in section
+    assert "M27" in section
 
 
 def test_m28_remains_stub_only_in_ledger() -> None:
@@ -860,6 +860,9 @@ def test_m27_milestone_plan_files_exist() -> None:
     m27 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M27"
     assert (m27 / "M27_plan.md").is_file()
     assert (m27 / "M27_toolcalls.md").is_file()
+    assert (m27 / "M27_run1.md").is_file()
+    assert (m27 / "M27_summary.md").is_file()
+    assert (m27 / "M27_audit.md").is_file()
 
 
 def test_m26_imitation_modules_exist() -> None:
