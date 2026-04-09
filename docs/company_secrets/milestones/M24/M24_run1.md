@@ -59,6 +59,15 @@ Single job **governance**: Ruff check, Ruff format check, Mypy, Pytest, pip-audi
 * **Step 6 — verdict:** Both runs are **safe to treat as merge authority** for M24: PR-head green on final tip + merge-boundary `main` green on merge commit.
 * **Step 7 — next actions:** Record evidence in ledger (`docs/starlab.md`); **M25** remains stub-only (no product code in this closeout).
 
+## Milestone closeout PR (non-merge-boundary for product)
+
+Documentation and governance alignment landed in [PR #28](https://github.com/m-cahill/starlab/pull/28) (merged **2026-04-09T21:05:11Z** UTC; merge commit `5590f544cb29e7ad14fcbf5398903995b27da95c`; tip `49f175d108ec3bb9eaed7044be92471994c9b79e`).
+
+* **PR-head CI:** [`24213306545`](https://github.com/m-cahill/starlab/actions/runs/24213306545) (**success**)
+* **Merge-push `main` CI:** [`24213308716`](https://github.com/m-cahill/starlab/actions/runs/24213308716) (**success**)
+
+These runs are **not** substitute merge authority for M24 **product** code — **authoritative** M24 product merge evidence remains **PR-head** [`24213046380`](https://github.com/m-cahill/starlab/actions/runs/24213046380) + **merge-boundary** [`24213094531`](https://github.com/m-cahill/starlab/actions/runs/24213094531) above.
+
 ## Notes
 
 * Further **documentation-only** green runs on `main` after this row are **not** merge-boundary events for M24 product unless explicitly recorded in §23 / §18.
