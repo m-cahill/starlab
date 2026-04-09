@@ -1,0 +1,302 @@
+{
+  "dataset_sha256": "b300a4d3441996d09d69ec85eb03ff3672f661b60fc2d08f3ab5ebade025a4ad",
+  "dataset_version": "starlab.replay_training_dataset.v1",
+  "examples": [
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:0:100:0:production_structure",
+      "gameloop": 100,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 100,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 0
+      },
+      "perspective_player_index": 0,
+      "source_timeline_ref": {
+        "gameloop": 100,
+        "semantic_kind_upstream": "unit_init",
+        "timeline_index": 0,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "validation",
+      "target_semantic_kind": "production_structure"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:0:101:1:production_unit",
+      "gameloop": 101,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 101,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 0
+      },
+      "perspective_player_index": 0,
+      "source_timeline_ref": {
+        "gameloop": 101,
+        "semantic_kind_upstream": "unit_born",
+        "timeline_index": 1,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "validation",
+      "target_semantic_kind": "production_unit"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:0:250:4:production_unit",
+      "gameloop": 250,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 250,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 0
+      },
+      "perspective_player_index": 0,
+      "source_timeline_ref": {
+        "gameloop": 250,
+        "semantic_kind_upstream": "unit_born",
+        "timeline_index": 4,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "train",
+      "target_semantic_kind": "production_unit"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:0:300:5:production_structure",
+      "gameloop": 300,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 300,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 0
+      },
+      "perspective_player_index": 0,
+      "source_timeline_ref": {
+        "gameloop": 300,
+        "semantic_kind_upstream": "unit_init",
+        "timeline_index": 5,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "test",
+      "target_semantic_kind": "production_structure"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:0:400:6:production_unit",
+      "gameloop": 400,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 400,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 0
+      },
+      "perspective_player_index": 0,
+      "source_timeline_ref": {
+        "gameloop": 400,
+        "semantic_kind_upstream": "unit_born",
+        "timeline_index": 6,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "train",
+      "target_semantic_kind": "production_unit"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:0:700:7:other",
+      "gameloop": 700,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 700,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 0
+      },
+      "perspective_player_index": 0,
+      "source_timeline_ref": {
+        "gameloop": 700,
+        "semantic_kind_upstream": "unit_died",
+        "timeline_index": 7,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "train",
+      "target_semantic_kind": "other"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:0:1000:9:other",
+      "gameloop": 1000,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 1000,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 0
+      },
+      "perspective_player_index": 0,
+      "source_timeline_ref": {
+        "gameloop": 1000,
+        "semantic_kind_upstream": "unit_died",
+        "timeline_index": 9,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "train",
+      "target_semantic_kind": "other"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:0:1200:10:other",
+      "gameloop": 1200,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 1200,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 0
+      },
+      "perspective_player_index": 0,
+      "source_timeline_ref": {
+        "gameloop": 1200,
+        "semantic_kind_upstream": "unit_died",
+        "timeline_index": 10,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "train",
+      "target_semantic_kind": "other"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:1:200:2:production_structure",
+      "gameloop": 200,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 200,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 1
+      },
+      "perspective_player_index": 1,
+      "source_timeline_ref": {
+        "gameloop": 200,
+        "semantic_kind_upstream": "unit_init",
+        "timeline_index": 2,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "train",
+      "target_semantic_kind": "production_structure"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:1:205:3:production_structure",
+      "gameloop": 205,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 205,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 1
+      },
+      "perspective_player_index": 1,
+      "source_timeline_ref": {
+        "gameloop": 205,
+        "semantic_kind_upstream": "unit_init",
+        "timeline_index": 3,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "train",
+      "target_semantic_kind": "production_structure"
+    },
+    {
+      "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+      "evidence_refs": [
+        "artifact:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:replay_timeline.json",
+        "bundle_manifest:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1"
+      ],
+      "example_id": "starlab.m26.example.v1:fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457:844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1:1:720:8:other",
+      "gameloop": 720,
+      "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+      "observation_request": {
+        "bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+        "gameloop": 720,
+        "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+        "perspective_player_index": 1
+      },
+      "perspective_player_index": 1,
+      "source_timeline_ref": {
+        "gameloop": 720,
+        "semantic_kind_upstream": "unit_died",
+        "timeline_index": 8,
+        "timeline_schema_version": "starlab.replay_timeline.v1"
+      },
+      "split": "train",
+      "target_semantic_kind": "other"
+    }
+  ],
+  "label_policy_id": "starlab.m26.label.coarse_action_v1",
+  "non_claims": [
+    "benchmark_integrity",
+    "full_action_legality",
+    "imitation_quality",
+    "live_sc2_execution",
+    "m27_imitation_baseline_training",
+    "m28_plus_product_claims",
+    "model_training",
+    "raw_replay_packaging",
+    "replay_execution_equivalence",
+    "replay_parser_correctness"
+  ],
+  "selection_policy_id": "starlab.m26.selection.timeline_entries_v1",
+  "source_lineage_roots": [
+    "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457"
+  ],
+  "split_policy_id": "starlab.m26.split.sha256_mod100_v1",
+  "warnings": [
+    "intake_provenance_absent"
+  ]
+}

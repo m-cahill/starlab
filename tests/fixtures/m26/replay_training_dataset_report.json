@@ -1,0 +1,31 @@
+{
+  "dataset_sha256": "b300a4d3441996d09d69ec85eb03ff3672f661b60fc2d08f3ab5ebade025a4ad",
+  "example_count": 11,
+  "non_claims": [
+    "benchmark_integrity",
+    "full_action_legality",
+    "imitation_quality",
+    "live_sc2_execution",
+    "m27_imitation_baseline_training",
+    "m28_plus_product_claims",
+    "model_training",
+    "raw_replay_packaging",
+    "replay_execution_equivalence",
+    "replay_parser_correctness"
+  ],
+  "report_version": "starlab.replay_training_dataset_report.v1",
+  "source_bundle_count": 1,
+  "split_counts": {
+    "test": 1,
+    "train": 8,
+    "validation": 2
+  },
+  "target_semantic_kind_counts": {
+    "other": 4,
+    "production_structure": 4,
+    "production_unit": 3
+  },
+  "warnings": [
+    "intake_provenance_absent"
+  ]
+}
