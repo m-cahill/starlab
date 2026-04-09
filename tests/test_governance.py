@@ -108,11 +108,20 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m18() -> None:
+def test_current_milestone_is_m19() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M18" in section
-    assert "Perceptual" in section or "perceptual" in section.lower()
+    assert "M19" in section
+    assert "Reconciliation" in section or "reconciliation" in section.lower()
+
+
+def test_m18_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M18 |") and "Perceptual" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M18 milestone row not found or not complete")
 
 
 def test_m17_complete_in_milestone_table() -> None:
@@ -448,10 +457,19 @@ def test_m17_milestone_files_exist() -> None:
     assert (m17 / "M17_audit.md").is_file()
 
 
-def test_m18_stub_milestone_files_exist() -> None:
+def test_m18_milestone_files_exist() -> None:
     m18 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M18"
     assert (m18 / "M18_plan.md").is_file()
     assert (m18 / "M18_toolcalls.md").is_file()
+    assert (m18 / "M18_run1.md").is_file()
+    assert (m18 / "M18_summary.md").is_file()
+    assert (m18 / "M18_audit.md").is_file()
+
+
+def test_m19_stub_milestone_files_exist() -> None:
+    m19 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M19"
+    assert (m19 / "M19_plan.md").is_file()
+    assert (m19 / "M19_toolcalls.md").is_file()
 
 
 def test_m16_complete_in_milestone_table() -> None:

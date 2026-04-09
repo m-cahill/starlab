@@ -8,6 +8,10 @@
 * **Suggested branch:** `m18-perceptual-bridge-prototype`
 * **Target tag:** `v0.0.18-m18`
 
+## Status
+
+**Closed** — merged to `main` as [PR #19](https://github.com/m-cahill/starlab/pull/19) (merge commit `59d2d6e2af08852d63e0c91a984000c11decfece`, **2026-04-09T00:32:06Z** UTC). Evidence: `M18_run1.md`, `M18_summary.md`, `M18_audit.md`.
+
 ## Why this milestone exists
 
 M15 proved the **canonical state schema** only. M16 proved **bundle → one canonical state frame**. M17 proved the **agent-facing observation contract** only. M18 is the first milestone allowed to prove a **narrow materialization bridge** from one M16 `canonical_state.json` into one M17-shaped observation instance for one player-relative viewpoint at one `gameloop`.
