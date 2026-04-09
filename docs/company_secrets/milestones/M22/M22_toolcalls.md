@@ -2,7 +2,14 @@
 
 ---
 
-## Stub
+## Implementation
 
-* **Purpose:** Milestone folder for **M22** (heuristic baseline suite) seeded at M21 closeout.
-* **Status:** No M22 implementation.
+* **Purpose:** M22 heuristic baseline suite — product, tests, governance, ledger.
+* **Status:** Implementation in progress; append tool calls before each invocation per `.cursorrules`.
+
+---
+
+## Stub (historical)
+
+* **Purpose:** Milestone folder for **M22** seeded at M21 closeout.
+* **Status:** Superseded by implementation above.
