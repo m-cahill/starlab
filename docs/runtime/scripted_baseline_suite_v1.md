@@ -13,7 +13,7 @@ The **scripted baseline suite** is a deterministic, offline artifact that binds 
 | --------- | ---- |
 | **M20** | Benchmark contract + scorecard JSON Schemas and validation helpers. |
 | **M21** | Scripted baseline suite + embedded scorecards (this contract). **No** heuristics. |
-| **M22** | Heuristic baseline suite (out of scope for M21). |
+| **M22** | Heuristic baseline suite (`docs/runtime/heuristic_baseline_suite_v1.md`) — separate contract; out of scope for M21. |
 | **M23** | Evaluation runner / tournament harness (out of scope for M21). |
 
 ## Required benchmark contract posture (M21)
