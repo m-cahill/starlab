@@ -40,6 +40,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/evaluation_diagnostics_failure_views_v1.md",
     "docs/runtime/baseline_evidence_pack_v1.md",
     "docs/runtime/replay_training_dataset_v1.md",
+    "docs/runtime/replay_imitation_baseline_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -116,11 +117,18 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m27_stub() -> None:
+def test_current_milestone_is_m27() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "M27" in section
     assert "Imitation" in section
+    assert "M28" in section
+
+
+def test_m28_remains_stub_only_in_ledger() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "stub" in section.lower() or "stub-only" in section
 
 
 def test_planned_program_arc_is_35_milestones() -> None:
@@ -848,7 +856,7 @@ def test_m26_milestone_files_exist() -> None:
     assert (m26 / "M26_audit.md").is_file()
 
 
-def test_m27_stub_milestone_files_exist() -> None:
+def test_m27_milestone_plan_files_exist() -> None:
     m27 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M27"
     assert (m27 / "M27_plan.md").is_file()
     assert (m27 / "M27_toolcalls.md").is_file()
@@ -864,9 +872,28 @@ def test_m26_imitation_modules_exist() -> None:
         assert (im / name).is_file()
 
 
+def test_m27_imitation_modules_exist() -> None:
+    im = REPO_ROOT / "starlab" / "imitation"
+    for name in (
+        "baseline_models.py",
+        "baseline_features.py",
+        "baseline_fit.py",
+        "emit_replay_imitation_baseline.py",
+        "replay_observation_materialization.py",
+    ):
+        assert (im / name).is_file()
+
+
 def test_m26_fixture_dir_exists() -> None:
     fx = REPO_ROOT / "tests" / "fixtures" / "m26"
     assert fx.is_dir()
+
+
+def test_m27_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m27"
+    assert fx.is_dir()
+    assert (fx / "replay_imitation_baseline.json").is_file()
+    assert (fx / "replay_imitation_baseline_report.json").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
