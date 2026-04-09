@@ -1,0 +1,158 @@
+{
+  "action_mask_families": {
+    "families": [
+      {
+        "family_name": "no_op",
+        "ordered_mask_values": [
+          1
+        ]
+      },
+      {
+        "family_name": "selection",
+        "ordered_mask_values": [
+          1,
+          0
+        ]
+      },
+      {
+        "family_name": "camera_or_view",
+        "ordered_mask_values": [
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "family_name": "production",
+        "ordered_mask_values": [
+          1,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "family_name": "build",
+        "ordered_mask_values": [
+          1,
+          1
+        ]
+      },
+      {
+        "family_name": "unit_command",
+        "ordered_mask_values": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "family_name": "research_or_upgrade",
+        "ordered_mask_values": [
+          1
+        ]
+      }
+    ]
+  },
+  "contract_id": "starlab.observation_surface.v1",
+  "entity_rows": {
+    "rows": [
+      {
+        "category": "heavy",
+        "count": 1,
+        "owner_view": "self",
+        "row_kind": "aggregated_category"
+      },
+      {
+        "category": "light",
+        "count": 1,
+        "owner_view": "self",
+        "row_kind": "aggregated_category"
+      },
+      {
+        "category": "other",
+        "count": 1,
+        "owner_view": "self",
+        "row_kind": "aggregated_category"
+      }
+    ]
+  },
+  "metadata": {
+    "gameloop": 999,
+    "observation_contract_version": "1",
+    "perspective_player_index": 0,
+    "source_bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+    "source_canonical_state_sha256": "aed7739bbb528a1744f8a1d1c5074cff333a96ec87b2f2902abc4456e1bdd266",
+    "source_lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+    "source_replay_identity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "scalar_features": {
+    "ordered_entries": [
+      {
+        "name": "economy.resource_signal_category",
+        "value": "medium"
+      },
+      {
+        "name": "economy.structure_train_events_total",
+        "value": 2
+      },
+      {
+        "name": "economy.unit_train_events_total",
+        "value": 3
+      },
+      {
+        "name": "global.active_combat_window_count",
+        "value": 1
+      },
+      {
+        "name": "global.active_slice_count",
+        "value": 1
+      },
+      {
+        "name": "production.active_build_queue_count",
+        "value": 2
+      },
+      {
+        "name": "production.tech_upgrades_started_total",
+        "value": 0
+      },
+      {
+        "name": "race.actual",
+        "value": "Terran"
+      },
+      {
+        "name": "result.known",
+        "value": "win"
+      },
+      {
+        "name": "scouting.recent_scout_events_count",
+        "value": 3
+      },
+      {
+        "name": "visibility.proxy_level",
+        "value": "medium"
+      }
+    ]
+  },
+  "schema_version": "starlab.observation_frame.v1",
+  "spatial_plane_family": {
+    "planes": [
+      {
+        "channel_count": 2,
+        "channel_order": [
+          "terrain_class",
+          "control_affinity"
+        ],
+        "coordinate_frame": "starlab.spatial.not_bound_to_replay_map",
+        "grid_height": 8,
+        "grid_width": 8,
+        "plane_id": "example_placeholder_plane"
+      }
+    ]
+  },
+  "viewpoint": {
+    "player_index": 0,
+    "single_player_relative_viewpoint": true,
+    "visibility_policy": "proxy_bounded"
+  }
+}

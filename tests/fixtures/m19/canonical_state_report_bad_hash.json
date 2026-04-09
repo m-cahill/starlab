@@ -1,0 +1,35 @@
+{
+  "canonical_state_schema_sha256": "83d07e123cabee05e971f7d3a39dc29a5b8aaad1c75c5a4a7a83cbb2c7f9af6e",
+  "canonical_state_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "contract": "starlab.canonical_state_pipeline.v1",
+  "derivation_summary": {
+    "used_build_order_economy": true,
+    "used_combat_scouting_visibility": true,
+    "used_metadata": true,
+    "used_replay_bundle_manifest": true,
+    "used_replay_slices": true,
+    "used_timeline": true
+  },
+  "non_claims": [
+    "Does not prove observation surface contract (M17) or perceptual bridge (M18).",
+    "Does not prove replay\u2194execution equivalence, benchmark integrity, or live SC2 in CI.",
+    "Economy and visibility fields are conservative replay-derived summaries \u2014 not exact banks or fog-of-war truth."
+  ],
+  "profile": "starlab.canonical_state_pipeline.m16.v1",
+  "report_version": "starlab.canonical_state_report.v1",
+  "source_artifact_hashes": {
+    "replay_build_order_economy.json": "665c9f40ee26f6e182570b39bb4a58c6afc5d7d86430685be98335af5d14487c",
+    "replay_combat_scouting_visibility.json": "42cadbcc884037a0c5ccab7225403a2e00b04541916859bf0757b89879fb6f47",
+    "replay_metadata.json": "d1bf603d0fac56bd1db17a8a483a60d51911c9c9c9cacb4e8092247443f39574",
+    "replay_metadata_report.json": "08c075292712bc7f36af9c975a78f0ff493c10eb12c9088ec87da84172b27e90",
+    "replay_slices.json": "0bb7e09e1a080b124c8039b19c9f77c64738a8997c07c16724aacd4e91da5480",
+    "replay_slices_report.json": "453376403d4227fa56848af044817aa533813daf4d489be45b387e6de0f516bf",
+    "replay_timeline.json": "dc68119639ccee6eb19b76e86a953938e6aabfb8d7ef6edf9b2012c9168aa432"
+  },
+  "source_bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+  "source_lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+  "target_gameloop": 1200,
+  "warnings": [
+    "metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both)."
+  ]
+}

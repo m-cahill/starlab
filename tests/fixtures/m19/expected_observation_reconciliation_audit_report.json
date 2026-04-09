@@ -1,0 +1,14 @@
+{
+  "audit_verdict": "pass_with_warnings",
+  "failures": [],
+  "report_version": "starlab.observation_reconciliation_audit_report.v1",
+  "summary": "Representation audit: bounded or unavailable-by-design semantics present (see warnings).",
+  "upstream_warnings": [
+    "canonical_state_report:metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both).",
+    "observation_surface_report:upstream canonical_state_report: metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both)."
+  ],
+  "warnings": [
+    "scalar:economy.resource_signal_category:bounded_lossy",
+    "scalar:visibility.proxy_level:bounded_lossy"
+  ]
+}
