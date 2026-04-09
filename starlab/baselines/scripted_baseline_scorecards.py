@@ -31,10 +31,7 @@ def build_scripted_scorecard(
     for md in metric_defs:
         mid = md["metric_id"]
         if mid not in metric_values:
-            msg = (
-                f"missing fixture metric value for metric_id={mid!r} "
-                f"subject={subject_id!r}"
-            )
+            msg = f"missing fixture metric value for metric_id={mid!r} subject={subject_id!r}"
             raise ValueError(msg)
         raw = metric_values[mid]
         val: float | int
