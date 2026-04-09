@@ -38,6 +38,8 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/heuristic_baseline_suite_v1.md",
     "docs/runtime/evaluation_runner_tournament_harness_v1.md",
     "docs/runtime/evaluation_diagnostics_failure_views_v1.md",
+    "docs/runtime/baseline_evidence_pack_v1.md",
+    "docs/runtime/replay_training_dataset_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -114,11 +116,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m26() -> None:
+def test_current_milestone_is_m27_stub() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M26" in section
-    assert "Replay Corpus" in section or "Training Dataset" in section
+    assert "M27" in section
+    assert "Imitation" in section
 
 
 def test_planned_program_arc_is_35_milestones() -> None:
@@ -725,6 +727,15 @@ def test_m25_complete_in_milestone_table() -> None:
     raise AssertionError("M25 milestone row not found or not complete")
 
 
+def test_m26_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M26 |") and "Training Dataset" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M26 milestone row not found or not complete")
+
+
 def test_m20_benchmark_modules_exist() -> None:
     bp = REPO_ROOT / "starlab" / "benchmarks"
     for name in (
@@ -828,10 +839,34 @@ def test_m25_evidence_pack_modules_exist() -> None:
         assert (ev / name).is_file()
 
 
-def test_m26_stub_milestone_files_exist() -> None:
+def test_m26_milestone_files_exist() -> None:
     m26 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M26"
     assert (m26 / "M26_plan.md").is_file()
     assert (m26 / "M26_toolcalls.md").is_file()
+    assert (m26 / "M26_run1.md").is_file()
+    assert (m26 / "M26_summary.md").is_file()
+    assert (m26 / "M26_audit.md").is_file()
+
+
+def test_m27_stub_milestone_files_exist() -> None:
+    m27 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M27"
+    assert (m27 / "M27_plan.md").is_file()
+    assert (m27 / "M27_toolcalls.md").is_file()
+
+
+def test_m26_imitation_modules_exist() -> None:
+    im = REPO_ROOT / "starlab" / "imitation"
+    for name in (
+        "dataset_models.py",
+        "dataset_views.py",
+        "emit_replay_training_dataset.py",
+    ):
+        assert (im / name).is_file()
+
+
+def test_m26_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m26"
+    assert fx.is_dir()
 
 
 def test_m09_metadata_modules_exist() -> None:
