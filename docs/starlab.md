@@ -1171,8 +1171,11 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 | Event | Workflow run | Conclusion | URL |
 | ----- | ------------ | ---------- | --- |
 | `main` after M23 merge (`b8857d2…`) | `24178615940` | success | https://github.com/m-cahill/starlab/actions/runs/24178615940 |
+| `main` after M23 milestone closeout ([PR #25](https://github.com/m-cahill/starlab/pull/25)) (`317b3a0…`) | `24178745007` | success | https://github.com/m-cahill/starlab/actions/runs/24178745007 |
 
-*Closeout / ledger documentation pushes after this row may produce additional green `main` runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge. Prefer **at most one** post-merge doc-only commit per closeout hygiene.*
+*Row `24178745007` is **milestone documentation / governance alignment** — **not** merge-boundary product evidence for M23. **Authoritative** M23 product merge remains PR-head [`24178571859`](https://github.com/m-cahill/starlab/actions/runs/24178571859) + merge-boundary [`24178615940`](https://github.com/m-cahill/starlab/actions/runs/24178615940) ([PR #24](https://github.com/m-cahill/starlab/pull/24)).*
+
+*Closeout / ledger documentation pushes after these rows may produce additional green `main` runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge. Prefer **at most one** post-merge doc-only commit per closeout hygiene.*
 
 **M23 milestone artifacts:** `docs/company_secrets/milestones/M23/` (`M23_plan.md`, `M23_toolcalls.md`, `M23_run1.md`, `M23_summary.md`, `M23_audit.md`, etc.)
 
@@ -1307,6 +1310,9 @@ It should always answer, with minimal ambiguity:
 - Product: `docs/runtime/evaluation_runner_tournament_harness_v1.md`, `starlab/evaluation/` (runner + round-robin harness + `python -m starlab.evaluation.emit_evaluation_tournament`), `tests/fixtures/m23/`, `tests/test_evaluation_tournament.py` (includes **M20 → M21/M22 emitters → M23** chain test); **413** pytest on authoritative CI (one pre-existing `s2protocol` deprecation warning in replay CLI test — not M23)
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23: **governed fixture-only evaluation tournament** (narrow) **proved on `main`**; Phase IV chain (M20 contract / M21–M22 emitters / **M23** runner); **current milestone** → **M24** (stub); score trend M23 row; Phase IV evaluation/tournament glossary
 - Milestone closeout: `M23_run1.md`, `M23_summary.md`, `M23_audit.md`, `M23_plan.md` (**closed**), `M23_toolcalls.md`; **M24** stubs (`M24_plan.md`, `M24_toolcalls.md`) — **no** M24 product code
+- Merged [PR #25](https://github.com/m-cahill/starlab/pull/25) to `main` at **2026-04-09T07:45:11Z**; merge commit `317b3a02c8b7977e3af597069899e1fe9454cafd` (merge method: **merge commit**); remote branch `m23-closeout-docs` **deleted**
+- Final PR head `1b6e7b76e97cf2fffaa549526ff80249c698be6c` — **green PR-head CI** (doc-only closeout): [`24178744293`](https://github.com/m-cahill/starlab/actions/runs/24178744293) (**success**) — **not** product merge authority for M23
+- **Non-merge-boundary** `main` CI — merge commit `317b3a0…`: [`24178745007`](https://github.com/m-cahill/starlab/actions/runs/24178745007) (**success**) — milestone docs + ledger + governance tests only; **authoritative** M23 product merge evidence remains PR-head [`24178571859`](https://github.com/m-cahill/starlab/actions/runs/24178571859) + merge-boundary [`24178615940`](https://github.com/m-cahill/starlab/actions/runs/24178615940)
 
 ### 2026-04-09 — M22 merged to `main` (PR #23) + closeout
 
