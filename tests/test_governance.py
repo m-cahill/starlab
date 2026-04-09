@@ -526,6 +526,12 @@ def test_m24_milestone_files_exist() -> None:
     assert (m24 / "M24_audit.md").is_file()
 
 
+def test_m25_milestone_files_exist() -> None:
+    m25 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M25"
+    assert (m25 / "M25_plan.md").is_file()
+    assert (m25 / "M25_toolcalls.md").is_file()
+
+
 def test_m16_complete_in_milestone_table() -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()

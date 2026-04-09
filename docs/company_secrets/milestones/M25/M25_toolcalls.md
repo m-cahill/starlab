@@ -2,7 +2,7 @@
 
 ---
 
-## Stub
+## 2026-04-09 — M25 implementation session
 
-* **Purpose:** Milestone folder for **M25** (baseline evidence pack) seeded with M24 implementation.
-* **Status:** No M25 implementation.
+* **Purpose:** Implement baseline evidence pack (runtime contract, `starlab/evaluation/` modules, CLI, fixtures, tests, `docs/starlab.md` updates).
+* **Status:** Product code + tests added; milestone not closed (no `M25_run1.md` / summary / audit until CI + merge).
