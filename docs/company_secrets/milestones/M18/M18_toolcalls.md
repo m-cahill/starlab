@@ -62,3 +62,8 @@ Commands run from repo root `c:\coding\starlab` on **2026-04-09** (closeout pass
 ### Final status
 
 **M18 closed.** Ledger and governance tests updated; **no M19 product code**.
+
+### Non-merge-boundary `main` CI (closeout push)
+
+* **Commit:** `977b625f09ab3db893c26a31e6c3c0e730a9fea4` (`docs(m18): milestone closeout — run1, summary, audit, ledger, M19 stubs`)
+* **Run:** [`24166079739`](https://github.com/m-cahill/starlab/actions/runs/24166079739) — **success** (documentation-only; **not** merge authority for M18 product — that remains PR-head `24165977039` + merge-boundary `24166004479`).

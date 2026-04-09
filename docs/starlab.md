@@ -1140,6 +1140,7 @@ It should always answer, with minimal ambiguity:
 - Product: `docs/runtime/perceptual_bridge_prototype_v1.md`, `starlab/observation/` materialization modules + CLI, `tests/fixtures/m18/`, `tests/test_observation_surface_pipeline.py`; **322** pytest on authoritative CI (one pre-existing `s2protocol` deprecation warning in replay CLI test — not M18)
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23: **governed perceptual bridge prototype** (narrow) **proved on `main`**; Phase III progression (M15 schema / M16 bundle→frame / M17 observation contract / **M18 prototype bridge**); **current milestone** → **M19** (stub); closeout ledger M18 row; score trend M18 note
 - Milestone closeout: `M18_run1.md`, `M18_summary.md`, `M18_audit.md`, `M18_plan.md` (**closed**), `M18_toolcalls.md`; **M19** stubs (`M19_plan.md`, `M19_toolcalls.md`) — **no** M19 product code
+- **Non-merge-boundary** `main` CI — closeout commit `977b625f09ab3db893c26a31e6c3c0e730a9fea4`: [`24166079739`](https://github.com/m-cahill/starlab/actions/runs/24166079739) (**success**) — milestone docs + ledger only; **authoritative** M18 product merge evidence remains PR-head [`24165977039`](https://github.com/m-cahill/starlab/actions/runs/24165977039) + merge-boundary [`24166004479`](https://github.com/m-cahill/starlab/actions/runs/24166004479)
 
 ### 2026-04-08 — M17 merged to `main` (PR #18) + closeout
 
