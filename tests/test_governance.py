@@ -511,6 +511,9 @@ def test_m23_milestone_files_exist() -> None:
     m23 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M23"
     assert (m23 / "M23_plan.md").is_file()
     assert (m23 / "M23_toolcalls.md").is_file()
+    assert (m23 / "M23_run1.md").is_file()
+    assert (m23 / "M23_summary.md").is_file()
+    assert (m23 / "M23_audit.md").is_file()
 
 
 def test_m24_stub_milestone_files_exist() -> None:

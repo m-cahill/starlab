@@ -2,7 +2,7 @@
 
 **Milestone:** M23  
 **Phase:** IV — Benchmark Contracts, Baselines, and Evaluation  
-**Status:** **Implementation** on branch `m23-evaluation-runner-tournament-harness` (merge + CI **pending**).
+**Status:** **Closed** — merged to `main` ([PR #24](https://github.com/m-cahill/starlab/pull/24)); see `M23_summary.md`, `M23_audit.md`, `M23_run1.md`.
 
 ## Objective
 
@@ -18,12 +18,13 @@ Prove the **first governed evaluation consumer** of the benchmark surface by loa
 
 ## Locked semantics (summary)
 
-* Pairwise **win/loss/draw** from **`scoring_role: primary`** metric only; full metric rows recorded.
+* Pairwise **win/loss/draw** from **`scoring_role: primary`** metric only; full metric comparison rows recorded.
 * Points: **1.0 / 0.5 / 0.0** (win / draw / loss).
 * Suite validation: **structural** (no new suite JSON Schema in M23).
 * **No** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M23 evaluation modules.
 
-## Closeout (pending merge)
+## Closeout
 
-* Fill **PR #**, **SHAs**, **authoritative CI** in `docs/starlab.md` §3 / §18 / §23.
-* Generate `M23_run1.md`, `M23_summary.md`, `M23_audit.md` per company prompts.
+* **Merged:** 2026-04-09T07:41:53Z (UTC) — PR #24 — merge commit `b8857d2ccfdb2963d4fd2311f98d02cbe79aa252`
+* **Authoritative PR-head CI:** [`24178571859`](https://github.com/m-cahill/starlab/actions/runs/24178571859)
+* **Merge-boundary `main` CI:** [`24178615940`](https://github.com/m-cahill/starlab/actions/runs/24178615940)
