@@ -226,7 +226,7 @@ Planned program arc (33 milestones, M00–M32):
 | M22 | Heuristic Baseline Suite | IV | Complete | v0.0.22-m22 | — |
 | M23 | Evaluation Runner & Tournament Harness | IV | Complete | v0.0.23-m23 | — |
 | M24 | Attribution, Diagnostics, and Failure Views | IV | Complete | v0.0.24-m24 | — |
-| M25 | Baseline Evidence Pack | IV | Planned | v0.0.25-m25 | — |
+| M25 | Baseline Evidence Pack | IV | In progress | v0.0.25-m25 | — |
 | M26 | Replay-Derived Imitation Baseline | V | Planned | v0.0.26-m26 | — |
 | M27 | Hierarchical Agent Interface Layer | V | Planned | v0.0.27-m27 | — |
 | M28 | First Learned Hierarchical Agent | V | Planned | v0.0.28-m28 | — |
