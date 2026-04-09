@@ -31,6 +31,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/canonical_state_schema_v1.md",
     "docs/runtime/canonical_state_pipeline_v1.md",
     "docs/runtime/observation_surface_contract_v1.md",
+    "docs/runtime/perceptual_bridge_prototype_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -523,6 +524,26 @@ def test_m17_fixture_dir_exists() -> None:
     assert (fx / "observation_surface_invalid_example_bad_schema_version.json").is_file()
     assert (fx / "expected_observation_surface_schema.json").is_file()
     assert (fx / "expected_observation_surface_schema_report.json").is_file()
+
+
+def test_m18_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m18"
+    assert fx.is_dir()
+    assert (fx / "canonical_state.json").is_file()
+    assert (fx / "canonical_state_report.json").is_file()
+    assert (fx / "expected_observation_surface.json").is_file()
+    assert (fx / "expected_observation_surface_report.json").is_file()
+
+
+def test_m18_perceptual_bridge_modules_exist() -> None:
+    obs = REPO_ROOT / "starlab" / "observation"
+    for name in (
+        "observation_surface_inputs.py",
+        "observation_surface_derivation.py",
+        "observation_surface_pipeline.py",
+        "emit_observation_surface.py",
+    ):
+        assert (obs / name).is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:

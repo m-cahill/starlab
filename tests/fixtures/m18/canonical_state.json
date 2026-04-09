@@ -1,0 +1,82 @@
+{
+  "frame_kind": "replay_derived",
+  "gameloop": 1200,
+  "global_context": {
+    "active_combat_window_ids": [
+      "combat_window:2"
+    ],
+    "active_slice_ids": [
+      "676c8e6625340d6af24bb3cbf454ce497afbd173762428f15e5ea6fe6dde5585"
+    ],
+    "map_name": "Test Map"
+  },
+  "players": [
+    {
+      "army_summary": {
+        "army_unit_category_counts": {
+          "heavy": 1,
+          "light": 1,
+          "other": 1
+        }
+      },
+      "combat_context": {
+        "active_combat_window_ids": [
+          "combat_window:2"
+        ]
+      },
+      "economy_summary": {
+        "resource_signal_category": "medium",
+        "structure_train_events_total": 2,
+        "unit_train_events_total": 3
+      },
+      "player_index": 0,
+      "production_summary": {
+        "active_build_queue_count": 2,
+        "tech_upgrades_started_total": 0
+      },
+      "race_actual": "Terran",
+      "result": "win",
+      "scouting_context": {
+        "recent_scout_events_count": 3
+      },
+      "visibility_context": {
+        "visibility_proxy_level": "medium",
+        "visibility_signal_non_truth_disclaimer": "starlab.visibility_proxy_not_fog_of_war_truth"
+      }
+    },
+    {
+      "army_summary": {
+        "army_unit_category_counts": {}
+      },
+      "economy_summary": {
+        "resource_signal_category": null,
+        "structure_train_events_total": 2,
+        "unit_train_events_total": 0
+      },
+      "player_index": 1,
+      "production_summary": {
+        "active_build_queue_count": 2,
+        "tech_upgrades_started_total": 0
+      },
+      "race_actual": "Zerg",
+      "result": "loss",
+      "scouting_context": {
+        "recent_scout_events_count": 2
+      }
+    }
+  ],
+  "provenance": {
+    "uses_build_order_economy_plane": true,
+    "uses_combat_scouting_visibility_plane": true,
+    "uses_metadata_plane": true,
+    "uses_replay_bundle_plane": true,
+    "uses_slice_plane": true,
+    "uses_timeline_plane": true
+  },
+  "schema_version": "starlab.canonical_state_frame.v1",
+  "source": {
+    "source_bundle_id": "844b7c08271e81f1444585004d23c26c52d77e009168f6ca22066b4cf6c071a1",
+    "source_lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+    "source_replay_identity": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+}
