@@ -1,0 +1,27 @@
+{
+  "entrant_count": 4,
+  "evidence_pack_sha256": "055513beea4715d86b33d4f83315568f121b900a5dfc6a7638e71a1166dbe678",
+  "failure_view_counts": {
+    "starlab.m25.failure_view.lowest_points_entrant": 1,
+    "starlab.m25.failure_view.zero_win_entrant": 1
+  },
+  "non_claims": [
+    "starlab.m25.pack_non_claim.not_benchmark_integrity",
+    "starlab.m25.pack_non_claim.not_leaderboard_validity_beyond_upstream",
+    "starlab.m25.pack_non_claim.not_live_sc2_or_replay_execution",
+    "starlab.m25.pack_non_claim.not_m26_imitation_or_learning",
+    "starlab.m25.pack_non_claim.not_new_benchmark_semantics",
+    "starlab.m25.pack_non_claim.not_new_diagnostics_or_scoring",
+    "starlab.m25.pack_non_claim.not_raw_replay_or_archive_packaging",
+    "starlab.m25.pack_non_claim.not_replay_execution_equivalence"
+  ],
+  "report_version": "starlab.baseline_evidence_pack_report.v1",
+  "subject_kind_counts": {
+    "heuristic": 2,
+    "scripted": 2
+  },
+  "suite_count": 2,
+  "warnings": [
+    "starlab.m25.warning.fixture_only_evidence_packaging_layer"
+  ]
+}

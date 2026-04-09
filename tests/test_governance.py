@@ -526,6 +526,12 @@ def test_m24_milestone_files_exist() -> None:
     assert (m24 / "M24_audit.md").is_file()
 
 
+def test_m25_milestone_files_exist() -> None:
+    m25 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M25"
+    assert (m25 / "M25_plan.md").is_file()
+    assert (m25 / "M25_toolcalls.md").is_file()
+
+
 def test_m16_complete_in_milestone_table() -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
@@ -692,13 +698,19 @@ def test_m24_complete_in_milestone_table() -> None:
     raise AssertionError("M24 milestone row not found or not complete")
 
 
-def test_m25_planned_in_milestone_table() -> None:
+def test_m25_status_in_milestone_table() -> None:
+    """M25 row: Status column is Planned, In progress, or Complete."""
+
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
         if stripped.startswith("| M25 |") and "Evidence" in stripped:
-            assert "Planned" in stripped
+            assert (
+                "| Planned |" in stripped
+                or "| In progress |" in stripped
+                or "| Complete |" in stripped
+            )
             return
-    raise AssertionError("M25 milestone row not found or not planned")
+    raise AssertionError("M25 milestone row not found")
 
 
 def test_m20_benchmark_modules_exist() -> None:
