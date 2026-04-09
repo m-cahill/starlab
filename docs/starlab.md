@@ -1315,6 +1315,14 @@ Milestone docs + ledger + governance tests + **M26** stubs only — **not** subs
 | ----- | ------------ | ---------- | --- |
 | `main` after M26 merge (`e83a849…`) | `24217178208` | success | https://github.com/m-cahill/starlab/actions/runs/24217178208 |
 
+**M26 CI evidence (post-merge `main` — non-merge-boundary closeout)**
+
+| Event | Workflow run | Conclusion | URL |
+| ----- | ------------ | ---------- | --- |
+| `main` after M26 closeout (`2ccf60e…`) | `24217359747` | success | https://github.com/m-cahill/starlab/actions/runs/24217359747 |
+
+Milestone docs + ledger + governance tests + **M27** stubs only — **not** substitute merge authority for M26 **product** (**authoritative** remains PR-head [`24217118559`](https://github.com/m-cahill/starlab/actions/runs/24217118559) + merge-boundary [`24217178208`](https://github.com/m-cahill/starlab/actions/runs/24217178208)).
+
 *Closeout / ledger documentation pushes after this row may produce additional green `main` runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge. Prefer **at most one** post-merge doc-only commit per closeout hygiene.*
 
 **M26 milestone artifacts:** `docs/company_secrets/milestones/M26/` (`M26_plan.md`, `M26_toolcalls.md`, `M26_run1.md`, `M26_summary.md`, `M26_audit.md`, etc.)
@@ -1451,6 +1459,10 @@ It should always answer, with minimal ambiguity:
 
 ## 23. Changelog
 
+### 2026-04-09 — M26 closeout CI recorded (§18 / `M26_run1.md`)
+
+- **Non-merge-boundary** `main` CI on closeout commit `2ccf60ea3a5aa6a4c4106bf9f6372bde06202d41` (short `2ccf60e…`): [`24217359747`](https://github.com/m-cahill/starlab/actions/runs/24217359747) (**success**) — documentation + governance alignment; **not** substitute merge authority for M26 **product** (PR-head [`24217118559`](https://github.com/m-cahill/starlab/actions/runs/24217118559) + merge-boundary [`24217178208`](https://github.com/m-cahill/starlab/actions/runs/24217178208))
+
 ### 2026-04-09 — M26 merged to `main` (PR #32) + milestone closeout
 
 - Merged [PR #32](https://github.com/m-cahill/starlab/pull/32) to `main` at **2026-04-09T22:50:52Z** (UTC); merge commit `e83a8493a577c9013d720f1debab009dcf9c464f` (merge method: **merge commit**); remote branch `m26-replay-corpus-training-dataset-contract` **deleted**
@@ -1460,7 +1472,6 @@ It should always answer, with minimal ambiguity:
 - §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23: **governed replay training dataset** (narrow, Phase V) **proved on `main`**; **current milestone** → **M27** (stub); §18 compact closeout + M26 merge rows; score trend M26 row
 - **Governance formalized in M26:** the future program arc is **35 milestones (M00–M34)** (revised from **33 milestones (M00–M32)**); **OD-007** → **M34** — recorded in **M26** governance + product merge; **historical M00–M25** merge/CI facts remain unchanged in substance
 - Milestone closeout: `M26_run1.md`, `M26_summary.md`, `M26_audit.md`, `M26_plan.md` (**Complete**), `M26_toolcalls.md`; **M27** stubs (`M27_plan.md`, `M27_toolcalls.md`) — **no** M27 product code
-- **Non-merge-boundary** `main` CI — runs on the closeout documentation push to `main` (this commit). **Not** substitute merge authority for M26 **product**; **authoritative** remains PR-head [`24217118559`](https://github.com/m-cahill/starlab/actions/runs/24217118559) + merge-boundary [`24217178208`](https://github.com/m-cahill/starlab/actions/runs/24217178208)
 
 ### 2026-04-09 — M26 governance: future milestone arc revised (33 → 35 milestones)
 

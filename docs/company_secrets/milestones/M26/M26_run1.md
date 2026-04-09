@@ -59,6 +59,15 @@ Single job **governance**: Ruff check, Ruff format check, Mypy, Pytest, pip-audi
 * **Step 6 — verdict:** Both **24217118559** and **24217178208** are **safe to treat as merge authority** for M26: PR-head green on final tip + merge-boundary `main` green on merge commit.
 * **Step 7 — next actions:** Ledger closeout (`docs/starlab.md`); **M27** remains stub-only (no imitation-baseline product code).
 
+## Milestone closeout (non-merge-boundary `main` CI)
+
+* **Closeout commit:** `2ccf60ea3a5aa6a4c4106bf9f6372bde06202d41` (short `2ccf60e…`) — message: `docs(m26): milestone closeout — ledger, governance, M27 stubs`
+* **Workflow run ID:** `24217359747`
+* **Conclusion:** success
+* **URL:** https://github.com/m-cahill/starlab/actions/runs/24217359747
+
+Milestone docs (`M26_run1.md`, `M26_summary.md`, `M26_audit.md`, `M26_plan.md`, `M26_toolcalls.md`), ledger §18/§23, governance tests, **M27** stubs — **not** a substitute for authoritative PR-head **24217118559** or merge-boundary **24217178208** for M26 **product** merge authority.
+
 ## Notes
 
 * Further **documentation-only** green runs on `main` after the closeout commit are **not** merge-boundary events for M26 product unless explicitly recorded in §23 / §18 — **not** substitute merge authority for PR-head **24217118559** or merge-boundary **24217178208**.
