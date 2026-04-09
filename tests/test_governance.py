@@ -118,7 +118,22 @@ def test_current_milestone_is_m26() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "M26" in section
-    assert "Imitation" in section or "imitation" in section
+    assert "Replay Corpus" in section or "Training Dataset" in section
+
+
+def test_planned_program_arc_is_35_milestones() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "35 milestones" in text
+    assert "M00–M34" in text or "M00-M34" in text
+
+
+def test_od007_targets_m34() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    for line in text.splitlines():
+        if line.strip().startswith("| OD-007 |"):
+            assert "M34" in line
+            return
+    raise AssertionError("OD-007 row not found in docs/starlab.md")
 
 
 def test_m18_complete_in_milestone_table() -> None:
