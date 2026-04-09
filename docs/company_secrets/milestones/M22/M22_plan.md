@@ -3,7 +3,7 @@
 **Project:** STARLAB  
 **Phase:** IV — Benchmark Contracts, Baselines, and Evaluation  
 **Milestone:** M22 — Heuristic Baseline Suite  
-**Status:** In progress / merge pending — see `M22_run1.md` for CI after PR merge.
+**Status:** **Complete** — merged to `main` ([PR #23](https://github.com/m-cahill/starlab/pull/23)); see `M22_run1.md` / `M22_summary.md` / `M22_audit.md`.
 
 ## Milestone identity
 
