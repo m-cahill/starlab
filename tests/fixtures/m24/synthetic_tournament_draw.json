@@ -1,0 +1,94 @@
+{
+  "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+  "benchmark_id": "m20_fixture_demo",
+  "entrants": [
+    {
+      "entrant_id": "synthetic.draw::a",
+      "source_scorecard_ref": {},
+      "subject_id": "a",
+      "subject_kind": "scripted",
+      "suite_id": "synthetic.draw"
+    },
+    {
+      "entrant_id": "synthetic.draw::b",
+      "source_scorecard_ref": {},
+      "subject_id": "b",
+      "subject_kind": "scripted",
+      "suite_id": "synthetic.draw"
+    }
+  ],
+  "evaluation_posture": "fixture_only",
+  "matches": [
+    {
+      "entrant_a_id": "synthetic.draw::a",
+      "entrant_b_id": "synthetic.draw::b",
+      "loser_entrant_id": null,
+      "match_id": "starlab.evaluation_tournament.v1.match.0001",
+      "metric_comparisons": [
+        {
+          "better_entrant_id": null,
+          "entrant_a_value": 5,
+          "entrant_b_value": 5,
+          "metric_id": "m1",
+          "optimization_direction": "maximize",
+          "scoring_role": "primary",
+          "unit": "count"
+        },
+        {
+          "better_entrant_id": null,
+          "entrant_a_value": 0.0,
+          "entrant_b_value": 0.0,
+          "metric_id": "m2",
+          "optimization_direction": "minimize",
+          "scoring_role": "diagnostic",
+          "unit": "ratio"
+        }
+      ],
+      "points_awarded": {
+        "synthetic.draw::a": 0.5,
+        "synthetic.draw::b": 0.5
+      },
+      "primary_metric_decision": {
+        "decisive_metric_id": "m1",
+        "entrant_a_value": 5,
+        "entrant_b_value": 5,
+        "optimization_direction": "maximize",
+        "outcome": "tie"
+      },
+      "result": "draw",
+      "winner_entrant_id": null
+    }
+  ],
+  "measurement_surface": "fixture_only",
+  "non_claims": [],
+  "standings": [
+    {
+      "draws": 1,
+      "entrant_id": "synthetic.draw::a",
+      "losses": 0,
+      "points": 0.5,
+      "primary_metric_id": "m1",
+      "primary_metric_optimization_direction": "maximize",
+      "primary_metric_tiebreak_scalar": 5.0,
+      "primary_metric_value": 5,
+      "rank": 1,
+      "wins": 0
+    },
+    {
+      "draws": 1,
+      "entrant_id": "synthetic.draw::b",
+      "losses": 0,
+      "points": 0.5,
+      "primary_metric_id": "m1",
+      "primary_metric_optimization_direction": "maximize",
+      "primary_metric_tiebreak_scalar": 5.0,
+      "primary_metric_value": 5,
+      "rank": 2,
+      "wins": 0
+    }
+  ],
+  "suite_inputs": [],
+  "tournament_id": "synthetic.m24.draw",
+  "tournament_version": "starlab.evaluation_tournament.v1",
+  "warnings": []
+}
