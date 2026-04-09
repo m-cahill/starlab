@@ -699,7 +699,7 @@ def test_m24_complete_in_milestone_table() -> None:
 
 
 def test_m25_status_in_milestone_table() -> None:
-    """M25 row status is **Planned**, **In progress**, or **Complete** (table cell, not substring noise)."""
+    """M25 row: Status column is Planned, In progress, or Complete."""
 
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
