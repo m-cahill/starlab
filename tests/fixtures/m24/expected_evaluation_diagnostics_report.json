@@ -1,0 +1,20 @@
+{
+  "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+  "diagnostics_verdict": "pass",
+  "entrant_count": 4,
+  "failure_view_count": 2,
+  "failures": [],
+  "match_count": 6,
+  "non_claims": [
+    "starlab.m24.diagnostics_non_claim.not_benchmark_integrity",
+    "starlab.m24.diagnostics_non_claim.not_leaderboard_validity_beyond_fixture",
+    "starlab.m24.diagnostics_non_claim.not_live_gameplay",
+    "starlab.m24.diagnostics_non_claim.not_new_benchmark_semantics",
+    "starlab.m24.diagnostics_non_claim.not_replay_derived_evidence",
+    "starlab.m24.diagnostics_non_claim.not_root_cause_outside_tournament_artifact"
+  ],
+  "report_version": "starlab.evaluation_diagnostics_report.v1",
+  "warnings": [
+    "starlab.m24.warning.fixture_only_diagnostics_consumer"
+  ]
+}

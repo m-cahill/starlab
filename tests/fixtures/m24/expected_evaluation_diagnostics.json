@@ -1,0 +1,447 @@
+{
+  "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+  "benchmark_id": "m20_fixture_demo",
+  "diagnostics_version": "starlab.evaluation_diagnostics.v1",
+  "entrant_diagnostics": [
+    {
+      "draws": 0,
+      "entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+      "losses": 3,
+      "opponent_results": [
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0001",
+          "opponent_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+          "outcome": "loss",
+          "points_awarded": 0.0
+        },
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0002",
+          "opponent_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+          "outcome": "loss",
+          "points_awarded": 0.0
+        },
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0003",
+          "opponent_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+          "outcome": "loss",
+          "points_awarded": 0.0
+        }
+      ],
+      "points": 0.0,
+      "primary_metric_value": 0,
+      "primary_tiebreak_scalar": 0.0,
+      "source_scorecard_ref": {
+        "scorecard_index": 0,
+        "suite_id": "starlab.scripted_baseline_suite.m21.v1.demo",
+        "suite_path": "tests/fixtures/m21/expected_scripted_baseline_suite.json",
+        "suite_sha256": "81420374ca5aca2b560a7aa3812c8aa3820fa95709b6eb5ebc00b39f015edfb2",
+        "suite_version": "starlab.scripted_baseline_suite.v1"
+      },
+      "standing_rank": 4,
+      "subject_id": "scripted_m21_noop",
+      "subject_kind": "scripted",
+      "suite_id": "starlab.scripted_baseline_suite.m21.v1.demo",
+      "wins": 0
+    },
+    {
+      "draws": 0,
+      "entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+      "losses": 1,
+      "opponent_results": [
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0001",
+          "opponent_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+          "outcome": "win",
+          "points_awarded": 1.0
+        },
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0004",
+          "opponent_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+          "outcome": "win",
+          "points_awarded": 1.0
+        },
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0005",
+          "opponent_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+          "outcome": "loss",
+          "points_awarded": 0.0
+        }
+      ],
+      "points": 2.0,
+      "primary_metric_value": 10,
+      "primary_tiebreak_scalar": 10.0,
+      "source_scorecard_ref": {
+        "scorecard_index": 1,
+        "suite_id": "starlab.scripted_baseline_suite.m21.v1.demo",
+        "suite_path": "tests/fixtures/m21/expected_scripted_baseline_suite.json",
+        "suite_sha256": "81420374ca5aca2b560a7aa3812c8aa3820fa95709b6eb5ebc00b39f015edfb2",
+        "suite_version": "starlab.scripted_baseline_suite.v1"
+      },
+      "standing_rank": 2,
+      "subject_id": "scripted_m21_fixed",
+      "subject_kind": "scripted",
+      "suite_id": "starlab.scripted_baseline_suite.m21.v1.demo",
+      "wins": 2
+    },
+    {
+      "draws": 0,
+      "entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+      "losses": 2,
+      "opponent_results": [
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0002",
+          "opponent_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+          "outcome": "win",
+          "points_awarded": 1.0
+        },
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0004",
+          "opponent_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+          "outcome": "loss",
+          "points_awarded": 0.0
+        },
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0006",
+          "opponent_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+          "outcome": "loss",
+          "points_awarded": 0.0
+        }
+      ],
+      "points": 1.0,
+      "primary_metric_value": 8,
+      "primary_tiebreak_scalar": 8.0,
+      "source_scorecard_ref": {
+        "scorecard_index": 0,
+        "suite_id": "starlab.heuristic_baseline_suite.m22.v1.demo",
+        "suite_path": "tests/fixtures/m22/expected_heuristic_baseline_suite.json",
+        "suite_sha256": "27b72ccc166f6de1cc9c6a3721b40819e5fbb7bfc452b053a8554403aed366c8",
+        "suite_version": "starlab.heuristic_baseline_suite.v1"
+      },
+      "standing_rank": 3,
+      "subject_id": "heuristic_economy_first_v1",
+      "subject_kind": "heuristic",
+      "suite_id": "starlab.heuristic_baseline_suite.m22.v1.demo",
+      "wins": 1
+    },
+    {
+      "draws": 0,
+      "entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+      "losses": 0,
+      "opponent_results": [
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0003",
+          "opponent_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+          "outcome": "win",
+          "points_awarded": 1.0
+        },
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0005",
+          "opponent_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+          "outcome": "win",
+          "points_awarded": 1.0
+        },
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0006",
+          "opponent_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+          "outcome": "win",
+          "points_awarded": 1.0
+        }
+      ],
+      "points": 3.0,
+      "primary_metric_value": 12,
+      "primary_tiebreak_scalar": 12.0,
+      "source_scorecard_ref": {
+        "scorecard_index": 1,
+        "suite_id": "starlab.heuristic_baseline_suite.m22.v1.demo",
+        "suite_path": "tests/fixtures/m22/expected_heuristic_baseline_suite.json",
+        "suite_sha256": "27b72ccc166f6de1cc9c6a3721b40819e5fbb7bfc452b053a8554403aed366c8",
+        "suite_version": "starlab.heuristic_baseline_suite.v1"
+      },
+      "standing_rank": 1,
+      "subject_id": "heuristic_pressure_first_v1",
+      "subject_kind": "heuristic",
+      "suite_id": "starlab.heuristic_baseline_suite.m22.v1.demo",
+      "wins": 3
+    }
+  ],
+  "evaluation_posture": "fixture_only",
+  "failure_views": {
+    "draws_equal_primary_metric": [],
+    "lowest_points_entrants": [
+      {
+        "entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop"
+      }
+    ],
+    "standings_used_lexicographic_tiebreak": [],
+    "standings_used_tiebreak_scalar": [],
+    "zero_win_entrants": [
+      {
+        "entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop"
+      }
+    ]
+  },
+  "match_diagnostics": [
+    {
+      "decisive_metric_id": "m1",
+      "decisive_metric_role": "primary",
+      "entrant_a_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+      "entrant_b_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+      "match_id": "starlab.evaluation_tournament.v1.match.0001",
+      "metric_comparisons": [
+        {
+          "better_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+          "entrant_a_value": 0,
+          "entrant_b_value": 10,
+          "metric_id": "m1",
+          "optimization_direction": "maximize",
+          "scoring_role": "primary",
+          "unit": "count"
+        },
+        {
+          "better_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+          "entrant_a_value": 0.0,
+          "entrant_b_value": 0.25,
+          "metric_id": "m2",
+          "optimization_direction": "minimize",
+          "scoring_role": "diagnostic",
+          "unit": "ratio"
+        }
+      ],
+      "outcome": "win_b",
+      "points_awarded": {
+        "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed": 1.0,
+        "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop": 0.0
+      },
+      "winner_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed"
+    },
+    {
+      "decisive_metric_id": "m1",
+      "decisive_metric_role": "primary",
+      "entrant_a_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+      "entrant_b_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+      "match_id": "starlab.evaluation_tournament.v1.match.0002",
+      "metric_comparisons": [
+        {
+          "better_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+          "entrant_a_value": 0,
+          "entrant_b_value": 8,
+          "metric_id": "m1",
+          "optimization_direction": "maximize",
+          "scoring_role": "primary",
+          "unit": "count"
+        },
+        {
+          "better_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+          "entrant_a_value": 0.0,
+          "entrant_b_value": 0.15,
+          "metric_id": "m2",
+          "optimization_direction": "minimize",
+          "scoring_role": "diagnostic",
+          "unit": "ratio"
+        }
+      ],
+      "outcome": "win_b",
+      "points_awarded": {
+        "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1": 1.0,
+        "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop": 0.0
+      },
+      "winner_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1"
+    },
+    {
+      "decisive_metric_id": "m1",
+      "decisive_metric_role": "primary",
+      "entrant_a_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+      "entrant_b_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+      "match_id": "starlab.evaluation_tournament.v1.match.0003",
+      "metric_comparisons": [
+        {
+          "better_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+          "entrant_a_value": 0,
+          "entrant_b_value": 12,
+          "metric_id": "m1",
+          "optimization_direction": "maximize",
+          "scoring_role": "primary",
+          "unit": "count"
+        },
+        {
+          "better_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+          "entrant_a_value": 0.0,
+          "entrant_b_value": 0.35,
+          "metric_id": "m2",
+          "optimization_direction": "minimize",
+          "scoring_role": "diagnostic",
+          "unit": "ratio"
+        }
+      ],
+      "outcome": "win_b",
+      "points_awarded": {
+        "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1": 1.0,
+        "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop": 0.0
+      },
+      "winner_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1"
+    },
+    {
+      "decisive_metric_id": "m1",
+      "decisive_metric_role": "primary",
+      "entrant_a_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+      "entrant_b_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+      "match_id": "starlab.evaluation_tournament.v1.match.0004",
+      "metric_comparisons": [
+        {
+          "better_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+          "entrant_a_value": 10,
+          "entrant_b_value": 8,
+          "metric_id": "m1",
+          "optimization_direction": "maximize",
+          "scoring_role": "primary",
+          "unit": "count"
+        },
+        {
+          "better_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+          "entrant_a_value": 0.25,
+          "entrant_b_value": 0.15,
+          "metric_id": "m2",
+          "optimization_direction": "minimize",
+          "scoring_role": "diagnostic",
+          "unit": "ratio"
+        }
+      ],
+      "outcome": "win_a",
+      "points_awarded": {
+        "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1": 0.0,
+        "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed": 1.0
+      },
+      "winner_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed"
+    },
+    {
+      "decisive_metric_id": "m1",
+      "decisive_metric_role": "primary",
+      "entrant_a_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+      "entrant_b_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+      "match_id": "starlab.evaluation_tournament.v1.match.0005",
+      "metric_comparisons": [
+        {
+          "better_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+          "entrant_a_value": 10,
+          "entrant_b_value": 12,
+          "metric_id": "m1",
+          "optimization_direction": "maximize",
+          "scoring_role": "primary",
+          "unit": "count"
+        },
+        {
+          "better_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+          "entrant_a_value": 0.25,
+          "entrant_b_value": 0.35,
+          "metric_id": "m2",
+          "optimization_direction": "minimize",
+          "scoring_role": "diagnostic",
+          "unit": "ratio"
+        }
+      ],
+      "outcome": "win_b",
+      "points_awarded": {
+        "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1": 1.0,
+        "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed": 0.0
+      },
+      "winner_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1"
+    },
+    {
+      "decisive_metric_id": "m1",
+      "decisive_metric_role": "primary",
+      "entrant_a_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+      "entrant_b_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+      "match_id": "starlab.evaluation_tournament.v1.match.0006",
+      "metric_comparisons": [
+        {
+          "better_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+          "entrant_a_value": 8,
+          "entrant_b_value": 12,
+          "metric_id": "m1",
+          "optimization_direction": "maximize",
+          "scoring_role": "primary",
+          "unit": "count"
+        },
+        {
+          "better_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+          "entrant_a_value": 0.15,
+          "entrant_b_value": 0.35,
+          "metric_id": "m2",
+          "optimization_direction": "minimize",
+          "scoring_role": "diagnostic",
+          "unit": "ratio"
+        }
+      ],
+      "outcome": "win_b",
+      "points_awarded": {
+        "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1": 0.0,
+        "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1": 1.0
+      },
+      "winner_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1"
+    }
+  ],
+  "measurement_surface": "fixture_only",
+  "non_claims": [
+    "starlab.m24.diagnostics_non_claim.not_benchmark_integrity",
+    "starlab.m24.diagnostics_non_claim.not_leaderboard_validity_beyond_fixture",
+    "starlab.m24.diagnostics_non_claim.not_live_gameplay",
+    "starlab.m24.diagnostics_non_claim.not_new_benchmark_semantics",
+    "starlab.m24.diagnostics_non_claim.not_replay_derived_evidence",
+    "starlab.m24.diagnostics_non_claim.not_root_cause_outside_tournament_artifact"
+  ],
+  "standing_explanations": [
+    {
+      "adjacent_comparison": {
+        "lower_rank_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+        "separated_by": "higher_points"
+      },
+      "entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_pressure_first_v1",
+      "explained_by": {
+        "lexicographic_tiebreak_used": false,
+        "points": 3.0,
+        "primary_tiebreak_scalar": 12.0
+      },
+      "rank": 1
+    },
+    {
+      "adjacent_comparison": {
+        "lower_rank_entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+        "separated_by": "higher_points"
+      },
+      "entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_fixed",
+      "explained_by": {
+        "lexicographic_tiebreak_used": false,
+        "points": 2.0,
+        "primary_tiebreak_scalar": 10.0
+      },
+      "rank": 2
+    },
+    {
+      "adjacent_comparison": {
+        "lower_rank_entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+        "separated_by": "higher_points"
+      },
+      "entrant_id": "starlab.heuristic_baseline_suite.m22.v1.demo::heuristic_economy_first_v1",
+      "explained_by": {
+        "lexicographic_tiebreak_used": false,
+        "points": 1.0,
+        "primary_tiebreak_scalar": 8.0
+      },
+      "rank": 3
+    },
+    {
+      "adjacent_comparison": null,
+      "entrant_id": "starlab.scripted_baseline_suite.m21.v1.demo::scripted_m21_noop",
+      "explained_by": {
+        "lexicographic_tiebreak_used": false,
+        "points": 0.0,
+        "primary_tiebreak_scalar": 0.0
+      },
+      "rank": 4
+    }
+  ],
+  "tournament_id": "starlab.evaluation_tournament.m23.v1.demo",
+  "warnings": [
+    "starlab.m24.warning.fixture_only_diagnostics_consumer"
+  ]
+}

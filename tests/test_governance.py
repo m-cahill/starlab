@@ -37,6 +37,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/scripted_baseline_suite_v1.md",
     "docs/runtime/heuristic_baseline_suite_v1.md",
     "docs/runtime/evaluation_runner_tournament_harness_v1.md",
+    "docs/runtime/evaluation_diagnostics_failure_views_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -113,11 +114,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m24() -> None:
+def test_current_milestone_is_m25() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M24" in section
-    assert "Attribution" in section or "Diagnostics" in section or "Failure" in section
+    assert "M25" in section
+    assert "Evidence" in section or "evidence" in section
 
 
 def test_m18_complete_in_milestone_table() -> None:
@@ -679,13 +680,22 @@ def test_m23_complete_in_milestone_table() -> None:
     raise AssertionError("M23 milestone row not found or not complete")
 
 
-def test_m24_planned_in_milestone_table() -> None:
+def test_m24_complete_in_milestone_table() -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
         if stripped.startswith("| M24 |") and "Attribution" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M24 milestone row not found or not complete")
+
+
+def test_m25_planned_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M25 |") and "Evidence" in stripped:
             assert "Planned" in stripped
             return
-    raise AssertionError("M24 milestone row not found or not planned")
+    raise AssertionError("M25 milestone row not found or not planned")
 
 
 def test_m20_benchmark_modules_exist() -> None:
@@ -761,6 +771,30 @@ def test_m23_evaluation_modules_exist() -> None:
         "emit_evaluation_tournament.py",
     ):
         assert (ev / name).is_file()
+
+
+def test_m24_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m24"
+    assert fx.is_dir()
+    assert (fx / "expected_evaluation_diagnostics.json").is_file()
+    assert (fx / "expected_evaluation_diagnostics_report.json").is_file()
+    assert (fx / "synthetic_tournament_draw.json").is_file()
+
+
+def test_m24_evaluation_modules_exist() -> None:
+    ev = REPO_ROOT / "starlab" / "evaluation"
+    for name in (
+        "diagnostics_models.py",
+        "diagnostics_views.py",
+        "emit_evaluation_diagnostics.py",
+    ):
+        assert (ev / name).is_file()
+
+
+def test_m25_stub_milestone_files_exist() -> None:
+    m25 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M25"
+    assert (m25 / "M25_plan.md").is_file()
+    assert (m25 / "M25_toolcalls.md").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
