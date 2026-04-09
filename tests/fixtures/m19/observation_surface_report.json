@@ -1,0 +1,25 @@
+{
+  "action_mask_posture": "prototype_heuristic_family_masks — not legality, not full SC2 action coverage.",
+  "contract": "starlab.perceptual_bridge_prototype.v1",
+  "gameloop": 1200,
+  "non_claims": [
+    "Prototype materialization only — not benchmark integrity or agent capability.",
+    "Action masks are coarse heuristics from M16 summaries — not legality computation.",
+    "Spatial planes are structural shape metadata only — not replay/map-grounded positional truth.",
+    "Visibility remains proxy-bounded — not certified fog-of-war truth.",
+    "Does not prove replay↔execution equivalence or live SC2 in CI."
+  ],
+  "observation_surface_sha256": "b46ae1b067950cd46f083d5731a165fa0de7c9a33b113c6a08dc00dabb20648e",
+  "perspective_player_index": 0,
+  "profile": "starlab.perceptual_bridge_prototype.m18.v1",
+  "provenance_crosscheck": {
+    "canonical_state_report_hash_match": true,
+    "canonical_state_report_supplied": true
+  },
+  "report_version": "starlab.observation_surface_materialization_report.v1",
+  "source_canonical_state_sha256": "aed7739bbb528a1744f8a1d1c5074cff333a96ec87b2f2902abc4456e1bdd266",
+  "spatial_plane_posture": "prototype_structural_only — placeholder plane family; no M09 map binding.",
+  "warnings": [
+    "upstream canonical_state_report: metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both)."
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "action_mask_audit_rows": [
+    {
+      "family_name": "no_op",
+      "family_order_index": 0,
+      "rationale": "Coarse prototype family mask from bounded M16 summaries — not legality or full action coverage.",
+      "reconciliation_status": "derived"
+    },
+    {
+      "family_name": "selection",
+      "family_order_index": 1,
+      "rationale": "Coarse prototype family mask from bounded M16 summaries — not legality or full action coverage.",
+      "reconciliation_status": "derived"
+    },
+    {
+      "family_name": "camera_or_view",
+      "family_order_index": 2,
+      "rationale": "Coarse prototype family mask from bounded M16 summaries — not legality or full action coverage.",
+      "reconciliation_status": "derived"
+    },
+    {
+      "family_name": "production",
+      "family_order_index": 3,
+      "rationale": "Coarse prototype family mask from bounded M16 summaries — not legality or full action coverage.",
+      "reconciliation_status": "derived"
+    },
+    {
+      "family_name": "build",
+      "family_order_index": 4,
+      "rationale": "Coarse prototype family mask from bounded M16 summaries — not legality or full action coverage.",
+      "reconciliation_status": "derived"
+    },
+    {
+      "family_name": "unit_command",
+      "family_order_index": 5,
+      "rationale": "Coarse prototype family mask from bounded M16 summaries — not legality or full action coverage.",
+      "reconciliation_status": "derived"
+    },
+    {
+      "family_name": "research_or_upgrade",
+      "family_order_index": 6,
+      "rationale": "Coarse prototype family mask from bounded M16 summaries — not legality or full action coverage.",
+      "reconciliation_status": "derived"
+    }
+  ],
+  "audit_metadata": {
+    "audit_artifact_version": "starlab.observation_reconciliation_audit.v1",
+    "contract": "starlab.observation_reconciliation_audit.v1"
+  },
+  "deferred_non_claims": [
+    "Does not prove replay parsing, M14 bundle loading, or Blizzard parser-stack isolation beyond this audit boundary.",
+    "Does not prove action legality, benchmark integrity, or replay↔execution equivalence.",
+    "Does not certify fog-of-war truth or exact banked resources beyond prior bounded M11/M12/M16 claims.",
+    "Spatial and action-mask rows classify prototype posture only — not map truth or legal actions."
+  ],
+  "entity_audit_rows": [
+    {
+      "category": "heavy",
+      "owner_view": "self",
+      "rationale": "Aggregated army category counts from canonical_state army_summary — faithful to M18 rules.",
+      "reconciliation_status": "exact",
+      "stable_key": "row_index=0"
+    },
+    {
+      "category": "light",
+      "owner_view": "self",
+      "rationale": "Aggregated army category counts from canonical_state army_summary — faithful to M18 rules.",
+      "reconciliation_status": "exact",
+      "stable_key": "row_index=1"
+    },
+    {
+      "category": "other",
+      "owner_view": "self",
+      "rationale": "Aggregated army category counts from canonical_state army_summary — faithful to M18 rules.",
+      "reconciliation_status": "exact",
+      "stable_key": "row_index=2"
+    }
+  ],
+  "scalar_audit_rows": [
+    {
+      "canonical_source_paths": [
+        "players[0].economy_summary.resource_signal_category"
+      ],
+      "observation_feature_name": "economy.resource_signal_category",
+      "rationale": "Replay-derived bounded summary or category signal — not exact banked resources or full semantic truth.",
+      "reconciliation_status": "bounded_lossy"
+    },
+    {
+      "canonical_source_paths": [
+        "players[0].economy_summary.structure_train_events_total"
+      ],
+      "observation_feature_name": "economy.structure_train_events_total",
+      "rationale": "Direct carry-through from canonical perspective player fields.",
+      "reconciliation_status": "exact"
+    },
+    {
+      "canonical_source_paths": [
+        "players[0].economy_summary.unit_train_events_total"
+      ],
+      "observation_feature_name": "economy.unit_train_events_total",
+      "rationale": "Direct carry-through from canonical perspective player fields.",
+      "reconciliation_status": "exact"
+    },
+    {
+      "canonical_source_paths": [
+        "global_context.active_combat_window_ids (length)"
+      ],
+      "observation_feature_name": "global.active_combat_window_count",
+      "rationale": "Deterministic aggregate: list length / count from canonical global_context.",
+      "reconciliation_status": "derived"
+    },
+    {
+      "canonical_source_paths": [
+        "global_context.active_slice_ids (length)"
+      ],
+      "observation_feature_name": "global.active_slice_count",
+      "rationale": "Deterministic aggregate: list length / count from canonical global_context.",
+      "reconciliation_status": "derived"
+    },
+    {
+      "canonical_source_paths": [
+        "players[0].production_summary.active_build_queue_count"
+      ],
+      "observation_feature_name": "production.active_build_queue_count",
+      "rationale": "Direct carry-through from canonical perspective player fields.",
+      "reconciliation_status": "exact"
+    },
+    {
+      "canonical_source_paths": [
+        "players[0].production_summary.tech_upgrades_started_total"
+      ],
+      "observation_feature_name": "production.tech_upgrades_started_total",
+      "rationale": "Direct carry-through from canonical perspective player fields.",
+      "reconciliation_status": "exact"
+    },
+    {
+      "canonical_source_paths": [
+        "players[0].race_actual"
+      ],
+      "observation_feature_name": "race.actual",
+      "rationale": "Direct carry-through from canonical perspective player fields.",
+      "reconciliation_status": "exact"
+    },
+    {
+      "canonical_source_paths": [
+        "players[0].result"
+      ],
+      "observation_feature_name": "result.known",
+      "rationale": "Direct carry-through from canonical perspective player fields.",
+      "reconciliation_status": "exact"
+    },
+    {
+      "canonical_source_paths": [
+        "players[0].scouting_context.recent_scout_events_count"
+      ],
+      "observation_feature_name": "scouting.recent_scout_events_count",
+      "rationale": "Direct carry-through from canonical perspective player fields.",
+      "reconciliation_status": "exact"
+    },
+    {
+      "canonical_source_paths": [
+        "players[0].visibility_context.visibility_proxy_level"
+      ],
+      "observation_feature_name": "visibility.proxy_level",
+      "rationale": "Proxy visibility level from M16 visibility_context — bounded signal, not certified fog-of-war truth.",
+      "reconciliation_status": "bounded_lossy"
+    }
+  ],
+  "source_identity": {
+    "canonical_state_report_supplied": true,
+    "gameloop": 1200,
+    "observation_surface_report_supplied": true,
+    "perspective_player_index": 0,
+    "source_canonical_state_sha256": "aed7739bbb528a1744f8a1d1c5074cff333a96ec87b2f2902abc4456e1bdd266"
+  },
+  "spatial_audit_rows": [
+    {
+      "plane_family_key": "example_placeholder_plane",
+      "rationale": "M18 spatial planes are prototype structural metadata only — not map-grounded terrain or control truth.",
+      "reconciliation_status": "bounded_lossy"
+    }
+  ],
+  "status_counts": {
+    "bounded_lossy": 3,
+    "derived": 9,
+    "exact": 10
+  }
+}
