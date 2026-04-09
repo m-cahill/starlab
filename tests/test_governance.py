@@ -698,13 +698,19 @@ def test_m24_complete_in_milestone_table() -> None:
     raise AssertionError("M24 milestone row not found or not complete")
 
 
-def test_m25_planned_in_milestone_table() -> None:
+def test_m25_status_in_milestone_table() -> None:
+    """M25 row status is **Planned**, **In progress**, or **Complete** (table cell, not substring noise)."""
+
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
         if stripped.startswith("| M25 |") and "Evidence" in stripped:
-            assert "Planned" in stripped
+            assert (
+                "| Planned |" in stripped
+                or "| In progress |" in stripped
+                or "| Complete |" in stripped
+            )
             return
-    raise AssertionError("M25 milestone row not found or not planned")
+    raise AssertionError("M25 milestone row not found")
 
 
 def test_m20_benchmark_modules_exist() -> None:
