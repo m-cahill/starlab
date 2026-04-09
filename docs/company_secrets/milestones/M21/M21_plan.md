@@ -2,7 +2,8 @@
 
 **Milestone:** M21  
 **Phase:** IV — Benchmark Contracts, Baselines, and Evaluation  
-**Recommended branch:** `m21-scripted-baseline-suite`
+**Status:** **Closed** — merged to `main` ([PR #22](https://github.com/m-cahill/starlab/pull/22)); see `M21_run1.md`, `M21_summary.md`, `M21_audit.md`.  
+**Recommended branch:** `m21-scripted-baseline-suite` (merged)
 
 ## Objective
 
