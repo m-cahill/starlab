@@ -2,7 +2,7 @@
 
 **Milestone:** M25  
 **Phase:** IV — Benchmark Contracts, Baselines, and Evaluation  
-**Status:** In progress — implementation on branch `m25-baseline-evidence-pack` (not merged until closeout).
+**Status:** **Complete** — merged to `main` ([PR #31](https://github.com/m-cahill/starlab/pull/31)); merge commit `f03c7bf4337b61ea0f88ff07aa5b4adb2c88850b`; see `M25_run1.md`, `M25_summary.md`, `M25_audit.md`.
 
 ## Objective
 

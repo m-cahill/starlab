@@ -114,11 +114,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m25() -> None:
+def test_current_milestone_is_m26() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M25" in section
-    assert "Evidence" in section or "evidence" in section
+    assert "M26" in section
+    assert "Imitation" in section or "imitation" in section
 
 
 def test_m18_complete_in_milestone_table() -> None:
@@ -530,6 +530,9 @@ def test_m25_milestone_files_exist() -> None:
     m25 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M25"
     assert (m25 / "M25_plan.md").is_file()
     assert (m25 / "M25_toolcalls.md").is_file()
+    assert (m25 / "M25_run1.md").is_file()
+    assert (m25 / "M25_summary.md").is_file()
+    assert (m25 / "M25_audit.md").is_file()
 
 
 def test_m16_complete_in_milestone_table() -> None:
@@ -698,19 +701,13 @@ def test_m24_complete_in_milestone_table() -> None:
     raise AssertionError("M24 milestone row not found or not complete")
 
 
-def test_m25_status_in_milestone_table() -> None:
-    """M25 row: Status column is Planned, In progress, or Complete."""
-
+def test_m25_complete_in_milestone_table() -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
         if stripped.startswith("| M25 |") and "Evidence" in stripped:
-            assert (
-                "| Planned |" in stripped
-                or "| In progress |" in stripped
-                or "| Complete |" in stripped
-            )
+            assert "Complete" in stripped
             return
-    raise AssertionError("M25 milestone row not found")
+    raise AssertionError("M25 milestone row not found or not complete")
 
 
 def test_m20_benchmark_modules_exist() -> None:
@@ -806,10 +803,20 @@ def test_m24_evaluation_modules_exist() -> None:
         assert (ev / name).is_file()
 
 
-def test_m25_stub_milestone_files_exist() -> None:
-    m25 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M25"
-    assert (m25 / "M25_plan.md").is_file()
-    assert (m25 / "M25_toolcalls.md").is_file()
+def test_m25_evidence_pack_modules_exist() -> None:
+    ev = REPO_ROOT / "starlab" / "evaluation"
+    for name in (
+        "evidence_pack_models.py",
+        "evidence_pack_views.py",
+        "emit_baseline_evidence_pack.py",
+    ):
+        assert (ev / name).is_file()
+
+
+def test_m26_stub_milestone_files_exist() -> None:
+    m26 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M26"
+    assert (m26 / "M26_plan.md").is_file()
+    assert (m26 / "M26_toolcalls.md").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
