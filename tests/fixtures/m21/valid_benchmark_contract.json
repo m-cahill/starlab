@@ -1,0 +1,51 @@
+{
+  "aggregation_policy": {
+    "notes": "Demo aggregation policy for M20 fixtures.",
+    "policy_kind": "weighted_sum"
+  },
+  "benchmark_id": "m20_fixture_demo",
+  "benchmark_name": "M20 fixture benchmark",
+  "benchmark_version": "1.0.0",
+  "gating_rules": [
+    {
+      "description": "Run completes without harness crash.",
+      "rule_id": "g1",
+      "severity": "hard"
+    }
+  ],
+  "input_requirements": {
+    "notes": "Fixture-only demo; no live runtime.",
+    "required_inputs": [
+      "canonical_state_snapshot"
+    ]
+  },
+  "measurement_surface": "fixture_only",
+  "metric_definitions": [
+    {
+      "aggregation_method": "sum",
+      "display_name": "First metric",
+      "metric_id": "m1",
+      "optimization_direction": "maximize",
+      "scoring_role": "primary",
+      "unit": "count"
+    },
+    {
+      "aggregation_method": "mean",
+      "display_name": "Second metric",
+      "metric_id": "m2",
+      "optimization_direction": "minimize",
+      "scoring_role": "diagnostic",
+      "unit": "ratio"
+    }
+  ],
+  "non_claims": [
+    "starlab.m20.benchmark_non_claim.not_benchmark_integrity",
+    "starlab.m20.benchmark_non_claim.not_replay_equivalence"
+  ],
+  "schema_version": "starlab.benchmark_contract.v1",
+  "scorecard_schema_ref": "starlab.benchmark_scorecard.m20.v1.schema.json",
+  "subject_kinds_allowed": [
+    "heuristic",
+    "scripted"
+  ]
+}

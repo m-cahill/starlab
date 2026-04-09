@@ -1,0 +1,17 @@
+{
+  "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+  "failures": [],
+  "fixture_case_count": 1,
+  "non_claims": [
+    "starlab.m21.suite_non_claim.not_benchmark_integrity",
+    "starlab.m21.suite_non_claim.not_heuristic_baseline",
+    "starlab.m21.suite_non_claim.not_replay_execution_equivalence"
+  ],
+  "report_version": "starlab.scripted_baseline_suite_report.v1",
+  "scorecard_count": 2,
+  "subject_count": 2,
+  "suite_verdict": "pass",
+  "warnings": [
+    "starlab.m21.warning.fixture_only_scripted_suite"
+  ]
+}

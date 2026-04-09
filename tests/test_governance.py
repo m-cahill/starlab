@@ -34,6 +34,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/perceptual_bridge_prototype_v1.md",
     "docs/runtime/observation_reconciliation_audit_v1.md",
     "docs/runtime/benchmark_contract_scorecard_v1.md",
+    "docs/runtime/scripted_baseline_suite_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -639,6 +640,26 @@ def test_m20_fixture_dir_exists() -> None:
     assert (fx / "valid_benchmark_contract.json").is_file()
     assert (fx / "valid_benchmark_scorecard.json").is_file()
     assert (fx / "expected_benchmark_contract_schema.json").is_file()
+
+
+def test_m21_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m21"
+    assert fx.is_dir()
+    assert (fx / "valid_benchmark_contract.json").is_file()
+    assert (fx / "invalid_benchmark_contract.json").is_file()
+    assert (fx / "expected_scripted_baseline_suite.json").is_file()
+    assert (fx / "expected_scripted_baseline_suite_report.json").is_file()
+
+
+def test_m21_baseline_modules_exist() -> None:
+    bl = REPO_ROOT / "starlab" / "baselines"
+    for name in (
+        "scripted_baseline_models.py",
+        "scripted_baseline_suite.py",
+        "scripted_baseline_scorecards.py",
+        "emit_scripted_baseline_suite.py",
+    ):
+        assert (bl / name).is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
