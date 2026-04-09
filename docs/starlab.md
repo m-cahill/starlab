@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract), `docs/runtime/replay_combat_scouting_visibility_extraction.md` (M12 combat / scouting / visibility contract), and `docs/runtime/replay_slice_generation.md` (M13 replay slice definitions contract), and `docs/runtime/replay_bundle_lineage_contract.md` (M14 replay bundle / lineage packaging contract), and `docs/runtime/canonical_state_schema_v1.md` (M15 canonical state schema contract), and `docs/runtime/canonical_state_pipeline_v1.md` (M16 canonical state pipeline contract), and `docs/runtime/observation_surface_contract_v1.md` (M17 observation surface contract), and `docs/runtime/perceptual_bridge_prototype_v1.md` (M18 perceptual bridge prototype contract), and `docs/runtime/observation_reconciliation_audit_v1.md` (M19 cross-mode reconciliation audit contract), and `docs/runtime/benchmark_contract_scorecard_v1.md` (M20 benchmark contract + scorecard contract).  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract), `docs/runtime/replay_combat_scouting_visibility_extraction.md` (M12 combat / scouting / visibility contract), and `docs/runtime/replay_slice_generation.md` (M13 replay slice definitions contract), and `docs/runtime/replay_bundle_lineage_contract.md` (M14 replay bundle / lineage packaging contract), and `docs/runtime/canonical_state_schema_v1.md` (M15 canonical state schema contract), and `docs/runtime/canonical_state_pipeline_v1.md` (M16 canonical state pipeline contract), and `docs/runtime/observation_surface_contract_v1.md` (M17 observation surface contract), and `docs/runtime/perceptual_bridge_prototype_v1.md` (M18 perceptual bridge prototype contract), and `docs/runtime/observation_reconciliation_audit_v1.md` (M19 cross-mode reconciliation audit contract), and `docs/runtime/benchmark_contract_scorecard_v1.md` (M20 benchmark contract + scorecard contract), and `docs/runtime/scripted_baseline_suite_v1.md` (M21 scripted baseline suite contract).  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -140,6 +140,7 @@ Focus:
 | Milestone | Primary artifact(s) | Binds to / upstream | Included vs external (Phase IV boundary) | Explicitly **not** proved here |
 | --------- | -------------------- | --------------------- | ---------------------------------------- | ------------------------------ |
 | M20 | `benchmark_contract_schema.json`, `benchmark_contract_schema_report.json`, `benchmark_scorecard_schema.json`, `benchmark_scorecard_schema_report.json` | Governed JSON Schemas + reports for one benchmark contract and one scorecard (`jsonschema` validation); optional fixture hashes in reports | STARLAB JSON; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M20 `starlab/benchmarks/` modules | Scripted baselines (**M21**), heuristic baselines (**M22**), evaluation runner (**M23**), tournament harness, benchmark integrity, replay↔execution equivalence, live SC2 in CI |
+| M21 | `scripted_baseline_suite.json`, `scripted_baseline_suite_report.json` | One M20-validated **`fixture_only`** benchmark contract; embedded M20 scorecards for a fixed ordered set of **scripted** subjects; deterministic catalogs | STARLAB JSON; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M21 `starlab/baselines/` modules | Heuristic baselines (**M22**), evaluation runner (**M23**), tournament harness, benchmark integrity, replay↔execution equivalence, live SC2 in CI |
 
 **Phase II slice / bundle boundary (M13 vs M14):** an M13 **slice** is a **metadata-defined temporal span** over already-governed JSON (addressable `[start_gameloop, end_gameloop]` with lineage). **M14** is where **bundle packaging** and **lineage contract v1** for replay bundles belong — not M13. M13 does not ship clipped replay bytes or M14-style bundles.
 
@@ -485,6 +486,17 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | `provisional` | Comparison is tentative or incomplete. |
 | `non_comparable` | Results must not be treated as comparable across subjects or runs. |
 
+### Phase IV baseline subject glossary (M20 vocabulary; ledgered for M21+)
+
+| Subject kind | Meaning |
+| ------------ | ------- |
+| `scripted` | Hand-authored or fixed-policy baseline behavior (deterministic fixture scoring in **M21**). |
+| `heuristic` | Rule- or search-based baseline without learned weights (**M22**). |
+| `imitation` | Behavior derived from replay or demonstration data (**later milestones**). |
+| `hierarchical` | Multi-level control / delegation interfaces (**later milestones**). |
+| `rl` | Reinforcement-learning-style agents (**later milestones**). |
+| `human_replay` | Human play as a reference or subject (**later milestones**). |
+
 ### Phase III progression (compact)
 
 | Milestone | What it proves (Phase III) |
@@ -500,6 +512,7 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Milestone | What it proves (Phase IV) |
 | --------- | ------------------------- |
 | **M20** | **Benchmark contract + scorecard schemas** — deterministic JSON Schemas + reports + fixture validation (**proved** on `main`; see §18 / PR #21). |
+| **M21** | **Scripted baseline suite** — load one **`fixture_only`** benchmark contract, emit deterministic `scripted_baseline_suite.json` + `scripted_baseline_suite_report.json` with embedded M20 scorecards (`docs/runtime/scripted_baseline_suite_v1.md`, `starlab/baselines/`). |
 
 ### Parser glossary (M08–M12)
 
@@ -567,11 +580,11 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ### M21 — Scripted Baseline Suite
 
-**Status:** **Planned** — **current** milestone; **M20** is **closed** on `main` (see §18). **Phase IV** continues (benchmark / evaluation plane); **M21** is **stub-only** until authorized (`docs/company_secrets/milestones/M21/`).
+**Status:** **Planned** — **current** milestone; **M20** is **closed** on `main` (see §18). **Phase IV** continues (benchmark / evaluation plane). **M21** product code targets `docs/runtime/scripted_baseline_suite_v1.md`, `starlab/baselines/`, and `tests/fixtures/m21/` — **merge to `main`** is tracked in §18 at milestone closeout.
 
-**Goal (high level):** **M21** introduces a **scripted baseline suite** — **not** started in M20; see `docs/company_secrets/milestones/M21/M21_plan.md` (stub).
+**Goal (high level):** **M21** introduces a **scripted baseline suite** — first consumer of the M20 benchmark contract with embedded scorecards; see `docs/company_secrets/milestones/M21/M21_plan.md`.
 
-**Primary references:** `docs/company_secrets/milestones/M21/M21_plan.md`; `docs/starlab.md` §6 / §10.
+**Primary references:** `docs/company_secrets/milestones/M21/M21_plan.md`; `docs/runtime/scripted_baseline_suite_v1.md`; `docs/starlab.md` §6 / §10.
 
 **Note:** **M20** proves only **governed benchmark contract + scorecard JSON Schemas + reports** (`docs/runtime/benchmark_contract_scorecard_v1.md`, `starlab/benchmarks/`) — **not** scripted baselines, **not** heuristic baselines, **not** evaluation runner / tournament harness (**M21–M23**).
 
