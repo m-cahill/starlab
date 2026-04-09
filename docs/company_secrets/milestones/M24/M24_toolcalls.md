@@ -7,3 +7,11 @@
 * **Write / StrReplace:** Append recovery + implementation log; replace stub plan with full M24 plan; add runtime contract, Python modules, tests, fixtures, governance, M25 stubs.
 * **Files:** `docs/company_secrets/milestones/M24/*`, `docs/runtime/evaluation_diagnostics_failure_views_v1.md`, `starlab/evaluation/*.py`, `tests/*`, `docs/starlab.md`, `docs/company_secrets/milestones/M25/*`
 * **Status:** M24 product + tests + ledger updates implemented locally; **merge PR / §18 CI** at milestone closeout.
+
+---
+
+## 2026-04-09 — M24 closeout (ledger + artifacts)
+
+* **Write / StrReplace:** `M24_run1.md`, `M24_summary.md`, `M24_audit.md`; `M24_plan.md` **closed**; `M24_toolcalls.md` (this entry); `docs/starlab.md` §3 / §11 / §18 / §20 / §23; glossary + capability rows; governance tests for M24 closeout files.
+* **Authoritative product merge (M24):** [PR #27](https://github.com/m-cahill/starlab/pull/27) — PR-head CI [`24213046380`](https://github.com/m-cahill/starlab/actions/runs/24213046380); merge-boundary `main` [`24213094531`](https://github.com/m-cahill/starlab/actions/runs/24213094531).
+* **Status:** M24 milestone artifacts finalized; **M25** remains stub-only (no M25 product code).

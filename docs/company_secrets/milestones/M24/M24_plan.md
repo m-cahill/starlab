@@ -2,7 +2,7 @@
 
 **Milestone:** M24  
 **Phase:** IV — Benchmark Contracts, Baselines, and Evaluation  
-**Status:** Active — product implementation authorized.
+**Status:** Complete — closed on `main` ([PR #27](https://github.com/m-cahill/starlab/pull/27)); ledger + milestone artifacts at closeout.
 
 ## Objective
 

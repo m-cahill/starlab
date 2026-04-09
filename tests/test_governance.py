@@ -517,10 +517,13 @@ def test_m23_milestone_files_exist() -> None:
     assert (m23 / "M23_audit.md").is_file()
 
 
-def test_m24_stub_milestone_files_exist() -> None:
+def test_m24_milestone_files_exist() -> None:
     m24 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M24"
     assert (m24 / "M24_plan.md").is_file()
     assert (m24 / "M24_toolcalls.md").is_file()
+    assert (m24 / "M24_run1.md").is_file()
+    assert (m24 / "M24_summary.md").is_file()
+    assert (m24 / "M24_audit.md").is_file()
 
 
 def test_m16_complete_in_milestone_table() -> None:
