@@ -64,10 +64,15 @@ Single job **governance**: Ruff check, Ruff format check, Mypy, Pytest, pip-audi
 * **Step 6 — verdict:** Both **24215322933** and **24215360351** are **safe to treat as merge authority** for M25: PR-head green on final tip + merge-boundary `main` green on merge commit.
 * **Step 7 — next actions:** Ledger closeout (`docs/starlab.md`); **M26** remains stub-only (no product code).
 
-## Milestone closeout (this commit)
+## Milestone closeout (non-merge-boundary `main` CI)
 
-Documentation + governance alignment may ship in the same push as `M25_summary.md` / `M25_audit.md` updates on `main` after merge — **not** a substitute for authoritative PR-head **24215322933** for M25 **product** merge authority.
+* **Closeout commit:** `78ced31526e4370e43d4ddbf8887ac827853e55d` (short `78ced31…`) — message: `docs(m25): milestone closeout — ledger, governance, M26 stubs`
+* **Workflow run ID:** `24215484700`
+* **Conclusion:** success
+* **URL:** https://github.com/m-cahill/starlab/actions/runs/24215484700
+
+Milestone docs (`M25_run1.md`, `M25_summary.md`, `M25_audit.md`, `M25_plan.md`, `M25_toolcalls.md`), ledger §18/§23, governance tests, **M26** stubs — **not** a substitute for authoritative PR-head **24215322933** or merge-boundary **24215360351** for M25 **product** merge authority.
 
 ## Notes
 
-* Further **documentation-only** green runs on `main` after this row are **not** merge-boundary events for M25 product unless explicitly recorded in §23 / §18.
+* Further **documentation-only** green runs on `main` after closeout commit `78ced31…` are **not** merge-boundary events for M25 product unless explicitly recorded in §23 / §18.

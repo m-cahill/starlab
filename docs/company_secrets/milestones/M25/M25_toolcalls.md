@@ -8,3 +8,4 @@
 * **Authoritative PR-head CI (merge gate):** [`24215322933`](https://github.com/m-cahill/starlab/actions/runs/24215322933) — success — final PR head `b132bfd…`
 * **Merge-boundary `main` CI:** [`24215360351`](https://github.com/m-cahill/starlab/actions/runs/24215360351) — success — merge commit `f03c7bf…`
 * **Superseded (not merge authority):** [`24215241322`](https://github.com/m-cahill/starlab/actions/runs/24215241322), [`24215286216`](https://github.com/m-cahill/starlab/actions/runs/24215286216)
+* **Non-merge-boundary `main` CI (closeout):** [`24215484700`](https://github.com/m-cahill/starlab/actions/runs/24215484700) — success — closeout commit `78ced31…` — milestone docs + governance only; **not** M25 product merge authority

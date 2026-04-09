@@ -1247,9 +1247,17 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 | ----- | ------------ | ---------- | --- |
 | `main` after M25 merge (`f03c7bf…`) | `24215360351` | success | https://github.com/m-cahill/starlab/actions/runs/24215360351 |
 
+**M25 CI evidence (post-merge `main` — non-merge-boundary closeout)**
+
+| Event | Workflow run | Conclusion | URL |
+| ----- | ------------ | ---------- | --- |
+| `main` after M25 closeout (`78ced31…`) | `24215484700` | success | https://github.com/m-cahill/starlab/actions/runs/24215484700 |
+
+Milestone docs + ledger + governance tests + **M26** stubs only — **not** substitute merge authority for M25 **product** (**authoritative** remains PR-head [`24215322933`](https://github.com/m-cahill/starlab/actions/runs/24215322933) + merge-boundary [`24215360351`](https://github.com/m-cahill/starlab/actions/runs/24215360351)).
+
 **Superseded red PR-head (not merge authority):** [`24215241322`](https://github.com/m-cahill/starlab/actions/runs/24215241322), [`24215286216`](https://github.com/m-cahill/starlab/actions/runs/24215286216) — see `M25_run1.md`.
 
-*Closeout / ledger documentation pushes after this row may produce additional green `main` runs; distinguish them in §23 — **not** merge-boundary unless the event is a PR merge.*
+*Further documentation-only pushes to `main` after this row may produce additional green CI runs; distinguish them in §23 — **not** merge-boundary events unless they record a new PR merge. Prefer **at most one** post-merge doc-only churn per closeout hygiene.*
 
 **M25 milestone artifacts:** `docs/company_secrets/milestones/M25/` (`M25_plan.md`, `M25_toolcalls.md`, `M25_run1.md`, `M25_summary.md`, `M25_audit.md`, etc.)
 
@@ -1391,6 +1399,7 @@ It should always answer, with minimal ambiguity:
 - Product: `docs/runtime/baseline_evidence_pack_v1.md`, `starlab/evaluation/evidence_pack_models.py`, `evidence_pack_views.py`, `emit_baseline_evidence_pack.py`, `tests/fixtures/m25/`, `tests/test_baseline_evidence_pack.py` (includes **M20 → M21/M22 → M23 → M24 → M25** chain test); **448** pytest on authoritative PR-head CI [`24215322933`](https://github.com/m-cahill/starlab/actions/runs/24215322933) (one pre-existing `s2protocol` deprecation warning in replay CLI test — not M25). **449** pytest on full `main` after this closeout commit (milestone docs + governance tests) — **not** additional product merge authority for M25
 - §3 / §6 / §7 / §9 / §11 / §18 / §23: **governed baseline evidence pack** (narrow) **proved on `main`**; Phase IV chain through **M25**; **current milestone** → **M26** (stub); evidence-pack glossary; M25 merge rows in §18
 - Milestone closeout: `M25_run1.md`, `M25_summary.md`, `M25_audit.md`, `M25_plan.md` (**Complete**), `M25_toolcalls.md`; **M26** stubs (`M26_plan.md`, `M26_toolcalls.md`) — **no** M26 product code
+- **Non-merge-boundary** `main` CI — closeout commit `78ced31526e4370e43d4ddbf8887ac827853e55d` (short `78ced31…`): [`24215484700`](https://github.com/m-cahill/starlab/actions/runs/24215484700) (**success**) — milestone docs + ledger + governance tests only; **authoritative** M25 **product** merge evidence remains PR-head [`24215322933`](https://github.com/m-cahill/starlab/actions/runs/24215322933) + merge-boundary [`24215360351`](https://github.com/m-cahill/starlab/actions/runs/24215360351)
 
 ### 2026-04-09 — M24 merged to `main` (PR #27) + milestone closeout
 
