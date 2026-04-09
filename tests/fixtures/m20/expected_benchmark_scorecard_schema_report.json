@@ -1,0 +1,49 @@
+{
+  "contract": "starlab.benchmark_scorecard.v1",
+  "deterministic_key_order_scorecard_instance": [
+    "aggregate_scores",
+    "benchmark_contract_sha256",
+    "benchmark_id",
+    "benchmark_version",
+    "comparability_status",
+    "evaluation_posture",
+    "gating_outcomes",
+    "metric_rows",
+    "non_claims",
+    "schema_version",
+    "scoring_status",
+    "subject_ref",
+    "warnings"
+  ],
+  "example_fixture_hashes": {
+    "invalid_benchmark_scorecard": "54a1238b7240e16c0c8c86f794a44a0d23b28c470b02ef8890116b9eca8ff841",
+    "valid_benchmark_scorecard": "bc9f0496e661a527bb80a931a013fc65ddebfe0679b5a4bed55f188b5e75c03b"
+  },
+  "non_claims": [
+    "starlab.m20.benchmark_scorecard_non_claim.not_benchmark_integrity",
+    "starlab.m20.benchmark_scorecard_non_claim.not_replay_execution_equivalence",
+    "starlab.m20.benchmark_scorecard_non_claim.schema_only_not_run_truth"
+  ],
+  "profile": "starlab.benchmark_scorecard.m20.v1",
+  "schema_id": "starlab.benchmark_scorecard.m20.v1.schema.json",
+  "schema_sha256": "cc0ed4ad6f9cb77ae3928b41c608f5fd761567e2601bbf74a490dce6e3208861",
+  "vocabularies": {
+    "comparability_status": [
+      "comparable",
+      "provisional",
+      "non_comparable"
+    ],
+    "evaluation_posture": [
+      "contract_only",
+      "fixture_only",
+      "replay_backed",
+      "runtime_backed",
+      "hybrid"
+    ],
+    "scoring_status": [
+      "scored",
+      "unscored",
+      "disqualified"
+    ]
+  }
+}

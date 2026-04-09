@@ -1,0 +1,210 @@
+{
+  "$id": "starlab.benchmark_contract.m20.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One benchmark definition document. Schema + validation only; does not assert benchmark integrity or replay equivalence.",
+  "properties": {
+    "aggregation_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "policy_kind": {
+          "enum": [
+            "weighted_sum",
+            "min",
+            "max",
+            "lexicographic"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "policy_kind"
+      ],
+      "type": "object"
+    },
+    "benchmark_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "benchmark_name": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "benchmark_version": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "gating_rules": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "description": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "rule_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "severity": {
+            "enum": [
+              "hard",
+              "soft"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule_id",
+          "description",
+          "severity"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "input_requirements": {
+      "additionalProperties": false,
+      "properties": {
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "required_inputs": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "required_inputs"
+      ],
+      "type": "object"
+    },
+    "measurement_surface": {
+      "enum": [
+        "fixture_only",
+        "replay_only",
+        "runtime_execution",
+        "hybrid"
+      ],
+      "type": "string"
+    },
+    "metric_definitions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "aggregation_method": {
+            "enum": [
+              "sum",
+              "mean",
+              "min",
+              "max",
+              "weighted_mean",
+              "last"
+            ],
+            "type": "string"
+          },
+          "display_name": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "metric_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "optimization_direction": {
+            "enum": [
+              "minimize",
+              "maximize",
+              "none"
+            ],
+            "type": "string"
+          },
+          "scoring_role": {
+            "enum": [
+              "primary",
+              "secondary",
+              "diagnostic",
+              "informational"
+            ],
+            "type": "string"
+          },
+          "unit": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "metric_id",
+          "display_name",
+          "unit",
+          "optimization_direction",
+          "aggregation_method",
+          "scoring_role"
+        ],
+        "type": "object"
+      },
+      "minItems": 1,
+      "type": "array"
+    },
+    "non_claims": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "starlab.benchmark_contract.v1",
+      "type": "string"
+    },
+    "scorecard_schema_ref": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "subject_kinds_allowed": {
+      "items": {
+        "enum": [
+          "scripted",
+          "heuristic",
+          "imitation",
+          "hierarchical",
+          "rl",
+          "human_replay"
+        ],
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "benchmark_id",
+    "benchmark_version",
+    "benchmark_name",
+    "subject_kinds_allowed",
+    "measurement_surface",
+    "input_requirements",
+    "metric_definitions",
+    "gating_rules",
+    "aggregation_policy",
+    "scorecard_schema_ref",
+    "non_claims"
+  ],
+  "title": "STARLAB benchmark contract v1 (M20 profile)",
+  "type": "object"
+}
