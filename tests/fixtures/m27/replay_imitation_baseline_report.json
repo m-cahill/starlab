@@ -1,0 +1,52 @@
+{
+  "agreement_by_split": {
+    "test": {
+      "agreement_count": 0,
+      "example_count": 1,
+      "rate": 0.0
+    },
+    "train": {
+      "agreement_count": 7,
+      "example_count": 8,
+      "rate": 0.875
+    },
+    "validation": {
+      "agreement_count": 1,
+      "example_count": 2,
+      "rate": 0.5
+    }
+  },
+  "baseline_sha256": "2a455b3b2d347b66f5d339e586a4cf2998cece2e3a368847c0ecdba8d9cb1ea5",
+  "fallback_counts_by_split": {
+    "test": 1,
+    "validation": 1
+  },
+  "fallback_label": "other",
+  "label_counts": {
+    "other": 4,
+    "production_structure": 4,
+    "production_unit": 3
+  },
+  "non_claims": [
+    "benchmark_integrity",
+    "hierarchical_control",
+    "imitation_quality_beyond_internal_smoke",
+    "leaderboard_validity",
+    "learned_agent_evaluation_harness_m28",
+    "live_sc2_execution",
+    "m29_plus_work",
+    "raw_replay_parser_execution_in_m27_modules",
+    "replay_execution_equivalence"
+  ],
+  "report_version": "starlab.replay_imitation_baseline_report.v1",
+  "signature_count": 6,
+  "test_example_count": 1,
+  "training_example_count": 8,
+  "validation_example_count": 2,
+  "warnings": [
+    "intake_provenance_absent",
+    "metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both).",
+    "upstream canonical_state_report: metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both).",
+    "visibility.proxy_level: no M16 visibility_context.visibility_proxy_level; using null (proxy-bounded posture; not fog-of-war truth)."
+  ]
+}

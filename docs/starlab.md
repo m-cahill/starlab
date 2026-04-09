@@ -13,7 +13,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract), `docs/runtime/replay_combat_scouting_visibility_extraction.md` (M12 combat / scouting / visibility contract), and `docs/runtime/replay_slice_generation.md` (M13 replay slice definitions contract), and `docs/runtime/replay_bundle_lineage_contract.md` (M14 replay bundle / lineage packaging contract), and `docs/runtime/canonical_state_schema_v1.md` (M15 canonical state schema contract), and `docs/runtime/canonical_state_pipeline_v1.md` (M16 canonical state pipeline contract), and `docs/runtime/observation_surface_contract_v1.md` (M17 observation surface contract), and `docs/runtime/perceptual_bridge_prototype_v1.md` (M18 perceptual bridge prototype contract), and `docs/runtime/observation_reconciliation_audit_v1.md` (M19 cross-mode reconciliation audit contract), and `docs/runtime/benchmark_contract_scorecard_v1.md` (M20 benchmark contract + scorecard contract), and `docs/runtime/scripted_baseline_suite_v1.md` (M21 scripted baseline suite contract), and `docs/runtime/heuristic_baseline_suite_v1.md` (M22 heuristic baseline suite contract), and `docs/runtime/evaluation_runner_tournament_harness_v1.md` (M23 evaluation runner + tournament harness contract), and `docs/runtime/evaluation_diagnostics_failure_views_v1.md` (M24 evaluation diagnostics + failure views contract), and `docs/runtime/baseline_evidence_pack_v1.md` (M25 baseline evidence pack contract), and `docs/runtime/replay_training_dataset_v1.md` (M26 replay training dataset contract).  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract), `docs/runtime/replay_combat_scouting_visibility_extraction.md` (M12 combat / scouting / visibility contract), and `docs/runtime/replay_slice_generation.md` (M13 replay slice definitions contract), and `docs/runtime/replay_bundle_lineage_contract.md` (M14 replay bundle / lineage packaging contract), and `docs/runtime/canonical_state_schema_v1.md` (M15 canonical state schema contract), and `docs/runtime/canonical_state_pipeline_v1.md` (M16 canonical state pipeline contract), and `docs/runtime/observation_surface_contract_v1.md` (M17 observation surface contract), and `docs/runtime/perceptual_bridge_prototype_v1.md` (M18 perceptual bridge prototype contract), and `docs/runtime/observation_reconciliation_audit_v1.md` (M19 cross-mode reconciliation audit contract), and `docs/runtime/benchmark_contract_scorecard_v1.md` (M20 benchmark contract + scorecard contract), and `docs/runtime/scripted_baseline_suite_v1.md` (M21 scripted baseline suite contract), and `docs/runtime/heuristic_baseline_suite_v1.md` (M22 heuristic baseline suite contract), and `docs/runtime/evaluation_runner_tournament_harness_v1.md` (M23 evaluation runner + tournament harness contract), and `docs/runtime/evaluation_diagnostics_failure_views_v1.md` (M24 evaluation diagnostics + failure views contract), and `docs/runtime/baseline_evidence_pack_v1.md` (M25 baseline evidence pack contract), and `docs/runtime/replay_training_dataset_v1.md` (M26 replay training dataset contract), and `docs/runtime/replay_imitation_baseline_v1.md` (M27 replay imitation baseline contract).  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -153,6 +153,7 @@ Focus:
 | Milestone | Primary artifact(s) | Binds to / upstream | Included vs external (Phase V boundary) | Explicitly **not** proved here |
 | --------- | -------------------- | --------------------- | ---------------------------------------- | ------------------------------ |
 | M26 | `replay_training_dataset.json`, `replay_training_dataset_report.json` | One or more governed **M14** bundle directories (`replay_bundle_manifest.json` / `replay_bundle_lineage.json` / `replay_bundle_contents.json` + M09–M13 primary JSON); optional per-bundle M07 `replay_intake_receipt.json` | STARLAB JSON only; **no** `starlab.sc2`, **no** `s2protocol`, **no** raw replay bytes, **no** replay parser execution in M26 `starlab/imitation/` modules | Model training, **M27** imitation baseline, benchmark integrity, replay↔execution equivalence, live SC2 in CI |
+| M27 | `replay_imitation_baseline.json`, `replay_imitation_baseline_report.json` | One governed **M26** `replay_training_dataset.json` + referenced governed **M14** bundle directories; observation materialization via **M16 → M18** in-process pipelines only | STARLAB JSON; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M27 baseline modules under `starlab/imitation/`; **no** shell-out to `emit_canonical_state` / `emit_observation_surface` in M27 product code | Benchmark integrity, leaderboard validity, live SC2 in CI, **M28** learned-agent evaluation harness, hierarchical control, replay↔execution equivalence, imitation quality beyond internal smoke metrics |
 
 **Phase II slice / bundle boundary (M13 vs M14):** an M13 **slice** is a **metadata-defined temporal span** over already-governed JSON (addressable `[start_gameloop, end_gameloop]` with lineage). **M14** is where **bundle packaging** and **lineage contract v1** for replay bundles belong — not M13. M13 does not ship clipped replay bytes or M14-style bundles.
 
@@ -236,7 +237,7 @@ Planned program arc (35 milestones, M00–M34):
 | M24 | Attribution, Diagnostics, and Failure Views | IV | Complete | v0.0.24-m24 | — |
 | M25 | Baseline Evidence Pack | IV | Complete | v0.0.25-m25 | — |
 | M26 | Replay Corpus Governance & Training Dataset Contract | V | Complete | v0.0.26-m26 | — |
-| M27 | Replay-Derived Imitation Baseline | V | Planned | v0.0.27-m27 | — |
+| M27 | Replay-Derived Imitation Baseline | V | In progress | v0.0.27-m27 | — |
 | M28 | Learned-Agent Evaluation Harness | V | Planned | v0.0.28-m28 | — |
 | M29 | Hierarchical Agent Interface Layer | V | Planned | v0.0.29-m29 | — |
 | M30 | First Learned Hierarchical Agent | V | Planned | v0.0.30-m30 | — |
@@ -485,6 +486,7 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | Evaluation diagnostics + failure views (fixture-only) | M24 | **On `main`** — narrow diagnostics + report over governed **M23** tournament JSON (**green PR-head** [`24213046380`](https://github.com/m-cahill/starlab/actions/runs/24213046380) on `5caf1fb…`; **green merge-push `main`** [`24213094531`](https://github.com/m-cahill/starlab/actions/runs/24213094531) on `7b4d3b4…`; see §18 / `M24_run1.md`); **not** baseline evidence pack (**M25** by itself), **M26** replay training dataset contract, **M27** imitation baseline, benchmark integrity, or replay↔execution equivalence |
 | Baseline evidence pack (Phase IV packaging) | M25 | **On `main`** — narrow packaging over **M21/M22 + M23 + M24** (**green PR-head** [`24215322933`](https://github.com/m-cahill/starlab/actions/runs/24215322933) on `b132bfd…`; **green merge-push `main`** [`24215360351`](https://github.com/m-cahill/starlab/actions/runs/24215360351) on `f03c7bf…`; see §18 / `M25_run1.md`); **not** benchmark integrity or replay↔execution equivalence |
 | Replay training dataset (Phase V; M14 bundles) | M26 | **On `main`** — narrow dataset + report over governed **M14** bundles (**green PR-head** [`24217118559`](https://github.com/m-cahill/starlab/actions/runs/24217118559) on `d8d3c4c…`; **green merge-push `main`** [`24217178208`](https://github.com/m-cahill/starlab/actions/runs/24217178208) on `e83a849…`; see §18 / `M26_run1.md`); **not** model training, benchmark integrity, **M27** imitation baseline, or replay↔execution equivalence |
+| Replay imitation baseline (Phase V; M26 + M14) | M27 | **In progress** — narrow `replay_imitation_baseline.json` + `replay_imitation_baseline_report.json` over governed **M26** dataset + **M14** bundles via **M16 → M18** materialization; runtime contract `docs/runtime/replay_imitation_baseline_v1.md`, modules + CLI under `starlab/imitation/`; **not** benchmark integrity, **not** **M28** learned-agent evaluation harness, **not** hierarchical control, **not** live SC2 in CI, **not** replay parser execution in M27 imitation modules |
 
 ### Slice vs bundle glossary (M13–M14)
 
@@ -567,6 +569,15 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | **Source artifact identity** | Benchmark + suite + tournament + diagnostics fields and hashes used to bind the chain (**M25** adds **`tournament_sha256`** / **`diagnostics_sha256`** as packaging identity; does **not** change **M24**’s governed inputs). |
 | **Pack non-claims** | Explicit **`non_claims[]`** on the pack — benchmark integrity, new semantics, live SC2, replay execution, **M26**/**M27** learning work, etc. |
 
+### Phase V imitation baseline glossary (M27)
+
+| Term | Meaning |
+| ---- | ------- |
+| **Imitation baseline** | Deterministic trained artifact (`replay_imitation_baseline.json` + report) over governed **M26** examples — **narrow** majority model, not a benchmark claim. |
+| **Context signature** | Bounded, bucketed projection from governed **M18** observation + **M16** canonical state fields (`starlab.m27.feature.observation_signature_v1`). |
+| **Fallback label** | Global majority label over **training** split when a signature was unseen during training (lexicographic tie-break). |
+| **Internal split-agreement smoke metric** | `agreement_by_split` in `replay_imitation_baseline_report.json` — **diagnostic fit only**, not leaderboard or benchmark integrity. |
+
 ### Phase III progression (compact)
 
 | Milestone | What it proves (Phase III) |
@@ -590,11 +601,13 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 
 ### Phase V progression (compact)
 
+**Phase V bridge (compact):** dataset contract → trained imitation baseline → learned-agent evaluation → hierarchy → evidence surface → flagship proof.
+
 | Milestone | What it proves (Phase V) |
 | --------- | ------------------------ |
 | **M26** | **Replay corpus governance + training dataset contract** — deterministic `replay_training_dataset.json` / `replay_training_dataset_report.json` from governed **M14** bundle directories (dataset contract only; **not** model training) (**proved** on `main`; see §18 / [PR #32](https://github.com/m-cahill/starlab/pull/32)). |
-| **M27** | **Replay-derived imitation baseline** (planned). |
-| **M28** | **Learned-agent evaluation harness** (planned). |
+| **M27** | **Replay-derived imitation baseline (narrow, trained artifact)** — deterministic `replay_imitation_baseline.json` / `replay_imitation_baseline_report.json` from governed **M26** + **M14** (majority-label-per-context-signature; explicit non-claims; **not** benchmark integrity, **not** **M28** harness). |
+| **M28** | **Learned-agent evaluation harness** (planned; **stub-only** until chartered). |
 | **M29** | **Hierarchical agent interface layer** (planned). |
 | **M30** | **First learned hierarchical agent** (planned). |
 | **M31** | **Replay explorer / operator evidence surface** (planned). |
@@ -673,22 +686,21 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ### M27 — Replay-Derived Imitation Baseline
 
-**Status:** **Planned** — **current** milestone (stub only); **M26** is **closed** on `main` (see §18 / `M26_run1.md`; `M26_plan.md` **Complete**).
+**Status:** **Current** milestone — **M26** is **closed** on `main` (see §18 / `M26_run1.md`; `M26_plan.md` **Complete**). **M27** delivers the **first narrow, replay-derived, trained imitation baseline artifact** (`replay_imitation_baseline.json` / `replay_imitation_baseline_report.json`) over governed **M26** + **M14** with explicit non-claims; **M28** remains **stub-only** (learned-agent evaluation harness — not started in product code).
 
-**Goal (high level):** **M27** will prove a **replay-derived imitation baseline** under explicit non-claims — **not** started in this ledger revision (no M27 product code on `main`).
+**Goal (high level):** Prove a **deterministic, offline, replay-derived imitation baseline** using **M16 → M18** materialization only (no replay parser execution in M27 `starlab/imitation/` modules; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` imports there). **Not** benchmark integrity, **not** **M28** evaluation harness, **not** hierarchical control.
 
-**Primary references:** `docs/company_secrets/milestones/M27/M27_plan.md` (stub); `docs/starlab.md` §6 Phase V boundary.
+**Primary references:** `docs/runtime/replay_imitation_baseline_v1.md`; `docs/company_secrets/milestones/M27/M27_plan.md`; `docs/starlab.md` §6 Phase V boundary.
 
-**Note:** **M20–M25** established **contract/suites → tournament → diagnostics → evidence pack** under explicit **fixture-only** non-claims. **M26** established the **replay training dataset contract** over governed **M14** bundles — **not** model training, **not** imitation quality, **not** benchmark integrity.
+**Note:** **M20–M25** established **contract/suites → tournament → diagnostics → evidence pack** under explicit **fixture-only** non-claims. **M26** established the **replay training dataset contract** over governed **M14** bundles — **not** model training by itself. **M27** adds the **first trained artifact** in that chain (still bounded; see Phase V glossary).
 
 #### Current milestone — explicit non-claims (standing)
 
-Until **M27** explicitly closes its chartered scope, treat the following as **not proved**:
+Until **M27** explicitly closes its chartered scope on `main`, treat the following as **not proved** beyond the narrow M27 artifact:
 
 - **Benchmark integrity** / leaderboard claims (**not** a default proof).
 - **New live SC2 execution proof in CI** (CI remains **fixture-driven** unless a milestone explicitly changes that posture).
-- **Replay-derived imitation baseline** product claims (**M27** — stub only).
-- **Learned-agent evaluation harness** (**M28** — not started).
+- **Learned-agent evaluation harness** (**M28** — **stub-only**; no M28 product code in **M27**).
 
 ---
 
