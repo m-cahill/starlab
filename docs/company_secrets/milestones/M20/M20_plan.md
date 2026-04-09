@@ -3,7 +3,7 @@
 **Milestone:** M20  
 **Phase:** IV — Benchmark Contracts, Baselines, and Evaluation  
 **Recommended branch:** `m20-benchmark-contract-scorecard-semantics`  
-**Status:** Implementation aligned with this plan (pending merge / closeout).
+**Status:** **Closed** — merged to `main` via [PR #21](https://github.com/m-cahill/starlab/pull/21) (2026-04-09). See `M20_run1.md`, `M20_summary.md`, `M20_audit.md`.
 
 ## Intent
 
