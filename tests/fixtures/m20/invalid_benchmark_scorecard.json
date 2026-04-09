@@ -1,0 +1,20 @@
+{
+  "aggregate_scores": [],
+  "benchmark_contract_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "benchmark_id": "bad",
+  "benchmark_version": "0.0.0",
+  "comparability_status": "provisional",
+  "evaluation_posture": "contract_only",
+  "gating_outcomes": [],
+  "metric_rows": [],
+  "non_claims": [
+    "starlab.m20.scorecard_non_claim.not_real_evaluation"
+  ],
+  "schema_version": "starlab.benchmark_scorecard.v1",
+  "scoring_status": "not_a_valid_status",
+  "subject_ref": {
+    "subject_id": "x",
+    "subject_kind": "scripted"
+  },
+  "warnings": []
+}

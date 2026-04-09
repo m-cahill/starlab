@@ -33,6 +33,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/observation_surface_contract_v1.md",
     "docs/runtime/perceptual_bridge_prototype_v1.md",
     "docs/runtime/observation_reconciliation_audit_v1.md",
+    "docs/runtime/benchmark_contract_scorecard_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -109,11 +110,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m20() -> None:
+def test_current_milestone_is_m21() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M20" in section
-    assert "Benchmark" in section
+    assert "M21" in section
+    assert "Scripted" in section or "Baseline" in section
 
 
 def test_m18_complete_in_milestone_table() -> None:
@@ -476,10 +477,16 @@ def test_m19_milestone_files_exist() -> None:
     assert (m19 / "M19_audit.md").is_file()
 
 
-def test_m20_stub_milestone_files_exist() -> None:
+def test_m20_milestone_files_exist() -> None:
     m20 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M20"
     assert (m20 / "M20_plan.md").is_file()
     assert (m20 / "M20_toolcalls.md").is_file()
+
+
+def test_m21_stub_milestone_files_exist() -> None:
+    m21 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M21"
+    assert (m21 / "M21_plan.md").is_file()
+    assert (m21 / "M21_toolcalls.md").is_file()
 
 
 def test_m16_complete_in_milestone_table() -> None:
@@ -601,6 +608,34 @@ def test_m19_complete_in_milestone_table() -> None:
             assert "Complete" in stripped
             return
     raise AssertionError("M19 milestone row not found or not complete")
+
+
+def test_m20_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M20 |") and "Benchmark Contract" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M20 milestone row not found or not complete")
+
+
+def test_m20_benchmark_modules_exist() -> None:
+    bp = REPO_ROOT / "starlab" / "benchmarks"
+    for name in (
+        "benchmark_contract_models.py",
+        "benchmark_contract_schema.py",
+        "benchmark_scorecard_schema.py",
+        "emit_benchmark_contracts.py",
+    ):
+        assert (bp / name).is_file()
+
+
+def test_m20_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m20"
+    assert fx.is_dir()
+    assert (fx / "valid_benchmark_contract.json").is_file()
+    assert (fx / "valid_benchmark_scorecard.json").is_file()
+    assert (fx / "expected_benchmark_contract_schema.json").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:

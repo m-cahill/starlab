@@ -1,0 +1,189 @@
+{
+  "$id": "starlab.benchmark_scorecard.m20.v1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "One benchmark result / scorecard surface. Schema + validation only; does not assert benchmark integrity, comparability truth, or run validity.",
+  "properties": {
+    "aggregate_scores": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "aggregate_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "unit": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "aggregate_id",
+          "value",
+          "unit"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "benchmark_contract_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "benchmark_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "benchmark_version": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "comparability_status": {
+      "enum": [
+        "comparable",
+        "provisional",
+        "non_comparable"
+      ],
+      "type": "string"
+    },
+    "evaluation_posture": {
+      "enum": [
+        "contract_only",
+        "fixture_only",
+        "replay_backed",
+        "runtime_backed",
+        "hybrid"
+      ],
+      "type": "string"
+    },
+    "gating_outcomes": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "detail": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "rule_id": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "rule_id",
+          "passed"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "metric_rows": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "metric_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "unit": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "metric_id",
+          "value",
+          "unit"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "non_claims": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "schema_version": {
+      "const": "starlab.benchmark_scorecard.v1",
+      "type": "string"
+    },
+    "scoring_status": {
+      "enum": [
+        "scored",
+        "unscored",
+        "disqualified"
+      ],
+      "type": "string"
+    },
+    "subject_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "subject_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "subject_kind": {
+          "enum": [
+            "scripted",
+            "heuristic",
+            "imitation",
+            "hierarchical",
+            "rl",
+            "human_replay"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject_kind",
+        "subject_id"
+      ],
+      "type": "object"
+    },
+    "warnings": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "benchmark_id",
+    "benchmark_version",
+    "benchmark_contract_sha256",
+    "subject_ref",
+    "evaluation_posture",
+    "scoring_status",
+    "comparability_status",
+    "metric_rows",
+    "aggregate_scores",
+    "gating_outcomes",
+    "warnings",
+    "non_claims"
+  ],
+  "title": "STARLAB benchmark scorecard v1 (M20 profile)",
+  "type": "object"
+}

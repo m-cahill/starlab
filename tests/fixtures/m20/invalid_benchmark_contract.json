@@ -1,0 +1,31 @@
+{
+  "aggregation_policy": {
+    "policy_kind": "weighted_sum"
+  },
+  "benchmark_id": "invalid",
+  "benchmark_name": "Invalid benchmark",
+  "benchmark_version": "0.0.0",
+  "gating_rules": [],
+  "input_requirements": {
+    "required_inputs": []
+  },
+  "measurement_surface": "not_a_valid_surface",
+  "metric_definitions": [
+    {
+      "aggregation_method": "sum",
+      "display_name": "x",
+      "metric_id": "m1",
+      "optimization_direction": "maximize",
+      "scoring_role": "primary",
+      "unit": "count"
+    }
+  ],
+  "non_claims": [
+    "starlab.m20.benchmark_non_claim.not_benchmark_integrity"
+  ],
+  "schema_version": "starlab.benchmark_contract.v1",
+  "scorecard_schema_ref": "starlab.benchmark_scorecard.m20.v1.schema.json",
+  "subject_kinds_allowed": [
+    "scripted"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "contract": "starlab.benchmark_contract.v1",
+  "deterministic_key_order_benchmark_instance": [
+    "aggregation_policy",
+    "benchmark_id",
+    "benchmark_name",
+    "benchmark_version",
+    "gating_rules",
+    "input_requirements",
+    "measurement_surface",
+    "metric_definitions",
+    "non_claims",
+    "schema_version",
+    "scorecard_schema_ref",
+    "subject_kinds_allowed"
+  ],
+  "example_fixture_hashes": {
+    "invalid_benchmark_contract": "991a1a0317181ec7fe328f2d24a8a7b8726580def5847661cd4aa4022f481f8a",
+    "valid_benchmark_contract": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661"
+  },
+  "non_claims": [
+    "starlab.m20.benchmark_contract_non_claim.not_benchmark_integrity",
+    "starlab.m20.benchmark_contract_non_claim.not_replay_execution_equivalence",
+    "starlab.m20.benchmark_contract_non_claim.not_baseline_performance"
+  ],
+  "profile": "starlab.benchmark_contract.m20.v1",
+  "schema_id": "starlab.benchmark_contract.m20.v1.schema.json",
+  "schema_sha256": "d2690381cfaf053af50cd396f71d79b6c089a198122356ec0c2d19a287812de9",
+  "vocabularies": {
+    "comparability_status": [
+      "comparable",
+      "provisional",
+      "non_comparable"
+    ],
+    "evaluation_posture": [
+      "contract_only",
+      "fixture_only",
+      "replay_backed",
+      "runtime_backed",
+      "hybrid"
+    ],
+    "measurement_surface": [
+      "fixture_only",
+      "replay_only",
+      "runtime_execution",
+      "hybrid"
+    ],
+    "scoring_status": [
+      "scored",
+      "unscored",
+      "disqualified"
+    ],
+    "subject_kinds_allowed": [
+      "scripted",
+      "heuristic",
+      "imitation",
+      "hierarchical",
+      "rl",
+      "human_replay"
+    ]
+  }
+}
