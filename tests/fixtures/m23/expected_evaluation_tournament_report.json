@@ -1,0 +1,19 @@
+{
+  "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+  "entrant_count": 4,
+  "failures": [],
+  "match_count": 6,
+  "non_claims": [
+    "starlab.m23.tournament_non_claim.not_attribution_diagnostics",
+    "starlab.m23.tournament_non_claim.not_benchmark_integrity",
+    "starlab.m23.tournament_non_claim.not_evidence_pack",
+    "starlab.m23.tournament_non_claim.not_leaderboard_validity",
+    "starlab.m23.tournament_non_claim.not_replay_execution_equivalence"
+  ],
+  "report_version": "starlab.evaluation_tournament_report.v1",
+  "suite_count": 2,
+  "tournament_verdict": "pass",
+  "warnings": [
+    "starlab.m23.warning.fixture_only_tournament_harness"
+  ]
+}

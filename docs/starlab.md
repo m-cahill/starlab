@@ -1,6 +1,8 @@
 # STARLAB — Canonical Project Ledger
 
 **Status:** Active — M00–**M22** merged to `main` ([PR #1](https://github.com/m-cahill/starlab/pull/1) through [PR #23](https://github.com/m-cahill/starlab/pull/23)). **M10** merge commit `cb3e581f70f85653477081eb1ef4772229f05983` — merge-push `main` CI [`24104111851`](https://github.com/m-cahill/starlab/actions/runs/24104111851) (**failure** — Mypy); **authoritative green `main`** after M10 repair (`cf2074e10ec8a38b22bd7b75ffeb4ec22a71485b`): [`24104197912`](https://github.com/m-cahill/starlab/actions/runs/24104197912) (**success**). **M09** merge commit `fc9b442d66abe9a2922e93051c7d0a22ccb133d1` — authoritative post-merge `main` CI on merge push [`24101900950`](https://github.com/m-cahill/starlab/actions/runs/24101900950) (**success**). **M08** merge commit `b99233e807177d65737beaba5246efa67a3edce2` — authoritative post-merge `main` CI [`24070602968`](https://github.com/m-cahill/starlab/actions/runs/24070602968) (**success**). **M07** merge commit `1c7bb0c0381c0f3c8a3eab354ca53e3e503d8d2a` — authoritative post-merge `main` CI on merge push [`24066550699`](https://github.com/m-cahill/starlab/actions/runs/24066550699) (**success**). **M06** merge commit `4953d7a5bbe0713ba82e03ea8f89da49a2f4147a` — post-merge `main` CI on merge push [`24064229874`](https://github.com/m-cahill/starlab/actions/runs/24064229874) (**success**). **M05** merge commit `bad27db36c135fd772e38dcafa64d6fa59577db0` — post-merge `main` CI [`24062610358`](https://github.com/m-cahill/starlab/actions/runs/24062610358) (**success**). **M05** closeout / ledger push on `main` (`6edeb8af845d9cbfaed5c329c1c9a3398acac9dd`): CI [`24062664914`](https://github.com/m-cahill/starlab/actions/runs/24062664914) (**success**). Follow-up ledger cross-reference (`ebca1e964c0539c78165bfab72c249a2157402cc`): CI [`24062700534`](https://github.com/m-cahill/starlab/actions/runs/24062700534) (**success**) — **not** merge-boundary events. **Replay intake / provenance enforcement** (narrow, M07), **governed replay parser substrate** (narrow, M08 — deterministic parse artifacts; `s2protocol` isolated), **stable normalized replay metadata** (narrow, M09 — pure extraction over M08 artifacts), and **governed event/timeline extraction** (narrow, M10 — deterministic timeline artifacts; optional `raw_event_streams` on `replay_raw_parse.json` v2) are **proved on `main`** (M10 merge-push CI failed Mypy; **green `main`** restored on repair commit — see §18). **Governed build-order / economy plane** (narrow, M11 — `replay_build_order_economy.json` / `replay_build_order_economy_report.json`; [PR #12](https://github.com/m-cahill/starlab/pull/12) merge commit `38c15302badd49966b17f9195ddb139f6ae9a9b4`; **authoritative green PR-head CI** [`24106029320`](https://github.com/m-cahill/starlab/actions/runs/24106029320) (**success**); **merge-boundary post-merge `main` CI** [`24106124347`](https://github.com/m-cahill/starlab/actions/runs/24106124347) (**success**)) is **proved on `main`**. **Governed combat / scouting / visibility windows** (narrow, M12 — `replay_combat_scouting_visibility.json` / `replay_combat_scouting_visibility_report.json`; [PR #13](https://github.com/m-cahill/starlab/pull/13) merge commit `78528958a616177b564e603c193fb0d7f8af734e`; **authoritative green PR-head CI** [`24109242392`](https://github.com/m-cahill/starlab/actions/runs/24109242392) (**success**); **merge-boundary post-merge `main` CI** [`24109269513`](https://github.com/m-cahill/starlab/actions/runs/24109269513) (**success**)) is **proved on `main`**. **Governed replay slice definitions** (narrow, M13 — `replay_slices.json` / `replay_slices_report.json`; [PR #14](https://github.com/m-cahill/starlab/pull/14) merge commit `f86e36837e81b8552639c5a885a13a773b96215c`; **authoritative green PR-head CI** [`24112526047`](https://github.com/m-cahill/starlab/actions/runs/24112526047) (**success**); **merge-boundary post-merge `main` CI** [`24112556177`](https://github.com/m-cahill/starlab/actions/runs/24112556177) (**success**)) is **proved on `main`**. **Governed replay bundle & lineage contract** (narrow, M14 — `replay_bundle_manifest.json` / `replay_bundle_lineage.json` / `replay_bundle_contents.json`; [PR #15](https://github.com/m-cahill/starlab/pull/15) merge commit `8a0439a9a2970a74f3a5087390fc080f02852246`; **authoritative green PR-head CI** [`24118622373`](https://github.com/m-cahill/starlab/actions/runs/24118622373) (**success**); **merge-boundary post-merge `main` CI** [`24118654909`](https://github.com/m-cahill/starlab/actions/runs/24118654909) (**success**)) is **proved on `main`**. **Governed canonical state schema v1** (narrow, M15 — `canonical_state_schema.json` / `canonical_state_schema_report.json`; [PR #16](https://github.com/m-cahill/starlab/pull/16) merge commit `b0f7132a54508f35d54406011cd3b37bce776927`; **authoritative green PR-head CI** [`24122064141`](https://github.com/m-cahill/starlab/actions/runs/24122064141) (**success**); **merge-boundary post-merge `main` CI** [`24122092800`](https://github.com/m-cahill/starlab/actions/runs/24122092800) (**success**)) is **proved on `main`**. **Governed structured state pipeline** (narrow, M16 — `canonical_state.json` / `canonical_state_report.json` from M14 bundles; [PR #17](https://github.com/m-cahill/starlab/pull/17) merge commit `dd9546f88ebcf9b454498eec83a14d742d17d070`; **authoritative green PR-head CI** [`24160830775`](https://github.com/m-cahill/starlab/actions/runs/24160830775) (**success**); **merge-boundary post-merge `main` CI** [`24160871811`](https://github.com/m-cahill/starlab/actions/runs/24160871811) (**success**)) is **proved on `main`**. **Governed observation surface contract** (narrow, M17 — `observation_surface_schema.json` / `observation_surface_schema_report.json`; [PR #18](https://github.com/m-cahill/starlab/pull/18) merge commit `f63c8e93cb0a2943b9149f4384dbde68b74f9e76`; **authoritative green PR-head CI** [`24164045530`](https://github.com/m-cahill/starlab/actions/runs/24164045530) (**success**); **merge-boundary post-merge `main` CI** [`24164075167`](https://github.com/m-cahill/starlab/actions/runs/24164075167) (**success**)) is **proved on `main`**. **Governed perceptual bridge prototype** (narrow, M18 — deterministic `observation_surface.json` / `observation_surface_report.json` from M16 `canonical_state.json`; [PR #19](https://github.com/m-cahill/starlab/pull/19) merge commit `59d2d6e2af08852d63e0c91a984000c11decfece`; **authoritative green PR-head CI** [`24165977039`](https://github.com/m-cahill/starlab/actions/runs/24165977039) (**success**); **merge-boundary post-merge `main` CI** [`24166004479`](https://github.com/m-cahill/starlab/actions/runs/24166004479) (**success**)) is **proved on `main`**. **Governed cross-mode reconciliation audit** (narrow, M19 — deterministic `observation_reconciliation_audit.json` / `observation_reconciliation_audit_report.json` for one paired M16 `canonical_state.json` + M18 `observation_surface.json`; [PR #20](https://github.com/m-cahill/starlab/pull/20) merge commit `9e855329fc50f4f00db9c857f982d18ef93e4e65`; **authoritative green PR-head CI** [`24168988693`](https://github.com/m-cahill/starlab/actions/runs/24168988693) (**success**); **merge-boundary post-merge `main` CI** [`24169013104`](https://github.com/m-cahill/starlab/actions/runs/24169013104) (**success**); see §18 / `M19_run1.md`) is **proved on `main`**. **Governed benchmark contract + scorecard schemas** (narrow, M20 — `benchmark_contract_schema.json` / `benchmark_contract_schema_report.json` / `benchmark_scorecard_schema.json` / `benchmark_scorecard_schema_report.json`; [PR #21](https://github.com/m-cahill/starlab/pull/21); **authoritative green PR-head CI** [`24173251270`](https://github.com/m-cahill/starlab/actions/runs/24173251270) (**success**); **merge-boundary post-merge `main` CI** [`24173270201`](https://github.com/m-cahill/starlab/actions/runs/24173270201) (**success**); see §18 / `M20_run1.md`) is **proved on `main`**. **Governed scripted baseline suite** (narrow, M21 — `scripted_baseline_suite.json` / `scripted_baseline_suite_report.json`; [PR #22](https://github.com/m-cahill/starlab/pull/22); **authoritative green PR-head CI** [`24174468912`](https://github.com/m-cahill/starlab/actions/runs/24174468912) on `818002e…`; **merge-boundary post-merge `main` CI** [`24174498486`](https://github.com/m-cahill/starlab/actions/runs/24174498486) on `092d00a…`; see §18 / `M21_run1.md`) is **proved on `main`**. **Governed heuristic baseline suite** (narrow, M22 — `heuristic_baseline_suite.json` / `heuristic_baseline_suite_report.json`; [PR #23](https://github.com/m-cahill/starlab/pull/23); **authoritative green PR-head CI** [`24176685407`](https://github.com/m-cahill/starlab/actions/runs/24176685407) on `96aba18…`; **merge-boundary post-merge `main` CI** [`24176717132`](https://github.com/m-cahill/starlab/actions/runs/24176717132) on `470afa8…`; see §18 / `M22_run1.md`). **Superseded** red PR-head [`24174444383`](https://github.com/m-cahill/starlab/actions/runs/24174444383) (Ruff format — **not** merge authority, **M21**). **Superseded** red PR-head [`24160804226`](https://github.com/m-cahill/starlab/actions/runs/24160804226) (Ruff format — **not** merge authority, **M16**). **Replay↔execution equivalence** and **benchmark integrity** remain **not** proved.  
+
+**M23 (evaluation runner / tournament harness):** product implementation targets merge on branch `m23-evaluation-runner-tournament-harness`; **authoritative PR-head CI + merge-boundary `main` CI** — **fill at merge** (see §23 changelog).  
 **License:** Source-available (evaluation and verification only); see `LICENSE`  
 **Governance Model:** Milestone-Driven, CI-Enforced  
 **Audit Posture:** Active Governance Signal  
@@ -13,7 +15,7 @@
 1. Read `docs/starlab-vision.md` for the moonshot framing and long-range thesis.  
 2. Read `docs/bicetb.md` for licensing, provenance, and diligence posture (“clean enough to buy”).  
 3. Read this file for current status, phase structure, milestone history, and project rules.  
-4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract), `docs/runtime/replay_combat_scouting_visibility_extraction.md` (M12 combat / scouting / visibility contract), and `docs/runtime/replay_slice_generation.md` (M13 replay slice definitions contract), and `docs/runtime/replay_bundle_lineage_contract.md` (M14 replay bundle / lineage packaging contract), and `docs/runtime/canonical_state_schema_v1.md` (M15 canonical state schema contract), and `docs/runtime/canonical_state_pipeline_v1.md` (M16 canonical state pipeline contract), and `docs/runtime/observation_surface_contract_v1.md` (M17 observation surface contract), and `docs/runtime/perceptual_bridge_prototype_v1.md` (M18 perceptual bridge prototype contract), and `docs/runtime/observation_reconciliation_audit_v1.md` (M19 cross-mode reconciliation audit contract), and `docs/runtime/benchmark_contract_scorecard_v1.md` (M20 benchmark contract + scorecard contract), and `docs/runtime/scripted_baseline_suite_v1.md` (M21 scripted baseline suite contract), and `docs/runtime/heuristic_baseline_suite_v1.md` (M22 heuristic baseline suite contract).  
+4. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract), `docs/runtime/replay_combat_scouting_visibility_extraction.md` (M12 combat / scouting / visibility contract), and `docs/runtime/replay_slice_generation.md` (M13 replay slice definitions contract), and `docs/runtime/replay_bundle_lineage_contract.md` (M14 replay bundle / lineage packaging contract), and `docs/runtime/canonical_state_schema_v1.md` (M15 canonical state schema contract), and `docs/runtime/canonical_state_pipeline_v1.md` (M16 canonical state pipeline contract), and `docs/runtime/observation_surface_contract_v1.md` (M17 observation surface contract), and `docs/runtime/perceptual_bridge_prototype_v1.md` (M18 perceptual bridge prototype contract), and `docs/runtime/observation_reconciliation_audit_v1.md` (M19 cross-mode reconciliation audit contract), and `docs/runtime/benchmark_contract_scorecard_v1.md` (M20 benchmark contract + scorecard contract), and `docs/runtime/scripted_baseline_suite_v1.md` (M21 scripted baseline suite contract), and `docs/runtime/heuristic_baseline_suite_v1.md` (M22 heuristic baseline suite contract), and `docs/runtime/evaluation_runner_tournament_harness_v1.md` (M23 evaluation runner + tournament harness contract).  
 5. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 6. Local testing is expected to use an RTX 5090 Blackwell where relevant.
 
@@ -142,8 +144,9 @@ Focus:
 | M20 | `benchmark_contract_schema.json`, `benchmark_contract_schema_report.json`, `benchmark_scorecard_schema.json`, `benchmark_scorecard_schema_report.json` | Governed JSON Schemas + reports for one benchmark contract and one scorecard (`jsonschema` validation); optional fixture hashes in reports | STARLAB JSON; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M20 `starlab/benchmarks/` modules | Scripted baselines (**M21**), heuristic baselines (**M22**), evaluation runner (**M23**), tournament harness, benchmark integrity, replay↔execution equivalence, live SC2 in CI |
 | M21 | `scripted_baseline_suite.json`, `scripted_baseline_suite_report.json` | One M20-validated **`fixture_only`** benchmark contract; embedded M20 scorecards for a fixed ordered set of **scripted** subjects; deterministic catalogs | STARLAB JSON; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M21 `starlab/baselines/` modules | Heuristic baselines (**M22**), evaluation runner (**M23**), tournament harness, benchmark integrity, replay↔execution equivalence, live SC2 in CI |
 | M22 | `heuristic_baseline_suite.json`, `heuristic_baseline_suite_report.json` | One M20-validated **`fixture_only`** benchmark contract; embedded M20 scorecards for a fixed ordered set of **heuristic** subjects; deterministic catalogs | STARLAB JSON; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M22 `starlab/baselines/` modules | Evaluation runner (**M23**), tournament harness, benchmark integrity, replay↔execution equivalence, live SC2 in CI |
+| M23 | `evaluation_tournament.json`, `evaluation_tournament_report.json` | M20 **`fixture_only`** benchmark contract + one or more governed **M21/M22** suite artifacts; deterministic entrant catalog + round-robin harness over embedded scorecards | STARLAB JSON; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M23 `starlab/evaluation/` modules | Attribution/diagnostics (**M24**), evidence packs (**M25**), benchmark integrity, replay↔execution equivalence, live SC2 in CI |
 
-**Phase IV boundary (M20–M23):** **M20** defines benchmark contract + scorecard schemas. **M21** and **M22** are **fixture-only baseline suite emitters** (scripted vs heuristic subjects) until **M23** introduces evaluation runner / tournament harness semantics — not proved in M21–M22.
+**Phase IV boundary (M20–M23):** **M20** defines benchmark contract + scorecard schemas. **M21** and **M22** are **fixture-only baseline suite emitters** (scripted vs heuristic subjects). **M23** consumes those suites and proves a **fixture-only evaluation runner + tournament harness** (deterministic tournament artifacts) — **not** benchmark integrity, **not** live SC2 execution, **not** replay-derived scoring.
 
 **Phase II slice / bundle boundary (M13 vs M14):** an M13 **slice** is a **metadata-defined temporal span** over already-governed JSON (addressable `[start_gameloop, end_gameloop]` with lineage). **M14** is where **bundle packaging** and **lineage contract v1** for replay bundles belong — not M13. M13 does not ship clipped replay bytes or M14-style bundles.
 
@@ -221,7 +224,7 @@ Planned program arc (33 milestones, M00–M32):
 | M20 | Benchmark Contract & Scorecard Semantics | IV | Complete | v0.0.20-m20 | — |
 | M21 | Scripted Baseline Suite | IV | Complete | v0.0.21-m21 | — |
 | M22 | Heuristic Baseline Suite | IV | Complete | v0.0.22-m22 | — |
-| M23 | Evaluation Runner & Tournament Harness | IV | Planned | v0.0.23-m23 | — |
+| M23 | Evaluation Runner & Tournament Harness | IV | Complete | v0.0.23-m23 | — |
 | M24 | Attribution, Diagnostics, and Failure Views | IV | Planned | v0.0.24-m24 | — |
 | M25 | Baseline Evidence Pack | IV | Planned | v0.0.25-m25 | — |
 | M26 | Replay-Derived Imitation Baseline | V | Planned | v0.0.26-m26 | — |
@@ -278,6 +281,8 @@ Planned program arc (33 milestones, M00–M32):
 
 **M22 note:** M22 is **merged** to `main` (see §18). “Complete” reflects **governed heuristic baseline suite** — deterministic `heuristic_baseline_suite.json` + `heuristic_baseline_suite_report.json` from one M20-validated **`fixture_only`** benchmark contract with embedded M20 scorecards for fixed **heuristic** subjects, runtime contract `docs/runtime/heuristic_baseline_suite_v1.md`, modules + CLI under `starlab/baselines/`; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M22 baseline modules — see §6 Phase IV artifact row. **Not** evaluation runner (**M23**), tournament harness, benchmark integrity, replay↔execution equivalence, or live SC2 in CI.
 
+**M23 note:** **M23** targets **governed fixture-only evaluation tournament** — deterministic `evaluation_tournament.json` + `evaluation_tournament_report.json` from one M20-validated **`fixture_only`** benchmark contract plus one or more **M21/M22** suite artifacts; runtime contract `docs/runtime/evaluation_runner_tournament_harness_v1.md`, modules + CLI under `starlab/evaluation/`; **no** `starlab.replays`, **no** `starlab.sc2`, **no** `s2protocol` in M23 evaluation modules — see §6 Phase IV artifact row. **Not** attribution/diagnostics (**M24**), evidence packs (**M25**), benchmark integrity, replay↔execution equivalence, or live SC2 in CI.
+
 ---
 
 ## 8. Milestone intent map
@@ -309,7 +314,7 @@ This section exists so each milestone has a stable “why,” not just a title.
 | M20 | Define benchmark contracts and scorecard semantics |
 | M21 | Scripted baseline suite |
 | M22 | Heuristic baseline suite |
-| M23 | Evaluation runner and tournament harness |
+| M23 | Evaluation runner and tournament harness (fixture-only tournament consumer; **M23** proves runner/harness mechanics — **not** benchmark integrity) |
 | M24 | Attribution, diagnostics, and failure views |
 | M25 | Baseline evidence pack |
 | M26 | Replay-derived imitation baseline |
@@ -508,6 +513,16 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | `rl` | Reinforcement-learning-style agents (**later milestones**). |
 | `human_replay` | Human play as a reference or subject (**later milestones**). |
 
+### Phase IV evaluation / tournament glossary (M23)
+
+| Term | Meaning |
+| ---- | ------- |
+| **Suite input** | One governed **M21** or **M22** suite JSON artifact passed to the runner (CLI order preserved). |
+| **Entrant** | One subject derived from an embedded suite scorecard; `entrant_id` is `{suite_id}::{subject_id}` (deterministic). |
+| **Match** | One pairwise **round-robin** fixture-only comparison; **win/loss/draw** is decided by the contract **`primary`** metric only; full metric rows are recorded for auditability. |
+| **Standings** | Deterministic ordering by tournament points, then primary-metric tie-break scalar, then `entrant_id` ascending. |
+| **Runner / harness non-claims** | **Not** benchmark integrity, leaderboard validity, replay↔execution equivalence, live SC2, replay parsing, attribution/diagnostics (**M24**), or evidence packs (**M25**). |
+
 ### Phase III progression (compact)
 
 | Milestone | What it proves (Phase III) |
@@ -525,6 +540,7 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 | **M20** | **Benchmark contract + scorecard schemas** — deterministic JSON Schemas + reports + fixture validation (**proved** on `main`; see §18 / PR #21). |
 | **M21** | **Scripted baseline suite** — load one **`fixture_only`** benchmark contract, emit deterministic `scripted_baseline_suite.json` + `scripted_baseline_suite_report.json` with embedded M20 scorecards (**proved** on `main`; see §18 / PR #22). |
 | **M22** | **Heuristic baseline suite** — same contract posture as M21 with fixed **heuristic** subjects (`heuristic_baseline_suite.json` / `heuristic_baseline_suite_report.json`); **fixture-only scorecard emitter** until **M23** adds runner semantics (**proved** on `main`; see §18 / PR #23). |
+| **M23** | **Evaluation runner + tournament harness** — load M20 contract + **M21/M22** suite artifacts; deterministic `evaluation_tournament.json` / `evaluation_tournament_report.json` (**merge + CI pending**; see §23). |
 
 ### Parser glossary (M08–M12)
 
@@ -590,23 +606,23 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-### M23 — Evaluation Runner & Tournament Harness
+### M24 — Attribution, Diagnostics, and Failure Views
 
-**Status:** **Planned** — **current** milestone; **M22** is **closed** on `main` (see §18). **M23** remains **stub-only** (`docs/company_secrets/milestones/M23/`) until authorized — **no** M23 product code.
+**Status:** **Planned** — **current** milestone; **M23** evaluation runner + tournament harness: **in progress** on branch `m23-evaluation-runner-tournament-harness` (merge + CI **pending** — see §23).
 
-**Goal (high level):** **M23** introduces an **evaluation runner** and **tournament harness** — **not** part of **M21**–**M22** fixture-only baseline suite emitters.
+**Goal (high level):** **M24** introduces **attribution / diagnostics / failure-view** surfaces over governed evaluation artifacts — **not** part of **M23** fixture-only tournament harness mechanics.
 
-**Primary references:** `docs/company_secrets/milestones/M23/M23_plan.md`; `docs/starlab.md` §6 Phase IV boundary (M20–M23).
+**Primary references:** `docs/company_secrets/milestones/M24/M24_plan.md` (stub); `docs/starlab.md` §6 Phase IV boundary (M20–M25).
 
-**Note:** **M21** and **M22** prove **fixture-only** scripted and heuristic baseline **suite + embedded scorecard emission** — **not** runner semantics, **not** tournament harness, **not** benchmark integrity, **not** live SC2 in CI.
+**Note:** **M20–M23** establish **benchmark contract → baseline suite emitters → evaluation tournament** under explicit **fixture-only** non-claims — **not** benchmark integrity, **not** live SC2 execution in CI.
 
 #### Current milestone — explicit non-claims (standing)
 
-Until **M23** explicitly closes a claim, treat the following as **not proved** for **M23** planning:
+Until **M24** explicitly closes a claim, treat the following as **not proved** for **M24** planning:
 
 - **Benchmark integrity** / leaderboard claims (**not** a default proof).
 - **New live SC2 execution proof in CI** (CI remains **fixture-driven** unless a milestone explicitly changes that posture).
-- **Evaluation runner** and **tournament harness** semantics (**M23** — not started while stubs only).
+- **Attribution / diagnostics / failure views** (**M24** — stub product code until authorized).
 
 ---
 
@@ -1184,6 +1200,7 @@ This is a placeholder table for future audit tracking once milestones begin clos
 | M20       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 | M21       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 | M22       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
+| M23       | 3.5  | +          | +        | +   | +         | +    | 4.5     |
 
 **M02 note:** Evidence column reflects **narrow** local harness proof + CI; not benchmark or cross-host certification.
 
@@ -1227,6 +1244,8 @@ This is a placeholder table for future audit tracking once milestones begin clos
 
 **M22 note:** Evidence column reflects **heuristic baseline suite + report emission** from one **`fixture_only`** M20-validated benchmark contract + embedded M20 scorecards for **heuristic** subjects + full governance CI **on `main`** (**green PR-head** [`24176685407`](https://github.com/m-cahill/starlab/actions/runs/24176685407) on `96aba18…`; **green merge-push `main`** [`24176717132`](https://github.com/m-cahill/starlab/actions/runs/24176717132) on `470afa8…`; see §18 / `M22_run1.md`). **Not** evaluation runner (**M23**), tournament harness, benchmark integrity, replay↔execution equivalence, or live SC2 in CI.
 
+**M23 note:** Evidence column reflects **fixture-only evaluation tournament** (`evaluation_tournament.json` / `evaluation_tournament_report.json`) from M20 + **M21/M22** suite artifacts + full governance CI — **authoritative PR-head / merge-boundary CI pending merge** (see §23). **Not** attribution/diagnostics (**M24**), evidence packs (**M25**), benchmark integrity, replay↔execution equivalence, or live SC2 in CI.
+
 ---
 
 ## 21. README alignment rule
@@ -1259,6 +1278,12 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-09 — M23 evaluation runner & tournament harness (implementation)
+
+- Product: `docs/runtime/evaluation_runner_tournament_harness_v1.md`, `starlab/evaluation/` (runner + round-robin harness + `python -m starlab.evaluation.emit_evaluation_tournament`), `tests/fixtures/m23/`, `tests/test_evaluation_tournament.py` (includes **M20 → M21/M22 emitters → M23** chain test)
+- §3 / §6 / §7 / §10 / §11 / §18 / §20 / §23: Phase IV **M23** artifact row + Phase IV evaluation/tournament glossary; **current milestone** → **M24** (stub); **M24** stubs (`M24_plan.md`, `M24_toolcalls.md`)
+- **Merge + authoritative CI:** **pending** — update this changelog row + §3 status line + §18 when **M23** merges to `main`
 
 ### 2026-04-09 — M22 merged to `main` (PR #23) + closeout
 

@@ -36,6 +36,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/benchmark_contract_scorecard_v1.md",
     "docs/runtime/scripted_baseline_suite_v1.md",
     "docs/runtime/heuristic_baseline_suite_v1.md",
+    "docs/runtime/evaluation_runner_tournament_harness_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -112,11 +113,11 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m23() -> None:
+def test_current_milestone_is_m24() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "M23" in section
-    assert "Evaluation" in section or "Runner" in section or "Tournament" in section
+    assert "M24" in section
+    assert "Attribution" in section or "Diagnostics" in section or "Failure" in section
 
 
 def test_m18_complete_in_milestone_table() -> None:
@@ -506,10 +507,16 @@ def test_m22_milestone_files_exist() -> None:
     assert (m22 / "M22_audit.md").is_file()
 
 
-def test_m23_stub_milestone_files_exist() -> None:
+def test_m23_milestone_files_exist() -> None:
     m23 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M23"
     assert (m23 / "M23_plan.md").is_file()
     assert (m23 / "M23_toolcalls.md").is_file()
+
+
+def test_m24_stub_milestone_files_exist() -> None:
+    m24 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M24"
+    assert (m24 / "M24_plan.md").is_file()
+    assert (m24 / "M24_toolcalls.md").is_file()
 
 
 def test_m16_complete_in_milestone_table() -> None:
@@ -660,13 +667,22 @@ def test_m22_complete_in_milestone_table() -> None:
     raise AssertionError("M22 milestone row not found or not complete")
 
 
-def test_m23_planned_in_milestone_table() -> None:
+def test_m23_complete_in_milestone_table() -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
         if stripped.startswith("| M23 |") and "Evaluation Runner" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M23 milestone row not found or not complete")
+
+
+def test_m24_planned_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M24 |") and "Attribution" in stripped:
             assert "Planned" in stripped
             return
-    raise AssertionError("M23 milestone row not found or not planned")
+    raise AssertionError("M24 milestone row not found or not planned")
 
 
 def test_m20_benchmark_modules_exist() -> None:
@@ -724,6 +740,24 @@ def test_m22_heuristic_baseline_modules_exist() -> None:
         "emit_heuristic_baseline_suite.py",
     ):
         assert (bl / name).is_file()
+
+
+def test_m23_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m23"
+    assert fx.is_dir()
+    assert (fx / "expected_evaluation_tournament.json").is_file()
+    assert (fx / "expected_evaluation_tournament_report.json").is_file()
+
+
+def test_m23_evaluation_modules_exist() -> None:
+    ev = REPO_ROOT / "starlab" / "evaluation"
+    for name in (
+        "evaluation_runner_models.py",
+        "evaluation_runner.py",
+        "tournament_harness.py",
+        "emit_evaluation_tournament.py",
+    ):
+        assert (ev / name).is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
