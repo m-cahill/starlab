@@ -45,7 +45,7 @@ Without M18, STARLAB would lack **fixture-backed evidence** that a deterministic
 
 ## 4. Validation & Evidence
 
-- **Local:** `ruff check`, `ruff format --check`, `mypy`, `pytest` — all green before push; 322 tests; one pre-existing pytest warning from `s2protocol` transitive import in replay CLI test (not M18)
+- **Local:** `ruff check`, `ruff format --check`, `mypy`, `pytest` — all green before push; **324** tests after governance closeout (+2 vs PR **322**); one pre-existing pytest warning from `s2protocol` transitive import in replay CLI test (not M18)
 - **CI:** Authoritative PR-head and merge-boundary `main` runs both **success** (see `M18_run1.md`)
 
 ---
