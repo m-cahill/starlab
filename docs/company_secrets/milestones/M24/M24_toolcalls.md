@@ -21,3 +21,9 @@
 ## 2026-04-09 — M24 closeout PR #28 (ledger on `main`)
 
 * **Merged:** [PR #28](https://github.com/m-cahill/starlab/pull/28) — merge commit `5590f544cb29e7ad14fcbf5398903995b27da95c`; PR-head CI [`24213306545`](https://github.com/m-cahill/starlab/actions/runs/24213306545); merge-boundary `main` [`24213308716`](https://github.com/m-cahill/starlab/actions/runs/24213308716) (**doc/governance only** — not product merge authority for M24).
+
+---
+
+## 2026-04-09 — PR #29 (PR #28 CI record on `main`)
+
+* **Merged:** [PR #29](https://github.com/m-cahill/starlab/pull/29) — merge commit `2a7d979e64c5001a390014f91f914c618d7f2cb6`; merge-boundary `main` [`24213371024`](https://github.com/m-cahill/starlab/actions/runs/24213371024) (**success** after rerun; concurrency-cancelled first attempt).
