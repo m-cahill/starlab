@@ -41,6 +41,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/baseline_evidence_pack_v1.md",
     "docs/runtime/replay_training_dataset_v1.md",
     "docs/runtime/replay_imitation_baseline_v1.md",
+    "docs/runtime/learned_agent_evaluation_harness_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -117,18 +118,17 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m28() -> None:
+def test_current_milestone_is_m29() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M29" in section
     assert "M28" in section
-    assert "Learned-Agent" in section or "Evaluation Harness" in section
-    assert "M27" in section
 
 
-def test_m28_remains_stub_only_in_ledger() -> None:
-    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
-    section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "stub" in section.lower() or "stub-only" in section
+def test_m29_milestone_stub_files_exist() -> None:
+    m29 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M29"
+    assert (m29 / "M29_plan.md").is_file()
+    assert (m29 / "M29_toolcalls.md").is_file()
 
 
 def test_planned_program_arc_is_35_milestones() -> None:
@@ -865,6 +865,12 @@ def test_m27_milestone_plan_files_exist() -> None:
     assert (m27 / "M27_audit.md").is_file()
 
 
+def test_m28_milestone_plan_files_exist() -> None:
+    m28 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M28"
+    assert (m28 / "M28_plan.md").is_file()
+    assert (m28 / "M28_toolcalls.md").is_file()
+
+
 def test_m26_imitation_modules_exist() -> None:
     im = REPO_ROOT / "starlab" / "imitation"
     for name in (
@@ -883,6 +889,7 @@ def test_m27_imitation_modules_exist() -> None:
         "baseline_fit.py",
         "emit_replay_imitation_baseline.py",
         "replay_observation_materialization.py",
+        "replay_imitation_predictor.py",
     ):
         assert (im / name).is_file()
 
@@ -897,6 +904,25 @@ def test_m27_fixture_dir_exists() -> None:
     assert fx.is_dir()
     assert (fx / "replay_imitation_baseline.json").is_file()
     assert (fx / "replay_imitation_baseline_report.json").is_file()
+
+
+def test_m28_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m28"
+    assert fx.is_dir()
+    assert (fx / "benchmark_contract_m28.json").is_file()
+    assert (fx / "learned_agent_evaluation.json").is_file()
+    assert (fx / "learned_agent_evaluation_report.json").is_file()
+
+
+def test_m28_evaluation_modules_exist() -> None:
+    ev = REPO_ROOT / "starlab" / "evaluation"
+    for name in (
+        "learned_agent_evaluation.py",
+        "learned_agent_metrics.py",
+        "emit_learned_agent_evaluation.py",
+        "learned_agent_models.py",
+    ):
+        assert (ev / name).is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:

@@ -28,6 +28,7 @@ M27_IMITATION_MODULES = (
     "baseline_fit.py",
     "emit_replay_imitation_baseline.py",
     "replay_observation_materialization.py",
+    "replay_imitation_predictor.py",
 )
 
 

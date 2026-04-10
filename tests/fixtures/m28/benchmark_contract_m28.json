@@ -1,0 +1,66 @@
+{
+  "aggregation_policy": {
+    "notes": "M28 imitation eval fixture",
+    "policy_kind": "weighted_sum"
+  },
+  "benchmark_id": "m28_imitation_eval_fixture_v1",
+  "benchmark_name": "M28 learned imitation evaluation fixture",
+  "benchmark_version": "1.0.0",
+  "gating_rules": [
+    {
+      "description": "Fixture evaluation completes.",
+      "rule_id": "g1",
+      "severity": "hard"
+    }
+  ],
+  "input_requirements": {
+    "notes": "Fixture-only; offline M26 test split + M27 baseline.",
+    "required_inputs": [
+      "observation_surface_snapshot"
+    ]
+  },
+  "measurement_surface": "fixture_only",
+  "metric_definitions": [
+    {
+      "aggregation_method": "mean",
+      "display_name": "Accuracy",
+      "metric_id": "accuracy",
+      "optimization_direction": "maximize",
+      "scoring_role": "primary",
+      "unit": "ratio"
+    },
+    {
+      "aggregation_method": "mean",
+      "display_name": "Macro F1",
+      "metric_id": "macro_f1",
+      "optimization_direction": "maximize",
+      "scoring_role": "secondary",
+      "unit": "ratio"
+    },
+    {
+      "aggregation_method": "mean",
+      "display_name": "Fallback rate",
+      "metric_id": "fallback_rate",
+      "optimization_direction": "minimize",
+      "scoring_role": "secondary",
+      "unit": "ratio"
+    },
+    {
+      "aggregation_method": "sum",
+      "display_name": "Example count",
+      "metric_id": "example_count",
+      "optimization_direction": "none",
+      "scoring_role": "informational",
+      "unit": "count"
+    }
+  ],
+  "non_claims": [
+    "starlab.m28.benchmark_non_claim.not_benchmark_integrity",
+    "starlab.m28.benchmark_non_claim.not_replay_equivalence"
+  ],
+  "schema_version": "starlab.benchmark_contract.v1",
+  "scorecard_schema_ref": "starlab.benchmark_scorecard.m20.v1.schema.json",
+  "subject_kinds_allowed": [
+    "imitation"
+  ]
+}

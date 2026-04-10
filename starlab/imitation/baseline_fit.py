@@ -18,6 +18,7 @@ from starlab.imitation.baseline_models import (
     REPLAY_IMITATION_BASELINE_REPORT_FILENAME,
 )
 from starlab.imitation.dataset_models import REPLAY_TRAINING_DATASET_VERSION
+from starlab.imitation.replay_imitation_predictor import FrozenImitationPredictor
 from starlab.imitation.replay_observation_materialization import (
     materialize_observation_for_observation_request,
     resolve_bundle_directory,
@@ -148,10 +149,10 @@ def build_replay_imitation_baseline_artifacts(
             },
         )
 
-    def predict_for_signature(sig: str) -> tuple[str, bool]:
-        if sig in sig_predicted:
-            return sig_predicted[sig], False
-        return fallback_label, True
+    predictor = FrozenImitationPredictor.from_signature_mapping(
+        sig_predicted,
+        fallback_label,
+    )
 
     split_totals: Counter[str] = Counter()
     split_agree: Counter[str] = Counter()
@@ -163,7 +164,7 @@ def build_replay_imitation_baseline_artifacts(
         label_counts[lab] += 1
 
     for _eid, sp, lab, sig, _ in rows:
-        pred, used_fb = predict_for_signature(sig)
+        pred, used_fb = predictor.predict(sig)
         if pred == lab:
             split_agree[sp] += 1
         if used_fb:
