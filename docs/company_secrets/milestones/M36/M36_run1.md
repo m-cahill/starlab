@@ -61,7 +61,7 @@ Workflow **`CI`** — parallel jobs:
 
 ## Non-merge-boundary runs (post-closeout)
 
-* A **separate** `push` to `main` for **M36 documentation closeout** (ledger + `M36_*` artifacts + governance test bumps) may trigger an additional **`CI`** run — **not** substitute merge authority for M36 product scope (authoritative remains **`24266877684`** + **`24266906173`**).
+* **Doc/governance closeout push** (`e4b306584a6cc0cb4a7f582c50f8fe3100094d8b`): **`CI`** run [`24267000568`](https://github.com/m-cahill/starlab/actions/runs/24267000568) — **success** — **not** merge-boundary authority for M36 implementation (authoritative product merge remains **`24266877684`** + **`24266906173`** on `e73a53b…`).
 
 ## Workflow analysis (aligned to `docs/company_secrets/prompts/workflowprompt.md`)
 

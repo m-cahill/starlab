@@ -1685,7 +1685,7 @@ It should always answer, with minimal ambiguity:
 - §3 / §6 / §7 / §8 / §10 / §11 / §18 / §20 / §23: **M36** **Complete** on `main`; **current milestone** → **M37** (**stub only**); **M37** stubs unchanged (`M37_plan.md`, `M37_toolcalls.md`) — **no** M37 product code in this closeout
 - Milestone closeout docs: `M36_run1.md`, `M36_summary.md`, `M36_audit.md`, `M36_plan.md` (**Complete**), `M36_toolcalls.md`
 - Annotated tag **`v0.0.36-m36`** on merge commit `e73a53b28a4b6eeb3a2c19dd358d928c64806e89` (milestone boundary — **not** a later doc-only tip)
-- Post–merge-closeout doc/governance commit (this pass): M36 complete-row smoke + `test_current_milestone_is_m37` + full `M36_*` closeout files — **`617`** `pytest` locally; **does not** replace merge-boundary **`616`** tests on [`24266906173`](https://github.com/m-cahill/starlab/actions/runs/24266906173) at `e73a53b…` (authoritative M36 **implementation** merge CI remains **`24266877684`** + **`24266906173`**)
+- Post–merge-closeout doc/governance commit `e4b306584a6cc0cb4a7f582c50f8fe3100094d8b`: M36 complete-row smoke + `test_current_milestone_is_m37` + full `M36_*` closeout files — **`617`** `pytest` locally; **non-merge-boundary `main` CI** [`24267000568`](https://github.com/m-cahill/starlab/actions/runs/24267000568) (**success**) — **does not** replace merge-boundary **`616`** tests on [`24266906173`](https://github.com/m-cahill/starlab/actions/runs/24266906173) at `e73a53b…` (authoritative M36 **implementation** merge CI remains **`24266877684`** + **`24266906173`**)
 
 ### 2026-04-10 — M35 merged to `main` (PR #46) + milestone closeout
 
