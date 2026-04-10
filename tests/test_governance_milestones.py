@@ -65,10 +65,13 @@ def test_m34_milestone_closeout_files_exist() -> None:
 
 
 @pytest.mark.smoke
-def test_m35_milestone_stub_files_exist() -> None:
+def test_m35_milestone_closeout_files_exist() -> None:
     m35 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M35"
     assert (m35 / "M35_plan.md").is_file()
     assert (m35 / "M35_toolcalls.md").is_file()
+    assert (m35 / "M35_run1.md").is_file()
+    assert (m35 / "M35_summary.md").is_file()
+    assert (m35 / "M35_audit.md").is_file()
 
 
 @pytest.mark.smoke
@@ -107,6 +110,16 @@ def test_m34_complete_in_milestone_table() -> None:
             assert "Complete" in stripped
             return
     raise AssertionError("M34 milestone row not found or not complete")
+
+
+@pytest.mark.smoke
+def test_m35_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M35 |") and "Audit Closure IV" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M35 milestone row not found or not complete")
 
 
 @pytest.mark.smoke

@@ -332,3 +332,17 @@ The expected sequence after this milestone is:
 - **M39** — Platform Boundary Review & Multi-Environment Charter
 
 Do not skip the `docs/starlab.md` update at the start. The ledger must lead the implementation, not lag it.
+
+---
+
+## Closeout (merged to `main`)
+
+- **PR:** [#46](https://github.com/m-cahill/starlab/pull/46)
+- **Final PR head SHA:** `91e45ddfbb7a1f610ba25ac59a107c1b7e40af1a`
+- **Authoritative PR-head CI:** [`24265022396`](https://github.com/m-cahill/starlab/actions/runs/24265022396) — success
+- **Merge commit:** `5b4d24b0eca578b70f2963f1561b99bc89fef033`
+- **Merge-boundary `main` CI:** [`24265056432`](https://github.com/m-cahill/starlab/actions/runs/24265056432) — success
+- **Tag:** `v0.0.35-m35` on merge commit
+- **Superseded PR-head (not merge authority):** [`24264929015`](https://github.com/m-cahill/starlab/actions/runs/24264929015) (Ruff format), [`24264963434`](https://github.com/m-cahill/starlab/actions/runs/24264963434) (Mypy)
+- **Closeout docs:** `M35_run1.md`, `M35_summary.md`, `M35_audit.md`
+- **Status:** **Complete** — current program stub milestone is **M36** (see `docs/starlab.md` §7 / §11).

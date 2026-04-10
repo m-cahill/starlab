@@ -75,11 +75,11 @@ def test_od005_resolved_row() -> None:
 
 
 @pytest.mark.smoke
-def test_current_milestone_is_m35() -> None:
+def test_current_milestone_is_m36() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M36" in section
     assert "M35" in section
-    assert "M34" in section
 
 
 @pytest.mark.smoke
