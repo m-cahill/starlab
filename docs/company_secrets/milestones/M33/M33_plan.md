@@ -99,4 +99,4 @@ M33 proves STARLAB’s required checks can run in explicit, truthful CI tiers wi
 
 ---
 
-**Status:** Implementation per this charter (replace prior stub).
+**Status:** **Complete on `main`** — [PR #39](https://github.com/m-cahill/starlab/pull/39), merge commit `975ac52fff206f9ceb1b0be66a0e7f1c7386a248`; authoritative PR-head CI [`24231313561`](https://github.com/m-cahill/starlab/actions/runs/24231313561); merge-boundary `main` CI [`24256871132`](https://github.com/m-cahill/starlab/actions/runs/24256871132); see `M33_run1.md`, `M33_summary.md`, `M33_audit.md`; tag `v0.0.33-m33` on merge commit.

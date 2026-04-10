@@ -142,12 +142,12 @@ def test_od005_resolved_row() -> None:
 
 
 @pytest.mark.smoke
-def test_current_milestone_is_m33() -> None:
+def test_current_milestone_is_m34() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M34" in section
+    assert "Audit Closure III" in section
     assert "M33" in section
-    assert "Audit Closure II" in section
-    assert "M32" in section
 
 
 def test_m29_milestone_stub_files_exist() -> None:
@@ -183,11 +183,30 @@ def test_m32_milestone_closeout_files_exist() -> None:
     assert (m32 / "M32_audit.md").is_file()
 
 
-@pytest.mark.smoke
-def test_m33_milestone_plan_files_exist() -> None:
+def test_m33_milestone_closeout_files_exist() -> None:
     m33 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M33"
     assert (m33 / "M33_plan.md").is_file()
     assert (m33 / "M33_toolcalls.md").is_file()
+    assert (m33 / "M33_run1.md").is_file()
+    assert (m33 / "M33_summary.md").is_file()
+    assert (m33 / "M33_audit.md").is_file()
+
+
+@pytest.mark.smoke
+def test_m34_milestone_stub_files_exist() -> None:
+    m34 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M34"
+    assert (m34 / "M34_plan.md").is_file()
+    assert (m34 / "M34_toolcalls.md").is_file()
+
+
+@pytest.mark.smoke
+def test_m33_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M33 |") and "Audit Closure II" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M33 milestone row not found or not complete")
 
 
 def test_m29_complete_in_milestone_table() -> None:

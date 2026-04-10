@@ -82,12 +82,14 @@ def test_operating_manual_links_ci_tiers_and_deferred_registry() -> None:
     assert "DeferredIssuesRegistry.md" in body
 
 
-def test_ledger_m33_charter_surfaces() -> None:
+def test_ledger_m34_stub_and_m33_predecessor_surfaces() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "parallel CI jobs" in section or "quality" in section
+    assert "M34" in section
+    assert "Audit Closure III" in section
+    assert "M33" in section
     assert "fieldtest-output" in section or "fieldtest" in section
-    assert "ci_tiering_field_test_readiness_v1.md" in section or "CI tiering" in section
+    assert "ci_tiering_field_test_readiness_v1.md" in section or "CI tiering" in section or "Audit Closure II" in section
 
 
 def test_no_m34_m35_product_creep_paths() -> None:
@@ -96,9 +98,10 @@ def test_no_m34_m35_product_creep_paths() -> None:
     assert not (REPO_ROOT / "starlab" / "proof_pack").exists()
 
 
-def test_m33_plan_is_chartered_not_empty_stub() -> None:
+def test_m33_plan_is_complete_charter() -> None:
     plan = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M33" / "M33_plan.md"
     body = plan.read_text(encoding="utf-8")
     assert len(body) > 800
     assert "Acceptance criteria" in body
     assert "governance" in body.lower()
+    assert "Complete on `main`" in body
