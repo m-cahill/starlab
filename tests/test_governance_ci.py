@@ -48,10 +48,10 @@ def test_ledger_has_m01_runtime_title_and_m32_map() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "SC2 Runtime Surface Decision & Environment Lock" in text
     assert "M32" in text
-    assert "38 milestones" in text
-    assert "M00–M37" in text or "M00-M37" in text
+    assert "40 milestones" in text
+    assert "M00–M39" in text or "M00-M39" in text
     assert "Audit Closure I" in text
-    assert "Platform Boundary Review & Multi-Environment Charter" in text
+    assert "Platform Boundary Review" in text
     assert "Governance, Runtime Surface, and Deterministic Run Substrate" in text
 
 
@@ -83,18 +83,18 @@ def test_current_milestone_is_m35() -> None:
 
 
 @pytest.mark.smoke
-def test_planned_program_arc_is_38_milestones() -> None:
+def test_planned_program_arc_is_40_milestones() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
-    assert "38 milestones" in text
-    assert "M00–M37" in text or "M00-M37" in text
+    assert "40 milestones" in text
+    assert "M00–M39" in text or "M00-M39" in text
 
 
 @pytest.mark.smoke
-def test_od007_targets_m37() -> None:
+def test_od007_targets_m39() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     for line in text.splitlines():
         if line.strip().startswith("| OD-007 |"):
-            assert "M37" in line
+            assert "M39" in line
             return
     raise AssertionError("OD-007 row not found in docs/starlab.md")
 
