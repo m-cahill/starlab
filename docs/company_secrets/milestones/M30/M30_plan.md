@@ -99,4 +99,4 @@ Benchmark integrity, live SC2, replay↔execution equivalence, tournament semant
 
 ## Status
 
-**Implementation in progress** on branch `m30-first-learned-hierarchical-agent` — product code, tests, fixtures, runtime contract, and ledger §11 artifact names; **PR + CI + closeout** follow normal workflow.
+**Complete on `main`** — merged [PR #36](https://github.com/m-cahill/starlab/pull/36) (merge commit `1c3a5f63f0ac5f380d3fd1ffcab66ca0d7d422bf`; **authoritative PR-head CI** [`24223946664`](https://github.com/m-cahill/starlab/actions/runs/24223946664); **merge-boundary `main` CI** [`24223976390`](https://github.com/m-cahill/starlab/actions/runs/24223976390)); closeout docs `M30_run1.md`, `M30_summary.md`, `M30_audit.md`; ledger `docs/starlab.md` updated; **M31** stubs only.

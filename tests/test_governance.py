@@ -43,6 +43,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_imitation_baseline_v1.md",
     "docs/runtime/learned_agent_evaluation_harness_v1.md",
     "docs/runtime/hierarchical_agent_interface_v1.md",
+    "docs/runtime/replay_hierarchical_imitation_agent_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -119,11 +120,12 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m30() -> None:
+def test_current_milestone_is_m31() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M31" in section
+    assert "stub" in section.lower()
     assert "M30" in section
-    assert "M29" in section
 
 
 def test_m29_milestone_stub_files_exist() -> None:
@@ -132,10 +134,19 @@ def test_m29_milestone_stub_files_exist() -> None:
     assert (m29 / "M29_toolcalls.md").is_file()
 
 
-def test_m30_milestone_stub_files_exist() -> None:
+def test_m30_milestone_closeout_files_exist() -> None:
     m30 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M30"
     assert (m30 / "M30_plan.md").is_file()
     assert (m30 / "M30_toolcalls.md").is_file()
+    assert (m30 / "M30_run1.md").is_file()
+    assert (m30 / "M30_summary.md").is_file()
+    assert (m30 / "M30_audit.md").is_file()
+
+
+def test_m31_milestone_stub_files_exist() -> None:
+    m31 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M31"
+    assert (m31 / "M31_plan.md").is_file()
+    assert (m31 / "M31_toolcalls.md").is_file()
 
 
 def test_m29_complete_in_milestone_table() -> None:
@@ -145,6 +156,15 @@ def test_m29_complete_in_milestone_table() -> None:
             assert "Complete" in stripped
             return
     raise AssertionError("M29 milestone row not found or not complete")
+
+
+def test_m30_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M30 |") and "First Learned Hierarchical Agent" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M30 milestone row not found or not complete")
 
 
 def test_planned_program_arc_is_35_milestones() -> None:
