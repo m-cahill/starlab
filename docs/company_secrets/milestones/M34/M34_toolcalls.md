@@ -25,5 +25,6 @@
 - Merge-boundary **`main`** CI [`24261102337`](https://github.com/m-cahill/starlab/actions/runs/24261102337) — success (watch to completion).
 - **Tag:** `git tag -a v0.0.34-m34` on merge commit `51e960d0c1c0eb20923836a8ac2400a59013bcc5`; `git push origin v0.0.34-m34`.
 - **Closeout docs:** `docs/starlab.md` (§3, §7, §11, §18 table, §20 M34 note, §23), `M34_run1.md`, `M34_summary.md`, `M34_audit.md`, `M34_plan.md` (this milestone plan).
+- Commit `6dcf8079cebd06d4a3714d6d85932a2415241c05` pushed to `main`; **non-merge-boundary** CI [`24261183636`](https://github.com/m-cahill/starlab/actions/runs/24261183636) — success (doc-only); `M34_run1.md` updated with post-closeout run pointer.
 
 ---

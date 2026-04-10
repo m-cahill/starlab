@@ -1695,6 +1695,7 @@ It should always answer, with minimal ambiguity:
 - §3 / §6 / §7 / §8 / §10 / §11 / §18 / §20 / §23: **M34** **Complete** on `main`; **current milestone** → **M35** (**stub only**)
 - Milestone closeout docs: `M34_run1.md`, `M34_summary.md`, `M34_audit.md`, `M34_plan.md` (**Complete**), `M34_toolcalls.md`
 - Annotated tag **`v0.0.34-m34`** on merge commit `51e960d0c1c0eb20923836a8ac2400a59013bcc5` (milestone boundary — **not** a later doc-only tip)
+- **Non-merge-boundary `main` CI (post-closeout docs):** [`24261183636`](https://github.com/m-cahill/starlab/actions/runs/24261183636) on closeout commit `6dcf8079cebd06d4a3714d6d85932a2415241c05` — **success** (ledger/closeout only); **not** substitute merge authority for M34 product (authoritative remains [`24261065226`](https://github.com/m-cahill/starlab/actions/runs/24261065226) + [`24261102337`](https://github.com/m-cahill/starlab/actions/runs/24261102337)); see `M34_run1.md`
 
 ### 2026-04-10 — M33 merged to `main` (PR #39) + milestone closeout
 

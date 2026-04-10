@@ -74,6 +74,7 @@ All listed steps **merge-blocking** on both runs; artifact uploads use `if-no-fi
 ## Non-merge-boundary runs (post-merge)
 
 * **Dependabot** may open separate workflow runs on `main` after `.github/dependabot.yml` lands; those are **not** substitute merge authority for M34 product (authoritative remains **`24261065226`** + **`24261102337`**).
+* **Doc closeout** commit `6dcf8079cebd06d4a3714d6d85932a2415241c05` — push `main` CI [`24261183636`](https://github.com/m-cahill/starlab/actions/runs/24261183636) — **success** — ledger/closeout markdown only; **not** substitute merge authority for M34 product (authoritative remains **`24261065226`** + **`24261102337`**).
 
 ## Workflow analysis (aligned to `docs/company_secrets/prompts/workflowprompt.md`)
 
