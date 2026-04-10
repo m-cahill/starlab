@@ -171,5 +171,3 @@ def assert_valid_hierarchical_trace_document(obj: dict[str, Any]) -> None:
     if errs:
         msg = "; ".join(errs)
         raise ValueError(msg)
-
-
