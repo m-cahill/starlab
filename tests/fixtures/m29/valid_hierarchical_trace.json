@@ -1,0 +1,50 @@
+{
+  "hierarchical_decision_trace": {
+    "manager_request": {
+      "delegates_catalog": [
+        {
+          "delegate_id": "worker_macro",
+          "delegate_role": "worker"
+        },
+        {
+          "delegate_id": "worker_micro",
+          "delegate_role": "worker"
+        }
+      ],
+      "frame_ref": {
+        "bundle_id": "fixture_bundle_m29",
+        "gameloop": 1200,
+        "lineage_root": "lineage_root_fixture_m29",
+        "perspective_player_index": 1
+      }
+    },
+    "manager_response": {
+      "directive_kind": "macro",
+      "option_id": "opt_a",
+      "selected_delegate_id": "worker_macro"
+    },
+    "worker_request": {
+      "delegate": {
+        "delegate_id": "worker_macro",
+        "delegate_role": "worker"
+      },
+      "frame_ref": {
+        "bundle_id": "fixture_bundle_m29",
+        "gameloop": 1200,
+        "lineage_root": "lineage_root_fixture_m29",
+        "perspective_player_index": 1
+      },
+      "manager_response": {
+        "directive_kind": "macro",
+        "option_id": "opt_a",
+        "selected_delegate_id": "worker_macro"
+      }
+    },
+    "worker_response": {
+      "confidence": 0.75,
+      "label_policy_id": "starlab.m26.label.coarse_action_v1",
+      "semantic_coarse_label": "production_unit"
+    }
+  },
+  "schema_version": "starlab.hierarchical_agent_interface_trace.v1"
+}

@@ -1,0 +1,191 @@
+{
+  "$defs": {
+    "delegate_descriptor": {
+      "additionalProperties": false,
+      "properties": {
+        "delegate_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "delegate_role": {
+          "enum": [
+            "worker"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "delegate_id",
+        "delegate_role"
+      ],
+      "type": "object"
+    },
+    "frame_ref": {
+      "additionalProperties": false,
+      "properties": {
+        "bundle_id": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "gameloop": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "lineage_root": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "perspective_player_index": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "bundle_id",
+        "lineage_root",
+        "gameloop",
+        "perspective_player_index"
+      ],
+      "type": "object"
+    },
+    "hierarchical_decision_trace": {
+      "additionalProperties": false,
+      "properties": {
+        "manager_request": {
+          "$ref": "#/$defs/manager_request"
+        },
+        "manager_response": {
+          "$ref": "#/$defs/manager_response"
+        },
+        "worker_request": {
+          "$ref": "#/$defs/worker_request"
+        },
+        "worker_response": {
+          "$ref": "#/$defs/worker_response"
+        }
+      },
+      "required": [
+        "manager_request",
+        "manager_response",
+        "worker_request",
+        "worker_response"
+      ],
+      "type": "object"
+    },
+    "manager_request": {
+      "additionalProperties": false,
+      "properties": {
+        "delegates_catalog": {
+          "items": {
+            "$ref": "#/$defs/delegate_descriptor"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "frame_ref": {
+          "$ref": "#/$defs/frame_ref"
+        }
+      },
+      "required": [
+        "frame_ref",
+        "delegates_catalog"
+      ],
+      "type": "object"
+    },
+    "manager_response": {
+      "additionalProperties": false,
+      "properties": {
+        "directive_kind": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "option_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "selected_delegate_id": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "selected_delegate_id"
+      ],
+      "type": "object"
+    },
+    "worker_request": {
+      "additionalProperties": false,
+      "properties": {
+        "delegate": {
+          "$ref": "#/$defs/delegate_descriptor"
+        },
+        "frame_ref": {
+          "$ref": "#/$defs/frame_ref"
+        },
+        "manager_response": {
+          "$ref": "#/$defs/manager_response"
+        }
+      },
+      "required": [
+        "frame_ref",
+        "manager_response",
+        "delegate"
+      ],
+      "type": "object"
+    },
+    "worker_response": {
+      "additionalProperties": false,
+      "properties": {
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "type": "number"
+        },
+        "label_policy_id": {
+          "const": "starlab.m26.label.coarse_action_v1",
+          "type": "string"
+        },
+        "semantic_coarse_label": {
+          "enum": [
+            "army_attack",
+            "army_move",
+            "economy_expand",
+            "economy_worker",
+            "other",
+            "production_structure",
+            "production_unit",
+            "research_upgrade",
+            "scout"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "label_policy_id",
+        "semantic_coarse_label"
+      ],
+      "type": "object"
+    }
+  },
+  "$id": "https://starlab.dev/schemas/hierarchical_agent_interface_schema.v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Offline, frame-scoped two-level hierarchy (manager routing + worker semantic label). Does not assert live SC2 actions, benchmark integrity, or learned policies.",
+  "properties": {
+    "hierarchical_decision_trace": {
+      "$ref": "#/$defs/hierarchical_decision_trace"
+    },
+    "schema_version": {
+      "const": "starlab.hierarchical_agent_interface_trace.v1",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "hierarchical_decision_trace"
+  ],
+  "title": "STARLAB hierarchical agent interface trace v1 (M29)",
+  "type": "object"
+}

@@ -42,6 +42,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_training_dataset_v1.md",
     "docs/runtime/replay_imitation_baseline_v1.md",
     "docs/runtime/learned_agent_evaluation_harness_v1.md",
+    "docs/runtime/hierarchical_agent_interface_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -118,17 +119,32 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
-def test_current_milestone_is_m29() -> None:
+def test_current_milestone_is_m30() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M30" in section
     assert "M29" in section
-    assert "M28" in section
 
 
 def test_m29_milestone_stub_files_exist() -> None:
     m29 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M29"
     assert (m29 / "M29_plan.md").is_file()
     assert (m29 / "M29_toolcalls.md").is_file()
+
+
+def test_m30_milestone_stub_files_exist() -> None:
+    m30 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M30"
+    assert (m30 / "M30_plan.md").is_file()
+    assert (m30 / "M30_toolcalls.md").is_file()
+
+
+def test_m29_complete_in_milestone_table() -> None:
+    for line in _milestone_table_section().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M29 |") and "Hierarchical" in stripped:
+            assert "Complete" in stripped
+            return
+    raise AssertionError("M29 milestone row not found or not complete")
 
 
 def test_planned_program_arc_is_35_milestones() -> None:
@@ -874,6 +890,15 @@ def test_m28_milestone_plan_files_exist() -> None:
     assert (m28 / "M28_audit.md").is_file()
 
 
+def test_m29_milestone_plan_files_exist() -> None:
+    m29 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M29"
+    assert (m29 / "M29_plan.md").is_file()
+    assert (m29 / "M29_toolcalls.md").is_file()
+    assert (m29 / "M29_run1.md").is_file()
+    assert (m29 / "M29_summary.md").is_file()
+    assert (m29 / "M29_audit.md").is_file()
+
+
 def test_m26_imitation_modules_exist() -> None:
     im = REPO_ROOT / "starlab" / "imitation"
     for name in (
@@ -926,6 +951,25 @@ def test_m28_evaluation_modules_exist() -> None:
         "learned_agent_models.py",
     ):
         assert (ev / name).is_file()
+
+
+def test_m29_hierarchy_modules_exist() -> None:
+    hi = REPO_ROOT / "starlab" / "hierarchy"
+    for name in (
+        "hierarchical_interface_models.py",
+        "hierarchical_interface_schema.py",
+        "hierarchical_interface_io.py",
+        "emit_hierarchical_agent_interface.py",
+    ):
+        assert (hi / name).is_file()
+
+
+def test_m29_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m29"
+    assert fx.is_dir()
+    assert (fx / "expected_hierarchical_agent_interface_schema.json").is_file()
+    assert (fx / "expected_hierarchical_agent_interface_schema_report.json").is_file()
+    assert (fx / "valid_hierarchical_trace.json").is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
