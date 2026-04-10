@@ -1665,7 +1665,7 @@ It should always answer, with minimal ambiguity:
 - §3 / §6 / §7 / §8 / §10 / §11 / §18 / §20 / §23: **M32** **Complete** on `main`; **current milestone** → **M33** (**stub-only**); **M33** stubs (`M33_plan.md`, `M33_toolcalls.md`) — **no** M33 product code
 - Milestone closeout docs: `M32_run1.md`, `M32_summary.md`, `M32_audit.md`, `M32_plan.md` (**Complete**), `M32_toolcalls.md`
 - Annotated tag **`v0.0.32-m32`** on merge commit `cf7219911a208da584537b4c08ab5811fa3f67de` (milestone boundary — **not** a later doc-only tip unless repo convention changes)
-- **Non-merge-boundary** `main` CI on documentation-only commits after this merge (if any): **not** product merge authority for M32 (authoritative remains [`24228528798`](https://github.com/m-cahill/starlab/actions/runs/24228528798) + [`24228788230`](https://github.com/m-cahill/starlab/actions/runs/24228788230))
+- **Non-merge-boundary** `main` CI on closeout commit `6866bf718adc829526ae46cb6de0141416f72f94`: [`24228864767`](https://github.com/m-cahill/starlab/actions/runs/24228864767) (**success**) — documentation + governance + M33 stubs only; **not** product merge authority for M32 (authoritative remains [`24228528798`](https://github.com/m-cahill/starlab/actions/runs/24228528798) + [`24228788230`](https://github.com/m-cahill/starlab/actions/runs/24228788230))
 
 ### 2026-04-10 — M32 governance: future milestone arc revised (35 → 38 milestones)
 

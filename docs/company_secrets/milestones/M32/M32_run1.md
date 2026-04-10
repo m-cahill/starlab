@@ -103,4 +103,4 @@ All listed steps **merge-blocking**; none use `continue-on-error`. Coverage and 
 
 ## Non-merge-boundary runs (post-closeout)
 
-* **Post-closeout** documentation / governance commits on `main` after the merge boundary may produce additional green CI runs — **not** product merge authority for M32 (authoritative remains [`24228528798`](https://github.com/m-cahill/starlab/actions/runs/24228528798) + [`24228788230`](https://github.com/m-cahill/starlab/actions/runs/24228788230)). Record any such run ID in §23 when ledger-only pushes occur.
+* **Non-merge-boundary** `main` CI on closeout commit `6866bf718adc829526ae46cb6de0141416f72f94` (short `6866bf7…`): [`24228864767`](https://github.com/m-cahill/starlab/actions/runs/24228864767) (**success**) — `M32_run1.md` / `M32_summary.md` / `M32_audit.md`, ledger §11/§18/§23, M33 stubs, governance tests; **not** product merge authority for M32 (authoritative remains [`24228528798`](https://github.com/m-cahill/starlab/actions/runs/24228528798) + [`24228788230`](https://github.com/m-cahill/starlab/actions/runs/24228788230)).
