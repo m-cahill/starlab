@@ -1604,6 +1604,7 @@ It should always answer, with minimal ambiguity:
 - **M30 proof (narrow):** deterministic offline **`replay_hierarchical_imitation_agent.json`** / **`replay_hierarchical_imitation_agent_report.json`** — replay-derived two-level learned imitation with **M29** trace schema (`starlab.hierarchical_agent_interface_trace.v1`), fixed delegate policy **`starlab.m30.delegate.fixed_four_v1`**; stock M26 fixture delegates may be sparse — fallback proof traces documented in `M30_summary.md`; **not** benchmark integrity, **not** live SC2, **not** raw action legality, **not** replay↔execution equivalence, **not** M31 replay explorer semantics
 - §3 / §6 / §7 / §8 / §10 / §11 / §18 / §20 / §23: **M30** **Complete** on `main`; **current milestone** → **M31** (**stub-only**); **M31** stubs (`M31_plan.md`, `M31_toolcalls.md`) — **no** M31 product code
 - Milestone closeout docs: `M30_run1.md`, `M30_summary.md`, `M30_audit.md`, `M30_plan.md` (**Complete**), `M30_toolcalls.md`
+- **Non-merge-boundary** `main` CI on closeout commit `d4c9e63fab1072a1be2e235f74c1b6decc74498d` (short `d4c9e63…`): [`24224064068`](https://github.com/m-cahill/starlab/actions/runs/24224064068) (**success**) — documentation + governance only; **not** product merge authority for M30 (authoritative remains [`24223946664`](https://github.com/m-cahill/starlab/actions/runs/24223946664) + [`24223976390`](https://github.com/m-cahill/starlab/actions/runs/24223976390))
 
 ### 2026-04-10 — M29 merged to `main` (PR #35) + milestone closeout
 
