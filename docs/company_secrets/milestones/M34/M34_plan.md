@@ -36,4 +36,4 @@ Structural-hygiene and diligence closure: shared I/O extraction where appropriat
 
 ## Status
 
-**Complete on branch** — merge evidence (PR, SHAs, tag `v0.0.34-m34`) **TBD** at merge; see `M34_run1.md`, `M34_summary.md`, `M34_audit.md`.
+**Complete on `main`** — [PR #40](https://github.com/m-cahill/starlab/pull/40); final PR head `a748bd7cc0be2b7e2acb423e098190429ae6fe2a`; merge commit `51e960d0c1c0eb20923836a8ac2400a59013bcc5`; authoritative PR-head CI [`24261065226`](https://github.com/m-cahill/starlab/actions/runs/24261065226); merge-boundary `main` CI [`24261102337`](https://github.com/m-cahill/starlab/actions/runs/24261102337); tag **`v0.0.34-m34`** on merge commit. See `M34_run1.md`, `M34_summary.md`, `M34_audit.md`.
