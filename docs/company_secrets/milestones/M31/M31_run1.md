@@ -40,7 +40,8 @@ Single job **governance**: Ruff check, Ruff format check, Mypy, Pytest, pip-audi
 
 ## Pytest
 
-* **558** tests passed on merge-boundary `main` CI [`24226308356`](https://github.com/m-cahill/starlab/actions/runs/24226308356) (one pre-existing `s2protocol` deprecation warning in replay CLI tests — unchanged; not introduced by M31 `starlab/explorer/` modules).
+* **558** tests passed on merge commit `41d6205…` (verified locally) and merge-boundary `main` CI [`24226308356`](https://github.com/m-cahill/starlab/actions/runs/24226308356) — **success** (one pre-existing `s2protocol` deprecation warning in replay CLI tests — unchanged; not introduced by M31 `starlab/explorer/` modules).
+* **560** tests on non-merge-boundary closeout CI [`24226392793`](https://github.com/m-cahill/starlab/actions/runs/24226392793) — **+2** governance tests vs merge tip; **not** merge authority for M31 product.
 
 ## Annotations (informational)
 
