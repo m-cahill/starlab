@@ -23,3 +23,7 @@ Define a **repeatable** minimum path to show the repository is wired correctly a
 - No live SC2 client execution.  
 - No benchmark integrity or leaderboard validity.  
 - No network or cloud deployment.
+
+## CI alignment (M33+)
+
+On GitHub Actions, the **smoke** lane runs `pytest -q -m smoke` with JUnit output; the **fieldtest** lane runs `make fieldtest` and uploads **`out/fieldtest/`** as an artifact. See `docs/runtime/ci_tiering_field_test_readiness_v1.md`.

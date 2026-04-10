@@ -50,7 +50,9 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_hierarchical_imitation_agent_v1.md",
     "docs/runtime/replay_explorer_surface_v1.md",
     "docs/runtime/clone_to_run_smoke_v1.md",
+    "docs/runtime/ci_tiering_field_test_readiness_v1.md",
     "docs/diligence/field_test_checklist.md",
+    "docs/diligence/field_test_session_template.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -182,7 +184,7 @@ def test_m32_milestone_closeout_files_exist() -> None:
 
 
 @pytest.mark.smoke
-def test_m33_milestone_stub_files_exist() -> None:
+def test_m33_milestone_plan_files_exist() -> None:
     m33 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M33"
     assert (m33 / "M33_plan.md").is_file()
     assert (m33 / "M33_toolcalls.md").is_file()

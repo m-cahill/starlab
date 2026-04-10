@@ -21,6 +21,8 @@ Use this for diligence or on-site validation of a **fixture-only** STARLAB check
 - [ ] Run M31 explorer emit on bundled fixtures (see `docs/getting_started_clone_to_run.md`).
 - [ ] Confirm output JSON files exist and are non-empty.
 - [ ] Confirm no raw `.SC2Replay` bytes are required for this path.
+- [ ] (Optional diligence) Record session using `docs/diligence/field_test_session_template.md`.
+- [ ] (CI) Confirm **`fieldtest-output`** artifact contains `replay_explorer_surface.json` and `replay_explorer_surface_report.json` when validating a green **`CI`** workflow — see `docs/runtime/ci_tiering_field_test_readiness_v1.md`.
 
 ## Governance
 
