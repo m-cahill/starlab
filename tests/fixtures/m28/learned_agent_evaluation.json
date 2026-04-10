@@ -1,0 +1,87 @@
+{
+  "baseline_sha256": "2a455b3b2d347b66f5d339e586a4cf2998cece2e3a368847c0ecdba8d9cb1ea5",
+  "benchmark_contract_sha256": "070f1b1592cb25db0aeface9dea89633f048522f7ef7d0f6089c2763ea3614ae",
+  "evaluation_sha256": "7b7694866b8aba151cbc1b939a91ba79554abc16d434311388f9599ac9c80c7b",
+  "evaluation_split": "test",
+  "evaluation_version": "starlab.learned_agent_evaluation.v1",
+  "example_count": 1,
+  "fallback_count": 1,
+  "fallback_rate": 1.0,
+  "feature_policy_id": "starlab.m27.feature.observation_signature_v1",
+  "label_policy_id": "starlab.m26.label.coarse_action_v1",
+  "metric_values": {
+    "accuracy": 0.0,
+    "example_count": 1,
+    "fallback_rate": 1.0,
+    "macro_f1": 0.0
+  },
+  "model_family": "starlab.m27.model.observation_signature_majority_v1",
+  "non_claims": [
+    "benchmark_integrity",
+    "leaderboard_validity",
+    "live_sc2_execution",
+    "m23_tournament_semantics",
+    "m24_diagnostics_surfaces",
+    "m25_evidence_pack_surfaces",
+    "replay_execution_equivalence",
+    "replay_parser_in_m28_modules",
+    "stronger_imitation_quality_than_explicit_metrics"
+  ],
+  "scorecard": {
+    "aggregate_scores": [],
+    "benchmark_contract_sha256": "070f1b1592cb25db0aeface9dea89633f048522f7ef7d0f6089c2763ea3614ae",
+    "benchmark_id": "m28_imitation_eval_fixture_v1",
+    "benchmark_version": "1.0.0",
+    "comparability_status": "provisional",
+    "evaluation_posture": "fixture_only",
+    "gating_outcomes": [
+      {
+        "detail": null,
+        "passed": true,
+        "rule_id": "g1"
+      }
+    ],
+    "metric_rows": [
+      {
+        "metric_id": "accuracy",
+        "unit": "ratio",
+        "value": 0.0
+      },
+      {
+        "metric_id": "macro_f1",
+        "unit": "ratio",
+        "value": 0.0
+      },
+      {
+        "metric_id": "fallback_rate",
+        "unit": "ratio",
+        "value": 1.0
+      },
+      {
+        "metric_id": "example_count",
+        "unit": "count",
+        "value": 1
+      }
+    ],
+    "non_claims": [
+      "starlab.m20.scorecard_non_claim.not_benchmark_integrity",
+      "starlab.m20.scorecard_non_claim.not_real_evaluation"
+    ],
+    "schema_version": "starlab.benchmark_scorecard.v1",
+    "scoring_status": "scored",
+    "subject_ref": {
+      "subject_id": "2a455b3b2d347b66f5d339e586a4cf2998cece2e3a368847c0ecdba8d9cb1ea5",
+      "subject_kind": "imitation"
+    },
+    "warnings": [
+      "starlab.m28.warning.fixture_only_learned_eval"
+    ]
+  },
+  "subject_kind": "imitation",
+  "training_dataset_sha256": "b300a4d3441996d09d69ec85eb03ff3672f661b60fc2d08f3ab5ebade025a4ad",
+  "warnings": [
+    "intake_provenance_absent",
+    "metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both).",
+    "upstream canonical_state_report: metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both)."
+  ]
+}
