@@ -89,7 +89,11 @@ def test_ledger_m34_stub_and_m33_predecessor_surfaces() -> None:
     assert "Audit Closure III" in section
     assert "M33" in section
     assert "fieldtest-output" in section or "fieldtest" in section
-    assert "ci_tiering_field_test_readiness_v1.md" in section or "CI tiering" in section or "Audit Closure II" in section
+    assert (
+        "ci_tiering_field_test_readiness_v1.md" in section
+        or "CI tiering" in section
+        or "Audit Closure II" in section
+    )
 
 
 def test_no_m34_m35_product_creep_paths() -> None:
