@@ -972,6 +972,25 @@ def test_m29_fixture_dir_exists() -> None:
     assert (fx / "valid_hierarchical_trace.json").is_file()
 
 
+def test_m30_hierarchy_modules_exist() -> None:
+    hi = REPO_ROOT / "starlab" / "hierarchy"
+    for name in (
+        "delegate_policy.py",
+        "hierarchical_agent_models.py",
+        "hierarchical_agent_fit.py",
+        "hierarchical_agent_predictor.py",
+        "emit_replay_hierarchical_imitation_agent.py",
+    ):
+        assert (hi / name).is_file()
+
+
+def test_m30_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m30"
+    assert fx.is_dir()
+    assert (fx / "replay_hierarchical_imitation_agent.json").is_file()
+    assert (fx / "replay_hierarchical_imitation_agent_report.json").is_file()
+
+
 def test_m09_metadata_modules_exist() -> None:
     rp = REPO_ROOT / "starlab" / "replays"
     for name in (

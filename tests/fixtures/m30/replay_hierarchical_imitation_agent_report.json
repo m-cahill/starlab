@@ -1,0 +1,120 @@
+{
+  "agent_sha256": "1a2b88c667be95ec683005d2a733b3ebccb05082679447fbd7879fc552fc6e54",
+  "delegate_counts": {
+    "information": 4,
+    "production": 7
+  },
+  "delegate_policy_id": "starlab.m30.delegate.fixed_four_v1",
+  "end_to_end_agreement_by_split": {
+    "test": {
+      "agreement_count": 0,
+      "example_count": 1,
+      "rate": 0.0
+    },
+    "train": {
+      "agreement_count": 7,
+      "example_count": 8,
+      "rate": 0.875
+    },
+    "validation": {
+      "agreement_count": 1,
+      "example_count": 2,
+      "rate": 0.5
+    }
+  },
+  "feature_policy_id": "starlab.m27.feature.observation_signature_v1",
+  "governed_asset_classes": {
+    "code": {
+      "description": "STARLAB Python modules under starlab/hierarchy/ (M30 scope)",
+      "kind": "repository_source"
+    },
+    "dataset": {
+      "description": "Governed M26 replay_training_dataset.json (hashed)",
+      "kind": "replay_training_dataset",
+      "training_dataset_sha256": "b300a4d3441996d09d69ec85eb03ff3672f661b60fc2d08f3ab5ebade025a4ad"
+    },
+    "delegate_policy": {
+      "delegate_policy_id": "starlab.m30.delegate.fixed_four_v1",
+      "kind": "checked_in_mapping"
+    },
+    "derived_labels": {
+      "description": "Coarse labels from M26; delegate partition from M30 policy",
+      "kind": "supervised_targets",
+      "label_policy_id": "starlab.m26.label.coarse_action_v1"
+    },
+    "replays": {
+      "description": "Referenced M14 bundle directories (hashed bundle members)",
+      "kind": "governed_replay_bundles"
+    }
+  },
+  "label_counts": {
+    "other": 4,
+    "production_structure": 4,
+    "production_unit": 3
+  },
+  "label_policy_id": "starlab.m26.label.coarse_action_v1",
+  "manager_agreement_by_split": {
+    "test": {
+      "agreement_count": 0,
+      "example_count": 1,
+      "rate": 0.0
+    },
+    "train": {
+      "agreement_count": 7,
+      "example_count": 8,
+      "rate": 0.875
+    },
+    "validation": {
+      "agreement_count": 1,
+      "example_count": 2,
+      "rate": 0.5
+    }
+  },
+  "manager_fallback_counts_by_split": {
+    "test": 1,
+    "validation": 1
+  },
+  "non_claims": [
+    "benchmark_integrity",
+    "first_flagship_proof_pack",
+    "hierarchical_policy_optimality",
+    "leaderboard_validity",
+    "live_sc2_execution",
+    "m31_replay_explorer_product",
+    "raw_sc2_action_legality",
+    "replay_execution_equivalence",
+    "replay_parser_in_m30_modules",
+    "strong_imitation_quality_beyond_internal_smoke"
+  ],
+  "report_version": "starlab.replay_hierarchical_imitation_agent_report.v1",
+  "test_example_count": 1,
+  "training_example_count": 8,
+  "validation_example_count": 2,
+  "warnings": [
+    "intake_provenance_absent",
+    "metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both).",
+    "upstream canonical_state_report: metadata.game.game_length_loops differs from max timeline entry gameloop; using replay_length_loops=1200 (max of both).",
+    "visibility.proxy_level: no M16 visibility_context.visibility_proxy_level; using null (proxy-bounded posture; not fog-of-war truth)."
+  ],
+  "worker_agreement_by_split": {
+    "test": {
+      "agreement_count": 0,
+      "example_count": 1,
+      "rate": 0.0
+    },
+    "train": {
+      "agreement_count": 7,
+      "example_count": 8,
+      "rate": 0.875
+    },
+    "validation": {
+      "agreement_count": 1,
+      "example_count": 2,
+      "rate": 0.5
+    }
+  },
+  "worker_fallback_counts_by_split": {
+    "test": 1,
+    "validation": 1
+  }
+}
