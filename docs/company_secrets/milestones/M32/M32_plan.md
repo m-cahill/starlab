@@ -5,7 +5,8 @@
 - **Milestone:** M32
 - **Name:** Audit Closure I — Coverage, Clone-to-Run Baseline, and Operating Manual Scaffold
 - **Phase:** V
-- **Recommended branch:** `m32-audit-closure-coverage-clone-run-manual-scaffold`
+- **Branch (merged):** `m32-audit-closure-coverage-clone-run-manual-scaffold` → [PR #38](https://github.com/m-cahill/starlab/pull/38), merge commit `cf7219911a208da584537b4c08ab5811fa3f67de`
+- **Status:** **Complete on `main`** — see `M32_run1.md`, `M32_summary.md`, `M32_audit.md`; tag `v0.0.32-m32` on merge commit
 
 ## Mandatory governance change at milestone start
 
