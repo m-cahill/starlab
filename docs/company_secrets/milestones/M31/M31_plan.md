@@ -98,4 +98,10 @@ tests/test_replay_explorer_surface.py
 
 ---
 
+## Status
+
+**Complete on `main`** — merged [PR #37](https://github.com/m-cahill/starlab/pull/37) (merge commit `41d62056e1956627b63152221932dc9c2423429c`; **authoritative PR-head CI** [`24225153475`](https://github.com/m-cahill/starlab/actions/runs/24225153475); **merge-boundary `main` CI** [`24226308356`](https://github.com/m-cahill/starlab/actions/runs/24226308356)); closeout docs `M31_run1.md`, `M31_summary.md`, `M31_audit.md`; ledger `docs/starlab.md` updated; **M32** stubs only.
+
+---
+
 *Plan adapted from M31 charter; preserves M30-reserved narrow proof and explicit non-claims.*
