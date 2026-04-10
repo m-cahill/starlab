@@ -1,0 +1,45 @@
+{
+  "bounded_excerpt_policy": {
+    "combat_scouting_max": 6,
+    "economy_max": 6,
+    "max_panels_default": 5,
+    "observation_scalar_entries_max": 12,
+    "timeline_max": 8
+  },
+  "delegate_frequency": {
+    "information": 1,
+    "production": 2
+  },
+  "governed_asset_classes": [
+    "m14_bundle_json",
+    "m10_timeline",
+    "m11_build_order_economy",
+    "m12_combat_scouting_visibility",
+    "m13_slices",
+    "m16_canonical_state",
+    "m18_observation_surface",
+    "m30_replay_hierarchical_imitation_agent",
+    "m29_hierarchical_trace_schema"
+  ],
+  "missing_or_unavailable_upstream_count": 2,
+  "non_claims": [
+    "benchmark_integrity_not_claimed",
+    "leaderboard_validity_not_claimed",
+    "live_sc2_execution_not_claimed",
+    "replay_execution_equivalence_not_claimed",
+    "raw_sc2_action_legality_not_claimed",
+    "full_replay_coverage_not_claimed_hosted_ui_not_claimed",
+    "m32_flagship_proof_pack_not_claimed",
+    "deployment_readiness_not_claimed"
+  ],
+  "panel_count": 5,
+  "report_version": "starlab.replay_explorer_surface_report.v1",
+  "selection_policy_id": "starlab.m31.selection.slice_anchor_v1",
+  "slice_count": 5,
+  "surface_version": "starlab.replay_explorer_surface.v1",
+  "trace_validation_notes": [],
+  "worker_label_frequency": {
+    "other": 1,
+    "production_structure": 2
+  }
+}

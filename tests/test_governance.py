@@ -44,6 +44,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/learned_agent_evaluation_harness_v1.md",
     "docs/runtime/hierarchical_agent_interface_v1.md",
     "docs/runtime/replay_hierarchical_imitation_agent_v1.md",
+    "docs/runtime/replay_explorer_surface_v1.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -1009,6 +1010,26 @@ def test_m30_fixture_dir_exists() -> None:
     assert fx.is_dir()
     assert (fx / "replay_hierarchical_imitation_agent.json").is_file()
     assert (fx / "replay_hierarchical_imitation_agent_report.json").is_file()
+
+
+def test_m31_fixture_dir_exists() -> None:
+    fx = REPO_ROOT / "tests" / "fixtures" / "m31"
+    assert fx.is_dir()
+    assert (fx / "expected_replay_explorer_surface.json").is_file()
+    assert (fx / "expected_replay_explorer_surface_report.json").is_file()
+    assert (fx / "bundle" / "replay_bundle_manifest.json").is_file()
+
+
+def test_m31_explorer_modules_exist() -> None:
+    ex = REPO_ROOT / "starlab" / "explorer"
+    for name in (
+        "replay_explorer_models.py",
+        "replay_explorer_selection.py",
+        "replay_explorer_builder.py",
+        "replay_explorer_io.py",
+        "emit_replay_explorer_surface.py",
+    ):
+        assert (ex / name).is_file()
 
 
 def test_m09_metadata_modules_exist() -> None:
