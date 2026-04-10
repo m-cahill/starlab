@@ -14,6 +14,7 @@ from starlab.evaluation.learned_agent_models import (
     M28_METRIC_IDS_ORDERED,
     NON_CLAIMS_V1,
 )
+from starlab.evaluation.m14_bundle_loader import M14BundleLoader, default_load_m14_bundle
 from starlab.imitation.baseline_features import build_context_signature
 from starlab.imitation.baseline_models import MODEL_FAMILY
 from starlab.imitation.dataset_models import REPLAY_TRAINING_DATASET_VERSION
@@ -22,13 +23,13 @@ from starlab.imitation.replay_observation_materialization import (
     materialize_observation_for_observation_request,
 )
 from starlab.runs.json_util import canonical_json_dumps, sha256_hex_of_canonical_json
-from starlab.state.canonical_state_inputs import load_m14_bundle
 
 
 def index_bundle_directories_for_dataset(
     *,
     bundle_dirs: list[Path],
     required_bundle_ids: set[str],
+    bundle_loader: M14BundleLoader | None = None,
 ) -> dict[str, Path]:
     """Map ``bundle_id`` → resolved bundle directory path.
 
@@ -40,9 +41,10 @@ def index_bundle_directories_for_dataset(
         msg = "dataset references no bundle_id values"
         raise ValueError(msg)
 
+    loader = bundle_loader if bundle_loader is not None else default_load_m14_bundle
     seen: dict[str, Path] = {}
     for d in sorted(bundle_dirs, key=lambda p: str(p.resolve())):
-        bundle, err = load_m14_bundle(d)
+        bundle, err = loader(d)
         if bundle is None:
             msg = err or f"failed to load bundle directory {d}"
             raise ValueError(msg)
@@ -178,6 +180,7 @@ def build_learned_agent_evaluation_artifacts(
     dataset: dict[str, Any],
     bundle_dirs: list[Path],
     evaluation_split: str = "test",
+    bundle_loader: M14BundleLoader | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Evaluate frozen M27 baseline on governed held-out examples; emit evaluation + report."""
 
@@ -232,6 +235,7 @@ def build_learned_agent_evaluation_artifacts(
     bundle_index = index_bundle_directories_for_dataset(
         bundle_dirs=bundle_dirs,
         required_bundle_ids=required_ids,
+        bundle_loader=bundle_loader,
     )
 
     test_rows: list[tuple[str, str, str]] = []  # example_id, y_true, signature materialization path
@@ -390,6 +394,7 @@ def write_learned_agent_evaluation_artifacts(
     bundle_dirs: list[Path],
     output_dir: Path,
     evaluation_split: str = "test",
+    bundle_loader: M14BundleLoader | None = None,
 ) -> tuple[Path, Path]:
     """Load JSON inputs from disk and write evaluation artifacts."""
 
@@ -408,6 +413,7 @@ def write_learned_agent_evaluation_artifacts(
         dataset=raw_d,
         bundle_dirs=bundle_dirs,
         evaluation_split=evaluation_split,
+        bundle_loader=bundle_loader,
     )
 
     from starlab.evaluation.learned_agent_models import (

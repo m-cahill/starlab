@@ -91,17 +91,19 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    assert 25 <= n <= 35, f"smoke count {n} outside 25–35 band"
+    assert 25 <= n <= 45, f"smoke count {n} outside 25–45 band"
 
 
-def test_ledger_milestone_rows_m32_m37() -> None:
+def test_ledger_milestone_rows_m32_m39() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "| M32 | Audit Closure I" in text
     assert "| M33 | Audit Closure II" in text
     assert "| M34 | Audit Closure III" in text
-    assert "| M35 | Public Flagship Proof Pack" in text
-    assert "| M36 | SC2 Substrate Review" in text
-    assert "| M37 | Platform Boundary Review" in text
+    assert "| M35 | Audit Closure IV" in text
+    assert "| M36 | Audit Closure V" in text
+    assert "| M37 | Public Flagship Proof Pack" in text
+    assert "| M38 | SC2 Substrate Review" in text
+    assert "| M39 | Platform Boundary Review" in text
 
 
 def test_no_flagship_proof_pack_product_module_yet() -> None:

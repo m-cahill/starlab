@@ -42,3 +42,30 @@ def load_json_object(path: Path) -> tuple[dict[str, Any] | None, str | None]:
     except (OSError, UnicodeError) as exc:
         return None, str(exc)
     return parse_json_object_text(raw)
+
+
+def load_json_object_strict(path: Path) -> dict[str, Any]:
+    """Read ``path`` and return a single JSON object, or raise :exc:`ValueError`.
+
+    Single contract for strict callers (M35): :exc:`ValueError` on read failure,
+    invalid JSON, or a non-object JSON root.
+    """
+
+    try:
+        raw = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeError) as exc:
+        msg = f"{path}: {exc}"
+        raise ValueError(msg) from exc
+    obj, err = parse_json_object_text(raw)
+    if err is None:
+        assert obj is not None
+        return obj
+    if err == JSON_ROOT_MUST_BE_OBJECT:
+        msg = f"{path}: JSON root must be an object"
+        raise ValueError(msg)
+    try:
+        json.loads(raw)
+    except json.JSONDecodeError as exc:
+        msg = f"invalid JSON in {path}: {exc}"
+        raise ValueError(msg) from exc
+    raise RuntimeError("unreachable")

@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 import hashlib
-import json
 from pathlib import Path
 from typing import Any
 
-from starlab._io import JSON_ROOT_MUST_BE_OBJECT, parse_json_object_text
+from starlab._io import load_json_object_strict as load_json_object
 from starlab.imitation.dataset_models import (
     APPROVED_TARGET_SEMANTIC_KINDS,
     LABEL_POLICY_ID,
@@ -19,24 +18,6 @@ from starlab.imitation.dataset_models import (
     UNSAFE_INTAKE_STATUSES,
 )
 from starlab.runs.json_util import sha256_hex_of_canonical_json
-
-
-def load_json_object(path: Path) -> dict[str, Any]:
-    """Load JSON object from ``path``; propagate :exc:`json.JSONDecodeError` on decode failure."""
-
-    raw = path.read_text(encoding="utf-8")
-    obj, err = parse_json_object_text(raw)
-    if err is None:
-        assert obj is not None
-        return obj
-    if err == JSON_ROOT_MUST_BE_OBJECT:
-        msg = f"{path}: JSON root must be an object"
-        raise ValueError(msg)
-    try:
-        json.loads(raw)
-    except json.JSONDecodeError:
-        raise
-    raise RuntimeError("unreachable")
 
 
 def split_mod100_from_example_id(example_id: str) -> str:
@@ -328,3 +309,11 @@ def build_replay_training_dataset_artifacts(
     }
 
     return dataset, report
+
+
+__all__ = [
+    "build_replay_training_dataset_artifacts",
+    "load_json_object",
+    "map_timeline_to_coarse_label",
+    "split_mod100_from_example_id",
+]

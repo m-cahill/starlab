@@ -72,6 +72,34 @@ def test_m35_milestone_stub_files_exist() -> None:
 
 
 @pytest.mark.smoke
+def test_m36_milestone_stub_files_exist() -> None:
+    m36 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M36"
+    assert (m36 / "M36_plan.md").is_file()
+    assert (m36 / "M36_toolcalls.md").is_file()
+
+
+@pytest.mark.smoke
+def test_m37_milestone_stub_files_exist() -> None:
+    m37 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M37"
+    assert (m37 / "M37_plan.md").is_file()
+    assert (m37 / "M37_toolcalls.md").is_file()
+
+
+@pytest.mark.smoke
+def test_m38_milestone_stub_files_exist() -> None:
+    m38 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M38"
+    assert (m38 / "M38_plan.md").is_file()
+    assert (m38 / "M38_toolcalls.md").is_file()
+
+
+@pytest.mark.smoke
+def test_m39_milestone_stub_files_exist() -> None:
+    m39 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M39"
+    assert (m39 / "M39_plan.md").is_file()
+    assert (m39 / "M39_toolcalls.md").is_file()
+
+
+@pytest.mark.smoke
 def test_m34_complete_in_milestone_table() -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
