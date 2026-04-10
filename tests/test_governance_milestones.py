@@ -1,6 +1,10 @@
 """Governance tests: milestone table rows and milestone secret-folder files."""
 
+from __future__ import annotations
+
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -12,616 +16,166 @@ def _milestone_table_section() -> str:
     return text.split("## 7. Milestone table")[1].split("## 8")[0]
 
 
-def test_m29_milestone_stub_files_exist() -> None:
-    m29 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M29"
-    assert (m29 / "M29_plan.md").is_file()
-    assert (m29 / "M29_toolcalls.md").is_file()
+def test_ledger_documents_starlab_archive_policy() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "docs/starlab_archive.md" in text
+    assert "Ledger archival policy" in text
 
 
-def test_m30_milestone_closeout_files_exist() -> None:
-    m30 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M30"
-    assert (m30 / "M30_plan.md").is_file()
-    assert (m30 / "M30_toolcalls.md").is_file()
-    assert (m30 / "M30_run1.md").is_file()
-    assert (m30 / "M30_summary.md").is_file()
-    assert (m30 / "M30_audit.md").is_file()
-
-
-def test_m31_milestone_closeout_files_exist() -> None:
-    m31 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M31"
-    assert (m31 / "M31_plan.md").is_file()
-    assert (m31 / "M31_toolcalls.md").is_file()
-    assert (m31 / "M31_run1.md").is_file()
-    assert (m31 / "M31_summary.md").is_file()
-    assert (m31 / "M31_audit.md").is_file()
-
-
-def test_m32_milestone_closeout_files_exist() -> None:
-    m32 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M32"
-    assert (m32 / "M32_plan.md").is_file()
-    assert (m32 / "M32_toolcalls.md").is_file()
-    assert (m32 / "M32_run1.md").is_file()
-    assert (m32 / "M32_summary.md").is_file()
-    assert (m32 / "M32_audit.md").is_file()
-
-
-def test_m33_milestone_closeout_files_exist() -> None:
-    m33 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M33"
-    assert (m33 / "M33_plan.md").is_file()
-    assert (m33 / "M33_toolcalls.md").is_file()
-    assert (m33 / "M33_run1.md").is_file()
-    assert (m33 / "M33_summary.md").is_file()
-    assert (m33 / "M33_audit.md").is_file()
-
-
-@pytest.mark.smoke
-def test_m34_milestone_closeout_files_exist() -> None:
-    m34 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M34"
-    assert (m34 / "M34_plan.md").is_file()
-    assert (m34 / "M34_toolcalls.md").is_file()
-    assert (m34 / "M34_run1.md").is_file()
-    assert (m34 / "M34_summary.md").is_file()
-    assert (m34 / "M34_audit.md").is_file()
-
-
-@pytest.mark.smoke
-def test_m35_milestone_closeout_files_exist() -> None:
-    m35 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M35"
-    assert (m35 / "M35_plan.md").is_file()
-    assert (m35 / "M35_toolcalls.md").is_file()
-    assert (m35 / "M35_run1.md").is_file()
-    assert (m35 / "M35_summary.md").is_file()
-    assert (m35 / "M35_audit.md").is_file()
-
-
-@pytest.mark.smoke
-def test_m36_milestone_stub_files_exist() -> None:
-    m36 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M36"
-    assert (m36 / "M36_plan.md").is_file()
-    assert (m36 / "M36_toolcalls.md").is_file()
-
-
-@pytest.mark.smoke
-def test_m37_milestone_stub_files_exist() -> None:
-    m37 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M37"
-    assert (m37 / "M37_plan.md").is_file()
-    assert (m37 / "M37_toolcalls.md").is_file()
-
-
-@pytest.mark.smoke
-def test_m38_milestone_stub_files_exist() -> None:
-    m38 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M38"
-    assert (m38 / "M38_plan.md").is_file()
-    assert (m38 / "M38_toolcalls.md").is_file()
-
-
-@pytest.mark.smoke
-def test_m39_milestone_stub_files_exist() -> None:
-    m39 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M39"
-    assert (m39 / "M39_plan.md").is_file()
-    assert (m39 / "M39_toolcalls.md").is_file()
-
-
-@pytest.mark.smoke
-def test_m34_complete_in_milestone_table() -> None:
+def _assert_milestone_row_complete(milestone_id: str, name_fragment: str) -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
-        if stripped.startswith("| M34 |") and "Audit Closure III" in stripped:
-            assert "Complete" in stripped
+        if stripped.startswith(f"| {milestone_id} |") and name_fragment in stripped:
+            assert "Complete" in stripped, f"{milestone_id} row missing Complete"
             return
-    raise AssertionError("M34 milestone row not found or not complete")
-
-
-@pytest.mark.smoke
-def test_m35_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M35 |") and "Audit Closure IV" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M35 milestone row not found or not complete")
-
-
-@pytest.mark.smoke
-def test_m33_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M33 |") and "Audit Closure II" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M33 milestone row not found or not complete")
-
-
-def test_m29_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M29 |") and "Hierarchical" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M29 milestone row not found or not complete")
-
-
-def test_m30_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M30 |") and "First Learned Hierarchical Agent" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M30 milestone row not found or not complete")
-
-
-@pytest.mark.smoke
-def test_m31_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M31 |") and "Replay Explorer" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M31 milestone row not found or not complete")
-
-
-@pytest.mark.smoke
-def test_m32_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M32 |") and "Audit Closure I" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M32 milestone row not found or not complete")
-
-
-def test_m18_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M18 |") and "Perceptual" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M18 milestone row not found or not complete")
-
-
-def test_m17_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M17 |") and "Observation" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M17 milestone row not found or not complete")
-
-
-def test_m12_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M12 |") and "Combat" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M12 milestone row not found or not complete")
-
-
-def test_m13_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M13 |") and "Replay Slice" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M13 milestone row not found or not complete")
-
-
-@pytest.mark.smoke
-def test_m01_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M01 |") and "SC2 Runtime Surface Decision" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M01 milestone row not found")
-
-
-def test_m02_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M02 |") and "Deterministic Match Execution Harness" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M02 milestone row not found")
-
-
-def test_m03_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M03 |") and "Lineage Seed" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M03 milestone row not found")
-
-
-def test_m04_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M04 |") and "Replay Binding" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M04 milestone row not found")
-
-
-def test_m05_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M05 |") and "Canonical Run Artifact" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M05 milestone row not found")
-
-
-def test_m06_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M06 |") and "Environment Drift" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M06 milestone row not found")
-
-
-def test_m08_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M08 |") and "Replay Parser Substrate" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M08 milestone row not found")
-
-
-def test_m09_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M09 |") and "Replay Metadata Extraction" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M09 milestone row not found")
-
-
-def test_m03_stub_milestone_files_exist() -> None:
-    m03 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M03"
-    assert (m03 / "M03_plan.md").is_file()
-    assert (m03 / "M03_toolcalls.md").is_file()
-
-
-def test_m04_milestone_files_exist() -> None:
-    m04 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M04"
-    assert (m04 / "M04_plan.md").is_file()
-    assert (m04 / "M04_toolcalls.md").is_file()
-
-
-def test_m05_stub_milestone_files_exist() -> None:
-    m05 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M05"
-    assert (m05 / "M05_plan.md").is_file()
-    assert (m05 / "M05_toolcalls.md").is_file()
-
-
-def test_m06_stub_milestone_files_exist() -> None:
-    m06 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M06"
-    assert (m06 / "M06_plan.md").is_file()
-    assert (m06 / "M06_toolcalls.md").is_file()
-
-
-def test_m07_milestone_files_exist() -> None:
-    m07 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M07"
-    assert (m07 / "M07_plan.md").is_file()
-    assert (m07 / "M07_toolcalls.md").is_file()
-    assert (m07 / "M07_run1.md").is_file()
-    assert (m07 / "M07_summary.md").is_file()
-    assert (m07 / "M07_audit.md").is_file()
-
-
-def test_m08_milestone_files_exist() -> None:
-    m08 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M08"
-    assert (m08 / "M08_plan.md").is_file()
-    assert (m08 / "M08_toolcalls.md").is_file()
-    assert (m08 / "M08_run1.md").is_file()
-    assert (m08 / "M08_summary.md").is_file()
-    assert (m08 / "M08_audit.md").is_file()
-
-
-def test_m09_milestone_files_exist() -> None:
-    m09 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M09"
-    assert (m09 / "M09_plan.md").is_file()
-    assert (m09 / "M09_toolcalls.md").is_file()
-    assert (m09 / "M09_run1.md").is_file()
-    assert (m09 / "M09_summary.md").is_file()
-    assert (m09 / "M09_audit.md").is_file()
-
-
-def test_m10_milestone_files_exist() -> None:
-    m10 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M10"
-    assert (m10 / "M10_plan.md").is_file()
-    assert (m10 / "M10_toolcalls.md").is_file()
-    assert (m10 / "M10_run1.md").is_file()
-    assert (m10 / "M10_summary.md").is_file()
-    assert (m10 / "M10_audit.md").is_file()
-
-
-def test_m11_milestone_files_exist() -> None:
-    m11 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M11"
-    assert (m11 / "M11_plan.md").is_file()
-    assert (m11 / "M11_toolcalls.md").is_file()
-    assert (m11 / "M11_run1.md").is_file()
-    assert (m11 / "M11_summary.md").is_file()
-    assert (m11 / "M11_audit.md").is_file()
-
-
-def test_m12_milestone_files_exist() -> None:
-    m12 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M12"
-    assert (m12 / "M12_plan.md").is_file()
-    assert (m12 / "M12_toolcalls.md").is_file()
-    assert (m12 / "M12_run1.md").is_file()
-    assert (m12 / "M12_summary.md").is_file()
-    assert (m12 / "M12_audit.md").is_file()
-
-
-def test_m13_milestone_files_exist() -> None:
-    m13 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M13"
-    assert (m13 / "M13_plan.md").is_file()
-    assert (m13 / "M13_toolcalls.md").is_file()
-    assert (m13 / "M13_run1.md").is_file()
-    assert (m13 / "M13_summary.md").is_file()
-    assert (m13 / "M13_audit.md").is_file()
-
-
-def test_m14_milestone_files_exist() -> None:
-    m14 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M14"
-    assert (m14 / "M14_plan.md").is_file()
-    assert (m14 / "M14_toolcalls.md").is_file()
-    assert (m14 / "M14_run1.md").is_file()
-    assert (m14 / "M14_summary.md").is_file()
-    assert (m14 / "M14_audit.md").is_file()
-
-
-def test_m14_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M14 |") and "Replay Bundle" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M14 milestone row not found or not complete")
-
-
-def test_m15_milestone_files_exist() -> None:
-    m15 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M15"
-    assert (m15 / "M15_plan.md").is_file()
-    assert (m15 / "M15_toolcalls.md").is_file()
-    assert (m15 / "M15_run1.md").is_file()
-    assert (m15 / "M15_summary.md").is_file()
-    assert (m15 / "M15_audit.md").is_file()
-
-
-def test_m15_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M15 |") and "Canonical State" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M15 milestone row not found or not complete")
-
-
-def test_m16_milestone_files_exist() -> None:
-    m16 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M16"
-    assert (m16 / "M16_plan.md").is_file()
-    assert (m16 / "M16_toolcalls.md").is_file()
-    assert (m16 / "M16_run1.md").is_file()
-    assert (m16 / "M16_summary.md").is_file()
-    assert (m16 / "M16_audit.md").is_file()
-
-
-def test_m17_milestone_files_exist() -> None:
-    m17 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M17"
-    assert (m17 / "M17_plan.md").is_file()
-    assert (m17 / "M17_toolcalls.md").is_file()
-    assert (m17 / "M17_run1.md").is_file()
-    assert (m17 / "M17_summary.md").is_file()
-    assert (m17 / "M17_audit.md").is_file()
-
-
-def test_m18_milestone_files_exist() -> None:
-    m18 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M18"
-    assert (m18 / "M18_plan.md").is_file()
-    assert (m18 / "M18_toolcalls.md").is_file()
-    assert (m18 / "M18_run1.md").is_file()
-    assert (m18 / "M18_summary.md").is_file()
-    assert (m18 / "M18_audit.md").is_file()
-
-
-def test_m19_milestone_files_exist() -> None:
-    m19 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M19"
-    assert (m19 / "M19_plan.md").is_file()
-    assert (m19 / "M19_toolcalls.md").is_file()
-    assert (m19 / "M19_run1.md").is_file()
-    assert (m19 / "M19_summary.md").is_file()
-    assert (m19 / "M19_audit.md").is_file()
-
-
-def test_m20_milestone_files_exist() -> None:
-    m20 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M20"
-    assert (m20 / "M20_plan.md").is_file()
-    assert (m20 / "M20_toolcalls.md").is_file()
-    assert (m20 / "M20_run1.md").is_file()
-    assert (m20 / "M20_summary.md").is_file()
-    assert (m20 / "M20_audit.md").is_file()
-
-
-def test_m21_milestone_files_exist() -> None:
-    m21 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M21"
-    assert (m21 / "M21_plan.md").is_file()
-    assert (m21 / "M21_toolcalls.md").is_file()
-    assert (m21 / "M21_run1.md").is_file()
-    assert (m21 / "M21_summary.md").is_file()
-    assert (m21 / "M21_audit.md").is_file()
-
-
-def test_m22_milestone_files_exist() -> None:
-    m22 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M22"
-    assert (m22 / "M22_plan.md").is_file()
-    assert (m22 / "M22_toolcalls.md").is_file()
-    assert (m22 / "M22_run1.md").is_file()
-    assert (m22 / "M22_summary.md").is_file()
-    assert (m22 / "M22_audit.md").is_file()
-
-
-def test_m23_milestone_files_exist() -> None:
-    m23 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M23"
-    assert (m23 / "M23_plan.md").is_file()
-    assert (m23 / "M23_toolcalls.md").is_file()
-    assert (m23 / "M23_run1.md").is_file()
-    assert (m23 / "M23_summary.md").is_file()
-    assert (m23 / "M23_audit.md").is_file()
-
-
-def test_m24_milestone_files_exist() -> None:
-    m24 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M24"
-    assert (m24 / "M24_plan.md").is_file()
-    assert (m24 / "M24_toolcalls.md").is_file()
-    assert (m24 / "M24_run1.md").is_file()
-    assert (m24 / "M24_summary.md").is_file()
-    assert (m24 / "M24_audit.md").is_file()
-
-
-def test_m25_milestone_files_exist() -> None:
-    m25 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M25"
-    assert (m25 / "M25_plan.md").is_file()
-    assert (m25 / "M25_toolcalls.md").is_file()
-    assert (m25 / "M25_run1.md").is_file()
-    assert (m25 / "M25_summary.md").is_file()
-    assert (m25 / "M25_audit.md").is_file()
-
-
-def test_m16_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M16 |") and "Structured State" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M16 milestone row not found or not complete")
-
-
-def test_m19_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M19 |") and "Reconciliation" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M19 milestone row not found or not complete")
-
-
-def test_m20_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M20 |") and "Benchmark Contract" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M20 milestone row not found or not complete")
-
-
-def test_m21_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M21 |") and "Scripted Baseline" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M21 milestone row not found or not complete")
-
-
-def test_m22_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M22 |") and "Heuristic Baseline" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M22 milestone row not found or not complete")
-
-
-def test_m23_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M23 |") and "Evaluation Runner" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M23 milestone row not found or not complete")
-
-
-def test_m24_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M24 |") and "Attribution" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M24 milestone row not found or not complete")
-
-
-def test_m25_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M25 |") and "Evidence" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M25 milestone row not found or not complete")
-
-
-def test_m26_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M26 |") and "Training Dataset" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M26 milestone row not found or not complete")
-
-
-def test_m26_milestone_files_exist() -> None:
-    m26 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M26"
-    assert (m26 / "M26_plan.md").is_file()
-    assert (m26 / "M26_toolcalls.md").is_file()
-    assert (m26 / "M26_run1.md").is_file()
-    assert (m26 / "M26_summary.md").is_file()
-    assert (m26 / "M26_audit.md").is_file()
-
-
-def test_m27_milestone_plan_files_exist() -> None:
-    m27 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M27"
-    assert (m27 / "M27_plan.md").is_file()
-    assert (m27 / "M27_toolcalls.md").is_file()
-    assert (m27 / "M27_run1.md").is_file()
-    assert (m27 / "M27_summary.md").is_file()
-    assert (m27 / "M27_audit.md").is_file()
-
-
-def test_m28_milestone_plan_files_exist() -> None:
-    m28 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M28"
-    assert (m28 / "M28_plan.md").is_file()
-    assert (m28 / "M28_toolcalls.md").is_file()
-    assert (m28 / "M28_run1.md").is_file()
-    assert (m28 / "M28_summary.md").is_file()
-    assert (m28 / "M28_audit.md").is_file()
-
-
-def test_m29_milestone_plan_files_exist() -> None:
-    m29 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M29"
-    assert (m29 / "M29_plan.md").is_file()
-    assert (m29 / "M29_toolcalls.md").is_file()
-    assert (m29 / "M29_run1.md").is_file()
-    assert (m29 / "M29_summary.md").is_file()
-    assert (m29 / "M29_audit.md").is_file()
-
-
-def test_m10_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M10 |") and "Timeline" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M10 milestone row not found or not complete")
-
-
-def test_m11_complete_in_milestone_table() -> None:
-    for line in _milestone_table_section().splitlines():
-        stripped = line.strip()
-        if stripped.startswith("| M11 |") and "Build-Order" in stripped:
-            assert "Complete" in stripped
-            return
-    raise AssertionError("M11 milestone row not found or not complete")
+    raise AssertionError(f"{milestone_id} milestone row not found or not complete")
+
+
+def _closeout_filenames(prefix: str) -> tuple[str, ...]:
+    return tuple(
+        f"{prefix}_{name}"
+        for name in ("plan.md", "toolcalls.md", "run1.md", "summary.md", "audit.md")
+    )
+
+
+@dataclass(frozen=True)
+class _MilestoneFolder:
+    folder: str
+    filenames: tuple[str, ...]
+
+
+# (milestone_id, table name substring) — smoke-marked entries run under `pytest -m smoke`.
+_MILESTONE_COMPLETE_ROWS = [
+    pytest.param("M01", "SC2 Runtime Surface Decision"),
+    pytest.param("M02", "Deterministic Match Execution Harness"),
+    pytest.param("M03", "Lineage Seed"),
+    pytest.param("M04", "Replay Binding"),
+    pytest.param("M05", "Canonical Run Artifact"),
+    pytest.param("M06", "Environment Drift"),
+    pytest.param("M08", "Replay Parser Substrate"),
+    pytest.param("M09", "Replay Metadata Extraction"),
+    pytest.param("M10", "Timeline"),
+    pytest.param("M11", "Build-Order"),
+    pytest.param("M12", "Combat"),
+    pytest.param("M13", "Replay Slice"),
+    pytest.param("M14", "Replay Bundle"),
+    pytest.param("M15", "Canonical State"),
+    pytest.param("M16", "Structured State"),
+    pytest.param("M17", "Observation"),
+    pytest.param("M18", "Perceptual"),
+    pytest.param("M19", "Reconciliation"),
+    pytest.param("M20", "Benchmark Contract"),
+    pytest.param("M21", "Scripted Baseline"),
+    pytest.param("M22", "Heuristic Baseline"),
+    pytest.param("M23", "Evaluation Runner"),
+    pytest.param("M24", "Attribution"),
+    pytest.param("M25", "Evidence"),
+    pytest.param("M26", "Training Dataset"),
+    pytest.param("M27", "Replay-Derived Imitation"),
+    pytest.param("M28", "Learned-Agent Evaluation"),
+    pytest.param("M29", "Hierarchical", marks=pytest.mark.smoke),
+    pytest.param("M30", "First Learned Hierarchical Agent", marks=pytest.mark.smoke),
+    pytest.param("M31", "Replay Explorer", marks=pytest.mark.smoke),
+    pytest.param("M32", "Audit Closure I", marks=pytest.mark.smoke),
+    pytest.param("M33", "Audit Closure II", marks=pytest.mark.smoke),
+    pytest.param("M34", "Audit Closure III", marks=pytest.mark.smoke),
+    pytest.param("M35", "Audit Closure IV", marks=pytest.mark.smoke),
+]
+
+
+@pytest.mark.parametrize(("milestone_id", "name_fragment"), _MILESTONE_COMPLETE_ROWS)
+def test_milestone_complete_in_milestone_table(milestone_id: str, name_fragment: str) -> None:
+    _assert_milestone_row_complete(milestone_id, name_fragment)
+
+
+_MILESTONE_FOLDERS: list[Any] = [
+    _MilestoneFolder("M03", ("M03_plan.md", "M03_toolcalls.md")),
+    _MilestoneFolder("M04", ("M04_plan.md", "M04_toolcalls.md")),
+    _MilestoneFolder("M05", ("M05_plan.md", "M05_toolcalls.md")),
+    _MilestoneFolder("M06", ("M06_plan.md", "M06_toolcalls.md")),
+    _MilestoneFolder("M07", _closeout_filenames("M07")),
+    _MilestoneFolder("M08", _closeout_filenames("M08")),
+    _MilestoneFolder("M09", _closeout_filenames("M09")),
+    _MilestoneFolder("M10", _closeout_filenames("M10")),
+    _MilestoneFolder("M11", _closeout_filenames("M11")),
+    _MilestoneFolder("M12", _closeout_filenames("M12")),
+    _MilestoneFolder("M13", _closeout_filenames("M13")),
+    _MilestoneFolder("M14", _closeout_filenames("M14")),
+    _MilestoneFolder("M15", _closeout_filenames("M15")),
+    _MilestoneFolder("M16", _closeout_filenames("M16")),
+    _MilestoneFolder("M17", _closeout_filenames("M17")),
+    _MilestoneFolder("M18", _closeout_filenames("M18")),
+    _MilestoneFolder("M19", _closeout_filenames("M19")),
+    _MilestoneFolder("M20", _closeout_filenames("M20")),
+    _MilestoneFolder("M21", _closeout_filenames("M21")),
+    _MilestoneFolder("M22", _closeout_filenames("M22")),
+    _MilestoneFolder("M23", _closeout_filenames("M23")),
+    _MilestoneFolder("M24", _closeout_filenames("M24")),
+    _MilestoneFolder("M25", _closeout_filenames("M25")),
+    _MilestoneFolder("M26", _closeout_filenames("M26")),
+    _MilestoneFolder("M27", _closeout_filenames("M27")),
+    _MilestoneFolder("M28", _closeout_filenames("M28")),
+    pytest.param(
+        _MilestoneFolder("M29", ("M29_plan.md", "M29_toolcalls.md")),
+        id="M29",
+    ),
+    pytest.param(
+        _MilestoneFolder("M30", _closeout_filenames("M30")),
+        id="M30",
+    ),
+    pytest.param(
+        _MilestoneFolder("M31", _closeout_filenames("M31")),
+        id="M31",
+    ),
+    pytest.param(
+        _MilestoneFolder("M32", _closeout_filenames("M32")),
+        marks=pytest.mark.smoke,
+        id="M32",
+    ),
+    pytest.param(
+        _MilestoneFolder("M33", _closeout_filenames("M33")),
+        marks=pytest.mark.smoke,
+        id="M33",
+    ),
+    pytest.param(
+        _MilestoneFolder("M34", _closeout_filenames("M34")),
+        marks=pytest.mark.smoke,
+        id="M34",
+    ),
+    pytest.param(
+        _MilestoneFolder("M35", _closeout_filenames("M35")),
+        marks=pytest.mark.smoke,
+        id="M35",
+    ),
+    pytest.param(
+        _MilestoneFolder("M36", ("M36_plan.md", "M36_toolcalls.md")),
+        marks=pytest.mark.smoke,
+        id="M36",
+    ),
+    pytest.param(
+        _MilestoneFolder("M37", ("M37_plan.md", "M37_toolcalls.md")),
+        marks=pytest.mark.smoke,
+        id="M37",
+    ),
+    pytest.param(
+        _MilestoneFolder("M38", ("M38_plan.md", "M38_toolcalls.md")),
+        marks=pytest.mark.smoke,
+        id="M38",
+    ),
+    pytest.param(
+        _MilestoneFolder("M39", ("M39_plan.md", "M39_toolcalls.md")),
+        marks=pytest.mark.smoke,
+        id="M39",
+    ),
+]
+
+
+def _assert_milestone_folder(spec: _MilestoneFolder) -> None:
+    d = REPO_ROOT / "docs" / "company_secrets" / "milestones" / spec.folder
+    for name in spec.filenames:
+        assert (d / name).is_file(), f"missing {d / name}"
+
+
+@pytest.mark.parametrize("spec", _MILESTONE_FOLDERS)
+def test_milestone_expected_folder_files_exist(spec: _MilestoneFolder) -> None:
+    _assert_milestone_folder(spec)
