@@ -22,6 +22,8 @@ def test_ci_workflow_uploads_coverage_and_junit() -> None:
     assert "coverage.xml" in wf
     assert "pytest-junit.xml" in wf
     assert "--junitxml=pytest-junit.xml" in wf
+    assert "jobs:" in wf
+    assert "tests:" in wf
     assert "actions/checkout@" in wf
     assert re.search(r"actions/checkout@[0-9a-f]{40}", wf)
     assert re.search(r"actions/setup-python@[0-9a-f]{40}", wf)

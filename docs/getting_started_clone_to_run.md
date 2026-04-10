@@ -20,6 +20,8 @@ On Windows PowerShell, use the same commands (replace `python` with `py -3.11` i
 
 ## Verify quality gates
 
+Locally, mirror the CI **`quality`** + **`tests`** jobs:
+
 ```bash
 ruff check starlab tests
 ruff format --check starlab tests
@@ -35,6 +37,8 @@ make lint
 make typecheck
 make test
 ```
+
+CI splits these into parallel **`quality`**, **`smoke`**, **`tests`**, **`security`**, **`fieldtest`**, and a final **`governance`** aggregate — see `docs/runtime/ci_tiering_field_test_readiness_v1.md`.
 
 ## Fast smoke lane
 
