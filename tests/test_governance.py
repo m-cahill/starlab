@@ -869,6 +869,9 @@ def test_m28_milestone_plan_files_exist() -> None:
     m28 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M28"
     assert (m28 / "M28_plan.md").is_file()
     assert (m28 / "M28_toolcalls.md").is_file()
+    assert (m28 / "M28_run1.md").is_file()
+    assert (m28 / "M28_summary.md").is_file()
+    assert (m28 / "M28_audit.md").is_file()
 
 
 def test_m26_imitation_modules_exist() -> None:
