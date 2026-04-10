@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from starlab._io import load_json_object
 from starlab.runs.json_util import canonical_json_dumps, sha256_hex_of_canonical_json
 from starlab.state.canonical_state_catalog import (
     NON_CLAIMS_V1,
@@ -24,16 +25,6 @@ from starlab.state.canonical_state_schema import (
     build_canonical_state_json_schema,
     validate_canonical_state_frame,
 )
-
-
-def load_json_object(path: Path) -> tuple[dict[str, Any] | None, str | None]:
-    try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        return None, str(exc)
-    if not isinstance(raw, dict):
-        return None, "JSON root must be an object"
-    return raw, None
 
 
 def build_canonical_state_schema_report(

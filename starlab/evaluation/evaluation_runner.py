@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 from typing import Any, Literal
 
+from starlab._io import JSON_ROOT_MUST_BE_OBJECT, parse_json_object_text
 from starlab.benchmarks.benchmark_contract_schema import validate_benchmark_contract
 from starlab.benchmarks.benchmark_scorecard_schema import validate_benchmark_scorecard
 from starlab.evaluation.evaluation_runner_models import (
@@ -19,30 +20,38 @@ def load_benchmark_contract_json(path: Path) -> dict[str, Any]:
     """Load and return a benchmark contract object."""
 
     raw = path.read_text(encoding="utf-8")
+    obj, err = parse_json_object_text(raw)
+    if err is None:
+        assert obj is not None
+        return obj
+    if err == JSON_ROOT_MUST_BE_OBJECT:
+        msg = "benchmark contract must be a JSON object"
+        raise TypeError(msg)
     try:
-        obj: Any = json.loads(raw)
+        json.loads(raw)
     except json.JSONDecodeError as exc:
         msg = f"invalid JSON in benchmark contract: {exc}"
         raise ValueError(msg) from exc
-    if not isinstance(obj, dict):
-        msg = "benchmark contract must be a JSON object"
-        raise TypeError(msg)
-    return obj
+    raise RuntimeError("unreachable")
 
 
 def load_suite_json(path: Path) -> dict[str, Any]:
     """Load a baseline suite JSON object."""
 
     raw = path.read_text(encoding="utf-8")
+    obj, err = parse_json_object_text(raw)
+    if err is None:
+        assert obj is not None
+        return obj
+    if err == JSON_ROOT_MUST_BE_OBJECT:
+        msg = "suite artifact must be a JSON object"
+        raise ValueError(msg)
     try:
-        obj: Any = json.loads(raw)
+        json.loads(raw)
     except json.JSONDecodeError as exc:
         msg = f"invalid JSON in suite artifact: {exc}"
         raise ValueError(msg) from exc
-    if not isinstance(obj, dict):
-        msg = "suite artifact must be a JSON object"
-        raise ValueError(msg)
-    return obj
+    raise RuntimeError("unreachable")
 
 
 def _require_keys(obj: dict[str, Any], keys: tuple[str, ...], *, label: str) -> None:

@@ -7,6 +7,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any, Literal
 
+from starlab._io import JSON_ROOT_MUST_BE_OBJECT, parse_json_object_text
 from starlab.evaluation.diagnostics_models import (
     EVALUATION_DIAGNOSTICS_NON_CLAIMS_V1,
     EVALUATION_DIAGNOSTICS_REPORT_VERSION,
@@ -22,15 +23,19 @@ def load_tournament_json(path: Path) -> dict[str, Any]:
     """Load ``evaluation_tournament.json`` as a dict."""
 
     raw = path.read_text(encoding="utf-8")
+    obj, err = parse_json_object_text(raw)
+    if err is None:
+        assert obj is not None
+        return obj
+    if err == JSON_ROOT_MUST_BE_OBJECT:
+        msg = "tournament artifact must be a JSON object"
+        raise TypeError(msg)
     try:
-        obj: Any = json.loads(raw)
+        json.loads(raw)
     except json.JSONDecodeError as exc:
         msg = f"invalid JSON in tournament artifact: {exc}"
         raise ValueError(msg) from exc
-    if not isinstance(obj, dict):
-        msg = "tournament artifact must be a JSON object"
-        raise TypeError(msg)
-    return obj
+    raise RuntimeError("unreachable")
 
 
 def _require_keys(obj: dict[str, Any], keys: tuple[str, ...], *, label: str) -> None:

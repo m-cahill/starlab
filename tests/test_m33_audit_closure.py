@@ -82,11 +82,11 @@ def test_operating_manual_links_ci_tiers_and_deferred_registry() -> None:
     assert "DeferredIssuesRegistry.md" in body
 
 
-def test_ledger_m34_stub_and_m33_predecessor_surfaces() -> None:
+def test_ledger_m35_stub_and_m34_predecessor_surfaces() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M35" in section
     assert "M34" in section
-    assert "Audit Closure III" in section
     assert "M33" in section
     assert "fieldtest-output" in section or "fieldtest" in section
     assert (
@@ -109,3 +109,9 @@ def test_m33_plan_is_complete_charter() -> None:
     assert "Acceptance criteria" in body
     assert "governance" in body.lower()
     assert "Complete on `main`" in body
+
+
+def test_m35_plan_stub_exists() -> None:
+    plan = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M35" / "M35_plan.md"
+    assert plan.is_file()
+    assert "M35" in plan.read_text(encoding="utf-8")
