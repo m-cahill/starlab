@@ -30,6 +30,8 @@ See `docs/getting_started_clone_to_run.md` and repository `Makefile` targets (`i
 
 The **`CI`** workflow runs parallel jobs; the final **`governance`** job aggregates success. See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for names, artifacts, and non-claims.
 
+Promotion readiness (v0 remains non-canonical): **`docs/diligence/operating_manual_promotion_readiness.md`**.
+
 | Tier | Operator takeaway |
 | ---- | ----------------- |
 | `quality` | Fix Ruff / Mypy before re-running full suite. |

@@ -62,6 +62,7 @@ Flows generally move **from replay-derived data toward evaluation and evidence s
 | `starlab.imitation` | Training dataset contract, imitation baseline, predictors. |
 | `starlab.hierarchy` | Hierarchical interface schema, learned hierarchical imitation agent. |
 | `starlab.explorer` | Replay explorer / operator evidence surface (M31). |
+| `starlab._io` | Internal JSON object load helpers for file-boundary I/O (M34 / DIR-003); not a general data-access layer. |
 
 ## Untrusted boundaries
 

@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from starlab._io import JSON_ROOT_MUST_BE_OBJECT, parse_json_object_text
 from starlab.evaluation.evidence_pack_models import (
     BASELINE_EVIDENCE_PACK_NON_CLAIMS_V1,
     BASELINE_EVIDENCE_PACK_REPORT_VERSION,
@@ -29,15 +30,19 @@ def load_json_object(path: Path) -> dict[str, Any]:
     """Load a JSON object from ``path``."""
 
     raw = path.read_text(encoding="utf-8")
+    obj, err = parse_json_object_text(raw)
+    if err is None:
+        assert obj is not None
+        return obj
+    if err == JSON_ROOT_MUST_BE_OBJECT:
+        msg = f"{path}: root must be a JSON object"
+        raise TypeError(msg)
     try:
-        obj: Any = json.loads(raw)
+        json.loads(raw)
     except json.JSONDecodeError as exc:
         msg = f"invalid JSON in {path}: {exc}"
         raise ValueError(msg) from exc
-    if not isinstance(obj, dict):
-        msg = f"{path}: root must be a JSON object"
-        raise TypeError(msg)
-    return obj
+    raise RuntimeError("unreachable")
 
 
 def _require_keys(obj: dict[str, Any], keys: tuple[str, ...], *, label: str) -> None:

@@ -7,7 +7,7 @@
 | **Milestone** | M34 |
 | **Name** | Audit Closure III — Structural Hygiene, Deferred-Issue Closure, and Operating Manual Promotion Prep |
 | **Phase** | V — Learning Paths, Evidence Surfaces, and Flagship Proof |
-| **Recommended branch** | *(to be set when M34 starts)* |
+| **Recommended branch** | `m34-audit-closure-iii-structural-hygiene-manual-prep` |
 
 ## Goal
 
@@ -21,6 +21,19 @@ Structural-hygiene and diligence closure: shared I/O extraction where appropriat
 - Operating manual promoted to canonical **v1** (M34 is **prep** unless explicitly scoped otherwise)  
 - Replay↔execution equivalence  
 
+## Deliverables (see repo)
+
+- `starlab/_io.py`, migrated callers, governance split (`tests/test_governance_*.py`), `tests/test_m34_audit_closure.py`, `.github/dependabot.yml`, `pyproject.toml` dev caps, `docs/diligence/operating_manual_promotion_readiness.md`, `docs/audit/broad_exception_boundaries.md`, registry + `docs/starlab.md` updates.
+
+## Acceptance criteria
+
+1. Single shared JSON helper; duplicated DIR-003 tuple loaders removed or wrapped.  
+2. `test_governance.py` replaced by split modules; coverage intent preserved.  
+3. DIR-005: documentation/validation closure documented.  
+4. DIR-006: caps + Dependabot.  
+5. Manual prep doc states v0 non-canonical status.  
+6. CI topology unchanged (`CI` / `governance`); `fail_under = 75.4`.
+
 ## Status
 
-**Stub only** — seeded at **M33** closeout (`docs/starlab.md`, §11). **No** M34 product code until the milestone is chartered and merged under normal CI.
+**Complete on branch** — merge evidence (PR, SHAs, tag `v0.0.34-m34`) **TBD** at merge; see `M34_run1.md`, `M34_summary.md`, `M34_audit.md`.

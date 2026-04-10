@@ -1,0 +1,20 @@
+# M34 (DIR-006): weekly, low-noise updates for pip and GitHub Actions on main.
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 3
+    target-branch: "main"
+    labels:
+      - "dependencies"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 2
+    target-branch: "main"
+    labels:
+      - "dependencies"

@@ -8,21 +8,26 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from starlab._io import JSON_ROOT_MUST_BE_OBJECT, parse_json_object_text
 from starlab.sc2.environment_drift import emit_m06_artifacts, matrix_to_json, report_to_json
 from starlab.sc2.runtime_smoke_matrix import CI_PROFILE, LOCAL_PROFILE
 
 
 def _load_json_object(path: Path, *, label: str) -> dict[str, Any]:
     raw = path.read_text(encoding="utf-8")
+    data, err = parse_json_object_text(raw)
+    if err is None:
+        assert data is not None
+        return data
+    if err == JSON_ROOT_MUST_BE_OBJECT:
+        msg = f"{label}: root must be a JSON object"
+        raise ValueError(msg)
     try:
-        data = json.loads(raw)
+        json.loads(raw)
     except json.JSONDecodeError as e:
         msg = f"{label}: invalid JSON ({e})"
         raise ValueError(msg) from e
-    if not isinstance(data, dict):
-        msg = f"{label}: root must be a JSON object"
-        raise ValueError(msg)
-    return data
+    raise RuntimeError("unreachable")
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from starlab._io import load_json_object
 from starlab.replays.parser_interfaces import (
     AdapterFailure,
     AdapterSuccess,
@@ -51,13 +52,7 @@ def read_replay_opaque(replay_path: Path) -> tuple[str | None, int | None, str |
 def load_optional_json(path: Path | None) -> tuple[dict[str, Any] | None, str | None]:
     if path is None:
         return None, None
-    try:
-        raw = json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
-        return None, str(exc)
-    if not isinstance(raw, dict):
-        return None, "JSON root must be an object"
-    return raw, None
+    return load_json_object(path)
 
 
 def _status_from_adapter_failure(kind: str) -> ParseStatus:
