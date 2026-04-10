@@ -87,4 +87,19 @@ Run at minimum:
 
 ## Status
 
-- **In progress** on branch `m36-audit-closure-v-governance-surface-rationalization-doc-density-control` — implementation started **2026-04-10**.
+- **Complete** on `main` — see **Closeout** below.
+
+---
+
+## Closeout (merged to `main`)
+
+- **PR:** [#47](https://github.com/m-cahill/starlab/pull/47)
+- **Final PR head SHA:** `63fe1168e8a4bb7961948526589aba3c0a01c9ba`
+- **Authoritative PR-head CI:** [`24266877684`](https://github.com/m-cahill/starlab/actions/runs/24266877684) — success
+- **Merge commit:** `e73a53b28a4b6eeb3a2c19dd358d928c64806e89`
+- **Merge-boundary `main` CI:** [`24266906173`](https://github.com/m-cahill/starlab/actions/runs/24266906173) — success
+- **Tag:** `v0.0.36-m36` on merge commit
+- **Superseded PR-head (not merge authority):** none recorded on final head
+- **Closeout docs:** `M36_run1.md`, `M36_summary.md`, `M36_audit.md`
+- **Post-merge doc closeout:** ledger + milestone artifacts may land in additional `main` commits after the merge commit — **not** substitute CI authority for the M36 implementation merge (authoritative remains **`24266877684`** + **`24266906173`**).
+- **Current program stub milestone:** **M37** (see `docs/starlab.md` §7 / §11).

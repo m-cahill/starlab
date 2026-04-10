@@ -80,6 +80,7 @@ _MILESTONE_COMPLETE_ROWS = [
     pytest.param("M33", "Audit Closure II", marks=pytest.mark.smoke),
     pytest.param("M34", "Audit Closure III", marks=pytest.mark.smoke),
     pytest.param("M35", "Audit Closure IV", marks=pytest.mark.smoke),
+    pytest.param("M36", "Audit Closure V", marks=pytest.mark.smoke),
 ]
 
 
@@ -148,7 +149,7 @@ _MILESTONE_FOLDERS: list[Any] = [
         id="M35",
     ),
     pytest.param(
-        _MilestoneFolder("M36", ("M36_plan.md", "M36_toolcalls.md")),
+        _MilestoneFolder("M36", _closeout_filenames("M36")),
         marks=pytest.mark.smoke,
         id="M36",
     ),
