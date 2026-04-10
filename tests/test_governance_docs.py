@@ -7,6 +7,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 _GOVERNANCE_DOCS = [
+    "docs/starlab_archive.md",
     "docs/architecture.md",
     "docs/getting_started_clone_to_run.md",
     "docs/starlab_operating_manual_v0.md",

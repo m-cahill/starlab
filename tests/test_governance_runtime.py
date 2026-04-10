@@ -68,12 +68,6 @@ def test_opaque_replay_fixtures_exist() -> None:
     assert (fx / "replay_m07_sample.SC2Replay").is_file()
 
 
-def test_m07_opaque_replay_fixtures_exist() -> None:
-    fx = REPO_ROOT / "tests" / "fixtures"
-    assert (fx / "replay_m07_sample.SC2Replay").is_file()
-    assert (fx / "replay_m07_generated.SC2Replay").is_file()
-
-
 def test_m08_replay_parser_modules_exist() -> None:
     rp = REPO_ROOT / "starlab" / "replays"
     for name in (
