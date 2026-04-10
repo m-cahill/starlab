@@ -6,6 +6,7 @@ import ast
 import json
 from pathlib import Path
 
+import pytest
 from starlab.benchmarks.benchmark_contract_models import (
     BENCHMARK_CONTRACT_PROFILE,
     BENCHMARK_SCORECARD_PROFILE,
@@ -38,6 +39,7 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.smoke
 def test_deterministic_golden_benchmark_contract_schema_emission() -> None:
     expected_path = FIX / "expected_benchmark_contract_schema.json"
     schema = build_benchmark_contract_json_schema()

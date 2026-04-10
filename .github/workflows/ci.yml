@@ -18,12 +18,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           fetch-depth: 0
 
       - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.11"
           cache: pip
@@ -42,8 +42,13 @@ jobs:
       - name: Mypy
         run: mypy starlab tests
 
-      - name: Pytest
-        run: pytest -q
+      - name: Pytest with coverage and JUnit
+        run: |
+          pytest -q \
+            --cov=starlab \
+            --cov-report=xml \
+            --cov-report=term-missing:skip-covered \
+            --junitxml=pytest-junit.xml
 
       - name: pip-audit
         run: python -m pip_audit
@@ -51,15 +56,29 @@ jobs:
       - name: CycloneDX SBOM
         run: python -m cyclonedx_py environment -o sbom.json
 
+      - name: Upload coverage.xml
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coverage-xml
+          path: coverage.xml
+          if-no-files-found: error
+
+      - name: Upload pytest JUnit
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pytest-junit-xml
+          path: pytest-junit.xml
+          if-no-files-found: error
+
       - name: Upload SBOM artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: sbom-cyclonedx-json
           path: sbom.json
           if-no-files-found: error
 
       - name: Gitleaks
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@dcedce43c6f43de0b836d1fe38946645c9c638dc
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -71,9 +90,11 @@ jobs:
             echo ""
             echo "| Step | Result |"
             echo "|------|--------|"
-            echo "| Ruff / format / Mypy / Pytest | ok |"
+            echo "| Ruff / format / Mypy / Pytest + coverage | ok |"
             echo "| pip-audit | ok |"
             echo "| CycloneDX SBOM | artifact uploaded |"
+            echo "| coverage.xml | artifact uploaded |"
+            echo "| pytest-junit.xml | artifact uploaded |"
             echo "| Gitleaks | ok |"
             echo ""
             echo "Green means governance-safe for this milestone, not feature-complete."

@@ -23,6 +23,7 @@ venv/
 .ruff_cache/
 .coverage
 coverage.xml
+pytest-junit.xml
 htmlcov/
 
 # Env (allow *.example)
@@ -51,6 +52,9 @@ backend/.venv/
 # Ops / local
 ops/.env
 ops/.env.*
+
+# Makefile field-test output (M32)
+out/fieldtest/
 
 # Generated SBOM (CI artifact)
 sbom.json

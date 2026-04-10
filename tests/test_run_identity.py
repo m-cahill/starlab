@@ -18,6 +18,7 @@ from starlab.sc2.match_config import load_match_config, match_config_from_mappin
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
 
 
+@pytest.mark.smoke
 def test_normalize_match_config_stable() -> None:
     cfg = load_match_config(FIXTURE_DIR / "m02_match_config.json")
     a = normalize_match_config_for_identity(cfg)
@@ -25,6 +26,7 @@ def test_normalize_match_config_stable() -> None:
     assert a == b
 
 
+@pytest.mark.smoke
 def test_same_inputs_same_ids() -> None:
     cfg = load_match_config(FIXTURE_DIR / "m02_match_config.json")
     boundary = "s2client_proto_sc2api"
