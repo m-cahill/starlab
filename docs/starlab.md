@@ -1575,6 +1575,7 @@ It should always answer, with minimal ambiguity:
 - **M29 proof (narrow):** deterministic **`hierarchical_agent_interface_schema.json`** / **`hierarchical_agent_interface_schema_report.json`** — offline **two-level** manager→worker **trace** contract; worker **`semantic_coarse_label`** enum owned by M29, aligned 1:1 to **`starlab.m26.label.coarse_action_v1`** with **`label_policy_id`** on `worker_response`; **not** learned hierarchical agent (**M30**), **not** benchmark integrity, **not** live SC2, **not** raw action legality
 - §3 / §6 / §7 / §8 / §10 / §11 / §18 / §20 / §23: **M29** **Complete** on `main`; **current milestone** → **M30** (**stub-only**); **M30** stubs (`M30_plan.md`, `M30_toolcalls.md`)
 - Milestone closeout docs: `M29_run1.md`, `M29_summary.md`, `M29_audit.md`, `M29_plan.md` (**Complete**), `M29_toolcalls.md`
+- **Non-merge-boundary** `main` CI on closeout commit `d1566dd72884a98845bfb760fd1a591a311723f2` (short `d1566dd…`): [`24221851352`](https://github.com/m-cahill/starlab/actions/runs/24221851352) (**success**) — documentation + governance only; **not** substitute merge authority for M29 **product** (authoritative remains [`24221769054`](https://github.com/m-cahill/starlab/actions/runs/24221769054) + [`24221791088`](https://github.com/m-cahill/starlab/actions/runs/24221791088))
 
 ### 2026-04-10 — M28 merged to `main` (PR #34) + milestone closeout
 

@@ -53,3 +53,9 @@ Single job **governance**: Ruff check, Ruff format check, Mypy, Pytest, pip-audi
 * **Baseline:** Prior trusted green `main` @ M28 merge tip (`1ef6365…`).
 * **Step 1 — inventory:** Required merge-blocking job **governance** — all passed on authoritative PR-head and merge-boundary runs.
 * **Verdict:** **24221769054** and **24221791088** are **safe to treat as merge authority** for M29: PR-head green on final tip + merge-boundary `main` green on merge commit.
+
+## Post-closeout `main` CI (documentation + ledger only)
+
+* **Commit:** `d1566dd72884a98845bfb760fd1a591a311723f2` (short `d1566dd…`) — ledger §18/§23 + `M29_run1.md` / `M29_summary.md` / `M29_audit.md`; tag `v0.0.29-m29`.
+* **Workflow run ID:** `24221851352` — **success** — https://github.com/m-cahill/starlab/actions/runs/24221851352
+* **Note:** **not** substitute for M29 **product** merge authority (remains **24221769054** + **24221791088**).
