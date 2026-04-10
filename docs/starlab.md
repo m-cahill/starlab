@@ -1680,7 +1680,8 @@ It should always answer, with minimal ambiguity:
 - §3 / §6 / §7 / §8 / §10 / §11 / §18 / §20 / §23: **M33** **Complete** on `main`; **current milestone** → **M34** (**stub only**); **M34** stubs (`M34_plan.md`, `M34_toolcalls.md`) — **no** M34 product code
 - Milestone closeout docs: `M33_run1.md`, `M33_summary.md`, `M33_audit.md`, `M33_plan.md` (**Complete**), `M33_toolcalls.md`
 - Annotated tag **`v0.0.33-m33`** on merge commit `975ac52fff206f9ceb1b0be66a0e7f1c7386a248` (milestone boundary — **not** a later doc-only tip)
-- **Non-merge-boundary** `main` CI after this closeout commit: record when observed in §23 / `M33_run1.md` — **not** substitute merge authority for M33 **product** (authoritative remains [`24231313561`](https://github.com/m-cahill/starlab/actions/runs/24231313561) + [`24256871132`](https://github.com/m-cahill/starlab/actions/runs/24256871132))
+- **Non-merge-boundary `main` CI (post-closeout):** [`24257044304`](https://github.com/m-cahill/starlab/actions/runs/24257044304) on closeout commit `e98f30c082343fd22bd53c80e8bbeea0a073c173` — **failure** (Ruff E501 in `tests/test_m33_audit_closure.py`); **not** M33 product merge authority
+- **Repair / green `main` CI:** [`24257093617`](https://github.com/m-cahill/starlab/actions/runs/24257093617) on `c5835a37c52248e92d89050f43c33508c8f048ae` — **success** (Ruff wrap only); **not** substitute merge authority for M33 **product** (authoritative remains [`24231313561`](https://github.com/m-cahill/starlab/actions/runs/24231313561) + [`24256871132`](https://github.com/m-cahill/starlab/actions/runs/24256871132)); see `M33_run1.md`
 
 ### 2026-04-09 — M33 chartered: CI tiering, field-test CI artifact, architecture / operator docs (implementation)
 

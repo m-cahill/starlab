@@ -122,4 +122,5 @@ All jobs **required**; none use `continue-on-error` on merge-blocking tiers.
 
 ## Non-merge-boundary runs (post-closeout)
 
-* **Reserved:** after this ledger push, any doc-only `main` CI — record in §23 / this file footnote **not** as substitute merge authority for M33 **product** (authoritative remains **`24231313561`** + **`24256871132`**).
+* **Doc-only closeout push** (`e98f30c…` — ledger + M33/M34 docs + governance tests): workflow run [`24257044304`](https://github.com/m-cahill/starlab/actions/runs/24257044304) — **failure** (`quality` / Ruff E501 on long line in `tests/test_m33_audit_closure.py`). **Not** merge authority for M33 product (authoritative remains **`24231313561`** + **`24256871132`**).
+* **Repair push** (`c5835a3…` — Ruff line wrap): workflow run [`24257093617`](https://github.com/m-cahill/starlab/actions/runs/24257093617) — **success**. **Not** merge-boundary authority for M33 **product**; documents honest post-closeout CI on `main` after ledger closeout.
