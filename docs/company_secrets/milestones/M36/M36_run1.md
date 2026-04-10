@@ -62,6 +62,7 @@ Workflow **`CI`** — parallel jobs:
 ## Non-merge-boundary runs (post-closeout)
 
 * **Doc/governance closeout push** (`e4b306584a6cc0cb4a7f582c50f8fe3100094d8b`): **`CI`** run [`24267000568`](https://github.com/m-cahill/starlab/actions/runs/24267000568) — **success** — **not** merge-boundary authority for M36 implementation (authoritative product merge remains **`24266877684`** + **`24266906173`** on `e73a53b…`).
+* **Follow-up doc commit** (records post-closeout CI IDs on `main`): **`CI`** run [`24267036766`](https://github.com/m-cahill/starlab/actions/runs/24267036766) — **success** — **not** merge-boundary authority (same distinction as above). Later doc-only tips may add further non-merge-boundary runs.
 
 ## Workflow analysis (aligned to `docs/company_secrets/prompts/workflowprompt.md`)
 
