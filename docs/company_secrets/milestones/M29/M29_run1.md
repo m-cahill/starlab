@@ -56,6 +56,7 @@ Single job **governance**: Ruff check, Ruff format check, Mypy, Pytest, pip-audi
 
 ## Post-closeout `main` CI (documentation + ledger only)
 
-* **Commit:** `d1566dd72884a98845bfb760fd1a591a311723f2` (short `d1566dd…`) — ledger §18/§23 + `M29_run1.md` / `M29_summary.md` / `M29_audit.md`; tag `v0.0.29-m29`.
+* **Commit:** `d1566dd72884a98845bfb760fd1a591a311723f2` (short `d1566dd…`) — ledger §18/§23 + `M29_run1.md` / `M29_summary.md` / `M29_audit.md`; annotated tag `v0.0.29-m29` (initially here, then **moved** to follow-up tip below).
 * **Workflow run ID:** `24221851352` — **success** — https://github.com/m-cahill/starlab/actions/runs/24221851352
+* **Follow-up commit:** `39ee458a29db487aa9dc674940eb02db75537599` (short `39ee458…`) — §23 non-merge-boundary row for `24221851352` / `d1566dd…`; **workflow run** `24221881790` — **success** — https://github.com/m-cahill/starlab/actions/runs/24221881790 — **tag `v0.0.29-m29`** points to this commit.
 * **Note:** **not** substitute for M29 **product** merge authority (remains **24221769054** + **24221791088**).
