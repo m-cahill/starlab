@@ -102,4 +102,4 @@ All listed steps **merge-blocking**; none use `continue-on-error`.
 
 ## Non-merge-boundary runs (post-closeout)
 
-* *To be recorded only if a documentation-only push to `main` follows this closeout commit — such runs are **not** merge authority for M31 product.*
+* **Non-merge-boundary** `main` CI on closeout commit `59dcfeca869b1700587a6260aa72822b18ded87b` (short `59dcfec…`): [`24226392793`](https://github.com/m-cahill/starlab/actions/runs/24226392793) (**success**) — documentation + governance + M32 stubs only; **not** product merge authority for M31 (authoritative remains [`24225153475`](https://github.com/m-cahill/starlab/actions/runs/24225153475) + [`24226308356`](https://github.com/m-cahill/starlab/actions/runs/24226308356)).

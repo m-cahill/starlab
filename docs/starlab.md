@@ -1645,7 +1645,7 @@ It should always answer, with minimal ambiguity:
 - **M31 proof (narrow):** deterministic offline **`replay_explorer_surface.json`** / **`replay_explorer_surface_report.json`** — bounded panels over M13 slices, M10–M12 excerpts, M16→M18 anchor frame, **M30** hierarchical traces with **M29** validation; **not** benchmark integrity, **not** live SC2, **not** web UI, **not** M32 flagship proof pack
 - §3 / §6 / §7 / §8 / §10 / §11 / §18 / §20 / §23: **M31** **Complete** on `main`; **current milestone** → **M32** (**stub-only**); **M32** stubs (`M32_plan.md`, `M32_toolcalls.md`) — **no** M32 product code
 - Milestone closeout docs: `M31_run1.md`, `M31_summary.md`, `M31_audit.md`, `M31_plan.md` (**Complete**), `M31_toolcalls.md`
-- *Any later documentation-only `main` push for this closeout (if present) is **non-merge-boundary** CI — **not** product merge authority for M31 (authoritative remains [`24225153475`](https://github.com/m-cahill/starlab/actions/runs/24225153475) + [`24226308356`](https://github.com/m-cahill/starlab/actions/runs/24226308356)).*
+- **Non-merge-boundary** `main` CI on closeout commit `59dcfeca869b1700587a6260aa72822b18ded87b` (short `59dcfec…`): [`24226392793`](https://github.com/m-cahill/starlab/actions/runs/24226392793) (**success**) — documentation + governance + M32 stubs only; **not** product merge authority for M31 (authoritative remains [`24225153475`](https://github.com/m-cahill/starlab/actions/runs/24225153475) + [`24226308356`](https://github.com/m-cahill/starlab/actions/runs/24226308356))
 
 ### 2026-04-10 — M30 merged to `main` (PR #36) + milestone closeout
 
