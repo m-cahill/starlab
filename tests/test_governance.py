@@ -7,6 +7,10 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 _GOVERNANCE_DOCS = [
+    "docs/architecture.md",
+    "docs/getting_started_clone_to_run.md",
+    "docs/starlab_operating_manual_v0.md",
+    "docs/audit/DeferredIssuesRegistry.md",
     "docs/public_private_boundary.md",
     "docs/replay_data_provenance.md",
     "docs/rights_register.md",
@@ -45,6 +49,8 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/hierarchical_agent_interface_v1.md",
     "docs/runtime/replay_hierarchical_imitation_agent_v1.md",
     "docs/runtime/replay_explorer_surface_v1.md",
+    "docs/runtime/clone_to_run_smoke_v1.md",
+    "docs/diligence/field_test_checklist.md",
 ]
 
 _PLACEHOLDER_READMES = [
@@ -66,50 +72,62 @@ def test_placeholder_readme_exists(relative: str) -> None:
     assert path.is_file(), f"missing placeholder: {relative}"
 
 
+@pytest.mark.smoke
 def test_starlab_ledger_exists() -> None:
     ledger = REPO_ROOT / "docs" / "starlab.md"
     assert ledger.is_file()
 
 
+@pytest.mark.smoke
 def test_ledger_names_deployment_targets() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "Netlify" in text
     assert "Render" in text
 
 
+@pytest.mark.smoke
 def test_milestone_m00_directory_exists() -> None:
     m00 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M00"
     assert m00.is_dir()
 
 
+@pytest.mark.smoke
 def test_rights_register_exists() -> None:
     path = REPO_ROOT / "docs" / "rights_register.md"
     assert path.is_file()
 
 
+@pytest.mark.smoke
 def test_ci_workflow_exists() -> None:
     wf = REPO_ROOT / ".github" / "workflows" / "ci.yml"
     assert wf.is_file()
 
 
+@pytest.mark.smoke
 def test_pyproject_exists() -> None:
     assert (REPO_ROOT / "pyproject.toml").is_file()
 
 
+@pytest.mark.smoke
 def test_ledger_has_m01_runtime_title_and_m32_map() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "SC2 Runtime Surface Decision & Environment Lock" in text
     assert "M32" in text
+    assert "38 milestones" in text
+    assert "M00–M37" in text or "M00-M37" in text
+    assert "Audit Closure I" in text
     assert "Platform Boundary Review & Multi-Environment Charter" in text
     assert "Governance, Runtime Surface, and Deterministic Run Substrate" in text
 
 
+@pytest.mark.smoke
 def test_ledger_canonical_corpus_promotion_rule() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "Canonical corpus promotion" in text
     assert "canonical STARLAB corpus" in text
 
 
+@pytest.mark.smoke
 def test_od005_resolved_row() -> None:
     lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
     for line in lines:
@@ -121,11 +139,12 @@ def test_od005_resolved_row() -> None:
     raise AssertionError("OD-005 row not found in ledger")
 
 
+@pytest.mark.smoke
 def test_current_milestone_is_m32() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "M32" in section
-    assert "stub" in section.lower()
+    assert "Audit Closure I" in section
     assert "M31" in section
 
 
@@ -153,6 +172,7 @@ def test_m31_milestone_closeout_files_exist() -> None:
     assert (m31 / "M31_audit.md").is_file()
 
 
+@pytest.mark.smoke
 def test_m32_milestone_stub_files_exist() -> None:
     m32 = REPO_ROOT / "docs" / "company_secrets" / "milestones" / "M32"
     assert (m32 / "M32_plan.md").is_file()
@@ -177,6 +197,7 @@ def test_m30_complete_in_milestone_table() -> None:
     raise AssertionError("M30 milestone row not found or not complete")
 
 
+@pytest.mark.smoke
 def test_m31_complete_in_milestone_table() -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()
@@ -186,17 +207,19 @@ def test_m31_complete_in_milestone_table() -> None:
     raise AssertionError("M31 milestone row not found or not complete")
 
 
-def test_planned_program_arc_is_35_milestones() -> None:
+@pytest.mark.smoke
+def test_planned_program_arc_is_38_milestones() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
-    assert "35 milestones" in text
-    assert "M00–M34" in text or "M00-M34" in text
+    assert "38 milestones" in text
+    assert "M00–M37" in text or "M00-M37" in text
 
 
-def test_od007_targets_m34() -> None:
+@pytest.mark.smoke
+def test_od007_targets_m37() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     for line in text.splitlines():
         if line.strip().startswith("| OD-007 |"):
-            assert "M34" in line
+            assert "M37" in line
             return
     raise AssertionError("OD-007 row not found in docs/starlab.md")
 
@@ -242,6 +265,7 @@ def _milestone_table_section() -> str:
     return text.split("## 7. Milestone table")[1].split("## 8")[0]
 
 
+@pytest.mark.smoke
 def test_m01_complete_in_milestone_table() -> None:
     for line in _milestone_table_section().splitlines():
         stripped = line.strip()

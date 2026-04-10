@@ -27,6 +27,7 @@ dev = [
     "ruff>=0.4",
     "mypy>=1.8",
     "pytest>=8.0",
+    "pytest-cov>=5.0",
     "pip-audit>=2.7",
     "cyclonedx-bom>=4.0",
     "types-jsonschema>=4.20,<5",
@@ -64,3 +65,22 @@ ignore_errors = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
+markers = [
+    "smoke: fast fixture-backed subset for clone validation and CI smoke lane",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["starlab"]
+omit = []
+
+[tool.coverage.report]
+# M32: measured baseline ~77.4% total (branch-aware); gate = baseline - 2%.
+fail_under = 75.4
+precision = 1
+show_missing = false
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "if typing.TYPE_CHECKING:",
+]

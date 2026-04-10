@@ -15,11 +15,13 @@ class _Sample(Enum):
     X = 1
 
 
+@pytest.mark.smoke
 def test_normalize_bytes_hex_lowercase() -> None:
     assert normalize_value(b"\xab\xcd") == "abcd"
     assert normalize_value(bytearray(b"\x00\xff")) == "00ff"
 
 
+@pytest.mark.smoke
 def test_normalize_tuple_to_list() -> None:
     assert normalize_value((1, (2, 3))) == [1, [2, 3]]
 
@@ -47,6 +49,7 @@ def test_reject_unsupported_type() -> None:
         normalize_value(cast(Any, object()))
 
 
+@pytest.mark.smoke
 def test_deterministic_json_hash_twice() -> None:
     tree = {"a": [1, 2], "b": b"\x01\x02"}
     n = normalize_value(tree)

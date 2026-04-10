@@ -38,11 +38,13 @@ M31_EXPLORER_MODULES = (
 )
 
 
+@pytest.mark.smoke
 def test_slice_anchor_midpoint() -> None:
     assert slice_anchor_gameloop(0, 260) == 130
     assert slice_anchor_gameloop(40, 360) == 200
 
 
+@pytest.mark.smoke
 def test_selection_order_independent_of_input_order() -> None:
     slices_json = json.loads((BUNDLE_FIX / "replay_slices.json").read_text(encoding="utf-8"))
     raw = slices_json["slices"]
@@ -53,6 +55,7 @@ def test_selection_order_independent_of_input_order() -> None:
     assert [x.get("slice_id") for x in a] == [x.get("slice_id") for x in b]
 
 
+@pytest.mark.smoke
 def test_bounded_excerpt_counts() -> None:
     surface, _rep = build_replay_explorer_artifacts(
         bundle_dir=BUNDLE_FIX,
@@ -66,6 +69,7 @@ def test_bounded_excerpt_counts() -> None:
         assert len(p["combat_scouting_excerpt"]) <= 6
 
 
+@pytest.mark.smoke
 def test_trace_m29_compatible() -> None:
     surface, _rep = build_replay_explorer_artifacts(
         bundle_dir=BUNDLE_FIX,
@@ -82,6 +86,7 @@ def test_trace_m29_compatible() -> None:
         assert errs == [], errs
 
 
+@pytest.mark.smoke
 def test_io_deterministic_roundtrip(tmp_path: Path) -> None:
     surface, rep = build_replay_explorer_artifacts(
         bundle_dir=BUNDLE_FIX,
@@ -102,6 +107,7 @@ def test_io_deterministic_roundtrip(tmp_path: Path) -> None:
     ).read_text()
 
 
+@pytest.mark.smoke
 def test_report_reconciles_with_surface() -> None:
     surface, rep = build_replay_explorer_artifacts(
         bundle_dir=BUNDLE_FIX,
@@ -129,6 +135,7 @@ def test_non_claims_preserved() -> None:
     assert rep["non_claims"] == list(DEFAULT_NON_CLAIMS)
 
 
+@pytest.mark.smoke
 def test_golden_fixture_snapshot(tmp_path: Path) -> None:
     rc = emit_main(
         [
@@ -155,6 +162,7 @@ def test_golden_fixture_snapshot(tmp_path: Path) -> None:
     assert canonical_json_dumps(got_r) == canonical_json_dumps(exp_r)
 
 
+@pytest.mark.smoke
 def test_cli_module_invocation(tmp_path: Path) -> None:
     out = tmp_path / "cli_out"
     out.mkdir()

@@ -14,6 +14,7 @@ from starlab.sc2.env_probe import (
 )
 
 
+@pytest.mark.smoke
 def test_probe_json_is_deterministic(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
     monkeypatch.delenv("STARLAB_SC2_ROOT", raising=False)
     monkeypatch.delenv("STARLAB_SC2_BIN", raising=False)
@@ -28,6 +29,7 @@ def test_probe_json_is_deterministic(monkeypatch: pytest.MonkeyPatch, tmp_path: 
     json.loads(a)  # valid JSON
 
 
+@pytest.mark.smoke
 def test_env_precedence_binary_over_root(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
