@@ -1,0 +1,37 @@
+{
+  "coarse_semantic_label_enum": [
+    "army_attack",
+    "army_move",
+    "economy_expand",
+    "economy_worker",
+    "other",
+    "production_structure",
+    "production_unit",
+    "research_upgrade",
+    "scout"
+  ],
+  "coarse_semantic_label_policy_id": "starlab.m26.label.coarse_action_v1",
+  "contract": "starlab.hierarchical_agent_interface.v1",
+  "example_fixture_hashes": {
+    "invalid_label": "f8858bdc31a2cd0bb2c42cd0a0803ffdde2315c86635bac774090450b4115209",
+    "invalid_missing_version": "9fcf931b68c2c7c76a739f014f65e3f2e5f06b77449a94001975c165316462ea",
+    "valid": "3e0c648a12413ed40d4d49a99bee997928cca622e0e1ad4200b5dc46c3f09744"
+  },
+  "non_claims": [
+    "benchmark_integrity",
+    "first_learned_hierarchical_agent",
+    "hierarchical_policy_optimality",
+    "leaderboard_validity",
+    "live_sc2_execution",
+    "m30_plus_learned_hierarchy_claims",
+    "multi_level_hierarchy_beyond_two",
+    "multi_worker_routing",
+    "raw_sc2_action_legality",
+    "replay_execution_equivalence",
+    "replay_parser_in_m29_modules",
+    "training_or_fitting"
+  ],
+  "profile": "two_level_manager_worker_offline_v1",
+  "report_version": "starlab.hierarchical_agent_interface_schema_report.v1",
+  "schema_sha256": "cb734813998f0b05a61742a202c97f49f0473a667a4ead7515788c03d80ef48d"
+}

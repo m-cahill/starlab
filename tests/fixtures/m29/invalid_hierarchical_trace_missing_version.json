@@ -1,0 +1,40 @@
+{
+  "hierarchical_decision_trace": {
+    "manager_request": {
+      "delegates_catalog": [
+        {
+          "delegate_id": "worker_macro",
+          "delegate_role": "worker"
+        }
+      ],
+      "frame_ref": {
+        "bundle_id": "fixture_bundle_m29",
+        "gameloop": 0,
+        "lineage_root": "lineage_root_fixture_m29",
+        "perspective_player_index": 0
+      }
+    },
+    "manager_response": {
+      "selected_delegate_id": "worker_macro"
+    },
+    "worker_request": {
+      "delegate": {
+        "delegate_id": "worker_macro",
+        "delegate_role": "worker"
+      },
+      "frame_ref": {
+        "bundle_id": "fixture_bundle_m29",
+        "gameloop": 0,
+        "lineage_root": "lineage_root_fixture_m29",
+        "perspective_player_index": 0
+      },
+      "manager_response": {
+        "selected_delegate_id": "worker_macro"
+      }
+    },
+    "worker_response": {
+      "label_policy_id": "starlab.m26.label.coarse_action_v1",
+      "semantic_coarse_label": "other"
+    }
+  }
+}
