@@ -54,7 +54,10 @@
 
 ## Non-merge-boundary runs
 
-* **Post-closeout documentation push on `main`** (ledger / README / governance / `M38_*` artifacts; **not** merge authority for M38 product merge): **headSha** `d8e318dd60bf81e0cd3ab9a87ae487a7ff73cd88` — workflow run **[`24291941420`](https://github.com/m-cahill/starlab/actions/runs/24291941420)** (**success**). Jobs **quality**, **smoke**, **tests**, **security**, **fieldtest**, **governance** all green.
+* **Post-closeout documentation pushes on `main`** (**not** merge authority for M38 product merge):
+  * **headSha** `d8e318dd60bf81e0cd3ab9a87ae487a7ff73cd88` — **[`24291941420`](https://github.com/m-cahill/starlab/actions/runs/24291941420)** (**success**).
+  * **headSha** `c41976214671b073991502fa486e846ea2f0f7e1` (follow-up: record first non-merge run in ledger / run1) — **[`24291960962`](https://github.com/m-cahill/starlab/actions/runs/24291960962)** (**success**).
+  * Jobs **quality**, **smoke**, **tests**, **security**, **fieldtest**, **governance** all green on both runs.
 
 ## Workflow analysis (aligned to `docs/company_secrets/prompts/workflowprompt.md`)
 

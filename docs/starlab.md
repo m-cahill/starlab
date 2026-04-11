@@ -1722,7 +1722,7 @@ It should always answer, with minimal ambiguity:
 - **M38 proof (narrow):** README + ledger quick-scan; governance test dedup + milestone row checks; `tests/runpy_helpers.py` — **not** M39 flagship proof pack, **not** benchmark integrity, **not** live SC2 in CI, **not** gate weakening.
 - §11 **current milestone** → **M39** (stub); **M38** **Complete**; closeout `M38_run1.md`, `M38_summary.md`, `M38_audit.md`, `M38_plan.md` (**Complete**), `M38_toolcalls.md`.
 - Annotated tag **`v0.0.38-m38`** on merge commit `bf6bf4ad29466c5a44d32ec581dae9ee8a20bf96` (push tag per release discipline).
-- **Non-merge-boundary `main` CI** after closeout commit (doc-only; **not** PR #49 merge authority): [`24291941420`](https://github.com/m-cahill/starlab/actions/runs/24291941420) on `d8e318d…` — **success**.
+- **Non-merge-boundary `main` CI** after closeout (doc-only; **not** PR #49 merge authority): [`24291941420`](https://github.com/m-cahill/starlab/actions/runs/24291941420) on `d8e318d…` — **success**; follow-up evidence commit [`24291960962`](https://github.com/m-cahill/starlab/actions/runs/24291960962) on `c419762…` — **success**.
 
 ### 2026-04-10 — Planned program arc revised to **42 milestones (M00–M41)**; **M37** recharter (governance)
 
