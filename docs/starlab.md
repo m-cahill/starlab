@@ -1725,6 +1725,16 @@ It should always answer, with minimal ambiguity:
 
 ## 23. Changelog
 
+### 2026-04-11 — M39 merged to `main` (PR #50) + milestone closeout
+
+- Merged [PR #50](https://github.com/m-cahill/starlab/pull/50) to `main` at **2026-04-11T22:36:41Z** (UTC); merge commit `ca97027cf1827942a25c886f04b5db56b8b9fe7b` (merge method: **merge commit**); branch `m39-public-flagship-proof-pack` deleted after merge.
+- Final PR head `2c3fce7d3820bbfdfb655deedd3c0bb980ddc45b` — **authoritative green PR-head CI:** [`24292861437`](https://github.com/m-cahill/starlab/actions/runs/24292861437) (**success**); **superseded PR-head:** none.
+- **Merge-push `main` CI** on merge commit: [`24293162871`](https://github.com/m-cahill/starlab/actions/runs/24293162871) (**success**) — merge-boundary evidence for M39 product merge.
+- **M39 proof (narrow):** `starlab.flagship`, `make flagship`, CI **`flagship`** + artifact **`flagship-proof-pack`**, deterministic public proof pack + docs — **not** benchmark integrity, **not** live SC2 in CI, **not** training-track work, **not** Phase VI product.
+- §11 **current milestone** → **M40** (stub); **M39** **Complete**; closeout `M39_run1.md`, `M39_summary.md`, `M39_audit.md`, `M39_plan.md` (**Complete**), `M39_toolcalls.md`.
+- Annotated tag **`v0.0.39-m39`** on merge commit `ca97027cf1827942a25c886f04b5db56b8b9fe7b`.
+- **Non-merge-boundary `main` CI** after closeout (doc + ledger + governance test; **not** PR #50 merge authority): [`24293207074`](https://github.com/m-cahill/starlab/actions/runs/24293207074) on `744e514c3168d73ac20ee938a904d9b8b23823a1` — **success** (required jobs: **`quality`**, **`smoke`**, **`tests`**, **`security`**, **`fieldtest`**, **`flagship`**, **`governance`**).
+
 ### 2026-04-11 — M38 merged to `main` (PR #49) + milestone closeout
 
 - Merged [PR #49](https://github.com/m-cahill/starlab/pull/49) to `main` at **2026-04-11T21:21:43Z** (UTC); merge commit `bf6bf4ad29466c5a44d32ec581dae9ee8a20bf96` (merge method: **merge commit**); branch `m38-public-face-governance-code-health` deleted after merge.

@@ -54,7 +54,7 @@
 
 ## Non-merge-boundary runs
 
-* **None** recorded for this closeout push (ledger updates may trigger follow-on `main` runs — **not** merge authority for M39 product merge unless explicitly listed in a later closeout).
+* **Post-closeout** (ledger + `M39_*` artifacts + governance test; **not** PR #50 merge authority): [`24293207074`](https://github.com/m-cahill/starlab/actions/runs/24293207074) — **success** on head `744e514c3168d73ac20ee938a904d9b8b23823a1` — required jobs **`quality`**, **`smoke`**, **`tests`**, **`security`**, **`fieldtest`**, **`flagship`**, **`governance`** all **success**.
 
 ## Workflow analysis (aligned to `docs/company_secrets/prompts/workflowprompt.md`)
 
