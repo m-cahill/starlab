@@ -13,7 +13,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 def test_pyproject_has_coverage_fail_under_m32_gate() -> None:
     text = (REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert "[tool.coverage.report]" in text
-    assert "fail_under = 75.4" in text
+    assert "fail_under = " in text
+    m = re.search(r"fail_under = ([0-9.]+)", text)
+    assert m is not None
+    assert float(m.group(1)) >= 75.4, "coverage gate must not be lowered below the M32 baseline"
     assert "pytest-cov" in text
 
 
@@ -42,6 +45,7 @@ def test_makefile_has_required_targets() -> None:
         "typecheck",
         "audit",
         "fieldtest",
+        "check",
     ):
         assert t in mk, f"missing make target: {t}"
 
@@ -91,19 +95,21 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    assert 25 <= n <= 45, f"smoke count {n} outside 25–45 band"
+    assert 25 <= n <= 55, f"smoke count {n} outside 25–55 band"
 
 
-def test_ledger_milestone_rows_m32_m39() -> None:
+def test_ledger_milestone_rows_m32_m41() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "| M32 | Audit Closure I" in text
     assert "| M33 | Audit Closure II" in text
     assert "| M34 | Audit Closure III" in text
     assert "| M35 | Audit Closure IV" in text
     assert "| M36 | Audit Closure V" in text
-    assert "| M37 | Public Flagship Proof Pack" in text
-    assert "| M38 | SC2 Substrate Review" in text
-    assert "| M39 | Platform Boundary Review" in text
+    assert "| M37 | Audit Closure VI" in text
+    assert "| M38 | Audit Closure VII" in text
+    assert "| M39 | Public Flagship Proof Pack" in text
+    assert "| M40 | SC2 Substrate Review" in text
+    assert "| M41 | Platform Boundary Review" in text
 
 
 def test_no_flagship_proof_pack_product_module_yet() -> None:

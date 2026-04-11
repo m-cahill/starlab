@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import runpy
 import shutil
+import sys
 from pathlib import Path
 
 import pytest
@@ -87,6 +89,13 @@ def test_bundle_id_mismatch_in_contents_fails(tmp_path: Path) -> None:
     assert bundle is None
     assert err is not None
     assert "bundle_id" in err.lower()
+
+
+def test_emit_canonical_state_package_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(sys, "argv", ["emit_canonical_state", "--help"])
+    with pytest.raises(SystemExit) as exc:
+        runpy.run_module("starlab.state.emit_canonical_state", run_name="__main__")
+    assert exc.value.code == 0
 
 
 def test_emit_cli_writes_artifacts(tmp_path: Path) -> None:

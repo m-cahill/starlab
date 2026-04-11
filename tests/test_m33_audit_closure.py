@@ -52,7 +52,9 @@ def test_ci_workflow_actions_remain_sha_pinned() -> None:
 
 def test_coverage_gate_unchanged_m33() -> None:
     text = (REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8")
-    assert "fail_under = 75.4" in text
+    m = re.search(r"fail_under = ([0-9.]+)", text)
+    assert m is not None
+    assert float(m.group(1)) >= 75.4
 
 
 def test_runtime_ci_tiering_contract_exists() -> None:

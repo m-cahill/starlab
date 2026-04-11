@@ -44,6 +44,30 @@ def test_slice_anchor_midpoint() -> None:
     assert slice_anchor_gameloop(40, 360) == 200
 
 
+def test_ordered_slices_for_explorer_non_list_slices_returns_empty() -> None:
+    assert (
+        ordered_slices_for_explorer(
+            {"slices": "not-a-list"},
+            slice_id_filter=None,
+            max_panels=5,
+        )
+        == []
+    )
+
+
+def test_ordered_slices_for_explorer_filters_by_slice_id() -> None:
+    slices_json = json.loads((BUNDLE_FIX / "replay_slices.json").read_text(encoding="utf-8"))
+    first = slices_json["slices"][0]
+    sid = str(first["slice_id"])
+    got = ordered_slices_for_explorer(
+        slices_json,
+        slice_id_filter=sid,
+        max_panels=5,
+    )
+    assert len(got) == 1
+    assert str(got[0].get("slice_id")) == sid
+
+
 @pytest.mark.smoke
 def test_selection_order_independent_of_input_order() -> None:
     slices_json = json.loads((BUNDLE_FIX / "replay_slices.json").read_text(encoding="utf-8"))

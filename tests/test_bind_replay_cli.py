@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import runpy
 import subprocess
 import sys
 from pathlib import Path
@@ -92,6 +93,22 @@ def test_bind_replay_deterministic_across_runs(tmp_path: Path) -> None:
     assert text1 == text2
 
 
+def test_bind_replay_rejects_missing_lineage_seed(tmp_path: Path) -> None:
+    ri_path, _ls_path = _generate_m03_artifacts(tmp_path / "m03")
+    out = tmp_path / "out"
+    argv = [
+        "--run-identity",
+        str(ri_path),
+        "--lineage-seed",
+        str(tmp_path / "missing_lineage_seed.json"),
+        "--replay",
+        str(OPAQUE_REPLAY_FIXTURE),
+        "--output-dir",
+        str(out),
+    ]
+    assert bind_main(argv) == 1
+
+
 def test_bind_replay_rejects_missing_run_identity(tmp_path: Path) -> None:
     _, ls_path = _generate_m03_artifacts(tmp_path / "m03")
     out = tmp_path / "out"
@@ -141,6 +158,13 @@ def test_bind_replay_rejects_malformed_run_identity(tmp_path: Path) -> None:
     ]
     with pytest.raises(ValueError, match="missing required field"):
         bind_main(argv)
+
+
+def test_bind_replay_package_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(sys, "argv", ["bind_replay", "--help"])
+    with pytest.raises(SystemExit) as exc:
+        runpy.run_module("starlab.runs.bind_replay", run_name="__main__")
+    assert exc.value.code == 0
 
 
 def test_bind_replay_rejects_wrong_schema_version(tmp_path: Path) -> None:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib
 import json
 from pathlib import Path
 
@@ -12,6 +13,15 @@ from starlab.sc2.env_probe import (
     redact_path_str,
     run_probe,
 )
+
+
+def test_sc2_package_lazy_exports_and_unknown_attribute() -> None:
+    """``starlab.sc2`` defers heavy imports via ``__getattr__`` (M01)."""
+    sc2_pkg = importlib.import_module("starlab.sc2")
+    assert callable(sc2_pkg.run_probe)
+    assert callable(sc2_pkg.probe_result_to_json)
+    with pytest.raises(AttributeError, match="has no attribute"):
+        _ = getattr(sc2_pkg, "definitely_not_a_starlab_export")
 
 
 @pytest.mark.smoke

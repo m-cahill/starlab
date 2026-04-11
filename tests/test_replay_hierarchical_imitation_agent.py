@@ -14,6 +14,7 @@ from starlab.hierarchy.delegate_policy import (
     DELEGATE_IDS,
     DELEGATE_POLICY_ID,
     assert_delegate_mapping_total,
+    build_delegate_catalog_entries,
     delegate_id_for_coarse_label,
 )
 from starlab.hierarchy.emit_replay_hierarchical_imitation_agent import main as emit_main
@@ -72,6 +73,18 @@ def test_delegate_mapping_total_over_m29_enum() -> None:
     assert len(DELEGATE_IDS) == 4
     assert delegate_id_for_coarse_label("production_unit") == "production"
     assert delegate_id_for_coarse_label("scout") == "information"
+
+
+def test_delegate_id_for_coarse_label_unknown_raises() -> None:
+    with pytest.raises(ValueError, match="unsupported coarse label"):
+        delegate_id_for_coarse_label("not_a_coarse_label")
+
+
+def test_build_delegate_catalog_entries_shape() -> None:
+    rows = build_delegate_catalog_entries()
+    assert len(rows) == 4
+    assert {r["delegate_id"] for r in rows} == set(DELEGATE_IDS)
+    assert all(r["delegate_role"] == "worker" for r in rows)
 
 
 def test_happy_path_matches_golden(tmp_path: Path) -> None:

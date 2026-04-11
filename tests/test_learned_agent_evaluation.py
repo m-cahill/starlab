@@ -14,7 +14,7 @@ from starlab.evaluation.learned_agent_evaluation import (
     build_learned_agent_evaluation_artifacts,
     index_bundle_directories_for_dataset,
 )
-from starlab.evaluation.learned_agent_metrics import accuracy, macro_f1
+from starlab.evaluation.learned_agent_metrics import accuracy, label_counts, macro_f1
 from starlab.imitation.baseline_models import MODEL_FAMILY
 from starlab.runs.json_util import canonical_json_dumps
 
@@ -129,6 +129,22 @@ def test_deterministic_repeat(tmp_path: Path) -> None:
     )
     assert a1["evaluation_sha256"] == a2["evaluation_sha256"]
     assert canonical_json_dumps(r1) == canonical_json_dumps(r2)
+
+
+def test_cli_emit_requires_at_least_one_bundle(tmp_path: Path) -> None:
+    rc = emit_main(
+        [
+            "--contract",
+            str(M28_FIX / "benchmark_contract_m28.json"),
+            "--baseline",
+            str(M27_FIX / "replay_imitation_baseline.json"),
+            "--dataset",
+            str(M26_FIX / "replay_training_dataset.json"),
+            "--output-dir",
+            str(tmp_path / "out"),
+        ],
+    )
+    assert rc == 2
 
 
 def test_cli_emit(tmp_path: Path) -> None:
@@ -279,6 +295,20 @@ def test_metric_accuracy_and_macro_f1() -> None:
     labels = ["a", "b"]
     mf = macro_f1(y_true, y_pred, labels)
     assert abs(mf - (11.0 / 15.0)) < 1e-9
+
+
+def test_macro_f1_hits_zero_f1_branch_when_precision_and_recall_both_zero() -> None:
+    assert macro_f1(["a", "a"], ["b", "b"], ["a", "b"]) == 0.0
+
+
+def test_metric_accuracy_macro_f1_and_label_counts_edges() -> None:
+    assert accuracy([], []) == 0.0
+    with pytest.raises(ValueError, match="length mismatch"):
+        accuracy(["a"], [])
+    assert macro_f1([], [], []) == 0.0
+    with pytest.raises(ValueError, match="length mismatch"):
+        macro_f1(["a"], ["b", "c"], ["a"])
+    assert label_counts(["b", "a", "b"]) == {"a": 1, "b": 2}
 
 
 def test_index_bundle_directories_happy(tmp_path: Path) -> None:
