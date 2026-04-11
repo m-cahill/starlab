@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import runpy
 import subprocess
 import sys
 import tempfile
@@ -17,6 +16,8 @@ from starlab.runs.seed_from_proof import (
 from starlab.runs.seed_from_proof import (
     main as seed_main,
 )
+
+from tests.runpy_helpers import run_module_as_main
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
 
@@ -41,7 +42,7 @@ def test_seed_from_proof_package_main_invokes_cli(
         ],
     )
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module("starlab.runs.seed_from_proof", run_name="__main__")
+        run_module_as_main("starlab.runs.seed_from_proof")
     assert exc.value.code == 0
     assert (tmp_path / "run_identity.json").is_file()
 

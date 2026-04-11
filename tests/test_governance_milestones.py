@@ -52,6 +52,7 @@ _MILESTONE_COMPLETE_ROWS = [
     pytest.param("M04", "Replay Binding"),
     pytest.param("M05", "Canonical Run Artifact"),
     pytest.param("M06", "Environment Drift"),
+    pytest.param("M07", "Replay Intake"),
     pytest.param("M08", "Replay Parser Substrate"),
     pytest.param("M09", "Replay Metadata Extraction"),
     pytest.param("M10", "Timeline"),
@@ -81,6 +82,7 @@ _MILESTONE_COMPLETE_ROWS = [
     pytest.param("M34", "Audit Closure III", marks=pytest.mark.smoke),
     pytest.param("M35", "Audit Closure IV", marks=pytest.mark.smoke),
     pytest.param("M36", "Audit Closure V", marks=pytest.mark.smoke),
+    pytest.param("M37", "Audit Closure VI", marks=pytest.mark.smoke),
 ]
 
 

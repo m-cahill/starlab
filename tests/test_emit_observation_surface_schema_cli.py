@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import json
-import runpy
 import sys
 from pathlib import Path
 
 import pytest
 from starlab.observation.emit_observation_surface_schema import main as emit_main
+
+from tests.runpy_helpers import run_module_as_main
 
 FIX = Path(__file__).resolve().parent / "fixtures" / "m17"
 
@@ -16,7 +17,7 @@ FIX = Path(__file__).resolve().parent / "fixtures" / "m17"
 def test_emit_observation_surface_schema_package_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sys, "argv", ["emit_observation_surface_schema", "--help"])
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module("starlab.observation.emit_observation_surface_schema", run_name="__main__")
+        run_module_as_main("starlab.observation.emit_observation_surface_schema")
     assert exc.value.code == 0
 
 
