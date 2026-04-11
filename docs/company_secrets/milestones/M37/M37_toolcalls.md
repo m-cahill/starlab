@@ -2,6 +2,6 @@
 
 ---
 
-Stub — implementation **not** started.
+Implementation in progress — ledger recharter, coverage tests, CI/Makefile, `fail_under` discipline, governance alignment.
 
 ---

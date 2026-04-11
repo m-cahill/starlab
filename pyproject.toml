@@ -75,8 +75,8 @@ source = ["starlab"]
 omit = []
 
 [tool.coverage.report]
-# M32: measured baseline ~77.4% total (branch-aware); gate = baseline - 2%.
-fail_under = 75.4
+# M37: measured baseline ~80.0% total (branch-aware, full suite); gate ≈ baseline − 2pp; floor ≥ prior M32 gate.
+fail_under = 78.0
 precision = 1
 show_missing = false
 exclude_lines = [

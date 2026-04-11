@@ -2,11 +2,27 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 
 from starlab.sc2.artifacts import compute_artifact_hash
 from starlab.sc2.harness import run_match_execution
 from starlab.sc2.match_config import BoundedHorizon, MapSpec, MatchConfig
+
+
+def test_run_match_unknown_adapter_returns_error() -> None:
+    cfg = MatchConfig(
+        schema_version="1",
+        adapter="fake",
+        seed=99,
+        bounded_horizon=BoundedHorizon(5, 1),
+        map=MapSpec(discover_under_maps_dir=True),
+    )
+    bad = replace(cfg, adapter="not_a_real_adapter")
+    res = run_match_execution(bad)
+    assert res.ok is False
+    assert res.proof is None
+    assert res.message is not None and "unknown adapter" in res.message
 
 
 def test_fake_harness_twice_same_hash() -> None:

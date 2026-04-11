@@ -2,7 +2,7 @@
 PY ?= python
 PIP ?= $(PY) -m pip
 
-.PHONY: install-dev smoke test coverage lint typecheck audit fieldtest
+.PHONY: install-dev smoke test coverage lint typecheck audit fieldtest check
 
 install-dev:
 	$(PIP) install --upgrade pip setuptools
@@ -33,3 +33,6 @@ fieldtest: install-dev
 		--bundle-dir tests/fixtures/m31/bundle \
 		--agent-path tests/fixtures/m30/replay_hierarchical_imitation_agent.json \
 		--output-dir out/fieldtest
+
+# Local merge gate: lint + types + full test (no coverage report).
+check: lint typecheck test

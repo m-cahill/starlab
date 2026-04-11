@@ -14,6 +14,12 @@ from starlab.runs.models import (
 from starlab.sc2.match_config import MatchConfig
 
 
+def _posix_path_name_for_identity(pathish: str) -> str:
+    """Basename stable on all OSes (Windows paths may appear in configs on Linux CI)."""
+
+    return Path(pathish.replace("\\", "/")).name
+
+
 def normalize_map_spec_for_identity(cfg: MatchConfig) -> dict[str, Any]:
     """Path-stable map selection for hashing (no host absolute paths)."""
 
@@ -23,7 +29,7 @@ def normalize_map_spec_for_identity(cfg: MatchConfig) -> dict[str, Any]:
     if m.battle_net_map_name is not None:
         return {"battle_net_map_name": m.battle_net_map_name, "mode": "battle_net"}
     if m.path is not None:
-        return {"basename": Path(m.path).name, "mode": "path"}
+        return {"basename": _posix_path_name_for_identity(m.path), "mode": "path"}
     raise ValueError("map selection is incomplete")
 
 
@@ -33,7 +39,7 @@ def normalize_match_config_for_identity(cfg: MatchConfig) -> dict[str, Any]:
     iface = cfg.interface
     replay_filename: str | None = None
     if cfg.replay_filename:
-        replay_filename = Path(cfg.replay_filename).name
+        replay_filename = _posix_path_name_for_identity(cfg.replay_filename)
     return {
         "adapter": cfg.adapter,
         "bounded_horizon": {

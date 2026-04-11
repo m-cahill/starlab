@@ -66,6 +66,7 @@ jobs:
         run: pytest -q -m smoke --junitxml=pytest-smoke-junit.xml
 
       - name: Upload smoke JUnit
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pytest-smoke-junit-xml
@@ -101,7 +102,15 @@ jobs:
             --cov-report=term-missing:skip-covered \
             --junitxml=pytest-junit.xml
 
+      - name: Coverage TOTAL line (branch-aware) for step summary
+        if: always()
+        shell: bash
+        run: |
+          echo "### Tests job — coverage TOTAL (line + branch)" >> "$GITHUB_STEP_SUMMARY"
+          python -m coverage report --precision=2 | grep '^TOTAL' >> "$GITHUB_STEP_SUMMARY" || true
+
       - name: Upload coverage.xml
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: coverage-xml
@@ -109,6 +118,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload pytest JUnit
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: pytest-junit-xml
@@ -143,6 +153,7 @@ jobs:
         run: python -m cyclonedx_py environment -o sbom.json
 
       - name: Upload SBOM artifact
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: sbom-cyclonedx-json
@@ -180,6 +191,7 @@ jobs:
           test -f out/fieldtest/replay_explorer_surface_report.json
 
       - name: Upload field-test output directory
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: fieldtest-output
