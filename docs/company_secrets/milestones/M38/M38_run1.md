@@ -54,7 +54,7 @@
 
 ## Non-merge-boundary runs
 
-* None recorded for this closeout beyond the merge-boundary push run above. Any later doc-only pushes on `main` are **non-merge-boundary** unless explicitly chartered as product merges.
+* **Post-closeout documentation push on `main`** (ledger / README / governance / `M38_*` artifacts; **not** merge authority for M38 product merge): **headSha** `d8e318dd60bf81e0cd3ab9a87ae487a7ff73cd88` — workflow run **[`24291941420`](https://github.com/m-cahill/starlab/actions/runs/24291941420)** (**success**). Jobs **quality**, **smoke**, **tests**, **security**, **fieldtest**, **governance** all green.
 
 ## Workflow analysis (aligned to `docs/company_secrets/prompts/workflowprompt.md`)
 
