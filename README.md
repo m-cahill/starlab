@@ -110,8 +110,8 @@ These are planning lenses, not promises. The realistic early path is:
 
 | | |
 | --- | --- |
-| **Current milestone** | **M38** — Audit Closure VII — public face refresh, governance rationalization, code-health tightening |
-| **Last closed** | **M37** — Audit Closure VI — coverage margin recovery and CI evidence hardening ([PR #48](https://github.com/m-cahill/starlab/pull/48)) |
+| **Current milestone** | **M39** — Public Flagship Proof Pack (**stub**; not claimed until closed on `main` with authoritative CI) |
+| **Last closed** | **M38** — Audit Closure VII — public face refresh, governance rationalization, code-health tightening ([PR #49](https://github.com/m-cahill/starlab/pull/49)); prior **M37** — [PR #48](https://github.com/m-cahill/starlab/pull/48) |
 | **Next flagship** | **M39** — public flagship proof pack (**planned**; not claimed until that milestone closes on `main` with authoritative CI) |
 
 **What is proved on `main` (summary):** A governed, milestone-sized RTS lab substrate for StarCraft II: runtime and environment contracts; deterministic run identity and replay binding; replay intake through parser/metadata/timeline/build/combat/slice/bundle planes; canonical state and observation surfaces; benchmark/baseline/evaluation artifact chains through M31-style evidence surfaces; CI tiering, field-test artifacts, structural and governance hygiene; **~80%** branch-aware test coverage with a **78.0** `fail_under` gate (M37). **~85%** coverage remains a **stretch target**, not a repository guarantee.

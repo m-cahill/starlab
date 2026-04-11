@@ -75,13 +75,13 @@ def test_od005_resolved_row() -> None:
 
 
 @pytest.mark.smoke
-def test_current_milestone_is_m38() -> None:
+def test_current_milestone_is_m39_stub() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M39" in section
+    assert "Public Flagship Proof Pack" in section
     assert "M38" in section
-    assert "M37" in section
     assert "Audit Closure VII" in section
-    assert "Public Face Refresh" in section
 
 
 @pytest.mark.smoke

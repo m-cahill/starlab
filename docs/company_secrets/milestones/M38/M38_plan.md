@@ -2,7 +2,24 @@
 
 **Milestone:** M38  
 **Phase:** V — Learning Paths, Evidence Surfaces, and Flagship Proof  
-**Status:** In progress (implementation on branch `m38-public-face-governance-code-health`)
+**Status:** **Complete** — merged to `main` (see closeout below).
+
+---
+
+## Closeout (authoritative)
+
+| Field | Value |
+| --- | --- |
+| **PR** | [PR #49](https://github.com/m-cahill/starlab/pull/49) |
+| **Final PR head SHA** | `3e00641922fc11f7f906d9d163312993a83816c1` |
+| **Merge commit SHA** | `bf6bf4ad29466c5a44d32ec581dae9ee8a20bf96` |
+| **Merged at (UTC)** | `2026-04-11T21:21:43Z` |
+| **Authoritative PR-head CI** | [`24272425346`](https://github.com/m-cahill/starlab/actions/runs/24272425346) — **success** |
+| **Merge-boundary `main` CI** | [`24291882960`](https://github.com/m-cahill/starlab/actions/runs/24291882960) — **success** |
+| **Superseded (not merge authority)** | none recorded |
+| **Tag** | **`v0.0.38-m38`** on merge commit `bf6bf4ad29466c5a44d32ec581dae9ee8a20bf96` |
+| **Run evidence** | [`M38_run1.md`](M38_run1.md) |
+| **Summary / audit** | [`M38_summary.md`](M38_summary.md), [`M38_audit.md`](M38_audit.md) |
 
 ---
 
