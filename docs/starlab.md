@@ -1711,6 +1711,7 @@ It should always answer, with minimal ambiguity:
 - **M37 proof (narrow):** coverage margin recovery, CI evidence (`$GITHUB_STEP_SUMMARY` TOTAL line, `make check`), governance tests for **42**-milestone arc, cross-platform replay/map basename normalization in `starlab.runs.identity` — **not** M39 flagship proof pack, **not** subprocess coverage hacks, **not** lowering the gate below honest margin.
 - §11 **current milestone** → **M38** (stub); **M37** **Complete**; closeout `M37_run1.md`, `M37_summary.md`, `M37_audit.md`, `M37_plan.md` (**Complete**), `M37_toolcalls.md`.
 - Annotated tag **`v0.0.37-m37`** on merge commit `d2474bd365290a9c77f854b13d36a5ea1d8777cd`.
+- Post–merge-closeout doc commit `b98862befbbb381af27db184c646feb0ec26530d`: **`CI`** run [`24271317002`](https://github.com/m-cahill/starlab/actions/runs/24271317002) — **success** — **not** merge-boundary authority (same distinction as M36 post-closeout runs).
 
 ### 2026-04-10 — M36 merged to `main` (PR #47) + milestone closeout
 

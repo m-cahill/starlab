@@ -14,5 +14,6 @@ Ledger recharter, coverage tests, CI/Makefile, `fail_under` discipline, governan
 - Authoritative PR-head CI **`24271250678`** green; merged PR #48 (merge commit `d2474bd…`); merge-boundary **`main` CI** **`24271267848`** green.
 - Tag **`v0.0.37-m37`** pushed on merge commit `d2474bd365290a9c77f854b13d36a5ea1d8777cd`.
 - Wrote **`M37_run1.md`**, **`M37_summary.md`**, **`M37_audit.md`**; updated **`docs/starlab.md`**, **`M37_plan.md`**, **`tests/test_governance_ci.py`** (current milestone **M38**).
+- Pushed closeout to `main`; post-closeout **`CI`** [`24271317002`](https://github.com/m-cahill/starlab/actions/runs/24271317002) green on tip `b98862b…` (**non-merge-boundary**).
 
 ---

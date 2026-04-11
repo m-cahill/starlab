@@ -53,7 +53,7 @@
 
 ## Non-merge-boundary runs (post-closeout)
 
-* **None recorded** at initial M37 closeout — doc-only follow-ups on `main` after this commit would each produce additional **non-merge-boundary** runs (same distinction as M36).
+* **Doc/governance closeout push** (`b98862befbbb381af27db184c646feb0ec26530d`): **`CI`** run [`24271317002`](https://github.com/m-cahill/starlab/actions/runs/24271317002) — **success** — **not** merge-boundary authority for M37 implementation (authoritative product merge remains **`24271250678`** + **`24271267848`** on `d2474bd…`).
 
 ## Workflow analysis (aligned to `docs/company_secrets/prompts/workflowprompt.md`)
 
