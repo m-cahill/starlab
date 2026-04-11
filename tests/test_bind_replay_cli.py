@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import runpy
 import subprocess
 import sys
 from pathlib import Path
@@ -13,6 +12,8 @@ from starlab.runs.bind_replay import main as bind_main
 from starlab.runs.replay_binding import REPLAY_BINDING_SCHEMA_VERSION
 from starlab.runs.seed_from_proof import build_seed_from_paths
 from starlab.runs.writer import write_json_record
+
+from tests.runpy_helpers import run_module_as_main
 
 FIXTURE_DIR = Path(__file__).resolve().parent / "fixtures"
 OPAQUE_REPLAY_FIXTURE = FIXTURE_DIR / "replay_m07_generated.SC2Replay"
@@ -163,7 +164,7 @@ def test_bind_replay_rejects_malformed_run_identity(tmp_path: Path) -> None:
 def test_bind_replay_package_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sys, "argv", ["bind_replay", "--help"])
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module("starlab.runs.bind_replay", run_name="__main__")
+        run_module_as_main("starlab.runs.bind_replay")
     assert exc.value.code == 0
 
 

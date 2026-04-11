@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import json
-import runpy
 import sys
 from pathlib import Path
 
 import pytest
 from starlab.state.emit_canonical_state_schema import main as emit_main
+
+from tests.runpy_helpers import run_module_as_main
 
 FIX = Path(__file__).resolve().parent / "fixtures" / "m15"
 
@@ -16,7 +17,7 @@ FIX = Path(__file__).resolve().parent / "fixtures" / "m15"
 def test_emit_canonical_state_schema_package_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sys, "argv", ["emit_canonical_state_schema", "--help"])
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module("starlab.state.emit_canonical_state_schema", run_name="__main__")
+        run_module_as_main("starlab.state.emit_canonical_state_schema")
     assert exc.value.code == 0
 
 

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import runpy
 import shutil
 import sys
 from pathlib import Path
@@ -14,6 +13,8 @@ from starlab.state.canonical_state_inputs import load_m14_bundle
 from starlab.state.canonical_state_pipeline import (
     materialize_canonical_state,
 )
+
+from tests.runpy_helpers import run_module_as_main
 
 FIX = Path(__file__).resolve().parent / "fixtures" / "m16"
 BUNDLE = FIX / "bundle"
@@ -94,7 +95,7 @@ def test_bundle_id_mismatch_in_contents_fails(tmp_path: Path) -> None:
 def test_emit_canonical_state_package_main_help(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(sys, "argv", ["emit_canonical_state", "--help"])
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module("starlab.state.emit_canonical_state", run_name="__main__")
+        run_module_as_main("starlab.state.emit_canonical_state")
     assert exc.value.code == 0
 
 

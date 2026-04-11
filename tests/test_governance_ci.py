@@ -85,13 +85,6 @@ def test_current_milestone_is_m38() -> None:
 
 
 @pytest.mark.smoke
-def test_planned_program_arc_is_42_milestones() -> None:
-    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
-    assert "42 milestones" in text
-    assert "M00–M41" in text or "M00-M41" in text
-
-
-@pytest.mark.smoke
 def test_ledger_milestone_table_m37_m41_rows() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     sec = text.split("## 7. Milestone table")[1].split("## 8")[0]

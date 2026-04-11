@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import runpy
 import shutil
 import sys
 from pathlib import Path
@@ -82,6 +81,8 @@ from starlab.replays.timeline_io import (
 from starlab.runs.replay_binding import compute_replay_content_sha256
 from starlab.sc2.env_probe import main as env_probe_main
 from starlab.sc2.evaluate_environment_drift import main as evaluate_environment_drift_main
+
+from tests.runpy_helpers import run_module_as_main
 
 FIX13 = Path(__file__).resolve().parent / "fixtures" / "m13"
 FIX09 = Path(__file__).resolve().parent / "fixtures" / "m09"
@@ -310,10 +311,7 @@ def test_emit_learned_agent_evaluation_package_main_help(monkeypatch: pytest.Mon
         ["emit_learned_agent_evaluation", "--help"],
     )
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module(
-            "starlab.evaluation.emit_learned_agent_evaluation",
-            run_name="__main__",
-        )
+        run_module_as_main("starlab.evaluation.emit_learned_agent_evaluation")
     assert exc.value.code == 0
 
 
@@ -324,10 +322,7 @@ def test_emit_replay_explorer_surface_package_main_help(monkeypatch: pytest.Monk
         ["emit_replay_explorer_surface", "--help"],
     )
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module(
-            "starlab.explorer.emit_replay_explorer_surface",
-            run_name="__main__",
-        )
+        run_module_as_main("starlab.explorer.emit_replay_explorer_surface")
     assert exc.value.code == 0
 
 
@@ -429,7 +424,7 @@ def test_starlab_sc2_package_main_invokes_env_probe(monkeypatch: pytest.MonkeyPa
     ):
         monkeypatch.delenv(key, raising=False)
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module("starlab.sc2", run_name="__main__")
+        run_module_as_main("starlab.sc2")
     assert exc.value.code == 0
 
 
@@ -500,7 +495,7 @@ def test_intake_cli_package_main_sys_argv_slice(
         ],
     )
     with pytest.raises(SystemExit) as exc:
-        runpy.run_module("starlab.replays.intake_cli", run_name="__main__")
+        run_module_as_main("starlab.replays.intake_cli")
     assert exc.value.code == 0
     assert (out / "replay_intake_receipt.json").is_file()
 
