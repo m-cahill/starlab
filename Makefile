@@ -2,7 +2,7 @@
 PY ?= python
 PIP ?= $(PY) -m pip
 
-.PHONY: install-dev smoke test coverage lint typecheck audit fieldtest check
+.PHONY: install-dev smoke test coverage lint typecheck audit fieldtest flagship check
 
 install-dev:
 	$(PIP) install --upgrade pip setuptools
@@ -33,6 +33,10 @@ fieldtest: install-dev
 		--bundle-dir tests/fixtures/m31/bundle \
 		--agent-path tests/fixtures/m30/replay_hierarchical_imitation_agent.json \
 		--output-dir out/fieldtest
+
+# M39 public flagship proof pack (deterministic; fixture-backed).
+flagship: install-dev
+	$(PY) -m starlab.flagship.emit_public_flagship_proof_pack --output-dir out/flagship
 
 # Local merge gate: lint + types + full test (no coverage report).
 check: lint typecheck test
