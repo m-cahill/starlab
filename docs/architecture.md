@@ -79,6 +79,7 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 - **tests** — full suite + coverage gate + JUnit.  
 - **security** — dependency audit, SBOM, secret scan.  
 - **fieldtest** — fixture-only M31 explorer outputs under `out/fieldtest/`.  
+- **flagship** — M39 public flagship proof pack under `out/flagship/` (`flagship-proof-pack` CI artifact).  
 - **governance** — aggregate success (no duplicated test execution).
 
 ## Milestone-to-package map (corrective program, Phase V)
@@ -90,7 +91,7 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M29–M30 | `starlab.hierarchy` — interface + learned hierarchical agent. |
 | M31 | `starlab.explorer` — operator evidence surface. |
 | M32–M34 | Governance, CI, docs, structural hygiene — **not** new flagship research artifacts by default. |
-| M35 | Public flagship proof pack (charter — not implied by M33). |
+| M39 | `starlab.flagship` — public flagship proof pack (assembles M25/M28/M31 surfaces; not implied by M33 alone). |
 
 ## How an engineer validates the repo
 
@@ -98,8 +99,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 2. `make smoke` or `pytest -q -m smoke` — fast sanity.  
 3. `make test` or `pytest -q` — full suite (matches **`tests`** CI job intent).  
 4. `make fieldtest` — produces explorer JSON under `out/fieldtest/` (see `docs/getting_started_clone_to_run.md`).  
-5. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
-6. Read **`docs/starlab.md`** for current milestone and non-claims.
+5. `make flagship` — M39 proof pack under `out/flagship/` (see `docs/flagship_proof_pack.md`).  
+6. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
+7. Read **`docs/starlab.md`** for current milestone and non-claims.
 
 ## Source-of-truth documents
 

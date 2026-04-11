@@ -56,5 +56,8 @@ ops/.env.*
 # Makefile field-test output (M32)
 out/fieldtest/
 
+# M39 flagship proof pack (local / CI artifact)
+out/flagship/
+
 # Generated SBOM (CI artifact)
 sbom.json

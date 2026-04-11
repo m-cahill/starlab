@@ -11,10 +11,26 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 def test_ci_workflow_has_parallel_tiers_and_governance_aggregate() -> None:
     wf = (REPO_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
     assert wf.strip().startswith("name: CI\n")
-    for job in ("quality:", "smoke:", "tests:", "security:", "fieldtest:", "governance:"):
+    for job in (
+        "quality:",
+        "smoke:",
+        "tests:",
+        "security:",
+        "fieldtest:",
+        "flagship:",
+        "governance:",
+    ):
         assert job in wf, f"missing job: {job}"
-    assert "needs: [quality, smoke, tests, security, fieldtest]" in wf
+    assert "needs: [quality, smoke, tests, security, fieldtest, flagship]" in wf
     assert "continue-on-error" not in wf
+
+
+def test_ci_workflow_flagship_uploads_proof_pack_artifact() -> None:
+    wf = (REPO_ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+    assert "make flagship" in wf
+    assert "out/flagship/public_flagship_proof_pack.json" in wf
+    assert "name: flagship-proof-pack" in wf
+    assert "path: out/flagship/" in wf
 
 
 def test_ci_workflow_fieldtest_uploads_directory_artifact() -> None:
@@ -98,9 +114,10 @@ def test_ledger_m35_stub_and_m34_predecessor_surfaces() -> None:
     )
 
 
-def test_no_m34_m35_product_creep_paths() -> None:
-    """M33 must not add flagship proof-pack product modules."""
-    assert not (REPO_ROOT / "starlab" / "flagship").exists()
+def test_m39_flagship_module_and_no_proof_pack_shim() -> None:
+    """M39 introduces ``starlab.flagship``; alternate ``proof_pack`` package name remains unused."""
+
+    assert (REPO_ROOT / "starlab" / "flagship").is_dir()
     assert not (REPO_ROOT / "starlab" / "proof_pack").exists()
 
 

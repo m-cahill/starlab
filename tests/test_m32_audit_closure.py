@@ -112,9 +112,10 @@ def test_ledger_milestone_rows_m32_m41() -> None:
     assert "| M41 | Platform Boundary Review" in text
 
 
-def test_no_flagship_proof_pack_product_module_yet() -> None:
-    """M32 must not introduce flagship proof-pack product code under starlab/."""
-    assert not (REPO_ROOT / "starlab" / "flagship").exists()
+def test_flagship_proof_pack_module_exists_post_m39() -> None:
+    """M39 introduces ``starlab.flagship`` for the public flagship proof pack."""
+
+    assert (REPO_ROOT / "starlab" / "flagship").is_dir()
     assert not (REPO_ROOT / "starlab" / "proof_pack").exists()
 
 

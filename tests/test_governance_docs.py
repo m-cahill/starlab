@@ -50,6 +50,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/hierarchical_agent_interface_v1.md",
     "docs/runtime/replay_hierarchical_imitation_agent_v1.md",
     "docs/runtime/replay_explorer_surface_v1.md",
+    "docs/runtime/public_flagship_proof_pack_v1.md",
     "docs/runtime/clone_to_run_smoke_v1.md",
     "docs/runtime/ci_tiering_field_test_readiness_v1.md",
     "docs/diligence/field_test_checklist.md",
