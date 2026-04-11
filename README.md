@@ -110,13 +110,13 @@ These are planning lenses, not promises. The realistic early path is:
 
 | | |
 | --- | --- |
-| **Current milestone** | **M39** — Public Flagship Proof Pack (**stub**; not claimed until closed on `main` with authoritative CI) |
-| **Last closed** | **M38** — Audit Closure VII — public face refresh, governance rationalization, code-health tightening ([PR #49](https://github.com/m-cahill/starlab/pull/49)); prior **M37** — [PR #48](https://github.com/m-cahill/starlab/pull/48) |
-| **Next flagship** | **M39** — public flagship proof pack (**planned**; not claimed until that milestone closes on `main` with authoritative CI) |
+| **Current milestone** | **M40** — SC2 Substrate Review & Expansion Decision (**stub**; Phase VI; not claimed until closed on `main` with authoritative CI) |
+| **Last closed** | **M39** — Public Flagship Proof Pack ([PR #50](https://github.com/m-cahill/starlab/pull/50)); prior **M38** — [PR #49](https://github.com/m-cahill/starlab/pull/49) |
+| **Next** | **M40** — Phase VI substrate review (**planned**; charter when branch opens) |
 
-**What is proved on `main` (summary):** A governed, milestone-sized RTS lab substrate for StarCraft II: runtime and environment contracts; deterministic run identity and replay binding; replay intake through parser/metadata/timeline/build/combat/slice/bundle planes; canonical state and observation surfaces; benchmark/baseline/evaluation artifact chains through M31-style evidence surfaces; CI tiering, field-test artifacts, structural and governance hygiene; **~80%** branch-aware test coverage with a **78.0** `fail_under` gate (M37). **~85%** coverage remains a **stretch target**, not a repository guarantee.
+**What is proved on `main` (summary):** A governed, milestone-sized RTS lab substrate for StarCraft II: runtime and environment contracts; deterministic run identity and replay binding; replay intake through parser/metadata/timeline/build/combat/slice/bundle planes; canonical state and observation surfaces; benchmark/baseline/evaluation artifact chains through M31-style evidence surfaces; **M39** public flagship proof pack (`starlab.flagship`, `make flagship`, CI **`flagship`**); CI tiering, field-test + flagship artifacts, structural and governance hygiene; **~80%** branch-aware test coverage with a **78.0** `fail_under` gate (M37). **~85%** coverage remains a **stretch target**, not a repository guarantee.
 
-**What is not proved (by default):** **Benchmark integrity** and **replay↔execution equivalence**; **live SC2 in CI** (CI stays fixture-driven unless a milestone changes that); **M39 flagship proof-pack product** work; **operating manual v1** promotion. See `docs/starlab.md` §11 for explicit non-claims.
+**What is not proved (by default):** **Benchmark integrity** and **replay↔execution equivalence**; **live SC2 in CI** (CI stays fixture-driven unless a milestone changes that); **M40** / **M41** Phase VI product work; **operating manual v1** promotion. The **M39** pack does **not** claim benchmark integrity or live SC2 — see `docs/flagship_proof_pack.md` and `docs/starlab.md` §11.
 
 ---
 

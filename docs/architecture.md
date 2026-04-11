@@ -91,7 +91,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M29–M30 | `starlab.hierarchy` — interface + learned hierarchical agent. |
 | M31 | `starlab.explorer` — operator evidence surface. |
 | M32–M34 | Governance, CI, docs, structural hygiene — **not** new flagship research artifacts by default. |
-| M39 | `starlab.flagship` — public flagship proof pack (assembles M25/M28/M31 surfaces; not implied by M33 alone). |
+| M39 | `starlab.flagship` — public flagship proof pack (assembles M25/M28/M31 surfaces; **closed** on `main`; not implied by M33 alone). |
+
+**Phase VI:** **M40** / **M41** are governed in `docs/starlab.md` §7; **M40** is the **current** stub milestone until chartered.
 
 ## How an engineer validates the repo
 

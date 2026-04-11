@@ -8,4 +8,6 @@
 
 **2026-04-11** — Validate local state, push branch, open PR, monitor CI, draft `M39_run1.md` workflow report (no merge).
 
+**2026-04-11** — Closeout on `main`: PR #50 merged (`ca97027…`); merge-boundary CI `24293162871`; `M39_run1.md` / `M39_summary.md` / `M39_audit.md`; ledger + README + architecture + governance test (`M40` stub); `M39_plan.md` → Complete.
+
 ---

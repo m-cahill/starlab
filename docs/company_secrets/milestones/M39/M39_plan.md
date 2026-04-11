@@ -2,7 +2,7 @@
 
 **Milestone:** M39  
 **Phase:** V — Learning Paths, Evidence Surfaces, and Flagship Proof  
-**Status:** Chartered — implementation on branch `m39-public-flagship-proof-pack` (see `docs/starlab.md` §11).
+**Status:** **Complete** — merged to `main` ([PR #50](https://github.com/m-cahill/starlab/pull/50)); see `M39_run1.md`, `M39_summary.md`, `M39_audit.md`, `docs/starlab.md` §11 / §18.
 
 ---
 
