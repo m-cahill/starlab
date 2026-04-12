@@ -100,10 +100,7 @@ def test_m44_fixture_stub_emits_validation_and_binding(tmp_path: Path) -> None:
         output_dir=tmp_path / "m44_out2",
         runtime_mode="fixture_stub_ci",
     )
-    assert (
-        r1.validation_run["validation_run_sha256"]
-        == r2.validation_run["validation_run_sha256"]
-    )
+    assert r1.validation_run["validation_run_sha256"] == r2.validation_run["validation_run_sha256"]
 
 
 def test_m44_optional_video_metadata(tmp_path: Path) -> None:

@@ -59,9 +59,7 @@ def _derive_context_signature_for_step(step_index: int, obs: dict[str, int]) -> 
     gl = int(obs.get("game_loop", 0))
     minerals = int(obs.get("minerals", 0))
     vespene = int(obs.get("vespene", 0))
-    return (
-        f"m44_step={step_index}|gameloop={gl}|minerals={minerals}|vespene={vespene}"
-    )
+    return f"m44_step={step_index}|gameloop={gl}|minerals={minerals}|vespene={vespene}"
 
 
 def deterministic_stub_replay_bytes(*, proof_artifact_hash: str, runtime_mode: str) -> bytes:

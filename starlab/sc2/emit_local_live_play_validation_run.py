@@ -29,8 +29,7 @@ def main(argv: list[str] | None = None) -> int:
         required=True,
         type=Path,
         help=(
-            "M02 match config JSON (adapter=fake for fixture_stub_ci; "
-            "burnysc2 for local_live_sc2)"
+            "M02 match config JSON (adapter=fake for fixture_stub_ci; burnysc2 for local_live_sc2)"
         ),
     )
     parser.add_argument(
