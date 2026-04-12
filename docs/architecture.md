@@ -60,7 +60,7 @@ Flows generally move **from replay-derived data toward evaluation and evidence s
 | `starlab.baselines` | Scripted/heuristic baseline suites. |
 | `starlab.evaluation` | Tournament harness, diagnostics, evidence packs, learned-agent evaluation. |
 | `starlab.imitation` | Training dataset contract, imitation baseline, predictors, M41 replay-imitation training run emission. |
-| `starlab.hierarchy` | Hierarchical interface schema, learned hierarchical imitation agent. |
+| `starlab.hierarchy` | Hierarchical interface schema, learned hierarchical imitation agent (M29/M30), hierarchical training pipeline (M43). |
 | `starlab.explorer` | Replay explorer / operator evidence surface (M31). |
 | `starlab._io` | Internal JSON object load helpers for file-boundary I/O (M34 / DIR-003); not a general data-access layer. |
 
@@ -95,8 +95,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M40 | `starlab.training` — agent training program contract emission (`agent_training_program_contract.json` / report under `out/training_program/`); **closed** on `main` (charter milestone — **not** training results). |
 | M41 | `starlab.imitation` — replay-imitation training pipeline (`replay_imitation_training_run.json` / report + optional local `joblib` weights under `out/training_runs/`); **closed** on `main`. |
 | M42 | `starlab.evaluation` — learned-agent comparison (`learned_agent_comparison.json` / report under `out/comparisons/`); **`starlab.imitation.trained_run_predictor`** for M41 `joblib` loads — **closed** on `main`. |
+| M43 | `starlab.hierarchy` — hierarchical training pipeline (`hierarchical_training_run.json` / report + optional local `joblib` under `out/hierarchical_training_runs/`) — **in progress** until closed on `main`. |
 
-**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40**, **M41**, and **M42** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella; comparison harness in **`starlab.evaluation`** for **M42** — see `docs/runtime/learned_agent_comparison_harness_v1.md`). **M43** is the current **stub** milestone.
+**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40**, **M41**, and **M42** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella; comparison harness in **`starlab.evaluation`** for **M42** — see `docs/runtime/learned_agent_comparison_harness_v1.md`). **M43** is **in progress** (hierarchical training in **`starlab.hierarchy`** — see `docs/runtime/hierarchical_training_pipeline_v1.md`).
 
 ## How an engineer validates the repo
 
@@ -108,8 +109,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 6. `python -m starlab.training.emit_agent_training_program_contract --output-dir out/training_program` — M40 training-program contract JSON (local output; see `docs/runtime/agent_training_program_contract_v1.md`).  
 7. `python -m starlab.imitation.emit_replay_imitation_training_run --dataset … --bundle … --output-dir out/training_runs/<run_id>` — M41 training run + report (+ local weights; see `docs/runtime/replay_imitation_training_pipeline_v1.md`).  
 8. `python -m starlab.evaluation.emit_learned_agent_comparison --contract … --dataset … --bundle … --baseline … --m41 … --output-dir out/comparisons/<id>/` — M42 comparison (see `docs/runtime/learned_agent_comparison_harness_v1.md`).  
-9. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
-10. Read **`docs/starlab.md`** for current milestone and non-claims.
+9. `python -m starlab.hierarchy.emit_hierarchical_training_run --dataset … --bundle … --output-dir out/hierarchical_training_runs/<run_id>/` — M43 hierarchical training run + report (+ local weights; see `docs/runtime/hierarchical_training_pipeline_v1.md`).  
+10. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
+11. Read **`docs/starlab.md`** for current milestone and non-claims.
 
 ## Source-of-truth documents
 
