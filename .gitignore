@@ -62,5 +62,8 @@ out/flagship/
 # M40 agent training program contract (local emission)
 out/training_program/
 
+# M41 replay-imitation training runs (local-only weights + JSON)
+out/training_runs/
+
 # Generated SBOM (CI artifact)
 sbom.json

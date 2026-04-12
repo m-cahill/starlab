@@ -26,6 +26,89 @@ from starlab.imitation.replay_observation_materialization import (
 from starlab.runs.json_util import canonical_json_dumps, sha256_hex_of_canonical_json
 
 
+def collect_imitation_example_rows(
+    *,
+    dataset: dict[str, Any],
+    bundle_dirs: list[Path],
+) -> tuple[list[tuple[str, str, str, str]], list[str]]:
+    """Materialize M27 context signatures for each M26 example.
+
+    Returns rows ``(example_id, split, target_semantic_kind, context_signature)`` and warnings.
+    """
+
+    dv = dataset.get("dataset_version")
+    if dv != REPLAY_TRAINING_DATASET_VERSION:
+        msg = f"unsupported dataset_version {dv!r} (expected {REPLAY_TRAINING_DATASET_VERSION!r})"
+        raise ValueError(msg)
+
+    dsha = dataset.get("dataset_sha256")
+    if not isinstance(dsha, str) or len(dsha) != 64:
+        msg = "dataset.dataset_sha256 must be a 64-char hex string"
+        raise ValueError(msg)
+
+    examples = dataset.get("examples")
+    if not isinstance(examples, list) or not examples:
+        msg = "dataset.examples must be a non-empty array"
+        raise ValueError(msg)
+
+    label_policy_id = dataset.get("label_policy_id")
+    if not isinstance(label_policy_id, str) or not label_policy_id:
+        msg = "dataset.label_policy_id must be a non-empty string"
+        raise ValueError(msg)
+
+    all_warnings: list[str] = []
+    dw = dataset.get("warnings")
+    if isinstance(dw, list):
+        for w in dw:
+            if isinstance(w, str):
+                all_warnings.append(w)
+
+    bundle_index: dict[str, Path] = {}
+    for ex in examples:
+        if not isinstance(ex, dict):
+            continue
+        bid = ex.get("bundle_id")
+        if isinstance(bid, str) and bid:
+            if bid not in bundle_index:
+                bundle_index[bid] = resolve_bundle_directory(bundle_id=bid, bundle_dirs=bundle_dirs)
+
+    rows: list[tuple[str, str, str, str]] = []
+    for ex in examples:
+        if not isinstance(ex, dict):
+            msg = "each example must be an object"
+            raise ValueError(msg)
+        eid = ex.get("example_id")
+        sp = ex.get("split")
+        lab = ex.get("target_semantic_kind")
+        oreq = ex.get("observation_request")
+        if not isinstance(eid, str) or not isinstance(sp, str) or not isinstance(lab, str):
+            msg = f"example missing example_id, split, or target_semantic_kind: {ex!r}"
+            raise ValueError(msg)
+        if not isinstance(oreq, dict):
+            msg = f"example {eid}: observation_request must be an object"
+            raise ValueError(msg)
+
+        bid = ex.get("bundle_id")
+        if not isinstance(bid, str):
+            msg = f"example {eid}: bundle_id must be a string"
+            raise ValueError(msg)
+
+        bdir = bundle_index[bid]
+        cs, obs, _rep, warns = materialize_observation_for_observation_request(
+            bundle_dir=bdir,
+            observation_request=oreq,
+        )
+        all_warnings.extend(warns)
+        sig = build_context_signature(
+            observation_frame=obs,
+            canonical_state=cs,
+            perspective_player_index=int(ex.get("perspective_player_index", -1)),
+        )
+        rows.append((eid, sp, lab, sig))
+
+    return rows, all_warnings
+
+
 def _majority_label(counts: Counter[str]) -> str:
     if not counts:
         msg = "empty label counts for majority"
@@ -69,57 +152,12 @@ def build_replay_imitation_baseline_artifacts(
         msg = "dataset.label_policy_id must be a non-empty string"
         raise ValueError(msg)
 
-    all_warnings: list[str] = []
-    dw = dataset.get("warnings")
-    if isinstance(dw, list):
-        for w in dw:
-            if isinstance(w, str):
-                all_warnings.append(w)
-
-    bundle_index: dict[str, Path] = {}
-    for ex in examples:
-        if not isinstance(ex, dict):
-            continue
-        bid = ex.get("bundle_id")
-        if isinstance(bid, str) and bid:
-            if bid not in bundle_index:
-                bundle_index[bid] = resolve_bundle_directory(bundle_id=bid, bundle_dirs=bundle_dirs)
-
-    rows: list[
-        tuple[str, str, str, str, dict[str, Any]]
-    ] = []  # example_id, split, label, signature, extra
-    for ex in examples:
-        if not isinstance(ex, dict):
-            msg = "each example must be an object"
-            raise ValueError(msg)
-        eid = ex.get("example_id")
-        sp = ex.get("split")
-        lab = ex.get("target_semantic_kind")
-        oreq = ex.get("observation_request")
-        if not isinstance(eid, str) or not isinstance(sp, str) or not isinstance(lab, str):
-            msg = f"example missing example_id, split, or target_semantic_kind: {ex!r}"
-            raise ValueError(msg)
-        if not isinstance(oreq, dict):
-            msg = f"example {eid}: observation_request must be an object"
-            raise ValueError(msg)
-
-        bid = ex.get("bundle_id")
-        if not isinstance(bid, str):
-            msg = f"example {eid}: bundle_id must be a string"
-            raise ValueError(msg)
-
-        bdir = bundle_index[bid]
-        cs, obs, _rep, warns = materialize_observation_for_observation_request(
-            bundle_dir=bdir,
-            observation_request=oreq,
-        )
-        all_warnings.extend(warns)
-        sig = build_context_signature(
-            observation_frame=obs,
-            canonical_state=cs,
-            perspective_player_index=int(ex.get("perspective_player_index", -1)),
-        )
-        rows.append((eid, sp, lab, sig, {}))
+    raw_rows, all_warnings = collect_imitation_example_rows(
+        dataset=dataset, bundle_dirs=bundle_dirs
+    )
+    rows: list[tuple[str, str, str, str, dict[str, Any]]] = [
+        (eid, sp, lab, sig, {}) for eid, sp, lab, sig in raw_rows
+    ]
 
     train_labels = [lab for _eid, sp, lab, _sig, _ in rows if sp == "train"]
     fallback_label = _global_fallback_label(train_labels)
