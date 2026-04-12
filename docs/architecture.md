@@ -96,8 +96,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M41 | `starlab.imitation` — replay-imitation training pipeline (`replay_imitation_training_run.json` / report + optional local `joblib` weights under `out/training_runs/`); **closed** on `main`. |
 | M42 | `starlab.evaluation` — learned-agent comparison (`learned_agent_comparison.json` / report under `out/comparisons/`); **`starlab.imitation.trained_run_predictor`** for M41 `joblib` loads — **closed** on `main`. |
 | M43 | `starlab.hierarchy` — hierarchical training pipeline (`hierarchical_training_run.json` / report + optional local `joblib` under `out/hierarchical_training_runs/`) — **closed** on `main`. |
+| M44 | `starlab.sc2` — local live-play validation harness (`local_live_play_validation_run.json` / report + replay binding under `out/live_validation_runs/`) — **in progress** on-branch (**not** claimed **closed** on `main` until merge). |
 
-**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40**, **M41**, **M42**, and **M43** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella; comparison harness in **`starlab.evaluation`** for **M42** — see `docs/runtime/learned_agent_comparison_harness_v1.md`; hierarchical training in **`starlab.hierarchy`** for **M43** — see `docs/runtime/hierarchical_training_pipeline_v1.md`). **M44**–**M45** are **stub** until each closes on `main`.
+**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40**, **M41**, **M42**, and **M43** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella; comparison harness in **`starlab.evaluation`** for **M42** — see `docs/runtime/learned_agent_comparison_harness_v1.md`; hierarchical training in **`starlab.hierarchy`** for **M43** — see `docs/runtime/hierarchical_training_pipeline_v1.md`). **M44** local live-play validation is **in progress** in **`starlab.sc2`** — see `docs/runtime/local_live_play_validation_harness_v1.md`. **M45** is **planned** stub until closed on `main`.
 
 ## How an engineer validates the repo
 
@@ -110,8 +111,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 7. `python -m starlab.imitation.emit_replay_imitation_training_run --dataset … --bundle … --output-dir out/training_runs/<run_id>` — M41 training run + report (+ local weights; see `docs/runtime/replay_imitation_training_pipeline_v1.md`).  
 8. `python -m starlab.evaluation.emit_learned_agent_comparison --contract … --dataset … --bundle … --baseline … --m41 … --output-dir out/comparisons/<id>/` — M42 comparison (see `docs/runtime/learned_agent_comparison_harness_v1.md`).  
 9. `python -m starlab.hierarchy.emit_hierarchical_training_run --dataset … --bundle … --output-dir out/hierarchical_training_runs/<run_id>/` — M43 hierarchical training run + report (+ local weights; see `docs/runtime/hierarchical_training_pipeline_v1.md`).  
-10. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
-11. Read **`docs/starlab.md`** for current milestone and non-claims.
+10. `python -m starlab.sc2.emit_local_live_play_validation_run --hierarchical-training-run-dir … --match-config … --output-dir out/live_validation_runs/<run_id>/ --runtime-mode fixture_stub_ci` — M44 live validation (fixture stub in CI; `local_live_sc2` for real local SC2; see `docs/runtime/local_live_play_validation_harness_v1.md`).  
+11. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
+12. Read **`docs/starlab.md`** for current milestone and non-claims.
 
 ## Source-of-truth documents
 
