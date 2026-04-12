@@ -82,7 +82,7 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 - **flagship** — M39 public flagship proof pack under `out/flagship/` (`flagship-proof-pack` CI artifact).  
 - **governance** — aggregate success (no duplicated test execution).
 
-## Milestone-to-package map (corrective program, Phase V)
+## Milestone-to-package map (Phase V–VI, selected milestones)
 
 | Milestone | Emphasis |
 | --------- | -------- |
@@ -94,8 +94,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M39 | `starlab.flagship` — public flagship proof pack (assembles M25/M28/M31 surfaces; **closed** on `main`; not implied by M33 alone). |
 | M40 | `starlab.training` — agent training program contract emission (`agent_training_program_contract.json` / report under `out/training_program/`); **closed** on `main` (charter milestone — **not** training results). |
 | M41 | `starlab.imitation` — replay-imitation training pipeline (`replay_imitation_training_run.json` / report + optional local `joblib` weights under `out/training_runs/`); **closed** on `main`. |
+| M42 | `starlab.evaluation` — learned-agent comparison (`learned_agent_comparison.json` / report under `out/comparisons/`); **`starlab.imitation.trained_run_predictor`** for M41 `joblib` loads — **in progress** until merged to `main`. |
 
-**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40** and **M41** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella). **M42** is **planned** / stub until closed on `main`.
+**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40** and **M41** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella). **M42** comparison harness is **in progress** until merged to `main` (see `docs/runtime/learned_agent_comparison_harness_v1.md`).
 
 ## How an engineer validates the repo
 
@@ -106,8 +107,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 5. `make flagship` — M39 proof pack under `out/flagship/` (see `docs/flagship_proof_pack.md`).  
 6. `python -m starlab.training.emit_agent_training_program_contract --output-dir out/training_program` — M40 training-program contract JSON (local output; see `docs/runtime/agent_training_program_contract_v1.md`).  
 7. `python -m starlab.imitation.emit_replay_imitation_training_run --dataset … --bundle … --output-dir out/training_runs/<run_id>` — M41 training run + report (+ local weights; see `docs/runtime/replay_imitation_training_pipeline_v1.md`).  
-8. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
-9. Read **`docs/starlab.md`** for current milestone and non-claims.
+8. `python -m starlab.evaluation.emit_learned_agent_comparison --contract … --dataset … --bundle … --baseline … --m41 … --output-dir out/comparisons/<id>/` — M42 comparison (see `docs/runtime/learned_agent_comparison_harness_v1.md`).  
+9. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
+10. Read **`docs/starlab.md`** for current milestone and non-claims.
 
 ## Source-of-truth documents
 

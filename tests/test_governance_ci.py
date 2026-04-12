@@ -80,7 +80,11 @@ def test_current_milestone_is_m42_stub_after_m41_closeout() -> None:
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "M42" in section
     assert "Learned-Agent Comparison" in section
-    assert "planned" in section.lower() or "stub" in section.lower()
+    assert (
+        "planned" in section.lower()
+        or "stub" in section.lower()
+        or "in progress" in section.lower()
+    )
     assert "M41" in section
     assert "Replay-Imitation Training Pipeline" in section
     assert "closed" in section.lower()

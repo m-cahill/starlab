@@ -341,6 +341,18 @@ def test_m28_evaluation_modules_exist() -> None:
         assert (ev / name).is_file()
 
 
+def test_m42_comparison_modules_exist() -> None:
+    ev = REPO_ROOT / "starlab" / "evaluation"
+    for name in (
+        "learned_agent_comparison_harness.py",
+        "learned_agent_comparison_io.py",
+        "learned_agent_comparison_models.py",
+        "emit_learned_agent_comparison.py",
+    ):
+        assert (ev / name).is_file()
+    assert (REPO_ROOT / "starlab" / "imitation" / "trained_run_predictor.py").is_file()
+
+
 def test_m29_hierarchy_modules_exist() -> None:
     hi = REPO_ROOT / "starlab" / "hierarchy"
     for name in (
