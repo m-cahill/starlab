@@ -59,5 +59,8 @@ out/fieldtest/
 # M39 flagship proof pack (local / CI artifact)
 out/flagship/
 
+# M40 agent training program contract (local emission)
+out/training_program/
+
 # Generated SBOM (CI artifact)
 sbom.json
