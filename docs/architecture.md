@@ -94,9 +94,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M39 | `starlab.flagship` — public flagship proof pack (assembles M25/M28/M31 surfaces; **closed** on `main`; not implied by M33 alone). |
 | M40 | `starlab.training` — agent training program contract emission (`agent_training_program_contract.json` / report under `out/training_program/`); **closed** on `main` (charter milestone — **not** training results). |
 | M41 | `starlab.imitation` — replay-imitation training pipeline (`replay_imitation_training_run.json` / report + optional local `joblib` weights under `out/training_runs/`); **closed** on `main`. |
-| M42 | `starlab.evaluation` — learned-agent comparison (`learned_agent_comparison.json` / report under `out/comparisons/`); **`starlab.imitation.trained_run_predictor`** for M41 `joblib` loads — **in progress** until merged to `main`. |
+| M42 | `starlab.evaluation` — learned-agent comparison (`learned_agent_comparison.json` / report under `out/comparisons/`); **`starlab.imitation.trained_run_predictor`** for M41 `joblib` loads — **closed** on `main`. |
 
-**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40** and **M41** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella). **M42** comparison harness is **in progress** until merged to `main` (see `docs/runtime/learned_agent_comparison_harness_v1.md`).
+**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40**, **M41**, and **M42** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella; comparison harness in **`starlab.evaluation`** for **M42** — see `docs/runtime/learned_agent_comparison_harness_v1.md`). **M43** is the current **stub** milestone.
 
 ## How an engineer validates the repo
 

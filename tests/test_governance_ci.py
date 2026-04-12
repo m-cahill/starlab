@@ -75,18 +75,14 @@ def test_od005_resolved_row() -> None:
 
 
 @pytest.mark.smoke
-def test_current_milestone_is_m42_stub_after_m41_closeout() -> None:
+def test_current_milestone_is_m43_stub_after_m42_closeout() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M43" in section
+    assert "Hierarchical Training Pipeline" in section
+    assert "stub" in section.lower()
     assert "M42" in section
     assert "Learned-Agent Comparison" in section
-    assert (
-        "planned" in section.lower()
-        or "stub" in section.lower()
-        or "in progress" in section.lower()
-    )
-    assert "M41" in section
-    assert "Replay-Imitation Training Pipeline" in section
     assert "closed" in section.lower()
 
 
