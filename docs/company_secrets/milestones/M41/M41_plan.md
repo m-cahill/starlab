@@ -2,7 +2,7 @@
 
 **Milestone:** M41  
 **Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
-**Status:** In progress (implementation branch)
+**Status:** Complete (merged to `main`; see `M41_run1.md`, `M41_summary.md`, `M41_audit.md`)
 
 ---
 

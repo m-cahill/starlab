@@ -93,9 +93,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M32–M34 | Governance, CI, docs, structural hygiene — **not** new flagship research artifacts by default. |
 | M39 | `starlab.flagship` — public flagship proof pack (assembles M25/M28/M31 surfaces; **closed** on `main`; not implied by M33 alone). |
 | M40 | `starlab.training` — agent training program contract emission (`agent_training_program_contract.json` / report under `out/training_program/`); **closed** on `main` (charter milestone — **not** training results). |
-| M41 | `starlab.imitation` — replay-imitation training pipeline (`replay_imitation_training_run.json` / report + optional local `joblib` weights under `out/training_runs/`); **in progress** on branch. |
+| M41 | `starlab.imitation` — replay-imitation training pipeline (`replay_imitation_training_run.json` / report + optional local `joblib` weights under `out/training_runs/`); **closed** on `main`. |
 
-**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40** is **closed**; **M41** is **in progress** on branch (training implementation in **`starlab.imitation`**; **`starlab.training`** remains the cross-milestone M40 contract umbrella).
+**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40** and **M41** are **closed** on `main` (training implementation in **`starlab.imitation`** for **M41**; **`starlab.training`** remains the cross-milestone M40 contract umbrella). **M42** is **planned** / stub until closed on `main`.
 
 ## How an engineer validates the repo
 
