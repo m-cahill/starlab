@@ -1,19 +1,22 @@
 # M41 — CI / workflow analysis (Run 1)
 
 **Workflow:** `CI`  
-**Run ID (authoritative, final PR head):** [`24297148773`](https://github.com/m-cahill/starlab/actions/runs/24297148773)  
+**Run ID (authoritative, final PR head at time of recording):** [`24297168010`](https://github.com/m-cahill/starlab/actions/runs/24297168010)  
 **Trigger:** `pull_request`  
 **Branch:** `m41-replay-imitation-training-pipeline-v1`  
 **PR:** [#52](https://github.com/m-cahill/starlab/pull/52) — **M41: add replay-imitation training pipeline v1**  
-**Final PR head SHA (under review):** `d2ddcc777a36c1cd7332e3a876cfc9cee72bee9d`  
+**Final PR head SHA (under review):** `3155745023d84a044cf9f4f90abec99d57166ff1`  
 **Branch on origin before this pass:** **No** — branch was created locally and pushed as new (`git ls-remote` was empty before push).
 
-**Authoritative PR-head CI:** **`24297148773`** — **success** (all required jobs below passed).
+**Authoritative PR-head CI:** **`24297168010`** — **success** (all required jobs below passed).
 
 **Superseded / non-authority (intermediate PR heads, not merge authority for final):**  
+- [`24297148773`](https://github.com/m-cahill/starlab/actions/runs/24297148773) on `d2ddcc7…` (prior `M41_run1.md` correction)  
 - [`24297129471`](https://github.com/m-cahill/starlab/actions/runs/24297129471) on `ffbcf72…` (initial `M41_run1.md` commit)  
 - [`24297108516`](https://github.com/m-cahill/starlab/actions/runs/24297108516) on `67126bc…` (M41 product-only commit)  
 (Other historical runs, e.g. M40 PR `24295030115` Ruff failure, are **not** merge authority for M41.)
+
+*If the PR branch advances again after this file, re-check `gh run list --branch m41-replay-imitation-training-pipeline-v1` for the CI run matching the current PR head.*
 
 ---
 
@@ -51,7 +54,7 @@ No `continue-on-error` merge bypass observed.
 
 ## Step 4 — Failures
 
-- **None** on authoritative run `24297148773`.
+- **None** on authoritative run `24297168010`.
 
 ---
 
@@ -63,7 +66,7 @@ No `continue-on-error` merge bypass observed.
 
 ## Step 6 — Verdict
 
-**Verdict:** This PR-head CI run is **green** with all required jobs passing. It is appropriate to treat **`24297148773`** as **authoritative PR-head CI** for merge decision (subject to human approval). **Merge-boundary `main` CI** is **not** in scope until after merge.
+**Verdict:** This PR-head CI run is **green** with all required jobs passing. It is appropriate to treat **`24297168010`** as **authoritative PR-head CI** for merge decision (subject to human approval). **Merge-boundary `main` CI** is **not** in scope until after merge.
 
 **Status:** ✅ Merge approved *from a CI-signal perspective* — **human merge approval still required** per program gates.
 
