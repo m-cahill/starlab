@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable, Sequence
 from pathlib import Path
 from typing import Any
 
@@ -65,6 +66,124 @@ def index_bundle_directories_for_dataset(
         msg = f"missing --bundle for bundle_id(s): {sorted(missing)}"
         raise ValueError(msg)
     return seen
+
+
+def evaluate_predictor_on_test_split(
+    *,
+    dataset: dict[str, Any],
+    bundle_dirs: list[Path],
+    evaluation_split: str,
+    predict_sig: Callable[[str], tuple[str, bool]],
+    label_vocabulary: Sequence[str],
+    bundle_loader: M14BundleLoader | None = None,
+) -> tuple[dict[str, float | int], list[str], list[str], list[str], int]:
+    """M28 metric surface: evaluate one predictor on the held-out split (shared with M42).
+
+    ``label_vocabulary`` supplies the macro-F1 label universe (baseline or M41 schema).
+
+    Returns metric_values (four M28 keys), warnings, y_true, y_pred, fallback_count.
+    """
+
+    dv = dataset.get("dataset_version")
+    if dv != REPLAY_TRAINING_DATASET_VERSION:
+        msg = f"unsupported dataset_version {dv!r}"
+        raise ValueError(msg)
+
+    dsha = dataset.get("dataset_sha256")
+    if not isinstance(dsha, str) or len(dsha) != 64:
+        msg = "dataset.dataset_sha256 must be a 64-char hex string"
+        raise ValueError(msg)
+
+    examples = dataset.get("examples")
+    if not isinstance(examples, list) or not examples:
+        msg = "dataset.examples must be a non-empty array"
+        raise ValueError(msg)
+
+    required_ids: set[str] = set()
+    for ex in examples:
+        if isinstance(ex, dict):
+            bid = ex.get("bundle_id")
+            if isinstance(bid, str) and bid:
+                required_ids.add(bid)
+
+    bundle_index = index_bundle_directories_for_dataset(
+        bundle_dirs=bundle_dirs,
+        required_bundle_ids=required_ids,
+        bundle_loader=bundle_loader,
+    )
+
+    all_warnings: list[str] = []
+    dw = dataset.get("warnings")
+    if isinstance(dw, list):
+        for w in dw:
+            if isinstance(w, str):
+                all_warnings.append(w)
+
+    y_true: list[str] = []
+    y_pred: list[str] = []
+    fallback_flags: list[bool] = []
+
+    for ex in examples:
+        if not isinstance(ex, dict):
+            msg = "each example must be an object"
+            raise ValueError(msg)
+        if ex.get("split") != evaluation_split:
+            continue
+
+        eid = ex.get("example_id")
+        lab = ex.get("target_semantic_kind")
+        oreq = ex.get("observation_request")
+        bid = ex.get("bundle_id")
+        if not isinstance(eid, str) or not isinstance(lab, str):
+            msg = f"example missing example_id or target_semantic_kind: {ex!r}"
+            raise ValueError(msg)
+        if not isinstance(oreq, dict):
+            msg = f"example {eid}: observation_request must be an object"
+            raise ValueError(msg)
+        if not isinstance(bid, str):
+            msg = f"example {eid}: bundle_id must be a string"
+            raise ValueError(msg)
+
+        bdir = bundle_index[bid]
+        cs, obs, _rep, warns = materialize_observation_for_observation_request(
+            bundle_dir=bdir,
+            observation_request=oreq,
+        )
+        all_warnings.extend(warns)
+
+        ppi = ex.get("perspective_player_index")
+        ppi_i = int(ppi) if isinstance(ppi, int) and not isinstance(ppi, bool) else -1
+        sig = build_context_signature(
+            observation_frame=obs,
+            canonical_state=cs,
+            perspective_player_index=ppi_i,
+        )
+        pred, used_fb = predict_sig(sig)
+        y_true.append(lab)
+        y_pred.append(pred)
+        fallback_flags.append(used_fb)
+
+    if not y_true:
+        msg = f"no examples with split={evaluation_split!r}"
+        raise ValueError(msg)
+
+    n = len(y_true)
+    fb_count = sum(1 for f in fallback_flags if f)
+    fb_rate = float(fb_count) / float(n) if n else 0.0
+    acc = accuracy(y_true, y_pred)
+
+    label_list = sorted(set(label_vocabulary))
+    mf1 = macro_f1(y_true, y_pred, label_list)
+
+    metric_values: dict[str, float | int] = {
+        "accuracy": acc,
+        "macro_f1": mf1,
+        "fallback_rate": fb_rate,
+        "example_count": n,
+    }
+
+    warnings_sorted = sorted(set(all_warnings))
+    return metric_values, warnings_sorted, y_true, y_pred, fb_count
 
 
 def _validate_m28_benchmark_contract(benchmark_contract: dict[str, Any]) -> None:
@@ -220,100 +339,22 @@ def build_learned_agent_evaluation_artifacts(
 
     predictor = FrozenImitationPredictor.from_baseline_body(baseline)
 
-    examples = dataset.get("examples")
-    if not isinstance(examples, list) or not examples:
-        msg = "dataset.examples must be a non-empty array"
-        raise ValueError(msg)
-
-    required_ids: set[str] = set()
-    for ex in examples:
-        if isinstance(ex, dict):
-            bid = ex.get("bundle_id")
-            if isinstance(bid, str) and bid:
-                required_ids.add(bid)
-
-    bundle_index = index_bundle_directories_for_dataset(
-        bundle_dirs=bundle_dirs,
-        required_bundle_ids=required_ids,
-        bundle_loader=bundle_loader,
-    )
-
-    test_rows: list[tuple[str, str, str]] = []  # example_id, y_true, signature materialization path
-    all_warnings: list[str] = []
-    dw = dataset.get("warnings")
-    if isinstance(dw, list):
-        for w in dw:
-            if isinstance(w, str):
-                all_warnings.append(w)
-
-    y_true: list[str] = []
-    y_pred: list[str] = []
-    fallback_flags: list[bool] = []
-
-    for ex in examples:
-        if not isinstance(ex, dict):
-            msg = "each example must be an object"
-            raise ValueError(msg)
-        if ex.get("split") != evaluation_split:
-            continue
-
-        eid = ex.get("example_id")
-        lab = ex.get("target_semantic_kind")
-        oreq = ex.get("observation_request")
-        bid = ex.get("bundle_id")
-        if not isinstance(eid, str) or not isinstance(lab, str):
-            msg = f"example missing example_id or target_semantic_kind: {ex!r}"
-            raise ValueError(msg)
-        if not isinstance(oreq, dict):
-            msg = f"example {eid}: observation_request must be an object"
-            raise ValueError(msg)
-        if not isinstance(bid, str):
-            msg = f"example {eid}: bundle_id must be a string"
-            raise ValueError(msg)
-
-        bdir = bundle_index[bid]
-        cs, obs, _rep, warns = materialize_observation_for_observation_request(
-            bundle_dir=bdir,
-            observation_request=oreq,
-        )
-        all_warnings.extend(warns)
-
-        ppi = ex.get("perspective_player_index")
-        ppi_i = int(ppi) if isinstance(ppi, int) and not isinstance(ppi, bool) else -1
-        sig = build_context_signature(
-            observation_frame=obs,
-            canonical_state=cs,
-            perspective_player_index=ppi_i,
-        )
-        pred, used_fb = predictor.predict(sig)
-        y_true.append(lab)
-        y_pred.append(pred)
-        fallback_flags.append(used_fb)
-        test_rows.append((eid, lab, sig))
-
-    if not y_true:
-        msg = f"no examples with split={evaluation_split!r}"
-        raise ValueError(msg)
-
-    n = len(y_true)
-    fb_count = sum(1 for f in fallback_flags if f)
-    fb_rate = float(fb_count) / float(n) if n else 0.0
-    acc = accuracy(y_true, y_pred)
-
     vocab = baseline.get("label_vocabulary")
     if not isinstance(vocab, list) or not all(isinstance(x, str) for x in vocab):
         msg = "baseline.label_vocabulary must be a non-empty string array"
         raise ValueError(msg)
-    label_list = sorted(set(vocab))
 
-    mf1 = macro_f1(y_true, y_pred, label_list)
+    metric_values, warnings_sorted, y_true, y_pred, fb_count = evaluate_predictor_on_test_split(
+        dataset=dataset,
+        bundle_dirs=bundle_dirs,
+        evaluation_split=evaluation_split,
+        predict_sig=predictor.predict,
+        label_vocabulary=vocab,
+        bundle_loader=bundle_loader,
+    )
 
-    metric_values: dict[str, float | int] = {
-        "accuracy": acc,
-        "macro_f1": mf1,
-        "fallback_rate": fb_rate,
-        "example_count": n,
-    }
+    n = int(metric_values["example_count"])
+    fb_rate = float(metric_values["fallback_rate"])
 
     baseline_sha256 = baseline.get("baseline_sha256")
     if not isinstance(baseline_sha256, str) or len(baseline_sha256) != 64:
@@ -332,7 +373,6 @@ def build_learned_agent_evaluation_artifacts(
         msg = "baseline.feature_policy_id must be a non-empty string"
         raise ValueError(msg)
 
-    warnings_sorted = sorted(set(all_warnings))
     non_claims_sorted = sorted(set(NON_CLAIMS_V1))
 
     body_pre_hash: dict[str, Any] = {

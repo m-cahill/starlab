@@ -53,6 +53,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/public_flagship_proof_pack_v1.md",
     "docs/runtime/agent_training_program_contract_v1.md",
     "docs/runtime/replay_imitation_training_pipeline_v1.md",
+    "docs/runtime/learned_agent_comparison_harness_v1.md",
     "docs/runtime/clone_to_run_smoke_v1.md",
     "docs/runtime/ci_tiering_field_test_readiness_v1.md",
     "docs/diligence/field_test_checklist.md",
