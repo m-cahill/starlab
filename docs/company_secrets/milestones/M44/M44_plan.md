@@ -2,7 +2,7 @@
 
 **Milestone:** M44  
 **Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
-**Status:** In progress — implementation on branch (see `docs/starlab.md` §7 / §11).
+**Status:** Complete — merged to `main`; closeout `M44_run1.md`, `M44_summary.md`, `M44_audit.md` (see `docs/starlab.md` §7 / §11 / §18).
 
 ---
 

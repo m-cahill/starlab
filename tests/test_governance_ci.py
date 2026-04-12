@@ -75,12 +75,14 @@ def test_od005_resolved_row() -> None:
 
 
 @pytest.mark.smoke
-def test_current_milestone_is_m44_stub_after_m43_closeout() -> None:
+def test_current_milestone_is_m45_stub_after_m44_closeout() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M45" in section
+    assert "Self-Play" in section or "RL" in section
+    assert "stub" in section.lower()
     assert "M44" in section
     assert "Local Live-Play Validation" in section
-    assert "stub" in section.lower()
     assert "M43" in section
     assert "Hierarchical Training Pipeline" in section
     assert "M42" in section
@@ -99,6 +101,7 @@ def test_ledger_milestone_table_m37_m45_rows() -> None:
     assert "| M41 |" in sec and "Replay-Imitation Training Pipeline" in sec and "Complete" in sec
     assert "| M42 |" in sec and "Learned-Agent Comparison" in sec and "Complete" in sec
     assert "| M43 |" in sec and "Hierarchical Training Pipeline" in sec and "Complete" in sec
+    assert "| M44 |" in sec and "Local Live-Play Validation" in sec and "Complete" in sec
     assert "| M45 |" in sec and "Self-Play" in sec
 
 
