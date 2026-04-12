@@ -54,8 +54,9 @@
 | Run ID | `main` head | Role |
 | ------ | ----------- | ---- |
 | [`24315387918`](https://github.com/m-cahill/starlab/actions/runs/24315387918) | `879a878eb9d64884982e89e9cdff0e838260d353` (M45 closeout commit) | **Non-merge-boundary** — documentation + governance + milestone artifacts + tag push alignment; **not** PR #56 product merge authority. |
+| [`24315413976`](https://github.com/m-cahill/starlab/actions/runs/24315413976) | `2075ae075eda7787255ad04b333c1489d29a6ece` (`M45_run1` non-merge-boundary table) | **Non-merge-boundary** — documentation-only; **not** PR #56 product merge authority. |
 
-Further doc-only `main` pushes after the row above remain **non-merge-boundary** relative to PR #56 unless explicitly rechartered — see Actions history on `main`.
+Further doc-only `main` pushes after the rows above remain **non-merge-boundary** relative to PR #56 unless explicitly rechartered — see Actions history on `main`.
 
 ---
 
