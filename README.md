@@ -81,7 +81,7 @@ The current high-level program shape is:
 3. **State, Representation, and Perception Bridge**  
 4. **Benchmark Contracts, Baselines, and Evaluation**  
 5. **Learning Paths, Evidence Surfaces, and Flagship Proof**  
-6. **Governed Agent Training, Comparison, and Local Validation** (Phase VI — **M40**–**M45**; **M40** charter **closed** on `main`; **M41** replay-imitation training pipeline **closed** on `main`; **M42** learned-agent comparison harness **closed** on `main`; **M43** hierarchical training pipeline **closed** on `main`; **M44** local live-play validation harness **closed** on `main`; **M45** stub until closed)
+6. **Governed Agent Training, Comparison, and Local Validation** (Phase VI — **M40**–**M45**; **M40** charter **closed** on `main`; **M41** replay-imitation training pipeline **closed** on `main`; **M42** learned-agent comparison harness **closed** on `main`; **M43** hierarchical training pipeline **closed** on `main`; **M44** local live-play validation harness **closed** on `main`; **M45** self-play / RL bootstrap **In progress** until closed on `main`)
 
 STARLAB is intentionally **SC2-first**. Multi-environment expansion is deferred beyond the current **M00**–**M45** arc (see `docs/starlab.md` §19).
 
@@ -110,9 +110,9 @@ These are planning lenses, not promises. The realistic early path is:
 
 | | |
 | --- | --- |
-| **Current milestone** | **M45** — Self-Play / RL Bootstrap v1 (**stub**; Phase VI; **not** claimed **closed** on `main` until merge with authoritative CI) |
+| **Current milestone** | **M45** — Self-Play / RL Bootstrap v1 (**In progress**; Phase VI; **not** claimed **closed** on `main` until merge with authoritative CI) |
 | **Last closed** | **M44** — Local Live-Play Validation Harness v1 ([PR #55](https://github.com/m-cahill/starlab/pull/55)); prior **M43** — [PR #54](https://github.com/m-cahill/starlab/pull/54) |
-| **Next** | **M45** — Self-Play / RL Bootstrap v1 — only remaining Phase VI training-track milestone in **M40**–**M45** (**stub** until chartered and closed) |
+| **Next** | **M45** is the **final** Phase VI training-track milestone (**M40**–**M45**). After M45 closeout, the **Phase VI integrated test campaign** is a **post-M45** follow-on (operator-local; see `docs/diligence/phase_vi_integrated_test_campaign.md`). |
 
 **What is proved on `main` (summary):** A governed, milestone-sized RTS lab substrate for StarCraft II: runtime and environment contracts; deterministic run identity and replay binding; replay intake through parser/metadata/timeline/build/combat/slice/bundle planes; canonical state and observation surfaces; benchmark/baseline/evaluation artifact chains through M31-style evidence surfaces; **M39** public flagship proof pack (`starlab.flagship`, `make flagship`, CI **`flagship`**); **M40** training-program **charter** (`starlab.training`, deterministic `agent_training_program_contract` JSON under `out/training_program/` — **not** model training in M40); **M41** first governed **replay-imitation training pipeline** (`starlab.imitation`, `replay_imitation_training_run` JSON + report; optional local weights `out/training_runs/` — **not** in repo; see `docs/runtime/replay_imitation_training_pipeline_v1.md`); **M42** first governed **learned-agent comparison harness** (`starlab.evaluation`, `learned_agent_comparison` JSON + report; `TrainedRunPredictor` for M41 `joblib`; ranking policy `starlab.m42.ranking.accuracy_macro_f1_candidate_id_v1`; M28 metric surface reuse; see `docs/runtime/learned_agent_comparison_harness_v1.md`); **M43** first governed **hierarchical training pipeline** (`starlab.hierarchy`, `hierarchical_training_run` JSON + report; optional local weights `out/hierarchical_training_runs/` — see `docs/runtime/hierarchical_training_pipeline_v1.md`); **M44** first governed **local live-play validation harness** (`starlab.sc2`, `local_live_play_validation_run` JSON + report; bounded adapter `starlab.m44.semantic_live_action_adapter.v1`; `runtime_mode` `fixture_stub_ci` \| `local_live_sc2`; see `docs/runtime/local_live_play_validation_harness_v1.md`); CI tiering, field-test + flagship artifacts, structural and governance hygiene; **~80%** branch-aware test coverage with a **78.0** `fail_under` gate (M37). **~85%** coverage remains a **stretch target**, not a repository guarantee.
 
@@ -222,6 +222,7 @@ The standing objective:
 
 - Optional local match harness: `pip install -e ".[sc2-harness]"`, then `python -m starlab.sc2.run_match ...` — CI uses the **fake** adapter only.  
 - M44 live validation (after an M43 run exists locally): `python -m starlab.sc2.emit_local_live_play_validation_run --hierarchical-training-run-dir ... --match-config ... --output-dir out/live_validation_runs/<id>/ --runtime-mode fixture_stub_ci` — see `docs/runtime/local_live_play_validation_harness_v1.md`.  
+- M45 bootstrap (after M43 + M44 inputs exist locally): `python -m starlab.training.emit_self_play_rl_bootstrap_run --hierarchical-training-run-dir ... --match-config ... --output-dir out/rl_bootstrap_runs/<id>/ --runtime-mode fixture_stub_ci` — see `docs/runtime/self_play_rl_bootstrap_v1.md`.  
 - Run identity seed: `python -m starlab.runs.seed_from_proof ...` (no SC2 required for the seed artifacts).
 
 Historical M02/M03 closeout detail remains in `docs/starlab.md` §10 and milestone folders under `docs/company_secrets/milestones/`.
