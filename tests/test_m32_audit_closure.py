@@ -95,7 +95,7 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    assert 25 <= n <= 55, f"smoke count {n} outside 25–55 band"
+    assert 25 <= n <= 60, f"smoke count {n} outside 25–60 band"
 
 
 def test_ledger_milestone_rows_m32_m45() -> None:

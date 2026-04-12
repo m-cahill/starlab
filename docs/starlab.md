@@ -1843,7 +1843,7 @@ It should always answer, with minimal ambiguity:
 - **M43 proof (narrow):** first governed **hierarchical training pipeline** — `starlab.hierarchy` training modules + CLI, `hierarchical_training_run.json` / report, optional local-only combined `joblib`, **M40** contract binding, **M29** interface trace schema linkage, **M30** `starlab.m30.delegate.fixed_four_v1`, manager/worker **LogisticRegression**, **delegate_coverage** — **not** benchmark integrity, **not** replay↔execution equivalence, **not** live SC2 in CI, **not** **M42** comparison consumption beyond metadata compatibility, **not** **M44** live-play or **M45** RL.
 - §11 **current milestone** → **M44** (**stub**); **M43** **Complete**; closeout `M43_run1.md`, `M43_summary.md`, `M43_audit.md`, `M43_plan.md` (**Complete**), `M43_toolcalls.md`.
 - Annotated tag **`v0.0.43-m43`** on merge commit `8850e378a584c9821eeab3e8c72bc499d590b308`.
-- **Non-merge-boundary:** any **`main` CI** run triggered **only** by follow-up documentation or ledger pushes after the merge boundary — **not** PR #54 merge authority; merge-boundary remains [`24301419897`](https://github.com/m-cahill/starlab/actions/runs/24301419897) on `8850e37…`.
+- **Non-merge-boundary:** later `push` workflows on `main` after the merge boundary (closeout commits, etc.) — **not** PR #54 merge authority; merge-boundary remains [`24301419897`](https://github.com/m-cahill/starlab/actions/runs/24301419897) on `8850e37…` — see Actions history for run IDs.
 
 ### 2026-04-12 — M42 merged to `main` (PR #53) + milestone closeout
 

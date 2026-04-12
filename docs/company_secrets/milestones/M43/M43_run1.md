@@ -54,7 +54,7 @@ These runs were **green** on earlier PR heads during iteration; they are **super
 
 ## Non-merge-boundary `main` runs (post-merge)
 
-**None recorded** at closeout authoring time beyond the merge-boundary push above. Any later `main` pushes (docs-only or otherwise) are **not** the M43 merge-boundary authority unless explicitly rechartered.
+**Merge-boundary** authority for PR #54 remains [`24301419897`](https://github.com/m-cahill/starlab/actions/runs/24301419897) on merge commit `8850e37…`. Later `push` workflows on `main` (ledger closeout, governance tweaks, etc.) are **not** that merge boundary unless explicitly rechartered — see Actions history on `main` for individual run IDs.
 
 ---
 
