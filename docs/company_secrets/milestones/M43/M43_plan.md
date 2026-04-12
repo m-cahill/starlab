@@ -2,7 +2,7 @@
 
 **Milestone:** M43  
 **Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
-**Status:** In progress — implementation on branch (see `docs/starlab.md` §7 / §11).
+**Status:** Complete — merged to `main` (see `docs/starlab.md` §7 / §11; closeout `M43_run1.md`, `M43_summary.md`, `M43_audit.md`).
 
 ## Objective
 
@@ -21,6 +21,6 @@ Deliver the first **governed, local-first hierarchical training pipeline**: dete
 
 Benchmark integrity, replay↔execution equivalence, live SC2 in CI, M42 comparison integration, M44–M45 product work, committed weights, hierarchy depth beyond two levels / adaptive routing.
 
-## Closeout (later)
+## Closeout
 
-PR merge to `main`, `M43_summary.md` / `M43_audit.md`, tag `v0.0.43-m43`, authoritative CI recording per project workflow.
+Merged [PR #54](https://github.com/m-cahill/starlab/pull/54); `M43_run1.md`, `M43_summary.md`, `M43_audit.md`; tag **`v0.0.43-m43`** on merge commit `8850e378a584c9821eeab3e8c72bc499d590b308`; authoritative CI per `M43_run1.md`.
