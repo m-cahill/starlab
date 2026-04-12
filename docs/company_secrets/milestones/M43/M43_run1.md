@@ -12,15 +12,15 @@
 | Field | Value |
 | ----- | ----- |
 | Workflow | `CI` |
-| **Authoritative PR-head run ID** | [`24300781928`](https://github.com/m-cahill/starlab/actions/runs/24300781928) |
+| **Authoritative PR-head run ID** | [`24300809086`](https://github.com/m-cahill/starlab/actions/runs/24300809086) |
 | Trigger | `pull_request` |
 | Branch | `m43-hierarchical-training-pipeline-v1` |
-| **Final PR head SHA** | `719929d732779439811f5242f5cefd5bc73704b6` |
+| **Final PR head SHA** | `2f46bb6a069848f561710c6317436a440d12a503` |
 | PR | [#54](https://github.com/m-cahill/starlab/pull/54) — **M43: add hierarchical training pipeline v1** |
 
-**Final PR head (verified):** `719929d` — includes M43 product commit + this `M43_run1.md` workflow note.
+**Final PR head (verified):** `2f46bb6` — M43 implementation + `M43_run1.md` CI analysis + authoritative run-ID correction commit.
 
-**Superseded (not merge authority for final head):** run [`24300750817`](https://github.com/m-cahill/starlab/actions/runs/24300750817) on `e0df26c153c333261de17d0514467ad8b2a5d605` (M43 implementation only, before `M43_run1.md` was added).
+**Superseded (not merge authority for final head):** [`24300781928`](https://github.com/m-cahill/starlab/actions/runs/24300781928) on `719929d…` (after first `M43_run1.md` add); [`24300750817`](https://github.com/m-cahill/starlab/actions/runs/24300750817) on `e0df26c…` (M43 code only, before any `M43_run1.md`).
 
 ### Change context
 
@@ -39,8 +39,8 @@
 
 ### Superseded / non-authoritative runs
 
-- **Superseded** — [`24300750817`](https://github.com/m-cahill/starlab/actions/runs/24300750817) on `e0df26c153c333261de17d0514467ad8b2a5d605` (M43 code only; **not** merge authority for final PR head after `M43_run1.md` commit).
-- **Authoritative PR-head CI** for final head `719929d732779439811f5242f5cefd5bc73704b6`: **[`24300781928`](https://github.com/m-cahill/starlab/actions/runs/24300781928)** — **success**, all required jobs passed.
+- **Authoritative PR-head CI** for final head `2f46bb6a069848f561710c6317436a440d12a503`: **[`24300809086`](https://github.com/m-cahill/starlab/actions/runs/24300809086)** — **success**, all required jobs passed.
+- **Superseded** — [`24300781928`](https://github.com/m-cahill/starlab/actions/runs/24300781928), [`24300750817`](https://github.com/m-cahill/starlab/actions/runs/24300750817) — intermediate greens on earlier PR heads; **not** merge authority for tip `2f46bb6…`.
 
 ---
 
@@ -84,7 +84,7 @@
 
 ## Step 5 — Invariants & guardrails
 
-- Required checks remained enforced and **all passed** for run `24300750817`.
+- Required checks remained enforced and **all passed** for run `24300809086`.
 - No evidence of gate weakening in this PR.
 - M43 non-claims remain documentation-level; no benchmark-integrity inflation.
 
@@ -92,7 +92,7 @@
 
 ## Step 6 — Verdict
 
-> **Verdict:** PR-head CI run [`24300781928`](https://github.com/m-cahill/starlab/actions/runs/24300781928) completed **successfully** on `719929d732779439811f5242f5cefd5bc73704b6`. All required jobs passed. This run is suitable as **authoritative PR-head CI** for M43 merge review. **Merge-boundary `main` CI** is **not** claimed here — record that only after merge if/when closeout is approved.
+> **Verdict:** PR-head CI run [`24300809086`](https://github.com/m-cahill/starlab/actions/runs/24300809086) completed **successfully** on `2f46bb6a069848f561710c6317436a440d12a503`. All required jobs passed. This run is suitable as **authoritative PR-head CI** for M43 merge review. **Merge-boundary `main` CI** is **not** claimed here — record that only after merge if/when closeout is approved.
 
 **Status:** ✅ Merge approved *from a CI-signal perspective* — human still owns merge button and program gates.
 
