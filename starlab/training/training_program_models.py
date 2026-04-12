@@ -51,16 +51,14 @@ def milestone_sequence_v1() -> tuple[MilestoneIntentRow, ...]:
             "milestone": "M43",
             "title": "Hierarchical Training Pipeline v1",
             "one_line_intent": (
-                "Governed hierarchical training path building on M29/M30 surfaces; "
-                "bounded scope."
+                "Governed hierarchical training path building on M29/M30 surfaces; bounded scope."
             ),
         },
         {
             "milestone": "M44",
             "title": "Local Live-Play Validation Harness v1",
             "one_line_intent": (
-                "Local-only validation against live or harnessed play; "
-                "not proved in CI."
+                "Local-only validation against live or harnessed play; not proved in CI."
             ),
         },
         {

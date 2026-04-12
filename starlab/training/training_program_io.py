@@ -44,9 +44,7 @@ def build_agent_training_program_contract() -> dict[str, Any]:
 
 def build_agent_training_program_contract_report(contract: dict[str, Any]) -> dict[str, Any]:
     seq = contract["milestone_sequence"]
-    summary_ms = [
-        f"{row['milestone']}: {row['title']}" for row in seq
-    ]
+    summary_ms = [f"{row['milestone']}: {row['title']}" for row in seq]
     return {
         "report_version": AGENT_TRAINING_PROGRAM_CONTRACT_REPORT_VERSION,
         "contract_sha256": contract["contract_sha256"],
