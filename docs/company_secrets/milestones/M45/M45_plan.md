@@ -2,7 +2,8 @@
 
 **Milestone:** M45  
 **Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
-**Branch:** `m45-self-play-rl-bootstrap-v1`
+**Branch:** `m45-self-play-rl-bootstrap-v1`  
+**Status:** Complete (merged to `main`; see `M45_run1.md` / §18)
 
 ## Objective
 

@@ -1,6 +1,6 @@
 # Phase VI integrated test campaign (post‑M45 follow‑on)
 
-This note is **preparation and framing only**. It does **not** assert that a full integrated Phase VI test campaign has been executed or that additional claims beyond closed milestones are proved.
+**M45** is **closed** on `main` (see `docs/starlab.md` §11 / §18). This note remains **preparation and framing** for the **next** follow-on: it does **not** assert that a full integrated Phase VI test campaign has been executed or that additional claims beyond closed milestones are proved.
 
 ## Intent
 
