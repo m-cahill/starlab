@@ -1,19 +1,33 @@
-# M40 Plan — SC2 Substrate Review & Expansion Decision
+# M40 Plan — Agent Training Program Charter & Artifact Contract
 
 **Milestone:** M40  
-**Phase:** VI — Expansion Decision and Platform Boundary Review  
-**Status:** Stub — charter pending (see `docs/starlab.md` §7 / §11).
+**Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
+**Status:** In progress — see `docs/starlab.md` §7 / §11.
 
 ---
 
-## Intent (stub)
+## Intent
 
-**M40** is the **SC2 substrate review and expansion decision** milestone. Detailed scope is chartered when **M40** opens on a working branch. **No** product implementation is authorized from this stub file alone.
+Recharter STARLAB after M39 so the active program is a **governed training track** (M40–M45), not the former Phase VI substrate/platform review stubs. M40 delivers:
+
+1. **Roadmap recharter** in `docs/starlab.md` — **46 milestones (M00–M45)**; former **SC2 Substrate Review** and **Platform Boundary Review** ideas recorded as **deferred** (§19).
+2. **Training-program contract** — deterministic `agent_training_program_contract.json` / report under `out/training_program/`, `starlab.training` emitters, `docs/runtime/agent_training_program_contract_v1.md`.
+3. **Stub milestones** M41–M45 (plan + toolcalls only).
+
+No model training, no weights, no live SC2 in CI, no benchmark-integrity claims.
 
 ---
 
-## Non-goals (standing)
+## Out of scope
 
-- Pre-empting **M41** platform boundary charter (**OD-007**).
-- Benchmark-integrity upgrades unless explicitly chartered.
-- Live SC2 in CI unless explicitly chartered.
+- Training implementation (M41+)
+- RL / self-play logic
+- CI changes that weaken gates
+
+---
+
+## Deliverables
+
+- Updated ledger, README, architecture (where referenced)
+- `tests/test_m40_agent_training_program_contract.py`
+- Governance tests: M39 complete row, arc 46, M42–M45 stub folders

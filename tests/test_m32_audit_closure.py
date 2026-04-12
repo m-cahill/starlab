@@ -98,7 +98,7 @@ def test_smoke_collection_count_in_target_band() -> None:
     assert 25 <= n <= 55, f"smoke count {n} outside 25–55 band"
 
 
-def test_ledger_milestone_rows_m32_m41() -> None:
+def test_ledger_milestone_rows_m32_m45() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "| M32 | Audit Closure I" in text
     assert "| M33 | Audit Closure II" in text
@@ -108,8 +108,10 @@ def test_ledger_milestone_rows_m32_m41() -> None:
     assert "| M37 | Audit Closure VI" in text
     assert "| M38 | Audit Closure VII" in text
     assert "| M39 | Public Flagship Proof Pack" in text
-    assert "| M40 | SC2 Substrate Review" in text
-    assert "| M41 | Platform Boundary Review" in text
+    assert "| M40 | Agent Training Program Charter" in text
+    assert "| M41 | Replay-Imitation Training Pipeline" in text
+    assert "| M42 | Learned-Agent Comparison Harness" in text
+    assert "| M45 | Self-Play / RL Bootstrap" in text
 
 
 def test_flagship_proof_pack_module_exists_post_m39() -> None:
@@ -117,6 +119,12 @@ def test_flagship_proof_pack_module_exists_post_m39() -> None:
 
     assert (REPO_ROOT / "starlab" / "flagship").is_dir()
     assert not (REPO_ROOT / "starlab" / "proof_pack").exists()
+
+
+def test_agent_training_program_package_exists_post_m40() -> None:
+    """M40 introduces ``starlab.training`` for the governed training-program contract."""
+
+    assert (REPO_ROOT / "starlab" / "training").is_dir()
 
 
 def test_deferred_issues_registry_has_required_columns() -> None:

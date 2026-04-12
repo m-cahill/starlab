@@ -92,8 +92,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M31 | `starlab.explorer` — operator evidence surface. |
 | M32–M34 | Governance, CI, docs, structural hygiene — **not** new flagship research artifacts by default. |
 | M39 | `starlab.flagship` — public flagship proof pack (assembles M25/M28/M31 surfaces; **closed** on `main`; not implied by M33 alone). |
+| M40 | `starlab.training` — agent training program contract emission (`agent_training_program_contract.json` / report under `out/training_program/`). |
 
-**Phase VI:** **M40** / **M41** are governed in `docs/starlab.md` §7; **M40** is the **current** stub milestone until chartered.
+**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **`starlab.imitation`** remains M26/M27 replay-derived imitation; **`starlab.training`** holds the cross-milestone program contract.
 
 ## How an engineer validates the repo
 
@@ -102,8 +103,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 3. `make test` or `pytest -q` — full suite (matches **`tests`** CI job intent).  
 4. `make fieldtest` — produces explorer JSON under `out/fieldtest/` (see `docs/getting_started_clone_to_run.md`).  
 5. `make flagship` — M39 proof pack under `out/flagship/` (see `docs/flagship_proof_pack.md`).  
-6. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
-7. Read **`docs/starlab.md`** for current milestone and non-claims.
+6. `python -m starlab.training.emit_agent_training_program_contract --output-dir out/training_program` — M40 training-program contract JSON (local output; see `docs/runtime/agent_training_program_contract_v1.md`).  
+7. Optional: `make coverage`, `make audit`, `make lint`, `make typecheck`.  
+8. Read **`docs/starlab.md`** for current milestone and non-claims.
 
 ## Source-of-truth documents
 
