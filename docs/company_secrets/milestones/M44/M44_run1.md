@@ -55,8 +55,9 @@
 | ------ | ----------- | ---- |
 | [`24313225285`](https://github.com/m-cahill/starlab/actions/runs/24313225285) | `e3d14f4d61a4293bc355a050deacc3170fecc3e2` (closeout commit) | **Non-merge-boundary** — documentation-only closeout + tag push; **not** PR #55 product merge authority. |
 | [`24313253583`](https://github.com/m-cahill/starlab/actions/runs/24313253583) | `5e4456c7171033153137a641409c5f79eb5d4bbf` (ledger + `M44_run1` refinement) | **Non-merge-boundary** — documentation-only; **not** PR #55 product merge authority. |
+| [`24313282328`](https://github.com/m-cahill/starlab/actions/runs/24313282328) | `7f493f83ca71c40be335a80ea99ae416089c6d85` (`M44_run1` non-merge-boundary table completion) | **Non-merge-boundary** — documentation-only; **not** PR #55 product merge authority. |
 
-Later `push` workflows on `main` after the rows above are **not** the PR #55 merge boundary unless explicitly rechartered — see Actions history on `main`.
+Further doc-only `main` pushes after the rows above remain **non-merge-boundary** relative to PR #55 unless explicitly rechartered — see Actions history on `main`.
 
 ---
 
