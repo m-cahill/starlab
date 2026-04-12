@@ -1861,7 +1861,7 @@ It should always answer, with minimal ambiguity:
 - **M44 proof (narrow):** first governed **local live-play validation harness** — `starlab.sc2` harness + emitter, `local_live_play_validation_run.json` / report, `m43_sklearn_runtime`, bounded adapter **`starlab.m44.semantic_live_action_adapter.v1`**, replay-backed chain (M02/M03/M04), `runtime_mode` `fixture_stub_ci` \| `local_live_sc2`, optional video metadata — **not** benchmark integrity, **not** replay↔execution equivalence, **not** live SC2 in CI, **not** ladder performance, **not** **M45** RL product.
 - §11 **current milestone** → **M45** (**stub**); **M44** **Complete**; closeout `M44_run1.md`, `M44_summary.md`, `M44_audit.md`, `M44_plan.md` (**Complete**), `M44_toolcalls.md`.
 - Annotated tag **`v0.0.44-m44`** on merge commit `1b1067ad632643d2b14da05d510a7c2a263cc8ea`.
-- **Non-merge-boundary:** later `push` workflows on `main` after the merge boundary (closeout-only documentation commits, etc.) — **not** PR #55 product merge authority; merge-boundary remains [`24313143884`](https://github.com/m-cahill/starlab/actions/runs/24313143884) on `1b1067a…` — see Actions history for run IDs.
+- **Non-merge-boundary:** `main` CI [`24313225285`](https://github.com/m-cahill/starlab/actions/runs/24313225285) on closeout commit `e3d14f4…` — **success** — documentation-only closeout + tag push; **not** PR #55 product merge authority; merge-boundary remains [`24313143884`](https://github.com/m-cahill/starlab/actions/runs/24313143884) on `1b1067a…`.
 
 ### 2026-04-12 — M43 merged to `main` (PR #54) + milestone closeout
 

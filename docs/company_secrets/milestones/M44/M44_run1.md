@@ -49,7 +49,13 @@
 
 ## Non-merge-boundary `main` runs (post-merge)
 
-**Merge-boundary** authority for PR #55 remains [`24313143884`](https://github.com/m-cahill/starlab/actions/runs/24313143884) on merge commit `1b1067a…`. Later `push` workflows on `main` that only carry **M44 closeout** documentation (ledger, `M44_run1.md` / summary / audit, governance test alignment, etc.) are **not** that merge boundary unless explicitly rechartered — see Actions history on `main` for individual run IDs; label such runs **non-merge-boundary** relative to PR #55 product merge authority.
+**Merge-boundary** authority for PR #55 remains [`24313143884`](https://github.com/m-cahill/starlab/actions/runs/24313143884) on merge commit `1b1067a…`.
+
+| Run ID | `main` head | Role |
+| ------ | ----------- | ---- |
+| [`24313225285`](https://github.com/m-cahill/starlab/actions/runs/24313225285) | `e3d14f4d61a4293bc355a050deacc3170fecc3e2` (closeout commit) | **Non-merge-boundary** — documentation-only closeout + tag push; **not** PR #55 product merge authority. |
+
+Later `push` workflows on `main` after the rows above are **not** the PR #55 merge boundary unless explicitly rechartered — see Actions history on `main`.
 
 ---
 
