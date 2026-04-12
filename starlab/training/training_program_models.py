@@ -65,8 +65,8 @@ def milestone_sequence_v1() -> tuple[MilestoneIntentRow, ...]:
             "milestone": "M45",
             "title": "Self-Play / RL Bootstrap v1",
             "one_line_intent": (
-                "Governed self-play or RL bootstrap lane under contract; "
-                "no benchmark-integrity claim by default."
+                "Governed bootstrap rollouts over M44 + optional weighted sklearn re-fit; "
+                "bounded artifacts; no benchmark-integrity claim by default."
             ),
         },
     )

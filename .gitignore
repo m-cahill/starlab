@@ -70,6 +70,7 @@ out/hierarchical_training_runs/
 
 # M44 local live-play validation runs (local outputs + JSON)
 out/live_validation_runs/
+out/rl_bootstrap_runs/
 
 # Generated SBOM (CI artifact)
 sbom.json
