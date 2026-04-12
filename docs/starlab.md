@@ -1870,7 +1870,7 @@ It should always answer, with minimal ambiguity:
 - **M45 proof (narrow):** first governed **self-play / RL bootstrap** — `starlab.training` bootstrap modules + CLI, `self_play_rl_bootstrap_run.json` / report, `bootstrap_dataset.json`, **M44** harness reuse, **M43** candidate + local `joblib`, optional conservative weighted re-fit — **not** benchmark integrity, **not** replay↔execution equivalence, **not** live SC2 in CI, **not** ladder performance, **not** **Phase VI integrated test campaign** completion.
 - §7 milestone table → **M45** **Complete**; §11 **M00–M45** arc **closed** on `main`; closeout `M45_run1.md`, `M45_summary.md`, `M45_audit.md`, `M45_plan.md` (**Complete**), `M45_toolcalls.md`.
 - Annotated tag **`v0.0.45-m45`** on merge commit `1a585b68ea7413852ce78c220c6512bba6a004d7`.
-- **Non-merge-boundary:** any later `push` workflow on `main` that records **M45** documentation closeout / tag push **after** additional commits — **not** PR #56 product merge authority; merge-boundary remains [`24315311180`](https://github.com/m-cahill/starlab/actions/runs/24315311180) on `1a585b6…` unless a future entry revises this ledger.
+- **Non-merge-boundary:** `main` CI [`24315387918`](https://github.com/m-cahill/starlab/actions/runs/24315387918) on closeout commit `879a878…` — **success** — ledger/README/architecture/M45 artifacts/governance tests; **not** PR #56 product merge authority; merge-boundary remains [`24315311180`](https://github.com/m-cahill/starlab/actions/runs/24315311180) on `1a585b6…`.
 
 ### 2026-04-12 — M44 merged to `main` (PR #55) + milestone closeout
 

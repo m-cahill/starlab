@@ -51,7 +51,11 @@
 
 **Merge-boundary** authority for PR #56 remains [`24315311180`](https://github.com/m-cahill/starlab/actions/runs/24315311180) on merge commit `1a585b68ea7413852ce78c220c6512bba6a004d7`.
 
-Any later `push` workflows on `main` that record **M45 closeout** (ledger, `M45_run1.md`, README, governance tests, tag `v0.0.45-m45`, etc.) are **non-merge-boundary** relative to PR #56 product merge authority unless explicitly rechartered — see Actions history on `main` after the closeout commit.
+| Run ID | `main` head | Role |
+| ------ | ----------- | ---- |
+| [`24315387918`](https://github.com/m-cahill/starlab/actions/runs/24315387918) | `879a878eb9d64884982e89e9cdff0e838260d353` (M45 closeout commit) | **Non-merge-boundary** — documentation + governance + milestone artifacts + tag push alignment; **not** PR #56 product merge authority. |
+
+Further doc-only `main` pushes after the row above remain **non-merge-boundary** relative to PR #56 unless explicitly rechartered — see Actions history on `main`.
 
 ---
 
