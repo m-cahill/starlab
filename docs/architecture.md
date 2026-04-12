@@ -92,9 +92,9 @@ See **`docs/runtime/ci_tiering_field_test_readiness_v1.md`** for the authoritati
 | M31 | `starlab.explorer` — operator evidence surface. |
 | M32–M34 | Governance, CI, docs, structural hygiene — **not** new flagship research artifacts by default. |
 | M39 | `starlab.flagship` — public flagship proof pack (assembles M25/M28/M31 surfaces; **closed** on `main`; not implied by M33 alone). |
-| M40 | `starlab.training` — agent training program contract emission (`agent_training_program_contract.json` / report under `out/training_program/`). |
+| M40 | `starlab.training` — agent training program contract emission (`agent_training_program_contract.json` / report under `out/training_program/`); **closed** on `main` (charter milestone — **not** training results). |
 
-**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **`starlab.imitation`** remains M26/M27 replay-derived imitation; **`starlab.training`** holds the cross-milestone program contract.
+**Phase VI:** **M40**–**M45** — governed agent training, comparison, and local validation — see `docs/starlab.md` §6–§7. **M40** is **closed**; **M41** is the **current stub** milestone. **`starlab.imitation`** remains M26/M27 replay-derived imitation; **`starlab.training`** holds the cross-milestone program contract.
 
 ## How an engineer validates the repo
 

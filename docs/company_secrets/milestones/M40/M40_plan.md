@@ -2,7 +2,7 @@
 
 **Milestone:** M40  
 **Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
-**Status:** In progress — see `docs/starlab.md` §7 / §11.
+**Status:** Complete — merged to `main` ([PR #51](https://github.com/m-cahill/starlab/pull/51)); see `docs/starlab.md` §7 / §11 / §18 / §23.
 
 ---
 

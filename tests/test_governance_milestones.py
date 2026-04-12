@@ -85,6 +85,7 @@ _MILESTONE_COMPLETE_ROWS = [
     pytest.param("M37", "Audit Closure VI", marks=pytest.mark.smoke),
     pytest.param("M38", "Audit Closure VII", marks=pytest.mark.smoke),
     pytest.param("M39", "Public Flagship Proof Pack", marks=pytest.mark.smoke),
+    pytest.param("M40", "Agent Training Program Charter", marks=pytest.mark.smoke),
 ]
 
 

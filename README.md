@@ -81,7 +81,7 @@ The current high-level program shape is:
 3. **State, Representation, and Perception Bridge**  
 4. **Benchmark Contracts, Baselines, and Evaluation**  
 5. **Learning Paths, Evidence Surfaces, and Flagship Proof**  
-6. **Governed Agent Training, Comparison, and Local Validation** (Phase VI — **M40**–**M45**; charter through self-play / RL bootstrap track)
+6. **Governed Agent Training, Comparison, and Local Validation** (Phase VI — **M40**–**M45**; **M40** charter **closed** on `main`; **M41**–**M45** stub until each closes)
 
 STARLAB is intentionally **SC2-first**. Multi-environment expansion is deferred beyond the current **M00**–**M45** arc (see `docs/starlab.md` §19).
 
@@ -110,13 +110,13 @@ These are planning lenses, not promises. The realistic early path is:
 
 | | |
 | --- | --- |
-| **Current milestone** | **M40** — Agent Training Program Charter & Artifact Contract (Phase VI training track; in progress) |
-| **Last closed** | **M39** — Public Flagship Proof Pack ([PR #50](https://github.com/m-cahill/starlab/pull/50)); prior **M38** — [PR #49](https://github.com/m-cahill/starlab/pull/49) |
-| **Next** | **M41** — Replay-Imitation Training Pipeline v1 (**planned**; stub until chartered) |
+| **Current milestone** | **M41** — Replay-Imitation Training Pipeline v1 (**stub**; Phase VI; not claimed until closed on `main`) |
+| **Last closed** | **M40** — Agent Training Program Charter & Artifact Contract ([PR #51](https://github.com/m-cahill/starlab/pull/51)); prior **M39** — [PR #50](https://github.com/m-cahill/starlab/pull/50) |
+| **Next** | **M42** — Learned-Agent Comparison Harness v1 (**planned**; stub until chartered) |
 
-**What is proved on `main` (summary):** A governed, milestone-sized RTS lab substrate for StarCraft II: runtime and environment contracts; deterministic run identity and replay binding; replay intake through parser/metadata/timeline/build/combat/slice/bundle planes; canonical state and observation surfaces; benchmark/baseline/evaluation artifact chains through M31-style evidence surfaces; **M39** public flagship proof pack (`starlab.flagship`, `make flagship`, CI **`flagship`**); CI tiering, field-test + flagship artifacts, structural and governance hygiene; **~80%** branch-aware test coverage with a **78.0** `fail_under` gate (M37). **~85%** coverage remains a **stretch target**, not a repository guarantee.
+**What is proved on `main` (summary):** A governed, milestone-sized RTS lab substrate for StarCraft II: runtime and environment contracts; deterministic run identity and replay binding; replay intake through parser/metadata/timeline/build/combat/slice/bundle planes; canonical state and observation surfaces; benchmark/baseline/evaluation artifact chains through M31-style evidence surfaces; **M39** public flagship proof pack (`starlab.flagship`, `make flagship`, CI **`flagship`**); **M40** training-program **charter** (`starlab.training`, deterministic `agent_training_program_contract` JSON under `out/training_program/` — **not** model training); CI tiering, field-test + flagship artifacts, structural and governance hygiene; **~80%** branch-aware test coverage with a **78.0** `fail_under` gate (M37). **~85%** coverage remains a **stretch target**, not a repository guarantee.
 
-**What is not proved (by default):** **Benchmark integrity** and **replay↔execution equivalence**; **live SC2 in CI** (CI stays fixture-driven unless a milestone changes that); **M41+** training-track product results; **operating manual v1** promotion. The **M39** pack does **not** claim benchmark integrity or live SC2 — see `docs/flagship_proof_pack.md` and `docs/starlab.md` §11.
+**What is not proved (by default):** **Benchmark integrity** and **replay↔execution equivalence**; **live SC2 in CI** (CI stays fixture-driven unless a milestone changes that); **M41+** training-track **product** results (replay-imitation pipeline, comparison harness, etc.); **operating manual v1** promotion. The **M39** pack does **not** claim benchmark integrity or live SC2 — see `docs/flagship_proof_pack.md` and `docs/starlab.md` §11. **M40** does **not** prove training outcomes — charter and contract emission only.
 
 ---
 

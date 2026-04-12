@@ -75,13 +75,14 @@ def test_od005_resolved_row() -> None:
 
 
 @pytest.mark.smoke
-def test_current_milestone_is_m40_training_charter() -> None:
+def test_current_milestone_is_m41_stub_after_m40_closeout() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M41" in section
+    assert "Replay-Imitation Training Pipeline" in section
+    assert "stub" in section.lower()
     assert "M40" in section
     assert "Agent Training Program Charter" in section
-    assert "M39" in section
-    assert "Public Flagship Proof Pack" in section
     assert "closed" in section.lower()
 
 

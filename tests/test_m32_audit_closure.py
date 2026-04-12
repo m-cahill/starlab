@@ -109,6 +109,12 @@ def test_ledger_milestone_rows_m32_m45() -> None:
     assert "| M38 | Audit Closure VII" in text
     assert "| M39 | Public Flagship Proof Pack" in text
     assert "| M40 | Agent Training Program Charter" in text
+    for line in text.splitlines():
+        if line.strip().startswith("| M40 |") and "Agent Training Program Charter" in line:
+            assert "Complete" in line
+            break
+    else:
+        raise AssertionError("M40 milestone table row missing Complete")
     assert "| M41 | Replay-Imitation Training Pipeline" in text
     assert "| M42 | Learned-Agent Comparison Harness" in text
     assert "| M45 | Self-Play / RL Bootstrap" in text
