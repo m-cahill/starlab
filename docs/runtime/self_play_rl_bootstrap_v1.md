@@ -61,7 +61,7 @@ python -m starlab.training.emit_self_play_rl_bootstrap_run \
 | `reward_policy_id` | `starlab.m45.reward.validation_outcome_v1` |
 | `update_policy_id` | `starlab.m45.update.weighted_logistic_refit_v1` |
 
-**Reward (v1):** primary signal from M44 `match_execution.final_status` (`ok` → 1.0; otherwise 0.0) plus a small deterministic step-count shaping term (capped).
+**Reward (v1):** primary signal from M44 `match_execution.final_status` (`ok` → 1.0; otherwise 0.0) plus a small deterministic step-count shaping term (capped). For **bounded burnysc2** runs, `final_status` is **`ok`** when the M44 harness completed the step cap (validation contract success); the literal SC2 `Result` is **not** used for reward — see `sc2_game_result` on the M44 proof if needed for forensics. **Not** victory, **not** ladder performance.
 
 ## Binding and non-claims
 

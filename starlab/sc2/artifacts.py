@@ -37,6 +37,7 @@ class ExecutionProofRecord:
     action_count: int
     final_status: str
     replay: ReplayMetadata | None
+    sc2_game_result: str | None = None
     artifact_hash: str | None = None
 
 
@@ -66,7 +67,7 @@ def proof_record_to_hash_input_dict(record: ExecutionProofRecord) -> dict[str, A
     summaries_sorted = [
         {k: int(obs[k]) for k in sorted(obs)} for obs in record.observation_summaries
     ]
-    return {
+    out: dict[str, Any] = {
         "action_count": record.action_count,
         "adapter_name": record.adapter_name,
         "base_build": record.base_build,
@@ -83,6 +84,9 @@ def proof_record_to_hash_input_dict(record: ExecutionProofRecord) -> dict[str, A
         "status_sequence": list(record.status_sequence),
         "step_policy": {k: record.step_policy[k] for k in sorted(record.step_policy)},
     }
+    if record.sc2_game_result is not None:
+        out["sc2_game_result"] = record.sc2_game_result
+    return out
 
 
 def compute_artifact_hash(record: ExecutionProofRecord) -> str:
@@ -121,6 +125,7 @@ def parse_execution_proof_mapping(data: dict[str, Any]) -> ExecutionProofRecord:
             replay_file_sha256=replay_raw.get("replay_file_sha256"),
             note=replay_raw.get("note"),
         )
+    sgr = data.get("sc2_game_result")
     return ExecutionProofRecord(
         schema_version=str(data["schema_version"]),
         adapter_name=str(data["adapter_name"]),
@@ -137,5 +142,6 @@ def parse_execution_proof_mapping(data: dict[str, Any]) -> ExecutionProofRecord:
         action_count=int(data["action_count"]),
         final_status=str(data["final_status"]),
         replay=replay,
+        sc2_game_result=str(sgr) if sgr is not None else None,
         artifact_hash=data.get("artifact_hash"),
     )
