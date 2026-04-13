@@ -134,8 +134,12 @@ def run_burnysc2_adapter(
         sc2_version=sc2_version,
     )
 
-    final = getattr(result, "name", str(result))
-    sink["status_sequence"].append(f"result:{final}")
+    literal_sc2 = str(getattr(result, "name", str(result)))
+    sink["status_sequence"].append(f"result:{literal_sc2}")
+    # Bounded harness exits voluntarily at step cap (bounded_exit); SC2 reports a loss result
+    # (e.g. Defeat) but validation success is governed separately from match outcome.
+    bounded_completed = "bounded_exit" in sink["status_sequence"]
+    validation_final_status = "ok" if bounded_completed else literal_sc2
 
     iface = {
         "feature_layer_interface": config.interface.feature_layer_interface,
@@ -186,6 +190,7 @@ def run_burnysc2_adapter(
         status_sequence=tuple(sink["status_sequence"]),
         observation_summaries=obs_tuple,
         action_count=int(sink["action_count"]),
-        final_status=final,
+        final_status=validation_final_status,
         replay=replay_meta,
+        sc2_game_result=literal_sc2,
     )

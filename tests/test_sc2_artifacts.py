@@ -75,6 +75,30 @@ def test_hash_excludes_artifact_hash_field() -> None:
     assert h1 in out
 
 
+def test_sc2_game_result_included_in_hash_when_set() -> None:
+    r_ok = _sample_record()
+    r_live = ExecutionProofRecord(
+        schema_version=r_ok.schema_version,
+        adapter_name="burnysc2",
+        runtime_boundary_name=r_ok.runtime_boundary_name,
+        base_build=r_ok.base_build,
+        data_version=r_ok.data_version,
+        map_logical_key=r_ok.map_logical_key,
+        map_resolution=r_ok.map_resolution,
+        seed=r_ok.seed,
+        interface=r_ok.interface,
+        step_policy=r_ok.step_policy,
+        status_sequence=r_ok.status_sequence,
+        observation_summaries=r_ok.observation_summaries,
+        action_count=r_ok.action_count,
+        final_status="ok",
+        replay=r_ok.replay,
+        sc2_game_result="Defeat",
+    )
+    assert "sc2_game_result" in proof_record_to_hash_input_dict(r_live)
+    assert compute_artifact_hash(r_ok) != compute_artifact_hash(r_live)
+
+
 def test_json_redact_replay_name() -> None:
     r = ExecutionProofRecord(
         schema_version="match_execution_proof.v1",

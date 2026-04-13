@@ -313,6 +313,11 @@ def run_local_live_play_validation(
             "map_logical_key": proof_mapping.get("map_logical_key"),
             "proof_artifact_hash": proof_hash,
             "seed": cfg.seed,
+            **(
+                {"sc2_game_result": proof_mapping["sc2_game_result"]}
+                if proof_mapping.get("sc2_game_result") is not None
+                else {}
+            ),
         },
         "non_claims": sorted(NON_CLAIMS_V1),
         "optional_media_registration": vid_meta,

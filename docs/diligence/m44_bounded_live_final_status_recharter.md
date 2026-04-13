@@ -1,6 +1,6 @@
 # Recharter package — M44/M45 bounded live `final_status` semantics
 
-**Status:** Planning only — not implemented on this document’s landing branch until milestone execution.  
+**Status:** **Option A implemented** on branch `recharter/m44-bounded-live-final-status-semantics` (**M46**); merge to `main` pending — see `docs/starlab.md` §23 (**2026-04-13 — M46**) and `docs/company_secrets/milestones/M46/M46_plan.md`.  
 **Branch:** `recharter/m44-bounded-live-final-status-semantics`  
 **Milestone placeholder:** **M46** — *Bounded live validation final-status semantics* (working title; numbering subject to program governance).
 
@@ -122,11 +122,11 @@ def compute_episode_reward_validation_outcome_v1(validation_run: dict[str, Any])
 
 ## Acceptance criteria (M46 definition of done)
 
-- [ ] Governed semantics for bounded live vs fixture `final_status` (or successor fields) are documented and **versioned** in runtime contracts.
-- [ ] M45 reward / gating logic matches the chosen option without contradicting explicit non-claims.
-- [ ] Tests cover the new behavior without requiring live SC2 in default CI.
-- [ ] `docs/starlab.md` updated with M46 closeout narrative and **honest** non-claims (no benchmark integrity, no ladder claim).
-- [ ] Operator runbook / integrated campaign criteria updated so live M44 pass/fail rules match implementation.
+- [x] Governed semantics for bounded live vs fixture `final_status` (or successor fields) are documented and **versioned** in runtime contracts.
+- [x] M45 reward / gating logic matches the chosen option without contradicting explicit non-claims.
+- [x] Tests cover the new behavior without requiring live SC2 in default CI.
+- [x] `docs/starlab.md` updated with M46 closeout narrative and **honest** non-claims (no benchmark integrity, no ladder claim).
+- [x] Operator runbook / integrated campaign criteria updated so live M44 pass/fail rules match implementation (`docs/diligence/phase_vi_integrated_test_campaign.md`; runtime M44 doc is authoritative for field semantics).
 
 ---
 

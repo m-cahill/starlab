@@ -13,6 +13,8 @@ After **M45** closes on `main`, the next natural follow‑on is a **deliberate, 
 - **M44** local live‑play validation artifacts
 - **M45** bootstrap artifacts
 
+**M46 (bounded live semantics):** For **bounded** `local_live_sc2` / **burnysc2** runs that hit the configured step cap (`bounded_exit` in the execution proof), treat **`match_execution.final_status == "ok"`** as **validation-contract success** (aligned with the fixture path). The literal SC2 client **`Result`** is preserved separately as **`sc2_game_result`** — **not** a ladder or “won the game” claim. Authoritative: `docs/runtime/local_live_play_validation_harness_v1.md`.
+
 ## Boundary
 
 CI remains **fixture‑only** for SC2 and live play. Any **live SC2** or long‑running runs belong **outside** default CI, on operator machines, with results captured as **local artifacts** under the governed layouts (`out/…` roots, not committed weights).

@@ -53,6 +53,11 @@ out/live_validation_runs/<run_id>/
 - **CI:** fixture-only CPU path — `runtime_mode=fixture_stub_ci`, `adapter=fake`, no GPU, no live SC2 — see `tests/test_m44_local_live_play_validation_harness.py`.
 - **Local:** real M43 run directory under `out/hierarchical_training_runs/` (or equivalent); weights stay **local sidecars**; use `local_live_sc2` only on an operator machine with SC2 + optional `sc2-harness` extras.
 
+## `match_execution` semantics (bounded burnysc2 vs fixture)
+
+- **`fixture_stub_ci` / `adapter=fake`:** `match_execution.final_status` is **`ok`** (deterministic harness; no SC2 client `Result`).
+- **`local_live_sc2` / `adapter=burnysc2`:** When the bounded harness completes the configured step cap (`bounded_exit` in the proof `status_sequence`), **`match_execution.final_status`** is **`ok`** — this is **governed validation success** (bounded contract completed), **not** a claim that the bot won the match. The literal SC2 client `Result` name (e.g. `Victory`, `Defeat`, `Tie`) is preserved separately as **`sc2_game_result`** on `match_execution_proof.json` and, when present, on **`match_execution.sc2_game_result`** in `local_live_play_validation_run.json`. Voluntary leave at the step cap often yields `Defeat` in SC2; that does **not** negate validation success for this milestone’s narrow plumbing proof.
+
 ## Semantic live action adapter
 
 **Policy id:** `starlab.m44.semantic_live_action_adapter.v1`
