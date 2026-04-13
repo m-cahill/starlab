@@ -10,6 +10,8 @@
 
 **2026-04-13** — `gh pr merge` — [PR #57](https://github.com/m-cahill/starlab/pull/57) merged to `main` (merge commit `b925130…`); merge-boundary [`24359249759`](https://github.com/m-cahill/starlab/actions/runs/24359249759) **failure** (`pip-audit`); repair commit `1b7b25e…` — green [`24359357370`](https://github.com/m-cahill/starlab/actions/runs/24359357370).
 
-**2026-04-13** — `write` — `M46_run1.md`, `M46_summary.md`, `M46_audit.md`; ledger §11 / §18 / §23; **M47** stub; tag **`v0.0.46-m46`**.
+**2026-04-13** — `write` — `M46_run1.md`, `M46_summary.md`, `M46_audit.md`; ledger §11 / §18 / §23; **M47** stub.
+
+**2026-04-13** — `git tag` / `git push` — annotated **`v0.0.46-m46`** on merge commit `b925130…`; `gh run watch` — post-closeout `main` [`24359543409`](https://github.com/m-cahill/starlab/actions/runs/24359543409) on `1b33acd…` — **success**.
 
 ---

@@ -3,7 +3,7 @@
 **Milestone:** M46 — Bounded Live Validation Final-Status Semantics  
 **Mode:** DELTA AUDIT  
 **Range:** PR #57 product merge (`b925130…`) + CI repair commit (`1b7b25e…`) for pytest / `pip-audit`  
-**CI status:** **Authoritative PR-head** [`24332563005`](https://github.com/m-cahill/starlab/actions/runs/24332563005) — **success** (`ddb18f4…`). **Merge-boundary** on merge commit [`24359249759`](https://github.com/m-cahill/starlab/actions/runs/24359249759) — **failure** (security / pip-audit). **Repaired green `main`** [`24359357370`](https://github.com/m-cahill/starlab/actions/runs/24359357370) — **success** (dependency-only repair).  
+**CI status:** **Authoritative PR-head** [`24332563005`](https://github.com/m-cahill/starlab/actions/runs/24332563005) — **success** (`ddb18f4…`). **Merge-boundary** on merge commit [`24359249759`](https://github.com/m-cahill/starlab/actions/runs/24359249759) — **failure** (security / pip-audit). **Repaired green `main`** [`24359357370`](https://github.com/m-cahill/starlab/actions/runs/24359357370) — **success** (dependency-only repair). **Post-closeout `main`** [`24359543409`](https://github.com/m-cahill/starlab/actions/runs/24359543409) on `1b33acd…` — **success** (ledger closeout — **not** merge authority).  
 **Audit verdict:** 🟢 — Bounded **final_status** / **`sc2_game_result`** semantics merged with explicit non-claims; merge-boundary red documented; repair run **not** conflated with M46 product proof; **M42** contract-path mismatch explicitly deferred to **M47** stub.
 
 ---

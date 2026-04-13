@@ -49,6 +49,17 @@ This is **M46 product merge** evidence: **red merge-boundary** on first push —
 
 ---
 
+## Post-closeout / ledger push `main` CI (not merge authority)
+
+| Field | Value |
+| ----- | ----- |
+| **Commit** | `1b33acde84f0b719a6228507559b492b164f98b3` — docs closeout (`M46_run1` / summary / audit, §7 / §11 / §18 / §23, **M47** stub, governance tests) |
+| **Workflow run** | [`24359543409`](https://github.com/m-cahill/starlab/actions/runs/24359543409) — **success** (required jobs: `quality`, `smoke`, `tests`, `security`, `fieldtest`, `flagship`, `governance`) |
+
+**Role:** **Documentation / governance closeout** — **not** PR #57 merge authority; merge-boundary evidence remains [`24359249759`](https://github.com/m-cahill/starlab/actions/runs/24359249759) on `b925130…` (**failure**) + repaired green [`24359357370`](https://github.com/m-cahill/starlab/actions/runs/24359357370).
+
+---
+
 ## Narrow M46 proof (product)
 
 - **Option A:** Bounded **burnysc2** runs that record `bounded_exit` in the execution proof `status_sequence` emit **`match_execution.final_status="ok"`** (governed validation-contract completion at step cap).
@@ -66,4 +77,4 @@ This is **M46 product merge** evidence: **red merge-boundary** on first push —
 
 ## Annotated tag
 
-- **`v0.0.46-m46`** on merge commit `b925130d2e6bb9b2586139b17d100285e89b8e54` (after merge; tag documents M46 merge boundary per release discipline).
+- **`v0.0.46-m46`** on merge commit `b925130d2e6bb9b2586139b17d100285e89b8e54` (created and pushed after closeout commit `1b33acd…`; tag documents M46 merge boundary per release discipline).

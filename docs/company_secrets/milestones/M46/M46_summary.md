@@ -17,7 +17,8 @@ Align **bounded** `local_live_sc2` / **burnysc2** **`match_execution.final_statu
 - **PR #57** merged ([merge commit](https://github.com/m-cahill/starlab/commit/b925130d2e6bb9b2586139b17d100285e89b8e54) `b925130…`).
 - **Final PR head** `ddb18f4…` — **authoritative PR-head CI** [`24332563005`](https://github.com/m-cahill/starlab/actions/runs/24332563005).
 - **Merge-boundary** push on `b925130…` — [`24359249759`](https://github.com/m-cahill/starlab/actions/runs/24359249759) **failed** (`pip-audit` / pytest CVE); **repair** [`24359357370`](https://github.com/m-cahill/starlab/actions/runs/24359357370) on `1b7b25e…` (pytest **≥9.0.3**).
-- **Tag:** `v0.0.46-m46` on merge commit `b925130…`.
+- **Tag:** `v0.0.46-m46` on merge commit `b925130…` (pushed after closeout).
+- **Post-closeout `main` CI** on `1b33acd…`: [`24359543409`](https://github.com/m-cahill/starlab/actions/runs/24359543409) — **success** (ledger + closeout artifacts — **not** PR #57 merge authority).
 
 ## Non-claims
 
