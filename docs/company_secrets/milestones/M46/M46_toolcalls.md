@@ -8,6 +8,8 @@
 
 **2026-04-13** — `git` — Commit on `recharter/m44-bounded-live-final-status-semantics`; push; open PR; record authoritative CI in §23 after green.
 
-**2026-04-13** — `gh run watch` — PR [#57](https://github.com/m-cahill/starlab/pull/57) — **authoritative green PR-head CI** [`24332502917`](https://github.com/m-cahill/starlab/actions/runs/24332502917) (supersedes [`24332444125`](https://github.com/m-cahill/starlab/actions/runs/24332444125), [`24332375680`](https://github.com/m-cahill/starlab/actions/runs/24332375680), [`24332314901`](https://github.com/m-cahill/starlab/actions/runs/24332314901)).
+**2026-04-13** — `gh pr merge` — [PR #57](https://github.com/m-cahill/starlab/pull/57) merged to `main` (merge commit `b925130…`); merge-boundary [`24359249759`](https://github.com/m-cahill/starlab/actions/runs/24359249759) **failure** (`pip-audit`); repair commit `1b7b25e…` — green [`24359357370`](https://github.com/m-cahill/starlab/actions/runs/24359357370).
+
+**2026-04-13** — `write` — `M46_run1.md`, `M46_summary.md`, `M46_audit.md`; ledger §11 / §18 / §23; **M47** stub; tag **`v0.0.46-m46`**.
 
 ---

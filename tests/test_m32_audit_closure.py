@@ -95,10 +95,10 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    assert 25 <= n <= 60, f"smoke count {n} outside 25–60 band"
+    assert 25 <= n <= 65, f"smoke count {n} outside 25–65 band"
 
 
-def test_ledger_milestone_rows_m32_m45() -> None:
+def test_ledger_milestone_rows_m32_m47() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "| M32 | Audit Closure I" in text
     assert "| M33 | Audit Closure II" in text
@@ -118,6 +118,8 @@ def test_ledger_milestone_rows_m32_m45() -> None:
     assert "| M41 | Replay-Imitation Training Pipeline" in text
     assert "| M42 | Learned-Agent Comparison Harness" in text
     assert "| M45 | Self-Play / RL Bootstrap" in text
+    assert "| M46 | Bounded Live Validation Final-Status Semantics" in text
+    assert "| M47 | Learned-Agent Comparison Contract-Path Alignment (stub)" in text
 
 
 def test_flagship_proof_pack_module_exists_post_m39() -> None:

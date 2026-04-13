@@ -3,7 +3,7 @@
 **Milestone:** M46  
 **Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
 **Branch:** `recharter/m44-bounded-live-final-status-semantics`  
-**Status:** Complete on branch (pending merge to `main`; see §23 changelog / PR when opened)
+**Status:** Complete (merged to `main`; see `M46_run1.md` / §18)
 
 ## Objective
 
