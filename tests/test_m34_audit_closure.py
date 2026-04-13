@@ -40,7 +40,7 @@ def test_dev_dependency_upper_bounds_in_pyproject() -> None:
     text = (REPO_ROOT / "pyproject.toml").read_text(encoding="utf-8")
     assert "ruff>=" in text and "<1" in text
     assert "mypy>=" in text and "<2" in text
-    assert "pytest>=" in text and "<9" in text
+    assert "pytest>=" in text and "<10" in text
 
 
 def test_coverage_gate_unchanged_m34() -> None:
