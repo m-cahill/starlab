@@ -86,4 +86,7 @@ Per `docs/company_secrets/prompts/workflowprompt.md` — **signal summary** for 
 
 ## Post-closeout `main` CI (not merge authority until recorded)
 
-After this document and ledger/tag push: monitor the **next** `main` CI run on the closeout commit — **not** a substitute for PR-head or merge-boundary evidence above.
+| Field | Value |
+| ----- | ----- |
+| **Closeout commit** | `dad3268…` — `docs(m49): closeout artifacts, M50 stub, ledger, governance tests` |
+| **Push CI** | [`24381499317`](https://github.com/m-cahill/starlab/actions/runs/24381499317) — **success** — ledger + closeout artifacts + tag push — **not** PR #60 merge authority; merge-boundary remains [`24381345315`](https://github.com/m-cahill/starlab/actions/runs/24381345315) on `cad5f2b…`. |
