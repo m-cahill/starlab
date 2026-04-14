@@ -1,6 +1,6 @@
 # M49 Plan — Full Local Training / Bootstrap Campaign Charter & Evidence Protocol
 
-**Status:** Implementation (pending PR merge / closeout on `main`)  
+**Status:** Complete — closed on `main` (see `M49_run1.md`, `M49_summary.md`, `M49_audit.md`)  
 **Phase:** VI  
 **Milestone number:** M49  
 **Type:** Small governance/runtime milestone with operator-local follow-on evidence

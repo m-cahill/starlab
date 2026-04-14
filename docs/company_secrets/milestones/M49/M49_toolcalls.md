@@ -2,6 +2,10 @@
 
 ---
 
+**2026-04-14** — `write` / `apply_patch` — Milestone closeout: `M49_run1.md`, `M49_summary.md`, `M49_audit.md`; `docs/starlab.md` M49 closed + M50 stub + glossary; governance tests; `M50_plan.md` / `M50_toolcalls.md` stub; annotated tag `v0.0.49-m49` push.
+
+---
+
 **2026-04-14** — `write` — Stub `M49_plan.md` / `M49_toolcalls.md` seeded after **M48** closeout on `main` (**no** implementation).
 
 ---
