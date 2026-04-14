@@ -365,6 +365,18 @@ def test_m49_full_local_training_campaign_modules_exist() -> None:
         assert (tr / name).is_file()
 
 
+def test_m50_campaign_execution_modules_exist() -> None:
+    tr = REPO_ROOT / "starlab" / "training"
+    for name in (
+        "industrial_hidden_rollout_models.py",
+        "campaign_execution_lock.py",
+        "campaign_execution_io.py",
+        "campaign_execution_preflight.py",
+        "execute_full_local_training_campaign.py",
+    ):
+        assert (tr / name).is_file()
+
+
 def test_m29_hierarchy_modules_exist() -> None:
     hi = REPO_ROOT / "starlab" / "hierarchy"
     for name in (

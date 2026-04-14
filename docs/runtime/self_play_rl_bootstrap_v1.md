@@ -49,6 +49,8 @@ python -m starlab.training.emit_self_play_rl_bootstrap_run \
 
 **Weighted re-fit:** requires `--emit-updated-bundle`, `--dataset` (must match `hierarchical_training_run.source_dataset.dataset_sha256`), and at least one `--bundle-dir` (same M14 bundles used to build the M43 run).
 
+**M50 orchestration hook:** `run_self_play_rl_bootstrap(..., on_episode_complete=...)` accepts an optional callback `(episode_index, episode_row_dict) -> None` for heartbeat / supervision (used by the M50 campaign executor).
+
 ## `bootstrap_mode` (bounded enum)
 
 | Value | Meaning |

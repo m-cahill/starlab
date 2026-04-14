@@ -111,6 +111,15 @@ Preflight for `local_live_sc2` additionally checks Python **sc2** importability 
 - **M42 / M48:** `docs/runtime/learned_agent_comparison_harness_v1.md`
 - **M45 / M47:** `docs/runtime/self_play_rl_bootstrap_v1.md`
 - **M44:** `docs/runtime/local_live_play_validation_harness_v1.md`
+- **M50 execution:** `docs/runtime/industrial_hidden_rollout_mode_v1.md`, `docs/diligence/industrial_hidden_rollout_operator_guide.md`
+
+## M50 governed campaign execution (under this root)
+
+When using the M50 executor (`python -m starlab.training.execute_full_local_training_campaign`), execution trees live at:
+
+`out/training_campaigns/<campaign_id>/campaign_runs/<execution_id>/`
+
+Typical files include `hidden_rollout_campaign_run.json`, `campaign_execution_manifest.json`, `campaign_heartbeat.json`, `campaign_resume_state.json`, per-phase M45 outputs under `phases/<phase_name>/`, optional `STOP_REQUEST` for graceful stop between phases, and PID lockfiles (`.starlab_campaign_output.lock` at the campaign root, `.campaign_execution.lock` under the execution directory). Extended execution preflight may write `campaign_execution_preflight_receipt.json` at the campaign root.
 
 ## Explicit non-claims
 
