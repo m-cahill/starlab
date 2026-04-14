@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib.util
 import json
 from pathlib import Path
 from typing import Any
@@ -46,14 +47,14 @@ def verify_campaign_contract_seal(contract: dict[str, Any]) -> None:
 
 
 def _check_sc2_harness_importable() -> tuple[bool, str]:
-    try:
-        from sc2.bot_ai import BotAI  # noqa: F401
-    except ImportError:
+    """Prefer ``importlib.util.find_spec`` so mypy does not require optional ``sc2`` stubs."""
+
+    if importlib.util.find_spec("sc2") is None:
         return False, (
             "sc2 python package not importable; install optional extras "
             "(e.g. pip install -e '.[sc2-harness]') for local_live_sc2"
         )
-    return True, "sc2 import ok"
+    return True, "sc2 package resolvable"
 
 
 def _check_sc2_install_probe() -> tuple[bool, str]:
