@@ -62,8 +62,7 @@ def _check_sc2_install_probe() -> tuple[bool, str]:
     if not root:
         return (
             False,
-            "SC2 install root not resolved by probe "
-            "(see docs/runtime/sc2_runtime_surface.md)",
+            "SC2 install root not resolved by probe (see docs/runtime/sc2_runtime_surface.md)",
         )
     return True, f"SC2 probe root: {root}"
 
