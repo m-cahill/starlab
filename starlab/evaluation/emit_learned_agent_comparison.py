@@ -9,7 +9,10 @@ from pathlib import Path
 from starlab.evaluation.learned_agent_comparison_harness import (
     write_learned_agent_comparison_from_paths,
 )
-from starlab.training.training_program_io import build_agent_training_program_contract
+from starlab.training.training_program_io import (
+    build_agent_training_program_contract,
+    load_agent_training_program_contract_from_path,
+)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -20,10 +23,34 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument(
-        "--contract",
-        required=True,
+        "--benchmark-contract",
         type=Path,
-        help="Path to M20-valid benchmark contract JSON (M28 fixture surface).",
+        default=None,
+        metavar="PATH",
+        help=(
+            "Path to M20 benchmark contract JSON (M28 evaluation surface). "
+            "Required unless --contract is provided."
+        ),
+    )
+    parser.add_argument(
+        "--contract",
+        type=Path,
+        default=None,
+        metavar="PATH",
+        help=(
+            "Deprecated alias for --benchmark-contract: same M20 benchmark contract JSON "
+            "(not the M40 training-program charter)."
+        ),
+    )
+    parser.add_argument(
+        "--training-program-contract",
+        type=Path,
+        default=None,
+        metavar="PATH",
+        help=(
+            "Optional path to M40 agent_training_program_contract.json. If omitted, the "
+            "in-process default from build_agent_training_program_contract() is used."
+        ),
     )
     parser.add_argument(
         "--dataset",
@@ -73,6 +100,22 @@ def main(argv: list[str] | None = None) -> int:
         print("error: at least one --bundle is required", file=sys.stderr)
         return 2
 
+    bench_a = args.benchmark_contract
+    bench_b = args.contract
+    if bench_a is not None and bench_b is not None and bench_a.resolve() != bench_b.resolve():
+        print(
+            "error: --benchmark-contract and --contract disagree; pass only one",
+            file=sys.stderr,
+        )
+        return 2
+    benchmark_path = bench_a if bench_a is not None else bench_b
+    if benchmark_path is None:
+        print(
+            "error: M20 benchmark contract path required (--benchmark-contract or --contract)",
+            file=sys.stderr,
+        )
+        return 2
+
     m41_specs: list[tuple[str, Path, Path]] = []
     for triple in args.m41:
         cid, run_json_s, run_dir_s = triple[0], triple[1], triple[2]
@@ -81,14 +124,17 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         m41_specs.append((str(cid), Path(run_json_s), Path(run_dir_s)))
 
-    contract = build_agent_training_program_contract()
+    if args.training_program_contract is not None:
+        tp_contract = load_agent_training_program_contract_from_path(args.training_program_contract)
+    else:
+        tp_contract = build_agent_training_program_contract()
 
     try:
         write_learned_agent_comparison_from_paths(
-            contract_path=args.contract,
+            benchmark_contract_path=benchmark_path,
             dataset_path=args.dataset,
             bundle_dirs=[Path(p) for p in args.bundles],
-            training_program_contract=contract,
+            training_program_contract=tp_contract,
             output_dir=args.output_dir,
             baseline_path=args.baseline,
             m41_specs=m41_specs,

@@ -68,6 +68,41 @@ def _validate_m27_against_dataset(baseline: dict[str, Any], dataset: dict[str, A
         raise ValueError(msg)
 
 
+def _validate_m41_training_program_contract_identity(
+    *,
+    training_program_contract: dict[str, Any],
+    candidates: list[ComparisonCandidateSpec],
+) -> None:
+    """Require M41 runs to match the active M40 charter used for this comparison (M48)."""
+
+    tc_sha = training_program_contract.get("contract_sha256")
+    tc_ver = training_program_contract.get("program_version")
+    if not isinstance(tc_sha, str) or not isinstance(tc_ver, str):
+        msg = "active training program contract must include contract_sha256 and program_version"
+        raise ValueError(msg)
+
+    for spec in candidates:
+        if spec.source_type != CANDIDATE_SOURCE_M41:
+            continue
+        tr = spec.training_run_body
+        if tr is None:
+            continue
+        r_sha = tr.get("training_program_contract_sha256")
+        r_ver = tr.get("training_program_contract_version")
+        if r_sha != tc_sha:
+            msg = (
+                f"M41 candidate {spec.candidate_id!r}: training_program_contract_sha256 "
+                f"{r_sha!r} does not match active M40 training-program contract {tc_sha!r}"
+            )
+            raise ValueError(msg)
+        if r_ver != tc_ver:
+            msg = (
+                f"M41 candidate {spec.candidate_id!r}: training_program_contract_version "
+                f"{r_ver!r} does not match active M40 training-program contract {tc_ver!r}"
+            )
+            raise ValueError(msg)
+
+
 def _validate_m41_against_dataset(training_run: dict[str, Any], dataset: dict[str, Any]) -> None:
     if training_run.get("training_run_version") != REPLAY_IMITATION_TRAINING_RUN_VERSION:
         msg = f"unsupported training_run_version {training_run.get('training_run_version')!r}"
@@ -144,6 +179,12 @@ def build_learned_agent_comparison_artifacts(
     if not candidates:
         msg = "at least one candidate is required"
         raise ValueError(msg)
+
+    if any(spec.source_type == CANDIDATE_SOURCE_M41 for spec in candidates):
+        _validate_m41_training_program_contract_identity(
+            training_program_contract=training_program_contract,
+            candidates=candidates,
+        )
 
     _validate_m28_benchmark_contract(benchmark_contract)
     benchmark_contract_sha256 = sha256_hex_of_canonical_json(benchmark_contract)
@@ -333,7 +374,7 @@ def build_learned_agent_comparison_artifacts(
 
 def write_learned_agent_comparison_from_paths(
     *,
-    contract_path: Path,
+    benchmark_contract_path: Path,
     dataset_path: Path,
     bundle_dirs: list[Path],
     training_program_contract: dict[str, Any],
@@ -347,7 +388,7 @@ def write_learned_agent_comparison_from_paths(
 
     import json
 
-    raw_c = json.loads(contract_path.read_text(encoding="utf-8"))
+    raw_c = json.loads(benchmark_contract_path.read_text(encoding="utf-8"))
     raw_d = json.loads(dataset_path.read_text(encoding="utf-8"))
     raw_b = json.loads(baseline_path.read_text(encoding="utf-8"))
     if not isinstance(raw_c, dict) or not isinstance(raw_d, dict) or not isinstance(raw_b, dict):

@@ -127,7 +127,15 @@ def test_ledger_milestone_rows_m32_m47() -> None:
             break
     else:
         raise AssertionError("M47 milestone table row missing Complete")
-    assert "| M48 | Learned-Agent Comparison Contract-Path Alignment (stub)" in text
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("| M48 |") and (
+            "Learned-Agent Comparison Contract-Path Alignment" in stripped
+        ):
+            assert "In progress" in stripped
+            break
+    else:
+        raise AssertionError("M48 milestone table row missing In progress")
 
 
 def test_flagship_proof_pack_module_exists_post_m39() -> None:

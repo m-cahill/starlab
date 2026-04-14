@@ -18,7 +18,7 @@ A **benchmark scorecard** document records one evaluation result against a bench
 
 | Milestone | Role |
 | --------- | ---- |
-| **M20** | JSON Schemas + reports for benchmark contract and scorecard; fixture validation; CLI emission. **No** baselines, **no** runner, **no** tournament harness. |
+| **M20** | JSON Schemas + reports for benchmark contract and scorecard; fixture validation; CLI emission. **No** baselines, **no** runner, **no** tournament harness. **M42** binds comparison metrics via **`--benchmark-contract`** (M20 benchmark JSON), not the M40 training-program charter — see `docs/runtime/learned_agent_comparison_harness_v1.md`. |
 | **M21** | Scripted baseline suite (out of scope for M20). |
 | **M22** | Heuristic baseline suite (out of scope for M20). |
 | **M23** | Evaluation runner and tournament harness (out of scope for M20). |
