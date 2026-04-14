@@ -2,6 +2,8 @@
 
 **M45** is **closed** on `main` (see `docs/starlab.md` §11 / §18). This note remains **preparation and framing** for the **next** follow-on: it does **not** assert that a full integrated Phase VI test campaign has been executed or that additional claims beyond closed milestones are proved.
 
+**M49:** Governed **charter + preflight + evidence protocol** for a full local training / bootstrap campaign — normative contract semantics and CLIs: `docs/runtime/full_local_training_campaign_v1.md`. This diligence note **supplements** that runtime doc (operator narrative vs contract-first definitions); neither replaces the other.
+
 ## Intent
 
 After **M45** closes on `main`, the next natural follow‑on is a **deliberate, cross‑surface integrated test campaign** that exercises the Phase VI stack end‑to‑end in a **local, operator‑controlled** setting:

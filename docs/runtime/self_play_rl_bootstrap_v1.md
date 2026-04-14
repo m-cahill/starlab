@@ -87,6 +87,7 @@ python -m starlab.training.emit_self_play_rl_bootstrap_run \
 | **Watchable / operator-visible live validation** | Longer horizon, human review (e.g. video); optimized for **inspection**, not for bootstrap reward variance or tight step caps. |
 | **Bootstrap-bounded config** | M02 **`bounded_horizon`** / adapter settings aligned with **M45** reward policy and validation **`ok`** semantics (see M44/M46 docs). |
 | **Extended bootstrap campaign** | Many episodes under `out/rl_bootstrap_runs/` — read **`episode_manifest.json`** and **`episode_distinctness`** before treating the run as multi-sample evidence. |
+| **Full local campaign (M49)** | Governed charter under `out/training_campaigns/<id>/` — binds M43/M40/M20/M45-planned parameters; **not** automatic execution. See `docs/runtime/full_local_training_campaign_v1.md`. |
 | **“Good” for learning-oriented reads** | Distinct **`validation_run_sha256`** (and preferably **`run_id`**) across episodes **or** an explicit **integration-only** / repetition stance documented by the operator. |
 
 ## Binding and non-claims
