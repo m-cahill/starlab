@@ -14,6 +14,15 @@ def test_starlab_ledger_exists() -> None:
 
 
 @pytest.mark.smoke
+def test_m47_recharter_and_m48_deferral_documented() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "Governance recharter (2026-04-13 — user-directed)" in text
+    assert "Bootstrap Episode Distinctness & Operator Ergonomics" in text
+    assert "**M48 — Learned-agent comparison contract-path alignment (stub):**" in text
+    assert "49 milestones (M00–M48)" in text
+
+
+@pytest.mark.smoke
 def test_ledger_names_deployment_targets() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "Netlify" in text
@@ -50,6 +59,7 @@ def test_ledger_has_m01_runtime_title_and_m32_map() -> None:
     assert "M32" in text
     assert "46 milestones" in text
     assert "M00–M45" in text or "M00-M45" in text
+    assert "49 milestones" in text or "M00–M48" in text
     assert "Audit Closure I" in text
     assert "Platform Boundary Review" in text
     assert "Governance, Runtime Surface, and Deterministic Run Substrate" in text
@@ -75,18 +85,16 @@ def test_od005_resolved_row() -> None:
 
 
 @pytest.mark.smoke
-def test_current_milestone_is_m45_stub_after_m44_closeout() -> None:
+def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "M47" in section
+    assert "Bootstrap Episode Distinctness" in section or "Operator Ergonomics" in section
+    assert "M46" in section
     assert "M45" in section
     assert "Self-Play" in section or "RL" in section
-    assert "stub" in section.lower()
     assert "M44" in section
     assert "Local Live-Play Validation" in section
-    assert "M43" in section
-    assert "Hierarchical Training Pipeline" in section
-    assert "M42" in section
-    assert "Learned-Agent Comparison" in section
     assert section.lower().count("closed") >= 2
 
 

@@ -11,6 +11,7 @@ from starlab.hierarchy.hierarchical_training_pipeline import build_hierarchical_
 from starlab.runs.json_util import canonical_json_dumps
 from starlab.training.emit_self_play_rl_bootstrap_run import main as m45_main
 from starlab.training.self_play_rl_bootstrap_models import (
+    EPISODE_MANIFEST_VERSION,
     SELF_PLAY_RL_BOOTSTRAP_RUN_FILENAME,
     UPDATED_BUNDLE_BASENAME,
     UPDATED_POLICY_SUBDIR,
@@ -139,6 +140,45 @@ def test_m45_cli_module_smoke(tmp_path: Path) -> None:
     )
     assert rc == 0
     assert (out / SELF_PLAY_RL_BOOTSTRAP_RUN_FILENAME).is_file()
+
+
+def test_m47_multi_episode_fixture_distinct_validation_identities(tmp_path: Path) -> None:
+    """Per-episode match seed (base+index) yields distinct M44 validation_run_sha256 (fixture)."""
+
+    m43_dir, _bundle = _build_m43_run_dir(tmp_path)
+    shutil.copy(MATCH_FAKE, tmp_path / "match.json")
+    out = tmp_path / "m45_multi"
+    run_self_play_rl_bootstrap(
+        bundle_dirs=None,
+        dataset_path=None,
+        emit_updated_bundle=False,
+        episodes=3,
+        hierarchical_training_run_dir=m43_dir,
+        match_config_path=tmp_path / "match.json",
+        output_dir=out,
+        runtime_mode="fixture_stub_ci",
+        seed=100,
+    )
+    man_path = out / "episodes" / "episode_manifest.json"
+    man = json.loads(man_path.read_text(encoding="utf-8"))
+    assert man["episode_manifest_version"] == EPISODE_MANIFEST_VERSION
+    assert man["episode_seed_policy"] == "base_seed_plus_episode_index"
+    assert man["bootstrap_base_seed"] == 100
+    ep_rows = man["episodes"]
+    assert len(ep_rows) == 3
+    shas = {str(er["validation_run_sha256"]) for er in ep_rows}
+    assert len(shas) == 3
+    rids = {str(er["run_id"]) for er in ep_rows}
+    assert len(rids) == 3
+    assert ep_rows[0]["episode_seed"] == 100
+    assert ep_rows[1]["episode_seed"] == 101
+    assert ep_rows[2]["episode_seed"] == 102
+    run_rep = json.loads((out / "self_play_rl_bootstrap_run.json").read_text(encoding="utf-8"))
+    ed = run_rep["episode_distinctness"]
+    assert ed["configured_episode_count"] == 3
+    assert ed["distinct_validation_run_sha256_count"] == 3
+    assert ed["distinct_run_id_count"] == 3
+    assert not run_rep.get("warnings")
 
 
 def test_m45_training_modules_do_not_import_replays_or_s2protocol() -> None:

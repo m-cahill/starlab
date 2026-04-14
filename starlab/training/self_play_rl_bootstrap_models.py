@@ -19,7 +19,9 @@ UPDATED_BUNDLE_BASENAME: Final[str] = "rl_bootstrap_candidate_bundle.joblib"
 
 REWARD_POLICY_ID: Final[str] = "starlab.m45.reward.validation_outcome_v1"
 UPDATE_POLICY_ID: Final[str] = "starlab.m45.update.weighted_logistic_refit_v1"
-EPISODE_MANIFEST_VERSION: Final[str] = "starlab.m45.episode_manifest.v1"
+EPISODE_MANIFEST_VERSION: Final[str] = "starlab.m47.episode_manifest.v2"
+EPISODE_MANIFEST_VERSION_V1: Final[str] = "starlab.m45.episode_manifest.v1"
+EPISODE_SEED_POLICY: Final[str] = "base_seed_plus_episode_index"
 
 BootstrapMode = Literal[
     "single_candidate_fixture_stub",

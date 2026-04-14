@@ -56,7 +56,10 @@ def main(argv: list[str] | None = None) -> int:
         "--seed",
         type=int,
         default=42,
-        help="Random seed for weighted re-fit LogisticRegression (default: 42).",
+        help=(
+            "Bootstrap base seed: per-episode M02 match config seed is seed+episode_index; "
+            "also random_state for weighted re-fit LogisticRegression when --emit-updated-bundle."
+        ),
     )
     parser.add_argument(
         "--weights",
