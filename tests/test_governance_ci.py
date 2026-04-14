@@ -19,8 +19,7 @@ def test_m47_recharter_and_m48_deferral_documented() -> None:
     assert "Governance recharter (2026-04-13 — user-directed)" in text
     assert "Bootstrap Episode Distinctness & Operator Ergonomics" in text
     assert (
-        "**M47 — Bootstrap Episode Distinctness & Operator Ergonomics:** "
-        "**closed** on `main`"
+        "**M47 — Bootstrap Episode Distinctness & Operator Ergonomics:** **closed** on `main`"
     ) in text
     assert "**M48 — Learned-agent comparison contract-path alignment (stub):**" in text
     assert "49 milestones (M00–M48)" in text
