@@ -80,4 +80,11 @@ Per `docs/company_secrets/prompts/workflowprompt.md` — **signal summary** for 
 
 ## Post-closeout `main` CI (not merge authority)
 
-Runs after this closeout commit push (ledger + tag) — **not** PR #59 merge authority; merge-boundary remains [`24377511946`](https://github.com/m-cahill/starlab/actions/runs/24377511946) on `cdd023c…`.
+| Field | Value |
+| ----- | ----- |
+| **Closeout commit** | `64f4c9c…` — `docs(m48): closeout artifacts, M49 stub, ledger, governance tests` |
+| **First push CI** | [`24377643770`](https://github.com/m-cahill/starlab/actions/runs/24377643770) — **failure** — **quality** — Ruff **E501** line length in `test_governance_ci.py` — **not** PR #59 merge authority |
+| **Repair commit** | `915562a…` — `style: ruff format test_governance_ci (M48 closeout CI)` |
+| **Repaired `main` CI** | [`24377688981`](https://github.com/m-cahill/starlab/actions/runs/24377688981) — **success** (required jobs including **`governance`**) — ledger/format hygiene — **not** PR #59 merge authority |
+
+**Merge-boundary evidence for PR #59 remains:** [`24377511946`](https://github.com/m-cahill/starlab/actions/runs/24377511946) on merge commit `cdd023c…`.
