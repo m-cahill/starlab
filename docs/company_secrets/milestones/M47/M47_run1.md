@@ -61,4 +61,11 @@
 
 ## Post-closeout / ledger push `main` CI (not merge authority)
 
-*Recorded after the closeout commit that adds this file, `M47_summary.md`, `M47_audit.md`, and §1/§7/§11/§18/§23 updates lands on `main` — **not** PR #58 merge authority; merge-boundary remains [`24374756823`](https://github.com/m-cahill/starlab/actions/runs/24374756823) on `ebc5de0…`.*
+| Field | Value |
+| ----- | ----- |
+| **Closeout commit** | `5dcba2d…` — `docs(m47): closeout ledger, M47 run1/summary/audit, governance tests` |
+| **First push CI** | [`24374876505`](https://github.com/m-cahill/starlab/actions/runs/24374876505) — **failure** — **quality** — Ruff **format** check — **not** PR #58 merge authority |
+| **Repair commit** | `9a80f7f…` — `style: ruff format test_governance_ci (M47 closeout)` |
+| **Repaired `main` CI** | [`24374915005`](https://github.com/m-cahill/starlab/actions/runs/24374915005) — **success** (required jobs including **`governance`**) — ledger/tag/format hygiene — **not** PR #58 merge authority |
+
+**Merge-boundary evidence for PR #58 remains:** [`24374756823`](https://github.com/m-cahill/starlab/actions/runs/24374756823) on merge commit `ebc5de0…`.

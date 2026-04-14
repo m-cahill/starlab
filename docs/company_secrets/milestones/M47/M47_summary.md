@@ -22,6 +22,7 @@ The prior **M47** stub topic (**M42** `--contract` path alignment vs **M40** / *
 - **Final PR head** `4a8fb3e…` — **authoritative PR-head CI** [`24374720293`](https://github.com/m-cahill/starlab/actions/runs/24374720293).
 - **Merge-boundary** push on `ebc5de0…` — [`24374756823`](https://github.com/m-cahill/starlab/actions/runs/24374756823) **success**.
 - **Tag:** `v0.0.47-m47` on merge commit `ebc5de0…` (pushed after closeout).
+- **Post-closeout `main` CI:** [`24374915005`](https://github.com/m-cahill/starlab/actions/runs/24374915005) on `9a80f7f…` — **success** after Ruff format repair ([`24374876505`](https://github.com/m-cahill/starlab/actions/runs/24374876505) on `5dcba2d…` — **failure** — **not** merge authority).
 
 ## Non-claims
 
