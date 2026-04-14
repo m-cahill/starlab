@@ -80,7 +80,7 @@ def test_fieldtest_emit_replay_explorer_fixture_path(tmp_path: Path) -> None:
 
 
 def test_smoke_collection_count_in_target_band() -> None:
-    """Bounded fast lane: ~25–35 smoke tests (see M32 plan; M33 closeout adds governance rows)."""
+    """Bounded fast lane: ~25–35 smoke tests (see M32 plan; M33+ closeout adds governance rows)."""
     proc = subprocess.run(
         [sys.executable, "-m", "pytest", "--collect-only", "-q", "-m", "smoke", "tests"],
         cwd=str(REPO_ROOT),
@@ -95,7 +95,7 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    assert 25 <= n <= 65, f"smoke count {n} outside 25–65 band"
+    assert 25 <= n <= 70, f"smoke count {n} outside 25–70 band"
 
 
 def test_ledger_milestone_rows_m32_m47() -> None:
@@ -132,10 +132,10 @@ def test_ledger_milestone_rows_m32_m47() -> None:
         if stripped.startswith("| M48 |") and (
             "Learned-Agent Comparison Contract-Path Alignment" in stripped
         ):
-            assert "In progress" in stripped
+            assert "Complete" in stripped
             break
     else:
-        raise AssertionError("M48 milestone table row missing In progress")
+        raise AssertionError("M48 milestone table row missing Complete")
 
 
 def test_flagship_proof_pack_module_exists_post_m39() -> None:

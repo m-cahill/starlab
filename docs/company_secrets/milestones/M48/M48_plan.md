@@ -3,7 +3,7 @@
 **Milestone:** M48  
 **Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
 **Branch (implementation):** `m48-learned-agent-comparison-contract-path-alignment`  
-**Status:** **In progress** — implementation on branch `m48-learned-agent-comparison-contract-path-alignment` (**not** closed on `main` until PR merge + closeout)
+**Status:** **Closed** on `main` — merge commit `cdd023cb388ae99c3649978857e07af04c17df50` ([PR #59](https://github.com/m-cahill/starlab/pull/59)); see `M48_run1.md` / `M48_summary.md` / `M48_audit.md`.
 
 **Deferred from:** Prior **M47** stub topic (recharter **2026-04-13**); **M47** closed as **Bootstrap Episode Distinctness & Operator Ergonomics** — see `docs/starlab.md` §23.
 

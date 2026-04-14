@@ -21,8 +21,8 @@ def test_m47_recharter_and_m48_deferral_documented() -> None:
     assert (
         "**M47 — Bootstrap Episode Distinctness & Operator Ergonomics:** **closed** on `main`"
     ) in text
-    assert "**M48 — Learned-agent comparison contract-path alignment:** **in progress**" in text
-    assert "49 milestones (M00–M48)" in text
+    assert "**M48 — Learned-agent comparison contract-path alignment:** **closed** on `main`" in text
+    assert "50 milestones (M00–M49)" in text
 
 
 @pytest.mark.smoke
@@ -62,7 +62,7 @@ def test_ledger_has_m01_runtime_title_and_m32_map() -> None:
     assert "M32" in text
     assert "46 milestones" in text
     assert "M00–M45" in text or "M00-M45" in text
-    assert "49 milestones" in text or "M00–M48" in text
+    assert "50 milestones" in text or "M00–M49" in text
     assert "Audit Closure I" in text
     assert "Platform Boundary Review" in text
     assert "Governance, Runtime Surface, and Deterministic Run Substrate" in text
