@@ -21,7 +21,8 @@ def test_m47_recharter_and_m48_deferral_documented() -> None:
     assert (
         "**M47 — Bootstrap Episode Distinctness & Operator Ergonomics:** **closed** on `main`"
     ) in text
-    assert "**M48 — Learned-agent comparison contract-path alignment:** **closed** on `main`" in text
+    m48_closed = "**M48 — Learned-agent comparison contract-path alignment:** **closed** on `main`"
+    assert m48_closed in text
     assert "50 milestones (M00–M49)" in text
 
 
