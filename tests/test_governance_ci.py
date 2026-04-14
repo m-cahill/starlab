@@ -119,7 +119,8 @@ def test_ledger_milestone_table_m37_m45_rows() -> None:
     m48_line = next(line for line in sec.splitlines() if line.strip().startswith("| M48 |"))
     assert "Learned-Agent Comparison Contract-Path" in m48_line and "Complete" in m48_line
     assert "| M49 |" in sec and "Full Local Training" in sec and "Complete" in sec
-    assert "| M50 |" in sec and "Phase VI governance follow-on" in sec and "Stub" in sec
+    m50_line = next(line for line in sec.splitlines() if line.strip().startswith("| M50 |"))
+    assert "Industrial-scale hidden rollout" in m50_line and "Active" in m50_line
 
 
 @pytest.mark.smoke

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from collections import Counter
+from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
@@ -270,6 +271,7 @@ def run_self_play_rl_bootstrap(
     weights_path: Path | None = None,
     emit_updated_bundle: bool = False,
     mirror_self_play: bool = False,
+    on_episode_complete: Callable[[int, dict[str, Any]], None] | None = None,
 ) -> dict[str, Any]:
     """Run M44 rollouts; record bootstrap data; optional weighted re-fit + local joblib."""
 
@@ -369,17 +371,18 @@ def run_self_play_rl_bootstrap(
             bootstrap_coarse.append(pc)
             bootstrap_w.append(per_step_w)
 
-        episode_rows.append(
-            {
-                "episode_index": ep,
-                "episode_seed": episode_seed,
-                "relative_dir": f"episodes/e{ep:03d}",
-                "run_id": vr.get("run_id"),
-                "validation_run_sha256": vr.get("validation_run_sha256"),
-                "local_live_play_validation_run_path": str(vpath.resolve()),
-                "reward": reward_ep,
-            },
-        )
+        row = {
+            "episode_index": ep,
+            "episode_seed": episode_seed,
+            "relative_dir": f"episodes/e{ep:03d}",
+            "run_id": vr.get("run_id"),
+            "validation_run_sha256": vr.get("validation_run_sha256"),
+            "local_live_play_validation_run_path": str(vpath.resolve()),
+            "reward": reward_ep,
+        }
+        episode_rows.append(row)
+        if on_episode_complete is not None:
+            on_episode_complete(ep, row)
 
     reward_totals = [float(er["reward"]["reward_total"]) for er in episode_rows]
     mean_r = sum(reward_totals) / float(len(reward_totals)) if reward_totals else 0.0
