@@ -13,3 +13,7 @@
 **2026-04-13** — `git` / `ruff` / `mypy` / `pytest` — Verify tree, branch `m47-bootstrap-episode-distinctness-ergonomics`, commit/push M47, PR/CI/closeout (governance finish).
 
 ---
+
+**2026-04-14** — `write` / `apply_patch` — **M47** governance closeout: `M47_run1.md`, `M47_summary.md`, `M47_audit.md`; `docs/starlab.md` §1 / quick-scan / §6 / §7 / §11 / §18 / §23; `M47_plan.md` (**Complete**); governance tests; annotated tag **`v0.0.47-m47`** on merge commit `ebc5de0…` (post-closeout push).
+
+---

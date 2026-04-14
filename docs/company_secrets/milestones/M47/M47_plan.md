@@ -3,7 +3,7 @@
 **Milestone:** M47  
 **Phase:** VI — Governed Agent Training, Comparison, and Local Validation  
 **Branch:** `m47-bootstrap-episode-distinctness-ergonomics` (suggested)  
-**Status:** In progress (pending merge)
+**Status:** Complete (closed on `main`; see `M47_run1.md` / `M47_summary.md` / `M47_audit.md`)
 
 ## Governance recharter (user-directed, 2026-04-13)
 

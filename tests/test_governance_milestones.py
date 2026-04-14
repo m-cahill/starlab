@@ -91,6 +91,7 @@ _MILESTONE_COMPLETE_ROWS = [
     pytest.param("M43", "Hierarchical Training Pipeline", marks=pytest.mark.smoke),
     pytest.param("M45", "Self-Play / RL Bootstrap", marks=pytest.mark.smoke),
     pytest.param("M46", "Bounded Live Validation", marks=pytest.mark.smoke),
+    pytest.param("M47", "Bootstrap Episode Distinctness", marks=pytest.mark.smoke),
 ]
 
 
@@ -214,7 +215,7 @@ _MILESTONE_FOLDERS: list[Any] = [
         id="M46",
     ),
     pytest.param(
-        _MilestoneFolder("M47", ("M47_plan.md", "M47_toolcalls.md")),
+        _MilestoneFolder("M47", _closeout_filenames("M47")),
         marks=pytest.mark.smoke,
         id="M47",
     ),

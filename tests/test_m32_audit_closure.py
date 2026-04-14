@@ -119,7 +119,14 @@ def test_ledger_milestone_rows_m32_m47() -> None:
     assert "| M42 | Learned-Agent Comparison Harness" in text
     assert "| M45 | Self-Play / RL Bootstrap" in text
     assert "| M46 | Bounded Live Validation Final-Status Semantics" in text
-    assert "| M47 | Bootstrap Episode Distinctness & Operator Ergonomics" in text
+    for line in text.splitlines():
+        stripped = line.strip()
+        m47 = "Bootstrap Episode Distinctness & Operator Ergonomics"
+        if stripped.startswith("| M47 |") and m47 in stripped:
+            assert "Complete" in stripped
+            break
+    else:
+        raise AssertionError("M47 milestone table row missing Complete")
     assert "| M48 | Learned-Agent Comparison Contract-Path Alignment (stub)" in text
 
 
