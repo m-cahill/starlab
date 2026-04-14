@@ -23,6 +23,36 @@ from starlab.training.training_program_models import (
 )
 
 
+def verify_training_program_contract_digest(contract: dict[str, Any]) -> None:
+    """Ensure ``contract_sha256`` matches the canonical hash of the body without that field."""
+
+    stored = contract.get("contract_sha256")
+    if not isinstance(stored, str) or len(stored) != 64:
+        msg = "training program contract must include a 64-char hex contract_sha256"
+        raise ValueError(msg)
+    body_wo = {k: v for k, v in contract.items() if k != "contract_sha256"}
+    computed = sha256_hex_of_canonical_json(body_wo)
+    if stored != computed:
+        msg = "training program contract contract_sha256 does not match canonical body content"
+        raise ValueError(msg)
+
+
+def load_agent_training_program_contract_from_path(path: Path) -> dict[str, Any]:
+    """Load M40 ``agent_training_program_contract`` JSON from disk; verify digest integrity."""
+
+    import json
+
+    raw = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(raw, dict):
+        msg = "M40 training program contract root must be a JSON object"
+        raise ValueError(msg)
+    if "program_version" not in raw:
+        msg = "M40 training program contract JSON must include program_version"
+        raise ValueError(msg)
+    verify_training_program_contract_digest(raw)
+    return raw
+
+
 def build_agent_training_program_contract() -> dict[str, Any]:
     seq = milestone_sequence_v1()
     body: dict[str, Any] = {
