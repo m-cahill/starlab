@@ -33,3 +33,7 @@ Future training milestones bind to governed artifacts from **M26**–**M31** and
 ## Relation to M42 (learned-agent comparison)
 
 **M42** records both the **M20 benchmark contract** identity (evaluation surface) and the **M40 training-program contract** identity (charter) on `learned_agent_comparison.json`. The M42 CLI accepts an optional **`--training-program-contract`** path to load this JSON from disk; otherwise it uses the same in-process default as `build_agent_training_program_contract()`. See `docs/runtime/learned_agent_comparison_harness_v1.md` — **M20** and **M40** are distinct; do not point **`--benchmark-contract`** at the M40 file.
+
+## Relation to M49 (full local campaign charter)
+
+**M49** full local training / bootstrap campaign contracts record **M40** `contract_sha256` / `program_version` plus a resolved on-disk path for operator preflight. See `docs/runtime/full_local_training_campaign_v1.md`.

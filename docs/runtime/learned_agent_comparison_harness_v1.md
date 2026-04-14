@@ -34,6 +34,10 @@ M42 is the first **governed deterministic comparison** milestone: it evaluates *
 
 M42 does **not** define a new benchmark surface, **not** prove benchmark integrity, **not** live SC2 in CI, **not** replay↔execution equivalence, and **not** M43+ training work.
 
+## Relation to M49 (full local campaign charter)
+
+Post-bootstrap **M42** comparison is a recommended phase in a governed local campaign; **M49** contracts bind the **M20** benchmark path/hash used for that step. See `docs/runtime/full_local_training_campaign_v1.md`.
+
 ## Outputs
 
 | File | Role |

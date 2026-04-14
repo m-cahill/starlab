@@ -353,6 +353,18 @@ def test_m42_comparison_modules_exist() -> None:
     assert (REPO_ROOT / "starlab" / "imitation" / "trained_run_predictor.py").is_file()
 
 
+def test_m49_full_local_training_campaign_modules_exist() -> None:
+    tr = REPO_ROOT / "starlab" / "training"
+    for name in (
+        "full_local_training_campaign_models.py",
+        "full_local_training_campaign_io.py",
+        "full_local_training_campaign_preflight.py",
+        "emit_full_local_training_campaign_contract.py",
+        "emit_full_local_training_campaign_preflight.py",
+    ):
+        assert (tr / name).is_file()
+
+
 def test_m29_hierarchy_modules_exist() -> None:
     hi = REPO_ROOT / "starlab" / "hierarchy"
     for name in (
