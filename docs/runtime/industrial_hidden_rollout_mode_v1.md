@@ -37,6 +37,16 @@ From strongest to weakest:
 - Ladder / public performance  
 - That long campaigns automatically yield strong policies  
 
+## M51 extension (post-bootstrap protocol phases)
+
+**Run version:** `hidden_rollout_campaign_run.json` uses **`starlab.hidden_rollout_campaign_run.v2`** when the executor records **M51** `phase_receipts`.
+
+Optional flag: `--post-bootstrap-protocol-phases` on `python -m starlab.training.execute_full_local_training_campaign`.
+
+**Execution order (strict):** follow `campaign_protocol.phases` in the M49 contract — typically: gate receipts only → `bootstrap_episodes` (always `emit_updated_bundle=False`) → `optional_weighted_refit` (aggregated refit) → `post_refit_m42_comparison` (orchestrated **skip** with `candidate_not_m41_comparison_compatible` until M41 candidates are explicitly bound — no M42 harness extension in M51) → `watchable_m44_validation` (one M44 on **refit** joblib if refit succeeded; **no** silent fallback to original M43 weights).
+
+Per-phase **`phases/<phase_name>/phase_receipt.json`** (`starlab.campaign_phase_receipt.v1`) plus an aggregate `phase_receipts` list on the sealed hidden rollout run.
+
 ## References
 
 - `docs/runtime/full_local_training_campaign_v1.md` — M49 campaign root layout  

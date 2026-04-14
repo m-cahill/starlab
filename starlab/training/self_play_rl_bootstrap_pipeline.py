@@ -46,6 +46,7 @@ from starlab.training.self_play_rl_bootstrap_io import (
     write_episode_manifest,
 )
 from starlab.training.self_play_rl_bootstrap_models import (
+    BOOTSTRAP_DATASET_FILENAME,
     EPISODE_MANIFEST_VERSION,
     EPISODE_SEED_POLICY,
     NON_CLAIMS_V1,
@@ -571,3 +572,155 @@ def run_self_play_rl_bootstrap(
     write_bootstrap_dataset(body=ds_body, output_dir=output_dir)
 
     return run
+
+
+def aggregate_bootstrap_pseudo_label_rows_from_completed_phase_dirs(
+    completed_bootstrap_phase_dirs: list[Path],
+) -> tuple[list[dict[str, str]], list[str], list[str], list[float], dict[str, Any]]:
+    """Rebuild pseudo-label rows from bootstrap outputs (M51 post-bootstrap refit)."""
+
+    bootstrap_xd: list[dict[str, str]] = []
+    bootstrap_delegate: list[str] = []
+    bootstrap_coarse: list[str] = []
+    bootstrap_w: list[float] = []
+    contributing: list[dict[str, Any]] = []
+
+    for phase_dir in completed_bootstrap_phase_dirs:
+        ds_path = phase_dir / BOOTSTRAP_DATASET_FILENAME
+        if not ds_path.is_file():
+            msg = f"missing bootstrap_dataset.json under {phase_dir}"
+            raise ValueError(msg)
+        raw_ds = json.loads(ds_path.read_text(encoding="utf-8"))
+        if not isinstance(raw_ds, dict):
+            msg = f"{ds_path}: bootstrap_dataset root must be an object"
+            raise ValueError(msg)
+        man = raw_ds.get("manifest")
+        if not isinstance(man, dict):
+            msg = f"{ds_path}: manifest missing or not an object"
+            raise ValueError(msg)
+        eps = man.get("episodes")
+        if not isinstance(eps, list):
+            eps = []
+        phase_rows = 0
+        for ep in eps:
+            if not isinstance(ep, dict):
+                continue
+            vr_path_s = ep.get("local_live_play_validation_run_path")
+            if not isinstance(vr_path_s, str):
+                continue
+            vr_path = Path(vr_path_s)
+            if not vr_path.is_file():
+                msg = f"local_live_play_validation_run.json not found: {vr_path}"
+                raise ValueError(msg)
+            vr = json.loads(vr_path.read_text(encoding="utf-8"))
+            if not isinstance(vr, dict):
+                msg = f"{vr_path}: validation run root must be an object"
+                raise ValueError(msg)
+            reward_ep = compute_episode_reward_validation_outcome_v1(vr)
+            steps = vr.get("action_adapter_steps")
+            step_list = steps if isinstance(steps, list) else []
+            n_steps = max(1, len(step_list))
+            per_step_w = float(reward_ep["reward_total"]) / float(n_steps)
+            for st in step_list:
+                if not isinstance(st, dict):
+                    continue
+                sig = st.get("context_signature")
+                pd = st.get("predicted_delegate_id")
+                pc = st.get("predicted_coarse_label")
+                if not isinstance(sig, str) or not isinstance(pd, str) or not isinstance(pc, str):
+                    continue
+                bootstrap_xd.append(parse_context_signature_to_feature_dict(sig))
+                bootstrap_delegate.append(pd)
+                bootstrap_coarse.append(pc)
+                bootstrap_w.append(per_step_w)
+                phase_rows += 1
+        contributing.append(
+            {
+                "bootstrap_phase_output_dir": str(phase_dir.resolve()),
+                "pseudo_label_rows": phase_rows,
+            }
+        )
+
+    meta: dict[str, Any] = {
+        "contributing_bootstrap_phases": contributing,
+        "total_pseudo_label_rows": len(bootstrap_xd),
+    }
+    return bootstrap_xd, bootstrap_delegate, bootstrap_coarse, bootstrap_w, meta
+
+
+def run_standalone_weighted_refit_from_aggregated_rows(
+    *,
+    hierarchical_training_run_dir: Path,
+    dataset_path: Path,
+    bundle_dirs: list[Path],
+    output_dir: Path,
+    seed: int,
+    bootstrap_xd: list[dict[str, str]],
+    bootstrap_delegate: list[str],
+    bootstrap_coarse: list[str],
+    bootstrap_w: list[float],
+) -> dict[str, Any]:
+    """Weighted re-fit into ``output_dir/updated_policy/`` (M51 orchestrated refit phase)."""
+
+    if not bootstrap_xd:
+        msg = "no aggregated bootstrap pseudo-label rows; cannot re-fit"
+        raise ValueError(msg)
+
+    hr_path = hierarchical_training_run_dir / HIERARCHICAL_TRAINING_RUN_FILENAME
+    training_run = json.loads(hr_path.read_text(encoding="utf-8"))
+    if not isinstance(training_run, dict):
+        msg = "hierarchical training run root must be an object"
+        raise ValueError(msg)
+
+    raw_ds = json.loads(dataset_path.read_text(encoding="utf-8"))
+    if not isinstance(raw_ds, dict):
+        msg = "dataset JSON root must be an object"
+        raise ValueError(msg)
+    dsha = raw_ds.get("dataset_sha256")
+    src = training_run.get("source_dataset")
+    if isinstance(src, dict):
+        expected = src.get("dataset_sha256")
+        if isinstance(expected, str) and len(expected) == 64 and isinstance(dsha, str):
+            if dsha != expected:
+                msg = (
+                    "--dataset dataset_sha256 does not match hierarchical_training_run "
+                    "source_dataset"
+                )
+                raise ValueError(msg)
+
+    wpath = hierarchical_training_run_dir / WEIGHTS_SUBDIR / WEIGHTS_ARTIFACT_BASENAME
+    if not wpath.is_file():
+        msg = f"M43 joblib weights not found at {wpath}"
+        raise ValueError(msg)
+    bundle = load_hierarchical_sklearn_bundle(wpath)
+    assert_workers_cover_delegates(bundle)
+
+    rows, _row_warnings = collect_imitation_example_rows(dataset=raw_ds, bundle_dirs=bundle_dirs)
+    train_idx = [i for i, r in enumerate(rows) if r[1] == "train"]
+    if not train_idx:
+        msg = "no training examples (split=train) for weighted re-fit"
+        raise ValueError(msg)
+
+    new_bundle = _weighted_refit_bundle(
+        bootstrap_coarse=bootstrap_coarse,
+        bootstrap_delegate=bootstrap_delegate,
+        bootstrap_w=bootstrap_w,
+        bootstrap_xd=bootstrap_xd,
+        bundle=bundle,
+        rows=rows,
+        seed=seed,
+        train_idx=train_idx,
+    )
+    output_dir.mkdir(parents=True, exist_ok=True)
+    upd_dir = output_dir / UPDATED_POLICY_SUBDIR
+    upd_dir.mkdir(parents=True, exist_ok=True)
+    out_joblib = upd_dir / UPDATED_BUNDLE_BASENAME
+    joblib.dump(new_bundle, out_joblib)
+    return {
+        "artifact_sha256": sha256_hex_file(out_joblib),
+        "byte_size": int(out_joblib.stat().st_size),
+        "format": "joblib",
+        "relative_path": f"{UPDATED_POLICY_SUBDIR}/{UPDATED_BUNDLE_BASENAME}",
+        "schema": SKLEARN_BUNDLE_SCHEMA,
+        "update_policy_id": UPDATE_POLICY_ID,
+    }

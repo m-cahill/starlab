@@ -68,6 +68,10 @@ Maps **(delegate_id, coarse semantic label)** to a small set of **scripted templ
 
 If `--optional-video` is set, the emitter hashes the file and records **simple metadata** (`path`, `sha256`, `size_bytes`, `duration_seconds`, `format`; optional `resolution` / `codec` if extended later). Video is **supplementary**; the replay-backed artifact chain remains primary.
 
+## Weights path vs `weights_sidecar` (M51 campaign refit)
+
+`run_local_live_play_validation(..., weights_path=...)` normally requires the joblib SHA-256 to match `hierarchical_training_run.json` **`weights_sidecar.artifact_sha256`**. For **M51** watchable validation after an **M45 refit**, set **`enforce_weights_sidecar_sha256=False`** so a refit bundle path is accepted; the run JSON **`warnings`** list records `m51_weights_override` when the SHA differs.
+
 ## Non-claims
 
 See `non_claims` in the emitted run JSON and M40 `agent_training_program_contract.json`.

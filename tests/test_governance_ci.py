@@ -123,7 +123,7 @@ def test_ledger_milestone_table_m37_m45_rows() -> None:
     m50_line = next(line for line in sec.splitlines() if line.strip().startswith("| M50 |"))
     assert "Industrial-scale hidden rollout" in m50_line and "Complete" in m50_line
     m51_line = next(line for line in sec.splitlines() if line.strip().startswith("| M51 |"))
-    assert "Stub" in m51_line
+    assert "post-bootstrap" in m51_line and "In progress" in m51_line
 
 
 @pytest.mark.smoke

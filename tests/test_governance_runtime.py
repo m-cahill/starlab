@@ -377,6 +377,11 @@ def test_m50_campaign_execution_modules_exist() -> None:
         assert (tr / name).is_file()
 
 
+def test_m51_campaign_phase_receipt_module_exists() -> None:
+    tr = REPO_ROOT / "starlab" / "training"
+    assert (tr / "campaign_phase_receipt.py").is_file()
+
+
 def test_m29_hierarchy_modules_exist() -> None:
     hi = REPO_ROOT / "starlab" / "hierarchy"
     for name in (

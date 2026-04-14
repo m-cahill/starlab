@@ -121,6 +121,16 @@ When using the M50 executor (`python -m starlab.training.execute_full_local_trai
 
 Typical files include `hidden_rollout_campaign_run.json`, `campaign_execution_manifest.json`, `campaign_heartbeat.json`, `campaign_resume_state.json`, per-phase M45 outputs under `phases/<phase_name>/`, optional `STOP_REQUEST` for graceful stop between phases, and PID lockfiles (`.starlab_campaign_output.lock` at the campaign root, `.campaign_execution.lock` under the execution directory). Extended execution preflight may write `campaign_execution_preflight_receipt.json` at the campaign root.
 
+## M51 post-bootstrap phases (optional)
+
+**Flag:** `--post-bootstrap-protocol-phases` (default **off** preserves M50 bootstrap-only behavior).
+
+**Refit:** A distinct phase after bootstrap episodes aggregates pseudo-label rows from all **successfully completed** `bootstrap_episodes` phase directories (via each phase’s `bootstrap_dataset.json` and episode `local_live_play_validation_run.json` paths), then runs weighted re-fit into `phases/optional_weighted_refit/updated_policy/rl_bootstrap_candidate_bundle.joblib` when `m45_planned_bootstrap.planned_weighted_refit` is true and M26/M14 paths are present.
+
+**M42:** The offline comparison phase is recorded with **`candidate_not_m41_comparison_compatible`** — M42 remains M27/M41-only; M51 does not treat M45 refit bundles as M41 candidates.
+
+**Watchable M44:** One validation under `phases/watchable_m44_validation/` using the refit joblib; skipped if refit did not produce a bundle. The M44 harness may set `enforce_weights_sidecar_sha256=False` so refit SHA need not match `hierarchical_training_run.json` `weights_sidecar` (warning recorded on the validation run).
+
 ## Explicit non-claims
 
 See `non_claims` in the contract JSON and `NON_CLAIMS_V1` in `starlab.training.full_local_training_campaign_models`. M49 does **not** prove benchmark integrity, replay↔execution equivalence, live SC2 in CI, ladder performance, or that a long campaign yields a strong policy by default.
