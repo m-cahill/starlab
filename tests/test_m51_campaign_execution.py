@@ -21,7 +21,8 @@ from tests.test_m49_full_local_training_campaign import (
 
 def _minimal_protocol_one_bootstrap_episode() -> dict[str, object]:
     base = default_campaign_protocol_v1()
-    phases = list(base.get("phases", []))
+    raw_phases = base.get("phases", [])
+    phases = list(raw_phases) if isinstance(raw_phases, list) else []
     # Replace bootstrap tranches with a single one-episode phase for CI speed.
     slim: list[dict[str, object]] = []
     for p in phases:
