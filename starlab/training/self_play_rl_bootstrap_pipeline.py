@@ -30,12 +30,13 @@ from starlab.imitation.baseline_fit import collect_imitation_example_rows
 from starlab.imitation.replay_imitation_training_pipeline import (
     parse_context_signature_to_feature_dict,
 )
-from starlab.runs.json_util import sha256_hex_of_canonical_json
+from starlab.runs.json_util import canonical_json_dumps, sha256_hex_of_canonical_json
 from starlab.sc2.local_live_play_validation_harness import run_local_live_play_validation
 from starlab.sc2.local_live_play_validation_models import (
     LOCAL_LIVE_PLAY_VALIDATION_RUN_FILENAME,
     RuntimeMode,
 )
+from starlab.sc2.match_config import match_config_from_mapping, match_config_to_mapping
 from starlab.training.self_play_rl_bootstrap_io import (
     minimal_report_from_run,
     seal_bootstrap_run_body,
@@ -45,6 +46,7 @@ from starlab.training.self_play_rl_bootstrap_io import (
 )
 from starlab.training.self_play_rl_bootstrap_models import (
     EPISODE_MANIFEST_VERSION,
+    EPISODE_SEED_POLICY,
     NON_CLAIMS_V1,
     REWARD_POLICY_ID,
     SELF_PLAY_RL_BOOTSTRAP_RUN_VERSION,
@@ -316,6 +318,11 @@ def run_self_play_rl_bootstrap(
     episodes_dir = output_dir / "episodes"
     episodes_dir.mkdir(parents=True, exist_ok=True)
 
+    base_match_raw = json.loads(match_config_path.read_text(encoding="utf-8"))
+    if not isinstance(base_match_raw, dict):
+        msg = "match config root must be a JSON object"
+        raise ValueError(msg)
+
     episode_rows: list[dict[str, Any]] = []
     bootstrap_xd: list[dict[str, str]] = []
     bootstrap_delegate: list[str] = []
@@ -324,9 +331,19 @@ def run_self_play_rl_bootstrap(
 
     for ep in range(episodes):
         ep_dir = episodes_dir / f"e{ep:03d}"
+        ep_dir.mkdir(parents=True, exist_ok=True)
+        episode_seed = int(seed) + int(ep)
+        ep_cfg_dict = dict(base_match_raw)
+        ep_cfg_dict["seed"] = episode_seed
+        ep_cfg = match_config_from_mapping(ep_cfg_dict)
+        ep_match_path = ep_dir / "bootstrap_match_config.json"
+        ep_match_path.write_text(
+            canonical_json_dumps(match_config_to_mapping(ep_cfg)),
+            encoding="utf-8",
+        )
         res = run_local_live_play_validation(
             hierarchical_training_run_dir=hierarchical_training_run_dir,
-            match_config_path=match_config_path,
+            match_config_path=ep_match_path,
             output_dir=ep_dir,
             runtime_mode=runtime_mode,
             weights_path=wpath,
@@ -355,7 +372,9 @@ def run_self_play_rl_bootstrap(
         episode_rows.append(
             {
                 "episode_index": ep,
+                "episode_seed": episode_seed,
                 "relative_dir": f"episodes/e{ep:03d}",
+                "run_id": vr.get("run_id"),
                 "validation_run_sha256": vr.get("validation_run_sha256"),
                 "local_live_play_validation_run_path": str(vpath.resolve()),
                 "reward": reward_ep,
@@ -365,16 +384,43 @@ def run_self_play_rl_bootstrap(
     reward_totals = [float(er["reward"]["reward_total"]) for er in episode_rows]
     mean_r = sum(reward_totals) / float(len(reward_totals)) if reward_totals else 0.0
 
+    sha256_values = []
+    for er in episode_rows:
+        h = er.get("validation_run_sha256")
+        if isinstance(h, str) and len(h) == 64:
+            sha256_values.append(str(h))
+    distinct_validation_run_sha256 = len(set(sha256_values))
+    run_id_values = [str(er["run_id"]) for er in episode_rows if isinstance(er.get("run_id"), str)]
+    distinct_run_id = len(set(run_id_values))
+
+    updated_sidecar: dict[str, Any] | None = None
+    warnings: list[str] = []
+
+    if episodes > 1 and distinct_validation_run_sha256 < episodes:
+        warnings.append(
+            "m47_episode_validation_run_sha256_collapsed: "
+            f"configured_episodes={episodes} "
+            f"distinct_validation_run_sha256={distinct_validation_run_sha256}"
+        )
+    if episodes > 1 and distinct_run_id < episodes and len(run_id_values) == episodes:
+        warnings.append(
+            "m47_episode_run_id_collapsed: "
+            f"configured_episodes={episodes} distinct_run_id={distinct_run_id}"
+        )
+
     manifest = {
+        "bootstrap_base_seed": seed,
+        "distinct_episode_identities": {
+            "distinct_run_id_count": distinct_run_id,
+            "distinct_validation_run_sha256_count": distinct_validation_run_sha256,
+        },
         "episode_manifest_version": EPISODE_MANIFEST_VERSION,
+        "episode_seed_policy": EPISODE_SEED_POLICY,
         "episodes": episode_rows,
         "runtime_mode": runtime_mode,
         "bootstrap_mode": bootstrap_mode,
     }
     write_episode_manifest(body=manifest, episodes_dir=episodes_dir)
-
-    updated_sidecar: dict[str, Any] | None = None
-    warnings: list[str] = []
 
     if emit_updated_bundle:
         if dataset_path is None or not bundle_dirs:
@@ -443,6 +489,7 @@ def run_self_play_rl_bootstrap(
             "training_run_id": training_run["run_id"],
         },
         "episode_count_configured": episodes,
+        "episode_seed_policy": EPISODE_SEED_POLICY,
         "m44_runtime_mode": runtime_mode,
         "reward_policy_id": REWARD_POLICY_ID,
         "seed": seed,
@@ -480,6 +527,14 @@ def run_self_play_rl_bootstrap(
         },
         "caveats": caveats,
         "episode_count_configured": episodes,
+        "episode_distinctness": {
+            "bootstrap_base_seed": seed,
+            "configured_episode_count": episodes,
+            "distinct_run_id_count": distinct_run_id,
+            "distinct_validation_run_sha256_count": distinct_validation_run_sha256,
+            "episode_manifest_version": EPISODE_MANIFEST_VERSION,
+            "episode_seed_policy": EPISODE_SEED_POLICY,
+        },
         "m44_substrate": {
             "local_live_play_validation_contract": "starlab.local_live_play_validation_run.v1",
             "semantic_live_action_adapter_policy_id": "starlab.m44.semantic_live_action_adapter.v1",

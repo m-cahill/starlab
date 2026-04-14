@@ -119,7 +119,8 @@ def test_ledger_milestone_rows_m32_m47() -> None:
     assert "| M42 | Learned-Agent Comparison Harness" in text
     assert "| M45 | Self-Play / RL Bootstrap" in text
     assert "| M46 | Bounded Live Validation Final-Status Semantics" in text
-    assert "| M47 | Learned-Agent Comparison Contract-Path Alignment (stub)" in text
+    assert "| M47 | Bootstrap Episode Distinctness & Operator Ergonomics" in text
+    assert "| M48 | Learned-Agent Comparison Contract-Path Alignment (stub)" in text
 
 
 def test_flagship_proof_pack_module_exists_post_m39() -> None:

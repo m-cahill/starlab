@@ -29,7 +29,9 @@ def minimal_report_from_run(run: dict[str, Any]) -> dict[str, Any]:
     cand: dict[str, Any] = c_raw if isinstance(c_raw, dict) else {}
     s_raw = run.get("reward_summary")
     summ: dict[str, Any] = s_raw if isinstance(s_raw, dict) else {}
-    return {
+    ed_raw = run.get("episode_distinctness")
+    episode_distinctness = ed_raw if isinstance(ed_raw, dict) else None
+    rep: dict[str, Any] = {
         "report_version": SELF_PLAY_RL_BOOTSTRAP_RUN_REPORT_VERSION,
         "bootstrap_run_sha256": run["bootstrap_run_sha256"],
         "run_id": run["run_id"],
@@ -51,6 +53,9 @@ def minimal_report_from_run(run: dict[str, Any]) -> dict[str, Any]:
         "caveats": run.get("caveats", []),
         "non_claims": run.get("non_claims", []),
     }
+    if episode_distinctness is not None:
+        rep["episode_distinctness"] = episode_distinctness
+    return rep
 
 
 def write_bootstrap_artifacts(
