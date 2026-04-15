@@ -241,6 +241,11 @@ _MILESTONE_FOLDERS: list[Any] = [
         marks=pytest.mark.smoke,
         id="M51",
     ),
+    pytest.param(
+        _MilestoneFolder("M52", ("M52_plan.md", "M52_toolcalls.md")),
+        marks=pytest.mark.smoke,
+        id="M52",
+    ),
 ]
 
 

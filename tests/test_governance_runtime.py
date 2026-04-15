@@ -382,6 +382,16 @@ def test_m51_campaign_phase_receipt_module_exists() -> None:
     assert (tr / "campaign_phase_receipt.py").is_file()
 
 
+def test_m52_equivalence_charter_modules_exist() -> None:
+    eq = REPO_ROOT / "starlab" / "equivalence"
+    for name in (
+        "equivalence_models.py",
+        "equivalence_charter.py",
+        "emit_replay_execution_equivalence_charter.py",
+    ):
+        assert (eq / name).is_file()
+
+
 def test_m29_hierarchy_modules_exist() -> None:
     hi = REPO_ROOT / "starlab" / "hierarchy"
     for name in (
