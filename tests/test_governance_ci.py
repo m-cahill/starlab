@@ -64,10 +64,7 @@ def test_ledger_has_m01_runtime_title_and_m32_map() -> None:
     assert "46 milestones" in text
     assert "M00–M45" in text or "M00-M45" in text
     assert (
-        "62 milestones" in text
-        or "M00–M61" in text
-        or "M00-M61" in text
-        or "53 milestones" in text
+        "62 milestones" in text or "M00–M61" in text or "M00-M61" in text or "53 milestones" in text
     )
     assert "Audit Closure I" in text
     assert "Platform Boundary Review" in text
