@@ -388,6 +388,9 @@ def test_m52_equivalence_charter_modules_exist() -> None:
         "equivalence_models.py",
         "equivalence_charter.py",
         "emit_replay_execution_equivalence_charter.py",
+        "equivalence_gatepacks.py",
+        "equivalence_audit.py",
+        "emit_replay_execution_equivalence_audit.py",
     ):
         assert (eq / name).is_file()
 
