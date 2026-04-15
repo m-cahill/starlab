@@ -268,6 +268,7 @@ def test_m57_sc2_modules_do_not_import_replays_or_s2protocol() -> None:
 def test_ledger_m57_m58_m56_governance() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "### M57" in text
+    assert "### M58" in text
     assert "### M56" in text
     assert "M56" in text and "closed" in text.lower()
     assert "M58" in text

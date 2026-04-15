@@ -258,7 +258,7 @@ def test_cli_gates_writes_expected_files(tmp_path: Path) -> None:
 
 def test_ledger_m56_benchmark_integrity_governance() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
-    assert "### M57" in text
+    assert "### M58" in text
     assert "### M56" in text
     assert "M55" in text and "closed" in text.lower()
     assert "not yet proved" in text.lower() and "benchmark integrity" in text.lower()

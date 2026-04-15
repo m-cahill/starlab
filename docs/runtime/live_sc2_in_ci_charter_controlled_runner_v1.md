@@ -1,6 +1,6 @@
 # Live SC2 in CI — bounded charter & controlled runner v1 (M57)
 
-**Status:** M57 — narrow governance surface; **not** global proof of live SC2 in CI.
+**Status:** **M57** — **closed** on `main` — narrow governance surface; **not** global proof of live SC2 in CI; **not** default merge-gate live SC2.
 
 ## Purpose
 

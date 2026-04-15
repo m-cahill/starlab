@@ -96,7 +96,7 @@ def test_ledger_m55_m56_benchmark_integrity_governance() -> None:
     assert "not yet proved" in text.lower() and "benchmark integrity" in text.lower()
     sec11 = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "m55" in sec11.lower() and "closed" in sec11.lower()
-    assert "### M57" in sec11
+    assert "### M58" in sec11
     assert "### M56" in sec11
 
 
