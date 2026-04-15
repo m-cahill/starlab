@@ -1,7 +1,7 @@
 # Replay↔execution equivalence audit & acceptance gates v1 (M54)
 
 **Contract id:** `starlab.replay_execution_equivalence_audit.v1`  
-**Milestone:** **M54** — *bounded audit over M53 evidence* — **not** universal replay↔execution equivalence — see `docs/starlab.md`, §11.
+**Milestone:** **M54** — *bounded audit over M53 evidence* — **not** universal replay↔execution equivalence — **closed** on `main` (see `docs/starlab.md`, §11 / §18).
 
 **Evidence input:** `starlab.replay_execution_equivalence_evidence.v1` (`docs/runtime/replay_execution_equivalence_evidence_surface_v1.md`).  
 **Charter:** `starlab.replay_execution_equivalence_charter.v1` (`docs/runtime/replay_execution_equivalence_charter_v1.md`).

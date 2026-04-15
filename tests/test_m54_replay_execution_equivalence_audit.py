@@ -191,8 +191,9 @@ def test_governance_docs_include_m54_runtime_doc() -> None:
     assert "replay_execution_equivalence_audit_acceptance_gates_v1.md" in text
 
 
-def test_ledger_current_milestone_is_m54() -> None:
+def test_ledger_current_milestone_pointer_m55_after_m54_closeout() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "M55" in text and "Benchmark integrity charter" in text
     assert "M54" in text and "Replay↔execution equivalence audit" in text
 
 

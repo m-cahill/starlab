@@ -2,7 +2,7 @@
 
 **Contract id:** `starlab.replay_execution_equivalence_charter.v1`  
 **Milestone:** **M52** — *charter and machine-readable boundary only* — **not** paired proof — **closed** on `main` (see `docs/starlab.md`, §18).  
-**See also:** public ledger `docs/starlab.md` (Phase VII, v1 boundary, remaining proof-track map). **M53 evidence surface (closed on `main`):** `docs/runtime/replay_execution_equivalence_evidence_surface_v1.md`.
+**See also:** public ledger `docs/starlab.md` (Phase VII, v1 boundary, remaining proof-track map). **M53 evidence surface (closed on `main`):** `docs/runtime/replay_execution_equivalence_evidence_surface_v1.md`. **M54 audit / acceptance gates (closed on `main`):** `docs/runtime/replay_execution_equivalence_audit_acceptance_gates_v1.md`.
 
 ## Purpose
 
