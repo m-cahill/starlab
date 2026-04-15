@@ -38,7 +38,8 @@ def write_replay_execution_equivalence_evidence_artifacts(
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(
         description=(
-            "Emit deterministic replay-vs-execution equivalence evidence JSON (M53 bounded profile)."
+            "Emit deterministic replay-vs-execution equivalence evidence JSON "
+            "(M53 bounded profile)."
         )
     )
     p.add_argument(
