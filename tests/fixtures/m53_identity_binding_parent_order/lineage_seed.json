@@ -1,0 +1,44 @@
+{
+  "artifact_references": [
+    {
+      "logical_name": "run_identity.json",
+      "role": "artifact"
+    },
+    {
+      "logical_name": "lineage_seed.json",
+      "role": "artifact"
+    }
+  ],
+  "config_hash": "4cc10e97f45929a2d979b379c754a25f28e009087cf4efb731c52ec5aa852cdb",
+  "execution_id": "20b20f825be41bd4a6b73c5a771eae30da19c832c9e1ba59ac229ad13b9b62c3",
+  "input_references": [
+    {
+      "content_sha256": "9e5156cfa7294020e96e96391f52e57270aaac275fdc2f5ba969eeae40e13986",
+      "logical_name": "match_config",
+      "path": "tests/fixtures/m02_match_config.json",
+      "role": "config"
+    },
+    {
+      "content_sha256": "bb6948ed0bc07710b83818873c94fd8d76e2666c60f1c8734189b58eb3d8e96d",
+      "logical_name": "match_execution_proof",
+      "path": "tests/fixtures/m02_match_execution_proof.json",
+      "role": "proof"
+    }
+  ],
+  "later_milestones": {
+    "m04_replay_binding": "Replay file hash and binding hooks may attach here.",
+    "m05_canonical_run_artifact": "Canonical run artifact v0 may supersede or wrap this seed."
+  },
+  "lineage_seed_id": "a17d046478b43358647ab599baf5ef95bf9e61e0cdc31b4adb09fd34b9692833",
+  "parent_references": [
+    {
+      "id": "a"
+    },
+    {
+      "id": "b"
+    }
+  ],
+  "proof_artifact_hash": "d8e2fcb2e227c7c3e7e908c0df140586572f7c8c25fb67db1be823f445062774",
+  "run_spec_id": "7fed18301cec0c910fb1ed246db46fd80088514d98fd058dd08dd99052450321",
+  "schema_version": "starlab.lineage_seed.v1"
+}
