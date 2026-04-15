@@ -1,7 +1,7 @@
 # Benchmark integrity charter v1 (M55)
 
 **Contract id:** `starlab.benchmark_integrity_charter.v1`  
-**Milestone:** **M55** — *charter, vocabulary, and split-governance controls only* — **not** benchmark-integrity proof — see `docs/starlab.md` (Phase VII, remaining proof-track map).  
+**Milestone:** **M55** — *charter, vocabulary, and split-governance controls only* — **closed** on `main` ([PR #66](https://github.com/m-cahill/starlab/pull/66)) — **not** benchmark-integrity proof — see `docs/starlab.md` §11 / §23.  
 **See also:** public ledger `docs/starlab.md`. **M56 (stub/planned):** reproducibility evidence and benchmark-integrity **gates** — **not** introduced in M55.
 
 ## Purpose
