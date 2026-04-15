@@ -1,6 +1,6 @@
 # Benchmark integrity evidence & reproducibility gates v1 (M56)
 
-**Status:** Governed runtime contract (Phase VII — Trust, Equivalence, Benchmark Integrity, and Release Lock)
+**Status:** **Closed** on `main` — governed runtime contract (Phase VII — Trust, Equivalence, Benchmark Integrity, and Release Lock). Merge: [PR #67](https://github.com/m-cahill/starlab/pull/67); merge commit `bd7da9a6229fa067217dd04db918972a5ec73caf`; tag **`v0.0.56-m56`**. **Not** global benchmark integrity proof; **not** substitution for **M52–M54** replay↔execution equivalence.
 
 ## Contract identifiers
 
