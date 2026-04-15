@@ -121,8 +121,14 @@ def run_local_live_play_validation(
     run_id: str | None = None,
     include_environment_fingerprint: bool = True,
     env_json_path: Path | None = None,
+    enforce_weights_sidecar_sha256: bool = True,
 ) -> LivePlayValidationResult:
-    """Execute bounded validation: M02 harness, M43 sklearn inference trace, M04 replay binding."""
+    """Execute bounded validation: M02 harness, M43 sklearn inference trace, M04 replay binding.
+
+    When ``enforce_weights_sidecar_sha256`` is False, a ``weights_path`` whose SHA does not match
+    ``hierarchical_training_run.json``/``weights_sidecar`` is allowed (e.g. M51 campaign refit
+    bundle). A warning is recorded on the validation run.
+    """
 
     hr_path = hierarchical_training_run_dir / HIERARCHICAL_TRAINING_RUN_FILENAME
     training_run = json.loads(hr_path.read_text(encoding="utf-8"))
@@ -150,14 +156,23 @@ def run_local_live_play_validation(
         msg = f"M43 joblib weights not found at {wpath}"
         raise ValueError(msg)
 
+    weight_warnings: list[str] = []
     sidecar = training_run.get("weights_sidecar")
     if isinstance(sidecar, dict):
         expected_sha = sidecar.get("artifact_sha256")
         if isinstance(expected_sha, str) and expected_sha:
             actual = sha256_hex_file(wpath)
             if actual != expected_sha:
-                msg = "weights file sha256 does not match hierarchical_training_run weights_sidecar"
-                raise ValueError(msg)
+                if enforce_weights_sidecar_sha256:
+                    msg = (
+                        "weights file sha256 does not match hierarchical_training_run "
+                        "weights_sidecar"
+                    )
+                    raise ValueError(msg)
+                weight_warnings.append(
+                    "m51_weights_override: joblib sha256 does not match "
+                    "hierarchical_training_run weights_sidecar (non-M43 candidate weights)"
+                )
 
     bundle = load_hierarchical_sklearn_bundle(wpath)
     assert_workers_cover_delegates(bundle)
@@ -339,8 +354,8 @@ def run_local_live_play_validation(
         "runtime_mode": runtime_mode,
         "semantic_live_action_adapter_policy_id": SEMANTIC_LIVE_ACTION_ADAPTER_POLICY_ID,
         "validation_run_version": LOCAL_LIVE_PLAY_VALIDATION_RUN_VERSION,
-        "warnings": replay_warnings,
     }
+    body_pre["warnings"] = list(replay_warnings) + weight_warnings
 
     run = seal_validation_run_body(body_pre)
     report = minimal_report_from_run(run)

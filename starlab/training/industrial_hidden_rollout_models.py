@@ -10,7 +10,7 @@ EXECUTION_PREFLIGHT_RECEIPT_NOTE: Final[str] = (
 )
 
 INDUSTRIAL_HIDDEN_ROLLOUT_CONTRACT_VERSION: Final[str] = "starlab.industrial_hidden_rollout_mode.v1"
-HIDDEN_ROLLOUT_CAMPAIGN_RUN_VERSION: Final[str] = "starlab.hidden_rollout_campaign_run.v1"
+HIDDEN_ROLLOUT_CAMPAIGN_RUN_VERSION: Final[str] = "starlab.hidden_rollout_campaign_run.v2"
 HIDDEN_ROLLOUT_CAMPAIGN_RUN_REPORT_VERSION: Final[str] = (
     "starlab.hidden_rollout_campaign_run_report.v1"
 )
