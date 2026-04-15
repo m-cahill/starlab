@@ -94,6 +94,7 @@ _MILESTONE_COMPLETE_ROWS = [
     pytest.param("M47", "Bootstrap Episode Distinctness", marks=pytest.mark.smoke),
     pytest.param("M48", "Learned-Agent Comparison Contract-Path", marks=pytest.mark.smoke),
     pytest.param("M49", "Full Local Training / Bootstrap Campaign", marks=pytest.mark.smoke),
+    pytest.param("M52", "V1 Endgame Recharter", marks=pytest.mark.smoke),
 ]
 
 
@@ -242,9 +243,14 @@ _MILESTONE_FOLDERS: list[Any] = [
         id="M51",
     ),
     pytest.param(
-        _MilestoneFolder("M52", ("M52_plan.md", "M52_toolcalls.md")),
+        _MilestoneFolder("M52", _closeout_filenames("M52")),
         marks=pytest.mark.smoke,
         id="M52",
+    ),
+    pytest.param(
+        _MilestoneFolder("M53", ("M53_plan.md", "M53_toolcalls.md")),
+        marks=pytest.mark.smoke,
+        id="M53",
     ),
 ]
 

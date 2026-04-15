@@ -98,6 +98,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "M50" in section
     assert "M51" in section
     assert "M52" in section
+    assert "M53" in section
     assert "Bootstrap Episode Distinctness" in section or "Operator Ergonomics" in section
     assert "M46" in section
     assert "M45" in section

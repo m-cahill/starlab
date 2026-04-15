@@ -1,7 +1,7 @@
 # Replay↔execution equivalence charter v1 (M52)
 
 **Contract id:** `starlab.replay_execution_equivalence_charter.v1`  
-**Milestone:** **M52** — *charter and machine-readable boundary only* — **not** paired proof.  
+**Milestone:** **M52** — *charter and machine-readable boundary only* — **not** paired proof — **closed** on `main` (see `docs/starlab.md`, §18).  
 **See also:** public ledger `docs/starlab.md` (Phase VII, v1 boundary, remaining proof-track map).
 
 ## Purpose

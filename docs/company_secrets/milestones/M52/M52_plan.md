@@ -1,6 +1,6 @@
 # M52 Plan — V1 Endgame Recharter & Replay↔Execution Equivalence Charter v1
 
-**Status:** Active (implementation on feature branch)  
+**Status:** **Closed** on `main` ([PR #63](https://github.com/m-cahill/starlab/pull/63); merge commit `c80a47bedcc5e607e45381d401411d9aa5e2f10b`; tag **`v0.0.52-m52`**). Branch `m52-v1-endgame-recharter-replay-execution-charter` **deleted** after merge.  
 **Phase:** VII — Trust, Equivalence, Benchmark Integrity, and Release Lock
 
 ## Milestone title
