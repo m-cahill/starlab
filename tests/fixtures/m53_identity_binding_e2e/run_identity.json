@@ -1,0 +1,22 @@
+{
+  "adapter_name": "fake",
+  "bounded_horizon": {
+    "game_step": 1,
+    "max_game_steps": 10
+  },
+  "config_hash": "4cc10e97f45929a2d979b379c754a25f28e009087cf4efb731c52ec5aa852cdb",
+  "environment_fingerprint": null,
+  "execution_id": "20b20f825be41bd4a6b73c5a771eae30da19c832c9e1ba59ac229ad13b9b62c3",
+  "interface_summary": {
+    "feature_layer_interface": false,
+    "raw_interface": true,
+    "rendered_interface": false,
+    "score_interface": true
+  },
+  "normalized_map_reference": "fake://deterministic",
+  "proof_artifact_hash": "d8e2fcb2e227c7c3e7e908c0df140586572f7c8c25fb67db1be823f445062774",
+  "run_spec_id": "7fed18301cec0c910fb1ed246db46fd80088514d98fd058dd08dd99052450321",
+  "runtime_boundary_label": "s2client_proto_sc2api",
+  "schema_version": "starlab.run_identity.v1",
+  "seed": 4242
+}

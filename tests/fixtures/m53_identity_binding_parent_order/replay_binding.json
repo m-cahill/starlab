@@ -1,0 +1,27 @@
+{
+  "binding_mode": "opaque_content_sha256",
+  "execution_id": "20b20f825be41bd4a6b73c5a771eae30da19c832c9e1ba59ac229ad13b9b62c3",
+  "later_milestones": [
+    "M05 canonical run artifact v0",
+    "M08 replay parser substrate"
+  ],
+  "lineage_seed_id": "a17d046478b43358647ab599baf5ef95bf9e61e0cdc31b4adb09fd34b9692833",
+  "parent_references": [
+    {
+      "id": "b"
+    },
+    {
+      "id": "a"
+    }
+  ],
+  "proof_artifact_hash": "d8e2fcb2e227c7c3e7e908c0df140586572f7c8c25fb67db1be823f445062774",
+  "replay_binding_id": "aa2b2ed2653471aaeadd1f4748e3672d701cfe430eaebc464418b496c12371ed",
+  "replay_content_sha256": "75d471bb536f299d292dc94cc4cc2e01660e835efce3f2bd7c1c3a385def133b",
+  "replay_reference": {
+    "basename": "replay_m07_generated.SC2Replay",
+    "size_bytes": 42,
+    "suffix": ".SC2Replay"
+  },
+  "run_spec_id": "7fed18301cec0c910fb1ed246db46fd80088514d98fd058dd08dd99052450321",
+  "schema_version": "starlab.replay_binding.v1"
+}

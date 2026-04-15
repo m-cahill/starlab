@@ -55,6 +55,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/replay_imitation_training_pipeline_v1.md",
     "docs/runtime/learned_agent_comparison_harness_v1.md",
     "docs/runtime/replay_execution_equivalence_charter_v1.md",
+    "docs/runtime/replay_execution_equivalence_evidence_surface_v1.md",
     "docs/runtime/clone_to_run_smoke_v1.md",
     "docs/runtime/ci_tiering_field_test_readiness_v1.md",
     "docs/diligence/field_test_checklist.md",
