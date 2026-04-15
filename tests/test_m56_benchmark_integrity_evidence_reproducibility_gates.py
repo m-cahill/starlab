@@ -96,9 +96,7 @@ def test_corpus_row_not_applicable_happy_path() -> None:
         baseline_evidence_pack_path=p["baseline_evidence_pack"],
     )
     corp = next(
-        r
-        for r in ev["evidence_rows"]
-        if r["evidence_class"] == "corpus_provenance_and_promotion"
+        r for r in ev["evidence_rows"] if r["evidence_class"] == "corpus_provenance_and_promotion"
     )
     assert corp["status"] == "not_applicable"
 
@@ -131,9 +129,7 @@ def test_subject_mismatch_fails_gates() -> None:
     )
     g, _ = build_benchmark_integrity_reproducibility_gates_bundle(evidence=ev, evidence_report=rep)
     assert g["scope_status"] == "rejected_within_scope"
-    assert any(
-        x["status"] == "fail" and "subject" in x["gate_id"] for x in g["gate_results"]
-    )
+    assert any(x["status"] == "fail" and "subject" in x["gate_id"] for x in g["gate_results"])
 
 
 def test_posture_mismatch_fails_gates() -> None:
@@ -182,9 +178,7 @@ def test_corpus_implication_fails_gates() -> None:
         baseline_evidence_pack_path=p["baseline_evidence_pack"],
     )
     corp = next(
-        r
-        for r in ev["evidence_rows"]
-        if r["evidence_class"] == "corpus_provenance_and_promotion"
+        r for r in ev["evidence_rows"] if r["evidence_class"] == "corpus_provenance_and_promotion"
     )
     assert corp["status"] == "present"
     g, _ = build_benchmark_integrity_reproducibility_gates_bundle(

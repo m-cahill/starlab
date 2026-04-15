@@ -70,8 +70,7 @@ def build_benchmark_integrity_reproducibility_gates_bundle(
             0,
             {
                 "gate_id": (
-                    "starlab.m56.gate.fixture_only_baseline_chain."
-                    "evidence_report_sha_mismatch_v1"
+                    "starlab.m56.gate.fixture_only_baseline_chain.evidence_report_sha_mismatch_v1"
                 ),
                 "description": (
                     "Optional evidence report evidence_canonical_sha256 matches evidence JSON."
