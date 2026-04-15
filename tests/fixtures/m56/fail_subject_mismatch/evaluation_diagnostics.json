@@ -1,0 +1,152 @@
+{
+  "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+  "benchmark_id": "m20_fixture_demo",
+  "diagnostics_version": "starlab.evaluation_diagnostics.v1",
+  "entrant_diagnostics": [
+    {
+      "draws": 0,
+      "entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a",
+      "losses": 1,
+      "opponent_results": [
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0001",
+          "opponent_entrant_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b",
+          "outcome": "loss",
+          "points_awarded": 0.0
+        }
+      ],
+      "points": 0.0,
+      "primary_metric_value": 5,
+      "primary_tiebreak_scalar": 5.0,
+      "source_scorecard_ref": {
+        "scorecard_index": 0,
+        "suite_id": "starlab.scripted_baseline_suite.m56.v1.min",
+        "suite_path": "tests/fixtures/m56/happy/scripted_baseline_suite.json",
+        "suite_sha256": "a963b060a6861129d88173c47d1eff99b017489c27abc606c1afdcb7a19e0fe2",
+        "suite_version": "starlab.scripted_baseline_suite.v1"
+      },
+      "standing_rank": 2,
+      "subject_id": "m56_scripted_a",
+      "subject_kind": "scripted",
+      "suite_id": "starlab.scripted_baseline_suite.m56.v1.min",
+      "wins": 0
+    },
+    {
+      "draws": 0,
+      "entrant_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b",
+      "losses": 0,
+      "opponent_results": [
+        {
+          "match_id": "starlab.evaluation_tournament.v1.match.0001",
+          "opponent_entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a",
+          "outcome": "win",
+          "points_awarded": 1.0
+        }
+      ],
+      "points": 1.0,
+      "primary_metric_value": 7,
+      "primary_tiebreak_scalar": 7.0,
+      "source_scorecard_ref": {
+        "scorecard_index": 0,
+        "suite_id": "starlab.heuristic_baseline_suite.m56.v1.min",
+        "suite_path": "tests/fixtures/m56/happy/heuristic_baseline_suite.json",
+        "suite_sha256": "324a6ca76a920f385acb7c86f4294c8b609b4598bfbb7c0865db37ab6a4a1244",
+        "suite_version": "starlab.heuristic_baseline_suite.v1"
+      },
+      "standing_rank": 1,
+      "subject_id": "m56_heuristic_b",
+      "subject_kind": "heuristic",
+      "suite_id": "starlab.heuristic_baseline_suite.m56.v1.min",
+      "wins": 1
+    }
+  ],
+  "evaluation_posture": "fixture_only",
+  "failure_views": {
+    "draws_equal_primary_metric": [],
+    "lowest_points_entrants": [
+      {
+        "entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a"
+      }
+    ],
+    "standings_used_lexicographic_tiebreak": [],
+    "standings_used_tiebreak_scalar": [],
+    "zero_win_entrants": [
+      {
+        "entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a"
+      }
+    ]
+  },
+  "match_diagnostics": [
+    {
+      "decisive_metric_id": "m1",
+      "decisive_metric_role": "primary",
+      "entrant_a_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a",
+      "entrant_b_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b",
+      "match_id": "starlab.evaluation_tournament.v1.match.0001",
+      "metric_comparisons": [
+        {
+          "better_entrant_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b",
+          "entrant_a_value": 5,
+          "entrant_b_value": 7,
+          "metric_id": "m1",
+          "optimization_direction": "maximize",
+          "scoring_role": "primary",
+          "unit": "count"
+        },
+        {
+          "better_entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a",
+          "entrant_a_value": 0.1,
+          "entrant_b_value": 0.2,
+          "metric_id": "m2",
+          "optimization_direction": "minimize",
+          "scoring_role": "diagnostic",
+          "unit": "ratio"
+        }
+      ],
+      "outcome": "win_b",
+      "points_awarded": {
+        "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b": 1.0,
+        "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a": 0.0
+      },
+      "winner_entrant_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b"
+    }
+  ],
+  "measurement_surface": "fixture_only",
+  "non_claims": [
+    "starlab.m24.diagnostics_non_claim.not_benchmark_integrity",
+    "starlab.m24.diagnostics_non_claim.not_leaderboard_validity_beyond_fixture",
+    "starlab.m24.diagnostics_non_claim.not_live_gameplay",
+    "starlab.m24.diagnostics_non_claim.not_new_benchmark_semantics",
+    "starlab.m24.diagnostics_non_claim.not_replay_derived_evidence",
+    "starlab.m24.diagnostics_non_claim.not_root_cause_outside_tournament_artifact"
+  ],
+  "standing_explanations": [
+    {
+      "adjacent_comparison": {
+        "lower_rank_entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a",
+        "separated_by": "higher_points"
+      },
+      "entrant_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b",
+      "explained_by": {
+        "lexicographic_tiebreak_used": false,
+        "points": 1.0,
+        "primary_tiebreak_scalar": 7.0
+      },
+      "rank": 1
+    },
+    {
+      "adjacent_comparison": null,
+      "entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a",
+      "explained_by": {
+        "lexicographic_tiebreak_used": false,
+        "points": 0.0,
+        "primary_tiebreak_scalar": 5.0
+      },
+      "rank": 2
+    }
+  ],
+  "tournament_id": "starlab.evaluation_tournament.m23.v1.demo",
+  "warnings": [
+    "starlab.m24.warning.fixture_only_diagnostics_consumer"
+  ]
+}

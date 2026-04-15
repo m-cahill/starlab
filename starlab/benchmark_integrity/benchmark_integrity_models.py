@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Final
+from typing import Final, Literal
 
 CONTRACT_ID: Final[str] = "starlab.benchmark_integrity_charter.v1"
 
@@ -41,3 +41,60 @@ CONTROL_IDS_ORDERED: Final[tuple[str, ...]] = (
     "starlab.m55.control.score_aggregation_publication_v1",
     "starlab.m55.control.acceptance_authority_v1",
 )
+
+# --- M56 — bounded evidence + reproducibility gates (fixture-only baseline chain v1) ---
+
+BENCHMARK_INTEGRITY_EVIDENCE_CONTRACT_ID: Final[str] = "starlab.benchmark_integrity_evidence.v1"
+BENCHMARK_INTEGRITY_EVIDENCE_SCHEMA_VERSION: Final[str] = "starlab.benchmark_integrity_evidence.v1"
+BENCHMARK_INTEGRITY_EVIDENCE_REPORT_SCHEMA_VERSION: Final[str] = (
+    "starlab.benchmark_integrity_evidence_report.v1"
+)
+
+BENCHMARK_INTEGRITY_REPRODUCIBILITY_GATES_CONTRACT_ID: Final[str] = (
+    "starlab.benchmark_integrity_reproducibility_gates.v1"
+)
+BENCHMARK_INTEGRITY_REPRODUCIBILITY_GATES_SCHEMA_VERSION: Final[str] = (
+    "starlab.benchmark_integrity_reproducibility_gates.v1"
+)
+BENCHMARK_INTEGRITY_REPRODUCIBILITY_GATES_REPORT_SCHEMA_VERSION: Final[str] = (
+    "starlab.benchmark_integrity_reproducibility_gates_report.v1"
+)
+
+EVIDENCE_FILENAME: Final[str] = "benchmark_integrity_evidence.json"
+EVIDENCE_REPORT_FILENAME: Final[str] = "benchmark_integrity_evidence_report.json"
+REPRODUCIBILITY_GATES_FILENAME: Final[str] = "benchmark_integrity_reproducibility_gates.json"
+REPRODUCIBILITY_GATES_REPORT_FILENAME: Final[str] = (
+    "benchmark_integrity_reproducibility_gates_report.json"
+)
+
+M56_RUNTIMEV1_EVIDENCE_GATES_REL_PATH: Final[str] = (
+    "docs/runtime/benchmark_integrity_evidence_reproducibility_gates_v1.md"
+)
+
+M56_SCOPE_FIXTURE_ONLY_BASELINE_CHAIN_V1: Final[str] = (
+    "starlab.m56.scope.fixture_only_baseline_chain_v1"
+)
+M56_GATEPACK_FIXTURE_ONLY_BASELINE_CHAIN_V1: Final[str] = (
+    "starlab.m56.gatepack.fixture_only_baseline_chain_reproducibility_v1"
+)
+
+# Evidence row status vocabulary (M56).
+EvidenceRowStatus = Literal[
+    "present",
+    "missing",
+    "not_applicable",
+    "unavailable_by_design",
+    "out_of_scope",
+]
+
+# Scope gate outcome (top-level).
+M56ScopeGateStatus = Literal[
+    "accepted_within_scope",
+    "rejected_within_scope",
+    "not_evaluable",
+]
+
+# Gate predicate result.
+M56GateResultStatus = Literal["pass", "fail", "not_evaluable", "not_applicable"]
+
+EVIDENCE_ROW_ORDER: Final[tuple[str, ...]] = EVIDENCE_CLASSES_RESERVED_FOR_M56

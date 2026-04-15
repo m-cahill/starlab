@@ -40,6 +40,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/observation_reconciliation_audit_v1.md",
     "docs/runtime/benchmark_contract_scorecard_v1.md",
     "docs/runtime/benchmark_integrity_charter_v1.md",
+    "docs/runtime/benchmark_integrity_evidence_reproducibility_gates_v1.md",
     "docs/runtime/scripted_baseline_suite_v1.md",
     "docs/runtime/heuristic_baseline_suite_v1.md",
     "docs/runtime/evaluation_runner_tournament_harness_v1.md",

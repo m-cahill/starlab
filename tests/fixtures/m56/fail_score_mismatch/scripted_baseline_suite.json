@@ -1,0 +1,70 @@
+{
+  "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+  "benchmark_id": "m20_fixture_demo",
+  "evaluation_posture": "fixture_only",
+  "fixture_cases": [
+    {
+      "case_id": "fc_m56_s001",
+      "description": "M56 minimal scripted subject for benchmark-integrity evidence fixtures."
+    }
+  ],
+  "measurement_surface": "fixture_only",
+  "non_claims": [
+    "starlab.m21.suite_non_claim.not_benchmark_integrity",
+    "starlab.m21.suite_non_claim.not_heuristic_baseline",
+    "starlab.m21.suite_non_claim.not_replay_execution_equivalence"
+  ],
+  "scorecards": [
+    {
+      "aggregate_scores": [],
+      "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+      "benchmark_id": "m20_fixture_demo",
+      "benchmark_version": "1.0.0",
+      "comparability_status": "provisional",
+      "evaluation_posture": "fixture_only",
+      "gating_outcomes": [
+        {
+          "detail": null,
+          "passed": true,
+          "rule_id": "g1"
+        }
+      ],
+      "metric_rows": [
+        {
+          "metric_id": "m1",
+          "unit": "count",
+          "value": 5
+        },
+        {
+          "metric_id": "m2",
+          "unit": "ratio",
+          "value": 0.1
+        }
+      ],
+      "non_claims": [
+        "starlab.m21.scorecard_non_claim.not_benchmark_integrity",
+        "starlab.m21.scorecard_non_claim.not_replay_execution_equivalence"
+      ],
+      "schema_version": "starlab.benchmark_scorecard.v1",
+      "scoring_status": "scored",
+      "subject_ref": {
+        "subject_id": "m56_scripted_a",
+        "subject_kind": "scripted"
+      },
+      "warnings": [
+        "starlab.m21.warning.fixture_only_scripted_scorecard"
+      ]
+    }
+  ],
+  "subjects": [
+    {
+      "subject_id": "m56_scripted_a",
+      "subject_kind": "scripted"
+    }
+  ],
+  "suite_id": "starlab.scripted_baseline_suite.m56.v1.min",
+  "suite_version": "starlab.scripted_baseline_suite.v1",
+  "warnings": [
+    "starlab.m21.warning.fixture_only_scripted_suite"
+  ]
+}
