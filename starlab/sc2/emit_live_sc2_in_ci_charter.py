@@ -1,0 +1,45 @@
+"""CLI: emit `live_sc2_in_ci_charter.json` + report (M57)."""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+from starlab.runs.json_util import canonical_json_dumps
+from starlab.sc2.live_sc2_ci_charter import live_sc2_in_ci_charter_bundle
+from starlab.sc2.live_sc2_ci_models import (
+    LIVE_SC2_IN_CI_CHARTER_FILENAME,
+    LIVE_SC2_IN_CI_CHARTER_REPORT_FILENAME,
+)
+
+
+def write_live_sc2_in_ci_charter_artifacts(output_dir: Path) -> tuple[Path, Path]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    charter, report = live_sc2_in_ci_charter_bundle()
+    charter_path = output_dir / LIVE_SC2_IN_CI_CHARTER_FILENAME
+    report_path = output_dir / LIVE_SC2_IN_CI_CHARTER_REPORT_FILENAME
+    charter_path.write_text(canonical_json_dumps(charter), encoding="utf-8")
+    report_path.write_text(canonical_json_dumps(report), encoding="utf-8")
+    return charter_path, report_path
+
+
+def main(argv: list[str] | None = None) -> int:
+    p = argparse.ArgumentParser(
+        description="Emit deterministic live SC2-in-CI charter JSON (M57 — charter only)."
+    )
+    p.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path("."),
+        help="Directory for charter + report JSON (default: cwd).",
+    )
+    args = p.parse_args(argv)
+    c, r = write_live_sc2_in_ci_charter_artifacts(args.output_dir)
+    print(f"Wrote {c}")
+    print(f"Wrote {r}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
