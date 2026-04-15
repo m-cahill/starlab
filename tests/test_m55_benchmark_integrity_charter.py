@@ -109,9 +109,9 @@ def test_ledger_benchmark_integrity_not_equivalence_collapse() -> None:
 def test_phase_vii_has_m55_m56_track_table() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "#### Benchmark integrity track" in text
-    sec = text.split("#### Benchmark integrity track")[1].split(
-        "#### Phase VII track separation"
-    )[0]
+    sec = text.split("#### Benchmark integrity track")[1].split("#### Phase VII track separation")[
+        0
+    ]
     assert "M55" in sec and "M56" in sec
     assert "charter" in sec.lower() and "controls" in sec.lower()
     assert "evidence" in sec.lower() and "reproducibility" in sec.lower()
