@@ -160,11 +160,6 @@ def test_governance_docs_include_m53_runtime_doc() -> None:
     assert "replay_execution_equivalence_evidence_surface_v1.md" in text
 
 
-def test_ledger_current_milestone_is_m53() -> None:
-    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
-    assert "M53" in text and "Replay↔execution equivalence evidence surface" in text
-
-
 @pytest.mark.smoke
 def test_starlab_md_lists_phase_vii_profile_table() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
