@@ -86,10 +86,7 @@ def build_replay_execution_equivalence_audit_bundle(
                 "Replay↔execution equivalence is not proved globally; "
                 "this audit is profile-scoped only."
             ),
-            (
-                "Does not assert benchmark integrity, live SC2 in CI, "
-                "or ladder/public performance."
-            ),
+            ("Does not assert benchmark integrity, live SC2 in CI, or ladder/public performance."),
             (
                 "merge_bar_language is descriptive metadata only; "
                 "it does not change repository branch protection."
@@ -120,9 +117,7 @@ def build_replay_execution_equivalence_audit_bundle(
     return audit, report
 
 
-def build_replay_execution_equivalence_audit_report(
-    *, audit_obj: dict[str, Any]
-) -> dict[str, Any]:
+def build_replay_execution_equivalence_audit_report(*, audit_obj: dict[str, Any]) -> dict[str, Any]:
     audit_sha = sha256_hex_of_canonical_json(audit_obj)
     return {
         "schema_version": REPLAY_EXECUTION_EQUIVALENCE_AUDIT_REPORT_SCHEMA_VERSION,

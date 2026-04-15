@@ -401,8 +401,7 @@ def evaluate_identity_binding_acceptance_v1(
             _row(
                 gate_id=f"{_GATE_ID_PREFIX}.excluded_semantics_out_of_scope",
                 description=(
-                    "Gameplay/parser semantics row is explicitly out_of_scope "
-                    "(not a failure)."
+                    "Gameplay/parser semantics row is explicitly out_of_scope (not a failure)."
                 ),
                 status="pass" if ok else "fail",
                 subject_refs=[_ALLOWED_OUT_OF_SCOPE_SUBJECT],
@@ -423,8 +422,7 @@ def evaluate_identity_binding_acceptance_v1(
         _row(
             gate_id=f"{_GATE_ID_PREFIX}.no_disallowed_mismatch_rows",
             description=(
-                "No unexpected availability_class=mismatch rows outside "
-                "allowed policy subjects."
+                "No unexpected availability_class=mismatch rows outside allowed policy subjects."
             ),
             status="pass" if not unexpected else "fail",
             subject_refs=unexpected,

@@ -5,6 +5,7 @@ from __future__ import annotations
 import copy
 import json
 from pathlib import Path
+from typing import Any
 
 import pytest
 from starlab.equivalence.emit_replay_execution_equivalence_audit import (
@@ -31,7 +32,7 @@ FIX_BAD = REPO_ROOT / "tests" / "fixtures" / "m53_identity_binding_identity_mism
 FIX_ORDER = REPO_ROOT / "tests" / "fixtures" / "m53_identity_binding_parent_order"
 
 
-def _evidence_e2e() -> dict[str, object]:
+def _evidence_e2e() -> dict[str, Any]:
     return build_identity_binding_evidence(
         lineage_seed_path=FIX_E2E / "lineage_seed.json",
         replay_binding_path=FIX_E2E / "replay_binding.json",
