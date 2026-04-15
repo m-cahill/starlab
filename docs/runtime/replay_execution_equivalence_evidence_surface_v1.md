@@ -1,7 +1,7 @@
 # Replay↔execution equivalence evidence surface v1 (M53)
 
 **Contract id:** `starlab.replay_execution_equivalence_evidence.v1`  
-**Milestone:** **M53** — *bounded evidence artifacts only* — **not** paired universal equivalence — **not** M54 audit gates.  
+**Milestone:** **M53** — *bounded evidence artifacts only* — **not** paired universal equivalence — **not** M54 audit gates — **closed** on `main` (see `docs/starlab.md`, §18).  
 **Charter:** `starlab.replay_execution_equivalence_charter.v1` (`docs/runtime/replay_execution_equivalence_charter_v1.md`).  
 **See also:** public ledger `docs/starlab.md` (Phase VII profile table, v1 non-claims).
 
