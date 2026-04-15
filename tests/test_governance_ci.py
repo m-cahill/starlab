@@ -23,7 +23,7 @@ def test_m47_recharter_and_m48_deferral_documented() -> None:
     ) in text
     m48_closed = "**M48 — Learned-agent comparison contract-path alignment:** **closed** on `main`"
     assert m48_closed in text
-    assert "52 milestones (M00–M51)" in text
+    assert "53 milestones (M00–M52)" in text
 
 
 @pytest.mark.smoke
@@ -63,7 +63,7 @@ def test_ledger_has_m01_runtime_title_and_m32_map() -> None:
     assert "M32" in text
     assert "46 milestones" in text
     assert "M00–M45" in text or "M00-M45" in text
-    assert "52 milestones" in text or "M00–M51" in text
+    assert "53 milestones" in text or "M00–M52" in text or "52 milestones" in text
     assert "Audit Closure I" in text
     assert "Platform Boundary Review" in text
     assert "Governance, Runtime Surface, and Deterministic Run Substrate" in text
@@ -95,6 +95,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "M47" in section
     assert "M50" in section
     assert "M51" in section
+    assert "M52" in section
     assert "Bootstrap Episode Distinctness" in section or "Operator Ergonomics" in section
     assert "M46" in section
     assert "M45" in section
@@ -123,7 +124,7 @@ def test_ledger_milestone_table_m37_m45_rows() -> None:
     m50_line = next(line for line in sec.splitlines() if line.strip().startswith("| M50 |"))
     assert "Industrial-scale hidden rollout" in m50_line and "Complete" in m50_line
     m51_line = next(line for line in sec.splitlines() if line.strip().startswith("| M51 |"))
-    assert "post-bootstrap" in m51_line and "In progress" in m51_line
+    assert "post-bootstrap" in m51_line and "Complete" in m51_line and "v0.0.51-m51" in m51_line
 
 
 @pytest.mark.smoke
