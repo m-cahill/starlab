@@ -1,0 +1,104 @@
+{
+  "benchmark_contract_sha256": "59d564e96d27e506b055a49336c76795a0bfb5e8908e567cca8d323921e58661",
+  "diagnostics_sha256": "e315ec7679d6e82955f12280a67335cd19213440d4947d9a4b8757942f46947f",
+  "entrants": [
+    {
+      "draws": 0,
+      "entrant_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b",
+      "evidence_refs": {
+        "diagnostics_ref": {
+          "diagnostics_version": "starlab.evaluation_diagnostics.v1",
+          "entrant_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b"
+        },
+        "suite_ref": {
+          "subject_id": "m56_heuristic_b",
+          "subject_kind": "heuristic",
+          "suite_id": "starlab.heuristic_baseline_suite.m56.v1.min",
+          "suite_version": "starlab.heuristic_baseline_suite.v1"
+        },
+        "tournament_ref": {
+          "entrant_id": "starlab.heuristic_baseline_suite.m56.v1.min::m56_heuristic_b",
+          "standing_rank": 1,
+          "tournament_version": "starlab.evaluation_tournament.v1"
+        }
+      },
+      "failure_views": [],
+      "losses": 0,
+      "primary_metric": 7,
+      "primary_tiebreak_scalar": 7.0,
+      "standing_rank": 1,
+      "subject_id": "m56_heuristic_b",
+      "subject_kind": "heuristic",
+      "suite_id": "starlab.heuristic_baseline_suite.m56.v1.min",
+      "tournament_points": 1.0,
+      "wins": 1
+    },
+    {
+      "draws": 0,
+      "entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a",
+      "evidence_refs": {
+        "diagnostics_ref": {
+          "diagnostics_version": "starlab.evaluation_diagnostics.v1",
+          "entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a"
+        },
+        "suite_ref": {
+          "subject_id": "m56_scripted_a",
+          "subject_kind": "scripted",
+          "suite_id": "starlab.scripted_baseline_suite.m56.v1.min",
+          "suite_version": "starlab.scripted_baseline_suite.v1"
+        },
+        "tournament_ref": {
+          "entrant_id": "starlab.scripted_baseline_suite.m56.v1.min::m56_scripted_a",
+          "standing_rank": 2,
+          "tournament_version": "starlab.evaluation_tournament.v1"
+        }
+      },
+      "failure_views": [
+        {
+          "failure_view_id": "starlab.m25.failure_view.lowest_points_entrant",
+          "is_present": true,
+          "summary": "Entrant is among those with the lowest tournament points.",
+          "supporting_standing_context": {
+            "bucket": "lowest_points_entrants"
+          }
+        },
+        {
+          "failure_view_id": "starlab.m25.failure_view.zero_win_entrant",
+          "is_present": true,
+          "summary": "Entrant has zero wins under the governed M23 fixture-only tournament.",
+          "supporting_standing_context": {
+            "bucket": "zero_win_entrants"
+          }
+        }
+      ],
+      "losses": 1,
+      "primary_metric": 5,
+      "primary_tiebreak_scalar": 5.0,
+      "standing_rank": 2,
+      "subject_id": "m56_scripted_wrong",
+      "subject_kind": "scripted",
+      "suite_id": "starlab.scripted_baseline_suite.m56.v1.min",
+      "tournament_points": 0.0,
+      "wins": 0
+    }
+  ],
+  "evidence_pack_version": "starlab.baseline_evidence_pack.v1",
+  "non_claims": [
+    "starlab.m25.pack_non_claim.not_benchmark_integrity",
+    "starlab.m25.pack_non_claim.not_leaderboard_validity_beyond_upstream",
+    "starlab.m25.pack_non_claim.not_live_sc2_or_replay_execution",
+    "starlab.m25.pack_non_claim.not_m26_imitation_or_learning",
+    "starlab.m25.pack_non_claim.not_new_benchmark_semantics",
+    "starlab.m25.pack_non_claim.not_new_diagnostics_or_scoring",
+    "starlab.m25.pack_non_claim.not_raw_replay_or_archive_packaging",
+    "starlab.m25.pack_non_claim.not_replay_execution_equivalence"
+  ],
+  "suite_sha256s": [
+    "324a6ca76a920f385acb7c86f4294c8b609b4598bfbb7c0865db37ab6a4a1244",
+    "a963b060a6861129d88173c47d1eff99b017489c27abc606c1afdcb7a19e0fe2"
+  ],
+  "tournament_sha256": "5c52a4c015216146b2cfe1c85db0c47e21b1efdab091ec6c26e459134ba6852f",
+  "warnings": [
+    "starlab.m25.warning.fixture_only_evidence_packaging_layer"
+  ]
+}

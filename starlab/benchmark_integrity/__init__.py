@@ -1,4 +1,4 @@
-"""Benchmark integrity charter and split-governance controls (Phase VII — M55 charter only)."""
+"""Benchmark integrity charter (M55) and bounded evidence / gates (M56) — Phase VII."""
 
 from __future__ import annotations
 
