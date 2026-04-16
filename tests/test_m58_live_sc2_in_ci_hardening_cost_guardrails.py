@@ -252,14 +252,8 @@ def test_governance_ledger_m58_m57_m59() -> None:
     assert "m57" in sec11.lower() and "closed" in sec11.lower()
     assert "m59" in sec11.lower() and "closed" in sec11.lower()
     assert "m60" in sec11.lower() and "closed" in sec11.lower()
-    assert "m61" in sec11.lower() and (
-        "stub" in sec11.lower()
-        or "planned" in sec11.lower()
-        or "merge pending" in sec11.lower()
-        or "in pr" in sec11.lower()
-        or "pending" in sec11.lower()
-        or "machinery" in sec11.lower()
-    )
+    assert "m61" in sec11.lower() and "closed" in sec11.lower()
+    assert "ready_within_scope" in sec11.lower()
     assert "live_sc2_in_ci" in text.lower() or "live sc2" in text.lower()
     assert "merge" in text.lower() and "live" in text.lower()
 

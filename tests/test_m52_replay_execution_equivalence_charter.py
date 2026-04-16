@@ -64,6 +64,8 @@ def test_ledger_has_phase_vii_and_milestone_rows_m52_m61() -> None:
     ):
         line = next(line for line in sec.splitlines() if line.strip().startswith(f"| {mid} |"))
         assert frag in line
+    m61_line = next(line for line in sec.splitlines() if line.strip().startswith("| M61 |"))
+    assert "Complete" in m61_line and "SC2 Foundation Release Lock" in m61_line
 
 
 def test_intent_map_includes_m52_m61() -> None:
