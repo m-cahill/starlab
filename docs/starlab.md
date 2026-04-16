@@ -50,10 +50,10 @@ This table is a **navigation aid** only. Authoritative milestone narrative, CI r
 | ----- | ------------------------ |
 | Program arc | **62 milestones (M00–M61)** — **all closed** on `main`; **M61** completes the planned **v1** foundation-completion arc (see §7). |
 | Last closed milestone (v1 arc) | **M61** — SC2 foundation release lock & v1 proof pack (merge + operator-local **`ready_within_scope`** evidence; see §11 / §18). |
-| Last closed milestone (post-v1) | **PV1-M00** — Post-v1 Industrial Campaign Charter & Success Criteria — **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73); merge commit `77118675a6f9f76e7cd466269c8d2a19ace3552f`). **Governance-only**; **does not** open **PV1-M01**–**M04** (see §11). |
+| Last closed milestone (post-v1) | **PV1-M00** — Post-v1 Industrial Campaign Charter & Success Criteria — **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73); merge commit `77118675a6f9f76e7cd466269c8d2a19ace3552f`). **Governance-only**; that merge **did not** open **PV1-M02**–**M04** (each opens only under a separate charter — **PV1-M01** is opened separately; see §11). |
 | Post-v1 (PV1) | **PV1 — Long Industrial Campaign & Scaling Evidence** — **rechartered** post-v1 phase (**not** “Phase VIII” of v1). Public roadmap table: **Post-v1 (PV1)** section (below §7). **v1** arc **M00–M61** remains **closed** and **historical**. |
-| Current milestone | **None** — **PV1-M00** **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73)); **PV1-M01**–**M04** remain **roadmap placeholders** only (**not** opened). **v1** milestones **M00–M61** remain **closed** — **no** **M62**. |
-| Next planned follow-on | **PV1 roadmap** — **PV1-M01**–**M04** are **placeholders** (**planned** / **optional** / **not yet opened**) until explicitly opened; see **Post-v1 (PV1)** below §7. Separately, **v2** directions (**multi-game**, **AURORA/audio**, broader productization) in `docs/starlab-vision.md` remain **outside** the closed **M00–M61** arc unless **separately** rechartered. |
+| Current milestone | **PV1-M01** — Campaign Observability & Checkpoint Discipline — **open** (pre-execution tooling milestone; **not** Tranche A campaign execution evidence); **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`**. **PV1-M02**–**PV1-M04** remain **not opened** unless separately chartered. **v1** milestones **M00–M61** remain **closed** — **no** **M62**. |
+| Next planned follow-on | After **PV1-M01** closeout: **PV1-M02** — Tranche A Execution Evidence — **planned / not yet opened** until explicitly chartered; **PV1-M03** / **PV1-M04** remain placeholders. **v2** directions in `docs/starlab-vision.md` remain **outside** the closed **M00–M61** arc unless **separately** rechartered. |
 | Phase VI pipeline (compact) | **M40** contract → **M41** flat training run → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL → **M46** bounded live `final_status` / `sc2_game_result` semantics → **M47** bootstrap episode distinctness / operator ergonomics → **M48** M42 contract-path alignment (**closed** on `main`) → **M49** full local campaign charter + preflight (**closed** on `main`) → **M50** hidden rollout execution + supervision (**closed** on `main`) → **M51** post-bootstrap phase orchestration (**closed** on `main`) — **Phase VI complete** on `main`. |
 | Phase VII pipeline (compact) | **M52**–**M61** — **all closed** on `main` — trust, equivalence, benchmark integrity, live SC2-in-CI posture, ladder/public evaluation protocol, audit hardening, **v1 release lock** (**M61** operator-local **`ready_within_scope`**) — see §6; **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** merge-gate live SC2; **not** ladder/public performance proof. |
 | Offline artifact → local runtime (Phase VI scan) | **M40** contract → **M41** flat training → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL |
@@ -198,7 +198,7 @@ Compact index of **primary** governed JSON contracts and the **strongest allowed
 5. Read governance docs: `docs/public_private_boundary.md`, `docs/replay_data_provenance.md`, `docs/rights_register.md`, `docs/branding_and_naming.md`, `docs/deployment/deployment_posture.md`, `docs/runtime/sc2_runtime_surface.md`, `docs/runtime/environment_lock.md`, `docs/runtime/match_execution_harness.md` (M02 proof surface), `docs/runtime/run_identity_lineage_seed.md` (M03 run identity / lineage seed contract), `docs/runtime/replay_binding.md` (M04 replay binding contract), `docs/runtime/canonical_run_artifact_v0.md` (M05 canonical run package boundary), `docs/runtime/environment_drift_smoke_matrix.md` (M06 environment drift / smoke matrix contract), `docs/runtime/replay_intake_policy.md` (M07 replay intake / provenance gate), `docs/runtime/replay_parser_substrate.md` (M08 replay parser substrate contract), `docs/runtime/replay_metadata_extraction.md` (M09 replay metadata extraction contract), `docs/runtime/replay_timeline_event_extraction.md` (M10 replay timeline / event extraction contract), `docs/runtime/replay_build_order_economy_extraction.md` (M11 build-order / economy contract), `docs/runtime/replay_combat_scouting_visibility_extraction.md` (M12 combat / scouting / visibility contract), and `docs/runtime/replay_slice_generation.md` (M13 replay slice definitions contract), and `docs/runtime/replay_bundle_lineage_contract.md` (M14 replay bundle / lineage packaging contract), and `docs/runtime/canonical_state_schema_v1.md` (M15 canonical state schema contract), and `docs/runtime/canonical_state_pipeline_v1.md` (M16 canonical state pipeline contract), and `docs/runtime/observation_surface_contract_v1.md` (M17 observation surface contract), and `docs/runtime/perceptual_bridge_prototype_v1.md` (M18 perceptual bridge prototype contract), and `docs/runtime/observation_reconciliation_audit_v1.md` (M19 cross-mode reconciliation audit contract), and `docs/runtime/benchmark_contract_scorecard_v1.md` (M20 benchmark contract + scorecard contract), and `docs/runtime/scripted_baseline_suite_v1.md` (M21 scripted baseline suite contract), and `docs/runtime/heuristic_baseline_suite_v1.md` (M22 heuristic baseline suite contract), and `docs/runtime/evaluation_runner_tournament_harness_v1.md` (M23 evaluation runner + tournament harness contract), and `docs/runtime/evaluation_diagnostics_failure_views_v1.md` (M24 evaluation diagnostics + failure views contract), and `docs/runtime/baseline_evidence_pack_v1.md` (M25 baseline evidence pack contract), and `docs/runtime/replay_training_dataset_v1.md` (M26 replay training dataset contract), and `docs/runtime/replay_imitation_baseline_v1.md` (M27 replay imitation baseline contract), and `docs/runtime/learned_agent_evaluation_harness_v1.md` (M28 learned-agent evaluation harness contract), and `docs/runtime/hierarchical_agent_interface_v1.md` (M29 hierarchical agent interface contract), and `docs/runtime/replay_hierarchical_imitation_agent_v1.md` (M30 replay hierarchical imitation agent contract), and `docs/runtime/replay_explorer_surface_v1.md` (M31 replay explorer / operator evidence surface contract), and `docs/runtime/public_flagship_proof_pack_v1.md` (M39 public flagship proof pack contract), and `docs/runtime/agent_training_program_contract_v1.md` (M40 agent training program contract), and `docs/runtime/replay_imitation_training_pipeline_v1.md` (M41 replay-imitation training pipeline contract), and `docs/runtime/learned_agent_comparison_harness_v1.md` (M42 learned-agent comparison harness contract), and `docs/runtime/hierarchical_training_pipeline_v1.md` (M43 hierarchical training pipeline contract), and `docs/runtime/local_live_play_validation_harness_v1.md` (M44 local live-play validation harness contract), and `docs/runtime/self_play_rl_bootstrap_v1.md` (M45 self-play / RL bootstrap contract), and `docs/runtime/full_local_training_campaign_v1.md` (M49 full local campaign charter), and `docs/runtime/industrial_hidden_rollout_mode_v1.md` (M50 industrial hidden rollout contract), and `docs/runtime/replay_execution_equivalence_charter_v1.md` (M52 replay↔execution equivalence charter), and `docs/runtime/replay_execution_equivalence_evidence_surface_v1.md` (M53 replay↔execution equivalence evidence surface), and `docs/runtime/replay_execution_equivalence_audit_acceptance_gates_v1.md` (M54 replay↔execution equivalence audit / acceptance gates), and `docs/runtime/benchmark_integrity_charter_v1.md` (M55 benchmark integrity charter), and `docs/runtime/benchmark_integrity_evidence_reproducibility_gates_v1.md` (M56 benchmark integrity evidence + reproducibility gates), and `docs/runtime/live_sc2_in_ci_charter_controlled_runner_v1.md` (M57 live SC2 in CI charter / controlled runner), and `docs/runtime/live_sc2_in_ci_hardening_cost_guardrails_v1.md` (M58 live SC2 in CI hardening + cost guardrails), and `docs/runtime/ladder_public_evaluation_protocol_evidence_surface_v1.md` (M59 ladder/public evaluation protocol & evidence surface), and `docs/runtime/ci_tiering_field_test_readiness_v1.md` (M33 CI tiering + field-test readiness contract).  
 6. Treat this document as the public-facing source of truth and update it at every milestone closeout.  
 7. Local testing is expected to use an RTX 5090 Blackwell where relevant.  
-8. After the closed **v1** arc (**M00–M61**), read **Post-v1 (PV1) — Long Industrial Campaign & Scaling Evidence** (below §7) for the **PV1** roadmap — **not** a continuation of v1 milestone numbering (**no M62**).
+8. After the closed **v1** arc (**M00–M61**), read **Post-v1 (PV1) — Long Industrial Campaign & Scaling Evidence** (below §7) for the **PV1** roadmap — **not** a continuation of v1 milestone numbering (**no M62**). For **inspection-only** helpers over `out/training_campaigns/<campaign_id>/` trees (checkpoint receipts + observability index), read **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`** — **not** a substitute for operator execution evidence.
 
 **Post-M39 training roadmap (governance):** Phase VI was rechartered to **M40**–**M45** — charter (**M40**), then replay-imitation training, learned-agent comparison, hierarchical training, local live-play validation, and self-play / RL bootstrap — see §6–§8. Former Phase VI ideas (**SC2 Substrate Review & Expansion Decision**; **Platform Boundary Review & Multi-Environment Charter**) are **deferred beyond the current active arc** (§19). **Phase VI integrated test campaign** follows **M45** closeout — framed as post-M45 follow-on in `docs/diligence/phase_vi_integrated_test_campaign.md`, **not** as an earlier-milestone proof obligation.
 
@@ -583,14 +583,23 @@ Planned program arc (**62 milestones**, **M00**–**M61**) — **all closed** on
 | Milestone | Title | Status | Notes |
 | --- | --- | --- | --- |
 | `PV1-M00` | Post-v1 Industrial Campaign Charter & Success Criteria | **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73)) | Governance-first charter; locks threshold **shape**, tranche/checkpoint/evidence model — **not** numeric campaign commitments; **merge does not** open later PV1 rows |
-| `PV1-M01` | Campaign Observability & Checkpoint Discipline | **optional / not yet opened** | Open only if **PV1-M00** identifies a **real** tooling gap |
+| `PV1-M01` | Campaign Observability & Checkpoint Discipline | **open** (tooling milestone) | Deterministic **`tranche_checkpoint_receipt`** + **`campaign_observability_index`** helpers over existing M49/M50/M51 trees — **not** Tranche A execution; runtime **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`** |
 | `PV1-M02` | Tranche A Execution Evidence | **planned / not yet opened** | First substantive long-run tranche |
 | `PV1-M03` | Tranche B / Full-Run Completion Evidence | **planned / not yet opened** | Reaches operator-defined full-run threshold |
 | `PV1-M04` | Post-Campaign Analysis / Comparative Readout | **optional / not yet opened** | Only if post-run analysis is justified |
 
-**Roadmap disclaimer:** This table is **planning-only**. Rows **PV1-M01**–**PV1-M04** are **not** execution commitments, **not** merge or CI obligations, and **not** “approved” work packages until a milestone is **explicitly opened** and later **closed** under normal STARLAB governance.
+**Roadmap disclaimer:** This table is **planning-only** for rows not yet opened. Rows **PV1-M02**–**PV1-M04** are **not** execution commitments, **not** merge or CI obligations, and **not** “approved” work packages until **explicitly opened** and later **closed** under normal STARLAB governance.
 
-**Governance merge note:** Merging a **PV1-M00** governance change to `main` **does not** open **PV1-M01** or any later **PV1** milestone; each row opens only under a **separate** explicit decision and branch/PR.
+**Governance merge note:** Merging a **PV1-M00** governance change to `main` **did not** by itself open later **PV1** milestones; **PV1-M01** opens only under a **separate** explicit charter (this milestone).
+
+### PV1 evidence surfaces (PV1-M01 — inspection helpers)
+
+| Artifact(s) | Role |
+| --- | --- |
+| `tranche_checkpoint_receipt.json` / `tranche_checkpoint_receipt_report.json` | Bind a named **tranche** + **checkpoint** to discovered campaign paths; list **required** vs **missing** evidence classes; support operator pause/incomplete flags — **reference only** (`python -m starlab.training.emit_tranche_checkpoint_receipt`). |
+| `campaign_observability_index.json` / `campaign_observability_index_report.json` | One-pass **inventory** over an existing `out/training_campaigns/<campaign_id>/` tree (executions, phase receipts, replay bindings, watchable validations) — **reference only** (`python -m starlab.training.emit_campaign_observability_index`). |
+
+**Non-claims:** these artifacts **do not** fabricate execution evidence, **do not** prove a full-run threshold, and **do not** widen benchmark / equivalence / ladder / live-SC2 posture.
 
 ---
 
@@ -1042,11 +1051,19 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
+### PV1-M01 — Campaign Observability & Checkpoint Discipline — **open**
+
+**Post-v1 phase:** **PV1** — **not** “Phase VIII” of v1; milestone ids **`PV1-MNN`** (**not** **M62**). **v1** arc **M00–M61** remains **closed** on `main`.
+
+**Intent:** Pre-execution **tooling** only: deterministic **`tranche_checkpoint_receipt`** + **`campaign_observability_index`** inspection helpers over existing M49/M50/M51 campaign trees (`starlab.training` emitters); runtime **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`**. **Does not** execute campaigns, **does not** constitute Tranche A evidence, **does not** fabricate missing receipts.
+
+**Non-claims (PV1-M01):** **not** benchmark integrity; **not** replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as default merge norm; **not** full-run threshold satisfaction; **not** a substitute for operator-local execution.
+
+**Next substantive milestone (if authorized):** **PV1-M02** — Tranche A Execution Evidence — **not** opened by this milestone.
+
 ### PV1-M00 — Post-v1 Industrial Campaign Charter & Success Criteria — **closed**
 
 **Closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73); merge commit `77118675a6f9f76e7cd466269c8d2a19ace3552f` merged **2026-04-16T20:20:27Z** (UTC); **final PR head** `2f80cfa9c1d329b520ebb99280bb12c21bfaa81d`; **authoritative PR-head CI** [`24531908110`](https://github.com/m-cahill/starlab/actions/runs/24531908110) — **success**; **merge-boundary `main` CI** [`24532016096`](https://github.com/m-cahill/starlab/actions/runs/24532016096) on merge commit `77118675…` — **success**). Branch `pv1-m00-charter-post-v1-industrial-campaign` **retained** on `origin` at closeout (optional delete).
-
-**Post-v1 phase:** **PV1 — Long Industrial Campaign & Scaling Evidence** — **not** “Phase VIII” of v1; milestone ids **`PV1-MNN`** (**not** **M62**). **v1** arc **M00–M61** remains **closed** on `main`.
 
 **Intent (delivered):** **PV1** charter, full-run threshold **shape**, tranche model, checkpoint cadence, evidence classes, operator gates, explicit **non-claims** — **no** long-run campaign execution, **no** new benchmark/equivalence/ladder/live-CI product claims in this milestone.
 
@@ -1054,7 +1071,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M00):** **not** universal benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as default merge norm; **not** multi-environment generalization.
 
-**Post-merge:** **PV1-M01** and **PV1-M02** were **not** opened by this merge; roadmap rows **PV1-M01**–**M04** remain **placeholders** until explicitly chartered.
+**Post-merge:** **PV1-M02** was **not** opened by **PV1-M00**; **PV1-M01**–**M04** roadmap rows were placeholders until **PV1-M01** was separately chartered.
 
 ### M61 — SC2 foundation release lock & v1 proof pack — **closed**
 
@@ -2336,6 +2353,13 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-16 — **PV1-M01** Campaign Observability & Checkpoint Discipline — tooling (pre-merge)
+
+- **PV1-M01** opens as a **narrow pre-execution tooling** milestone (**not** Tranche A execution evidence).
+- **In-repo:** `starlab.training.emit_tranche_checkpoint_receipt`, `starlab.training.emit_campaign_observability_index`; runtime `docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`; fixture tests under `tests/fixtures/pv1_m01/`.
+- **Public ledger:** **Post-v1 (PV1)** roadmap + **PV1 evidence surfaces** subtable; §11 **PV1-M01** stub; quick-scan **current milestone** → **PV1-M01** while this milestone is open on the integration branch.
+- **Explicit non-claims:** **not** benchmark integrity; **not** replay↔execution equivalence; **not** ladder/public proof; **not** merge-gate live SC2; inspection helpers **do not** fabricate missing campaign artifacts.
 
 ### 2026-04-16 — **PV1-M00** merged to `main` (PR #73) + merge-boundary CI
 
