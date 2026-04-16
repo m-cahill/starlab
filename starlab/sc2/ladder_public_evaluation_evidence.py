@@ -341,8 +341,7 @@ def ladder_public_evaluation_evidence_bundle(
                 "Descriptive aggregates only — no significance, confidence, or merge-bar language."
             ),
             "explicit_non_claim": (
-                "This report does not prove benchmark integrity or "
-                "replay↔execution equivalence."
+                "This report does not prove benchmark integrity or replay↔execution equivalence."
             ),
         },
     }
