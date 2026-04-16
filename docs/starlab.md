@@ -50,10 +50,10 @@ This table is a **navigation aid** only. Authoritative milestone narrative, CI r
 | ----- | ------------------------ |
 | Program arc | **62 milestones (M00–M61)** — **all closed** on `main`; **M61** completes the planned **v1** foundation-completion arc (see §7). |
 | Last closed milestone (v1 arc) | **M61** — SC2 foundation release lock & v1 proof pack (merge + operator-local **`ready_within_scope`** evidence; see §11 / §18). |
-| Last closed milestone (post-v1) | **PV1-M00** — Post-v1 Industrial Campaign Charter & Success Criteria — **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73); merge commit `77118675a6f9f76e7cd466269c8d2a19ace3552f`). **Governance-only**; that merge **did not** open **PV1-M02**–**M04** (each opens only under a separate charter — **PV1-M01** is opened separately; see §11). |
+| Last closed milestone (post-v1) | **PV1-M01** — Campaign Observability & Checkpoint Discipline — **closed** on `main` ([PR #74](https://github.com/m-cahill/starlab/pull/74); merge commit `a0cb05d96c1e57b58992efd07c4bd841be539aba`). Pre-execution **tooling / inspection helpers only** — **not** Tranche A execution; **PV1-M02**–**M04** remain **not opened** (see §11). Prior: **PV1-M00** — **closed** ([PR #73](https://github.com/m-cahill/starlab/pull/73)). |
 | Post-v1 (PV1) | **PV1 — Long Industrial Campaign & Scaling Evidence** — **rechartered** post-v1 phase (**not** “Phase VIII” of v1). Public roadmap table: **Post-v1 (PV1)** section (below §7). **v1** arc **M00–M61** remains **closed** and **historical**. |
-| Current milestone | **PV1-M01** — Campaign Observability & Checkpoint Discipline — **open** (pre-execution tooling milestone; **not** Tranche A campaign execution evidence); **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`**. **PV1-M02**–**PV1-M04** remain **not opened** unless separately chartered. **v1** milestones **M00–M61** remain **closed** — **no** **M62**. |
-| Next planned follow-on | After **PV1-M01** closeout: **PV1-M02** — Tranche A Execution Evidence — **planned / not yet opened** until explicitly chartered; **PV1-M03** / **PV1-M04** remain placeholders. **v2** directions in `docs/starlab-vision.md` remain **outside** the closed **M00–M61** arc unless **separately** rechartered. |
+| Current milestone | **None** — **PV1-M01** **closed** on `main` ([PR #74](https://github.com/m-cahill/starlab/pull/74)); **PV1-M02**–**PV1-M04** remain **roadmap placeholders** only (**not** opened). **v1** milestones **M00–M61** remain **closed** — **no** **M62**. |
+| Next planned follow-on | **PV1** roadmap — **PV1-M02** — Tranche A Execution Evidence — **planned / not yet opened** until explicitly chartered; **PV1-M03** / **PV1-M04** remain placeholders. **v2** directions in `docs/starlab-vision.md` remain **outside** the closed **M00–M61** arc unless **separately** rechartered. |
 | Phase VI pipeline (compact) | **M40** contract → **M41** flat training run → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL → **M46** bounded live `final_status` / `sc2_game_result` semantics → **M47** bootstrap episode distinctness / operator ergonomics → **M48** M42 contract-path alignment (**closed** on `main`) → **M49** full local campaign charter + preflight (**closed** on `main`) → **M50** hidden rollout execution + supervision (**closed** on `main`) → **M51** post-bootstrap phase orchestration (**closed** on `main`) — **Phase VI complete** on `main`. |
 | Phase VII pipeline (compact) | **M52**–**M61** — **all closed** on `main` — trust, equivalence, benchmark integrity, live SC2-in-CI posture, ladder/public evaluation protocol, audit hardening, **v1 release lock** (**M61** operator-local **`ready_within_scope`**) — see §6; **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** merge-gate live SC2; **not** ladder/public performance proof. |
 | Offline artifact → local runtime (Phase VI scan) | **M40** contract → **M41** flat training → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL |
@@ -583,14 +583,14 @@ Planned program arc (**62 milestones**, **M00**–**M61**) — **all closed** on
 | Milestone | Title | Status | Notes |
 | --- | --- | --- | --- |
 | `PV1-M00` | Post-v1 Industrial Campaign Charter & Success Criteria | **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73)) | Governance-first charter; locks threshold **shape**, tranche/checkpoint/evidence model — **not** numeric campaign commitments; **merge does not** open later PV1 rows |
-| `PV1-M01` | Campaign Observability & Checkpoint Discipline | **open** (tooling milestone) | Deterministic **`tranche_checkpoint_receipt`** + **`campaign_observability_index`** helpers over existing M49/M50/M51 trees — **not** Tranche A execution; runtime **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`** |
+| `PV1-M01` | Campaign Observability & Checkpoint Discipline | **closed** on `main` ([PR #74](https://github.com/m-cahill/starlab/pull/74)) | Deterministic **`tranche_checkpoint_receipt`** + **`campaign_observability_index`** helpers — **inspection/reference only**; runtime **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`** — **not** Tranche A execution |
 | `PV1-M02` | Tranche A Execution Evidence | **planned / not yet opened** | First substantive long-run tranche |
 | `PV1-M03` | Tranche B / Full-Run Completion Evidence | **planned / not yet opened** | Reaches operator-defined full-run threshold |
 | `PV1-M04` | Post-Campaign Analysis / Comparative Readout | **optional / not yet opened** | Only if post-run analysis is justified |
 
 **Roadmap disclaimer:** This table is **planning-only** for rows not yet opened. Rows **PV1-M02**–**PV1-M04** are **not** execution commitments, **not** merge or CI obligations, and **not** “approved” work packages until **explicitly opened** and later **closed** under normal STARLAB governance.
 
-**Governance merge note:** Merging a **PV1-M00** governance change to `main` **did not** by itself open later **PV1** milestones; **PV1-M01** opens only under a **separate** explicit charter (this milestone).
+**Governance merge note:** **PV1-M00** and **PV1-M01** each merged under **separate** charters; **PV1-M02**–**M04** open only under **explicit** future decisions + PRs (**not** implied by prior merges).
 
 ### PV1 evidence surfaces (PV1-M01 — inspection helpers)
 
@@ -1051,11 +1051,15 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-### PV1-M01 — Campaign Observability & Checkpoint Discipline — **open**
+**Current (post-v1):** **None** — **PV1-M01** is **closed** on `main` ([PR #74](https://github.com/m-cahill/starlab/pull/74)). **PV1-M02**–**M04** are **not** opened unless separately chartered.
+
+### PV1-M01 — Campaign Observability & Checkpoint Discipline — **closed**
+
+**Closed** on `main` ([PR #74](https://github.com/m-cahill/starlab/pull/74); merge commit `a0cb05d96c1e57b58992efd07c4bd841be539aba` merged **2026-04-16T21:37:31Z** (UTC); **final PR head** `dfe1e7761eb2155c3fc6eb5604f8b40c5337a4c5`; **authoritative PR-head CI** [`24535255531`](https://github.com/m-cahill/starlab/actions/runs/24535255531) — **success**; **merge-boundary `main` CI** [`24535324891`](https://github.com/m-cahill/starlab/actions/runs/24535324891) on merge commit `a0cb05d…` — **success**).
 
 **Post-v1 phase:** **PV1** — **not** “Phase VIII” of v1; milestone ids **`PV1-MNN`** (**not** **M62**). **v1** arc **M00–M61** remains **closed** on `main`.
 
-**Intent:** Pre-execution **tooling** only: deterministic **`tranche_checkpoint_receipt`** + **`campaign_observability_index`** inspection helpers over existing M49/M50/M51 campaign trees (`starlab.training` emitters); runtime **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`**. **Does not** execute campaigns, **does not** constitute Tranche A evidence, **does not** fabricate missing receipts.
+**Intent (delivered):** Pre-execution **tooling** only: deterministic **`tranche_checkpoint_receipt`** + **`campaign_observability_index`** inspection helpers over existing M49/M50/M51 campaign trees (`starlab.training` emitters); runtime **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`**; fixture tests — **does not** execute campaigns, **does not** constitute Tranche A evidence, **does not** fabricate missing receipts.
 
 **Non-claims (PV1-M01):** **not** benchmark integrity; **not** replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as default merge norm; **not** full-run threshold satisfaction; **not** a substitute for operator-local execution.
 
@@ -1071,7 +1075,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M00):** **not** universal benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as default merge norm; **not** multi-environment generalization.
 
-**Post-merge:** **PV1-M02** was **not** opened by **PV1-M00**; **PV1-M01**–**M04** roadmap rows were placeholders until **PV1-M01** was separately chartered.
+**Post-merge:** **PV1-M02** was **not** opened by **PV1-M00**; **PV1-M01** was chartered and closed separately ([PR #74](https://github.com/m-cahill/starlab/pull/74)).
 
 ### M61 — SC2 foundation release lock & v1 proof pack — **closed**
 
@@ -2353,6 +2357,13 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-16 — **PV1-M01** merged to `main` (PR #74) + merge-boundary CI + ledger closeout
+
+- **Merged** [PR #74](https://github.com/m-cahill/starlab/pull/74) to `main` at **2026-04-16T21:37:31Z** (UTC); merge commit `a0cb05d96c1e57b58992efd07c4bd841be539aba`; **final PR head** `dfe1e7761eb2155c3fc6eb5604f8b40c5337a4c5`; **authoritative PR-head CI** [`24535255531`](https://github.com/m-cahill/starlab/actions/runs/24535255531) — **success**; **merge-boundary `main` CI** [`24535324891`](https://github.com/m-cahill/starlab/actions/runs/24535324891) on merge commit `a0cb05d…` — **success**.
+- **Delivered:** inspection/reference emitters + runtime contract + fixtures — **not** campaign execution, **not** Tranche A evidence.
+- **Post-closeout ledger:** §1 quick scan + §23 + §11 — **PV1-M01** **closed**; **current milestone** → **None**; **PV1-M02**–**M04** **not opened**; private **`PV1-M01_summary.md`** / **`PV1-M01_audit.md`** / **`PV1-M01_run1.md`** under `docs/company_secrets/milestones/post-v1/PV1-M01/`.
+- **Not merge authority:** ledger-only follow-up PR CI — cite separately from merge-boundary [`24535324891`](https://github.com/m-cahill/starlab/actions/runs/24535324891) on `a0cb05d…` when recording narrative-only alignment.
 
 ### 2026-04-16 — **PV1-M01** Campaign Observability & Checkpoint Discipline — tooling (pre-merge)
 
