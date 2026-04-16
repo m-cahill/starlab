@@ -1,0 +1,6 @@
+{
+  "campaign_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "execution_id": "exec001",
+  "execution_status": "fixture_only",
+  "hidden_rollout_campaign_run_version": "starlab.hidden_rollout_campaign_run.v2"
+}

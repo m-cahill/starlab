@@ -96,12 +96,16 @@ def test_ledger_post_v1_pv1_section() -> None:
     assert "## Post-v1 (PV1) — Long Industrial Campaign & Scaling Evidence" in text
     assert "| `PV1-M00` |" in text
     assert "### PV1-M00 — Post-v1 Industrial Campaign Charter & Success Criteria" in text
+    assert "### PV1 evidence surfaces (PV1-M01 — inspection helpers)" in text
+    assert "tranche_checkpoint_receipt.json" in text
+    assert "campaign_observability_index.json" in text
 
 
 @pytest.mark.smoke
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "### PV1-M01 — Campaign Observability & Checkpoint Discipline" in section
     assert "PV1-M00" in section
     assert "M47" in section
     assert "M50" in section

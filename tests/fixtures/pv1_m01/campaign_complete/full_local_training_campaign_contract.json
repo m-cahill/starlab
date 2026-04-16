@@ -1,0 +1,8 @@
+{
+  "authorization_posture": {
+    "status": "planned_charter_only"
+  },
+  "campaign_id": "pv1_m01_complete_fixture",
+  "campaign_sha256": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+  "campaign_version": "starlab.full_local_training_campaign_contract.v1"
+}
