@@ -1,6 +1,10 @@
 # Milestone Audit — PV1-M00: Post-v1 Industrial Campaign Charter & Success Criteria
 
-**Scope:** Governance-only recharter; **no** runtime expansion.
+**Audit mode:** **DELTA AUDIT** (governance milestone)  
+**Scope:** Documentation + ledger + minimal tests — **no** runtime delta.
+
+**current_sha (merge closeout):** `77118675a6f9f76e7cd466269c8d2a19ace3552f` (merge); PR head `2f80cfa9c1d329b520ebb99280bb12c21bfaa81d`  
+**CI:** Authoritative PR-head [`24531908110`](https://github.com/m-cahill/starlab/actions/runs/24531908110) — **success**; merge-boundary `main` [`24532016096`](https://github.com/m-cahill/starlab/actions/runs/24532016096) — **success**
 
 ---
 
@@ -8,23 +12,22 @@
 
 | Criterion | Score | Notes |
 | --- | ---: | --- |
-| Bounded-claims discipline | 5 | Explicit non-claims; no new benchmark/equivalence/ladder/live-CI claims; prior `out/` work not treated as proof of PV1 model. |
-| Ledger clarity | 5 | **Post-v1 (PV1)** section + quick-scan navigation; **no** “Phase VIII” of v1; **no** **M62**; roadmap statuses explicit (**planned** / **optional** / **current**). |
-| Milestone sizing | 5 | Doc/governance + minimal governance test; **no** product surface change. |
-| CI truthfulness | 5 | Governance tests align with ledger; **no** fake execution evidence. |
-| Readiness to open next milestone | 4 | Charter + roadmap ready; **PV1-M01** vs **PV1-M02** gate is operator-decided; numeric thresholds still TBD. |
+| Bounded-claims discipline | 5 | Non-claims explicit; **no** M62; **no** Phase VIII framing; prior `out/` not proof of PV1 model. |
+| Ledger clarity | 5 | Public roadmap self-sufficient; private notes non-authoritative. |
+| Milestone sizing | 5 | Governance-only; no product surface. |
+| CI truthfulness | 5 | PR-head + merge-boundary **main** green; governance tests match ledger. |
+| Readiness for next milestone | 5 | **PV1-M01** not opened; **PV1-M02** next substantive when authorized. |
 
-## Closeout decision (next milestone)
+## Closeout decision (post-merge)
 
-- **PV1-M00** merge **does not** auto-open **PV1-M01**, **PV1-M02**, or any other PV1 row.
-- **PV1-M01** is appropriate **only** after a **documented, concrete** tooling/observability gap (checkpoint discipline, campaign observability) — **none** was identified as mandatory in this governance-only pass.
-- **Recommendation:** keep **PV1-M01** **closed** until such a gap exists; next **substantive** execution milestone when authorized: **PV1-M02**.
+- **PV1-M00** merge **did not** open **PV1-M01**, **PV1-M02**, or any later **PV1** row.
+- **PV1-M01** remains **closed** — **no** mandatory tooling gap identified for this milestone.
+- **Recommendation:** Hold **PV1-M01** until a **documented** observability/checkpoint gap exists; next substantive opening: **PV1-M02** when authorized.
 
-## Residual risks
+## HIGH issues
 
-- Operators must **not** treat roadmap rows as approved work unless a milestone is **opened** explicitly.
-- Private `docs/company_secrets/**` must not become the **public** source of truth; `docs/starlab.md` remains authoritative for PV1 roadmap **status**.
+**None.**
 
 ## Verdict
 
-**PV1-M00** meets governance charter goals: **v1** arc (**M00–M61**) **closed** and **historical**; **PV1** **rechartered** as **`PV1-MNN`**; public roadmap self-sufficient; charter defines structure **without** overclaiming.
+**PV1-M00** is **closed** with audit-defensible CI evidence and ledger alignment. **PV1** roadmap rows after **PV1-M00** remain **unopened placeholders** until explicitly chartered.

@@ -49,9 +49,10 @@ This table is a **navigation aid** only. Authoritative milestone narrative, CI r
 | Topic | Position in this ledger |
 | ----- | ------------------------ |
 | Program arc | **62 milestones (M00–M61)** — **all closed** on `main`; **M61** completes the planned **v1** foundation-completion arc (see §7). |
-| Last closed milestone | **M61** — SC2 foundation release lock & v1 proof pack (merge + operator-local **`ready_within_scope`** evidence; see §11 / §18). |
+| Last closed milestone (v1 arc) | **M61** — SC2 foundation release lock & v1 proof pack (merge + operator-local **`ready_within_scope`** evidence; see §11 / §18). |
+| Last closed milestone (post-v1) | **PV1-M00** — Post-v1 Industrial Campaign Charter & Success Criteria — **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73); merge commit `77118675a6f9f76e7cd466269c8d2a19ace3552f`). **Governance-only**; **does not** open **PV1-M01**–**M04** (see §11). |
 | Post-v1 (PV1) | **PV1 — Long Industrial Campaign & Scaling Evidence** — **rechartered** post-v1 phase (**not** “Phase VIII” of v1). Public roadmap table: **Post-v1 (PV1)** section (below §7). **v1** arc **M00–M61** remains **closed** and **historical**. |
-| Current milestone | **PV1-M00** — Post-v1 Industrial Campaign Charter & Success Criteria — **current (governance)**; see §11 and **Post-v1 (PV1)** below §7. **v1** milestones **M00–M61** remain **closed** on `main` — **no** **M62**. |
+| Current milestone | **None** — **PV1-M00** **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73)); **PV1-M01**–**M04** remain **roadmap placeholders** only (**not** opened). **v1** milestones **M00–M61** remain **closed** — **no** **M62**. |
 | Next planned follow-on | **PV1 roadmap** — **PV1-M01**–**M04** are **placeholders** (**planned** / **optional** / **not yet opened**) until explicitly opened; see **Post-v1 (PV1)** below §7. Separately, **v2** directions (**multi-game**, **AURORA/audio**, broader productization) in `docs/starlab-vision.md` remain **outside** the closed **M00–M61** arc unless **separately** rechartered. |
 | Phase VI pipeline (compact) | **M40** contract → **M41** flat training run → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL → **M46** bounded live `final_status` / `sc2_game_result` semantics → **M47** bootstrap episode distinctness / operator ergonomics → **M48** M42 contract-path alignment (**closed** on `main`) → **M49** full local campaign charter + preflight (**closed** on `main`) → **M50** hidden rollout execution + supervision (**closed** on `main`) → **M51** post-bootstrap phase orchestration (**closed** on `main`) — **Phase VI complete** on `main`. |
 | Phase VII pipeline (compact) | **M52**–**M61** — **all closed** on `main` — trust, equivalence, benchmark integrity, live SC2-in-CI posture, ladder/public evaluation protocol, audit hardening, **v1 release lock** (**M61** operator-local **`ready_within_scope`**) — see §6; **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** merge-gate live SC2; **not** ladder/public performance proof. |
@@ -581,7 +582,7 @@ Planned program arc (**62 milestones**, **M00**–**M61**) — **all closed** on
 
 | Milestone | Title | Status | Notes |
 | --- | --- | --- | --- |
-| `PV1-M00` | Post-v1 Industrial Campaign Charter & Success Criteria | **current milestone** | Governance-first charter; locks threshold **shape**, tranche/checkpoint/evidence model — **not** numeric campaign commitments |
+| `PV1-M00` | Post-v1 Industrial Campaign Charter & Success Criteria | **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73)) | Governance-first charter; locks threshold **shape**, tranche/checkpoint/evidence model — **not** numeric campaign commitments; **merge does not** open later PV1 rows |
 | `PV1-M01` | Campaign Observability & Checkpoint Discipline | **optional / not yet opened** | Open only if **PV1-M00** identifies a **real** tooling gap |
 | `PV1-M02` | Tranche A Execution Evidence | **planned / not yet opened** | First substantive long-run tranche |
 | `PV1-M03` | Tranche B / Full-Run Completion Evidence | **planned / not yet opened** | Reaches operator-defined full-run threshold |
@@ -1041,15 +1042,19 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-### PV1-M00 — Post-v1 Industrial Campaign Charter & Success Criteria — **current (governance)**
+### PV1-M00 — Post-v1 Industrial Campaign Charter & Success Criteria — **closed**
+
+**Closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73); merge commit `77118675a6f9f76e7cd466269c8d2a19ace3552f` merged **2026-04-16T20:20:27Z** (UTC); **final PR head** `2f80cfa9c1d329b520ebb99280bb12c21bfaa81d`; **authoritative PR-head CI** [`24531908110`](https://github.com/m-cahill/starlab/actions/runs/24531908110) — **success**; **merge-boundary `main` CI** [`24532016096`](https://github.com/m-cahill/starlab/actions/runs/24532016096) on merge commit `77118675…` — **success**). Branch `pv1-m00-charter-post-v1-industrial-campaign` **retained** on `origin` at closeout (optional delete).
 
 **Post-v1 phase:** **PV1 — Long Industrial Campaign & Scaling Evidence** — **not** “Phase VIII” of v1; milestone ids **`PV1-MNN`** (**not** **M62**). **v1** arc **M00–M61** remains **closed** on `main`.
 
-**Intent:** Record the **PV1** charter, full-run threshold **shape**, tranche model, checkpoint cadence, evidence classes, operator gates, and explicit **non-claims** — **no** long-run campaign execution, **no** new benchmark/equivalence/ladder/live-CI claims.
+**Intent (delivered):** **PV1** charter, full-run threshold **shape**, tranche model, checkpoint cadence, evidence classes, operator gates, explicit **non-claims** — **no** long-run campaign execution, **no** new benchmark/equivalence/ladder/live-CI product claims in this milestone.
 
 **Artifacts:** Private charter and plan under `docs/company_secrets/milestones/post-v1/PV1-M00/` (local working surface — **not** public source of truth). Public roadmap and status: **Post-v1 (PV1)** section below §7 and quick-scan table.
 
 **Non-claims (PV1-M00):** **not** universal benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as default merge norm; **not** multi-environment generalization.
+
+**Post-merge:** **PV1-M01** and **PV1-M02** were **not** opened by this merge; roadmap rows **PV1-M01**–**M04** remain **placeholders** until explicitly chartered.
 
 ### M61 — SC2 foundation release lock & v1 proof pack — **closed**
 
@@ -2331,6 +2336,12 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-16 — **PV1-M00** merged to `main` (PR #73) + merge-boundary CI
+
+- **Merged** [PR #73](https://github.com/m-cahill/starlab/pull/73) to `main` at **2026-04-16T20:20:27Z** (UTC); merge commit `77118675a6f9f76e7cd466269c8d2a19ace3552f`; **final PR head** `2f80cfa9c1d329b520ebb99280bb12c21bfaa81d`; **authoritative PR-head CI** [`24531908110`](https://github.com/m-cahill/starlab/actions/runs/24531908110) — **success**; **merge-boundary `main` CI** [`24532016096`](https://github.com/m-cahill/starlab/actions/runs/24532016096) on merge commit `77118675…` — **success**.
+- **Post-merge:** **PV1-M01**–**M04** remain **roadmap placeholders** only (**not** opened by this merge).
+- **Not merge authority:** doc-only follow-up commits on `main` after this boundary — cite separately from [`24532016096`](https://github.com/m-cahill/starlab/actions/runs/24532016096) on `77118675…` when used as merge evidence.
 
 ### 2026-04-16 — **PV1-M00** Post-v1 Industrial Campaign Charter & Success Criteria — governance (charter milestone)
 

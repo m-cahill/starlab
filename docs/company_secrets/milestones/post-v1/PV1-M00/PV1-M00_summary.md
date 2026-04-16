@@ -1,35 +1,56 @@
 # Milestone Summary — PV1-M00: Post-v1 Industrial Campaign Charter & Success Criteria
 
 **Project:** STARLAB  
+**Phase:** Post-v1 (**PV1**) — **not** “Phase VIII” of v1  
 **Milestone:** PV1-M00 — Post-v1 Industrial Campaign Charter & Success Criteria  
-**Status:** Governance charter milestone (documentation + ledger)
+**Timeframe:** charter work **2026-04-16** (UTC); **merged** to `main` **2026-04-16T20:20:27Z** (UTC)  
+**Status:** **Closed** on `main`
+
+*(Aligned with `docs/company_secrets/prompts/summaryprompt.md` — factual, non-promotional.)*
 
 ---
 
-## What changed
+## 1. Milestone objective
 
-- **Public ledger (`docs/starlab.md`):** Added **Post-v1 (PV1)** section after the §7 milestone table; **Post-v1 (PV1)** quick-scan row + navigation; **Start Here** item 8; §11 **PV1-M00** entry; §23 changelog entry **PV1-M00**; **M00–M61** preserved as closed v1.
-- **Private milestone folder:** `docs/company_secrets/milestones/post-v1/PV1-M00/` seeded with `PV1-M00_plan.md`, `PV1-M00_charter.md`, `PV1-M00_toolcalls.md`.
-- **Tests:** `tests/test_governance_ci.py` — `test_ledger_post_v1_pv1_section`; §11 section check includes **PV1-M00**.
+Open the **post-v1** program line as **PV1** under **`PV1-MNN`**, record a **public** PV1 roadmap in **`docs/starlab.md`**, and capture a **private** charter (threshold **shape**, tranches, evidence, gates, non-claims) — **without** executing long industrial campaigns, **without** new benchmark/equivalence/ladder/live-CI claims, and **without** implying **M62** or a hidden continuation of **M00–M61**.
 
-## Where the phase was chartered
+---
 
-- **Canonical public roadmap:** `docs/starlab.md` — Post-v1 (PV1) section + roadmap table (**PV1-M00**–**M04** statuses).
-- **Canonical charter artifact (private):** `PV1-M00_charter.md` (full threshold shape, tranche model, evidence, gates, non-claims).
+## 2. Scope
 
-## What remains intentionally unopened
+### In scope (repo)
 
-- **PV1-M01**–**M04** — **not** opened; **planned** / **optional** only until explicitly chartered.
-- **Numeric full-run thresholds** — **TBD** in charter **Open operator-set values**; structure locked **without** invented numbers.
-- **PV1 tagging convention** — deferred (no new tag format in PV1-M00).
+- **`docs/starlab.md`:** Post-v1 (PV1) section, quick scan, Start Here item 8, §11 **PV1-M00**, §23 changelog, merge closeout alignment after PR merge.
+- **`tests/test_governance_ci.py`**, **`tests/test_m32_audit_closure.py`:** PV1 ledger guards; smoke count band.
+- **Private (local / optional commit):** `docs/company_secrets/milestones/post-v1/PV1-M00/` — plan, charter, summary, audit, `PV1-M00_run1.md`, `PV1-M00_toolcalls.md`.
 
-## Next milestone (explicit gate — not automatic)
+### Out of scope (explicit)
 
-Closing **PV1-M00** does **not** open any later PV1 milestone. Roadmap rows **PV1-M01**–**M04** stay **placeholders** until separately chartered.
+- **PV1-M01** / **PV1-M02** folders — **not** created.
+- Runtime/product code; widening claims; new **PV1** tag convention.
 
-- **PV1-M01** opens **only** if a **concrete** observability or checkpoint **tooling** gap is documented and justified (this closeout did **not** identify such a gap in-repo).
-- If **PV1-M01** is not opened, keep it **closed**; the next **substantive** opening would be **PV1-M02** (Tranche A Execution Evidence) when the operator **explicitly** authorizes that milestone on a follow-on branch.
+---
 
-## Tooling gap note (closeout)
+## 3. Evidence
 
-No new campaign observability or checkpoint **implementation** was required for PV1-M00; ledger and private charter only. See **`PV1-M00_plan.md`** §8 for the recorded assessment.
+| Item | Value |
+| --- | --- |
+| PR | [#73](https://github.com/m-cahill/starlab/pull/73) |
+| Merge commit | `77118675a6f9f76e7cd466269c8d2a19ace3552f` |
+| Final PR head | `2f80cfa9c1d329b520ebb99280bb12c21bfaa81d` |
+| Authoritative PR-head CI | [`24531908110`](https://github.com/m-cahill/starlab/actions/runs/24531908110) — **success** |
+| Merge-boundary `main` CI | [`24532016096`](https://github.com/m-cahill/starlab/actions/runs/24532016096) — **success** |
+
+---
+
+## 4. Post-merge state
+
+- **M00–M61** remain the **closed v1** arc.
+- **PV1-M00** is **closed** on `main`; **PV1-M01**–**M04** remain **roadmap placeholders** (**not** opened by the merge).
+- **PV1-M01** stays **closed** unless a **concrete** observability/checkpoint tooling gap is later documented; next **substantive** milestone when authorized: **PV1-M02**.
+
+---
+
+## 5. Closeout note
+
+Public ledger closeout commits after the merge boundary are **not** new product merge authority vs [`24532016096`](https://github.com/m-cahill/starlab/actions/runs/24532016096) on `77118675…` when recording narrative alignment.
