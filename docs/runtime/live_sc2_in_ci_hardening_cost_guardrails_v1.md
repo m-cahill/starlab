@@ -1,6 +1,6 @@
 # Live SC2 in CI — hardening & cost guardrails v1 (M58)
 
-**Status:** **M58** — product surface on `main` — hardens the **closed M57** bounded live-SC2-in-CI path — **not** global proof of live SC2 as a merge gate; **not** ladder/public evaluation (**M59**).
+**Status:** **M58** — **closed** on `main` — hardens the **closed M57** bounded live-SC2-in-CI path — **not** global proof of live SC2 as a merge gate; **not** ladder/public evaluation (**M59** stub). See `docs/starlab.md` §1 / §11 / §18 / §23 and tag **`v0.0.58-m58`** on merge commit `3a6f13910dc8056cb0d88161796dd5fe7888629d` ([PR #69](https://github.com/m-cahill/starlab/pull/69)).
 
 ## Purpose
 

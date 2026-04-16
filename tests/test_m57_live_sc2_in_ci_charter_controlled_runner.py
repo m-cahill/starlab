@@ -271,13 +271,14 @@ def test_ledger_m57_m58_m56_governance() -> None:
     assert "### M58" in text
     assert "### M56" in text
     assert "M56" in text and "closed" in text.lower()
-    assert "M58" in text
+    assert "M58" in text and "closed" in text.lower()
     assert "live_sc2_in_ci" in text or "live SC2" in text
     assert "not yet proved" in text.lower() or "not proved" in text.lower()
     assert "merge" in text.lower() and "live" in text.lower()
     sec11 = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "m57" in sec11.lower() and "m56" in sec11.lower() and "closed" in sec11.lower()
-    assert "m58" in sec11.lower()
+    assert "m58" in sec11.lower() and "closed" in sec11.lower()
+    assert "m59" in sec11.lower()
 
 
 def test_ledger_phase_vii_live_sc2_runner_profile_table() -> None:
