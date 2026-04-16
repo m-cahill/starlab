@@ -1,6 +1,8 @@
 # M60 — v2 readiness audit findings (concise)
 
-**Authority:** Subordinate to `docs/starlab.md`. This is a **short mapping** of older audit pressure points to **current `main`**, not a second full audit.
+**Status:** **Closed** on `main` (2026-04-16). [PR #71](https://github.com/m-cahill/starlab/pull/71). Tag **`v0.0.60-m60`**. Subordinate to `docs/starlab.md`.
+
+**Authority:** This is a **short mapping** of older audit pressure points to **current `main`**, not a second full audit.
 
 ## M32-era items already resolved (do not reopen without regression evidence)
 

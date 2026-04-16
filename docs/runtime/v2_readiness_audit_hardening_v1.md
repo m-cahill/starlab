@@ -1,5 +1,7 @@
 # v2 readiness — audit hardening v1 (M60)
 
+**Status:** **Closed** on `main` (2026-04-16). [PR #71](https://github.com/m-cahill/starlab/pull/71). Merge commit `9ef4e049f1e04ee36952be53647d48c649ad6915`. Tag **`v0.0.60-m60`**.
+
 **Milestone:** M60 — Audit hardening & v2 readiness v1  
 **Phase:** VII  
 **Runtime role:** Diligence and structural-boundary note for the M60 milestone (not a product artifact contract).
