@@ -23,6 +23,13 @@
 - **Numeric full-run thresholds** — **TBD** in charter **Open operator-set values**; structure locked **without** invented numbers.
 - **PV1 tagging convention** — deferred (no new tag format in PV1-M00).
 
-## Next milestone (per charter)
+## Next milestone (explicit gate — not automatic)
 
-- Open **PV1-M01** only if a **real** observability/checkpoint tooling gap is documented; otherwise next substantive opening is **PV1-M02** (on a follow-on branch when approved).
+Closing **PV1-M00** does **not** open any later PV1 milestone. Roadmap rows **PV1-M01**–**M04** stay **placeholders** until separately chartered.
+
+- **PV1-M01** opens **only** if a **concrete** observability or checkpoint **tooling** gap is documented and justified (this closeout did **not** identify such a gap in-repo).
+- If **PV1-M01** is not opened, keep it **closed**; the next **substantive** opening would be **PV1-M02** (Tranche A Execution Evidence) when the operator **explicitly** authorizes that milestone on a follow-on branch.
+
+## Tooling gap note (closeout)
+
+No new campaign observability or checkpoint **implementation** was required for PV1-M00; ledger and private charter only. See **`PV1-M00_plan.md`** §8 for the recorded assessment.

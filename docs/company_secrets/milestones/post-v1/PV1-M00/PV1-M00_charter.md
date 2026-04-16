@@ -39,6 +39,7 @@ This is a **rechartered** phase label. It is **not** “Phase VIII” of the ori
 - Define **watchable validation** minimums and **operator decision gates** (continue / pause / stop / resume).
 - Define **resumption vs invalidation** (when a run may resume under one campaign identity vs when a **new** campaign identity is required).
 - Record the **PV1** roadmap publicly in `docs/starlab.md` while keeping private notes under `docs/company_secrets/milestones/post-v1/` as **non-authoritative** working surface.
+- **`docs/starlab.md`** is the **only** authoritative public source for **PV1** roadmap **status**; private milestone markdown is supplementary.
 
 ---
 

@@ -589,6 +589,8 @@ Planned program arc (**62 milestones**, **M00**–**M61**) — **all closed** on
 
 **Roadmap disclaimer:** This table is **planning-only**. Rows **PV1-M01**–**PV1-M04** are **not** execution commitments, **not** merge or CI obligations, and **not** “approved” work packages until a milestone is **explicitly opened** and later **closed** under normal STARLAB governance.
 
+**Governance merge note:** Merging a **PV1-M00** governance change to `main` **does not** open **PV1-M01** or any later **PV1** milestone; each row opens only under a **separate** explicit decision and branch/PR.
+
 ---
 
 ## 8. Milestone intent map

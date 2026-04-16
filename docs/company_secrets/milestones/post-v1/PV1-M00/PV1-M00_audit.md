@@ -14,6 +14,12 @@
 | CI truthfulness | 5 | Governance tests align with ledger; **no** fake execution evidence. |
 | Readiness to open next milestone | 4 | Charter + roadmap ready; **PV1-M01** vs **PV1-M02** gate is operator-decided; numeric thresholds still TBD. |
 
+## Closeout decision (next milestone)
+
+- **PV1-M00** merge **does not** auto-open **PV1-M01**, **PV1-M02**, or any other PV1 row.
+- **PV1-M01** is appropriate **only** after a **documented, concrete** tooling/observability gap (checkpoint discipline, campaign observability) — **none** was identified as mandatory in this governance-only pass.
+- **Recommendation:** keep **PV1-M01** **closed** until such a gap exists; next **substantive** execution milestone when authorized: **PV1-M02**.
+
 ## Residual risks
 
 - Operators must **not** treat roadmap rows as approved work unless a milestone is **opened** explicitly.
