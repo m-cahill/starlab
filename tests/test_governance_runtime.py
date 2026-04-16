@@ -373,6 +373,7 @@ def test_m50_campaign_execution_modules_exist() -> None:
         "campaign_execution_io.py",
         "campaign_execution_preflight.py",
         "execute_full_local_training_campaign.py",
+        "_full_local_training_campaign_execution.py",
     ):
         assert (tr / name).is_file()
 
