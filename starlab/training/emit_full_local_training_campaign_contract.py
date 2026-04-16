@@ -73,6 +73,7 @@ def main(argv: list[str] | None = None) -> int:
         "--bundle-dir",
         action="append",
         dest="bundle_dirs",
+        type=Path,
         default=[],
         metavar="PATH",
         help="M14 bundle directory (repeat per bundle; required with --planned-weighted-refit).",
