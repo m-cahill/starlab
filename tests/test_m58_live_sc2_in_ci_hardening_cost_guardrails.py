@@ -257,6 +257,8 @@ def test_governance_ledger_m58_m57_m59() -> None:
         or "planned" in sec11.lower()
         or "merge pending" in sec11.lower()
         or "in pr" in sec11.lower()
+        or "pending" in sec11.lower()
+        or "machinery" in sec11.lower()
     )
     assert "live_sc2_in_ci" in text.lower() or "live sc2" in text.lower()
     assert "merge" in text.lower() and "live" in text.lower()

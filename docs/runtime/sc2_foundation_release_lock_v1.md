@@ -1,5 +1,7 @@
 # SC2 foundation release lock v1 (M61)
 
+**Status (ledger alignment):** **M61 machinery** (proof pack + audit emitters + this contract + tests) is **merged on `main`** ([PR #72](https://github.com/m-cahill/starlab/pull/72); merge commit `35d7734d14113adf206390f153f517a93d7d41ba`; tag **`v0.0.61-m61`**). **Operator-local** industrial campaign evidence packaged into a proof pack, and a release-lock audit reporting **`release_scope_status`: `ready_within_scope`**, remain **pending** — **not** satisfied by default CI or fixture-only tests alone.
+
 **Contract ids:** `starlab.sc2_foundation_v1_proof_pack.v1`, `starlab.sc2_foundation_release_lock_audit.v1`  
 **Input contract:** `starlab.sc2_foundation_v1_proof_pack_input.v1` (operator-authored JSON)  
 **Scope id:** `starlab.m61.release_scope.sc2_foundation_v1`  
