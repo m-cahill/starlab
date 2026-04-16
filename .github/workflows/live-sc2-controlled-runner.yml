@@ -1,11 +1,24 @@
-# M57 — optional, non-required, manual live SC2 controlled runner (self-hosted).
-# Not part of default PR merge checks. See docs/runtime/live_sc2_in_ci_charter_controlled_runner_v1.md
+# M57/M58 — optional, non-required, manual live SC2 controlled runner (self-hosted).
+# M58: preflight receipt + guardrails alignment + 30m timeout + 7d artifact retention.
+# Not part of default PR merge checks. See docs/runtime/live_sc2_in_ci_hardening_cost_guardrails_v1.md
 
-name: Live SC2 controlled runner (M57)
+name: Live SC2 controlled runner (M57 + M58)
 
 on:
   workflow_dispatch:
     inputs:
+      runtime_mode:
+        description: "M44 runtime mode (fixture_stub_ci or local_live_sc2)"
+        required: true
+        type: choice
+        options:
+          - fixture_stub_ci
+          - local_live_sc2
+      confirm_live_sc2:
+        description: "Explicit confirmation — required true when runtime_mode is local_live_sc2"
+        required: false
+        type: boolean
+        default: false
       m43_run_dir:
         description: "Path to M43 hierarchical training run directory (repo-relative)"
         required: true
@@ -15,7 +28,7 @@ on:
         required: true
         type: string
       match_config:
-        description: "Path to M02 match config JSON (burnysc2 for live)"
+        description: "Path to M02 match config JSON (burnysc2 for live; fake for fixture)"
         required: true
         type: string
       output_dir:
@@ -23,14 +36,20 @@ on:
         required: true
         type: string
 
+permissions:
+  contents: read
+
 concurrency:
-  group: live-sc2-m57-${{ github.repository }}
-  cancel-in-progress: true
+  group: live-sc2-m57-m58-${{ github.repository }}
+  cancel-in-progress: false
 
 jobs:
   controlled-runner:
     runs-on: [self-hosted, starlab-sc2]
-    timeout-minutes: 120
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Checkout
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
@@ -48,7 +67,34 @@ jobs:
           python -m pip install --upgrade pip setuptools
           pip install -e ".[dev]"
 
-      - name: Run M57 controlled runner (local_live_sc2)
+      - name: Emit M58 guardrails JSON
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python -m starlab.sc2.emit_live_sc2_in_ci_guardrails --output-dir "${{ github.event.inputs.output_dir }}"
+
+      - name: M58 preflight receipt
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+        run: |
+          CONFIRM="false"
+          if [ "${{ github.event.inputs.runtime_mode }}" = "local_live_sc2" ] && [ "${{ github.event.inputs.confirm_live_sc2 }}" = "true" ]; then
+            CONFIRM="true"
+          fi
+          python -m starlab.sc2.emit_live_sc2_in_ci_preflight \
+            --m43-run "${{ github.event.inputs.m43_run_dir }}" \
+            --weights "${{ github.event.inputs.weights_path }}" \
+            --match-config "${{ github.event.inputs.match_config }}" \
+            --runtime-mode "${{ github.event.inputs.runtime_mode }}" \
+            --workflow-trigger workflow_dispatch \
+            --runner-labels "${{ runner.os }},self-hosted,starlab-sc2" \
+            --timeout-minutes 30 \
+            --artifact-retention-days 7 \
+            --live-sc2-confirmed "$CONFIRM" \
+            --output-dir "${{ github.event.inputs.output_dir }}"
+
+      - name: Run M57 controlled runner
+        if: success()
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
         run: |
@@ -57,19 +103,24 @@ jobs:
             --weights "${{ github.event.inputs.weights_path }}" \
             --match-config "${{ github.event.inputs.match_config }}" \
             --output-dir "${{ github.event.inputs.output_dir }}" \
-            --runtime-mode local_live_sc2 \
+            --runtime-mode "${{ github.event.inputs.runtime_mode }}" \
             --requested-runner-posture github_workflow_dispatch \
             --workflow-trigger workflow_dispatch \
             --runner-labels "${{ runner.os }},self-hosted,starlab-sc2"
 
-      - name: Upload M57 receipts and M44 outputs
+      - name: Upload M58/M57 receipts and M44 outputs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: m57-live-sc2-controlled-runner-${{ github.run_id }}
+          name: m58-m57-live-sc2-controlled-runner-${{ github.run_id }}
           path: |
+            ${{ github.event.inputs.output_dir }}/live_sc2_in_ci_hardening_guardrails.json
+            ${{ github.event.inputs.output_dir }}/live_sc2_in_ci_hardening_guardrails_report.json
+            ${{ github.event.inputs.output_dir }}/live_sc2_in_ci_preflight_receipt.json
+            ${{ github.event.inputs.output_dir }}/live_sc2_in_ci_preflight_receipt_report.json
             ${{ github.event.inputs.output_dir }}/live_sc2_in_ci_controlled_runner_receipt.json
             ${{ github.event.inputs.output_dir }}/live_sc2_in_ci_controlled_runner_receipt_report.json
             ${{ github.event.inputs.output_dir }}/local_live_play_validation_run.json
             ${{ github.event.inputs.output_dir }}/replay_binding.json
+          retention-days: 7
           if-no-files-found: warn
