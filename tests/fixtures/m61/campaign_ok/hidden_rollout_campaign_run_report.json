@@ -1,0 +1,10 @@
+{
+  "non_claims": [],
+  "report_version": "starlab.hidden_rollout_campaign_run_report.v1",
+  "run_sha256": null,
+  "summary": {
+    "campaign_sha256": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+    "execution_id": "m61_fixture_exec",
+    "execution_status": "complete"
+  }
+}

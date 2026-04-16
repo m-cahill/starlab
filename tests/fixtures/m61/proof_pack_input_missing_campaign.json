@@ -1,0 +1,33 @@
+{
+  "campaign_evidence_paths": {
+    "bootstrap_run_report": "campaign_ok/bootstrap_run_report.json",
+    "campaign_preflight_receipt": "campaign_ok/campaign_preflight_receipt.json",
+    "full_local_training_campaign_contract": "campaign_ok/full_local_training_campaign_contract.json",
+    "hidden_rollout_campaign_run": "campaign_bad/hidden_rollout_campaign_run.json",
+    "hidden_rollout_campaign_run_report": "campaign_ok/hidden_rollout_campaign_run_report.json",
+    "replay_binding": "campaign_ok/replay_binding.json",
+    "validation_replay_path": "campaign_ok/validation.SC2Replay",
+    "watchable_m44_local_live_play_validation_run": "campaign_ok/local_live_play_validation_run.json"
+  },
+  "campaign_threshold_declaration": {
+    "campaign_length_class": "operator_declared_full_run",
+    "operator_declared_at": "2026-04-16T00:00:00Z",
+    "operator_defined_full_run_threshold": "Operator-declared full run (fixture: intentionally incomplete campaign).",
+    "threshold_satisfied": true
+  },
+  "emit_metadata": {
+    "fixed_timestamp_utc": "2026-04-16T00:00:00Z"
+  },
+  "explicit_non_claims": [],
+  "foundation_track_refs": [
+    {
+      "milestone_tag": "v0.0.49-m49"
+    }
+  ],
+  "input_version": "starlab.sc2_foundation_v1_proof_pack_input.v1",
+  "proof_pack_profile_id": "starlab.m61.campaign_evidence_profile.operator_local_hidden_rollout_with_watchable_validation_v1",
+  "release_scope_id": "starlab.m61.release_scope.sc2_foundation_v1",
+  "unresolved_gaps": [
+    "fixture_missing_post_bootstrap"
+  ]
+}

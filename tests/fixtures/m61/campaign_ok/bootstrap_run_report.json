@@ -1,0 +1,5 @@
+{
+  "campaign_id": "m61_fixture_ok",
+  "run_id": "m61_bootstrap_fixture",
+  "self_play_rl_bootstrap_run_report_version": "starlab.self_play_rl_bootstrap_run_report.v1"
+}

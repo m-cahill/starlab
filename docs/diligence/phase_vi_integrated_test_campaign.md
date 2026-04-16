@@ -1,6 +1,12 @@
 # Phase VI integrated test campaign (post‑M45 follow‑on)
 
-**M45** is **closed** on `main` (see `docs/starlab.md` §11 / §18). This note remains **preparation and framing** for the **next** follow-on: it does **not** assert that a full integrated Phase VI test campaign has been executed or that additional claims beyond closed milestones are proved.
+**M45** is **closed** on `main` (see `docs/starlab.md` §11 / §18). This diligence note remains **operator guidance** for the integrated campaign: it does **not** assert that a full integrated Phase VI test campaign has been executed or that additional claims beyond closed milestones are proved.
+
+## M61 release-lock relationship (required evidence input)
+
+**M61** elevates this campaign class to **mandatory v1 release-lock evidence** when claiming **within-scope** SC2 foundation readiness: the governed **industrial hidden rollout** path (**M49** contract + preflight → **M50/M51** `hidden_rollout_campaign_run` → **M51** post-bootstrap protocol phases → **watchable M44** on the refit path) must be **separately executed**, packaged via **`sc2_foundation_v1_proof_pack.json`**, and evaluated by **`sc2_foundation_release_lock_audit.json`**.
+
+This remains **operator-local** and **not** default CI; raw artifacts stay **local-only** (**do not** commit `out/` or `docs/company_secrets/`). See `docs/runtime/sc2_foundation_release_lock_v1.md`.
 
 **M49:** Governed **charter + preflight + evidence protocol** for a full local training / bootstrap campaign — normative contract semantics and CLIs: `docs/runtime/full_local_training_campaign_v1.md`. This diligence note **supplements** that runtime doc (operator narrative vs contract-first definitions); neither replaces the other.
 

@@ -1,0 +1,16 @@
+{
+  "campaign_sha256": "0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f0f",
+  "execution_id": "m61_fixture_bad",
+  "execution_status": "complete",
+  "phase_receipts": [
+    {
+      "executed": false,
+      "final_status": "skipped",
+      "phase_kind": "operator_review",
+      "phase_name": "watchable_m44_validation"
+    }
+  ],
+  "post_bootstrap_protocol_phases_enabled": false,
+  "run_version": "starlab.hidden_rollout_campaign_run.v2",
+  "warnings": []
+}

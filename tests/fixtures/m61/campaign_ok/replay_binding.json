@@ -1,0 +1,17 @@
+{
+  "binding_mode": "opaque_content_sha256",
+  "execution_id": "20b20f825be41bd4a6b73c5a771eae30da19c832c9e1ba59ac229ad13b9b62c3",
+  "later_milestones": [],
+  "lineage_seed_id": "0000000000000000000000000000000000000000000000000000000000000000",
+  "parent_references": [],
+  "proof_artifact_hash": "d8e2fcb2e227c7c3e7e908c0df140586572f7c8c25fb67db1be823f445062774",
+  "replay_binding_id": "4d8aa84bcc3e3a0bc4eaf10f074d465f2d14a84b2a96c7ee5013ff9d3726a8b1",
+  "replay_content_sha256": "75d471bb536f299d292dc94cc4cc2e01660e835efce3f2bd7c1c3a385def133b",
+  "replay_reference": {
+    "basename": "validation.SC2Replay",
+    "size_bytes": 9,
+    "suffix": ".SC2Replay"
+  },
+  "run_spec_id": "7fed18301cec0c910fb1ed246db46fd80088514d98fd058dd08dd99052450321",
+  "schema_version": "starlab.replay_binding.v1"
+}
