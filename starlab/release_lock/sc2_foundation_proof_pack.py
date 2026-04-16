@@ -51,9 +51,7 @@ def _file_sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def _phase_receipt_by_name(
-    receipts: object, name: str
-) -> dict[str, Any] | None:
+def _phase_receipt_by_name(receipts: object, name: str) -> dict[str, Any] | None:
     if not isinstance(receipts, list):
         return None
     for rec in receipts:

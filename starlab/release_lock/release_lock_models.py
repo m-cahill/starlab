@@ -5,9 +5,7 @@ from __future__ import annotations
 from typing import Final
 
 # Scope & profile (ledger-aligned)
-RELEASE_SCOPE_SC2_FOUNDATION_V1: Final[str] = (
-    "starlab.m61.release_scope.sc2_foundation_v1"
-)
+RELEASE_SCOPE_SC2_FOUNDATION_V1: Final[str] = "starlab.m61.release_scope.sc2_foundation_v1"
 CAMPAIGN_EVIDENCE_PROFILE_OPERATOR_LOCAL_V1: Final[str] = (
     "starlab.m61.campaign_evidence_profile."
     "operator_local_hidden_rollout_with_watchable_validation_v1"
@@ -55,4 +53,3 @@ M61_AUDIT_REQUIRED_NON_CLAIM_MARKERS: Final[tuple[str, ...]] = (
     "starlab.m61.non_claim.not_replay_execution_equivalence_universal",
     "starlab.m61.non_claim.not_ladder_public_performance_proof",
 )
-

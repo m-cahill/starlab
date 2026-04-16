@@ -89,8 +89,7 @@ def build_sc2_foundation_release_lock_audit_bundle(
     derived_ok = isinstance(cre, dict)
     derived = cre.get("campaign_run_derived") if isinstance(cre, dict) else None
     post_boot = (
-        isinstance(derived, dict)
-        and derived.get("post_bootstrap_protocol_phases_enabled") is True
+        isinstance(derived, dict) and derived.get("post_bootstrap_protocol_phases_enabled") is True
     )
     add(
         "post_bootstrap_protocol_phases_executed",
@@ -98,9 +97,7 @@ def build_sc2_foundation_release_lock_audit_bundle(
         "post_bootstrap_protocol_phases_enabled must be true on the campaign run",
     )
 
-    watch_ok = (
-        isinstance(derived, dict) and derived.get("watchable_m44_phase_executed") is True
-    )
+    watch_ok = isinstance(derived, dict) and derived.get("watchable_m44_phase_executed") is True
     add(
         "watchable_m44_validation_executed",
         bool(watch_ok),
@@ -120,13 +117,7 @@ def build_sc2_foundation_release_lock_audit_bundle(
         scope = RELEASE_SCOPE_NOT_EVALUABLE
         lang = "release_lock_not_evaluable_proof_pack_malformed_or_untrusted"
     else:
-        hard_fail = (
-            not req_nc
-            or not decl_ok
-            or not post_boot
-            or not watch_ok
-            or not m44_fs_ok
-        )
+        hard_fail = not req_nc or not decl_ok or not post_boot or not watch_ok or not m44_fs_ok
         if hard_fail:
             scope = RELEASE_SCOPE_NOT_READY
             lang = "release_lock_not_ready_within_explicit_m61_scope"

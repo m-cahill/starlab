@@ -112,3 +112,56 @@ def test_m61_emit_audit_cli_writes(tmp_path: Path) -> None:
     )
     assert a.name == AUDIT_FILENAME
     assert r.name == AUDIT_REPORT_FILENAME
+
+
+def test_m61_emit_sc2_foundation_v1_proof_pack_module_main_ok(tmp_path: Path) -> None:
+    from starlab.release_lock.emit_sc2_foundation_v1_proof_pack import main
+
+    out_dir = tmp_path / "emit_out"
+    assert (
+        main(
+            [
+                "--input",
+                str(FIX / "proof_pack_input.json"),
+                "--output-dir",
+                str(out_dir),
+                "--base-dir",
+                str(FIX),
+            ],
+        )
+        == 0
+    )
+    assert (out_dir / PROOF_PACK_FILENAME).is_file()
+    assert (out_dir / PROOF_PACK_REPORT_FILENAME).is_file()
+
+
+def test_m61_emit_sc2_foundation_v1_proof_pack_module_main_error(tmp_path: Path) -> None:
+    from starlab.release_lock.emit_sc2_foundation_v1_proof_pack import main
+
+    bad = tmp_path / "bad_input.json"
+    bad.write_text("{}", encoding="utf-8")
+    assert main(["--input", str(bad), "--output-dir", str(tmp_path / "o")]) == 1
+
+
+def test_m61_emit_release_lock_audit_module_main_ok(tmp_path: Path) -> None:
+    from starlab.release_lock.emit_sc2_foundation_release_lock_audit import main
+
+    write_sc2_foundation_v1_proof_pack_artifacts(
+        input_path=FIX / "proof_pack_input.json",
+        output_dir=tmp_path / "p",
+        base_dir=FIX,
+    )
+    aud_dir = tmp_path / "aud"
+    assert (
+        main(
+            [
+                "--proof-pack",
+                str(tmp_path / "p" / PROOF_PACK_FILENAME),
+                "--output-dir",
+                str(aud_dir),
+            ],
+        )
+        == 0
+    )
+    assert (aud_dir / AUDIT_FILENAME).is_file()
+    assert (aud_dir / AUDIT_REPORT_FILENAME).is_file()
