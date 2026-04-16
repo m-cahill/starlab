@@ -1,0 +1,8 @@
+{
+  "match_execution": {
+    "final_status": "ok",
+    "sc2_game_result": "Victory"
+  },
+  "run_version": "starlab.local_live_play_validation_run.v1",
+  "runtime_mode": "fixture_stub_ci"
+}
