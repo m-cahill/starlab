@@ -1,0 +1,42 @@
+{
+  "protocol_version": "1",
+  "protocol_profile_id": "starlab.m59.protocol_profile.single_candidate_public_eval_v1",
+  "subject_candidate": {
+    "candidate_id": "synthetic_m59_candidate_orchid_001",
+    "display_label": "Synthetic M59 orchid-line candidate (fixture)"
+  },
+  "candidate_lineage": [
+    {
+      "source_artifact_path": "out/live_validation_runs/synthetic_m44_bundle/run_identity.json",
+      "source_contract_id": "starlab.local_live_play_validation_run.v1",
+      "source_artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "notes": "Synthetic placeholder — not a claim of real M44 execution."
+    }
+  ],
+  "evaluation_surface_kind": "ladder_public",
+  "venue_descriptor": {
+    "label": "Synthetic public ladder-shaped evaluation (fixture)",
+    "region": "fixture",
+    "client_build": "not_applicable"
+  },
+  "accepted_evidence_classes": [
+    "replay_bound_result",
+    "result_row_only",
+    "operator_attested_result"
+  ],
+  "aggregation_rules": {
+    "description": "Descriptive counts only: results, evidence class, map known/unknown — no significance.",
+    "allowed": [
+      "result_totals",
+      "per_evidence_class_counts",
+      "per_map_counts_when_map_known",
+      "map_coverage_counts"
+    ]
+  },
+  "required_non_claims": [
+    "Fixture protocol: all match rows are synthetic — not real ladder or public server evidence."
+  ],
+  "explicit_out_of_scope": [
+    "Real Battle.net ladder automation or scraping (fixture-only CI)."
+  ]
+}

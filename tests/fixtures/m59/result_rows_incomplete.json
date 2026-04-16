@@ -1,0 +1,37 @@
+{
+  "evidence_session_id": "m59_synthetic_session_incomplete_002",
+  "result_rows": [
+    {
+      "stable_match_id": "syn_inc_001",
+      "observed_at": "2026-04-11T12:00:00Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_slot_a",
+      "match_result": "win",
+      "evidence_class": "replay_bound_result",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001",
+      "replay_reference_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "source_reference": "synthetic://fixture/replay/inc_001.sc2replay"
+    },
+    {
+      "stable_match_id": "syn_inc_002",
+      "observed_at": "2026-04-11T12:30:00Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_slot_b",
+      "map_name": "Incandescent LE",
+      "match_result": "loss",
+      "evidence_class": "replay_bound_result",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001",
+      "absence_flags": ["replay_missing"],
+      "source_reference": "operator_export_without_replay"
+    },
+    {
+      "stable_match_id": "syn_inc_003",
+      "observed_at": "2026-04-11T13:00:00Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_slot_c",
+      "match_result": "win",
+      "evidence_class": "result_row_only",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001"
+    }
+  ]
+}
