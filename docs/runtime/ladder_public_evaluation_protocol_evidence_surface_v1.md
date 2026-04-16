@@ -1,6 +1,6 @@
 # Ladder / public evaluation protocol & evidence surface v1 (M59)
 
-**Status:** M59 product contract (**merge pending** on GitHub PR; **not** closed on `main` until merged). **Not** ladder performance proof. **Not** benchmark integrity. **Not** replay↔execution equivalence.
+**Status:** M59 product contract (**closed** on `main` — [PR #70](https://github.com/m-cahill/starlab/pull/70); merge commit `319bc3d496b78c573c57991cd0fcc461219da6a4`; tag **`v0.0.59-m59`**). **Not** ladder performance proof. **Not** benchmark integrity. **Not** replay↔execution equivalence.
 
 ## Purpose
 

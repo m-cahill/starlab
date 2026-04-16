@@ -245,6 +245,7 @@ def test_governance_ledger_m58_m57_m59() -> None:
     assert "### M58" in text
     assert "### M57" in text
     assert "### M59" in text
+    assert "### M60" in text
     sec11 = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "m58" in sec11.lower() and "closed" in sec11.lower()
     assert "m57" in sec11.lower() and "closed" in sec11.lower()

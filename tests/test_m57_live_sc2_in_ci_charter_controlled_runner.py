@@ -279,6 +279,7 @@ def test_ledger_m57_m58_m56_governance() -> None:
     assert "m57" in sec11.lower() and "m56" in sec11.lower() and "closed" in sec11.lower()
     assert "m58" in sec11.lower() and "closed" in sec11.lower()
     assert "m59" in sec11.lower()
+    assert "m60" in sec11.lower()
 
 
 def test_ledger_phase_vii_live_sc2_runner_profile_table() -> None:
