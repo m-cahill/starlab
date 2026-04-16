@@ -1,0 +1,74 @@
+{
+  "evidence_session_id": "m59_synthetic_session_complete_001",
+  "result_rows": [
+    {
+      "stable_match_id": "syn_match_007",
+      "observed_at": "2026-04-10T18:22:01Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_opponent_slot_3",
+      "map_name": "Acropolis LE",
+      "match_result": "win",
+      "evidence_class": "replay_bound_result",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001",
+      "replay_reference_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "source_reference": "synthetic://fixture/replay/007.sc2replay"
+    },
+    {
+      "stable_match_id": "syn_match_002",
+      "observed_at": "2026-04-10T17:05:44Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_opponent_slot_1",
+      "map_name": "Golden Wall LE",
+      "match_result": "loss",
+      "evidence_class": "replay_bound_result",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001",
+      "replay_reference_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "source_reference": "synthetic://fixture/replay/002.sc2replay"
+    },
+    {
+      "stable_match_id": "syn_match_005",
+      "observed_at": "2026-04-10T17:48:12Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_opponent_slot_2",
+      "map_name": "Purity and Industry LE",
+      "match_result": "win",
+      "evidence_class": "result_row_only",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001",
+      "source_reference": "synthetic://fixture/result_export/005.json"
+    },
+    {
+      "stable_match_id": "syn_match_001",
+      "observed_at": "2026-04-10T16:30:00Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_opponent_slot_4",
+      "map_name": "Romanticide LE",
+      "match_result": "draw",
+      "evidence_class": "operator_attested_result",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001",
+      "source_reference": "operator_notes:fixture_session"
+    },
+    {
+      "stable_match_id": "syn_match_004",
+      "observed_at": "2026-04-10T17:12:00Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_opponent_slot_5",
+      "map_name": "Moondance LE",
+      "match_result": "win",
+      "evidence_class": "replay_bound_result",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001",
+      "replay_reference_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "source_reference": "synthetic://fixture/replay/004.sc2replay"
+    },
+    {
+      "stable_match_id": "syn_match_006",
+      "observed_at": "2026-04-10T18:01:00Z",
+      "venue_surface_kind": "ladder_public",
+      "opponent_label": "anon_opponent_slot_6",
+      "map_name": "Hardwire LE",
+      "match_result": "unknown",
+      "evidence_class": "result_row_only",
+      "subject_candidate_id": "synthetic_m59_candidate_orchid_001",
+      "source_reference": "synthetic://fixture/result_export/006_partial.json"
+    }
+  ]
+}
