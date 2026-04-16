@@ -573,3 +573,11 @@ def test_m09_fixture_raw_parse_fixtures_exist() -> None:
     assert (fx / "replay_raw_parse_partial.json").is_file()
     assert (fx / "replay_parse_receipt_valid.json").is_file()
     assert (fx / "replay_parse_report_valid.json").is_file()
+
+
+def test_pv1_m02_campaign_protocol_fixture_exists() -> None:
+    """PV1-M02 reproducible M49 protocol JSON for emit_full_local_training_campaign_contract."""
+
+    path = REPO_ROOT / "tests" / "fixtures" / "pv1_m02" / "pv1_m02_campaign_protocol.json"
+    assert path.is_file()
+    assert '"phase": "tranche_a"' in path.read_text(encoding="utf-8")
