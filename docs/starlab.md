@@ -53,16 +53,17 @@ This table is a **navigation aid** only. Authoritative milestone narrative, CI r
 | Last closed milestone (post-v1) | **PV1-M04** — Post-Campaign Analysis / Comparative Readout — **closed** on `main` (implementation [PR #79](https://github.com/m-cahill/starlab/pull/79); closeout [PR #81](https://github.com/m-cahill/starlab/pull/81)). Prior: **PV1-M03** — Tranche B / Full-Run Completion Evidence — **closed** on `main` (implementation [PR #77](https://github.com/m-cahill/starlab/pull/77); closeout [PR #78](https://github.com/m-cahill/starlab/pull/78)). Prior: **PV1-M02** — **closed** ([PR #76](https://github.com/m-cahill/starlab/pull/76)); **PV1-M01** — **closed** ([PR #74](https://github.com/m-cahill/starlab/pull/74)). |
 | Post-v1 (PV1) | **PV1 — Long Industrial Campaign & Scaling Evidence** — **closed** post-v1 phase (**not** “Phase VIII” of v1). Public roadmap table: **Post-v1 (PV1)** section (below §7). **v1** arc **M00–M61** remains **closed** and **historical**. |
 | Post-PV1 (PX1) | **PX1 — Full Industrial Run & Demonstration Proof** — **new** post-PV1 phase after **closed** **PV1** (**not** “Phase VIII”; **no** **M62**). Public roadmap: **Post-PV1 (PX1)** (below §7). **v2** remains **deferred** until PX1 program goals are resolved under explicit **`PX1-MNN`** milestones — **not** automatic after PX1. |
+| Last closed milestone (PX1 arc) | **PX1-M00** — Full Industrial Run & Demonstration Charter — **closed** on `main` (implementation [PR #83](https://github.com/m-cahill/starlab/pull/83); closeout **PX1_M00_CLOSEOUT_PR**). **Governance-first** charter only — **no** campaign execution; **no** demo recording; **did not** open **PX1-M01** or **v2**. |
 | PV1 campaign outcome (bounded, operator-local) | Tranche A **completed within scope**; Tranche B **completed within scope**; full-run threshold **`threshold-not-met`** — frozen **`full_run_duration_target`** **not** met (**separate** operator sessions; **not** reinterpreted). Anchored by closed **PV1-M02**/**PV1-M03** evidence — **not** merge-gate proof. |
-| Current milestone | **PX1-M00** — Full Industrial Run & Demonstration Charter — **open** (governance-first charter milestone on `main`). **Does not** execute campaigns or record demos. **PV1** is **closed** and **historical** — **PV1-M04** Post-Campaign Analysis / Comparative Readout — **closed** on `main` (implementation [PR #79](https://github.com/m-cahill/starlab/pull/79); closeout [PR #81](https://github.com/m-cahill/starlab/pull/81)); bounded **PV1** outcome (**unchanged**): Tranche A **completed within scope**; Tranche B **completed within scope**; full-run **`threshold-not-met`** on frozen **`full_run_duration_target`** (**separate** operator sessions — **not** reinterpreted). **v1** **M00–M61** remains **closed** — **no** **M62**. |
+| Current milestone | **None** — **PX1-M00** — Full Industrial Run & Demonstration Charter — **closed** on `main` (implementation [PR #83](https://github.com/m-cahill/starlab/pull/83); closeout **PX1_M00_CLOSEOUT_PR**). **PX1** phase + roadmap **remain** in **Post-PV1 (PX1)** (below §7). **PX1-M01**–**PX1-M04** are **planned / not yet opened**. **v2** is **not** opened. **PV1** is **closed** and **historical** — bounded **PV1** outcome (**unchanged**): Tranche A **completed within scope**; Tranche B **completed within scope**; full-run **`threshold-not-met`** (**separate** operator sessions — **not** reinterpreted). **v1** **M00–M61** remains **closed** — **no** **M62**. |
 | PV1 execution evidence (operator-local) | Tranche A: **`docs/runtime/pv1_tranche_a_execution_evidence_v1.md`**, **`tranche_a_operator_note.md`**. Tranche B / full-run threshold: **`docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md`**, **`tranche_b_operator_note.md`**, **`full_run_threshold_declaration.md`** — **not** default CI evidence; **not** a substitute for merge-gate proof. |
-| Next planned follow-on | **PX1-M01**–**PX1-M04** are **planned** — **not** opened by **PX1-M00**. **`docs/starlab-vision.md`** **v2** directions remain **outside** the closed **M00–M61** arc until **explicit** recharter after PX1 — **PX1 completion does not** automatically open **v2**. |
+| Next planned follow-on | **`current milestone`** = **None** — **PX1-M01**–**PX1-M04** are **planned / not yet opened** until **separately** chartered and merged. **`PX1-M00`** is **closed** — **not** a substitute for **PX1-M01** execution evidence. **`docs/starlab-vision.md`** **v2** directions remain **outside** the closed **M00–M61** arc until **explicit** recharter — **v2** is **not** opened. |
 | Phase VI pipeline (compact) | **M40** contract → **M41** flat training run → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL → **M46** bounded live `final_status` / `sc2_game_result` semantics → **M47** bootstrap episode distinctness / operator ergonomics → **M48** M42 contract-path alignment (**closed** on `main`) → **M49** full local campaign charter + preflight (**closed** on `main`) → **M50** hidden rollout execution + supervision (**closed** on `main`) → **M51** post-bootstrap phase orchestration (**closed** on `main`) — **Phase VI complete** on `main`. |
 | Phase VII pipeline (compact) | **M52**–**M61** — **all closed** on `main` — trust, equivalence, benchmark integrity, live SC2-in-CI posture, ladder/public evaluation protocol, audit hardening, **v1 release lock** (**M61** operator-local **`ready_within_scope`**) — see §6; **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** merge-gate live SC2; **not** ladder/public performance proof. |
 | Offline artifact → local runtime (Phase VI scan) | **M40** contract → **M41** flat training → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL |
 | Phase VI local vs CI | Flat training runs **`out/training_runs/`** (M41); hierarchical runs **`out/hierarchical_training_runs/`** (M43); comparison **`out/comparisons/`** (M42); live validation **`out/live_validation_runs/`** (M44); bootstrap runs **`out/rl_bootstrap_runs/`** (M45); full local campaign charter **`out/training_campaigns/`** (M49) + optional **`campaign_runs/<execution_id>/`** (M50 executor). All **local-first**. CI validates **fixture-only** CPU paths (**no** GPU training; **no** live SC2). |
 | Test coverage | ~**80%** branch-aware total (M37 authoritative PR-head); **`fail_under` = 78.0** in `pyproject.toml`. **~85%** is a **stretch target**, not a guaranteed claim. |
-| Still **not** proved today (present tense) | **Benchmark integrity** (global / beyond bounded milestone scope), **replay↔execution equivalence** (global / gameplay-semantic), **live SC2 in CI as default merge-gate / global proof**, **ladder / public performance**, **statistical significance of ranking** (M42 does **not** claim this), **operating manual v1** — see §11 *explicit non-claims*. **M61** **closed** with operator-local evidence + **`ready_within_scope`** **does not** change these boundaries — **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** merge-gate live SC2; **not** ladder/public performance. The *Remaining v1 proof-track map* below is **historical** — all Phase VII rows are **complete** on `main`. **PX1-class gaps (present tense):** a **true** full industrial-grade run under the **PX1** threshold package (**not** yet completed — **PX1-M01**); **bounded play-quality + demo-worthy agent** selection (**not** yet earned — **PX1-M02**+); **governed winning demo / video proof pack** (**not** yet earned — **PX1-M03**+). **PX1-M00** is **charter only** — **does not** claim these are satisfied. |
+| Still **not** proved today (present tense) | **Benchmark integrity** (global / beyond bounded milestone scope), **replay↔execution equivalence** (global / gameplay-semantic), **live SC2 in CI as default merge-gate / global proof**, **ladder / public performance**, **statistical significance of ranking** (M42 does **not** claim this), **operating manual v1** — see §11 *explicit non-claims*. **M61** **closed** with operator-local evidence + **`ready_within_scope`** **does not** change these boundaries — **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** merge-gate live SC2; **not** ladder/public performance. The *Remaining v1 proof-track map* below is **historical** — all Phase VII rows are **complete** on `main`. **PX1-class gaps (present tense):** a **true** full industrial-grade run under the **PX1** threshold package (**not** yet completed — **PX1-M01**); **bounded play-quality + demo-worthy agent** selection (**not** yet earned — **PX1-M02**+); **governed winning demo / video proof pack** (**not** yet earned — **PX1-M03**+). **PX1-M00** is **closed** as a **governance charter** milestone — **does not** claim industrial-run, play-quality, or demo proof are satisfied. |
 
 **Phase VI — default M49 protocol phases vs executor coverage (M50 / M51):** Reference only; full semantics in `docs/runtime/full_local_training_campaign_v1.md` and `docs/runtime/industrial_hidden_rollout_mode_v1.md`.
 
@@ -654,23 +655,24 @@ These **canonical basenames** live at the **`out/training_campaigns/<campaign_id
 
 **Private working surface:** Milestone notes may live under `docs/company_secrets/milestones/post-v1/PX1-MNN/` (not committed by default). This section + §11 anchor the **public** roadmap.
 
-### PX1 roadmap (planned sequence — only PX1-M00 open in this ledger pass)
+### PX1 roadmap (planned sequence — PX1-M00 **closed**; PX1-M01+ **not** opened)
 
 | Milestone | Title | Status | Notes |
 | --- | --- | --- | --- |
-| `PX1-M00` | Full Industrial Run & Demonstration Charter | **current / open** | Governance-first charter; defines run success, play-quality success, demo/video success, non-claims, and PX1 roadmap — **no** campaign execution; **no** demo recording |
+| `PX1-M00` | Full Industrial Run & Demonstration Charter | **closed** on `main` ([PR #83](https://github.com/m-cahill/starlab/pull/83) implementation; **PX1_M00_CLOSEOUT_PR** closeout) | Governance-first charter; defines run success, play-quality success, demo/video success, non-claims, and PX1 roadmap — **no** campaign execution; **no** demo recording |
 | `PX1-M01` | Full Industrial Campaign Execution Evidence | **planned / not yet opened** | Executes the true full industrial-grade run under a newly frozen threshold (**concrete values frozen in PX1-M01** before execution) |
 | `PX1-M02` | Play-Quality Evaluation & Demo Candidate Selection | **planned / not yet opened** | Evaluates resulting candidates for bounded play quality; selects demo-worthy agent(s) |
 | `PX1-M03` | Governed Demo Proof Pack & Winning Video | **planned / not yet opened** | Bounded replay/video/demo milestone: selected agent **playing and winning** under declared conditions |
 | `PX1-M04` | Optional Demo Hardening / Strategic Recharter Decision | **optional / not yet opened** | Polish, public-facing packaging, or explicit gate framing **only if needed** |
 
-**Roadmap disclaimer:** **PX1-M01**–**PX1-M04** are **not** opened by **PX1-M00**. **PX1** is **not** implied by closed **PV1** merges.
+**Roadmap disclaimer:** **PX1-M01**–**PX1-M04** are **not** opened by **PX1-M00** (closed). **PX1** is **not** implied by closed **PV1** merges.
 
-**Ledger truths (PX1-M00):**
+**Ledger truths (PX1 phase, post–PX1-M00 closeout):**
 
 - **v1** (**M00–M61**) is **complete** and **historical**.
 - **PV1** (**PV1-M00**–**PV1-M04**) is **complete** and **historical**; bounded **PV1** outcome is **not** reinterpreted here.
-- **PX1** is **new** and **separate** from **PV1**.
+- **PX1** is **new** and **separate** from **PV1**; **PX1-M00** established the **PX1** charter and roadmap (**governance only**).
+- **`current milestone`** = **None** after **PX1-M00** closeout — **PX1-M01**+ **not** opened.
 - **v2** is **not** opened.
 - The program has **not** yet completed a **true** full industrial-grade run under the **PX1** threshold package (**PX1-M01**).
 - The program has **not** yet earned a **governed winning demo proof** (**PX1-M03**+).
@@ -1129,15 +1131,21 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-**Current (post-PV1):** **PX1-M00** — Full Industrial Run & Demonstration Charter — **open** (governance-first charter milestone). **Product (in repo):** runtime **`docs/runtime/px1_full_industrial_run_demo_charter_v1.md`**; **Post-PV1 (PX1)** roadmap table (below §7); private plan/charter under `docs/company_secrets/milestones/post-v1/PX1-M00/` — **not** committed by default. **Does not** add operator campaign execution, **does not** record demos, **does not** freeze final numeric PX1 threshold values (**schema only** in **PX1-M00**; **PX1-M01** freezes values before execution). **v1** (**M00–M61**) is **closed** and **historical**. **PV1** (**PV1-M00**–**PV1-M04**) is **closed** and **historical** — bounded **PV1** outcome (**unchanged**): Tranche A **completed within scope**; Tranche B **completed within scope**; full-run **`threshold-not-met`** on frozen **`full_run_duration_target`** (**separate** operator sessions — **not** reinterpreted). **PV1** is **not** “Phase VIII” — **no** **M62**. **v2** is **not** opened. **PX1-M01**–**PX1-M04** are **planned** — **not** opened by **PX1-M00**.
+**Current (post-PV1):** **None** — **PX1-M00** — Full Industrial Run & Demonstration Charter — **closed** on `main` (implementation [PR #83](https://github.com/m-cahill/starlab/pull/83); **PX1_M00_CLOSEOUT_PR**). **PX1** phase + roadmap **remain** in **Post-PV1 (PX1)** (below §7). **PX1-M01**–**PX1-M04** are **planned / not yet opened**. **v2** is **not** opened. **PX1-M00** was **governance-first** only: **no** operator campaign execution, **no** demo recording, **no** industrial-run or play-quality or demo proof claimed — **PX1-M01**+ remain **separate** milestones. **v1** (**M00–M61**) is **closed** and **historical**. **PV1** (**PV1-M00**–**PV1-M04**) is **closed** and **historical** — bounded **PV1** outcome (**unchanged**): Tranche A **completed within scope**; Tranche B **completed within scope**; full-run **`threshold-not-met`** (**separate** operator sessions — **not** reinterpreted). **PV1** is **not** “Phase VIII” — **no** **M62**.
 
-### PX1-M00 — Full Industrial Run & Demonstration Charter — **open**
+### PX1-M00 — Full Industrial Run & Demonstration Charter — **closed** (`main`)
 
-**Intent:** Open **PX1 — Full Industrial Run & Demonstration Proof** as a **separate** post-**PV1** governed phase with explicit **three-way** success separation (full industrial run vs play‑quality vs demo/video), **PX1** roadmap rows, **PX1** non-claims, and public-ledger framing for the full planned **PX1** sequence.
+**Implementation PR:** [PR #83](https://github.com/m-cahill/starlab/pull/83) — merged charter surfaces (public ledger, **`docs/runtime/px1_full_industrial_run_demo_charter_v1.md`**, governance tests, private plan/charter). **Authoritative PR-head CI** [`24587023204`](https://github.com/m-cahill/starlab/actions/runs/24587023204) — **success**; **merge-boundary `main` CI** [`24587086428`](https://github.com/m-cahill/starlab/actions/runs/24587086428) on merge commit `92da985…` — **success**.
 
-**Non-claims (PX1-M00):** **governance charter + roadmap only** — **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **not** new Tranche A/B execution or **threshold-met** fabrication against **PV1** history; **not** automatic **v2** readiness; **does not** open **PX1-M01**–**M04**; **does not** imply **v2** begins after **PX1** automatically.
+**Milestone closeout PR:** **PX1_M00_CLOSEOUT_PR** — ledger + private **`PX1-M00_summary.md`** / **`PX1-M00_audit.md`** — **governance closeout only**; **does not** add execution evidence; **does not** open **PX1-M01**.
 
-**Authoritative narrative:** See **`docs/runtime/px1_full_industrial_run_demo_charter_v1.md`** and **Post-PV1 (PX1)** (below §7).
+**Intent (delivered):** Established **PX1** as a **separate** post-**PV1** phase with **three-way** success separation (full industrial run vs play‑quality vs demo/video), **PX1** roadmap rows, **PX1** non-claims, and public-ledger framing — **no** operator campaigns, **no** demos, **no** threshold value freeze (**schema** in charter; **PX1-M01** freezes values before execution).
+
+**Non-claims (PX1-M00):** **governance charter + roadmap only** — **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **not** new Tranche A/B execution or **threshold-met** fabrication against **PV1** history; **not** automatic **v2** readiness; **did not** open **PX1-M01**–**M04**; **does not** imply **v2** begins after **PX1** automatically.
+
+**Authoritative narrative:** **`docs/runtime/px1_full_industrial_run_demo_charter_v1.md`**; **Post-PV1 (PX1)** (below §7); private **`PX1-M00_charter.md`**.
+
+**Post-closeout ledger:** §1 quick scan + §23 + §11 — **PX1-M00** **closed**; **`current milestone`** → **None**; **PX1-M01** **not** opened.
 
 ### PV1-M04 — Post-Campaign Analysis / Comparative Readout — **closed** (`main`)
 
@@ -1167,7 +1175,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M03):** **Tranche B / bounded full-run completion evidence only** — **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **does not** **alone** implement **PV1-M04** (separate PR).
 
-**Next substantial follow-on:** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`** — **`current milestone`** = **PX1-M00** (see §11).
+**Next substantial follow-on:** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`** — **`current milestone`** = **None** after **PX1-M00** closeout (see §11); **PX1-M01** **not** opened.
 
 ### PV1-M02 — Tranche A Execution Evidence — **closed**
 
@@ -1179,7 +1187,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M02):** **bounded Tranche A execution evidence only** — **not** full-run threshold satisfaction; **not** Tranche B; **not** PV1 program completion; **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **PV1-M03** is a **separate** milestone — **not** implied closed by **PV1-M02** merge alone.
 
-**Next substantial follow-on:** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`** — **`current milestone`** = **PX1-M00** (see §11).
+**Next substantial follow-on:** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`** — **`current milestone`** = **None** after **PX1-M00** closeout (see §11); **PX1-M01** **not** opened.
 
 ### PV1-M01 — Campaign Observability & Checkpoint Discipline — **closed**
 
@@ -1191,7 +1199,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M01):** **not** benchmark integrity; **not** replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as default merge norm; **not** full-run threshold satisfaction; **not** a substitute for operator-local execution.
 
-**Next substantial follow-on:** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`** — **`current milestone`** = **PX1-M00** (see §11).
+**Next substantial follow-on:** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`** — **`current milestone`** = **None** after **PX1-M00** closeout (see §11); **PX1-M01** **not** opened.
 
 ### PV1-M00 — Post-v1 Industrial Campaign Charter & Success Criteria — **closed**
 
@@ -2485,6 +2493,13 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-17 — **PX1-M00** milestone closeout — merged to `main` (**PX1_M00_CLOSEOUT_PR**) — **closed**; **`current milestone`** → **None**
+
+- **Closed** **PX1-M00** on `main` with **governance** closeout only: **no** new SC2 execution; **no** demo recording; **no** opening **PX1-M01** or **v2**. **PX1** phase + roadmap **remain** in **Post-PV1 (PX1)**; **PX1-M01**–**M04** **planned / not yet opened**.
+- **Delivered:** §1 quick scan + §11 + §23 + **Post-PV1 (PX1)** roadmap row for **PX1-M00** → **closed**; private **`PX1-M00_summary.md`** / **`PX1-M00_audit.md`**; governance test updates — **not** industrial-run or demo proof.
+- **Preserved:** closed **v1** (**M00–M61**); closed **PV1**; bounded **PV1** outcome (**unchanged**); **PR #83** as **PX1-M00** implementation anchor — **not** reinterpreted.
+- **Post-closeout ledger:** §1 quick scan + §23 + §11 — **PX1-M00** **closed**; **`current milestone`** = **None**. **Authoritative closeout PR-head CI** and **merge-boundary `main` CI** — see closeout PR checks (recorded in **`PX1-M00_run2.md`**).
 
 ### 2026-04-17 — **PX1-M00** Full Industrial Run & Demonstration Charter — **open** on `main` — merged ([PR #83](https://github.com/m-cahill/starlab/pull/83)) — new **Post-PV1 (PX1)** phase
 
