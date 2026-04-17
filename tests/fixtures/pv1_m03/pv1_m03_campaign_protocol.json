@@ -1,0 +1,39 @@
+{
+  "minimum_episodes_governed_full_run": 1,
+  "recommended_default_total_episodes": 6,
+  "phases": [
+    {
+      "description": "Deterministic readiness checks (charter-only for executor).",
+      "kind": "gate",
+      "phase": "preflight"
+    },
+    {
+      "description": "PV1-M02 Tranche A — first substantive post-v1 bootstrap slice (historical name; sealed in campaign contract).",
+      "episode_budget": 3,
+      "kind": "bootstrap_episodes",
+      "phase": "tranche_a"
+    },
+    {
+      "description": "PV1-M03 Tranche B — second substantive bootstrap slice for full-run threshold evaluation.",
+      "episode_budget": 3,
+      "kind": "bootstrap_episodes",
+      "phase": "tranche_b"
+    },
+    {
+      "description": "M45 weighted re-fit when prerequisites hold.",
+      "kind": "optional",
+      "phase": "optional_weighted_refit"
+    },
+    {
+      "description": "M42 comparison (honest skip when no M41 candidate).",
+      "kind": "offline",
+      "phase": "post_refit_m42_comparison"
+    },
+    {
+      "description": "Watchable M44 on refit bundle.",
+      "episode_budget": 1,
+      "kind": "operator_review",
+      "phase": "watchable_m44_validation"
+    }
+  ]
+}

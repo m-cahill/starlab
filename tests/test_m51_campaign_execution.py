@@ -109,6 +109,82 @@ def test_m51_post_bootstrap_protocol_fixture_pipeline(tmp_path: Path) -> None:
     assert (w44 / "local_live_play_validation_run.json").is_file()
 
 
+def test_m51_skip_bootstrap_phases_runs_second_tranche_only(tmp_path: Path) -> None:
+    """Continuation execution: skip first bootstrap_episodes block; run second + M51."""
+    m43_dir, bundle = _build_m43_run_dir(tmp_path)
+    shutil.copy(MATCH_FAKE, tmp_path / "match.json")
+    bench = M28_FIX / "benchmark_contract_m28.json"
+    out = tmp_path / "campaign"
+    ds = M26_FIX / "replay_training_dataset.json"
+    base = _minimal_protocol_one_bootstrap_episode()
+    raw_phases = base.get("phases", [])
+    phases = list(raw_phases) if isinstance(raw_phases, list) else []
+    slim2: list[dict[str, object]] = []
+    for p in phases:
+        if not isinstance(p, dict):
+            continue
+        if p.get("kind") == "bootstrap_episodes" and p.get("phase") == "m51_ci_bootstrap":
+            slim2.append(
+                {
+                    "phase": "tranche_a_stub",
+                    "kind": "bootstrap_episodes",
+                    "episode_budget": 1,
+                    "description": "first tranche placeholder",
+                }
+            )
+            slim2.append(
+                {
+                    "phase": "tranche_b_stub",
+                    "kind": "bootstrap_episodes",
+                    "episode_budget": 1,
+                    "description": "second tranche for skip test",
+                }
+            )
+            continue
+        slim2.append(p)
+    proto = dict(base)
+    proto["phases"] = slim2
+    emit_full_local_training_campaign(
+        benchmark_contract_path=bench,
+        bundle_dirs=[bundle],
+        campaign_id="m51_skip_pb",
+        campaign_protocol=proto,
+        dataset_path=ds,
+        hierarchical_training_run_dir=m43_dir,
+        match_config_path=tmp_path / "match.json",
+        output_dir=out,
+        planned_weighted_refit=True,
+        runtime_mode="fixture_stub_ci",
+        training_program_contract_path=None,
+    )
+    code = execute_campaign_main(
+        [
+            "--campaign-contract",
+            str(out / "full_local_training_campaign_contract.json"),
+            "--campaign-root",
+            str(out),
+            "--execution-id",
+            "m51_skip_exec",
+            "--skip-execution-preflight",
+            "--post-bootstrap-protocol-phases",
+            "--skip-bootstrap-phases",
+            "1",
+            "--requested-visibility-mode",
+            "minimized",
+        ],
+    )
+    assert code == 0
+    ed = out / "campaign_runs" / "m51_skip_exec"
+    ta = ed / "phases" / "tranche_a_stub"
+    tb = ed / "phases" / "tranche_b_stub"
+    ta_rec = json.loads((ta / "phase_receipt.json").read_text(encoding="utf-8"))
+    assert ta_rec.get("final_status") == "skipped"
+    assert "skip_bootstrap_phases_prior_tranche_completed_in_other_execution" in (
+        ta_rec.get("reason_codes") or []
+    )
+    assert (tb / "self_play_rl_bootstrap_run.json").is_file()
+
+
 def test_m51_module_help_lists_post_bootstrap_flag() -> None:
     import subprocess
     import sys

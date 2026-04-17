@@ -108,6 +108,17 @@ def main(argv: list[str] | None = None) -> int:
         help="Run only the first N bootstrap_episodes phases (default: all).",
     )
     parser.add_argument(
+        "--skip-bootstrap-phases",
+        type=int,
+        default=0,
+        metavar="N",
+        help=(
+            "Skip the first N bootstrap_episodes phases in protocol order (continuation runs "
+            "when prior tranches completed under another execution_id). Do not combine with "
+            "--max-bootstrap-phases unless you understand bootstrap_slot ordering."
+        ),
+    )
+    parser.add_argument(
         "--post-bootstrap-protocol-phases",
         action="store_true",
         help=(
@@ -289,6 +300,9 @@ def main(argv: list[str] | None = None) -> int:
             )
         else:
             phases = _bootstrap_phases(protocol)
+            skip_b = max(0, int(args.skip_bootstrap_phases or 0))
+            if skip_b:
+                phases = phases[skip_b:]
             if args.max_bootstrap_phases is not None:
                 n = max(0, int(args.max_bootstrap_phases))
                 phases = phases[:n]
