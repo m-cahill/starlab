@@ -2486,10 +2486,11 @@ It should always answer, with minimal ambiguity:
 
 ## 23. Changelog
 
-### 2026-04-17 — **PX1-M00** Full Industrial Run & Demonstration Charter — **open** (`main`) — new **Post-PV1 (PX1)** phase
+### 2026-04-17 — **PX1-M00** Full Industrial Run & Demonstration Charter — **open** on `main` — merged ([PR #83](https://github.com/m-cahill/starlab/pull/83)) — new **Post-PV1 (PX1)** phase
 
-- **Opened** **PX1 — Full Industrial Run & Demonstration Proof** as a **separate** post-**PV1** governed phase (**not** “Phase VIII”; **not** **M62**; **not** PV1 cleanup). **`current milestone`** → **PX1-M00** (governance-first charter; **no** operator campaign execution; **no** demo recording).
-- **Delivered:** public runtime **`docs/runtime/px1_full_industrial_run_demo_charter_v1.md`**; **Post-PV1 (PX1)** section + roadmap table ( **PX1-M01**–**M04** **planned / not opened** ); §1 quick scan + §11 + Start Here item 9; private **`PX1-M00_plan.md`** / **`PX1-M00_charter.md`** under `docs/company_secrets/milestones/post-v1/PX1-M00/`.
+- **Merged** [PR #83](https://github.com/m-cahill/starlab/pull/83) to `main`; merge commit `92da98595e29499405bfee0c25f85f32114d68ad`; **final PR head** `4f0e010a5a480ab249a31a164b8d10cb84c068b0`; **authoritative PR-head CI** [`24587023204`](https://github.com/m-cahill/starlab/actions/runs/24587023204) — **success**; **merge-boundary `main` CI** [`24587086428`](https://github.com/m-cahill/starlab/actions/runs/24587086428) on merge commit `92da985…` — **success**.
+- **Opened** **PX1 — Full Industrial Run & Demonstration Proof** as a **separate** post-**PV1** governed phase (**not** “Phase VIII”; **not** **M62**; **not** PV1 cleanup). **`current milestone`** → **PX1-M00** (governance-first charter; **no** operator campaign execution; **no** demo recording). **Not** milestone closeout — **PX1-M00** remains **open** until separate governance closeout.
+- **Delivered:** public runtime **`docs/runtime/px1_full_industrial_run_demo_charter_v1.md`**; **Post-PV1 (PX1)** section + roadmap table ( **PX1-M01**–**M04** **planned / not opened** ); §1 quick scan + §11 + Start Here item 9; private **`PX1-M00_plan.md`** / **`PX1-M00_charter.md`** under `docs/company_secrets/milestones/post-v1/PX1-M00/`; private **`PX1-M00_run1.md`** (CI/workflow analysis — **not** closeout audit).
 - **Preserved:** closed **v1** (**M00–M61**) and closed **PV1** (**PV1-M00**–**PV1-M04**) history; bounded **PV1** outcome (**unchanged**): Tranche A/B **within scope**; full-run **`threshold-not-met`** (**not** reinterpreted). **v2** remains **unopened**; **PX1 completion does not** automatically open **v2**.
 
 ### 2026-04-17 — **PV1-M04** milestone closeout — merged to `main` ([PR #81](https://github.com/m-cahill/starlab/pull/81)) — **closed**; **`current milestone`** → **None**
