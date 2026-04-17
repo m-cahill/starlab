@@ -11,12 +11,13 @@
 | --- | --- |
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
 | Closeout PR | [PR #87](https://github.com/m-cahill/starlab/pull/87) |
-| Final PR head SHA | *TBD — fill from `git rev-parse HEAD` on final push* |
-| Merge commit (`main`) | *TBD after merge* |
-| Authoritative PR-head run | *TBD* |
-| Merge-boundary `main` run | *TBD* |
+| Branch | `docs/px1-m01-closeout` |
+| Final PR head SHA | `80065499524be92160a583c9e6297108949ebd1d` |
+| Merge commit (`main`) | `9e8a66c1ab097adc34d0cfa86ab3c54472f6c81b` |
+| Authoritative PR-head CI | [`24591211373`](https://github.com/m-cahill/starlab/actions/runs/24591211373) on **`8006549…`** — **success** |
+| Merge-boundary `main` CI | [`24591267317`](https://github.com/m-cahill/starlab/actions/runs/24591267317) on merge commit `9e8a66c…` — **success** |
 
-**Superseded runs:** *none unless noted in CI UI*
+**Superseded runs:** prior PR-head run [`24591205124`](https://github.com/m-cahill/starlab/actions/runs/24591205124) on first closeout commit `da78a25…` — **superseded** by final head `8006549…` (not merge authority for final head).
 
 ---
 
@@ -33,13 +34,12 @@
 
 | Question | Answer |
 | --- | --- |
-| CI green on final PR head? | *TBD* |
-| Merge-boundary `main` green? | *TBD* |
-| Merge-ready? | *TBD* |
+| CI green on final PR head? | **Yes** — [`24591211373`](https://github.com/m-cahill/starlab/actions/runs/24591211373) |
+| Merge-boundary `main` green? | **Yes** — [`24591267317`](https://github.com/m-cahill/starlab/actions/runs/24591267317) |
+| Merge-ready? | **Merged** to `main` |
 
 ---
 
 ## 4. Notes
 
-- Replace token **`[PR #87](https://github.com/m-cahill/starlab/pull/87)`** in `docs/starlab.md` / `PX1-M01_summary.md` / `PX1-M01_audit.md` with the real closeout PR link after PR creation.
 - Operator-local execution evidence remains under **`out/training_campaigns/`** — **not** committed.
