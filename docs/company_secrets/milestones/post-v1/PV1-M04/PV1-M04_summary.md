@@ -3,7 +3,7 @@
 **Project:** STARLAB  
 **Phase:** Post-v1 (**PV1**) — **not** “Phase VIII” of v1  
 **Milestone:** PV1-M04  
-**Timeframe:** implementation merge **2026-04-17** ([PR #79](https://github.com/m-cahill/starlab/pull/79)) → milestone closeout ([PR #81](https://github.com/m-cahill/starlab/pull/81)) — merge dates **record at merge**  
+**Timeframe:** implementation merge **2026-04-17** ([PR #79](https://github.com/m-cahill/starlab/pull/79)) → milestone closeout merge **2026-04-17** (UTC) ([PR #81](https://github.com/m-cahill/starlab/pull/81); merge commit `0b2c427199ed4a42ca31119274984b8a1a456daa`)  
 **Status:** **Closed**
 
 ---
