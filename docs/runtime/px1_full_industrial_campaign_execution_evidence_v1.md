@@ -4,7 +4,7 @@
 
 This file is the **public runtime contract** for **PX1-M01 — Full Industrial Campaign Execution Evidence**. **Whether PX1-M01 is open or closed** on `main` is determined by **`docs/starlab.md`** (and the opening / closeout PRs), **not** by this document alone.
 
-When the ledger lists **PX1-M01** as **open**, this contract governs how to read operator-local artifacts and the **frozen PX1 full-run threshold block**. **PX1-M02** does **not** open automatically when **PX1-M01** merges or closes — **not** even if **`threshold-met`**.
+When the ledger lists **PX1-M01** as **closed**, this contract remains the **reference** for reading operator-local artifacts and the **frozen PX1 full-run threshold block** used for the authoritative run. **PX1-M02** does **not** open automatically when **PX1-M01** merges or closes — **not** even if **`threshold-met`**.
 
 ## Purpose
 
