@@ -1,5 +1,9 @@
 # PV1 Tranche B / full-run threshold evidence (v1)
 
+## Ledger posture (public source of truth)
+
+This file is a **governance runtime contract** for **PV1-M03**. It **does not** by itself mean **PV1-M03** is **closed** on `main`. **Milestone closure** requires an honest operator outcome, accurate **`docs/starlab.md`** ledger updates, and a **merge** to `main` per project rules — **not** implied by this document alone.
+
 ## Purpose
 
 This contract defines **Tranche B** and **full-run threshold evaluation** for **PV1-M03 — Tranche B / Full-Run Completion Evidence**: operator-local governed execution on the closed **M49 / M50 / M51** machinery, with **PV1-M01** inspection artifacts at tranche boundaries and an explicit **`threshold-met`** or **`threshold-not-met`** declaration against a **frozen** threshold block.

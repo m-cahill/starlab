@@ -117,7 +117,8 @@ def test_m51_skip_bootstrap_phases_runs_second_tranche_only(tmp_path: Path) -> N
     out = tmp_path / "campaign"
     ds = M26_FIX / "replay_training_dataset.json"
     base = _minimal_protocol_one_bootstrap_episode()
-    phases = list(base.get("phases", [])) if isinstance(base.get("phases"), list) else []
+    raw_phases = base.get("phases", [])
+    phases = list(raw_phases) if isinstance(raw_phases, list) else []
     slim2: list[dict[str, object]] = []
     for p in phases:
         if not isinstance(p, dict):
