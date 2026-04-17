@@ -2,7 +2,7 @@
 
 **Milestone:** PV1-M03 — Tranche B / Full-Run Completion Evidence  
 **Implementation PR:** [PR #77](https://github.com/m-cahill/starlab/pull/77) — merge commit `9105a7ee6dff47acfb409f4cd08ca2693e98f9f1`  
-**Closeout PR:** [PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR) — **milestone closure** (ledger + private artifacts)
+**Closeout PR:** [PR #78](https://github.com/m-cahill/starlab/pull/78) — **milestone closure** (ledger + private artifacts)
 
 ## CI posture
 

@@ -3,7 +3,7 @@
 **Project:** STARLAB  
 **Phase:** Post-v1 (**PV1**) — **not** “Phase VIII” of v1  
 **Milestone:** PV1-M03  
-**Timeframe:** implementation merge **2026-04-17** (PR #77) → milestone closeout (PR #PLACEHOLDER_CLOSEOUT_PR) — merge date **record at merge**  
+**Timeframe:** implementation merge **2026-04-17** (PR #77) → milestone closeout (PR #78) — merge date **record at merge**  
 **Status:** **Closed**
 
 ---

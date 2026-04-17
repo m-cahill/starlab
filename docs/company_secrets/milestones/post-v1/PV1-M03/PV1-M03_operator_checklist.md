@@ -1,6 +1,6 @@
 # PV1-M03 — Operator execution checklist (Tranche B / full-run threshold)
 
-**Status:** **Historical operator recipe.** **PV1-M03** is **closed** on `main` (implementation [PR #77](https://github.com/m-cahill/starlab/pull/77); closeout [PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR)). **Tranche B** may be **completed within scope**; **full-run threshold** may still be **`threshold-not-met`** if the frozen **`full_run_duration_target`** is not satisfied — see **`docs/starlab.md`** for current ledger. This checklist does **not** open **PV1-M04**.
+**Status:** **Historical operator recipe.** **PV1-M03** is **closed** on `main` (implementation [PR #77](https://github.com/m-cahill/starlab/pull/77); closeout [PR #78](https://github.com/m-cahill/starlab/pull/78)). **Tranche B** may be **completed within scope**; **full-run threshold** may still be **`threshold-not-met`** if the frozen **`full_run_duration_target`** is not satisfied — see **`docs/starlab.md`** for current ledger. This checklist does **not** open **PV1-M04**.
 
 **Authoritative contracts:** `docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md` (public), `docs/starlab.md` (ledger).
 
