@@ -10,7 +10,7 @@
 | Field | Value |
 | --- | --- |
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
-| Closeout PR | PX1M01CLOSEOUTPR |
+| Closeout PR | [PR #87](https://github.com/m-cahill/starlab/pull/87) |
 | Final PR head SHA | *TBD — fill from `git rev-parse HEAD` on final push* |
 | Merge commit (`main`) | *TBD after merge* |
 | Authoritative PR-head run | *TBD* |
@@ -41,5 +41,5 @@
 
 ## 4. Notes
 
-- Replace token **`PX1M01CLOSEOUTPR`** in `docs/starlab.md` / `PX1-M01_summary.md` / `PX1-M01_audit.md` with the real closeout PR link after PR creation.
+- Replace token **`[PR #87](https://github.com/m-cahill/starlab/pull/87)`** in `docs/starlab.md` / `PX1-M01_summary.md` / `PX1-M01_audit.md` with the real closeout PR link after PR creation.
 - Operator-local execution evidence remains under **`out/training_campaigns/`** — **not** committed.

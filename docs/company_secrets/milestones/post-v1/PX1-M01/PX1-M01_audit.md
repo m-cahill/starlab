@@ -3,7 +3,7 @@
 **Mode:** DELTA AUDIT  
 **Milestone:** PX1-M01 — Full Industrial Campaign Execution Evidence  
 **Baseline:** PX1-M01 opening ([PR #85](https://github.com/m-cahill/starlab/pull/85)) + ledger pins ([PR #86](https://github.com/m-cahill/starlab/pull/86))  
-**Closeout:** PX1M01CLOSEOUTPR  
+**Closeout:** [PR #87](https://github.com/m-cahill/starlab/pull/87)  
 **current_sha:** (final closeout PR head — see `PX1-M01_run2.md`)  
 **diff_range:** PX1-M01 opening merge boundary → closeout PR head (see `PX1-M01_run2.md`)  
 

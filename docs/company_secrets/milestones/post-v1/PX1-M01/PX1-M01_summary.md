@@ -3,7 +3,7 @@
 **Project:** STARLAB  
 **Phase:** Post-PV1 (PX1)  
 **Milestone:** PX1-M01 — Full Industrial Campaign Execution Evidence  
-**Timeframe:** Opening [PR #85](https://github.com/m-cahill/starlab/pull/85) (2026-04-17) → closeout PX1M01CLOSEOUTPR (2026-04-17)  
+**Timeframe:** Opening [PR #85](https://github.com/m-cahill/starlab/pull/85) (2026-04-17) → closeout [PR #87](https://github.com/m-cahill/starlab/pull/87) (2026-04-17)  
 **Status:** Closed  
 
 ---
