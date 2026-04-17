@@ -3,7 +3,7 @@
 **Project:** STARLAB  
 **Phase:** Post-PV1 — **PX1 — Full Industrial Run & Demonstration Proof**  
 **Milestone:** **PX1-M00** — Full Industrial Run & Demonstration Charter  
-**Timeframe:** 2026-04-17 (charter implementation [PR #83](https://github.com/m-cahill/starlab/pull/83)) → 2026-04-17 (governance closeout — **PX1_M00_CLOSEOUT_PR**)  
+**Timeframe:** 2026-04-17 (charter implementation [PR #83](https://github.com/m-cahill/starlab/pull/83)) → 2026-04-17 (governance closeout — [PR #84](https://github.com/m-cahill/starlab/pull/84))  
 **Status:** **Closed**
 
 ---
@@ -109,7 +109,7 @@ No new issues were introduced during this milestone beyond normal governance tex
 ## 12. Canonical References
 
 - [PR #83](https://github.com/m-cahill/starlab/pull/83) — PX1-M00 implementation  
-- Closeout PR — **PX1_M00_CLOSEOUT_PR**  
+- Closeout PR — [PR #84](https://github.com/m-cahill/starlab/pull/84)  
 - `docs/runtime/px1_full_industrial_run_demo_charter_v1.md`  
 - `docs/company_secrets/milestones/post-v1/PX1-M00/PX1-M00_charter.md`  
 - `docs/company_secrets/milestones/post-v1/PX1-M00/PX1-M00_run1.md`  
