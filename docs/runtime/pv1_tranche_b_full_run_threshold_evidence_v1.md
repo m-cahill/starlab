@@ -2,7 +2,7 @@
 
 ## Ledger posture (public source of truth)
 
-This file is a **governance runtime contract** for **PV1-M03**. It **does not** by itself mean **PV1-M03** is **closed** on `main`. **Milestone closure** requires an honest operator outcome, accurate **`docs/starlab.md`** ledger updates, and a **merge** to `main` per project rules — **not** implied by this document alone.
+This file is a **governance runtime contract** for **PV1-M03**. **Whether PV1-M03 is closed** on `main` is determined by **`docs/starlab.md`** (and the milestone closeout PR), **not** by this document alone. When the ledger lists **PV1-M03** as **closed**, this contract still governs how to read operator-local artifacts (`tranche_b_operator_note.md`, `full_run_threshold_declaration.md`) and the frozen threshold block.
 
 ## Purpose
 
