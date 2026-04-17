@@ -591,3 +591,14 @@ def test_pv1_m03_campaign_protocol_fixture_exists() -> None:
     text = path.read_text(encoding="utf-8")
     assert '"phase": "tranche_a"' in text
     assert '"phase": "tranche_b"' in text
+
+
+def test_px1_m01_campaign_protocol_fixture_exists() -> None:
+    """PX1-M01 reproducible M49 protocol JSON (12 bootstrap episodes + M51 tail; CI-safe)."""
+
+    path = REPO_ROOT / "tests" / "fixtures" / "px1_m01" / "px1_m01_campaign_protocol.json"
+    assert path.is_file()
+    text = path.read_text(encoding="utf-8")
+    assert '"phase": "tranche_a"' in text
+    assert '"phase": "tranche_b"' in text
+    assert '"episode_budget": 6' in text

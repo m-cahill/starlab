@@ -47,6 +47,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/pv1_tranche_a_execution_evidence_v1.md",
     "docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md",
     "docs/runtime/px1_full_industrial_run_demo_charter_v1.md",
+    "docs/runtime/px1_full_industrial_campaign_execution_evidence_v1.md",
     "docs/runtime/scripted_baseline_suite_v1.md",
     "docs/runtime/heuristic_baseline_suite_v1.md",
     "docs/runtime/evaluation_runner_tournament_harness_v1.md",
