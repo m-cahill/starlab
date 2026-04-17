@@ -1,0 +1,6 @@
+{
+  "campaign_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "execution_id": "synth_a",
+  "execution_status": "complete",
+  "hidden_rollout_campaign_run_version": "starlab.hidden_rollout_campaign_run.v2"
+}
