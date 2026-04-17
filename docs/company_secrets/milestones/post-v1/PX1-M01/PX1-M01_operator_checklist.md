@@ -2,7 +2,8 @@
 
 **Milestone:** Full Industrial Campaign Execution Evidence  
 **Threshold doc:** `docs/runtime/px1_full_industrial_campaign_execution_evidence_v1.md`  
-**Freeze:** `PX1-M01_threshold_freeze.md`
+**Freeze:** `PX1-M01_threshold_freeze.md`  
+**Ledger:** **PX1-M01** is **closed** on `main`; **`current milestone`** = **None** — see `docs/starlab.md` (§1 quick scan, §11, §23).
 
 ## Before authoritative execution
 
@@ -28,5 +29,7 @@
 
 ## PR2 closeout
 
-- [ ] Honest **`threshold-met`** or **`threshold-not-met`**.
-- [ ] **`PX1-M02`** remains **unopened** unless separately authorized.
+- [x] Honest **`threshold-met`** or **`threshold-not-met`** (operator-local: **`threshold-met`**).
+- [x] **`PX1-M02`** remains **unopened** unless separately authorized.
+- [x] **`v2`** remains **unopened**.
+- [x] Ledger updated: **`PX1-M01`** **closed**; **`current milestone`** = **None** (governance closeout PR — see `docs/starlab.md` / `PX1-M01_run2.md`).
