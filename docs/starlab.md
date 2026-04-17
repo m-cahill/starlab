@@ -591,7 +591,7 @@ Planned program arc (**62 milestones**, **M00**–**M61**) — **all closed** on
 
 **Roadmap disclaimer:** **PV1-M02** is **closed** on `main`; **PV1-M03** is **open** on `main` (PR #77 merged **implementation + governance** — **not** milestone closeout); **PV1-M04** remains **planning-only** until explicitly opened.
 
-**Governance merge note:** **PV1-M00** and **PV1-M01** and **PV1-M02** merged under **separate** charters; **PV1-M03** merges under its **own** PR when ready; **PV1-M04** opens only under **explicit** future decisions + PRs (**not** implied by prior merges).
+**Governance merge note:** **PV1-M00** and **PV1-M01** and **PV1-M02** merged under **separate** charters; **PV1-M03** **implementation / governance** for Tranche B opened on `main` via [PR #77](https://github.com/m-cahill/starlab/pull/77) (**not** milestone closeout); any **future** PV1-M03 **milestone closeout** (if authorized) lands under **its own** PR and evidence; **PV1-M04** opens only under **explicit** future decisions + PRs (**not** implied by prior merges).
 
 ### PV1 evidence surfaces (PV1-M01 — inspection helpers)
 

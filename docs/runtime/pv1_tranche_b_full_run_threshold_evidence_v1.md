@@ -67,7 +67,7 @@ Switch to a **fresh** `campaign_id` only if a real **invalidation** makes same-r
 ## Minimum evidence package (campaign root + executions)
 
 - **M49:** `full_local_training_campaign_contract.json` (lists **both** tranches + M51 phases), `campaign_preflight_receipt.json`
-- **M50/M51:** `campaign_runs/pv1_m02_exec_001/hidden_rollout_campaign_run.json`, `campaign_runs/pv1_m03_exec_001/hidden_rollout_campaign_run.json`, phase receipts, replay bindings, watchable validations as applicable
+- **M50/M51:** `campaign_runs/pv1_m02_exec_001/hidden_rollout_campaign_run.json`, `campaign_runs/pv1_m03_exec_001/hidden_rollout_campaign_run.json`, phase receipts, replay bindings, watchable validations as applicable; per execution, `campaign_execution_preflight_receipt.json` at the campaign root when the M50 executor runs extended preflight (honest record when preflight fails)
 - **PV1-M01:** `campaign_observability_index.json` / reports; `tranche_checkpoint_receipt.json` for each tranche close
 - **Operator:** `tranche_a_operator_note.md` (PV1-M02), `tranche_b_operator_note.md`, `full_run_threshold_declaration.md`
 
