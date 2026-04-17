@@ -50,11 +50,11 @@ This table is a **navigation aid** only. Authoritative milestone narrative, CI r
 | ----- | ------------------------ |
 | Program arc | **62 milestones (M00–M61)** — **all closed** on `main`; **M61** completes the planned **v1** foundation-completion arc (see §7). |
 | Last closed milestone (v1 arc) | **M61** — SC2 foundation release lock & v1 proof pack (merge + operator-local **`ready_within_scope`** evidence; see §11 / §18). |
-| Last closed milestone (post-v1) | **PV1-M02** — Tranche A Execution Evidence — **closed** on `main` ([PR #76](https://github.com/m-cahill/starlab/pull/76)). Prior: **PV1-M01** — **closed** ([PR #74](https://github.com/m-cahill/starlab/pull/74)). |
+| Last closed milestone (post-v1) | **PV1-M03** — Tranche B / Full-Run Completion Evidence — **closed** on `main` (implementation [PR #77](https://github.com/m-cahill/starlab/pull/77); closeout [PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR)). Prior: **PV1-M02** — **closed** ([PR #76](https://github.com/m-cahill/starlab/pull/76)); **PV1-M01** — **closed** ([PR #74](https://github.com/m-cahill/starlab/pull/74)). |
 | Post-v1 (PV1) | **PV1 — Long Industrial Campaign & Scaling Evidence** — **rechartered** post-v1 phase (**not** “Phase VIII” of v1). Public roadmap table: **Post-v1 (PV1)** section (below §7). **v1** arc **M00–M61** remains **closed** and **historical**. |
-| Current milestone | **PV1-M03** — Tranche B / Full-Run Completion Evidence — **open** on `main` — merged implementation [PR #77](https://github.com/m-cahill/starlab/pull/77) (**not** milestone closeout): merge commit `9105a7ee6dff47acfb409f4cd08ca2693e98f9f1`; **final PR head** `946e332a87556767a322e8cb3039d6e4a757271c`; **authoritative PR-head CI** [`24541829597`](https://github.com/m-cahill/starlab/actions/runs/24541829597) — **success**; **merge-boundary `main` CI** [`24541875605`](https://github.com/m-cahill/starlab/actions/runs/24541875605) on merge commit `9105a7e…` — **success**. Operator-local **`local_live_sc2`** Tranche B execution remains **blocked** where the SC2 install probe / **`STARLAB_SC2_ROOT`** does not resolve — see §11. **PV1-M04** remains **optional / not yet opened**. **v1** milestones **M00–M61** remain **closed** — **no** **M62**. |
+| Current milestone | **None** — **PV1-M03** is **closed** on `main` (implementation [PR #77](https://github.com/m-cahill/starlab/pull/77); closeout [PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR)). **Tranche B posture:** **completed within scope** (operator-local). **Full-run threshold posture:** **`threshold-not-met`** — frozen **`full_run_duration_target`** was **not** satisfied (Tranche A and Tranche B completed in **separate** operator sessions; **not** reinterpreted). Checkpoint receipts preserved under `checkpoints/tranche_a_close/` and `checkpoints/tranche_b_close/` per PV1-M01 discipline. **PV1-M04** remains **optional / not yet opened**. **v1** milestones **M00–M61** remain **closed** — **no** **M62**. |
 | PV1 execution evidence (operator-local) | Tranche A: **`docs/runtime/pv1_tranche_a_execution_evidence_v1.md`**, **`tranche_a_operator_note.md`**. Tranche B / full-run threshold: **`docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md`**, **`tranche_b_operator_note.md`**, **`full_run_threshold_declaration.md`** — **not** default CI evidence; **not** a substitute for merge-gate proof. |
-| Next planned follow-on | After **PV1-M03** closeout on `main`: **PV1-M04** — Post-campaign analysis / comparative readout — **optional / not yet opened** unless separately chartered. **v2** directions in `docs/starlab-vision.md` remain **outside** the closed **M00–M61** arc unless **separately** rechartered. |
+| Next planned follow-on | **PV1-M04** — Post-campaign analysis / comparative readout — **optional / not yet opened** unless separately chartered. **v2** directions in `docs/starlab-vision.md` remain **outside** the closed **M00–M61** arc unless **separately** rechartered. |
 | Phase VI pipeline (compact) | **M40** contract → **M41** flat training run → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL → **M46** bounded live `final_status` / `sc2_game_result` semantics → **M47** bootstrap episode distinctness / operator ergonomics → **M48** M42 contract-path alignment (**closed** on `main`) → **M49** full local campaign charter + preflight (**closed** on `main`) → **M50** hidden rollout execution + supervision (**closed** on `main`) → **M51** post-bootstrap phase orchestration (**closed** on `main`) — **Phase VI complete** on `main`. |
 | Phase VII pipeline (compact) | **M52**–**M61** — **all closed** on `main` — trust, equivalence, benchmark integrity, live SC2-in-CI posture, ladder/public evaluation protocol, audit hardening, **v1 release lock** (**M61** operator-local **`ready_within_scope`**) — see §6; **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** merge-gate live SC2; **not** ladder/public performance proof. |
 | Offline artifact → local runtime (Phase VI scan) | **M40** contract → **M41** flat training → **M42** comparison → **M43** hierarchical training → **M44** local live-play → **M45** self-play / RL |
@@ -586,12 +586,12 @@ Planned program arc (**62 milestones**, **M00**–**M61**) — **all closed** on
 | `PV1-M00` | Post-v1 Industrial Campaign Charter & Success Criteria | **closed** on `main` ([PR #73](https://github.com/m-cahill/starlab/pull/73)) | Governance-first charter; locks threshold **shape**, tranche/checkpoint/evidence model — **not** numeric campaign commitments; **merge does not** open later PV1 rows |
 | `PV1-M01` | Campaign Observability & Checkpoint Discipline | **closed** on `main` ([PR #74](https://github.com/m-cahill/starlab/pull/74)) | Deterministic **`tranche_checkpoint_receipt`** + **`campaign_observability_index`** helpers — **inspection/reference only**; runtime **`docs/runtime/pv1_campaign_observability_checkpoint_discipline_v1.md`** — **not** Tranche A execution |
 | `PV1-M02` | Tranche A Execution Evidence | **closed** on `main` ([PR #76](https://github.com/m-cahill/starlab/pull/76)) | Bounded **operator-local** Tranche A evidence — runtime **`docs/runtime/pv1_tranche_a_execution_evidence_v1.md`** — **not** full-run completion; **not** Tranche B |
-| `PV1-M03` | Tranche B / Full-Run Completion Evidence | **open** on `main` ([PR #77](https://github.com/m-cahill/starlab/pull/77)) — **not** closed | Runtime **`docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md`**; **`--skip-bootstrap-phases`**; operator Tranche B + threshold declaration **pending** honest **`local_live_sc2`** execution — **does not** open **PV1-M04** |
+| `PV1-M03` | Tranche B / Full-Run Completion Evidence | **closed** on `main` (implementation [PR #77](https://github.com/m-cahill/starlab/pull/77); closeout [PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR)) | Tranche B **completed within scope**; **`full_run_threshold_declaration.md`** = **`threshold-not-met`** (frozen **`full_run_duration_target`** — **not** reinterpreted); runtime **`docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md`**; **`--skip-bootstrap-phases`** — **does not** open **PV1-M04** |
 | `PV1-M04` | Post-Campaign Analysis / Comparative Readout | **optional / not yet opened** | Only if post-run analysis is justified |
 
-**Roadmap disclaimer:** **PV1-M02** is **closed** on `main`; **PV1-M03** is **open** on `main` (PR #77 merged **implementation + governance** — **not** milestone closeout); **PV1-M04** remains **planning-only** until explicitly opened.
+**Roadmap disclaimer:** **PV1-M02** and **PV1-M03** are **closed** on `main`; **PV1-M04** remains **planning-only** until explicitly opened.
 
-**Governance merge note:** **PV1-M00** and **PV1-M01** and **PV1-M02** merged under **separate** charters; **PV1-M03** **implementation / governance** for Tranche B opened on `main` via [PR #77](https://github.com/m-cahill/starlab/pull/77) (**not** milestone closeout); any **future** PV1-M03 **milestone closeout** (if authorized) lands under **its own** PR and evidence; **PV1-M04** opens only under **explicit** future decisions + PRs (**not** implied by prior merges).
+**Governance merge note:** **PV1-M00** through **PV1-M02** merged under **separate** charters; **PV1-M03** **implementation** for Tranche B merged on `main` via [PR #77](https://github.com/m-cahill/starlab/pull/77); **PV1-M03** **milestone closeout** (honest operator outcome + ledger) merges via [PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR); **PV1-M04** opens only under **explicit** future decisions + PRs (**not** implied by prior merges).
 
 ### PV1 evidence surfaces (PV1-M01 — inspection helpers)
 
@@ -1073,21 +1073,23 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ## 11. Current milestone
 
-**Current (post-v1):** **PV1-M03** — Tranche B / Full-Run Completion Evidence — **open** on `main` (merged via [PR #77](https://github.com/m-cahill/starlab/pull/77) — **not** milestone closeout). **PV1-M04** is **not** opened unless separately chartered.
+**Current (post-v1):** **None** — **PV1-M03** is **closed** on `main` (implementation [PR #77](https://github.com/m-cahill/starlab/pull/77); closeout [PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR)). **Tranche B posture:** **completed within scope** (operator-local). **Full-run threshold posture:** **`threshold-not-met`** — frozen **`full_run_duration_target`** was **not** satisfied (Tranche A and Tranche B completed in **separate** operator sessions; **not** reinterpreted). **PV1-M04** is **not** opened unless separately chartered.
 
-### PV1-M03 — Tranche B / Full-Run Completion Evidence — **open** (`main`)
+### PV1-M03 — Tranche B / Full-Run Completion Evidence — **closed** (`main`)
 
-**Merged implementation PR:** [PR #77](https://github.com/m-cahill/starlab/pull/77) — merge commit `9105a7ee6dff47acfb409f4cd08ca2693e98f9f1` merged **2026-04-17** (UTC); **final PR head** `946e332a87556767a322e8cb3039d6e4a757271c`; **authoritative PR-head CI** [`24541829597`](https://github.com/m-cahill/starlab/actions/runs/24541829597) — **success**; **merge-boundary `main` CI** [`24541875605`](https://github.com/m-cahill/starlab/actions/runs/24541875605) on merge commit `9105a7e…` — **success**. Branch `pv1-m03-tranche-b-full-run-evidence` **retained** on `origin` (optional delete). Milestone **open** — **not** closed.
+**Merged implementation PR:** [PR #77](https://github.com/m-cahill/starlab/pull/77) — merge commit `9105a7ee6dff47acfb409f4cd08ca2693e98f9f1` merged **2026-04-17** (UTC); **final PR head** `946e332a87556767a322e8cb3039d6e4a757271c`; **authoritative PR-head CI** [`24541829597`](https://github.com/m-cahill/starlab/actions/runs/24541829597) — **success**; **merge-boundary `main` CI** [`24541875605`](https://github.com/m-cahill/starlab/actions/runs/24541875605) on merge commit `9105a7e…` — **success**. Branch `pv1-m03-tranche-b-full-run-evidence` **retained** on `origin` (optional delete).
+
+**Milestone closeout PR:** [PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR) — ledger + private **`PV1-M03_run1.md`** / **`PV1-M03_summary.md`** / **`PV1-M03_audit.md`** — **honest bounded closeout**; **not** `threshold-met` fabrication.
 
 **Post-v1 phase:** **PV1** — **not** “Phase VIII” of v1; milestone ids **`PV1-MNN`** (**not** **M62**). **v1** arc **M00–M61** remains **closed** on `main`.
 
-**In-repo (on `main`):** Runtime **`docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md`**; protocol fixture **`tests/fixtures/pv1_m03/pv1_m03_campaign_protocol.json`**; executor **`--skip-bootstrap-phases`** for multi-tranche continuation; governance tests — **not** default CI; **not** operator execution proof.
+**In-repo (on `main`):** Runtime **`docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md`**; protocol fixture **`tests/fixtures/pv1_m03/pv1_m03_campaign_protocol.json`**; executor **`--skip-bootstrap-phases`** for multi-tranche continuation; governance tests — **not** default CI.
 
-**Operator-local (blocked in this environment):** **`local_live_sc2`** Tranche B has **not** run where **`STARLAB_SC2_ROOT`** / SC2 install probe does not resolve — M49 **campaign preflight** may report **`preflight_ok`: false**. **No** valid **`pv1_m03_exec_001`** completion claim; **no** final **`threshold-met`** / **`threshold-not-met`** milestone closeout until operator evidence exists or an honest post-attempt declaration is recorded **after** a real execution attempt on an SC2-capable machine.
+**Operator-local outcome (truthful):** Tranche B execution **`pv1_m03_exec_001`** **completed within scope** under **`local_live_sc2`** with coherent **`hidden_rollout_campaign_run.json`** and operator notes; **`full_run_threshold_declaration.md`** records **`threshold-not-met`** because the frozen **`full_run_duration_target`** is **not** satisfied by **separate** operator sessions for Tranche A vs Tranche B — **not** a claim that **`threshold-met`** was met.
 
 **Non-claims (PV1-M03):** **Tranche B / bounded full-run completion evidence only** — **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **does not** open **PV1-M04** unless separately chartered.
 
-**Next substantive milestone (if authorized):** **PV1-M04** — **not** opened until **PV1-M03** closes on `main`.
+**Next substantive milestone (if authorized):** **PV1-M04** — **optional / not yet opened** unless separately chartered.
 
 ### PV1-M02 — Tranche A Execution Evidence — **closed**
 
@@ -1099,7 +1101,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M02):** **bounded Tranche A execution evidence only** — **not** full-run threshold satisfaction; **not** Tranche B; **not** PV1 program completion; **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **PV1-M03** is a **separate** milestone — **not** implied closed by **PV1-M02** merge alone.
 
-**Next substantive milestone (if authorized):** **PV1-M03** — **current** on `main` — see §11 **PV1-M03** stub.
+**Next substantive milestone (if authorized):** **PV1-M04** — **optional / not yet opened** unless separately chartered — see §11 **PV1-M03** closeout.
 
 ### PV1-M01 — Campaign Observability & Checkpoint Discipline — **closed**
 
@@ -1111,7 +1113,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M01):** **not** benchmark integrity; **not** replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as default merge norm; **not** full-run threshold satisfaction; **not** a substitute for operator-local execution.
 
-**Next substantive milestone (if authorized):** **PV1-M03** — **open** on `main` — see §11 **PV1-M03** stub.
+**Next substantive milestone (if authorized):** **PV1-M04** — **optional / not yet opened** unless separately chartered — see §11 **PV1-M03** closeout.
 
 ### PV1-M00 — Post-v1 Industrial Campaign Charter & Success Criteria — **closed**
 
@@ -2405,6 +2407,12 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-17 — **PV1-M03** milestone closeout — merged to `main` ([PR #PLACEHOLDER_CLOSEOUT_PR](https://github.com/m-cahill/starlab/pull/PLACEHOLDER_CLOSEOUT_PR)) — **closed**; honest **`threshold-not-met`**
+
+- **Closed** **PV1-M03** on `main` with **bounded** outcome: **Tranche B completed within scope** (operator-local); **full-run threshold** = **`threshold-not-met`** — frozen **`full_run_duration_target`** was **not** satisfied because Tranche A and Tranche B ran in **separate** operator sessions (**not** reinterpreted). **Does not** claim **`threshold-met`**; **does not** open **PV1-M04**.
+- **Preserved:** [PR #77](https://github.com/m-cahill/starlab/pull/77) as the **implementation** merge; **this PR** is the **milestone closeout** step (ledger + private **`PV1-M03_run1.md`** / **`PV1-M03_summary.md`** / **`PV1-M03_audit.md`**). Checkpoint receipts under `checkpoints/tranche_a_close/` and `checkpoints/tranche_b_close/` per PV1-M01 discipline (operator-local trees **not** committed by default).
+- **Post-closeout ledger:** §1 quick scan + §23 + §11 — **PV1-M03** **closed**; **current milestone** → **None**; **PV1-M04** **not opened**. Authoritative **closeout PR-head CI** and **merge-boundary `main` CI** run IDs — **record at merge** (same discipline as prior milestones).
 
 ### 2026-04-17 — **PV1-M03** Tranche B / full-run threshold — merged to `main` (PR #77) — **open milestone** (not closeout)
 
