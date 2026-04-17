@@ -46,7 +46,15 @@
 - **Merge status:** PR **#83** merged to `main`.
 - **Milestone state:** **PX1-M00** remains **open** (charter landed; **not** governance closeout).
 
-## 5. Residual / follow-up
+## 5. Post-merge ledger follow-up (same milestone, not closeout)
+
+| Field | Value |
+| --- | --- |
+| Commit | `f4c56017bd828d9caa602cff2ddb149429c86ea7` |
+| Purpose | Record PR **#83** + CI run IDs in §23; add this **`PX1-M00_run1.md`** |
+| **`main` CI** | [`24587163775`](https://github.com/m-cahill/starlab/actions/runs/24587163775) — **success** |
+
+## 6. Residual / follow-up
 
 - **PX1-M01** remains **not opened**.
 - **PX1-M00** formal closeout (summary/audit prompts) is a **separate** step when authorized — **not** this document.
