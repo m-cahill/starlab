@@ -247,8 +247,33 @@ def execute_m51_protocol_phases(
             continue
 
         if kind == "bootstrap_episodes":
+            skip_first = int(getattr(args, "skip_bootstrap_phases", 0) or 0)
             skip_max = max_boot is not None and bootstrap_slot >= int(max_boot)
             budget = int(phase.get("episode_budget", 0))
+            if not skip_max and bootstrap_slot < skip_first:
+                bootstrap_slot += 1
+                rec = build_phase_receipt(
+                    eligible=False,
+                    executed=False,
+                    final_status="skipped",
+                    input_artifact_refs={},
+                    output_artifact_refs={},
+                    phase_kind=kind,
+                    phase_name=phase_name,
+                    phase_order_index=order_idx,
+                    reason_codes=[
+                        "skip_bootstrap_phases_prior_tranche_completed_in_other_execution",
+                    ],
+                    requested=True,
+                    resume_posture="not_applicable",
+                    stop_boundary_reached=False,
+                    warnings=[],
+                )
+                pdir = edir / "phases" / phase_name
+                pdir.mkdir(parents=True, exist_ok=True)
+                write_phase_receipt(phase_output_dir=pdir, receipt=rec)
+                receipt_list.append(rec)
+                continue
             if skip_max:
                 bootstrap_slot += 1
                 rec = build_phase_receipt(

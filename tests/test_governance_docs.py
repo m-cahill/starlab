@@ -45,6 +45,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/ladder_public_evaluation_protocol_evidence_surface_v1.md",
     "docs/runtime/sc2_foundation_release_lock_v1.md",
     "docs/runtime/pv1_tranche_a_execution_evidence_v1.md",
+    "docs/runtime/pv1_tranche_b_full_run_threshold_evidence_v1.md",
     "docs/runtime/scripted_baseline_suite_v1.md",
     "docs/runtime/heuristic_baseline_suite_v1.md",
     "docs/runtime/evaluation_runner_tournament_harness_v1.md",
