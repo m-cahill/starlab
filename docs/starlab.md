@@ -1094,6 +1094,8 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Milestone closeout PR:** [PR #81](https://github.com/m-cahill/starlab/pull/81) — ledger + private **`PV1-M04_summary.md`** / **`PV1-M04_audit.md`** — **honest governance closeout**; **does not** add execution evidence; **does not** reinterpret **`threshold-not-met`**.
 
+**Authoritative closeout PR-head CI** [`24549710647`](https://github.com/m-cahill/starlab/actions/runs/24549710647) on **final PR head** `99caf2156d915851df21d45a7fe1725da7094924` — **success**; **merge-boundary `main` CI** [`24549764138`](https://github.com/m-cahill/starlab/actions/runs/24549764138) on merge commit `0b2c427199ed4a42ca31119274984b8a1a456daa` — **success**.
+
 **Product (in repo):** runtime **`docs/runtime/pv1_post_campaign_readout_v1.md`**; deterministic **`pv1_post_campaign_readout.json`** / **`pv1_post_campaign_readout_report.json`** via `python -m starlab.training.emit_pv1_post_campaign_readout` (**aggregation only** over existing campaign trees — default outputs under `--campaign-root`, optional **`--output-dir`**); **`tests/fixtures/pv1_m04/`** + **`tests/test_pv1_post_campaign_readout.py`** — **fixture-only** — **not** operator **`out/`** trees in CI.
 
 **Non-claims (PV1-M04):** **bounded post-campaign comparative readout only** — **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **not** new Tranche A/B execution or **threshold-met** fabrication; **not** automatic charter of **PV1-M05**.
@@ -2437,7 +2439,7 @@ It should always answer, with minimal ambiguity:
 
 - **Closed** **PV1-M04** on `main` with **governance** closeout only: **no** new SC2 execution; **no** reinterpretation of **`threshold-not-met`** on **`full_run_duration_target`**. The **bounded** **PV1** campaign result remains: Tranche A **completed within scope**; Tranche B **completed within scope**; full-run threshold **`threshold-not-met`** (**separate** operator sessions — **not** reinterpreted).
 - **Preserved:** [PR #79](https://github.com/m-cahill/starlab/pull/79) as the **implementation** merge (readout emitter + runtime + fixtures); **this PR** is the **milestone closeout** step (ledger + private **`PV1-M04_summary.md`** / **`PV1-M04_audit.md`**). **Does not** open **PV1-M05** or any later **PV1** row.
-- **Post-closeout ledger:** §1 quick scan + §23 + §11 — **PV1-M04** **closed**; **`current milestone`** = **None**. **Authoritative closeout PR-head CI** — **record at merge** (green run on final PR head). **Merge-boundary `main` CI** — **record at merge** (green run on merge commit).
+- **Post-closeout ledger:** §1 quick scan + §23 + §11 — **PV1-M04** **closed**; **`current milestone`** = **None**. **Authoritative closeout PR-head CI** [`24549710647`](https://github.com/m-cahill/starlab/actions/runs/24549710647) on **final PR head** `99caf2156d915851df21d45a7fe1725da7094924` — **success**; **merge-boundary `main` CI** [`24549764138`](https://github.com/m-cahill/starlab/actions/runs/24549764138) on merge commit `0b2c427199ed4a42ca31119274984b8a1a456daa` — **success**.
 
 ### 2026-04-16 — **PV1-M04** Post-Campaign Analysis / Comparative Readout — merged to `main` ([PR #79](https://github.com/m-cahill/starlab/pull/79)) — **open** (not closeout)
 
