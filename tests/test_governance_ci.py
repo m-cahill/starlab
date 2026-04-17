@@ -8,10 +8,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 @pytest.mark.smoke
-def test_ledger_quick_scan_post_v1_current_none_after_pv1_m04_closeout() -> None:
+def test_ledger_quick_scan_post_pv1_current_px1_m00_after_px1_charter() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
-    assert "| Current milestone | **None**" in scan
+    assert "| Current milestone | **PX1-M00**" in scan
+    assert "**PX1-M00**" in scan
     assert "**PV1-M04**" in scan
     assert "**closed**" in scan
     assert "pull/81" in scan
@@ -20,6 +21,8 @@ def test_ledger_quick_scan_post_v1_current_none_after_pv1_m04_closeout() -> None
     assert "pull/77" in scan
     assert "threshold-not-met" in scan
     assert "tranche_b_operator_note.md" in scan or "PV1 execution evidence" in scan
+    assert "| Post-PV1 (PX1) |" in scan
+    assert "v2" in scan.lower() and "defer" in scan.lower()
 
 
 @pytest.mark.smoke
@@ -106,6 +109,20 @@ def test_od005_resolved_row() -> None:
 
 
 @pytest.mark.smoke
+def test_ledger_post_pv1_px1_section() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "## Post-PV1 (PX1) — Full Industrial Run & Demonstration Proof" in text
+    assert "| `PX1-M00` |" in text
+    assert "| `PX1-M01` |" in text
+    assert "| `PX1-M02` |" in text
+    assert "| `PX1-M03` |" in text
+    assert "| `PX1-M04` |" in text
+    assert "Full Industrial Run & Demonstration Charter | **current / open**" in text
+    assert "docs/runtime/px1_full_industrial_run_demo_charter_v1.md" in text
+    assert (REPO_ROOT / "docs" / "runtime" / "px1_full_industrial_run_demo_charter_v1.md").is_file()
+
+
+@pytest.mark.smoke
 def test_ledger_post_v1_pv1_section() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "## Post-v1 (PV1) — Long Industrial Campaign & Scaling Evidence" in text
@@ -132,6 +149,8 @@ def test_ledger_post_v1_pv1_section() -> None:
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "### PX1-M00 — Full Industrial Run & Demonstration Charter — **open**" in section
+    assert "px1_full_industrial_run_demo_charter_v1.md" in section
     assert "### PV1-M04 — Post-Campaign Analysis / Comparative Readout — **closed**" in section
     assert "### PV1-M03 — Tranche B / Full-Run Completion Evidence — **closed**" in section
     assert "### PV1-M02 — Tranche A Execution Evidence — **closed**" in section
