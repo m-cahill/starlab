@@ -13,7 +13,8 @@ def test_ledger_quick_scan_post_v1_current_pv1_m03_open() -> None:
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone | **PV1-M03**" in scan
     assert "**open**" in scan
-    assert "pv1-m03-tranche-b-full-run-evidence" in scan
+    assert "**open** on `main`" in scan
+    assert "pull/77" in scan
     assert "tranche_b_operator_note.md" in scan or "PV1 execution evidence" in scan
 
 
@@ -116,6 +117,7 @@ def test_ledger_post_v1_pv1_section() -> None:
     assert "### PV1 evidence surfaces (PV1-M03 — Tranche B / full-run threshold)" in text
     assert "[PR #74](https://github.com/m-cahill/starlab/pull/74)" in text
     assert "[PR #76](https://github.com/m-cahill/starlab/pull/76)" in text
+    assert "[PR #77](https://github.com/m-cahill/starlab/pull/77)" in text
     assert "**open**" in text
 
 
