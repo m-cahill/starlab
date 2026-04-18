@@ -29,6 +29,32 @@ def test_governance_docs_include_px1_m02_runtime_doc() -> None:
     assert "px1_play_quality_demo_candidate_selection_v1.md" in text
 
 
+def test_protocol_bundle_rejects_wrong_profile_id() -> None:
+    import hashlib
+
+    obj = load_json_object_strict(PROTOCOL_INPUT)
+    obj["protocol_profile_id"] = "starlab.invalid.profile"
+    raw = json.dumps(obj, sort_keys=True).encode("utf-8")
+    with pytest.raises(ValueError, match="unsupported protocol_profile_id"):
+        px1_play_quality_protocol_bundle(
+            input_obj=obj,
+            input_sha256=hashlib.sha256(raw).hexdigest(),
+        )
+
+
+def test_protocol_bundle_rejects_wrong_runtime_doc_path() -> None:
+    import hashlib
+
+    obj = load_json_object_strict(PROTOCOL_INPUT)
+    obj["runtime_doc_rel_path"] = "docs/wrong.md"
+    raw = json.dumps(obj, sort_keys=True).encode("utf-8")
+    with pytest.raises(ValueError, match="runtime_doc_rel_path"):
+        px1_play_quality_protocol_bundle(
+            input_obj=obj,
+            input_sha256=hashlib.sha256(raw).hexdigest(),
+        )
+
+
 def test_protocol_contract_id_and_profile() -> None:
     raw = PROTOCOL_INPUT.read_bytes()
     obj = load_json_object_strict(PROTOCOL_INPUT)
