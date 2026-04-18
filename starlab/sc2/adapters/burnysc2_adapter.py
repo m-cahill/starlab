@@ -14,8 +14,12 @@ from starlab.sc2.artifacts import (
 )
 from starlab.sc2.env_probe import run_probe
 from starlab.sc2.maps import ResolvedMap, resolve_local_map_path
-from starlab.sc2.match_config import MatchConfig
+from starlab.sc2.match_config import (
+    BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+    MatchConfig,
+)
 from starlab.sc2.models import Sc2RuntimeSpec
+from starlab.sc2.px1_m03_hybrid_terran_bot import make_px1_m03_hybrid_terran_bot_class
 
 
 def _sha256_file(path: Path) -> str:
@@ -46,7 +50,10 @@ def _resolve_map_for_burny(config: MatchConfig, maps_root: Path | None) -> tuple
 
 
 def run_burnysc2_adapter(
-    config: MatchConfig, output_dir: Path | None = None
+    config: MatchConfig,
+    output_dir: Path | None = None,
+    *,
+    hierarchical_sklearn_bundle: dict[str, Any] | None = None,
 ) -> ExecutionProofRecord:
     """Run a bounded bot-vs-AI game via BurnySc2.
 
@@ -78,6 +85,11 @@ def run_burnysc2_adapter(
         "status_sequence": ["configure", "launch"],
     }
 
+    use_hybrid = config.burnysc2_policy == BURNYSC2_POLICY_PX1_M03_HYBRID_V1
+    if use_hybrid and hierarchical_sklearn_bundle is None:
+        msg = "burnysc2_policy px1_m03_hybrid_v1 requires hierarchical_sklearn_bundle"
+        raise RuntimeError(msg)
+
     class _HarnessBot(BotAI):
         def __init__(self, max_steps: int, game_step: int, out: dict[str, Any]) -> None:
             super().__init__()
@@ -108,13 +120,25 @@ def run_burnysc2_adapter(
 
     map_settings, logical_key, map_resolution = _resolve_map_for_burny(config, maps_root)
 
-    bot = _HarnessBot(
-        config.bounded_horizon.max_game_steps,
-        config.bounded_horizon.game_step,
-        sink,
-    )
+    if use_hybrid:
+        assert hierarchical_sklearn_bundle is not None
+        bot_cls = make_px1_m03_hybrid_terran_bot_class(
+            max_steps=config.bounded_horizon.max_game_steps,
+            game_step=config.bounded_horizon.game_step,
+            sink=sink,
+            hierarchical_sklearn_bundle=hierarchical_sklearn_bundle,
+        )
+        bot = bot_cls()
+        bot_race = Race.Terran
+    else:
+        bot = _HarnessBot(
+            config.bounded_horizon.max_game_steps,
+            config.bounded_horizon.game_step,
+            sink,
+        )
+        bot_race = Race.Random
     players = [
-        Bot(Race.Random, bot),
+        Bot(bot_race, bot),
         Computer(Race.Random, Difficulty.Easy),
     ]
 
@@ -173,6 +197,21 @@ def run_burnysc2_adapter(
 
     obs_tuple = tuple(dict(x) for x in sink["observations"])
 
+    lat = sink.get("live_action_tallies")
+    tallies_out: dict[str, int] | None = None
+    if isinstance(lat, dict) and lat:
+        tallies_out = {str(k): int(v) for k, v in lat.items()}
+    lbs = sink.get("live_action_behavior_summary")
+    summary_out: dict[str, Any] | None = None
+    if isinstance(lbs, dict) and lbs:
+        summary_out = dict(lbs)
+        if use_hybrid:
+            summary_out["operator_readable_summary_v1"] = (
+                "PX1-M03 hybrid: hard-coded Terran worker/supply/barracks/marine scaffold; "
+                "one early scout move; throttled marine attack-move toward enemy start using "
+                "M43 coarse labels with periodic fallback — not full strategic play."
+            )
+
     return ExecutionProofRecord(
         schema_version=PROOF_SCHEMA_VERSION,
         adapter_name="burnysc2",
@@ -193,4 +232,6 @@ def run_burnysc2_adapter(
         final_status=validation_final_status,
         replay=replay_meta,
         sc2_game_result=literal_sc2,
+        live_action_tallies=tallies_out,
+        live_action_behavior_summary=summary_out,
     )

@@ -185,7 +185,11 @@ def run_local_live_play_validation(
 
     shutil.copy(match_config_path, paths.match_config)
 
-    harness_result = run_match_execution(cfg, output_dir=output_dir)
+    harness_result = run_match_execution(
+        cfg,
+        output_dir=output_dir,
+        hierarchical_sklearn_bundle=bundle,
+    )
     if not harness_result.ok or harness_result.proof is None:
         msg = harness_result.message or "match harness failed"
         raise RuntimeError(msg)

@@ -1,0 +1,21 @@
+{
+  "adapter": "burnysc2",
+  "bounded_horizon": {
+    "game_step": 8,
+    "max_game_steps": 3000
+  },
+  "burnysc2_policy": "px1_m03_hybrid_v1",
+  "interface": {
+    "feature_layer_interface": false,
+    "raw_interface": true,
+    "rendered_interface": false,
+    "score_interface": true
+  },
+  "map": {
+    "discover_under_maps_dir": true
+  },
+  "replay_filename": "px1_m03_validation.SC2Replay",
+  "save_replay": true,
+  "schema_version": "1",
+  "seed": 4242
+}

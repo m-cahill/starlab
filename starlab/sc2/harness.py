@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from starlab.sc2.adapters.burnysc2_adapter import run_burnysc2_adapter
 from starlab.sc2.adapters.fake import FakeMatchHarnessAdapter
@@ -18,14 +19,23 @@ class HarnessResult:
     message: str | None = None
 
 
-def run_match_execution(config: MatchConfig, *, output_dir: Path | None = None) -> HarnessResult:
+def run_match_execution(
+    config: MatchConfig,
+    *,
+    output_dir: Path | None = None,
+    hierarchical_sklearn_bundle: dict[str, Any] | None = None,
+) -> HarnessResult:
     """Execute one bounded match and build a proof record."""
 
     try:
         if config.adapter == "fake":
             proof = FakeMatchHarnessAdapter().run(config)
         elif config.adapter == "burnysc2":
-            proof = run_burnysc2_adapter(config, output_dir)
+            proof = run_burnysc2_adapter(
+                config,
+                output_dir,
+                hierarchical_sklearn_bundle=hierarchical_sklearn_bundle,
+            )
         else:
             return HarnessResult(
                 ok=False, proof=None, message=f"unknown adapter {config.adapter!r}"
