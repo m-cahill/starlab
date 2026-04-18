@@ -1,0 +1,54 @@
+{
+  "contract_id": "starlab.px1_play_quality_protocol.v1",
+  "protocol_version": "starlab.px1_play_quality_protocol.v1",
+  "protocol_profile_id": "starlab.px1_m02.protocol_profile.bounded_local_live_play_v1",
+  "runtime_doc_rel_path": "docs/runtime/px1_play_quality_demo_candidate_selection_v1.md",
+  "px1_m01_anchor": {
+    "campaign_id": "px1_m01_full_run_2026_04_17_a",
+    "execution_id": "px1_m01_exec_001"
+  },
+  "candidate_pool": [
+    {
+      "candidate_id": "px1_m01_weighted_refit_rl_bootstrap_v1",
+      "pool_description": "Post-bootstrap optional weighted refit bundle (M51 optional_weighted_refit)",
+      "relative_to_campaign_run": "phases/optional_weighted_refit/updated_policy/rl_bootstrap_candidate_bundle.joblib",
+      "notes": "Sole coherent primary candidate from closed PX1-M01; no fabricated pre-refit comparison candidate."
+    }
+  ],
+  "opponent_profiles": [
+    {
+      "opponent_profile_id": "px1_m02_opponent_scripted_style_v1",
+      "posture_label": "bounded_local_scripted_style",
+      "match_config_repo_relative_path": "tests/fixtures/px1_m02/match_opponent_profile_scripted_style.json",
+      "non_claim": "Not a distinct scripted ladder opponent; frozen M02 burnysc2 harness profile A (seed/horizon) for bounded evaluation series only."
+    },
+    {
+      "opponent_profile_id": "px1_m02_opponent_heuristic_style_v1",
+      "posture_label": "bounded_local_heuristic_style",
+      "match_config_repo_relative_path": "tests/fixtures/px1_m02/match_opponent_profile_heuristic_style.json",
+      "non_claim": "Not a distinct heuristic ladder opponent; frozen M02 burnysc2 harness profile B (distinct seed) for bounded evaluation series only."
+    }
+  ],
+  "frozen_parameters": {
+    "minimum_candidates_evaluated": 1,
+    "preferred_candidates_evaluated": 2,
+    "minimum_distinct_opponent_profiles": 2,
+    "minimum_matches_per_candidate_per_opponent_profile": 5,
+    "minimum_total_live_matches_for_selected_candidate": 10,
+    "minimum_selected_candidate_overall_win_rate": 0.6,
+    "minimum_selected_candidate_win_count": 6,
+    "minimum_replay_backed_wins_for_selected_candidate": 2,
+    "minimum_watchable_wins_for_selected_candidate": 1,
+    "minimum_evidence_completeness": "complete",
+    "required_runtime_mode": "local_live_sc2",
+    "allowed_continuity_invalidations": 0,
+    "selection_rule": "choose highest bounded evidence-backed candidate that satisfies the frozen protocol; if tie, prefer candidate with stronger declared demo-opponent performance, then stable deterministic tiebreak"
+  },
+  "non_claims": [
+    "PX1-M02 is bounded play-quality evaluation and demo-candidate selection only — not ladder/public strength, not global benchmark integrity, not replay↔execution equivalence.",
+    "Opponent profiles are bounded local match harness configurations — not public ladder equivalence.",
+    "PX1-M03 (governed demo proof / winning video) does not open automatically from PX1-M02.",
+    "v2 does not open automatically from PX1-M02.",
+    "PX1-M01 proved industrial full-run threshold-met — not play quality or demo/video proof."
+  ]
+}
