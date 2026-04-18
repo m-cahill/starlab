@@ -37,6 +37,19 @@ def test_protocol_bundle_rejects_wrong_profile_id() -> None:
         )
 
 
+def test_protocol_bundle_rejects_non_string_optional_notes() -> None:
+    import hashlib
+
+    obj = load_json_object_strict(PROTOCOL_INPUT)
+    obj["candidate_pool"][0]["notes"] = 123
+    raw = json.dumps(obj, sort_keys=True).encode("utf-8")
+    with pytest.raises(ValueError, match="optional string"):
+        px1_demo_readiness_protocol_bundle(
+            input_obj=obj,
+            input_sha256=hashlib.sha256(raw).hexdigest(),
+        )
+
+
 def test_protocol_contract_id_and_profile() -> None:
     raw = PROTOCOL_INPUT.read_bytes()
     obj = load_json_object_strict(PROTOCOL_INPUT)
@@ -102,3 +115,76 @@ def test_emit_protocol_cli_main(tmp_path: Path) -> None:
         )
         == 0
     )
+
+
+def test_protocol_cli_main_missing_input_returns_1(tmp_path: Path) -> None:
+    from starlab.sc2.emit_px1_demo_readiness_protocol import main as protocol_main
+
+    assert (
+        protocol_main(
+            ["--input", str(tmp_path / "missing.json"), "--output-dir", str(tmp_path / "out")],
+        )
+        == 1
+    )
+
+
+def test_evidence_cli_main_missing_protocol_returns_1(tmp_path: Path) -> None:
+    from starlab.sc2.emit_px1_demo_readiness_evidence import main as ev_main
+
+    assert (
+        ev_main(
+            [
+                "--protocol",
+                str(tmp_path / "missing.json"),
+                "--evaluation-input",
+                str(EVAL_DEMO_READY),
+                "--output-dir",
+                str(tmp_path / "ev_out"),
+            ],
+        )
+        == 1
+    )
+
+
+def test_evidence_bundle_rejects_protocol_contract_mismatch(tmp_path: Path) -> None:
+    from starlab.sc2.px1_demo_readiness_evidence import px1_demo_readiness_evidence_bundle
+
+    pdir = tmp_path / "proto"
+    write_px1_demo_readiness_protocol_artifacts(input_path=PROTOCOL_INPUT, output_dir=pdir)
+    p = load_json_object_strict(pdir / "px1_demo_readiness_protocol.json")
+    p["contract_id"] = "starlab.px1_demo_readiness_protocol.invalid"
+    e = load_json_object_strict(EVAL_DEMO_READY)
+    with pytest.raises(ValueError, match="protocol contract_id"):
+        px1_demo_readiness_evidence_bundle(
+            protocol_obj=p,
+            evaluation_input_obj=e,
+            evaluation_input_sha256="a" * 64,
+        )
+
+
+def test_evidence_bundle_rejects_protocol_schema_mismatch(tmp_path: Path) -> None:
+    from starlab.sc2.px1_demo_readiness_evidence import px1_demo_readiness_evidence_bundle
+
+    pdir = tmp_path / "proto"
+    write_px1_demo_readiness_protocol_artifacts(input_path=PROTOCOL_INPUT, output_dir=pdir)
+    p = load_json_object_strict(pdir / "px1_demo_readiness_protocol.json")
+    p["schema_version"] = "0.0.0"
+    e = load_json_object_strict(EVAL_DEMO_READY)
+    with pytest.raises(ValueError, match="protocol schema_version"):
+        px1_demo_readiness_evidence_bundle(
+            protocol_obj=p,
+            evaluation_input_obj=e,
+            evaluation_input_sha256="c" * 64,
+        )
+
+
+def test_validate_rejects_empty_evaluation_series_id(tmp_path: Path) -> None:
+    from starlab.sc2.px1_demo_readiness_evidence import validate_demo_readiness_evaluation_input
+
+    pdir = tmp_path / "proto"
+    write_px1_demo_readiness_protocol_artifacts(input_path=PROTOCOL_INPUT, output_dir=pdir)
+    p = load_json_object_strict(pdir / "px1_demo_readiness_protocol.json")
+    e = load_json_object_strict(EVAL_DEMO_READY)
+    e["evaluation_series_id"] = "  "
+    with pytest.raises(ValueError, match="evaluation_series_id"):
+        validate_demo_readiness_evaluation_input(protocol_obj=p, eval_obj=e)
