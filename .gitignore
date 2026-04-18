@@ -1,8 +1,6 @@
-# Company secrets (tracked exception: docs/company_secrets/milestones/ for governance)
-docs/company_secrets/manuals/
-docs/company_secrets/prompts/
-docs/company_secrets/rediai33/
-docs/company_secrets/enhancements/
+# Company secrets — tracked in-repo (do not gitignore whole dirs; they are governance/prompt canon):
+#   docs/company_secrets/{prompts,manuals,enhancements,rediai33,milestones/…}
+# Only ignore truly local / machine-specific paths under milestones:
 docs/company_secrets/milestones/M02/_local_runs/
 docs/company_secrets/milestones/M02/_local_maps/
 
