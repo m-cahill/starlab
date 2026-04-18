@@ -60,6 +60,10 @@ module = "starlab.sc2.adapters.burnysc2_adapter"
 ignore_errors = true
 
 [[tool.mypy.overrides]]
+module = "starlab.sc2.px1_m03_hybrid_terran_bot"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
 module = "starlab.replays.s2protocol_adapter"
 ignore_errors = true
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Any
 
@@ -39,6 +40,8 @@ class ExecutionProofRecord:
     replay: ReplayMetadata | None
     sc2_game_result: str | None = None
     artifact_hash: str | None = None
+    live_action_tallies: Mapping[str, int] | None = None
+    live_action_behavior_summary: Mapping[str, Any] | None = None
 
 
 def _sorted_json(obj: Any) -> str:
@@ -86,6 +89,12 @@ def proof_record_to_hash_input_dict(record: ExecutionProofRecord) -> dict[str, A
     }
     if record.sc2_game_result is not None:
         out["sc2_game_result"] = record.sc2_game_result
+    if record.live_action_tallies:
+        lat = record.live_action_tallies
+        out["live_action_tallies"] = {k: int(lat[k]) for k in sorted(lat)}
+    if record.live_action_behavior_summary:
+        lbs = record.live_action_behavior_summary
+        out["live_action_behavior_summary"] = {k: lbs[k] for k in sorted(lbs)}
     return out
 
 
@@ -126,6 +135,14 @@ def parse_execution_proof_mapping(data: dict[str, Any]) -> ExecutionProofRecord:
             note=replay_raw.get("note"),
         )
     sgr = data.get("sc2_game_result")
+    lat_raw = data.get("live_action_tallies")
+    lat: dict[str, int] | None = None
+    if isinstance(lat_raw, dict):
+        lat = {str(k): int(v) for k, v in lat_raw.items()}
+    lbs_raw = data.get("live_action_behavior_summary")
+    lbs: dict[str, Any] | None = None
+    if isinstance(lbs_raw, dict):
+        lbs = dict(lbs_raw)
     return ExecutionProofRecord(
         schema_version=str(data["schema_version"]),
         adapter_name=str(data["adapter_name"]),
@@ -144,4 +161,6 @@ def parse_execution_proof_mapping(data: dict[str, Any]) -> ExecutionProofRecord:
         replay=replay,
         sc2_game_result=str(sgr) if sgr is not None else None,
         artifact_hash=data.get("artifact_hash"),
+        live_action_tallies=lat,
+        live_action_behavior_summary=lbs,
     )

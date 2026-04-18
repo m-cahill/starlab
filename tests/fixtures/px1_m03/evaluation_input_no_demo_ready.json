@@ -1,0 +1,37 @@
+{
+  "evaluation_series_id": "px1_m03_eval_synthetic_no_demo_ready_v1",
+  "required_runtime_mode_asserted": "local_live_sc2",
+  "candidates_evaluated": [
+    {
+      "candidate_id": "px1_m01_weighted_refit_rl_bootstrap_v1",
+      "per_opponent_profile": {
+        "px1_m02_opponent_heuristic_style_v1": {
+          "matches_played": 5,
+          "wins": 2,
+          "replay_backed_wins": 0,
+          "watchable_wins": 0,
+          "continuity_invalidations": 0
+        },
+        "px1_m02_opponent_scripted_style_v1": {
+          "matches_played": 5,
+          "wins": 2,
+          "replay_backed_wins": 1,
+          "watchable_wins": 0,
+          "continuity_invalidations": 0
+        }
+      },
+      "aggregate": {
+        "total_live_matches": 10,
+        "overall_wins": 4,
+        "overall_win_rate": 0.4,
+        "replay_backed_wins": 1,
+        "watchable_wins": 0,
+        "evidence_completeness": "complete"
+      }
+    }
+  ],
+  "selection": {
+    "status": "no-demo-ready-candidate-within-scope",
+    "rationale": "Synthetic fixture: win rate and watchable wins below frozen minima (CI-only)."
+  }
+}

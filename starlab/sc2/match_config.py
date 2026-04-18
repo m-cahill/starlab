@@ -33,6 +33,11 @@ class MapSpec:
     battle_net_map_name: str | None = None
 
 
+# BurnySc2 live policy: default passive harness; PX1-M03 hybrid = Terran scaffold + M43.
+BURNYSC2_POLICY_PASSIVE = "passive"
+BURNYSC2_POLICY_PX1_M03_HYBRID_V1 = "px1_m03_hybrid_v1"
+
+
 @dataclass(frozen=True, slots=True)
 class MatchConfig:
     """Bounded harness configuration."""
@@ -45,12 +50,17 @@ class MatchConfig:
     interface: InterfaceConfig = field(default_factory=InterfaceConfig)
     save_replay: bool = False
     replay_filename: str | None = None
+    burnysc2_policy: str = BURNYSC2_POLICY_PASSIVE
 
     def validate(self) -> None:
         if self.schema_version != "1":
             raise ValueError(f"unsupported schema_version: {self.schema_version!r}")
         if self.adapter not in {"fake", "burnysc2"}:
             raise ValueError(f"unsupported adapter: {self.adapter!r}")
+        if self.burnysc2_policy not in {BURNYSC2_POLICY_PASSIVE, BURNYSC2_POLICY_PX1_M03_HYBRID_V1}:
+            raise ValueError(f"unsupported burnysc2_policy: {self.burnysc2_policy!r}")
+        if self.adapter != "burnysc2" and self.burnysc2_policy != BURNYSC2_POLICY_PASSIVE:
+            raise ValueError("burnysc2_policy may only be set when adapter is burnysc2")
         if self.bounded_horizon.max_game_steps < 1:
             raise ValueError("bounded_horizon.max_game_steps must be >= 1")
         if self.bounded_horizon.game_step < 1:
@@ -100,6 +110,7 @@ def _iface_from_json(data: dict[str, Any]) -> InterfaceConfig:
 def match_config_from_mapping(data: dict[str, Any]) -> MatchConfig:
     """Parse and validate a match config dict (typically from JSON)."""
 
+    bpol = str(data.get("burnysc2_policy", BURNYSC2_POLICY_PASSIVE))
     cfg = MatchConfig(
         schema_version=str(data.get("schema_version", "1")),
         adapter=str(data["adapter"]),
@@ -109,6 +120,7 @@ def match_config_from_mapping(data: dict[str, Any]) -> MatchConfig:
         interface=_iface_from_json(data),
         save_replay=bool(data.get("save_replay", False)),
         replay_filename=data.get("replay_filename"),
+        burnysc2_policy=bpol,
     )
     cfg.validate()
     return cfg
@@ -151,4 +163,6 @@ def match_config_to_mapping(cfg: MatchConfig) -> dict[str, Any]:
     if cfg.map.battle_net_map_name is not None:
         m["battle_net_map_name"] = cfg.map.battle_net_map_name
     out["map"] = m
+    if cfg.burnysc2_policy != BURNYSC2_POLICY_PASSIVE:
+        out["burnysc2_policy"] = cfg.burnysc2_policy
     return out
