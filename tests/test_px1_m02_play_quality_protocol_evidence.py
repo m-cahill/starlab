@@ -104,3 +104,57 @@ def test_evaluation_per_profile_key_mismatch_raises(tmp_path: Path) -> None:
             evaluation_input_path=bad_path,
             output_dir=tmp_path / "o",
         )
+
+
+def test_emit_protocol_cli_main_success_and_errors(tmp_path: Path) -> None:
+    from starlab.sc2.emit_px1_play_quality_protocol import main as protocol_main
+
+    out = tmp_path / "proto_out"
+    out.mkdir()
+    assert (
+        protocol_main(
+            ["--input", str(PROTOCOL_INPUT), "--output-dir", str(out)],
+        )
+        == 0
+    )
+    assert (
+        protocol_main(
+            ["--input", str(tmp_path / "nonexistent_protocol.json"), "--output-dir", str(out)],
+        )
+        == 1
+    )
+
+
+def test_emit_evidence_cli_main_success_and_errors(tmp_path: Path) -> None:
+    from starlab.sc2.emit_px1_play_quality_evidence import main as evidence_main
+
+    pdir = tmp_path / "proto"
+    write_px1_play_quality_protocol_artifacts(input_path=PROTOCOL_INPUT, output_dir=pdir)
+    evout = tmp_path / "evidence_out"
+    evout.mkdir()
+    assert (
+        evidence_main(
+            [
+                "--protocol",
+                str(pdir / "px1_play_quality_protocol.json"),
+                "--evaluation-input",
+                str(EVAL_SELECTED),
+                "--output-dir",
+                str(evout),
+            ],
+        )
+        == 0
+    )
+    assert (
+        evidence_main(
+            [
+                "--protocol",
+                str(pdir / "px1_play_quality_protocol.json"),
+                "--evaluation-input",
+                str(tmp_path / "missing_eval.json"),
+                "--output-dir",
+                str(evout),
+            ],
+        )
+        == 1
+    )

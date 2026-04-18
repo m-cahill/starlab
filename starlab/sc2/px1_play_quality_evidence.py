@@ -150,8 +150,7 @@ def validate_evaluation_input(
             raise ValueError(msg)
         if set(per.keys()) != profile_id_set:
             msg = (
-                f"candidates_evaluated[{i}].per_opponent_profile keys must match "
-                "protocol profiles"
+                f"candidates_evaluated[{i}].per_opponent_profile keys must match protocol profiles"
             )
             raise ValueError(msg)
         per_norm: dict[str, Any] = {}
