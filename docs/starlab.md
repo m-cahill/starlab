@@ -2564,11 +2564,12 @@ It should always answer, with minimal ambiguity:
 
 ## 23. Changelog
 
-### 2026-04-18 — **PX1-M03** Candidate Strengthening & Demo Readiness Remediation — **opened** (PR1 — ledger + runtime + protocol freeze + hybrid surface; branch `px1-m03-candidate-strengthening-demo-readiness` — pre-merge)
+### 2026-04-18 — **PX1-M03** Candidate Strengthening & Demo Readiness Remediation — merged to `main` ([PR #90](https://github.com/m-cahill/starlab/pull/90)) — PR1 **open** (not closeout)
 
+- **Merged** [PR #90](https://github.com/m-cahill/starlab/pull/90) to `main`; merge commit `fdd2b9d9b76e2816b4e99e793d8b7a37ef4fd64b`; **final PR head** `b5e79274173b388903020d807fd0cb149394c16a`; **authoritative PR-head CI** [`24610112326`](https://github.com/m-cahill/starlab/actions/runs/24610112326) — **success**; **merge-boundary `main` CI** [`24610141976`](https://github.com/m-cahill/starlab/actions/runs/24610141976) on merge commit `fdd2b9d9…` — **success**. **Superseded** failed PR-head runs — **not** merge authority: [`24609919629`](https://github.com/m-cahill/starlab/actions/runs/24609919629); [`24610058969`](https://github.com/m-cahill/starlab/actions/runs/24610058969).
 - **Opened** **`PX1-M03`** as a **corrective** milestone after **PX1-M02** closed with **`no-candidate-selected`**: recharter moves governed demo/video proof to **`PX1-M04`**; adds optional **`PX1-M05`**; public runtime **`docs/runtime/px1_candidate_strengthening_demo_readiness_v1.md`**; deterministic **`px1_demo_readiness_protocol.json`** / **`px1_demo_readiness_evidence.json`** emitters; hybrid **`burnysc2_policy`** `px1_m03_hybrid_v1`; private **`docs/company_secrets/milestones/post-v1/PX1-M03/`** plans — **not** **PX1-M04**/**v2** auto-open; **not** winning-video proof.
-- **Delivered (this branch):** §1 quick scan + §7 PX1 roadmap + §11 + §23 — **`current milestone`** → **`PX1-M03`**; **PX1-M02** remains **closed** with **`no-candidate-selected`** (**not** reinterpreted).
-- **Post-merge target:** **`PX1-M03`** **open** on `main` until operator remediation reruns + later closeout PR — **not** operator reruns in PR1.
+- **Delivered:** §1 quick scan + §7 PX1 roadmap + §11 + §23 — **`current milestone`** → **`PX1-M03`**; **PX1-M02** remains **closed** with **`no-candidate-selected`** (**not** reinterpreted).
+- **Post-PR1 ledger:** **`PX1-M03`** **open** on `main` until operator remediation reruns + later closeout PR — **not** operator reruns in PR1. Private workflow record: **`PX1-M03_run1.md`**.
 
 ### 2026-04-18 — **PX1-M02** governance closeout — merged to `main` ([PR #89](https://github.com/m-cahill/starlab/pull/89)) — **closed**; **`current milestone`** → **None** (superseded by **PX1-M03** open — see entry above)
 
