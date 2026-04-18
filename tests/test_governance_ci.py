@@ -124,7 +124,7 @@ def test_ledger_post_pv1_px1_section() -> None:
     assert "| `PX1-M04` |" in text
     assert "Full Industrial Run & Demonstration Charter | **closed**" in text
     assert "Full Industrial Campaign Execution Evidence | **closed**" in text
-    assert "Play-Quality Evaluation & Demo Candidate Selection | **open**" in text
+    assert "Play-Quality Evaluation & Demo Candidate Selection | **closed**" in text
     assert "pull/83" in text
     assert "docs/runtime/px1_full_industrial_run_demo_charter_v1.md" in text
     assert "docs/runtime/px1_full_industrial_campaign_execution_evidence_v1.md" in text
@@ -165,8 +165,10 @@ def test_ledger_post_v1_pv1_section() -> None:
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "**`current milestone`** = **`PX1-M02`**" in section
-    assert "### PX1-M02 — Play-Quality Evaluation & Demo Candidate Selection — **open**" in section
+    assert "**`current milestone`** = **None**" in section
+    assert (
+        "### PX1-M02 — Play-Quality Evaluation & Demo Candidate Selection — **closed**"
+    ) in section
     assert "### PX1-M01 — Full Industrial Campaign Execution Evidence — **closed**" in section
     assert "px1_full_industrial_campaign_execution_evidence_v1.md" in section
     assert "### PX1-M00 — Full Industrial Run & Demonstration Charter — **closed**" in section
