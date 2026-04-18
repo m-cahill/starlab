@@ -2,7 +2,7 @@
 
 **Milestone:** PX1-M02 — Play-Quality Evaluation & Demo Candidate Selection (closeout)  
 **Mode:** PR-head validation + merge-boundary `main` verification (to be filled after PR opens)  
-**PR:** [PR #PR_PLACEHOLDER](https://github.com/m-cahill/starlab/pull/PR_PLACEHOLDER) — `docs(governance): close PX1-M02 play-quality evaluation and demo candidate selection`
+**PR:** [PR #89](https://github.com/m-cahill/starlab/pull/89) — `docs(governance): close PX1-M02 play-quality evaluation and demo candidate selection`
 
 ---
 

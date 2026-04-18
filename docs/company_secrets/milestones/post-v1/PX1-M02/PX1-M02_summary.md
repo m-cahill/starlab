@@ -3,7 +3,7 @@
 **Project:** STARLAB  
 **Phase:** Post-PV1 (PX1)  
 **Milestone:** PX1-M02 — Play-Quality Evaluation & Demo Candidate Selection  
-**Timeframe:** Opening [PR #88](https://github.com/m-cahill/starlab/pull/88) (2026-04-18) → closeout [PR #PR_PLACEHOLDER](https://github.com/m-cahill/starlab/pull/PR_PLACEHOLDER) (2026-04-18)  
+**Timeframe:** Opening [PR #88](https://github.com/m-cahill/starlab/pull/88) (2026-04-18) → closeout [PR #89](https://github.com/m-cahill/starlab/pull/89) (2026-04-18)  
 **Status:** Closed  
 
 ---
