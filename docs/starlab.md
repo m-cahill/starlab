@@ -688,7 +688,7 @@ These **canonical basenames** live at the **`out/training_campaigns/<campaign_id
 | --- | --- | --- | --- |
 | `PX1-M00` | Full Industrial Run & Demonstration Charter | **closed** on `main` ([PR #83](https://github.com/m-cahill/starlab/pull/83) implementation; [PR #84](https://github.com/m-cahill/starlab/pull/84) closeout) | Governance-first charter; defines run success, play-quality success, demo/video success, non-claims, and PX1 roadmap — **no** campaign execution; **no** demo recording |
 | `PX1-M01` | Full Industrial Campaign Execution Evidence | **closed** on `main` (milestone closeout [PR #87](https://github.com/m-cahill/starlab/pull/87)) | **Frozen** threshold package in **`docs/runtime/px1_full_industrial_campaign_execution_evidence_v1.md`**; **authoritative** operator-local run + honest **`threshold-met`** — **not** play-quality (**PX1-M02**) or demo (**PX1-M03**) |
-| `PX1-M02` | Play-Quality Evaluation & Demo Candidate Selection | **open** (PR1 — protocol freeze + emitters + governance) | Bounded **`local_live_sc2`** play-quality evaluation + demo-candidate selection — **not** **PX1-M01** reinterpretation; **not** **PX1-M03**; **not** ladder proof |
+| `PX1-M02` | Play-Quality Evaluation & Demo Candidate Selection | **open** on `main` (PR1 — protocol freeze + emitters + governance; [PR #88](https://github.com/m-cahill/starlab/pull/88)) | Bounded **`local_live_sc2`** play-quality evaluation + demo-candidate selection — **not** **PX1-M01** reinterpretation; **not** **PX1-M03**; **not** ladder proof |
 | `PX1-M03` | Governed Demo Proof Pack & Winning Video | **planned / not yet opened** | Bounded replay/video/demo milestone: selected agent **playing and winning** under declared conditions |
 | `PX1-M04` | Optional Demo Hardening / Strategic Recharter Decision | **optional / not yet opened** | Polish, public-facing packaging, or explicit gate framing **only if needed** |
 
@@ -1160,11 +1160,15 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Current (post-PV1):** **`current milestone`** = **`PX1-M02`** — Play-Quality Evaluation & Demo Candidate Selection — **open** (PR1: protocol freeze + deterministic protocol/evidence emitters + runtime contract + governance tests; **not** milestone closeout; **not** authoritative operator evaluation claims). **PX1-M01** — Full Industrial Campaign Execution Evidence — **closed** on `main` (milestone closeout [PR #87](https://github.com/m-cahill/starlab/pull/87)) — **authoritative** operator-local run completed under **`local_live_sc2`** with **`campaign_id`** `px1_m01_full_run_2026_04_17_a`, **`execution_id`** `px1_m01_exec_001`; Tranche A **completed within scope**; Tranche B **completed within scope**; full-run **`threshold-met`** — **not** play-quality proof (**PX1-M02** evaluates that separately) and **not** demo/video (**PX1-M03**). **PX1-M01** **opened** via [PR #85](https://github.com/m-cahill/starlab/pull/85) (governance + freeze + fixture + tests). **`PX1-M03`–`PX1-M04`** are **planned / not yet opened**. **v2** is **not** opened. **v1** (**M00–M61**) is **closed** and **historical**. **PV1** (**PV1-M00**–**PV1-M04**) is **closed** and **historical** — bounded **PV1** outcome (**unchanged**): Tranche A **completed within scope**; Tranche B **completed within scope**; full-run **`threshold-not-met`** (**separate** operator sessions — **not** reinterpreted). **PV1** is **not** “Phase VIII” — **no** **M62**.
 
-### PX1-M02 — Play-Quality Evaluation & Demo Candidate Selection — **open** (`main` pending PR1 merge)
+### PX1-M02 — Play-Quality Evaluation & Demo Candidate Selection — **open** (`main`)
 
-**Intent (PR1):** Open **PX1-M02** in the ledger; freeze a **bounded** play-quality protocol before authoritative candidate claims; add **`docs/runtime/px1_play_quality_demo_candidate_selection_v1.md`**; deterministic **`px1_play_quality_protocol.json`** / **`px1_play_quality_evidence.json`** emitters (`python -m starlab.sc2.emit_px1_play_quality_protocol`, `python -m starlab.sc2.emit_px1_play_quality_evidence`); synthetic **`tests/fixtures/px1_m02/`** — **not** default CI live SC2; **not** **PX1-M03**; **not** **v2**.
+**Implementation PR (opening / protocol freeze):** [PR #88](https://github.com/m-cahill/starlab/pull/88) — merge commit `5521d8b8671e72a5f9297148ff972b13b75e408a` merged **2026-04-18T01:49:56Z** (UTC); **final PR head** `f44c66add532cc73b5dfa99ca26eb7640f961ae6`; **authoritative PR-head CI** [`24594170354`](https://github.com/m-cahill/starlab/actions/runs/24594170354) — **success**; **merge-boundary `main` CI** [`24594198357`](https://github.com/m-cahill/starlab/actions/runs/24594198357) on merge commit `5521d8b…` — **success**. **Superseded** PR-head runs: [`24594051547`](https://github.com/m-cahill/starlab/actions/runs/24594051547) — **failure** (Ruff format / coverage — **not** merge authority); [`24594125553`](https://github.com/m-cahill/starlab/actions/runs/24594125553) — **failure** (branch-aware coverage **77.98%** vs **78.0%** gate — **not** merge authority). Branch `px1-m02-play-quality-demo-candidate-selection` **retained** on `origin`. **Delivered in repo:** public runtime **`docs/runtime/px1_play_quality_demo_candidate_selection_v1.md`**; deterministic **`px1_play_quality_protocol.json`** / **`px1_play_quality_evidence.json`** emitters (`python -m starlab.sc2.emit_px1_play_quality_protocol`, `python -m starlab.sc2.emit_px1_play_quality_evidence`); synthetic **`tests/fixtures/px1_m02/`** + governance tests; private **`PX1-M02_plan.md`**, **`PX1-M02_protocol_freeze.md`**, **`PX1-M02_operator_checklist.md`**, **`PX1-M02_execution_readiness.md`**, **`PX1-M02_toolcalls.md`** — **does not** run the live SC2 evaluation series in default CI; **does not** claim a selected demo candidate; **does not** open **PX1-M03** or **v2**.
 
-**Non-claims (PX1-M02 PR1):** **not** play-quality proof yet; **not** demo/video; **not** ladder; operator-local evaluation **after** merge — **not** merge-gate proof.
+**Post-merge ledger / CI record:** private **`PX1-M02_run1.md`** — PR-head + merge-boundary workflow analysis — **not** milestone closeout.
+
+**Intent (PR1 — delivered):** Open **PX1-M02** in the ledger; freeze a **bounded** play-quality protocol before authoritative candidate claims; runtime + emitters + fixtures as above — **not** default CI live SC2; **not** **PX1-M03**; **not** **v2**.
+
+**Non-claims (PX1-M02 PR1):** **not** play-quality proof yet; **not** demo/video; **not** ladder; operator-local live evaluation **after** **`PX1-M02_execution_readiness.md`** — **not** merge-gate proof; **not** automatic **PX1-M03** opening.
 
 **Authoritative narrative:** **`docs/runtime/px1_play_quality_demo_candidate_selection_v1.md`**; **Post-PV1 (PX1)** (above §7).
 
@@ -1224,7 +1228,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M03):** **Tranche B / bounded full-run completion evidence only** — **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **does not** **alone** implement **PV1-M04** (separate PR).
 
-**Next substantial follow-on (historical at PV1-M03 closeout):** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`**. **Superseded by §11:** **`PX1-M01`** is **closed** on `main`; **`current milestone`** = **None** until a later **`PX1-MNN`** is opened.
+**Next substantial follow-on (historical at PV1-M03 closeout):** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`**. **Superseded by §11 (post-PX1-M02 PR1):** **`PX1-M01`** is **closed** on `main`; **`current milestone`** = **`PX1-M02`** — **open** (until separate closeout); **`PX1-M03`+** remain **not yet opened**; **v2** remains **not** opened.
 
 ### PV1-M02 — Tranche A Execution Evidence — **closed**
 
@@ -1236,7 +1240,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M02):** **bounded Tranche A execution evidence only** — **not** full-run threshold satisfaction; **not** Tranche B; **not** PV1 program completion; **not** global benchmark integrity; **not** universal replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as merge norm; **PV1-M03** is a **separate** milestone — **not** implied closed by **PV1-M02** merge alone.
 
-**Next substantial follow-on (historical at PV1-M02 closeout):** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`**. **Superseded by §11:** **`PX1-M01`** is **closed** on `main`; **`current milestone`** = **None** until a later **`PX1-MNN`** is opened.
+**Next substantial follow-on (historical at PV1-M02 closeout):** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`**. **Superseded by §11 (post-PX1-M02 PR1):** **`PX1-M01`** is **closed** on `main`; **`current milestone`** = **`PX1-M02`** — **open** (until separate closeout); **`PX1-M03`+** remain **not yet opened**; **v2** remains **not** opened.
 
 ### PV1-M01 — Campaign Observability & Checkpoint Discipline — **closed**
 
@@ -1248,7 +1252,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Non-claims (PV1-M01):** **not** benchmark integrity; **not** replay↔execution equivalence; **not** ladder/public strength; **not** live SC2 in CI as default merge norm; **not** full-run threshold satisfaction; **not** a substitute for operator-local execution.
 
-**Next substantial follow-on (historical at PV1-M01 tooling closeout):** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`**. **Superseded by §11:** **`PX1-M01`** (full industrial run) is **closed** on `main`; **`current milestone`** = **None** until a later **`PX1-MNN`** is opened.
+**Next substantial follow-on (historical at PV1-M01 tooling closeout):** **PV1** program line is **closed** on `main`; post-**PV1** work continues under **`PX1-MNN`**. **Superseded by §11 (post-PX1-M02 PR1):** **`PX1-M01`** (full industrial run) is **closed** on `main`; **`current milestone`** = **`PX1-M02`** — **open** (until separate closeout); **`PX1-M03`+** remain **not yet opened**; **v2** remains **not** opened.
 
 ### PV1-M00 — Post-v1 Industrial Campaign Charter & Success Criteria — **closed**
 
@@ -2543,11 +2547,17 @@ It should always answer, with minimal ambiguity:
 
 ## 23. Changelog
 
-### 2026-04-17 — **PX1-M02** Play-Quality Evaluation & Demo Candidate Selection — **open** (PR1 — protocol freeze + emitters)
+### 2026-04-18 — **PX1-M02** PR1 merged to `main` ([PR #88](https://github.com/m-cahill/starlab/pull/88)) — protocol freeze + emitters — **open** (not closeout)
 
-- **Opened** **`PX1-M02`** on branch **`px1-m02-play-quality-demo-candidate-selection`** (awaiting merge to `main`): **`current milestone`** → **`PX1-M02`**.
+- **Merged** [PR #88](https://github.com/m-cahill/starlab/pull/88) to `main`; merge commit `5521d8b8671e72a5f9297148ff972b13b75e408a` merged **2026-04-18T01:49:56Z** (UTC); **final PR head** `f44c66add532cc73b5dfa99ca26eb7640f961ae6`; **authoritative PR-head CI** [`24594170354`](https://github.com/m-cahill/starlab/actions/runs/24594170354) — **success**; **merge-boundary `main` CI** [`24594198357`](https://github.com/m-cahill/starlab/actions/runs/24594198357) on merge commit `5521d8b…` — **success**. **Superseded** PR-head runs — **not** merge authority: [`24594051547`](https://github.com/m-cahill/starlab/actions/runs/24594051547); [`24594125553`](https://github.com/m-cahill/starlab/actions/runs/24594125553).
+- **`PX1-M02`** remains **open** on `main` (protocol freeze + runtime contract + deterministic emitters + synthetic fixtures + readiness checkpoint); **not** milestone closeout; **not** the live SC2 evaluation series; **not** demo-candidate selection claim; **`PX1-M03`–`PX1-M04`** **planned / not yet opened**; **v2** **not** opened.
+- **Post-merge ledger:** §11 **PX1-M02** PR pins; private **`PX1-M02_run1.md`** — **not** operator **`out/`** play-quality evidence.
+
+### 2026-04-17 — **PX1-M02** Play-Quality Evaluation & Demo Candidate Selection — **open** (PR1 — protocol freeze + emitters; pre-merge on branch)
+
+- **Opened** **`PX1-M02`** on branch **`px1-m02-play-quality-demo-candidate-selection`**: **`current milestone`** → **`PX1-M02`**.
 - **Delivered:** public runtime **`docs/runtime/px1_play_quality_demo_candidate_selection_v1.md`**; **`starlab.sc2.emit_px1_play_quality_protocol`** + **`starlab.sc2.emit_px1_play_quality_evidence`**; synthetic **`tests/fixtures/px1_m02/`** + **`tests/test_px1_m02_play_quality_protocol_evidence.py`**; private **`PX1-M02_plan.md`**, **`PX1-M02_protocol_freeze.md`**, **`PX1-M02_operator_checklist.md`**, **`PX1-M02_execution_readiness.md`**, **`PX1-M02_toolcalls.md`** — **not** operator **`out/`** evidence; **not** live SC2 in default CI; **not** **PX1-M03** or **v2**.
-- **Post-merge ledger:** §1 quick scan + §23 + §11 — **`PX1-M02` open**; **PX1-M01** remains **closed**; **`PX1-M03`–`PX1-M04`** remain **planned / not yet opened** until separately chartered.
+- **Authoritative merge + CI** — **2026-04-18** entry above ([PR #88](https://github.com/m-cahill/starlab/pull/88)).
 
 ### 2026-04-17 — **PX1-M01** milestone closeout — merged to `main` ([PR #87](https://github.com/m-cahill/starlab/pull/87)) — **closed**; **`current milestone`** → **None**
 
