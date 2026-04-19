@@ -2597,6 +2597,7 @@ It should always answer, with minimal ambiguity:
 
 - **Closed** **PX1-M04** on `main` with governance closeout: ledger + private **`PX1-M04_summary.md`** / **`PX1-M04_audit.md`** / **`PX1-M04_run2.md`**; canonical selection memo + checklist polish — **packaging / proof governance** only; operator-local demo proof pack chain verified (**`scripted_01`**, **`out/px1_m03_operator_watchable.mp4`**, **`px1_m01_weighted_refit_rl_bootstrap_v1`**) — **not** new remediation; **not** **PX1-M05** or **v2** auto-open.
 - **Post-closeout ledger:** §1 quick scan + §7 + §11 + §23 — **PX1-M04** **closed**; **`current milestone`** = **None**; **`PX1-M05`** **optional / not yet opened**; **v2** **not** opened.
+- **Workflow record:** **`PX1-M04_run2.md`** finalized with authoritative PR-head CI [`24637621474`](https://github.com/m-cahill/starlab/actions/runs/24637621474) and merge-boundary `main` CI [`24637654026`](https://github.com/m-cahill/starlab/actions/runs/24637654026) on merge commit `36095686110f994a0c8d4fc4ad5e83cdf873cc7f`.
 
 ### 2026-04-19 — **PX1-M04** Governed Demo Proof Pack & Winning Video — merged to `main` ([PR #92](https://github.com/m-cahill/starlab/pull/92)) — PR1 **open** (not closeout)
 

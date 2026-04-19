@@ -13,10 +13,10 @@
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
 | Trigger | `pull_request` |
 | Branch | `docs/governance-close-px1-m04` |
-| **Final PR head SHA** | *Record after final green push* |
-| **Merge commit on `main`** | *Record after merge* |
-| **Authoritative PR-head CI** | *Record — **success** expected* |
-| **Merge-boundary `main` CI** | *Record on merge commit — **success** expected* |
+| **Final PR head SHA** | `01936aea804be0ddfc8a41c2c02e5d2d7996c4ba` |
+| **Merge commit on `main`** | `36095686110f994a0c8d4fc4ad5e83cdf873cc7f` |
+| **Authoritative PR-head CI** | [`24637621474`](https://github.com/m-cahill/starlab/actions/runs/24637621474) — **success** |
+| **Merge-boundary `main` CI** | [`24637654026`](https://github.com/m-cahill/starlab/actions/runs/24637654026) on merge commit `36095686…` — **success** |
 
 ---
 
@@ -30,7 +30,7 @@
 
 ---
 
-## 3. Signal integrity (expected)
+## 3. Signal integrity
 
 | Area | Pass/Fail | Notes |
 | --- | --- | --- |
@@ -42,4 +42,4 @@
 
 ## 4. Merge readiness verdict
 
-*Update after CI:* **Merge** when all required jobs **green** on authoritative PR-head and merge-boundary `main` runs.
+**Merged** — all required jobs **green** on PR-head run **`24637621474`** and merge-boundary `main` run **`24637654026`**.
