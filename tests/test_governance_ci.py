@@ -12,6 +12,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan and "**`None`**" in scan
+    assert "| Last closed milestone (PX2 arc) |" in scan and "PX2-M00" in scan
     assert "PX1-M04" in scan and "**closed**" in scan
     assert "PX1-M03" in scan and "**closed**" in scan
     assert "PX1-M01" in scan and "**closed**" in scan
@@ -27,6 +28,8 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "threshold-not-met" in scan
     assert "tranche_b_operator_note.md" in scan or "PV1 execution evidence" in scan
     assert "| Post-PV1 (PX1) |" in scan
+    assert "| Post-PX1 (PX2) |" in scan
+    assert "px2_autonomous_full_game_agent_charter_v1.md" in scan
     assert "| Last closed milestone (PX1 arc) |" in scan
     assert "| PX1 industrial run status (PX1-M01) |" in scan
     assert "v2" in scan.lower() and "defer" in scan.lower()
@@ -148,6 +151,30 @@ def test_ledger_post_pv1_px1_section() -> None:
 
 
 @pytest.mark.smoke
+def test_ledger_post_px1_px2_section() -> None:
+    text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "## Post-PX1 (PX2) — Autonomous Full-Game Skill Development" in text
+    assert "PX1 proved demo-proof packaging and bounded remediation" in text
+    assert "| `PX2-M00` |" in text
+    px2_m00_row = next(
+        line for line in text.splitlines() if line.strip().startswith("| `PX2-M00` |")
+    )
+    assert "**closed**" in px2_m00_row
+    assert "| `PX2-M01` |" in text
+    assert "| `PX2-M02` |" in text
+    assert "| `PX2-M03` |" in text
+    assert "| `PX2-M04` |" in text
+    assert "| `PX2-M05` |" in text
+    assert "Full Terran Runtime & Action Surface" in text
+    assert "Neural Bootstrap from Replays" in text
+    assert "Industrial Self-Play Campaign" in text
+    assert "docs/runtime/px2_autonomous_full_game_agent_charter_v1.md" in text
+    assert "### Phase boundary matrix (post-v1 phases)" in text
+    px2_charter = REPO_ROOT / "docs" / "runtime" / "px2_autonomous_full_game_agent_charter_v1.md"
+    assert px2_charter.is_file()
+
+
+@pytest.mark.smoke
 def test_ledger_post_v1_pv1_section() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "## Post-v1 (PV1) — Long Industrial Campaign & Scaling Evidence" in text
@@ -175,6 +202,11 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "**`current milestone`** = **`None`**" in section
+    assert "PX2-M01" in section and "**not** opened" in section
+    assert (
+        "### PX2-M00 — Autonomous Full-Game Agent Charter & Success Criteria — **closed** (`main`)"
+        in section
+    )
     assert (
         "### PX1-M04 — Governed Demo Proof Pack & Winning Video — **closed** (`main`)"
     ) in section
