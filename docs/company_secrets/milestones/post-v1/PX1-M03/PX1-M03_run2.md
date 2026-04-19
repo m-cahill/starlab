@@ -13,10 +13,10 @@
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
 | Trigger | `pull_request` |
 | Branch | `docs/governance-close-px1-m03` |
-| **Final PR head SHA** | *(record after push)* |
-| **Merge commit on `main`** | *(record after merge)* |
-| **Authoritative PR-head CI** | *(record run id — e.g. `gh run list --branch docs/governance-close-px1-m03`)* |
-| **Merge-boundary `main` CI** | *(record run id on merge commit)* |
+| **Final PR head SHA** | `625a8832659a2ef4996c171c31d43e0c130ef702` — **final green** before squash |
+| **Merge commit on `main`** | `17d38f97cea46f14969a0927517801532ca3251f` (squash merge for PR #91) |
+| **Authoritative PR-head CI** | [`24620201126`](https://github.com/m-cahill/starlab/actions/runs/24620201126) — **success** (includes **`test(governance): align smoke ledger checks with PX1-M03 closeout**`) |
+| **Merge-boundary `main` CI** | [`24620227867`](https://github.com/m-cahill/starlab/actions/runs/24620227867) on merge commit `17d38f97…` — **success** |
 
 ---
 
@@ -35,11 +35,11 @@
 | Area | Pass/Fail | Notes |
 | --- | --- | --- |
 | quality (Ruff + Mypy) | Pass | Docs-only delta |
-| tests + coverage gate | Pass | No test logic change |
+| tests + coverage gate | Pass | **`tests/test_governance_ci.py`** updated for **PX1-M03** **closed** / **`current milestone` = None** |
 | governance aggregate | Pass | Merge gate |
 
 ---
 
 ## 4. Merge readiness verdict
 
-**Merge-ready** when all required jobs are **green** on the authoritative PR-head run and merge-boundary `main` run — update the table in §1 with run URLs.
+**Merged** — all required jobs **green** on PR-head run **`24620201126`** and merge-boundary `main` run **`24620227867`**.
