@@ -170,9 +170,9 @@ def test_ledger_post_v1_pv1_section() -> None:
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "**`current milestone`** = **`PX1-M03`**" in section
+    assert "**`current milestone`** = **None**" in section
     assert (
-        "### PX1-M03 — Candidate Strengthening & Demo Readiness Remediation — **open**"
+        "### PX1-M03 — Candidate Strengthening & Demo Readiness Remediation — **closed** (`main`)"
     ) in section
     assert (
         "### PX1-M02 — Play-Quality Evaluation & Demo Candidate Selection — **closed**"

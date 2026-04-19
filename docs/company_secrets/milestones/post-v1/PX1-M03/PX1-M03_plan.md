@@ -1,7 +1,7 @@
 # PX1-M03 — Plan
 
 **Title:** Candidate Strengthening & Demo Readiness Remediation  
-**Status:** Open (PR1: ledger + runtime + protocol freeze + code surfaces)
+**Status:** Closed (opening [PR #90](https://github.com/m-cahill/starlab/pull/90); closeout [PR #91](https://github.com/m-cahill/starlab/pull/91))
 
 ## Objective
 

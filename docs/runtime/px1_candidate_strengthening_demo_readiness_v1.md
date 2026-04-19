@@ -1,6 +1,7 @@
 # PX1-M03 — Candidate Strengthening & Demo Readiness Remediation (v1)
 
 **Milestone:** `PX1-M03` — post-`PX1-M02` corrective remediation (not the governed winning-video milestone).  
+**Ledger status:** **closed** on `main` (governance closeout [PR #91](https://github.com/m-cahill/starlab/pull/91)); frozen-protocol operator-local evaluation concluded with **`demo-ready-candidate-selected`** — **`current milestone` = None**; **PX1-M04** / **v2** **not** opened by closeout.  
 **Primary candidate (unchanged id):** `px1_m01_weighted_refit_rl_bootstrap_v1` — same lineage as PX1-M01/PX1-M02; this milestone adds an **enriched bounded live action surface** only.
 
 ---
@@ -84,6 +85,7 @@ After reruns:
 - `demo_readiness_declaration.md` — exactly one terminal line:
   - `demo-ready-candidate-selected`
   - `no-demo-ready-candidate-within-scope`
+- For a **watchable** win, `local_live_play_validation_run.json` must carry non-null **`optional_media_registration`** on that same run. Closeout used operator-local **`out/px1_m03_operator_watchable.mp4`** on the counted watchable match (`runs/scripted_01` under the authoritative series root — registration metadata re-sealed; large binary **not** in git).
 
 ---
 
