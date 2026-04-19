@@ -699,7 +699,7 @@ These **canonical basenames** live at the **`out/training_campaigns/<campaign_id
 | `PX1-M01` | Full Industrial Campaign Execution Evidence | **closed** on `main` (milestone closeout [PR #87](https://github.com/m-cahill/starlab/pull/87)) | **Frozen** threshold package in **`docs/runtime/px1_full_industrial_campaign_execution_evidence_v1.md`**; **authoritative** operator-local run + honest **`threshold-met`** — **not** play-quality (**PX1-M02**) or demo readiness (**PX1-M03**/**PX1-M04**) |
 | `PX1-M02` | Play-Quality Evaluation & Demo Candidate Selection | **closed** on `main` (opening [PR #88](https://github.com/m-cahill/starlab/pull/88); closeout [PR #89](https://github.com/m-cahill/starlab/pull/89)) | Bounded **`local_live_sc2`** evaluation under **protocol v2**; honest **`no-candidate-selected`** — **not** **PX1-M01** reinterpretation; **not** demo readiness closure; **not** ladder proof |
 | `PX1-M03` | Candidate Strengthening & Demo Readiness Remediation | **closed** on `main` (opening [PR #90](https://github.com/m-cahill/starlab/pull/90); closeout [PR #91](https://github.com/m-cahill/starlab/pull/91)) | **Remediation** milestone after **PX1-M02** **`no-candidate-selected`**; bounded hybrid live surface + frozen **`px1_demo_readiness_*`** protocol; **closed** with **`demo-ready-candidate-selected`** — **not** the final proof-pack milestone (**PX1-M04**) |
-| `PX1-M04` | Governed Demo Proof Pack & Winning Video | **current / open** on `main` | **Packaging** + proof governance after successful **PX1-M03**; runtime **`docs/runtime/px1_governed_demo_proof_pack_v1.md`** — **not** default gameplay tuning; **not** new campaign |
+| `PX1-M04` | Governed Demo Proof Pack & Winning Video | **current / open** on `main` (opening [PR #92](https://github.com/m-cahill/starlab/pull/92)) | **Packaging** + proof governance after successful **PX1-M03**; runtime **`docs/runtime/px1_governed_demo_proof_pack_v1.md`** — **not** default gameplay tuning; **not** new campaign |
 | `PX1-M05` | Optional Demo Hardening / Strategic Recharter Decision | **optional / not yet opened** | Polish, packaging, or explicit post-demo strategic decision **only if needed** |
 
 **Roadmap disclaimer:** **PX1-M00**–**PX1-M03** (closed) do **not** imply **PX1-M04**/**PX1-M05** are complete; **PX1-M05** does **not** open automatically from **PX1-M04**. **PX1** is **not** implied by closed **PV1** merges.
@@ -1184,6 +1184,8 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 ### PX1-M04 — Governed Demo Proof Pack & Winning Video — **open** (`main`)
 
+**PR1 (opening / merge):** [PR #92](https://github.com/m-cahill/starlab/pull/92) — merge commit `f5e4521d35e152c97eb07458b38fb296929b5aaf` merged **2026-04-19T19:18:21Z** (UTC); **final PR head** `e57dac36d44c073198d773c8a8abd54bec5b5b56`; **authoritative PR-head CI** [`24637019658`](https://github.com/m-cahill/starlab/actions/runs/24637019658) — **success**; **merge-boundary `main` CI** [`24637049478`](https://github.com/m-cahill/starlab/actions/runs/24637049478) on merge commit `f5e4521d…` — **success**. **Superseded** PR-head run — **not** merge authority: [`24623471026`](https://github.com/m-cahill/starlab/actions/runs/24623471026) — **failure** (Ruff format — **not** merge authority). Private workflow record: **`PX1-M04_run1.md`**.
+
 **PR1 (opening):** Public runtime **`docs/runtime/px1_governed_demo_proof_pack_v1.md`**; private **`docs/company_secrets/milestones/post-v1/PX1-M04/`** (plan, pack checklist, pack freeze, canonical demo selection, toolcalls) — **does not** commit large binaries by default; **does not** open **PX1-M05** or **v2**.
 
 **Intent:** Select and **package** bounded **PX1-M03** success evidence (canonical winning run + replay + video references + traceability) — **not** new industrial campaign; **not** further remediation by default.
@@ -1194,7 +1196,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **PR1 (opening / freeze):** [PR #90](https://github.com/m-cahill/starlab/pull/90) — public runtime **`docs/runtime/px1_candidate_strengthening_demo_readiness_v1.md`**; **`starlab.sc2.emit_px1_demo_readiness_protocol`** + **`starlab.sc2.emit_px1_demo_readiness_evidence`**; hybrid **`burnysc2_policy`** `px1_m03_hybrid_v1` + fixtures — **not** operator remediation evidence.
 
-**Closeout PR:** [PR #91](https://github.com/m-cahill/starlab/pull/91) — ledger + **`PX1-M03_summary.md`** / **`PX1-M03_audit.md`** / **`PX1-M03_run2.md`** — records successful **remediation** closure (**`demo-ready-candidate-selected`**). At merge, **`current milestone`** was set to **None** until **PX1-M04** is opened by a **separate** governance PR.
+**Closeout PR:** [PR #91](https://github.com/m-cahill/starlab/pull/91) — ledger + **`PX1-M03_summary.md`** / **`PX1-M03_audit.md`** / **`PX1-M03_run2.md`** — records successful **remediation** closure (**`demo-ready-candidate-selected`**). That closeout set **`current milestone`** to **None** until **PX1-M04** opened by a **separate** governance PR — **PX1-M04** is now **open** on `main` ([PR #92](https://github.com/m-cahill/starlab/pull/92)).
 
 **Intent (delivered):** Corrective milestone after **PX1-M02** **`no-candidate-selected`** — bounded capability uplift + fresh **`local_live_sc2`** evaluation under frozen **`px1_demo_readiness_*`** minima — **not** the final proof-pack milestone (**PX1-M04**).
 
@@ -2589,10 +2591,11 @@ It should always answer, with minimal ambiguity:
 
 ## 23. Changelog
 
-### 2026-04-19 — **PX1-M04** Governed Demo Proof Pack & Winning Video — PR1 to `main` ([PR #92](https://github.com/m-cahill/starlab/pull/92)) — **open**
+### 2026-04-19 — **PX1-M04** Governed Demo Proof Pack & Winning Video — merged to `main` ([PR #92](https://github.com/m-cahill/starlab/pull/92)) — PR1 **open** (not closeout)
 
-- **Opened** **`PX1-M04`** as the **packaging / proof governance** milestone after **PX1-M03** successful closeout: public runtime **`docs/runtime/px1_governed_demo_proof_pack_v1.md`**; private **`docs/company_secrets/milestones/post-v1/PX1-M04/`** (plan, pack checklist, pack freeze, canonical demo selection, toolcalls) — **not** default gameplay remediation; **not** new industrial campaign; **not** **PX1-M05** or **v2** auto-open.
-- **Ledger:** §1 quick scan + §7 + §11 — **`current milestone`** → **`PX1-M04`**; **PX1-M03** remains **closed** with **`demo-ready-candidate-selected`** (**preserved**).
+- **Merged** [PR #92](https://github.com/m-cahill/starlab/pull/92) to `main`; merge commit `f5e4521d35e152c97eb07458b38fb296929b5aaf` merged **2026-04-19T19:18:21Z** (UTC); **final PR head** `e57dac36d44c073198d773c8a8abd54bec5b5b56`; **authoritative PR-head CI** [`24637019658`](https://github.com/m-cahill/starlab/actions/runs/24637019658) — **success**; **merge-boundary `main` CI** [`24637049478`](https://github.com/m-cahill/starlab/actions/runs/24637049478) on merge commit `f5e4521d…` — **success**. **Superseded** failed PR-head run — **not** merge authority: [`24623471026`](https://github.com/m-cahill/starlab/actions/runs/24623471026) — **failure** (Ruff format check — **not** merge authority).
+- **Opened** **`PX1-M04`** as the **packaging / proof governance** milestone after **PX1-M03** successful closeout: public runtime **`docs/runtime/px1_governed_demo_proof_pack_v1.md`**; private **`docs/company_secrets/milestones/post-v1/PX1-M04/`** (plan, pack checklist, pack freeze, canonical demo selection, toolcalls) — **not** default gameplay remediation; **not** new industrial campaign; **not** operator-local pack assembly; **not** **PX1-M05** or **v2** auto-open.
+- **Ledger:** §1 quick scan + §7 + §11 + §23 — **`current milestone`** → **`PX1-M04`**; **PX1-M03** remains **closed** with **`demo-ready-candidate-selected`** (**preserved**). Private workflow record: **`PX1-M04_run1.md`**.
 
 ### 2026-04-19 — **PX1-M03** governance closeout — merged to `main` ([PR #91](https://github.com/m-cahill/starlab/pull/91)) — **closed**; **`current milestone`** → **None**
 
