@@ -2589,7 +2589,7 @@ It should always answer, with minimal ambiguity:
 
 ## 23. Changelog
 
-### 2026-04-19 — **PX1-M04** Governed Demo Proof Pack & Winning Video — **opened** on `main` (PR1 — governance)
+### 2026-04-19 — **PX1-M04** Governed Demo Proof Pack & Winning Video — PR1 to `main` ([PR #92](https://github.com/m-cahill/starlab/pull/92)) — **open**
 
 - **Opened** **`PX1-M04`** as the **packaging / proof governance** milestone after **PX1-M03** successful closeout: public runtime **`docs/runtime/px1_governed_demo_proof_pack_v1.md`**; private **`docs/company_secrets/milestones/post-v1/PX1-M04/`** (plan, pack checklist, pack freeze, canonical demo selection, toolcalls) — **not** default gameplay remediation; **not** new industrial campaign; **not** **PX1-M05** or **v2** auto-open.
 - **Ledger:** §1 quick scan + §7 + §11 — **`current milestone`** → **`PX1-M04`**; **PX1-M03** remains **closed** with **`demo-ready-candidate-selected`** (**preserved**).
