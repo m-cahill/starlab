@@ -3,7 +3,7 @@
 **Project:** STARLAB  
 **Phase:** Post-PV1 (PX1)  
 **Milestone:** PX1-M03 — Candidate Strengthening & Demo Readiness Remediation  
-**Timeframe:** Opening [PR #90](https://github.com/m-cahill/starlab/pull/90) (2026-04-18) → closeout [PR #CLOSEOUT_PR_NUM](https://github.com/m-cahill/starlab/pull/CLOSEOUT_PR_NUM) (2026-04-19)  
+**Timeframe:** Opening [PR #90](https://github.com/m-cahill/starlab/pull/90) (2026-04-18) → closeout [PR #91](https://github.com/m-cahill/starlab/pull/91) (2026-04-19)  
 **Status:** Closed  
 
 ---
@@ -106,7 +106,7 @@ Provide **corrective remediation** after **PX1-M02** closed honestly with **`no-
 ## 12. Canonical References
 
 - PR #90 (open PX1-M03 / protocol freeze)
-- PR #CLOSEOUT_PR_NUM (governance closeout — this change set)
+- PR #91 (governance closeout — this change set)
 - `docs/runtime/px1_candidate_strengthening_demo_readiness_v1.md`
 - Operator-local series root (see §3)
 - `PX1-M03_protocol_freeze.md`, `PX1-M03_remediation_rationale.md`, `PX1-M03_run1.md`

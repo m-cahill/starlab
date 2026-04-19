@@ -1,7 +1,7 @@
 # PX1-M03 — Plan
 
 **Title:** Candidate Strengthening & Demo Readiness Remediation  
-**Status:** Closed (opening [PR #90](https://github.com/m-cahill/starlab/pull/90); closeout [PR #CLOSEOUT_PR_NUM](https://github.com/m-cahill/starlab/pull/CLOSEOUT_PR_NUM))
+**Status:** Closed (opening [PR #90](https://github.com/m-cahill/starlab/pull/90); closeout [PR #91](https://github.com/m-cahill/starlab/pull/91))
 
 ## Objective
 

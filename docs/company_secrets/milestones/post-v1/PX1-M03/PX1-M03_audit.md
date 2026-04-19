@@ -2,7 +2,7 @@
 
 **Audit mode:** DELTA AUDIT (milestone closeout)  
 **Milestone ID:** PX1-M03  
-**Closeout PR:** [PR #CLOSEOUT_PR_NUM](https://github.com/m-cahill/starlab/pull/CLOSEOUT_PR_NUM)  
+**Closeout PR:** [PR #91](https://github.com/m-cahill/starlab/pull/91)  
 **CI run link(s):** see **`PX1-M03_run2.md`** (authoritative PR-head + merge-boundary runs after merge)  
 
 ---
@@ -55,7 +55,7 @@
 {
   "milestone": "PX1-M03",
   "mode": "delta_audit_closeout",
-  "closeout_pr": "CLOSEOUT_PR_NUM",
+  "closeout_pr": "91",
   "verdict": "green",
   "quality_gates": {
     "ci": "expected_green_docs_only",

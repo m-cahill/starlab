@@ -9,7 +9,7 @@
 
 | Field | Value |
 | --- | --- |
-| PR | [PR #CLOSEOUT_PR_NUM](https://github.com/m-cahill/starlab/pull/CLOSEOUT_PR_NUM) — `docs(governance): close PX1-M03 candidate strengthening and demo readiness remediation` |
+| PR | [PR #91](https://github.com/m-cahill/starlab/pull/91) — `docs(governance): close PX1-M03 candidate strengthening and demo readiness remediation` |
 | Workflow | **CI** (`.github/workflows/ci.yml`) |
 | Trigger | `pull_request` |
 | Branch | `docs/governance-close-px1-m03` |
