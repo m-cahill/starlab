@@ -2,7 +2,7 @@
 
 **Milestone:** `PX1-M04` — **packaging and proof governance** for evidence already produced under **PX1-M03** (not remediation, not new training).
 
-**Public ledger:** `docs/starlab.md` — **`current milestone`** = **`PX1-M04`** while this milestone is **open**.
+**Public ledger:** `docs/starlab.md` — **`PX1-M04`** is **closed** on `main`; **`current milestone`** = **None** until a new **`PX1-MNN`** is chartered.
 
 ---
 

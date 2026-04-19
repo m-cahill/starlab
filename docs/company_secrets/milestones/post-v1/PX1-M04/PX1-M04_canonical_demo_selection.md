@@ -1,6 +1,6 @@
 # PX1-M04 — Canonical demo selection
 
-**Status:** Initial selection for **PX1-M04** PR1 (packaging milestone — **not** new remediation).  
+**Status:** **Closed** with **PX1-M04** governance closeout — selection **unchanged** (packaging milestone — **not** new remediation).  
 **Candidate id (unchanged):** `px1_m01_weighted_refit_rl_bootstrap_v1`  
 
 ---
@@ -19,11 +19,13 @@
 | Field | Value |
 | --- | --- |
 | **Run directory label** | `scripted_01` |
+| **`run_id`** (sealed JSON) | `3123a93de6b383612941625d758d4127198a3e37a1a8232c6622e819b7e9798a` |
+| **`validation_run_sha256`** (sealed JSON) | `a2cd3d2f1ceeb69f55feeda591c737e69f8b1ff8fee02f04aaba98bb60f953ae` |
 | **Opponent profile** | `px1_m02_opponent_scripted_style_v1` (first watchable win chronology in series driver) |
 | **Sealed run JSON** | `…/runs/scripted_01/local_live_play_validation_run.json` |
 | **Result** | `match_execution.sc2_game_result` = **Victory** |
 | **Watchable** | Yes — non-null **`optional_media_registration`** on same run |
-| **Replay file (typical)** | `…/runs/scripted_01/px1_m03_validation.SC2Replay` |
+| **Replay file** | `…/runs/scripted_01/replay/validation.SC2Replay` (relative to run directory; basename **`validation.SC2Replay`** per sealed JSON `replay.replay_file`) |
 
 **Rationale:** This run is the **designated watchable win** for the successful PX1-M03 series: it combines a **replay-backed victory** with **registered optional media** aligned to the operator-captured video used for governance (**`out/px1_m03_operator_watchable.mp4`** after registration cleanup). It is the clearest single traceable chain for demo packaging.
 

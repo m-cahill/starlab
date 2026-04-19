@@ -1,7 +1,7 @@
 # PX1-M04 — Plan
 
 **Title:** Governed Demo Proof Pack & Winning Video  
-**Status:** Open (PR1: ledger + runtime contract + selection memo + pack checklist/freeze)
+**Status:** Closed (PR1 [PR #92](https://github.com/m-cahill/starlab/pull/92); governance closeout: this milestone’s closeout PR)
 
 ## Objective
 
