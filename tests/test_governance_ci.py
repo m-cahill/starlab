@@ -286,3 +286,6 @@ def test_m01_changelog_entry_present() -> None:
     assert "OD-005" in text
     assert "### 2026-04-19 — **PX2-M01** closeout" in text
     assert "24643980874" in text
+    assert "24644245868" in text
+    assert "24644285043" in text
+    assert "dd5ce04a5ab531326ebf2b6a65951edea49e5813" in text

@@ -1249,7 +1249,11 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **PR #95 ([PX2-M01](https://github.com/m-cahill/starlab/pull/95)):** Implementation + closeout on **`px2-m01-terran-runtime-action-surface`** — public **`docs/runtime/px2_full_terran_runtime_action_surface_v1.md`**; **`starlab.sc2.px2`**; fixture tests; ledger + governance tests — **runtime/action substrate only** — **not** training; **not** Blackwell execution; **not** strength proof.
 
-**Authoritative PR-head CI (implementation head, pre-closeout commit):** [`24643980874`](https://github.com/m-cahill/starlab/actions/runs/24643980874) on **`c9d573460a0a82edba5a2941500902a8ccde1db8`** — **success** — **not** merge-boundary `main` CI (see §23 changelog + private **`PX2-M01_run1.md`** for closeout head + post-merge merge-boundary IDs).
+**Authoritative PR-head CI (implementation head, pre-closeout commit):** [`24643980874`](https://github.com/m-cahill/starlab/actions/runs/24643980874) on **`c9d573460a0a82edba5a2941500902a8ccde1db8`** — **success** — **not** the closeout head CI.
+
+**Authoritative PR-head CI (closeout head):** [`24644245868`](https://github.com/m-cahill/starlab/actions/runs/24644245868) on **`f4773d61e9981337f4799e77ec8f8ddae533f1e3`** — **success** — **not** merge-boundary `main` CI.
+
+**Merge commit (`main`):** `dd5ce04a5ab531326ebf2b6a65951edea49e5813` — **merge-boundary `main` CI** [`24644285043`](https://github.com/m-cahill/starlab/actions/runs/24644285043) — **success** (see §23 changelog + private **`PX2-M01_run1.md`**).
 
 **Delivered (intent):** Versioned **Terran core v1** structured action schema; placement/target vocabulary; legality/masking over a conservative **`GameStateSnapshot`**; `compile_terran_action` → **`Px2InternalCommand`**; **`burny_bridge`** semantic hints for traceability; deterministic compile receipts; fixture tests — see **`docs/runtime/px2_full_terran_runtime_action_surface_v1.md`**.
 
@@ -2686,7 +2690,8 @@ It should always answer, with minimal ambiguity:
 
 - **Closed** **`PX2-M01`** on `main` via [PR #95](https://github.com/m-cahill/starlab/pull/95) (**branch** `px2-m01-terran-runtime-action-surface`): ledger + governance tests — **`PX2-M01`** **closed** at merge; **`current milestone`** = **`None`**; **`PX2-M02`** **not** opened; **`PX1-M05`** optional / not yet opened; **v2** not opened. **Runtime/action substrate only** — **not** training; **not** Blackwell execution; **not** strength proof.
 - **Implementation PR-head (authoritative merge gate before closeout commit):** `c9d573460a0a82edba5a2941500902a8ccde1db8` — **authoritative PR-head CI** [`24643980874`](https://github.com/m-cahill/starlab/actions/runs/24643980874) — **success**.
-- **Closeout ledger + governance tests:** final PR head is the tip of **PR #95** immediately before merge — **authoritative closeout PR-head CI**, **merge commit (`main`)**, and **merge-boundary `main` CI** — record after push/merge in this section and in private **`PX2-M01_run1.md`** (see merge-boundary line once **PR #95** lands on `main`).
+- **Closeout final PR head:** `f4773d61e9981337f4799e77ec8f8ddae533f1e3` — **authoritative closeout PR-head CI** [`24644245868`](https://github.com/m-cahill/starlab/actions/runs/24644245868) — **success**.
+- **Merge commit (`main`):** `dd5ce04a5ab531326ebf2b6a65951edea49e5813` — **merge-boundary `main` CI** [`24644285043`](https://github.com/m-cahill/starlab/actions/runs/24644285043) on merge commit `dd5ce04a…` — **success** — private workflow record: **`PX2-M01_run1.md`**.
 
 ### 2026-04-19 — **PX2-M01** opening — Full Terran Runtime & Action Surface — **`current milestone`** → **`PX2-M01`**
 
