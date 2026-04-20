@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–9 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–10 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -19,6 +19,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE7,
     EXECUTION_KIND_SLICE8,
     EXECUTION_KIND_SLICE9,
+    EXECUTION_KIND_SLICE10,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -39,6 +40,15 @@ from starlab.sc2.px2.self_play.campaign_run import (
 from starlab.sc2.px2.self_play.canonical_operator_local_run import (
     resolve_canonical_campaign_root,
     run_canonical_operator_local_campaign_root_smoke,
+)
+from starlab.sc2.px2.self_play.current_candidate import (
+    DEFAULT_SLICE10_CAMPAIGN_ID,
+    next_run_preflight_hints_from_current_candidate,
+    run_bounded_operator_local_session_transition_with_current_candidate,
+)
+from starlab.sc2.px2.self_play.current_candidate_record import (
+    CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB,
+    PX2_SELF_PLAY_CURRENT_CANDIDATE_CONTRACT_ID,
 )
 from starlab.sc2.px2.self_play.execution_preflight import (
     PX2_SELF_PLAY_EXECUTION_PREFLIGHT_CONTRACT_ID,
@@ -1209,6 +1219,141 @@ def test_emit_operator_local_session_transition_cli_init_only(tmp_path: Path) ->
     )
     root = base / "out" / "px2_self_play_campaigns" / DEFAULT_SLICE9_CAMPAIGN_ID
     assert (root / "px2_self_play_operator_local_session_transition.json").is_file()
+
+
+def test_slice10_promotion_emits_current_candidate_seal_and_hints(tmp_path: Path) -> None:
+    cid = "px2_m03_slice10_ci"
+    r1, r2 = "cc_a", "cc_b"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=[r1, r2],
+        torch_seed=5,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    assert (root / "px2_self_play_current_candidate.json").is_file()
+    assert (root / "px2_self_play_current_candidate_report.json").is_file()
+    cc = json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))
+    assert cc["contract_id"] == PX2_SELF_PLAY_CURRENT_CANDIDATE_CONTRACT_ID
+    assert cc["execution_kind"] == EXECUTION_KIND_SLICE10
+    assert cc["current_candidate_rule_id"] == CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB
+    assert (
+        cc["operator_local_session_transition_sha256"]
+        == out["operator_local_session_transition_sha256"]
+    )
+    assert cc["current_run_id_after_transition"] == r2
+    anchor = cc["anchor"]
+    assert anchor["continuity_run_id"] == r2
+    cont = json.loads(
+        (root / "runs" / r2 / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    last_step = cont["step_records"][-1]
+    assert anchor["checkpoint_receipt_sha256"] == last_step["checkpoint_receipt_sha256"]
+    assert cc["weight_identity"] == cont["weight_identity"]
+    basis_only = {
+        k: v
+        for k, v in cc.items()
+        if k
+        not in (
+            "current_candidate_sha256",
+            "operator_note_convention",
+            "campaign_root_resolved_posix",
+        )
+    }
+    assert cc["current_candidate_sha256"] == sha256_hex_of_canonical_json(basis_only)
+    hints = next_run_preflight_hints_from_current_candidate(root)
+    assert hints is not None
+    assert hints["anchor_continuity_run_id"] == r2
+    assert hints["checkpoint_receipt_sha256"] == last_step["checkpoint_receipt_sha256"]
+    assert (
+        hints["operator_local_session_transition_sha256"]
+        == out["operator_local_session_transition_sha256"]
+    )
+
+
+def test_slice10_rollback_anchor_first_run(tmp_path: Path) -> None:
+    cid = "px2_m03_slice10_rb"
+    r1, r2 = "cc_rb_a", "cc_rb_b"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="rollback",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=[r1, r2],
+        torch_seed=9,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    cc = json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))
+    assert cc["anchor"]["continuity_run_id"] == r1
+    cont = json.loads(
+        (root / "runs" / r1 / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    first_step = cont["step_records"][0]
+    assert cc["anchor"]["checkpoint_receipt_sha256"] == first_step["checkpoint_receipt_sha256"]
+
+
+def test_slice10_current_candidate_deterministic_repeat(tmp_path: Path) -> None:
+    cid = "px2_m03_slice10_det"
+    base = tmp_path / "s10"
+    ids = ["a10", "b10"]
+    a = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=ids,
+        torch_seed=13,
+        continuity_step_count=2,
+    )
+    shutil.rmtree(base / "out")
+    b = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=ids,
+        torch_seed=13,
+        continuity_step_count=2,
+    )
+    assert a["current_candidate_sha256"] == b["current_candidate_sha256"]
+
+
+def test_emit_current_candidate_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_current_candidate import main
+
+    base = tmp_path / "op10"
+    base.mkdir()
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--base-dir",
+                str(base),
+                "--init-only",
+                "--transition",
+                "promotion",
+                "--run-ids",
+                "cli_cc_a",
+                "cli_cc_b",
+                "--campaign-id",
+                DEFAULT_SLICE10_CAMPAIGN_ID,
+                "--steps",
+                "2",
+            ]
+        )
+        == 0
+    )
+    root = base / "out" / "px2_self_play_campaigns" / DEFAULT_SLICE10_CAMPAIGN_ID
+    assert (root / "px2_self_play_current_candidate.json").is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
