@@ -1,7 +1,7 @@
 # PX2 — Industrial self-play campaign (runtime v1)
 
-**Version:** v1 (PX2-M03 opening slice — contract, bridge, fixture smoke; **not** industrial execution proof)  
-**Contract IDs (code):** `starlab.px2.self_play_campaign_contract.v1`, `starlab.px2.self_play_smoke_run.v1`  
+**Version:** v1 — **slice 1** (contract, bridge, fixture smoke) + **slice 2** (execution skeleton, artifact tree, checkpoint/eval receipts); **not** industrial campaign execution proof  
+**Contract IDs (code):** `starlab.px2.self_play_campaign_contract.v1`, `starlab.px2.self_play_smoke_run.v1`, `starlab.px2.self_play_campaign_run.v1`, `starlab.px2.self_play_checkpoint_receipt.v1`, `starlab.px2.self_play_evaluation_receipt.v1`  
 **Related:** readiness / preflight `docs/runtime/px2_industrial_self_play_campaign_readiness_v1.md`; replay-bootstrap `docs/runtime/px2_neural_bootstrap_from_replays_v1.md` (PX2-M02); Terran surface `docs/runtime/px2_full_terran_runtime_action_surface_v1.md` (PX2-M01)
 
 ---
@@ -83,13 +83,13 @@ The opening implementation provides **named snapshot refs**, a **seed-policy** e
 
 ## 7. Checkpoint/eval/promotion/rollback posture
 
-These appear as **explicit fields** on the campaign contract. The **fixture smoke run** may record **descriptive** outcomes only, for example:
+These appear as **explicit fields** on the campaign contract.
 
-- `checkpoint_would_emit` / `evaluation_would_run`
-- `promotion_deferred_in_smoke`
-- `rollback_not_triggered_in_smoke`
+**Slice 1** — the **fixture smoke run** recorded **descriptive** placeholders only (`checkpoint_would_emit`, etc.).
 
-**Retention** and **operator-local layout** expectations are described at the contract level; long-run behavior is **deferred** to later **`PX2-M03`** execution.
+**Slice 2** — bounded **checkpoint** and **evaluation** **receipt** JSON (+ reports) are emitted for fixture skeleton runs (see §8b). They make the control plane **more concrete** in-repo but are **not** industrial checkpoint persistence or real eval distributions. **Promotion** / **rollback** remain **stub** fields on the sealed campaign run (`promotion_posture_stub`, `rollback_posture_stub`).
+
+**Retention** and **operator-local layout** expectations are described at the contract level; long-run behavior is **deferred** to later **`PX2-M03`** industrial execution.
 
 ---
 
@@ -104,6 +104,24 @@ Uses a **PX2-M02-style** bundle corpus (e.g. test `tests/fixtures/px2_m02/corpus
 - `px2_self_play_smoke_run_report.json`
 
 The smoke path **does not** simulate a full SC2 match. It proves: contract load, bridge execution, opponent selection, decode/compile, and deterministic **bookkeeping** outputs.
+
+---
+
+## 8b. Slice 2 — Campaign execution skeleton (bounded, fixture-only)
+
+**Python:** `starlab.sc2.px2.self_play.campaign_run` — `run_px2_campaign_execution_skeleton`  
+**Emitter CLI:** `python -m starlab.sc2.px2.self_play.emit_px2_self_play_campaign_execution_skeleton --output-dir … --corpus-root …`
+
+**Purpose:** A **PX2-native** bounded loop that loads the slice-1 **campaign contract**, runs a **small multi-episode** fixture path (same **M02** corpus lineage as slice 1), uses the **policy bridge** and **opponent selection** per episode, and writes a **deterministic artifact tree** under a user-supplied directory.
+
+**Typical files (not all are sealed):**
+
+- `px2_self_play_campaign_run.json` / `px2_self_play_campaign_run_report.json` (sealed `run_sha256` on the run body)
+- `run_manifest.json` — cadence overrides for skeleton (effective episode cadence so receipts appear in CI; **industrial runs** follow contract `checkpoint_posture` / `eval_posture` games, not these overrides)
+- `checkpoint_receipts/ckpt_epNNN.json` + `*_report.json`
+- `evaluation_receipts/eval_epNNN.json` + `*_report.json`
+
+**Non-claims:** This is **slice-2 skeleton output**, **not** proof of a long industrial self-play campaign, **not** Blackwell completion, **not** ladder strength.
 
 ---
 
@@ -126,16 +144,16 @@ Later **`PX2-M03`** work may attach **operator-local** campaigns under `out/px2_
 
 ---
 
-## Surface coverage (slice 1 vs later `PX2-M03`)
+## Surface coverage (slice 1 vs slice 2 vs later `PX2-M03`)
 
-| Surface | Proved in slice 1 | Deferred to later `PX2-M03` work |
-| --- | --- | --- |
-| Versioned campaign contract + report JSON | Yes (emitters + seal) | Industrial campaign-specific profiles |
-| Policy→runtime bridge (M02→M01) | Yes (CPU fixture path) | Production weight load, distributed inference |
-| Snapshot/opponent pool | Stub + deterministic selection | Full pool, diversity metrics, anti-collapse enforcement |
-| Checkpoint/eval/promotion/rollback | Contract + smoke placeholders | Real checkpoints, eval harness, promotion/rollback automation |
-| Self-play smoke | Fixture-only, deterministic artifacts | Operator-local Blackwell-scale loops |
-| M49/M50/M51 executor | N/A (reference only) | Optional adaptation or PX2-native executor |
+| Surface | Slice 1 | Slice 2 | Later industrial `PX2-M03` |
+| --- | --- | --- | --- |
+| Campaign contract + report | Yes | Reused | Campaign-specific operator profiles |
+| Policy→runtime bridge | Yes | Reused | Weight load, scaling |
+| Opponent pool | Stub + selection | Same stub, multi-episode | Full pool, anti-collapse |
+| Checkpoint / eval | Contract placeholders | **Receipt JSON + reports** (fixture skeleton) | Real persistence, real eval harness |
+| Execution | Smoke JSON only | **Run manifest + sealed campaign run** | Long runs, Blackwell-class intent |
+| M49/M50/M51 | Reference | Reference | Optional adapter or native executor |
 
 ---
 
@@ -148,5 +166,10 @@ Later **`PX2-M03`** work may attach **operator-local** campaigns under `out/px2_
 | `starlab.sc2.px2.self_play.snapshot_pool` | Opponent pool stub |
 | `starlab.sc2.px2.self_play.opponent_selection` | Selection rule IDs + `select_opponent_ref` |
 | `starlab.sc2.px2.self_play.smoke_run` | Smoke orchestration |
+| `starlab.sc2.px2.self_play.campaign_run` | Slice-2 execution skeleton |
+| `starlab.sc2.px2.self_play.checkpoint_receipts` | Checkpoint receipt + report builders |
+| `starlab.sc2.px2.self_play.evaluation_receipts` | Evaluation receipt + report builders |
+| `starlab.sc2.px2.self_play.run_artifacts` | Manifest + JSON write helpers |
 | `starlab.sc2.px2.self_play.emit_px2_self_play_campaign_contract` | Campaign emitter CLI |
 | `starlab.sc2.px2.self_play.emit_px2_self_play_smoke_run` | Smoke emitter CLI |
+| `starlab.sc2.px2.self_play.emit_px2_self_play_campaign_execution_skeleton` | Slice-2 skeleton emitter CLI |
