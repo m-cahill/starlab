@@ -1,9 +1,10 @@
-"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 4)."""
+"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 5)."""
 
 from __future__ import annotations
 
 from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE4,
+    EXECUTION_KIND_SLICE5,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_REPORT_CONTRACT_ID,
     run_operator_local_campaign_continuity,
@@ -13,6 +14,17 @@ from starlab.sc2.px2.self_play.campaign_contract import (
     PX2_SELF_PLAY_CAMPAIGN_REPORT_CONTRACT_ID,
     build_px2_self_play_campaign_artifacts,
     seal_px2_self_play_campaign_body,
+)
+from starlab.sc2.px2.self_play.campaign_root import (
+    default_operator_local_campaign_root_subdirs,
+    ensure_operator_local_campaign_root_layout,
+    recommended_operator_out_campaign_root_path,
+    run_slice5_operator_local_campaign,
+)
+from starlab.sc2.px2.self_play.campaign_root_manifest import (
+    PX2_SELF_PLAY_CAMPAIGN_ROOT_MANIFEST_CONTRACT_ID,
+    PX2_SELF_PLAY_CAMPAIGN_ROOT_MANIFEST_REPORT_CONTRACT_ID,
+    build_px2_self_play_campaign_root_manifest_artifacts,
 )
 from starlab.sc2.px2.self_play.campaign_run import (
     PX2_SELF_PLAY_CAMPAIGN_RUN_CONTRACT_ID,
@@ -42,6 +54,7 @@ from starlab.sc2.px2.self_play.opponent_selection import (
     OPPONENT_SELECTION_FROZEN_SEED,
     OPPONENT_SELECTION_ROUND_ROBIN,
     OPPONENT_SELECTION_SELF_SNAPSHOT,
+    OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB,
     select_opponent_ref,
 )
 from starlab.sc2.px2.self_play.policy_runtime_bridge import (
@@ -70,6 +83,9 @@ from starlab.sc2.px2.self_play.smoke_run import (
 from starlab.sc2.px2.self_play.snapshot_pool import (
     OpponentPoolStub,
     build_default_opponent_pool_stub,
+    build_slice5_opponent_pool,
+    opponent_battle_ref_ids,
+    opponent_pool_identity_sha256,
 )
 from starlab.sc2.px2.self_play.weight_loading import (
     WEIGHT_MODE_INIT_ONLY,
@@ -82,8 +98,10 @@ __all__ = [
     "OPPONENT_SELECTION_FROZEN_SEED",
     "OPPONENT_SELECTION_ROUND_ROBIN",
     "OPPONENT_SELECTION_SELF_SNAPSHOT",
+    "OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB",
     "EXECUTION_KIND_SLICE3",
     "EXECUTION_KIND_SLICE4",
+    "EXECUTION_KIND_SLICE5",
     "WEIGHT_MODE_INIT_ONLY",
     "WEIGHT_MODE_WEIGHTS_FILE",
     "OpponentPoolStub",
@@ -91,6 +109,8 @@ __all__ = [
     "PX2_SELF_PLAY_CAMPAIGN_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID",
     "PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_REPORT_CONTRACT_ID",
+    "PX2_SELF_PLAY_CAMPAIGN_ROOT_MANIFEST_CONTRACT_ID",
+    "PX2_SELF_PLAY_CAMPAIGN_ROOT_MANIFEST_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_CAMPAIGN_RUN_CONTRACT_ID",
     "PX2_SELF_PLAY_CAMPAIGN_RUN_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_CHECKPOINT_RECEIPT_CONTRACT_ID",
@@ -110,14 +130,22 @@ __all__ = [
     "PolicyRuntimeBridgeReceipt",
     "bootstrap_policy_runtime_step",
     "build_default_opponent_pool_stub",
+    "build_px2_self_play_campaign_root_manifest_artifacts",
+    "build_slice5_opponent_pool",
     "build_policy_operator_local",
     "build_slice4_continuity_manifest",
     "build_px2_self_play_campaign_artifacts",
     "build_px2_self_play_smoke_run_artifacts",
+    "default_operator_local_campaign_root_subdirs",
     "default_operator_local_slice4_subdirs",
+    "ensure_operator_local_campaign_root_layout",
     "ensure_operator_local_slice4_layout",
+    "opponent_battle_ref_ids",
+    "opponent_pool_identity_sha256",
     "run_execution_preflight",
+    "recommended_operator_out_campaign_root_path",
     "run_operator_local_campaign_continuity",
+    "run_slice5_operator_local_campaign",
     "run_operator_local_campaign_smoke",
     "run_px2_campaign_execution_skeleton",
     "run_px2_fixture_self_play_smoke",

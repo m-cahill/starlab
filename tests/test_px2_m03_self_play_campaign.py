@@ -1,8 +1,9 @@
-"""PX2-M03 self-play tests: slices 1–4 (incl. continuity). CPU fixtures."""
+"""PX2-M03 self-play tests: slices 1–5 (incl. continuity, campaign root). CPU fixtures."""
 
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 
 import pytest
@@ -12,6 +13,7 @@ from starlab.sc2.px2.bootstrap.feature_adapter import observation_feature_dim
 from starlab.sc2.px2.bootstrap.policy_model import BootstrapTerranPolicy
 from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE4,
+    EXECUTION_KIND_SLICE5,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -19,6 +21,10 @@ from starlab.sc2.px2.self_play.campaign_contract import (
     PX2_SELF_PLAY_CAMPAIGN_CONTRACT_ID,
     build_px2_self_play_campaign_artifacts,
     seal_px2_self_play_campaign_body,
+)
+from starlab.sc2.px2.self_play.campaign_root import run_slice5_operator_local_campaign
+from starlab.sc2.px2.self_play.campaign_root_manifest import (
+    PX2_SELF_PLAY_CAMPAIGN_ROOT_MANIFEST_CONTRACT_ID,
 )
 from starlab.sc2.px2.self_play.campaign_run import (
     EXECUTION_KIND_SLICE2,
@@ -38,6 +44,7 @@ from starlab.sc2.px2.self_play.opponent_selection import (
     OPPONENT_SELECTION_FROZEN_SEED,
     OPPONENT_SELECTION_ROUND_ROBIN,
     OPPONENT_SELECTION_SELF_SNAPSHOT,
+    OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB,
     select_opponent_ref,
 )
 from starlab.sc2.px2.self_play.policy_runtime_bridge import bootstrap_policy_runtime_step
@@ -47,7 +54,13 @@ from starlab.sc2.px2.self_play.smoke_run import (
     PX2_SELF_PLAY_SMOKE_RUN_CONTRACT_ID,
     run_px2_fixture_self_play_smoke,
 )
-from starlab.sc2.px2.self_play.snapshot_pool import build_default_opponent_pool_stub
+from starlab.sc2.px2.self_play.snapshot_pool import (
+    DEFAULT_SLICE5_WEIGHTED_FROZEN_WEIGHTS,
+    build_default_opponent_pool_stub,
+    build_slice5_opponent_pool,
+    opponent_battle_ref_ids,
+    opponent_pool_identity_sha256,
+)
 from starlab.sc2.px2.self_play.weight_loading import (
     build_policy_operator_local,
     sha256_hex_file,
@@ -104,6 +117,29 @@ def test_opponent_selection_unknown_rule_errors() -> None:
     bad = "starlab.px2.opponent_selection.nope.v1"
     with pytest.raises(ValueError, match="unknown"):
         select_opponent_ref(step_index=0, rule_id=bad, ref_ids=("x",))
+
+
+def test_opponent_selection_weighted_frozen_stub() -> None:
+    refs = ("a", "b", "c")
+    weights = (2, 1, 1)
+    expanded_expect = ["a", "a", "b", "c"]
+    for step, exp in enumerate(expanded_expect * 2):
+        got = select_opponent_ref(
+            step_index=step,
+            rule_id=OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB,
+            ref_ids=refs,
+            weights=weights,
+        )
+        assert got == exp
+
+
+def test_opponent_selection_weighted_requires_weights() -> None:
+    with pytest.raises(ValueError, match="weights required"):
+        select_opponent_ref(
+            step_index=0,
+            rule_id=OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB,
+            ref_ids=("a", "b"),
+        )
 
 
 def test_policy_bridge_decode_compile(tmp_path: Path) -> None:
@@ -516,6 +552,7 @@ def test_operator_local_continuity_deterministic_init_only(tmp_path: Path) -> No
     cont = json.loads((root / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8"))
     assert cont["contract_id"] == PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID
     assert cont["execution_kind"] == EXECUTION_KIND_SLICE4
+    assert "opponent_rotation_trace" in cont["episodes"][0]
     sealed = {k: v for k, v in cont.items() if k != "continuity_sha256"}
     assert cont["continuity_sha256"] == sha256_hex_of_canonical_json(sealed)
 
@@ -594,3 +631,120 @@ def test_emit_campaign_continuity_cli_init_only(tmp_path: Path) -> None:
         == 0
     )
     assert (out / "px2_self_play_campaign_continuity.json").is_file()
+
+
+def test_slice5_opponent_pool_identity_and_battle_refs() -> None:
+    pool = build_slice5_opponent_pool(campaign_tag="t")
+    battle = opponent_battle_ref_ids(pool)
+    assert len(battle) == 4
+    assert pool.seed_policy_ref_id not in battle
+    id1 = opponent_pool_identity_sha256(pool)
+    id2 = opponent_pool_identity_sha256(build_slice5_opponent_pool(campaign_tag="t"))
+    assert id1 == id2
+
+
+def test_slice5_campaign_root_manifest_deterministic_repeat(tmp_path: Path) -> None:
+    """Preflight seals absolute ``output_dir``; repeat with identical paths for stable hashes."""
+
+    rid = "px2_slice5_fixed_run"
+    fixed_cid = "px2_m03_slice5_ci"
+    root = tmp_path / "camp"
+    a1 = run_slice5_operator_local_campaign(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        init_only=True,
+        campaign_id=fixed_cid,
+        torch_seed=21,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    shutil.rmtree(root)
+    a2 = run_slice5_operator_local_campaign(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        init_only=True,
+        campaign_id=fixed_cid,
+        torch_seed=21,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    assert a1["campaign_root_manifest_sha256"] == a2["campaign_root_manifest_sha256"]
+    assert a1["continuity_sha256"] == a2["continuity_sha256"]
+
+    mpath = root / "px2_self_play_campaign_root_manifest.json"
+    manifest = json.loads(mpath.read_text(encoding="utf-8"))
+    assert manifest["contract_id"] == PX2_SELF_PLAY_CAMPAIGN_ROOT_MANIFEST_CONTRACT_ID
+    sealed = {k: v for k, v in manifest.items() if k != "campaign_root_manifest_sha256"}
+    assert manifest["campaign_root_manifest_sha256"] == sha256_hex_of_canonical_json(sealed)
+    assert (root / "opponent_pool" / "px2_opponent_pool_metadata.json").is_file()
+    run_dir = root / "runs" / rid
+    cont = json.loads(
+        (run_dir / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    assert cont["execution_kind"] == EXECUTION_KIND_SLICE5
+    assert cont["opponent_pool_identity_sha256"] == manifest["opponent_pool_identity_sha256"]
+    pool = build_slice5_opponent_pool(campaign_tag=fixed_cid.replace("/", "_"))
+    expect_rr = [
+        select_opponent_ref(
+            step_index=i,
+            rule_id=OPPONENT_SELECTION_ROUND_ROBIN,
+            ref_ids=opponent_battle_ref_ids(pool),
+        )
+        for i in range(2)
+    ]
+    refs = [e["opponent_snapshot_ref"] for e in cont["episodes"]]
+    assert refs == expect_rr
+    assert [e["opponent_rotation_trace"]["selected_opponent_ref"] for e in cont["episodes"]] == refs
+
+
+def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
+    pool = build_slice5_opponent_pool(campaign_tag="w")
+    battle = opponent_battle_ref_ids(pool)
+    assert DEFAULT_SLICE5_WEIGHTED_FROZEN_WEIGHTS == (2, 1, 1, 1)
+    run_operator_local_campaign_continuity(
+        corpus_root=CORPUS,
+        output_dir=tmp_path / "wcont",
+        init_only=True,
+        campaign_id="weighted_ci",
+        campaign_profile_id="weighted_profile",
+        torch_seed=3,
+        run_id="weighted_run",
+        continuity_step_count=3,
+        opponent_pool=pool,
+        opponent_selection_rule_id=OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB,
+        opponent_selection_weights=DEFAULT_SLICE5_WEIGHTED_FROZEN_WEIGHTS,
+        opponent_rotation_ref_ids=battle,
+        execution_kind=EXECUTION_KIND_SLICE5,
+    )
+    cont = json.loads(
+        (tmp_path / "wcont" / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    expanded: list[str] = []
+    for rid, w in zip(battle, DEFAULT_SLICE5_WEIGHTED_FROZEN_WEIGHTS, strict=True):
+        expanded.extend([rid] * w)
+    for i in range(3):
+        assert cont["episodes"][i]["opponent_snapshot_ref"] == expanded[i % len(expanded)]
+
+
+def test_emit_slice5_campaign_root_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_slice5_campaign_root import main
+
+    root = tmp_path / "s5"
+    assert (
+        main(
+            [
+                "--campaign-root",
+                str(root),
+                "--corpus-root",
+                str(CORPUS),
+                "--init-only",
+                "--steps",
+                "2",
+                "--run-id",
+                "cli_s5",
+            ]
+        )
+        == 0
+    )
+    assert (root / "px2_self_play_campaign_root_manifest.json").is_file()
+    assert (root / "runs" / "cli_s5" / "px2_self_play_campaign_continuity.json").is_file()

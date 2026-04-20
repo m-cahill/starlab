@@ -21,8 +21,10 @@ from starlab.sc2.px2.self_play.campaign_contract import (
 from starlab.sc2.px2.self_play.checkpoint_receipts import build_slice4_checkpoint_receipt_artifacts
 from starlab.sc2.px2.self_play.evaluation_receipts import build_slice4_evaluation_receipt_artifacts
 from starlab.sc2.px2.self_play.execution_preflight import run_execution_preflight
+from starlab.sc2.px2.self_play.opponent_rotation import build_opponent_rotation_trace
 from starlab.sc2.px2.self_play.opponent_selection import (
     OPPONENT_SELECTION_ROUND_ROBIN,
+    OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB,
     select_opponent_ref,
 )
 from starlab.sc2.px2.self_play.policy_runtime_bridge import bootstrap_policy_runtime_step
@@ -37,7 +39,11 @@ from starlab.sc2.px2.self_play.run_artifacts import (
     ensure_operator_local_slice4_layout,
     write_json,
 )
-from starlab.sc2.px2.self_play.snapshot_pool import build_default_opponent_pool_stub
+from starlab.sc2.px2.self_play.snapshot_pool import (
+    OpponentPoolStub,
+    build_default_opponent_pool_stub,
+    opponent_pool_identity_sha256,
+)
 from starlab.sc2.px2.self_play.weight_loading import build_policy_operator_local
 
 PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID: Final[str] = (
@@ -48,6 +54,7 @@ PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_REPORT_CONTRACT_ID: Final[str] = (
 )
 
 EXECUTION_KIND_SLICE4: Final[str] = "px2_m03_slice4_operator_local_continuity_v1"
+EXECUTION_KIND_SLICE5: Final[str] = "px2_m03_slice5_operator_local_campaign_root_v1"
 
 
 def _seal_continuity_body(body_without_seal: dict[str, Any]) -> str:
@@ -68,6 +75,11 @@ def run_operator_local_campaign_continuity(
     continuity_step_count: int = 3,
     device_intent: str = "cpu",
     map_location: str = "cpu",
+    opponent_pool: OpponentPoolStub | None = None,
+    opponent_selection_rule_id: str = OPPONENT_SELECTION_ROUND_ROBIN,
+    opponent_selection_weights: tuple[int, ...] | None = None,
+    opponent_rotation_ref_ids: tuple[str, ...] | None = None,
+    execution_kind: str = EXECUTION_KIND_SLICE4,
 ) -> dict[str, Any]:
     """Multi-step continuity proof: preflight → N bounded steps with sealed receipt chain.
 
@@ -110,13 +122,29 @@ def run_operator_local_campaign_continuity(
         map_location=map_location,
     )
 
-    pool = build_default_opponent_pool_stub(campaign_tag="slice4")
-    ref_ids = tuple(r.ref_id for r in pool.snapshot_refs)
+    pool = (
+        opponent_pool
+        if opponent_pool is not None
+        else build_default_opponent_pool_stub(campaign_tag="slice4")
+    )
+    ref_ids = (
+        opponent_rotation_ref_ids
+        if opponent_rotation_ref_ids is not None
+        else tuple(r.ref_id for r in pool.snapshot_refs)
+    )
+    if opponent_selection_rule_id == OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB:
+        if opponent_selection_weights is None:
+            msg = "opponent_selection_weights required for weighted_frozen_stub"
+            raise ValueError(msg)
+    elif opponent_selection_weights is not None:
+        msg = "opponent_selection_weights only valid for weighted_frozen_stub"
+        raise ValueError(msg)
+
     campaign, _cr = build_px2_self_play_campaign_artifacts(
         campaign_id=campaign_id,
         campaign_profile_id=campaign_profile_id,
         opponent_pool=pool,
-        opponent_selection_rule_id=OPPONENT_SELECTION_ROUND_ROBIN,
+        opponent_selection_rule_id=opponent_selection_rule_id,
         torch_seed=torch_seed,
     )
     campaign_sha = str(campaign["campaign_sha256"])
@@ -147,8 +175,16 @@ def run_operator_local_campaign_continuity(
         gss = ex["game_state_snapshot"]
         opponent_ref = select_opponent_ref(
             step_index=step,
-            rule_id=OPPONENT_SELECTION_ROUND_ROBIN,
+            rule_id=opponent_selection_rule_id,
             ref_ids=ref_ids,
+            weights=opponent_selection_weights,
+        )
+        rot_trace = build_opponent_rotation_trace(
+            step_index=step,
+            rule_id=opponent_selection_rule_id,
+            ref_ids=ref_ids,
+            selected_ref=opponent_ref,
+            weights=opponent_selection_weights,
         )
         bridge = bootstrap_policy_runtime_step(model, obs, gss)
         games_done = step + 1
@@ -158,6 +194,7 @@ def run_operator_local_campaign_continuity(
                 "episode_index_one_based": games_done,
                 "example_id": ex.get("example_id"),
                 "opponent_snapshot_ref": opponent_ref,
+                "opponent_rotation_trace": rot_trace,
                 "bridge": bridge.to_json_dict(),
             }
         )
@@ -278,25 +315,41 @@ def run_operator_local_campaign_continuity(
         prior_ev = ev_seal
         prior_promo = pr_seal
 
+    pool_identity = opponent_pool_identity_sha256(pool)
+    continuity_non_claims = (
+        [
+            "Slice-5 operator-local campaign-root continuity — not industrial self-play campaign.",
+            "Not Blackwell-scale; not merge-gate default CI proof.",
+        ]
+        if execution_kind == EXECUTION_KIND_SLICE5
+        else [
+            "Slice-4 bounded multi-step continuity — not industrial self-play campaign.",
+            "Not Blackwell-scale; not merge-gate default CI proof.",
+        ]
+    )
+
     continuity_body: dict[str, Any] = {
         "contract_id": PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
         "campaign_id": campaign_id,
         "run_id": rid,
         "campaign_sha256": campaign_sha,
         "linked_campaign_contract_id": PX2_SELF_PLAY_CAMPAIGN_CONTRACT_ID,
-        "execution_kind": EXECUTION_KIND_SLICE4,
+        "execution_kind": execution_kind,
         "preflight_sha256": pf_sha,
         "torch_seed": torch_seed,
         "continuity_step_count": n_steps,
         "weight_identity": weight_meta,
         "weight_bundle_ref": weight_bundle_ref.strip() if weight_bundle_ref else None,
         "device_intent": device_intent,
+        "opponent_pool_identity_sha256": pool_identity,
+        "opponent_selection_rule_id": opponent_selection_rule_id,
+        "opponent_selection_weights": list(opponent_selection_weights)
+        if opponent_selection_weights is not None
+        else None,
+        "opponent_rotation_ref_ids": list(ref_ids),
         "episodes": episodes_out,
         "step_records": step_records,
-        "non_claims": [
-            "Slice-4 bounded multi-step continuity — not industrial self-play campaign.",
-            "Not Blackwell-scale; not merge-gate default CI proof.",
-        ],
+        "non_claims": continuity_non_claims,
     }
     continuity_no_seal = {k: v for k, v in continuity_body.items() if k != "continuity_sha256"}
     seal = _seal_continuity_body(continuity_no_seal)
@@ -312,6 +365,7 @@ def run_operator_local_campaign_continuity(
             "preflight_sha256": pf_sha,
             "continuity_steps": n_steps,
             "final_checkpoint_receipt_sha256": step_records[-1]["checkpoint_receipt_sha256"],
+            "opponent_pool_identity_sha256": pool_identity,
         },
         "non_claims": continuity_body["non_claims"],
     }
@@ -331,10 +385,14 @@ def run_operator_local_campaign_continuity(
         campaign_id=campaign_id,
         run_id=rid,
         campaign_sha256=campaign_sha,
-        execution_kind=EXECUTION_KIND_SLICE4,
+        execution_kind=execution_kind,
         continuity_step_count=n_steps,
         preflight_sha256=pf_sha,
-        corpus_note="PX2-M02 fixture corpus lineage; slice-4 continuity proof.",
+        corpus_note=(
+            "PX2-M02 fixture corpus lineage; slice-4/5 bounded continuity proof."
+            if execution_kind == EXECUTION_KIND_SLICE4
+            else "PX2-M02 fixture corpus lineage; slice-5 campaign-root continuity proof."
+        ),
         torch_seed=torch_seed,
         operator_local_layout=sub,
     )
