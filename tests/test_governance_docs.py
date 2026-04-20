@@ -55,6 +55,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/px2_full_terran_runtime_action_surface_v1.md",
     "docs/runtime/px2_neural_bootstrap_from_replays_v1.md",
     "docs/runtime/px2_industrial_self_play_campaign_readiness_v1.md",
+    "docs/runtime/px2_industrial_self_play_campaign_v1.md",
     "docs/runtime/scripted_baseline_suite_v1.md",
     "docs/runtime/heuristic_baseline_suite_v1.md",
     "docs/runtime/evaluation_runner_tournament_harness_v1.md",
