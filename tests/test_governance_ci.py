@@ -11,7 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
-    assert "| Current milestone |" in scan and "**`None`**" in scan
+    assert "| Current milestone |" in scan and "**`PX2-M01`**" in scan and "**open**" in scan
     assert "| Last closed milestone (PX2 arc) |" in scan and "PX2-M00" in scan
     assert "PX1-M04" in scan and "**closed**" in scan
     assert "PX1-M03" in scan and "**closed**" in scan
@@ -161,6 +161,11 @@ def test_ledger_post_px1_px2_section() -> None:
     )
     assert "**closed**" in px2_m00_row
     assert "| `PX2-M01` |" in text
+    px2_m01_row = next(
+        line for line in text.splitlines() if line.strip().startswith("| `PX2-M01` |")
+    )
+    assert "**open**" in px2_m01_row
+    assert "px2_full_terran_runtime_action_surface_v1.md" in text
     assert "| `PX2-M02` |" in text
     assert "| `PX2-M03` |" in text
     assert "| `PX2-M04` |" in text
@@ -172,6 +177,8 @@ def test_ledger_post_px1_px2_section() -> None:
     assert "### Phase boundary matrix (post-v1 phases)" in text
     px2_charter = REPO_ROOT / "docs" / "runtime" / "px2_autonomous_full_game_agent_charter_v1.md"
     assert px2_charter.is_file()
+    px2_m01_rt = REPO_ROOT / "docs" / "runtime" / "px2_full_terran_runtime_action_surface_v1.md"
+    assert px2_m01_rt.is_file()
 
 
 @pytest.mark.smoke
@@ -201,8 +208,8 @@ def test_ledger_post_v1_pv1_section() -> None:
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
-    assert "**`current milestone`** = **`None`**" in section
-    assert "PX2-M01" in section and "**not** opened" in section
+    assert "**`PX2-M01`**" in section and "**open**" in section
+    assert "### PX2-M01 — Full Terran Runtime & Action Surface — **open** (`main`)" in section
     assert (
         "### PX2-M00 — Autonomous Full-Game Agent Charter & Success Criteria — **closed** (`main`)"
         in section
