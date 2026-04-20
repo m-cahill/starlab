@@ -1,0 +1,47 @@
+{
+  "action_mask_families": {"families": []},
+  "contract_id": "starlab.observation_surface.v1",
+  "entity_rows": {"rows": []},
+  "metadata": {
+    "gameloop": 900,
+    "observation_contract_version": "1",
+    "perspective_player_index": 0,
+    "source_bundle_id": "px2_m02_fixture_eval_bundle_1111",
+    "source_canonical_state_sha256": "01",
+    "source_lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+    "source_replay_identity": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "scalar_features": {
+    "ordered_entries": [
+      {"name": "economy.resource_signal_category", "value": "high"},
+      {"name": "economy.structure_train_events_total", "value": 3},
+      {"name": "economy.unit_train_events_total", "value": 2},
+      {"name": "global.active_combat_window_count", "value": 0},
+      {"name": "global.active_slice_count", "value": 0},
+      {"name": "production.active_build_queue_count", "value": 2},
+      {"name": "production.tech_upgrades_started_total", "value": 0},
+      {"name": "race.actual", "value": "Terran"},
+      {"name": "result.known", "value": "win"},
+      {"name": "scouting.recent_scout_events_count", "value": 1},
+      {"name": "visibility.proxy_level", "value": "high"}
+    ]
+  },
+  "schema_version": "starlab.observation_frame.v1",
+  "spatial_plane_family": {
+    "planes": [
+      {
+        "channel_count": 2,
+        "channel_order": ["terrain_class", "control_affinity"],
+        "coordinate_frame": "starlab.spatial.not_bound_to_replay_map",
+        "grid_height": 8,
+        "grid_width": 8,
+        "plane_id": "px2_m02_fixture_plane"
+      }
+    ]
+  },
+  "viewpoint": {
+    "player_index": 0,
+    "single_player_relative_viewpoint": true,
+    "visibility_policy": "proxy_bounded"
+  }
+}

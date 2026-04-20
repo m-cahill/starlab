@@ -1,0 +1,20 @@
+{
+  "artifact_hashes": {},
+  "bundle_created_from": "tests/fixtures/px2_m02/corpus/replay_train_bundle",
+  "bundle_id": "px2_m02_fixture_train_bundle_2222",
+  "contract": "starlab.replay_bundle_contract.v1",
+  "determinism_notes": "PX2-M02 fixture corpus — deterministic synthetic bundle.",
+  "exclusions": [],
+  "generation_parameters": {},
+  "included_milestones": ["M09", "M10", "M11"],
+  "lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+  "primary_artifacts": [
+    "replay_metadata.json",
+    "replay_timeline.json",
+    "replay_build_order_economy.json"
+  ],
+  "profile": "starlab.replay_bundle.m14.v1",
+  "schema_version": "starlab.replay_bundle_manifest.v1",
+  "secondary_report_artifacts": [],
+  "source_replay_identity": "2222222222222222222222222222222222222222222222222222222222222222"
+}

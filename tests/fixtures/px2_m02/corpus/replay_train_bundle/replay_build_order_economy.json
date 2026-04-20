@@ -1,0 +1,51 @@
+{
+  "build_order_economy_contract_version": "starlab.replay_build_order_economy_contract.v1",
+  "build_order_economy_profile": "starlab.replay_build_order_economy.m11.v1",
+  "build_order_steps": [
+    {
+      "category": "gas_structure",
+      "entity_kind": "structure",
+      "entity_name": "Refinery",
+      "gameloop": 300,
+      "phase": "started",
+      "player_index": 0,
+      "source_timeline_index": 0,
+      "step_index": 0
+    },
+    {
+      "category": "production",
+      "entity_kind": "structure",
+      "entity_name": "Barracks",
+      "gameloop": 350,
+      "phase": "started",
+      "player_index": 0,
+      "source_timeline_index": 1,
+      "step_index": 1
+    },
+    {
+      "category": "unit",
+      "entity_kind": "unit",
+      "entity_name": "Marine",
+      "gameloop": 400,
+      "phase": "completed",
+      "player_index": 0,
+      "source_timeline_index": 2,
+      "step_index": 2,
+      "unit_tag": "0000000000500000"
+    }
+  ],
+  "classification_profile": {
+    "catalog_name": "starlab.build_order_economy_catalog.m11.v1",
+    "morph_rules_profile": "starlab.build_order_economy_morph.m11.v1"
+  },
+  "economy_checkpoints": [],
+  "ordering_policy": "fixture",
+  "players": [{"player_index": 0}],
+  "replay_content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+  "schema_version": "starlab.replay_build_order_economy.v1",
+  "source_metadata_report_sha256": null,
+  "source_metadata_sha256": null,
+  "source_raw_parse_sha256": null,
+  "source_timeline_report_sha256": null,
+  "source_timeline_sha256": null
+}

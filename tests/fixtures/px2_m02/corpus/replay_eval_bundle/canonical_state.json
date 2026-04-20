@@ -1,0 +1,35 @@
+{
+  "frame_kind": "replay_derived",
+  "gameloop": 900,
+  "global_context": {"active_combat_window_ids": [], "active_slice_ids": [], "map_name": "Fixture"},
+  "players": [
+    {
+      "army_summary": {"army_unit_category_counts": {}},
+      "economy_summary": {
+        "resource_signal_category": "high",
+        "structure_train_events_total": 3,
+        "unit_train_events_total": 2
+      },
+      "player_index": 0,
+      "production_summary": {"active_build_queue_count": 2, "tech_upgrades_started_total": 0},
+      "race_actual": "Terran",
+      "result": "win",
+      "scouting_context": {"recent_scout_events_count": 1},
+      "visibility_context": {"visibility_proxy_level": "high"}
+    }
+  ],
+  "provenance": {
+    "uses_build_order_economy_plane": true,
+    "uses_combat_scouting_visibility_plane": true,
+    "uses_metadata_plane": true,
+    "uses_replay_bundle_plane": true,
+    "uses_slice_plane": true,
+    "uses_timeline_plane": true
+  },
+  "schema_version": "starlab.canonical_state_frame.v1",
+  "source": {
+    "source_bundle_id": "px2_m02_fixture_eval_bundle_1111",
+    "source_lineage_root": "fdd37af019f2cd23f3dce5a1c6d129a7741f81e0502528f325141d7e0b56f457",
+    "source_replay_identity": "1111111111111111111111111111111111111111111111111111111111111111"
+  }
+}
