@@ -55,6 +55,7 @@ PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_REPORT_CONTRACT_ID: Final[str] = (
 
 EXECUTION_KIND_SLICE4: Final[str] = "px2_m03_slice4_operator_local_continuity_v1"
 EXECUTION_KIND_SLICE5: Final[str] = "px2_m03_slice5_operator_local_campaign_root_v1"
+EXECUTION_KIND_SLICE6: Final[str] = "px2_m03_slice6_canonical_operator_local_campaign_root_smoke_v1"
 
 
 def _seal_continuity_body(body_without_seal: dict[str, Any]) -> str:
@@ -316,17 +317,21 @@ def run_operator_local_campaign_continuity(
         prior_promo = pr_seal
 
     pool_identity = opponent_pool_identity_sha256(pool)
-    continuity_non_claims = (
-        [
+    if execution_kind == EXECUTION_KIND_SLICE6:
+        continuity_non_claims = [
+            "Slice-6 canonical campaign-root smoke — not industrial self-play campaign.",
+            "Not Blackwell-scale; not merge-gate default CI proof.",
+        ]
+    elif execution_kind == EXECUTION_KIND_SLICE5:
+        continuity_non_claims = [
             "Slice-5 operator-local campaign-root continuity — not industrial self-play campaign.",
             "Not Blackwell-scale; not merge-gate default CI proof.",
         ]
-        if execution_kind == EXECUTION_KIND_SLICE5
-        else [
+    else:
+        continuity_non_claims = [
             "Slice-4 bounded multi-step continuity — not industrial self-play campaign.",
             "Not Blackwell-scale; not merge-gate default CI proof.",
         ]
-    )
 
     continuity_body: dict[str, Any] = {
         "contract_id": PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
@@ -381,6 +386,13 @@ def run_operator_local_campaign_continuity(
     chain_out = dict(chain_body)
     chain_out["continuity_chain_sha256"] = chain_seal
 
+    if execution_kind == EXECUTION_KIND_SLICE4:
+        cnote = "PX2-M02 fixture corpus lineage; slice-4 bounded continuity proof."
+    elif execution_kind == EXECUTION_KIND_SLICE6:
+        cnote = "PX2-M02 fixture corpus lineage; slice-6 canonical campaign-root smoke proof."
+    else:
+        cnote = "PX2-M02 fixture corpus lineage; slice-5 campaign-root continuity proof."
+
     manifest = build_slice4_continuity_manifest(
         campaign_id=campaign_id,
         run_id=rid,
@@ -388,11 +400,7 @@ def run_operator_local_campaign_continuity(
         execution_kind=execution_kind,
         continuity_step_count=n_steps,
         preflight_sha256=pf_sha,
-        corpus_note=(
-            "PX2-M02 fixture corpus lineage; slice-4/5 bounded continuity proof."
-            if execution_kind == EXECUTION_KIND_SLICE4
-            else "PX2-M02 fixture corpus lineage; slice-5 campaign-root continuity proof."
-        ),
+        corpus_note=cnote,
         torch_seed=torch_seed,
         operator_local_layout=sub,
     )

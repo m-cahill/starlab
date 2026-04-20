@@ -103,6 +103,10 @@ def build_slice4_continuity_manifest(
         "operator_local_layout": operator_local_layout,
         "non_claims": (
             [
+                "Slice-6 continuity manifest — canonical smoke; not industrial campaign.",
+            ]
+            if "slice6" in execution_kind
+            else [
                 "Slice-5 continuity manifest — bounded campaign-root run; not industrial campaign.",
             ]
             if "slice5" in execution_kind
