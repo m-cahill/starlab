@@ -107,6 +107,10 @@ def build_slice4_continuity_manifest(
             ]
             if "slice6" in execution_kind
             else [
+                "Slice-8 continuity manifest — bounded multi-run session; not industrial campaign.",
+            ]
+            if "slice8" in execution_kind
+            else [
                 "Slice-7 continuity manifest — bounded real run; not industrial campaign.",
             ]
             if "slice7" in execution_kind

@@ -24,6 +24,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
         or "canonical operator-local" in scan.lower()
     )
     assert "slice 7" in scan.lower() or "real-run" in scan.lower() or "real run" in scan.lower()
+    assert "slice 8" in scan.lower() or "multi-run session" in scan.lower()
     assert "| Last closed milestone (PX2 arc) |" in scan
     assert "PX2-M02" in scan and "PX2-M01" in scan and "PX2-M00" in scan
     assert "PX1-M04" in scan and "**closed**" in scan

@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–7 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–8 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE5,
     EXECUTION_KIND_SLICE6,
     EXECUTION_KIND_SLICE7,
+    EXECUTION_KIND_SLICE8,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -48,6 +49,13 @@ from starlab.sc2.px2.self_play.operator_local_real_run import (
 )
 from starlab.sc2.px2.self_play.operator_local_real_run_record import (
     PX2_SELF_PLAY_OPERATOR_LOCAL_REAL_RUN_CONTRACT_ID,
+)
+from starlab.sc2.px2.self_play.operator_local_session import (
+    DEFAULT_SLICE8_CAMPAIGN_ID,
+    run_bounded_operator_local_session,
+)
+from starlab.sc2.px2.self_play.operator_local_session_record import (
+    PX2_SELF_PLAY_OPERATOR_LOCAL_SESSION_CONTRACT_ID,
 )
 from starlab.sc2.px2.self_play.operator_local_smoke import (
     EXECUTION_KIND_SLICE3,
@@ -929,6 +937,109 @@ def test_emit_operator_local_real_run_cli_init_only(tmp_path: Path) -> None:
     )
     root = base / "out" / "px2_self_play_campaigns" / DEFAULT_SLICE7_CAMPAIGN_ID
     assert (root / "px2_self_play_operator_local_real_run.json").is_file()
+
+
+def test_slice8_bounded_session_init_only_emits_session_and_runs(tmp_path: Path) -> None:
+    cid = "px2_m03_slice8_ci"
+    r1, r2 = "sess_run_a", "sess_run_b"
+    out = run_bounded_operator_local_session(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=[r1, r2],
+        torch_seed=7,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    assert (root / "px2_self_play_operator_local_session.json").is_file()
+    assert (root / "px2_self_play_operator_local_session_report.json").is_file()
+    assert (root / "px2_self_play_campaign_root_manifest.json").is_file()
+    sess = json.loads(
+        (root / "px2_self_play_operator_local_session.json").read_text(encoding="utf-8")
+    )
+    assert sess["contract_id"] == PX2_SELF_PLAY_OPERATOR_LOCAL_SESSION_CONTRACT_ID
+    assert sess["execution_kind"] == EXECUTION_KIND_SLICE8
+    assert sess["ordered_run_ids"] == [r1, r2]
+    basis_only = {
+        k: v
+        for k, v in sess.items()
+        if k
+        not in (
+            "operator_local_session_sha256",
+            "operator_note_convention",
+            "campaign_root_resolved_posix",
+        )
+    }
+    assert sess["operator_local_session_sha256"] == sha256_hex_of_canonical_json(basis_only)
+    rm = json.loads(
+        (root / "px2_self_play_campaign_root_manifest.json").read_text(encoding="utf-8")
+    )
+    assert len(rm["continuity_run_references"]) == 2
+    for rid in (r1, r2):
+        rd = root / "runs" / rid
+        assert (rd / "px2_self_play_campaign_continuity.json").is_file()
+        rr = json.loads(
+            (rd / "px2_self_play_operator_local_real_run.json").read_text(encoding="utf-8")
+        )
+        assert rr["execution_kind"] == EXECUTION_KIND_SLICE8
+        assert rr["run_id"] == rid
+    assert out["ordered_run_ids"] == [r1, r2]
+
+
+def test_slice8_session_deterministic_repeat_fixed_paths(tmp_path: Path) -> None:
+    cid = "px2_m03_slice8_det"
+    base = tmp_path / "s8"
+    ids = ["s8a", "s8b"]
+    a = run_bounded_operator_local_session(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=ids,
+        torch_seed=21,
+        continuity_step_count=2,
+    )
+    shutil.rmtree(base / "out")
+    b = run_bounded_operator_local_session(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=ids,
+        torch_seed=21,
+        continuity_step_count=2,
+    )
+    assert a["operator_local_session_sha256"] == b["operator_local_session_sha256"]
+    assert a["campaign_root_manifest_sha256"] == b["campaign_root_manifest_sha256"]
+
+
+def test_emit_operator_local_session_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_session import main
+
+    base = tmp_path / "op8"
+    base.mkdir()
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--base-dir",
+                str(base),
+                "--init-only",
+                "--run-ids",
+                "cli_a",
+                "cli_b",
+                "--campaign-id",
+                DEFAULT_SLICE8_CAMPAIGN_ID,
+                "--steps",
+                "2",
+            ]
+        )
+        == 0
+    )
+    root = base / "out" / "px2_self_play_campaigns" / DEFAULT_SLICE8_CAMPAIGN_ID
+    assert (root / "px2_self_play_operator_local_session.json").is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
