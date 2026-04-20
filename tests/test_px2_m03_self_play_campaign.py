@@ -1,7 +1,8 @@
-"""PX2-M03 slice 1 — campaign contract, bridge, opponent selection, smoke JSON (CPU)."""
+"""PX2-M03 self-play tests: slice 1 contract/smoke; slice 2 skeleton/receipts. CPU fixtures."""
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pytest
@@ -13,6 +14,11 @@ from starlab.sc2.px2.self_play.campaign_contract import (
     PX2_SELF_PLAY_CAMPAIGN_CONTRACT_ID,
     build_px2_self_play_campaign_artifacts,
     seal_px2_self_play_campaign_body,
+)
+from starlab.sc2.px2.self_play.campaign_run import (
+    EXECUTION_KIND_SLICE2,
+    PX2_SELF_PLAY_CAMPAIGN_RUN_CONTRACT_ID,
+    run_px2_campaign_execution_skeleton,
 )
 from starlab.sc2.px2.self_play.opponent_selection import (
     OPPONENT_SELECTION_FROZEN_SEED,
@@ -142,3 +148,94 @@ def test_emit_smoke_run_cli_writes_four_artifacts(tmp_path: Path) -> None:
     assert rc == 0
     assert (tmp_path / "px2_self_play_smoke_run.json").is_file()
     assert (tmp_path / "px2_self_play_smoke_run_report.json").is_file()
+
+
+def test_campaign_execution_skeleton_deterministic_artifacts(tmp_path: Path) -> None:
+    run_id = "px2_test_skeleton_run_fixed_001"
+    s1 = run_px2_campaign_execution_skeleton(
+        corpus_root=CORPUS,
+        output_dir=tmp_path / "a",
+        campaign_id="px2_skeleton_ci",
+        campaign_profile_id="px2_skeleton_profile",
+        run_id=run_id,
+        torch_seed=7,
+        fixture_episode_count=3,
+        checkpoint_episode_cadence=2,
+        eval_episode_cadence=2,
+    )
+    s2 = run_px2_campaign_execution_skeleton(
+        corpus_root=CORPUS,
+        output_dir=tmp_path / "b",
+        campaign_id="px2_skeleton_ci",
+        campaign_profile_id="px2_skeleton_profile",
+        run_id=run_id,
+        torch_seed=7,
+        fixture_episode_count=3,
+        checkpoint_episode_cadence=2,
+        eval_episode_cadence=2,
+    )
+    assert s1["run_sha256"] == s2["run_sha256"]
+    assert s1["checkpoint_paths"] == s2["checkpoint_paths"]
+    assert s1["evaluation_paths"] == s2["evaluation_paths"]
+
+    run_path = tmp_path / "a" / "px2_self_play_campaign_run.json"
+    run_json = json.loads(run_path.read_text(encoding="utf-8"))
+    assert run_json["contract_id"] == PX2_SELF_PLAY_CAMPAIGN_RUN_CONTRACT_ID
+    assert run_json["execution_kind"] == EXECUTION_KIND_SLICE2
+    assert run_json["run_id"] == run_id
+    sealed = {k: v for k, v in run_json.items() if k != "run_sha256"}
+    assert run_json["run_sha256"] == sha256_hex_of_canonical_json(sealed)
+
+    manifest = json.loads((tmp_path / "a" / "run_manifest.json").read_text(encoding="utf-8"))
+    assert manifest["run_id"] == run_id
+    assert manifest["execution_kind"] == EXECUTION_KIND_SLICE2
+
+    ck = tmp_path / "a" / "checkpoint_receipts"
+    ev = tmp_path / "a" / "evaluation_receipts"
+    assert (ck / "ckpt_ep002.json").is_file() and (ck / "ckpt_ep002_report.json").is_file()
+    assert (ev / "eval_ep002.json").is_file() and (ev / "eval_ep002_report.json").is_file()
+    # games_done=3 with cadence 2 => no boundary at episode 3 (3 % 2 != 0)
+    assert not (ck / "ckpt_ep003.json").exists()
+    assert s1["checkpoint_paths"] == ["checkpoint_receipts/ckpt_ep002.json"]
+    assert s1["evaluation_paths"] == ["evaluation_receipts/eval_ep002.json"]
+
+    ck_body = json.loads((ck / "ckpt_ep002.json").read_text(encoding="utf-8"))
+    assert ck_body["episode_index_one_based"] == 2
+    ev_body = json.loads((ev / "eval_ep002.json").read_text(encoding="utf-8"))
+    assert ev_body["episode_index_one_based"] == 2
+
+    episodes = run_json["episodes"]
+    assert len(episodes) == 3
+    refs = [e["opponent_snapshot_ref"] for e in episodes]
+    pool = build_default_opponent_pool_stub()
+    expect = [
+        select_opponent_ref(
+            step_index=i,
+            rule_id=OPPONENT_SELECTION_ROUND_ROBIN,
+            ref_ids=tuple(r.ref_id for r in pool.snapshot_refs),
+        )
+        for i in range(3)
+    ]
+    assert refs == expect
+
+
+def test_emit_campaign_execution_skeleton_cli_writes_tree(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_campaign_execution_skeleton import main
+
+    out = tmp_path / "skel"
+    rc = main(
+        [
+            "--output-dir",
+            str(out),
+            "--corpus-root",
+            str(CORPUS),
+            "--run-id",
+            "cli_fixed_run_01",
+            "--torch-seed",
+            "3",
+        ]
+    )
+    assert rc == 0
+    assert (out / "px2_self_play_campaign_run.json").is_file()
+    assert (out / "run_manifest.json").is_file()
+    assert (out / "checkpoint_receipts" / "ckpt_ep002.json").is_file()
