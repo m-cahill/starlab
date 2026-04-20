@@ -33,19 +33,20 @@ def build_operator_local_real_run_seal_basis(
     preflight_sha256: str,
     continuity_sha256: str,
     continuity_chain_sha256: str,
-    campaign_root_manifest_sha256: str,
+    campaign_root_manifest_sha256: str | None,
     opponent_pool_identity_sha256: str,
     weight_mode: str,
     weights_file_sha256: str | None,
     weights_path_basename: str | None,
     non_claims: list[str],
+    execution_kind: str = EXECUTION_KIND_SLICE7,
 ) -> dict[str, Any]:
     """Identity hashed as ``operator_local_real_run_sha256`` (no absolute filesystem paths)."""
 
     return {
         "contract_id": PX2_SELF_PLAY_OPERATOR_LOCAL_REAL_RUN_CONTRACT_ID,
         "operator_local_real_run_record_version": OPERATOR_LOCAL_REAL_RUN_RECORD_VERSION,
-        "execution_kind": EXECUTION_KIND_SLICE7,
+        "execution_kind": execution_kind,
         "campaign_id": campaign_id,
         "campaign_profile_id": campaign_profile_id,
         "run_id": run_id,
@@ -58,7 +59,7 @@ def build_operator_local_real_run_seal_basis(
         "preflight_sha256": preflight_sha256,
         "continuity_sha256": continuity_sha256,
         "continuity_chain_sha256": continuity_chain_sha256,
-        "campaign_root_manifest_sha256": campaign_root_manifest_sha256,
+        "campaign_root_manifest_sha256": campaign_root_manifest_sha256 or "",
         "opponent_pool_identity_sha256": opponent_pool_identity_sha256,
         "weight_mode": weight_mode,
         "weights_file_sha256": weights_file_sha256,
@@ -83,6 +84,7 @@ def build_px2_self_play_operator_local_real_run_artifacts(
     opponent_pool_identity_sha256: str,
     weight_identity: dict[str, Any],
     non_claims: list[str],
+    execution_kind: str = EXECUTION_KIND_SLICE7,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Return real_run JSON + report with sealed ``operator_local_real_run_sha256``."""
 
@@ -107,6 +109,7 @@ def build_px2_self_play_operator_local_real_run_artifacts(
         weights_file_sha256=wsha if isinstance(wsha, str) else None,
         weights_path_basename=basename,
         non_claims=non_claims,
+        execution_kind=execution_kind,
     )
     seal = _seal_real_run_body(basis)
     root_posix = campaign_root_resolved.resolve().as_posix()

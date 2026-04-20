@@ -90,7 +90,7 @@ def run_bounded_operator_local_real_run(
         preflight_sha256=str(inner["preflight_sha256"]),
         continuity_sha256=str(inner["continuity_sha256"]),
         continuity_chain_sha256=str(inner["continuity_chain_sha256"]),
-        campaign_root_manifest_sha256=str(inner["campaign_root_manifest_sha256"]),
+        campaign_root_manifest_sha256=str(inner["campaign_root_manifest_sha256"] or ""),
         opponent_pool_identity_sha256=str(inner["opponent_pool_identity_sha256"]),
         weight_identity=weight_identity,
         non_claims=non_claims,
