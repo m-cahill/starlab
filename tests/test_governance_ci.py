@@ -13,6 +13,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan and "**`PX2-M03`**" in scan
     assert "px2_industrial_self_play_campaign_readiness_v1.md" in scan
+    assert "px2_industrial_self_play_campaign_v1.md" in scan
     assert "| Last closed milestone (PX2 arc) |" in scan
     assert "PX2-M02" in scan and "PX2-M01" in scan and "PX2-M00" in scan
     assert "PX1-M04" in scan and "**closed**" in scan
@@ -197,6 +198,9 @@ def test_ledger_post_px1_px2_section() -> None:
         REPO_ROOT / "docs" / "runtime" / "px2_industrial_self_play_campaign_readiness_v1.md"
     )
     assert px2_m03_ready.is_file()
+    px2_m03_campaign_v1 = REPO_ROOT / "docs" / "runtime" / "px2_industrial_self_play_campaign_v1.md"
+    assert px2_m03_campaign_v1.is_file()
+    assert "px2_industrial_self_play_campaign_v1.md" in text
 
 
 @pytest.mark.smoke
@@ -228,6 +232,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "**`PX2-M03`**" in section
     assert "px2_industrial_self_play_campaign_readiness_v1.md" in section
+    assert "px2_industrial_self_play_campaign_v1.md" in section
     assert "### PX2-M03 — Industrial Self-Play Campaign — **open** on `main`" in section
     assert "### PX2-M02 — Neural Bootstrap from Replays — **closed** on `main`" in section
     assert "### PX2-M01 — Full Terran Runtime & Action Surface — **closed** on `main`" in section
@@ -310,6 +315,8 @@ def test_m01_changelog_entry_present() -> None:
     assert "3b16c73fc3dd1cd4c5fbd73dd33c6bb0b2e486db" in text
     assert "### 2026-04-20 — **PX2-M03** opening" in text
     assert "px2_industrial_self_play_campaign_readiness_v1.md" in text
+    assert "### 2026-04-19 — **PX2-M03** first implementation slice" in text
+    assert "px2_industrial_self_play_campaign_v1.md" in text
     assert "### 2026-04-19 — **PX2-M02** opening" in text
     assert "### 2026-04-19 — **PX2-M01** closeout" in text
     assert "24643980874" in text
