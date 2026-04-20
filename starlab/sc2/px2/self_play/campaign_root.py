@@ -9,6 +9,7 @@ from typing import Any, Final
 from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE5,
     EXECUTION_KIND_SLICE6,
+    EXECUTION_KIND_SLICE7,
     run_operator_local_campaign_continuity,
 )
 from starlab.sc2.px2.self_play.campaign_root_manifest import (
@@ -148,6 +149,11 @@ def run_slice5_operator_local_campaign(
         ]
         if execution_kind == EXECUTION_KIND_SLICE6
         else [
+            "Slice-7 bounded operator-local real run — not industrial self-play campaign.",
+            "Real filesystem tree; minutes-scale; not merge-gate default CI proof.",
+        ]
+        if execution_kind == EXECUTION_KIND_SLICE7
+        else [
             "Slice-5 operator-local campaign-root manifest — not industrial self-play campaign.",
             "Continuity runs are bounded; not Blackwell-scale; not merge-gate default CI proof.",
         ]
@@ -177,6 +183,8 @@ def run_slice5_operator_local_campaign(
         "campaign_root": str(root),
         "run_id": rid,
         "continuity_sha256": cont["continuity_sha256"],
+        "continuity_chain_sha256": cont["continuity_chain_sha256"],
+        "preflight_sha256": cont["preflight_sha256"],
         "campaign_root_manifest_sha256": manifest["campaign_root_manifest_sha256"],
         "campaign_contract_sha256": cont["campaign_sha256"],
         "opponent_pool_identity_sha256": opponent_pool_identity_sha256(pool_use),

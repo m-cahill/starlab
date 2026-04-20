@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–6 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–7 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE4,
     EXECUTION_KIND_SLICE5,
     EXECUTION_KIND_SLICE6,
+    EXECUTION_KIND_SLICE7,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -40,6 +41,13 @@ from starlab.sc2.px2.self_play.canonical_operator_local_run import (
 from starlab.sc2.px2.self_play.execution_preflight import (
     PX2_SELF_PLAY_EXECUTION_PREFLIGHT_CONTRACT_ID,
     run_execution_preflight,
+)
+from starlab.sc2.px2.self_play.operator_local_real_run import (
+    DEFAULT_SLICE7_CAMPAIGN_ID,
+    run_bounded_operator_local_real_run,
+)
+from starlab.sc2.px2.self_play.operator_local_real_run_record import (
+    PX2_SELF_PLAY_OPERATOR_LOCAL_REAL_RUN_CONTRACT_ID,
 )
 from starlab.sc2.px2.self_play.operator_local_smoke import (
     EXECUTION_KIND_SLICE3,
@@ -801,6 +809,126 @@ def test_emit_canonical_campaign_root_smoke_cli_init_only(tmp_path: Path) -> Non
     )
     root = base / "out" / "px2_self_play_campaigns" / "px2_m03_slice6_canonical_smoke"
     assert (root / "px2_self_play_campaign_root_manifest.json").is_file()
+
+
+def test_slice7_bounded_real_run_init_only_emits_record(tmp_path: Path) -> None:
+    cid = "px2_m03_slice7_ci"
+    rid = "px2_slice7_real"
+    out = run_bounded_operator_local_real_run(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        torch_seed=13,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    assert (root / "px2_self_play_operator_local_real_run.json").is_file()
+    assert (root / "px2_self_play_operator_local_real_run_report.json").is_file()
+    rr = json.loads(
+        (root / "px2_self_play_operator_local_real_run.json").read_text(encoding="utf-8")
+    )
+    assert rr["contract_id"] == PX2_SELF_PLAY_OPERATOR_LOCAL_REAL_RUN_CONTRACT_ID
+    assert rr["execution_kind"] == EXECUTION_KIND_SLICE7
+    assert rr["run_id"] == rid
+    basis_only = {
+        k: v
+        for k, v in rr.items()
+        if k
+        not in (
+            "operator_local_real_run_sha256",
+            "weight_identity",
+            "operator_note_convention",
+            "campaign_root_resolved_posix",
+        )
+    }
+    assert rr["operator_local_real_run_sha256"] == sha256_hex_of_canonical_json(basis_only)
+    cont = json.loads(
+        (root / "runs" / rid / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    assert cont["execution_kind"] == EXECUTION_KIND_SLICE7
+    assert out["preflight_sha256"] == cont["preflight_sha256"]
+    chain = json.loads((root / "runs" / rid / "continuity_chain.json").read_text(encoding="utf-8"))
+    assert out["continuity_chain_sha256"] == chain["continuity_chain_sha256"]
+
+
+def test_slice7_bounded_real_run_with_weights(tmp_path: Path) -> None:
+    wpath = tmp_path / "slice7w.pt"
+    pol = BootstrapTerranPolicy(input_dim=observation_feature_dim())
+    torch.save(pol.state_dict(), wpath)
+    cid = "px2_m03_slice7_weights"
+    rid = "wrun7"
+    out = run_bounded_operator_local_real_run(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=False,
+        weights_path=wpath,
+        torch_seed=2,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    rr = json.loads(
+        (root / "px2_self_play_operator_local_real_run.json").read_text(encoding="utf-8")
+    )
+    assert rr["weights_path_basename"] == wpath.name
+    assert rr["weight_mode"] == "weights_file"
+
+
+def test_slice7_real_run_deterministic_repeat_fixed_paths(tmp_path: Path) -> None:
+    cid = "px2_m03_slice7_det"
+    rid = "det_run"
+    root = tmp_path / "camp"
+    a1 = run_bounded_operator_local_real_run(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=root,
+        init_only=True,
+        torch_seed=99,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    shutil.rmtree(root / "out")
+    a2 = run_bounded_operator_local_real_run(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=root,
+        init_only=True,
+        torch_seed=99,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    assert a1["operator_local_real_run_sha256"] == a2["operator_local_real_run_sha256"]
+    assert a1["continuity_sha256"] == a2["continuity_sha256"]
+
+
+def test_emit_operator_local_real_run_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_real_run import main
+
+    base = tmp_path / "op7"
+    base.mkdir()
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--base-dir",
+                str(base),
+                "--init-only",
+                "--run-id",
+                "cli_slice7",
+                "--campaign-id",
+                DEFAULT_SLICE7_CAMPAIGN_ID,
+                "--steps",
+                "2",
+            ]
+        )
+        == 0
+    )
+    root = base / "out" / "px2_self_play_campaigns" / DEFAULT_SLICE7_CAMPAIGN_ID
+    assert (root / "px2_self_play_operator_local_real_run.json").is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:

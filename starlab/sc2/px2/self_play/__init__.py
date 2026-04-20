@@ -1,4 +1,4 @@
-"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 6)."""
+"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 7)."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE4,
     EXECUTION_KIND_SLICE5,
     EXECUTION_KIND_SLICE6,
+    EXECUTION_KIND_SLICE7,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_REPORT_CONTRACT_ID,
     run_operator_local_campaign_continuity,
@@ -48,6 +49,15 @@ from starlab.sc2.px2.self_play.execution_preflight import (
     PX2_SELF_PLAY_EXECUTION_PREFLIGHT_CONTRACT_ID,
     PX2_SELF_PLAY_EXECUTION_PREFLIGHT_REPORT_CONTRACT_ID,
     run_execution_preflight,
+)
+from starlab.sc2.px2.self_play.operator_local_real_run import (
+    DEFAULT_SLICE7_CAMPAIGN_ID,
+    run_bounded_operator_local_real_run,
+)
+from starlab.sc2.px2.self_play.operator_local_real_run_record import (
+    PX2_SELF_PLAY_OPERATOR_LOCAL_REAL_RUN_CONTRACT_ID,
+    PX2_SELF_PLAY_OPERATOR_LOCAL_REAL_RUN_REPORT_CONTRACT_ID,
+    build_px2_self_play_operator_local_real_run_artifacts,
 )
 from starlab.sc2.px2.self_play.operator_local_smoke import (
     EXECUTION_KIND_SLICE3,
@@ -115,6 +125,7 @@ __all__ = [
     "EXECUTION_KIND_SLICE4",
     "EXECUTION_KIND_SLICE5",
     "EXECUTION_KIND_SLICE6",
+    "EXECUTION_KIND_SLICE7",
     "WEIGHT_MODE_INIT_ONLY",
     "WEIGHT_MODE_WEIGHTS_FILE",
     "OpponentPoolStub",
@@ -134,6 +145,8 @@ __all__ = [
     "PX2_SELF_PLAY_EXECUTION_PREFLIGHT_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_OPERATOR_LOCAL_SMOKE_CONTRACT_ID",
     "PX2_SELF_PLAY_OPERATOR_LOCAL_SMOKE_REPORT_CONTRACT_ID",
+    "PX2_SELF_PLAY_OPERATOR_LOCAL_REAL_RUN_CONTRACT_ID",
+    "PX2_SELF_PLAY_OPERATOR_LOCAL_REAL_RUN_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_PROMOTION_RECEIPT_CONTRACT_ID",
     "PX2_SELF_PLAY_PROMOTION_RECEIPT_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_ROLLBACK_RECEIPT_CONTRACT_ID",
@@ -143,6 +156,7 @@ __all__ = [
     "PREFLIGHT_SEAL_VERSION",
     "PolicyRuntimeBridgeReceipt",
     "bootstrap_policy_runtime_step",
+    "build_px2_self_play_operator_local_real_run_artifacts",
     "build_default_opponent_pool_stub",
     "build_px2_self_play_campaign_root_manifest_artifacts",
     "build_slice5_opponent_pool",
@@ -152,6 +166,7 @@ __all__ = [
     "build_px2_self_play_campaign_artifacts",
     "build_px2_self_play_smoke_run_artifacts",
     "default_operator_local_campaign_root_subdirs",
+    "DEFAULT_SLICE7_CAMPAIGN_ID",
     "corpus_root_logical_posix",
     "default_operator_local_slice4_subdirs",
     "ensure_operator_local_campaign_root_layout",
@@ -160,6 +175,7 @@ __all__ = [
     "opponent_pool_identity_sha256",
     "output_dir_logical_posix",
     "resolve_canonical_campaign_root",
+    "run_bounded_operator_local_real_run",
     "run_canonical_operator_local_campaign_root_smoke",
     "run_execution_preflight",
     "recommended_operator_out_campaign_root_path",
