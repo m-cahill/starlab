@@ -1,7 +1,7 @@
 # PX2 — Industrial self-play campaign (runtime v1)
 
-**Version:** v1 — **slice 1** (contract, bridge, fixture smoke) + **slice 2** (execution skeleton, artifact tree, checkpoint/eval receipts) + **slice 3** (operator-local execution preflight, bounded real-weights smoke); **not** industrial campaign execution proof  
-**Contract IDs (code):** `starlab.px2.self_play_campaign_contract.v1`, `starlab.px2.self_play_smoke_run.v1`, `starlab.px2.self_play_campaign_run.v1`, `starlab.px2.self_play_checkpoint_receipt.v1`, `starlab.px2.self_play_evaluation_receipt.v1`, `starlab.px2.self_play_execution_preflight.v1`, `starlab.px2.self_play_operator_local_smoke.v1`  
+**Version:** v1 — **slice 1** (contract, bridge, fixture smoke) + **slice 2** (execution skeleton, artifact tree, checkpoint/eval receipts) + **slice 3** (operator-local execution preflight, bounded real-weights smoke) + **slice 4** (bounded multi-step continuity, sealed linkage, promotion/rollback receipt surfaces); **not** industrial campaign execution proof  
+**Contract IDs (code):** `starlab.px2.self_play_campaign_contract.v1`, `starlab.px2.self_play_smoke_run.v1`, `starlab.px2.self_play_campaign_run.v1`, `starlab.px2.self_play_checkpoint_receipt.v1`, `starlab.px2.self_play_evaluation_receipt.v1`, `starlab.px2.self_play_execution_preflight.v1`, `starlab.px2.self_play_operator_local_smoke.v1`, `starlab.px2.self_play_campaign_continuity.v1`, `starlab.px2.self_play_promotion_receipt.v1`, `starlab.px2.self_play_rollback_receipt.v1`  
 **Related:** readiness / preflight `docs/runtime/px2_industrial_self_play_campaign_readiness_v1.md`; replay-bootstrap `docs/runtime/px2_neural_bootstrap_from_replays_v1.md` (PX2-M02); Terran surface `docs/runtime/px2_full_terran_runtime_action_surface_v1.md` (PX2-M01)
 
 ---
@@ -89,6 +89,8 @@ These appear as **explicit fields** on the campaign contract.
 
 **Slice 2** — bounded **checkpoint** and **evaluation** **receipt** JSON (+ reports) are emitted for fixture skeleton runs (see §8b). They make the control plane **more concrete** in-repo but are **not** industrial checkpoint persistence or real eval distributions. **Promotion** / **rollback** remain **stub** fields on the sealed campaign run (`promotion_posture_stub`, `rollback_posture_stub`).
 
+**Slice 4** — explicit **promotion** and **rollback** **receipt** JSON (+ reports) per continuity step (see §8d), linked to eval/checkpoint seals — transitions remain **deterministic/stubbed**; **not** **PX2-M04** exploit closure.
+
 **Retention** and **operator-local layout** expectations are described at the contract level; long-run behavior is **deferred** to later **`PX2-M03`** industrial execution.
 
 ---
@@ -141,6 +143,30 @@ The smoke path **does not** simulate a full SC2 match. It proves: contract load,
 
 ---
 
+## 8d. Slice 4 — Multi-step continuity + sealed linkage (operator-local)
+
+**Python:** `starlab.sc2.px2.self_play.campaign_continuity` — `run_operator_local_campaign_continuity`; `starlab.sc2.px2.self_play.promotion_receipts` / `starlab.sc2.px2.self_play.rollback_receipts`; extended checkpoint/eval builders in `checkpoint_receipts` / `evaluation_receipts`; layout helpers in `run_artifacts` (`default_operator_local_slice4_subdirs`, `ensure_operator_local_slice4_layout`).  
+**CLI:** `python -m starlab.sc2.px2.self_play.emit_px2_self_play_campaign_continuity …`
+
+**Purpose:** A **small fixed** number of continuity steps (2–3 clamped) after slice-3 **preflight**, with **checkpoint → evaluation** linkage, **promotion** and **rollback** receipts per step, and a **continuity chain** seal. Later steps link to **prior** checkpoint/eval seals; all steps record **campaign**, **run**, **preflight**, and **weight identity**.
+
+**Operator-local layout (under the run root you pass to `--output-dir`):**
+
+| Relative path | Role |
+| --- | --- |
+| `px2_self_play_execution_preflight.json` (+ `_report`) | Slice-3 preflight (reused) |
+| `px2_self_play_campaign_continuity.json` (+ `_report`) | Sealed continuity run summary (`continuity_sha256`) |
+| `continuity_chain.json` | Ordered step seals + `continuity_chain_sha256` |
+| `run_manifest.json` | Slice-4 manifest (`operator_local_layout` map) |
+| `checkpoint_receipts/ckpt_stepNNN.json` (+ `_report`) | Per-step checkpoint receipts (slice-4 linkage fields) |
+| `evaluation_receipts/eval_stepNNN.json` (+ `_report`) | Per-step eval receipts (link to same-step checkpoint seal) |
+| `promotion_receipts/promotion_stepNNN.json` (+ `_report`) | Explicit promotion decisions (stub transition logic id) |
+| `rollback_receipts/rollback_stepNNN.json` (+ `_report`) | Explicit rollback posture (default `triggered: false` on stub path) |
+
+**Non-claims:** **Continuity proof** only — **not** industrial long-run self-play; **not** Blackwell; **not** real promotion/exploit policy (**PX2-M04** remains separate); **not** merge-gate CI.
+
+---
+
 ## 9. Explicit non-claims
 
 This slice **does not**:
@@ -160,16 +186,17 @@ Later **`PX2-M03`** work may attach **operator-local** campaigns under `out/px2_
 
 ---
 
-## Surface coverage (slice 1 vs slice 2 vs slice 3 vs later `PX2-M03`)
+## Surface coverage (slice 1 vs slice 2 vs slice 3 vs slice 4 vs later `PX2-M03`)
 
-| Surface | Slice 1 | Slice 2 | Slice 3 | Later industrial `PX2-M03` |
-| --- | --- | --- | --- | --- |
-| Campaign contract + report | Yes | Reused | Reused | Campaign-specific operator profiles |
-| Policy→runtime bridge | Yes | Reused | Reused + **weight file / init-only** | Scaling, training loops |
-| Opponent pool | Stub + selection | Same stub, multi-episode | Same stub | Full pool, anti-collapse |
-| Checkpoint / eval | Contract placeholders | **Receipt JSON + reports** (fixture skeleton) | Same posture (optional) | Real persistence, real eval harness |
-| Execution | Smoke JSON only | **Run manifest + sealed campaign run** | **Preflight + operator-local smoke** | Long runs, Blackwell-class intent |
-| M49/M50/M51 | Reference | Reference | Reference | Optional adapter or native executor |
+| Surface | Slice 1 | Slice 2 | Slice 3 | Slice 4 | Later industrial `PX2-M03` |
+| --- | --- | --- | --- | --- | --- |
+| Campaign contract + report | Yes | Reused | Reused | Reused | Campaign-specific operator profiles |
+| Policy→runtime bridge | Yes | Reused | Reused + **weight file / init-only** | Reused | Scaling, training loops |
+| Opponent pool | Stub + selection | Same stub, multi-episode | Same stub | Same stub | Full pool, anti-collapse |
+| Checkpoint / eval | Contract placeholders | **Receipt JSON + reports** (fixture skeleton) | Same posture (optional) | **Linked** checkpoint/eval per step | Real persistence, real eval harness |
+| Promotion / rollback | Contract placeholders | Stub on campaign run | N/A | **Dedicated receipt JSON + reports** | Real policy |
+| Execution | Smoke JSON only | **Run manifest + sealed campaign run** | **Preflight + operator-local smoke** | **Preflight + multi-step continuity + chain seal** | Long runs, Blackwell-class intent |
+| M49/M50/M51 | Reference | Reference | Reference | Reference | Optional adapter or native executor |
 
 ---
 
@@ -194,3 +221,7 @@ Later **`PX2-M03`** work may attach **operator-local** campaigns under `out/px2_
 | `starlab.sc2.px2.self_play.operator_local_smoke` | Slice-3 bounded operator-local smoke |
 | `starlab.sc2.px2.self_play.emit_px2_self_play_execution_preflight` | Preflight emitter CLI |
 | `starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_smoke` | Operator-local smoke CLI |
+| `starlab.sc2.px2.self_play.campaign_continuity` | Slice-4 multi-step continuity orchestration |
+| `starlab.sc2.px2.self_play.promotion_receipts` | Promotion receipt + report builders |
+| `starlab.sc2.px2.self_play.rollback_receipts` | Rollback receipt + report builders |
+| `starlab.sc2.px2.self_play.emit_px2_self_play_campaign_continuity` | Slice-4 continuity CLI |

@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests: slices 1–3 (incl. preflight + operator-local smoke). CPU fixtures."""
+"""PX2-M03 self-play tests: slices 1–4 (incl. continuity). CPU fixtures."""
 
 from __future__ import annotations
 
@@ -10,6 +10,11 @@ import torch
 from starlab.runs.json_util import sha256_hex_of_canonical_json
 from starlab.sc2.px2.bootstrap.feature_adapter import observation_feature_dim
 from starlab.sc2.px2.bootstrap.policy_model import BootstrapTerranPolicy
+from starlab.sc2.px2.self_play.campaign_continuity import (
+    EXECUTION_KIND_SLICE4,
+    PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
+    run_operator_local_campaign_continuity,
+)
 from starlab.sc2.px2.self_play.campaign_contract import (
     PX2_SELF_PLAY_CAMPAIGN_CONTRACT_ID,
     build_px2_self_play_campaign_artifacts,
@@ -36,6 +41,8 @@ from starlab.sc2.px2.self_play.opponent_selection import (
     select_opponent_ref,
 )
 from starlab.sc2.px2.self_play.policy_runtime_bridge import bootstrap_policy_runtime_step
+from starlab.sc2.px2.self_play.promotion_receipts import PX2_SELF_PLAY_PROMOTION_RECEIPT_CONTRACT_ID
+from starlab.sc2.px2.self_play.rollback_receipts import PX2_SELF_PLAY_ROLLBACK_RECEIPT_CONTRACT_ID
 from starlab.sc2.px2.self_play.smoke_run import (
     PX2_SELF_PLAY_SMOKE_RUN_CONTRACT_ID,
     run_px2_fixture_self_play_smoke,
@@ -479,3 +486,111 @@ def test_emit_operator_local_smoke_cli_init_only(tmp_path: Path) -> None:
         == 0
     )
     assert (out / "px2_self_play_operator_local_smoke.json").is_file()
+
+
+def test_operator_local_continuity_deterministic_init_only(tmp_path: Path) -> None:
+    rid = "px2_cont_fixed_run_001"
+    out = tmp_path / "same_out"
+    s1 = run_operator_local_campaign_continuity(
+        corpus_root=CORPUS,
+        output_dir=out,
+        init_only=True,
+        weights_path=None,
+        torch_seed=7,
+        run_id=rid,
+        continuity_step_count=3,
+    )
+    s2 = run_operator_local_campaign_continuity(
+        corpus_root=CORPUS,
+        output_dir=out,
+        init_only=True,
+        weights_path=None,
+        torch_seed=7,
+        run_id=rid,
+        continuity_step_count=3,
+    )
+    assert s1["continuity_sha256"] == s2["continuity_sha256"]
+    assert s1["continuity_chain_sha256"] == s2["continuity_chain_sha256"]
+
+    root = out
+    cont = json.loads((root / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8"))
+    assert cont["contract_id"] == PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID
+    assert cont["execution_kind"] == EXECUTION_KIND_SLICE4
+    sealed = {k: v for k, v in cont.items() if k != "continuity_sha256"}
+    assert cont["continuity_sha256"] == sha256_hex_of_canonical_json(sealed)
+
+    assert (root / "checkpoint_receipts" / "ckpt_step001.json").is_file()
+    assert (root / "evaluation_receipts" / "eval_step001.json").is_file()
+    assert (root / "promotion_receipts" / "promotion_step001.json").is_file()
+    assert (root / "rollback_receipts" / "rollback_step001.json").is_file()
+    assert (root / "continuity_chain.json").is_file()
+
+    ck1 = json.loads(
+        (root / "checkpoint_receipts" / "ckpt_step001.json").read_text(encoding="utf-8")
+    )
+    ev1 = json.loads(
+        (root / "evaluation_receipts" / "eval_step001.json").read_text(encoding="utf-8")
+    )
+    assert ck1["preflight_sha256"] == cont["preflight_sha256"]
+    assert ev1["link_checkpoint_receipt_sha256"] == ck1["checkpoint_receipt_sha256"]
+
+    pr2 = json.loads(
+        (root / "promotion_receipts" / "promotion_step002.json").read_text(encoding="utf-8")
+    )
+    assert pr2["contract_id"] == PX2_SELF_PLAY_PROMOTION_RECEIPT_CONTRACT_ID
+    assert pr2["prior_promotion_receipt_sha256"] is not None
+
+    rb3 = json.loads(
+        (root / "rollback_receipts" / "rollback_step003.json").read_text(encoding="utf-8")
+    )
+    assert rb3["contract_id"] == PX2_SELF_PLAY_ROLLBACK_RECEIPT_CONTRACT_ID
+    assert rb3["triggered"] is False
+
+    steps = cont["step_records"]
+    assert len(steps) == 3
+    ck2 = json.loads(
+        (root / "checkpoint_receipts" / "ckpt_step002.json").read_text(encoding="utf-8")
+    )
+    assert ck2["prior_checkpoint_receipt_sha256"] == steps[0]["checkpoint_receipt_sha256"]
+    assert ck2["prior_evaluation_receipt_sha256"] == steps[0]["evaluation_receipt_sha256"]
+
+
+def test_operator_local_continuity_with_weights(tmp_path: Path) -> None:
+    wpath = tmp_path / "pol.pt"
+    pol = BootstrapTerranPolicy(input_dim=observation_feature_dim())
+    torch.save(pol.state_dict(), wpath)
+    out = tmp_path / "cw"
+    run_operator_local_campaign_continuity(
+        corpus_root=CORPUS,
+        output_dir=out,
+        init_only=False,
+        weights_path=wpath,
+        torch_seed=1,
+        run_id="wcont",
+        continuity_step_count=2,
+    )
+    cont = json.loads((out / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8"))
+    assert cont["weight_identity"]["weights_file_sha256"] == sha256_hex_file(wpath)
+
+
+def test_emit_campaign_continuity_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_campaign_continuity import main
+
+    out = tmp_path / "cc"
+    assert (
+        main(
+            [
+                "--output-dir",
+                str(out),
+                "--corpus-root",
+                str(CORPUS),
+                "--init-only",
+                "--steps",
+                "2",
+                "--run-id",
+                "cli_cc",
+            ]
+        )
+        == 0
+    )
+    assert (out / "px2_self_play_campaign_continuity.json").is_file()

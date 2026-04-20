@@ -61,3 +61,59 @@ def build_checkpoint_receipt_artifacts(
         "non_claims": body["non_claims"],
     }
     return receipt, report
+
+
+def build_slice4_checkpoint_receipt_artifacts(
+    *,
+    campaign_id: str,
+    run_id: str,
+    campaign_sha256: str,
+    linked_campaign_contract_id: str,
+    preflight_sha256: str,
+    weight_identity: dict[str, Any],
+    continuity_step_index_zero_based: int,
+    episode_index_one_based: int,
+    games_completed_in_run: int,
+    policy_snapshot_note: str,
+    prior_checkpoint_receipt_sha256: str | None,
+    prior_evaluation_receipt_sha256: str | None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Checkpoint receipt with slice-4 linkage fields (operator-local continuity)."""
+
+    body: dict[str, Any] = {
+        "contract_id": PX2_SELF_PLAY_CHECKPOINT_RECEIPT_CONTRACT_ID,
+        "campaign_id": campaign_id,
+        "run_id": run_id,
+        "campaign_sha256": campaign_sha256,
+        "linked_campaign_contract_id": linked_campaign_contract_id,
+        "preflight_sha256": preflight_sha256,
+        "weight_identity": weight_identity,
+        "continuity_step_index_zero_based": continuity_step_index_zero_based,
+        "episode_index_one_based": episode_index_one_based,
+        "games_completed_in_run": games_completed_in_run,
+        "checkpoint_kind": "slice4_operator_local_continuity",
+        "policy_snapshot_note": policy_snapshot_note,
+        "prior_checkpoint_receipt_sha256": prior_checkpoint_receipt_sha256,
+        "prior_evaluation_receipt_sha256": prior_evaluation_receipt_sha256,
+        "non_claims": [
+            "Slice-4 continuity checkpoint — not industrial persistence or promotion proof.",
+            "Linkage fields support audit; transitions may be stubbed.",
+        ],
+    }
+    seal = seal_checkpoint_receipt_body(body)
+    receipt = dict(body)
+    receipt["checkpoint_receipt_sha256"] = seal
+
+    report: dict[str, Any] = {
+        "contract_id": PX2_SELF_PLAY_CHECKPOINT_RECEIPT_REPORT_CONTRACT_ID,
+        "checkpoint_receipt_sha256": seal,
+        "campaign_id": campaign_id,
+        "run_id": run_id,
+        "summary": {
+            "continuity_step_index_zero_based": continuity_step_index_zero_based,
+            "episode_index_one_based": episode_index_one_based,
+            "games_completed_in_run": games_completed_in_run,
+        },
+        "non_claims": body["non_claims"],
+    }
+    return receipt, report

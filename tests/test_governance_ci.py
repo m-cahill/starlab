@@ -16,6 +16,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "px2_industrial_self_play_campaign_v1.md" in scan
     assert "slice 2" in scan.lower() or "execution skeleton" in scan.lower()
     assert "slice 3" in scan.lower() or "preflight" in scan.lower()
+    assert "slice 4" in scan.lower() or "continuity" in scan.lower()
     assert "| Last closed milestone (PX2 arc) |" in scan
     assert "PX2-M02" in scan and "PX2-M01" in scan and "PX2-M00" in scan
     assert "PX1-M04" in scan and "**closed**" in scan
@@ -320,6 +321,7 @@ def test_m01_changelog_entry_present() -> None:
     assert "### 2026-04-19 — **PX2-M03** first implementation slice" in text
     assert "### 2026-04-19 — **PX2-M03** second implementation slice" in text
     assert "### 2026-04-20 — **PX2-M03** third implementation slice" in text
+    assert "### 2026-04-20 — **PX2-M03** fourth implementation slice" in text
     assert "px2_industrial_self_play_campaign_v1.md" in text
     assert "### 2026-04-19 — **PX2-M02** opening" in text
     assert "### 2026-04-19 — **PX2-M01** closeout" in text
