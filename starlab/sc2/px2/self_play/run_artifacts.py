@@ -101,9 +101,18 @@ def build_slice4_continuity_manifest(
         "corpus_note": corpus_note,
         "torch_seed": torch_seed,
         "operator_local_layout": operator_local_layout,
-        "non_claims": [
-            "Slice-4 continuity manifest — bounded multi-step linkage; not industrial campaign.",
-        ],
+        "non_claims": (
+            [
+                "Slice-5 continuity manifest — bounded campaign-root run; not industrial campaign.",
+            ]
+            if "slice5" in execution_kind
+            else [
+                (
+                    "Slice-4 continuity manifest — bounded multi-step linkage; "
+                    "not industrial campaign."
+                ),
+            ]
+        ),
     }
 
 
