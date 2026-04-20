@@ -8,6 +8,7 @@ from typing import Any, Final
 
 from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE5,
+    EXECUTION_KIND_SLICE6,
     run_operator_local_campaign_continuity,
 )
 from starlab.sc2.px2.self_play.campaign_root_manifest import (
@@ -89,6 +90,7 @@ def run_slice5_operator_local_campaign(
     opponent_selection_rule_id: str = OPPONENT_SELECTION_ROUND_ROBIN,
     opponent_selection_weights: tuple[int, ...] | None = None,
     pool: OpponentPoolStub | None = None,
+    execution_kind: str = EXECUTION_KIND_SLICE5,
 ) -> dict[str, Any]:
     """Bounded slice-5 path: layout, continuity under ``runs/<run_id>/``, sealed root manifest."""
 
@@ -135,10 +137,21 @@ def run_slice5_operator_local_campaign(
         opponent_selection_rule_id=opponent_selection_rule_id,
         opponent_selection_weights=weights_for_continuity,
         opponent_rotation_ref_ids=battle_refs,
-        execution_kind=EXECUTION_KIND_SLICE5,
+        execution_kind=execution_kind,
     )
 
     sub4 = default_operator_local_slice4_subdirs()
+    root_non_claims = (
+        [
+            "Slice-6 canonical campaign-root smoke — not industrial self-play campaign.",
+            "Bounded continuity; not Blackwell-scale; not merge-gate default CI proof.",
+        ]
+        if execution_kind == EXECUTION_KIND_SLICE6
+        else [
+            "Slice-5 operator-local campaign-root manifest — not industrial self-play campaign.",
+            "Continuity runs are bounded; not Blackwell-scale; not merge-gate default CI proof.",
+        ]
+    )
     manifest, report = build_px2_self_play_campaign_root_manifest_artifacts(
         campaign_id=campaign_id,
         campaign_contract_sha256=str(cont["campaign_sha256"]),
@@ -155,10 +168,7 @@ def run_slice5_operator_local_campaign(
         ),
         opponent_pool_identity_sha256=opponent_pool_identity_sha256(pool_use),
         opponent_selection_rule_id=opponent_selection_rule_id,
-        non_claims=[
-            "Slice-5 operator-local campaign-root manifest — not industrial self-play campaign.",
-            "Continuity runs are bounded; not Blackwell-scale; not merge-gate default CI proof.",
-        ],
+        non_claims=root_non_claims,
     )
     write_json(root / "px2_self_play_campaign_root_manifest.json", manifest)
     write_json(root / "px2_self_play_campaign_root_manifest_report.json", report)

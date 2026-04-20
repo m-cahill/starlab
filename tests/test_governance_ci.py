@@ -18,6 +18,11 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "slice 3" in scan.lower() or "preflight" in scan.lower()
     assert "slice 4" in scan.lower() or "continuity" in scan.lower()
     assert "slice 5" in scan.lower() or "campaign-root" in scan.lower()
+    assert (
+        "slice 6" in scan.lower()
+        or "preflight seal" in scan.lower()
+        or "canonical operator-local" in scan.lower()
+    )
     assert "| Last closed milestone (PX2 arc) |" in scan
     assert "PX2-M02" in scan and "PX2-M01" in scan and "PX2-M00" in scan
     assert "PX1-M04" in scan and "**closed**" in scan

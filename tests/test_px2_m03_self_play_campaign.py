@@ -1,9 +1,10 @@
-"""PX2-M03 self-play tests: slices 1–5 (incl. continuity, campaign root). CPU fixtures."""
+"""PX2-M03 self-play tests for slices 1–6 (CPU fixtures)."""
 
 from __future__ import annotations
 
 import json
 import shutil
+import tempfile
 from pathlib import Path
 
 import pytest
@@ -14,6 +15,7 @@ from starlab.sc2.px2.bootstrap.policy_model import BootstrapTerranPolicy
 from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE4,
     EXECUTION_KIND_SLICE5,
+    EXECUTION_KIND_SLICE6,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -30,6 +32,10 @@ from starlab.sc2.px2.self_play.campaign_run import (
     EXECUTION_KIND_SLICE2,
     PX2_SELF_PLAY_CAMPAIGN_RUN_CONTRACT_ID,
     run_px2_campaign_execution_skeleton,
+)
+from starlab.sc2.px2.self_play.canonical_operator_local_run import (
+    resolve_canonical_campaign_root,
+    run_canonical_operator_local_campaign_root_smoke,
 )
 from starlab.sc2.px2.self_play.execution_preflight import (
     PX2_SELF_PLAY_EXECUTION_PREFLIGHT_CONTRACT_ID,
@@ -316,9 +322,31 @@ def test_preflight_init_only_ok(tmp_path: Path) -> None:
     )
     assert ok and not err
     assert pre["contract_id"] == PX2_SELF_PLAY_EXECUTION_PREFLIGHT_CONTRACT_ID
-    sealed = {k: v for k, v in pre.items() if k != "preflight_sha256"}
-    assert pre["preflight_sha256"] == sha256_hex_of_canonical_json(sealed)
+    assert pre["preflight_sha256"] == sha256_hex_of_canonical_json(pre["preflight_seal_basis"])
+    assert "corpus_root" in pre and Path(pre["corpus_root"]).is_dir()
     assert rep["summary"]["preflight_ok"] is True
+    assert rep["operator_absolute_paths_advisory"]["corpus_root"] == pre["corpus_root"]
+
+
+def test_preflight_seal_stable_across_distinct_temp_roots() -> None:
+    """Logical seal matches for the same run_id + fixture corpus even when output roots differ."""
+
+    def run_one(base: Path) -> str:
+        out = base / "out"
+        ok, pre, _, err = run_execution_preflight(
+            corpus_root=CORPUS,
+            output_dir=out,
+            init_only=True,
+            weights_path=None,
+            weight_bundle_ref=None,
+            torch_seed=1,
+            run_id="pf_cross",
+        )
+        assert ok and not err
+        return str(pre["preflight_sha256"])
+
+    with tempfile.TemporaryDirectory() as a, tempfile.TemporaryDirectory() as b:
+        assert run_one(Path(a)) == run_one(Path(b))
 
 
 def test_preflight_fails_missing_corpus(tmp_path: Path) -> None:
@@ -644,7 +672,7 @@ def test_slice5_opponent_pool_identity_and_battle_refs() -> None:
 
 
 def test_slice5_campaign_root_manifest_deterministic_repeat(tmp_path: Path) -> None:
-    """Preflight seals absolute ``output_dir``; repeat with identical paths for stable hashes."""
+    """Repeat with identical paths for stable continuity + root-manifest hashes."""
 
     rid = "px2_slice5_fixed_run"
     fixed_cid = "px2_m03_slice5_ci"
@@ -695,6 +723,84 @@ def test_slice5_campaign_root_manifest_deterministic_repeat(tmp_path: Path) -> N
     refs = [e["opponent_snapshot_ref"] for e in cont["episodes"]]
     assert refs == expect_rr
     assert [e["opponent_rotation_trace"]["selected_opponent_ref"] for e in cont["episodes"]] == refs
+
+
+def test_slice6_canonical_campaign_root_smoke_layout_and_kind(tmp_path: Path) -> None:
+    cid = "px2_m03_slice6_canonical_smoke"
+    rid = "px2_slice6_layout"
+    root = resolve_canonical_campaign_root(cid, base_dir=tmp_path)
+    assert root == tmp_path / "out" / "px2_self_play_campaigns" / cid
+    summary = run_canonical_operator_local_campaign_root_smoke(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        torch_seed=11,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    assert Path(summary["campaign_root"]) == root
+    cont = json.loads(
+        (root / "runs" / rid / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    assert cont["execution_kind"] == EXECUTION_KIND_SLICE6
+    assert (root / "px2_self_play_campaign_root_manifest.json").is_file()
+
+
+def test_slice6_canonical_smoke_stable_across_distinct_base_dirs(tmp_path: Path) -> None:
+    """Same logical campaign id + run id → same sealed continuity + root manifest across bases."""
+
+    cid = "px2_m03_slice6_canonical_smoke"
+    rid = "px2_slice6_cross_base"
+    base1 = tmp_path / "w1"
+    base2 = tmp_path / "w2"
+    base1.mkdir()
+    base2.mkdir()
+    s1 = run_canonical_operator_local_campaign_root_smoke(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=base1,
+        init_only=True,
+        torch_seed=9,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    s2 = run_canonical_operator_local_campaign_root_smoke(
+        corpus_root=CORPUS,
+        campaign_id=cid,
+        base_dir=base2,
+        init_only=True,
+        torch_seed=9,
+        run_id=rid,
+        continuity_step_count=2,
+    )
+    assert s1["continuity_sha256"] == s2["continuity_sha256"]
+    assert s1["campaign_root_manifest_sha256"] == s2["campaign_root_manifest_sha256"]
+
+
+def test_emit_canonical_campaign_root_smoke_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_canonical_campaign_root_smoke import main
+
+    base = tmp_path / "op"
+    base.mkdir()
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--base-dir",
+                str(base),
+                "--init-only",
+                "--run-id",
+                "cli_slice6",
+                "--steps",
+                "2",
+            ]
+        )
+        == 0
+    )
+    root = base / "out" / "px2_self_play_campaigns" / "px2_m03_slice6_canonical_smoke"
+    assert (root / "px2_self_play_campaign_root_manifest.json").is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
