@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests: slice 1 contract/smoke; slice 2 skeleton/receipts. CPU fixtures."""
+"""PX2-M03 self-play tests: slices 1–3 (incl. preflight + operator-local smoke). CPU fixtures."""
 
 from __future__ import annotations
 
@@ -20,6 +20,15 @@ from starlab.sc2.px2.self_play.campaign_run import (
     PX2_SELF_PLAY_CAMPAIGN_RUN_CONTRACT_ID,
     run_px2_campaign_execution_skeleton,
 )
+from starlab.sc2.px2.self_play.execution_preflight import (
+    PX2_SELF_PLAY_EXECUTION_PREFLIGHT_CONTRACT_ID,
+    run_execution_preflight,
+)
+from starlab.sc2.px2.self_play.operator_local_smoke import (
+    EXECUTION_KIND_SLICE3,
+    PX2_SELF_PLAY_OPERATOR_LOCAL_SMOKE_CONTRACT_ID,
+    run_operator_local_campaign_smoke,
+)
 from starlab.sc2.px2.self_play.opponent_selection import (
     OPPONENT_SELECTION_FROZEN_SEED,
     OPPONENT_SELECTION_ROUND_ROBIN,
@@ -32,6 +41,10 @@ from starlab.sc2.px2.self_play.smoke_run import (
     run_px2_fixture_self_play_smoke,
 )
 from starlab.sc2.px2.self_play.snapshot_pool import build_default_opponent_pool_stub
+from starlab.sc2.px2.self_play.weight_loading import (
+    build_policy_operator_local,
+    sha256_hex_file,
+)
 
 CORPUS = Path(__file__).resolve().parent / "fixtures" / "px2_m02" / "corpus"
 
@@ -239,3 +252,230 @@ def test_emit_campaign_execution_skeleton_cli_writes_tree(tmp_path: Path) -> Non
     assert (out / "px2_self_play_campaign_run.json").is_file()
     assert (out / "run_manifest.json").is_file()
     assert (out / "checkpoint_receipts" / "ckpt_ep002.json").is_file()
+
+
+def test_sha256_hex_file_stable(tmp_path: Path) -> None:
+    p = tmp_path / "w.bin"
+    p.write_bytes(b"abc")
+    assert sha256_hex_file(p) == sha256_hex_file(p)
+
+
+def test_preflight_init_only_ok(tmp_path: Path) -> None:
+    out = tmp_path / "out"
+    ok, pre, rep, err = run_execution_preflight(
+        corpus_root=CORPUS,
+        output_dir=out,
+        init_only=True,
+        weights_path=None,
+        weight_bundle_ref=None,
+        torch_seed=1,
+        run_id="pf1",
+    )
+    assert ok and not err
+    assert pre["contract_id"] == PX2_SELF_PLAY_EXECUTION_PREFLIGHT_CONTRACT_ID
+    sealed = {k: v for k, v in pre.items() if k != "preflight_sha256"}
+    assert pre["preflight_sha256"] == sha256_hex_of_canonical_json(sealed)
+    assert rep["summary"]["preflight_ok"] is True
+
+
+def test_preflight_fails_missing_corpus(tmp_path: Path) -> None:
+    ok, _, _, err = run_execution_preflight(
+        corpus_root=tmp_path / "nope",
+        output_dir=tmp_path / "out",
+        init_only=True,
+        weights_path=None,
+        weight_bundle_ref=None,
+        torch_seed=1,
+        run_id="pf2",
+    )
+    assert not ok
+    assert "corpus_root_not_found" in err
+
+
+def test_preflight_init_only_rejects_weights_path(tmp_path: Path) -> None:
+    w = tmp_path / "w.pt"
+    w.write_bytes(b"x")
+    ok, _, _, err = run_execution_preflight(
+        corpus_root=CORPUS,
+        output_dir=tmp_path / "out",
+        init_only=True,
+        weights_path=w,
+        weight_bundle_ref=None,
+        torch_seed=1,
+        run_id="pf3",
+    )
+    assert not ok
+    assert "weights_path_forbidden_when_init_only" in err
+
+
+def test_preflight_not_init_requires_weights(tmp_path: Path) -> None:
+    ok, _, _, err = run_execution_preflight(
+        corpus_root=CORPUS,
+        output_dir=tmp_path / "out",
+        init_only=False,
+        weights_path=None,
+        weight_bundle_ref=None,
+        torch_seed=1,
+        run_id="pf4",
+    )
+    assert not ok
+    assert "weights_path_required_when_not_init_only" in err
+
+
+def test_preflight_missing_weight_file(tmp_path: Path) -> None:
+    ok, _, _, err = run_execution_preflight(
+        corpus_root=CORPUS,
+        output_dir=tmp_path / "out",
+        init_only=False,
+        weights_path=tmp_path / "missing.pt",
+        weight_bundle_ref=None,
+        torch_seed=1,
+        run_id="pf5",
+    )
+    assert not ok
+    assert "weights_file_missing" in err
+
+
+def test_preflight_invalid_weights_file(tmp_path: Path) -> None:
+    bad = tmp_path / "bad.pt"
+    bad.write_bytes(b"not_a_torch_file")
+    ok, _, _, err = run_execution_preflight(
+        corpus_root=CORPUS,
+        output_dir=tmp_path / "out",
+        init_only=False,
+        weights_path=bad,
+        weight_bundle_ref=None,
+        torch_seed=1,
+        run_id="pf6",
+    )
+    assert not ok
+    assert "weights_load_failed" in err
+
+
+def test_build_policy_init_only_matches_seed(tmp_path: Path) -> None:
+    m1, meta1 = build_policy_operator_local(init_only=True, weights_path=None, torch_seed=5)
+    m2, meta2 = build_policy_operator_local(init_only=True, weights_path=None, torch_seed=5)
+    assert meta1["weight_mode"] == "init_only"
+    sd1 = m1.state_dict()
+    sd2 = m2.state_dict()
+    assert all(torch.equal(sd1[k], sd2[k]) for k in sd1)
+
+
+def test_build_policy_from_weights_file_roundtrip(tmp_path: Path) -> None:
+    m0 = BootstrapTerranPolicy(input_dim=observation_feature_dim())
+    path = tmp_path / "policy.pt"
+    torch.save(m0.state_dict(), path)
+    m1, meta = build_policy_operator_local(init_only=False, weights_path=path, torch_seed=0)
+    assert meta["weights_file_sha256"] == sha256_hex_file(path)
+    assert meta["weight_mode"] == "weights_file"
+    assert torch.equal(m0.fc1.weight, m1.fc1.weight)
+
+
+def test_operator_local_smoke_init_only_writes_artifacts(tmp_path: Path) -> None:
+    out = tmp_path / "ol"
+    run = run_operator_local_campaign_smoke(
+        corpus_root=CORPUS,
+        output_dir=out,
+        init_only=True,
+        weights_path=None,
+        weight_bundle_ref=None,
+        torch_seed=11,
+        run_id="ol_run_fixed",
+        episode_budget=2,
+    )
+    assert run["run_id"] == "ol_run_fixed"
+    sm = json.loads((out / "px2_self_play_operator_local_smoke.json").read_text(encoding="utf-8"))
+    assert sm["contract_id"] == PX2_SELF_PLAY_OPERATOR_LOCAL_SMOKE_CONTRACT_ID
+    assert sm["execution_kind"] == EXECUTION_KIND_SLICE3
+    assert sm["weight_identity"]["weight_mode"] == "init_only"
+    seal = {k: v for k, v in sm.items() if k != "operator_local_smoke_sha256"}
+    assert sm["operator_local_smoke_sha256"] == sha256_hex_of_canonical_json(seal)
+    assert (out / "px2_self_play_execution_preflight.json").is_file()
+
+
+def test_operator_local_smoke_with_weights_file(tmp_path: Path) -> None:
+    out = tmp_path / "ol2"
+    wpath = tmp_path / "p.pt"
+    pol = BootstrapTerranPolicy(input_dim=observation_feature_dim())
+    torch.save(pol.state_dict(), wpath)
+    run = run_operator_local_campaign_smoke(
+        corpus_root=CORPUS,
+        output_dir=out,
+        init_only=False,
+        weights_path=wpath,
+        torch_seed=3,
+        run_id="ol_w",
+        episode_budget=1,
+    )
+    sm = json.loads((out / "px2_self_play_operator_local_smoke.json").read_text(encoding="utf-8"))
+    assert sm["weight_identity"]["weight_mode"] == "weights_file"
+    assert sm["weight_identity"]["weights_file_sha256"] == sha256_hex_file(wpath)
+    assert run["run_id"] == "ol_w"
+
+
+def test_build_policy_rejects_init_only_with_path(tmp_path: Path) -> None:
+    p = tmp_path / "x.pt"
+    p.write_bytes(b"a")
+    with pytest.raises(ValueError, match="weights_path must be None"):
+        build_policy_operator_local(init_only=True, weights_path=p, torch_seed=0)
+
+
+def test_build_policy_requires_path_when_not_init_only(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="weights_path is required"):
+        build_policy_operator_local(init_only=False, weights_path=None, torch_seed=0)
+
+
+def test_operator_local_smoke_raises_when_preflight_fails(tmp_path: Path) -> None:
+    with pytest.raises(ValueError, match="preflight failed"):
+        run_operator_local_campaign_smoke(
+            corpus_root=tmp_path / "missing_corpus",
+            output_dir=tmp_path / "out",
+            init_only=True,
+            weights_path=None,
+            run_id="fail",
+            episode_budget=1,
+        )
+
+
+def test_emit_execution_preflight_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_execution_preflight import main
+
+    out = tmp_path / "pf"
+    assert (
+        main(
+            [
+                "--output-dir",
+                str(out),
+                "--corpus-root",
+                str(CORPUS),
+                "--init-only",
+                "--run-id",
+                "cli_pf",
+            ]
+        )
+        == 0
+    )
+    assert (out / "px2_self_play_execution_preflight.json").is_file()
+
+
+def test_emit_operator_local_smoke_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_smoke import main
+
+    out = tmp_path / "ols"
+    assert (
+        main(
+            [
+                "--output-dir",
+                str(out),
+                "--corpus-root",
+                str(CORPUS),
+                "--init-only",
+                "--episodes",
+                "1",
+                "--run-id",
+                "cli_ol",
+            ]
+        )
+        == 0
+    )
+    assert (out / "px2_self_play_operator_local_smoke.json").is_file()

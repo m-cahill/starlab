@@ -1,7 +1,7 @@
 # PX2 — Industrial self-play campaign (runtime v1)
 
-**Version:** v1 — **slice 1** (contract, bridge, fixture smoke) + **slice 2** (execution skeleton, artifact tree, checkpoint/eval receipts); **not** industrial campaign execution proof  
-**Contract IDs (code):** `starlab.px2.self_play_campaign_contract.v1`, `starlab.px2.self_play_smoke_run.v1`, `starlab.px2.self_play_campaign_run.v1`, `starlab.px2.self_play_checkpoint_receipt.v1`, `starlab.px2.self_play_evaluation_receipt.v1`  
+**Version:** v1 — **slice 1** (contract, bridge, fixture smoke) + **slice 2** (execution skeleton, artifact tree, checkpoint/eval receipts) + **slice 3** (operator-local execution preflight, bounded real-weights smoke); **not** industrial campaign execution proof  
+**Contract IDs (code):** `starlab.px2.self_play_campaign_contract.v1`, `starlab.px2.self_play_smoke_run.v1`, `starlab.px2.self_play_campaign_run.v1`, `starlab.px2.self_play_checkpoint_receipt.v1`, `starlab.px2.self_play_evaluation_receipt.v1`, `starlab.px2.self_play_execution_preflight.v1`, `starlab.px2.self_play_operator_local_smoke.v1`  
 **Related:** readiness / preflight `docs/runtime/px2_industrial_self_play_campaign_readiness_v1.md`; replay-bootstrap `docs/runtime/px2_neural_bootstrap_from_replays_v1.md` (PX2-M02); Terran surface `docs/runtime/px2_full_terran_runtime_action_surface_v1.md` (PX2-M01)
 
 ---
@@ -125,6 +125,22 @@ The smoke path **does not** simulate a full SC2 match. It proves: contract load,
 
 ---
 
+## 8c. Slice 3 — Operator-local execution preflight + bounded real-weights smoke
+
+**Python:** `starlab.sc2.px2.self_play.execution_preflight` — `run_execution_preflight`; `starlab.sc2.px2.self_play.weight_loading` — `build_policy_operator_local`, `sha256_hex_file`; `starlab.sc2.px2.self_play.operator_local_smoke` — `run_operator_local_campaign_smoke`  
+**CLI:** `python -m starlab.sc2.px2.self_play.emit_px2_self_play_execution_preflight …`; `python -m starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_smoke …`
+
+**Purpose:** First **honest bridge** from fixture-only CI smoke to **operator-local readiness**: a **governed preflight receipt** (corpus root, output dir writable, policy weight mode, optional `torch`/platform notes) and a **small bounded** operator-local smoke that can load **real** `BootstrapTerranPolicy` **state_dict** from a user file (or use **explicit init-only** mode). Weight identity is recorded (**SHA-256** of the weights file + path note).
+
+**Typical files:**
+
+- `px2_self_play_execution_preflight.json` / `px2_self_play_execution_preflight_report.json` (sealed `preflight_sha256`)
+- `px2_self_play_operator_local_smoke.json` / `px2_self_play_operator_local_smoke_report.json` (sealed `operator_local_smoke_sha256`)
+
+**Non-claims:** Preflight is **readiness only** — **not** campaign success, **not** industrial completion, **not** Blackwell proof. Slice-3 smoke is **local-first**, **minutes-scale**, **not** the default merge-gate path. **Live SC2** and **GPU** remain **out of scope** for default CI.
+
+---
+
 ## 9. Explicit non-claims
 
 This slice **does not**:
@@ -144,16 +160,16 @@ Later **`PX2-M03`** work may attach **operator-local** campaigns under `out/px2_
 
 ---
 
-## Surface coverage (slice 1 vs slice 2 vs later `PX2-M03`)
+## Surface coverage (slice 1 vs slice 2 vs slice 3 vs later `PX2-M03`)
 
-| Surface | Slice 1 | Slice 2 | Later industrial `PX2-M03` |
-| --- | --- | --- | --- |
-| Campaign contract + report | Yes | Reused | Campaign-specific operator profiles |
-| Policy→runtime bridge | Yes | Reused | Weight load, scaling |
-| Opponent pool | Stub + selection | Same stub, multi-episode | Full pool, anti-collapse |
-| Checkpoint / eval | Contract placeholders | **Receipt JSON + reports** (fixture skeleton) | Real persistence, real eval harness |
-| Execution | Smoke JSON only | **Run manifest + sealed campaign run** | Long runs, Blackwell-class intent |
-| M49/M50/M51 | Reference | Reference | Optional adapter or native executor |
+| Surface | Slice 1 | Slice 2 | Slice 3 | Later industrial `PX2-M03` |
+| --- | --- | --- | --- | --- |
+| Campaign contract + report | Yes | Reused | Reused | Campaign-specific operator profiles |
+| Policy→runtime bridge | Yes | Reused | Reused + **weight file / init-only** | Scaling, training loops |
+| Opponent pool | Stub + selection | Same stub, multi-episode | Same stub | Full pool, anti-collapse |
+| Checkpoint / eval | Contract placeholders | **Receipt JSON + reports** (fixture skeleton) | Same posture (optional) | Real persistence, real eval harness |
+| Execution | Smoke JSON only | **Run manifest + sealed campaign run** | **Preflight + operator-local smoke** | Long runs, Blackwell-class intent |
+| M49/M50/M51 | Reference | Reference | Reference | Optional adapter or native executor |
 
 ---
 
@@ -173,3 +189,8 @@ Later **`PX2-M03`** work may attach **operator-local** campaigns under `out/px2_
 | `starlab.sc2.px2.self_play.emit_px2_self_play_campaign_contract` | Campaign emitter CLI |
 | `starlab.sc2.px2.self_play.emit_px2_self_play_smoke_run` | Smoke emitter CLI |
 | `starlab.sc2.px2.self_play.emit_px2_self_play_campaign_execution_skeleton` | Slice-2 skeleton emitter CLI |
+| `starlab.sc2.px2.self_play.execution_preflight` | Slice-3 operator-local preflight |
+| `starlab.sc2.px2.self_play.weight_loading` | Slice-3 policy weight load + file hash |
+| `starlab.sc2.px2.self_play.operator_local_smoke` | Slice-3 bounded operator-local smoke |
+| `starlab.sc2.px2.self_play.emit_px2_self_play_execution_preflight` | Preflight emitter CLI |
+| `starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_smoke` | Operator-local smoke CLI |
