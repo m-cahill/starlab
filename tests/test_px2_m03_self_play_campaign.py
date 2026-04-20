@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–8 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–9 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -18,6 +18,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE6,
     EXECUTION_KIND_SLICE7,
     EXECUTION_KIND_SLICE8,
+    EXECUTION_KIND_SLICE9,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -56,6 +57,15 @@ from starlab.sc2.px2.self_play.operator_local_session import (
 )
 from starlab.sc2.px2.self_play.operator_local_session_record import (
     PX2_SELF_PLAY_OPERATOR_LOCAL_SESSION_CONTRACT_ID,
+)
+from starlab.sc2.px2.self_play.operator_local_session_transition import (
+    DEFAULT_SLICE9_CAMPAIGN_ID,
+    run_bounded_operator_local_session_with_transition,
+)
+from starlab.sc2.px2.self_play.operator_local_session_transition_record import (
+    PX2_SELF_PLAY_OPERATOR_LOCAL_SESSION_TRANSITION_CONTRACT_ID,
+    TRANSITION_RULE_PROMOTION_LAST_RUN,
+    TRANSITION_RULE_ROLLBACK_FIRST_RUN_BASELINE,
 )
 from starlab.sc2.px2.self_play.operator_local_smoke import (
     EXECUTION_KIND_SLICE3,
@@ -1040,6 +1050,165 @@ def test_emit_operator_local_session_cli_init_only(tmp_path: Path) -> None:
     )
     root = base / "out" / "px2_self_play_campaigns" / DEFAULT_SLICE8_CAMPAIGN_ID
     assert (root / "px2_self_play_operator_local_session.json").is_file()
+
+
+def test_slice9_promotion_init_only_emits_transition_and_seal(tmp_path: Path) -> None:
+    cid = "px2_m03_slice9_ci"
+    r1, r2 = "sess_tr_a", "sess_tr_b"
+    out = run_bounded_operator_local_session_with_transition(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=[r1, r2],
+        torch_seed=7,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    assert (root / "px2_self_play_operator_local_session_transition.json").is_file()
+    assert (root / "px2_self_play_operator_local_session_transition_report.json").is_file()
+    tm = json.loads(
+        (root / "px2_self_play_operator_local_session_transition.json").read_text(encoding="utf-8")
+    )
+    assert tm["contract_id"] == PX2_SELF_PLAY_OPERATOR_LOCAL_SESSION_TRANSITION_CONTRACT_ID
+    assert tm["execution_kind"] == EXECUTION_KIND_SLICE9
+    assert tm["transition_type"] == "promotion"
+    assert tm["transition_rule_id"] == TRANSITION_RULE_PROMOTION_LAST_RUN
+    assert tm["current_run_id_after_transition"] == r2
+    assert tm["ordered_run_ids"] == [r1, r2]
+    cont_last = json.loads(
+        (root / "runs" / r2 / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    last_step = cont_last["step_records"][-1]
+    assert (
+        tm["source_receipt_lineage"]["promotion_receipt_sha256"]
+        == last_step["promotion_receipt_sha256"]
+    )
+    assert (
+        tm["source_receipt_lineage"]["checkpoint_receipt_sha256"]
+        == last_step["checkpoint_receipt_sha256"]
+    )
+    basis_only = {
+        k: v
+        for k, v in tm.items()
+        if k
+        not in (
+            "operator_local_session_transition_sha256",
+            "operator_note_convention",
+            "campaign_root_resolved_posix",
+        )
+    }
+    assert tm["operator_local_session_transition_sha256"] == sha256_hex_of_canonical_json(
+        basis_only
+    )
+    rep = json.loads(
+        (root / "px2_self_play_operator_local_session_transition_report.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert rep["summary"]["transition_type"] == "promotion"
+    assert rep["summary"]["current_run_id_after_transition"] == r2
+
+
+def test_slice9_rollback_init_only_current_is_first_run(tmp_path: Path) -> None:
+    cid = "px2_m03_slice9_rb"
+    r1, r2 = "rb_a", "rb_b"
+    out = run_bounded_operator_local_session_with_transition(
+        corpus_root=CORPUS,
+        transition_kind="rollback",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=[r1, r2],
+        torch_seed=11,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    tm = json.loads(
+        (root / "px2_self_play_operator_local_session_transition.json").read_text(encoding="utf-8")
+    )
+    assert tm["transition_type"] == "rollback"
+    assert tm["transition_rule_id"] == TRANSITION_RULE_ROLLBACK_FIRST_RUN_BASELINE
+    assert tm["current_run_id_after_transition"] == r1
+    cont_first = json.loads(
+        (root / "runs" / r1 / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    cont_last = json.loads(
+        (root / "runs" / r2 / "px2_self_play_campaign_continuity.json").read_text(encoding="utf-8")
+    )
+    first0 = cont_first["step_records"][0]
+    last_fin = cont_last["step_records"][-1]
+    assert (
+        tm["source_receipt_lineage"]["baseline_checkpoint_receipt_sha256"]
+        == first0["checkpoint_receipt_sha256"]
+    )
+    assert (
+        tm["source_receipt_lineage"]["reference_last_run_final_rollback_receipt_sha256"]
+        == last_fin["rollback_receipt_sha256"]
+    )
+
+
+def test_slice9_transition_deterministic_repeat_fixed_paths(tmp_path: Path) -> None:
+    cid = "px2_m03_slice9_det"
+    base = tmp_path / "s9"
+    ids = ["s9a", "s9b"]
+    a = run_bounded_operator_local_session_with_transition(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=ids,
+        torch_seed=31,
+        continuity_step_count=2,
+    )
+    shutil.rmtree(base / "out")
+    b = run_bounded_operator_local_session_with_transition(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=ids,
+        torch_seed=31,
+        continuity_step_count=2,
+    )
+    assert (
+        a["operator_local_session_transition_sha256"]
+        == b["operator_local_session_transition_sha256"]
+    )
+    assert a["operator_local_session_sha256"] == b["operator_local_session_sha256"]
+
+
+def test_emit_operator_local_session_transition_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_session_transition import main
+
+    base = tmp_path / "op9"
+    base.mkdir()
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--base-dir",
+                str(base),
+                "--init-only",
+                "--transition",
+                "promotion",
+                "--run-ids",
+                "cli_tr_a",
+                "cli_tr_b",
+                "--campaign-id",
+                DEFAULT_SLICE9_CAMPAIGN_ID,
+                "--steps",
+                "2",
+            ]
+        )
+        == 0
+    )
+    root = base / "out" / "px2_self_play_campaigns" / DEFAULT_SLICE9_CAMPAIGN_ID
+    assert (root / "px2_self_play_operator_local_session_transition.json").is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
