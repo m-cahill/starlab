@@ -60,6 +60,9 @@ EXECUTION_KIND_SLICE7: Final[str] = "px2_m03_slice7_bounded_operator_local_real_
 EXECUTION_KIND_SLICE8: Final[str] = "px2_m03_slice8_bounded_operator_local_session_v1"
 EXECUTION_KIND_SLICE9: Final[str] = "px2_m03_slice9_bounded_operator_local_session_transition_v1"
 EXECUTION_KIND_SLICE10: Final[str] = "px2_m03_slice10_bounded_current_candidate_carry_forward_v1"
+EXECUTION_KIND_SLICE11: Final[str] = (
+    "px2_m03_slice11_bounded_continuation_run_consuming_candidate_v1"
+)
 
 
 def _seal_continuity_body(body_without_seal: dict[str, Any]) -> str:
@@ -335,6 +338,12 @@ def run_operator_local_campaign_continuity(
         continuity_non_claims = [
             "Slice-8 bounded operator-local multi-run session member — not industrial self-play.",
             "Not Blackwell-scale; not merge-gate default CI proof.",
+        ]
+    elif execution_kind == EXECUTION_KIND_SLICE11:
+        continuity_non_claims = [
+            "Slice-11 bounded continuation run — current-candidate consumption; "
+            "not industrial self-play.",
+            "Not PX2-M04 exploit closure; not Blackwell-scale; not merge-gate default CI proof.",
         ]
     elif execution_kind == EXECUTION_KIND_SLICE5:
         continuity_non_claims = [
