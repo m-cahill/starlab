@@ -107,6 +107,10 @@ def build_slice4_continuity_manifest(
             ]
             if "slice6" in execution_kind
             else [
+                "Slice-7 continuity manifest — bounded real run; not industrial campaign.",
+            ]
+            if "slice7" in execution_kind
+            else [
                 "Slice-5 continuity manifest — bounded campaign-root run; not industrial campaign.",
             ]
             if "slice5" in execution_kind
