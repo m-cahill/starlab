@@ -1,7 +1,7 @@
 # PX2 — Industrial self-play campaign (runtime v1)
 
-**Version:** v1 — **slice 1** (contract, bridge, fixture smoke) + **slice 2** (execution skeleton, artifact tree, checkpoint/eval receipts) + **slice 3** (operator-local execution preflight, bounded real-weights smoke) + **slice 4** (bounded multi-step continuity, sealed linkage, promotion/rollback receipt surfaces) + **slice 5** (operator-local campaign-root manifest, expanded opponent pool, deterministic rotation / selection recording) + **slice 6** (preflight logical-path seal normalization, canonical operator-local campaign-root smoke path) + **slice 7** (first bounded operator-local non-Blackwell real-run execution record) + **slice 8** (bounded operator-local multi-run session under one campaign root); **not** industrial campaign execution proof  
-**Contract IDs (code):** `starlab.px2.self_play_campaign_contract.v1`, `starlab.px2.self_play_smoke_run.v1`, `starlab.px2.self_play_campaign_run.v1`, `starlab.px2.self_play_checkpoint_receipt.v1`, `starlab.px2.self_play_evaluation_receipt.v1`, `starlab.px2.self_play_execution_preflight.v1`, `starlab.px2.self_play_operator_local_smoke.v1`, `starlab.px2.self_play_campaign_continuity.v1`, `starlab.px2.self_play_promotion_receipt.v1`, `starlab.px2.self_play_rollback_receipt.v1`, `starlab.px2.self_play_campaign_root_manifest.v1`, `starlab.px2.self_play_operator_local_real_run.v1`, `starlab.px2.self_play_operator_local_session.v1`  
+**Version:** v1 — **slice 1** (contract, bridge, fixture smoke) + **slice 2** (execution skeleton, artifact tree, checkpoint/eval receipts) + **slice 3** (operator-local execution preflight, bounded real-weights smoke) + **slice 4** (bounded multi-step continuity, sealed linkage, promotion/rollback receipt surfaces) + **slice 5** (operator-local campaign-root manifest, expanded opponent pool, deterministic rotation / selection recording) + **slice 6** (preflight logical-path seal normalization, canonical operator-local campaign-root smoke path) + **slice 7** (first bounded operator-local non-Blackwell real-run execution record) + **slice 8** (bounded operator-local multi-run session under one campaign root) + **slice 9** (bounded session + one governed promotion/rollback execution step); **not** industrial campaign execution proof  
+**Contract IDs (code):** `starlab.px2.self_play_campaign_contract.v1`, `starlab.px2.self_play_smoke_run.v1`, `starlab.px2.self_play_campaign_run.v1`, `starlab.px2.self_play_checkpoint_receipt.v1`, `starlab.px2.self_play_evaluation_receipt.v1`, `starlab.px2.self_play_execution_preflight.v1`, `starlab.px2.self_play_operator_local_smoke.v1`, `starlab.px2.self_play_campaign_continuity.v1`, `starlab.px2.self_play_promotion_receipt.v1`, `starlab.px2.self_play_rollback_receipt.v1`, `starlab.px2.self_play_campaign_root_manifest.v1`, `starlab.px2.self_play_operator_local_real_run.v1`, `starlab.px2.self_play_operator_local_session.v1`, `starlab.px2.self_play_operator_local_session_transition.v1`  
 **Related:** readiness / preflight `docs/runtime/px2_industrial_self_play_campaign_readiness_v1.md`; replay-bootstrap `docs/runtime/px2_neural_bootstrap_from_replays_v1.md` (PX2-M02); Terran surface `docs/runtime/px2_full_terran_runtime_action_surface_v1.md` (PX2-M01)
 
 ---
@@ -219,6 +219,17 @@ The smoke path **does not** simulate a full SC2 match. It proves: contract load,
 
 ---
 
+## 8i. Slice 9 — Bounded session + one governed promotion/rollback execution step
+
+**Python:** `starlab.sc2.px2.self_play.operator_local_session_transition` — `run_bounded_operator_local_session_with_transition`; `starlab.sc2.px2.self_play.operator_local_session_transition_record` — `build_px2_self_play_operator_local_session_transition_artifacts` (sealed **`operator_local_session_transition_sha256`**).  
+**CLI:** `python -m starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_session_transition --corpus-root … --transition promotion|rollback [--base-dir …] --init-only` (or `--weights …`).
+
+**Purpose:** Runs the **slice-8** multi-run session (same tree), then records **one** deterministic **session-level** transition — **`promotion`** (stub: bind to **last** run’s **final** promotion / checkpoint / eval lineage) or **`rollback`** (stub: bind **current** candidate to **first** run’s **first** checkpoint, with a **reference** to the **last** run’s final rollback receipt for audit). **Not** **PX2-M04** exploit closure; **not** strength certification; **not** broader ranking semantics.
+
+**Non-claims:** **Not** industrial campaign; **not** exploit resolution; **not** merge-gate default CI — operational **receipt linkage** only.
+
+---
+
 ## 9. Explicit non-claims
 
 This slice **does not**:
@@ -234,24 +245,24 @@ This slice **does not**:
 
 ## 10. Operator-local future path
 
-Later **`PX2-M03`** industrial execution is expected to **reuse** the **slice-5/6/7/8** campaign-root discipline: canonical `out/px2_self_play_campaigns/<campaign_id>/`, `runs/<run_id>/` continuity trees, `opponent_pool/` metadata, sealed root + continuity manifests, **slice-6** preflight **logical** seal basis, **slice-7** bounded **real-run** record JSON, and **slice-8** **multi-run** session records — then add **long-run** checkpoint/eval cycles and hardware-appropriate execution — **not** implied by slices 1–8 alone.
+Later **`PX2-M03`** industrial execution is expected to **reuse** the **slice-5/6/7/8/9** campaign-root discipline: canonical `out/px2_self_play_campaigns/<campaign_id>/`, `runs/<run_id>/` continuity trees, `opponent_pool/` metadata, sealed root + continuity manifests, **slice-6** preflight **logical** seal basis, **slice-7** bounded **real-run** record JSON, **slice-8** **multi-run** session records, and **slice-9** **session transition** receipts — then add **long-run** checkpoint/eval cycles and hardware-appropriate execution — **not** implied by slices 1–9 alone.
 
 ---
 
-## Surface coverage (slice 1 vs slice 2 vs slice 3 vs slice 4 vs slice 5 vs slice 6 vs slice 7 vs slice 8 vs later `PX2-M03`)
+## Surface coverage (slice 1 vs slice 2 vs slice 3 vs slice 4 vs slice 5 vs slice 6 vs slice 7 vs slice 8 vs slice 9 vs later `PX2-M03`)
 
-| Surface | Slice 1 | Slice 2 | Slice 3 | Slice 4 | Slice 5 | Slice 6 | Slice 7 | Slice 8 | Later industrial `PX2-M03` |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Campaign contract + report | Yes | Reused | Reused | Reused | Reused | Reused | Reused | Reused | Campaign-specific operator profiles |
-| Policy→runtime bridge | Yes | Reused | Reused + **weight file / init-only** | Reused | Reused | Reused | Reused | Reused | Scaling, training loops |
-| Opponent pool | Stub + selection | Same stub, multi-episode | Same stub | Same stub | **Expanded bounded pool + identity seal** | Same | Same | Same | Full pool, anti-collapse |
-| Checkpoint / eval | Contract placeholders | **Receipt JSON + reports** (fixture skeleton) | Same posture (optional) | **Linked** checkpoint/eval per step | Same (under `runs/<run_id>/`) | Same | Same | Same | Real persistence, real eval harness |
-| Promotion / rollback | Contract placeholders | Stub on campaign run | N/A | **Dedicated receipt JSON + reports** | Same | Same | Same | Same | Real policy |
-| Campaign root / traceability | N/A | N/A | N/A | Single run root | **Root manifest + pool metadata + rotation traces** | **Canonical smoke + logical preflight seal basis** | **Top-level real-run record + optional operator note** | **Multi-run root manifest + session JSON + per-run real-run under `runs/`** | Industrial bookkeeping |
-| Execution | Smoke JSON only | **Run manifest + sealed campaign run** | **Preflight + operator-local smoke** | **Preflight + multi-step continuity + chain seal** | **Campaign root + continuity under `runs/`** | **Bounded canonical smoke (slice-6 kind)** | **Bounded real run (slice-7 kind)** | **Bounded multi-run session (slice-8 kind)** | Long runs, Blackwell-class intent |
-| Preflight seal | N/A | N/A | Full JSON + seal | Reused | Reused | **Logical-path `preflight_seal_basis`** | Reused | Reused | Industrial preflight |
-| Real-run execution record | N/A | N/A | N/A | N/A | N/A | N/A | **`px2_self_play_operator_local_real_run.json`** (root) | **Per-run** `…/runs/<run_id>/px2_self_play_operator_local_real_run.json` + **`px2_self_play_operator_local_session.json`** | Industrial run ledgers |
-| M49/M50/M51 | Reference | Reference | Reference | Reference | Reference | Reference | Reference | Reference | Optional adapter or native executor |
+| Surface | Slice 1 | Slice 2 | Slice 3 | Slice 4 | Slice 5 | Slice 6 | Slice 7 | Slice 8 | Slice 9 | Later industrial `PX2-M03` |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Campaign contract + report | Yes | Reused | Reused | Reused | Reused | Reused | Reused | Reused | Reused | Campaign-specific operator profiles |
+| Policy→runtime bridge | Yes | Reused | Reused + **weight file / init-only** | Reused | Reused | Reused | Reused | Reused | Reused | Scaling, training loops |
+| Opponent pool | Stub + selection | Same stub, multi-episode | Same stub | Same stub | **Expanded bounded pool + identity seal** | Same | Same | Same | Same | Full pool, anti-collapse |
+| Checkpoint / eval | Contract placeholders | **Receipt JSON + reports** (fixture skeleton) | Same posture (optional) | **Linked** checkpoint/eval per step | Same (under `runs/<run_id>/`) | Same | Same | Same | Same | Real persistence, real eval harness |
+| Promotion / rollback | Contract placeholders | Stub on campaign run | N/A | **Dedicated receipt JSON + reports** | Same | Same | Same | Same | **Session-level stub transition + receipt lineage** | Real policy |
+| Campaign root / traceability | N/A | N/A | N/A | Single run root | **Root manifest + pool metadata + rotation traces** | **Canonical smoke + logical preflight seal basis** | **Top-level real-run record + optional operator note** | **Multi-run root manifest + session JSON + per-run real-run under `runs/`** | **+ `px2_self_play_operator_local_session_transition.json`** | Industrial bookkeeping |
+| Execution | Smoke JSON only | **Run manifest + sealed campaign run** | **Preflight + operator-local smoke** | **Preflight + multi-step continuity + chain seal** | **Campaign root + continuity under `runs/`** | **Bounded canonical smoke (slice-6 kind)** | **Bounded real run (slice-7 kind)** | **Bounded multi-run session (slice-8 kind)** | **Bounded session + transition (slice-9 kind)** | Long runs, Blackwell-class intent |
+| Preflight seal | N/A | N/A | Full JSON + seal | Reused | Reused | **Logical-path `preflight_seal_basis`** | Reused | Reused | Reused | Industrial preflight |
+| Real-run execution record | N/A | N/A | N/A | N/A | N/A | N/A | **`px2_self_play_operator_local_real_run.json`** (root) | **Per-run** `…/runs/<run_id>/px2_self_play_operator_local_real_run.json` + **`px2_self_play_operator_local_session.json`** | Same + **transition** record | Industrial run ledgers |
+| M49/M50/M51 | Reference | Reference | Reference | Reference | Reference | Reference | Reference | Reference | Reference | Optional adapter or native executor |
 
 ---
 
@@ -293,3 +304,6 @@ Later **`PX2-M03`** industrial execution is expected to **reuse** the **slice-5/
 | `starlab.sc2.px2.self_play.operator_local_session` | Slice-8 bounded multi-run session orchestration |
 | `starlab.sc2.px2.self_play.operator_local_session_record` | Slice-8 session JSON + seal |
 | `starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_session` | Slice-8 bounded session CLI |
+| `starlab.sc2.px2.self_play.operator_local_session_transition` | Slice-9 session + promotion/rollback step |
+| `starlab.sc2.px2.self_play.operator_local_session_transition_record` | Slice-9 transition JSON + seal |
+| `starlab.sc2.px2.self_play.emit_px2_self_play_operator_local_session_transition` | Slice-9 session-transition CLI |
