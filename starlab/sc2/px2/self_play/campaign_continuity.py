@@ -59,6 +59,7 @@ EXECUTION_KIND_SLICE6: Final[str] = "px2_m03_slice6_canonical_operator_local_cam
 EXECUTION_KIND_SLICE7: Final[str] = "px2_m03_slice7_bounded_operator_local_real_run_v1"
 EXECUTION_KIND_SLICE8: Final[str] = "px2_m03_slice8_bounded_operator_local_session_v1"
 EXECUTION_KIND_SLICE9: Final[str] = "px2_m03_slice9_bounded_operator_local_session_transition_v1"
+EXECUTION_KIND_SLICE10: Final[str] = "px2_m03_slice10_bounded_current_candidate_carry_forward_v1"
 
 
 def _seal_continuity_body(body_without_seal: dict[str, Any]) -> str:

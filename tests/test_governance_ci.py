@@ -30,6 +30,11 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
         or "session transition" in scan.lower()
         or "promotion/rollback execution" in scan.lower()
     )
+    assert (
+        "slice 10" in scan.lower()
+        or "current-candidate" in scan.lower()
+        or "current candidate" in scan.lower()
+    )
     assert "| Last closed milestone (PX2 arc) |" in scan
     assert "PX2-M02" in scan and "PX2-M01" in scan and "PX2-M00" in scan
     assert "PX1-M04" in scan and "**closed**" in scan
