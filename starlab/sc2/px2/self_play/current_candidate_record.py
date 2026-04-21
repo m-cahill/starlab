@@ -15,9 +15,15 @@ PX2_SELF_PLAY_CURRENT_CANDIDATE_REPORT_CONTRACT_ID: Final[str] = (
     "starlab.px2.self_play_current_candidate_report.v1"
 )
 CURRENT_CANDIDATE_RECORD_VERSION: Final[str] = "px2_m03_slice10_current_candidate_carry_forward_v1"
+CURRENT_CANDIDATE_RECORD_VERSION_SLICE12: Final[str] = (
+    "px2_m03_slice12_current_candidate_reanchor_after_continuation_v1"
+)
 
 CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB: Final[str] = (
     "px2_m03_slice10_carry_forward_from_session_transition_stub_v1"
+)
+CURRENT_CANDIDATE_RULE_REANCHOR_FROM_CONTINUATION_STUB: Final[str] = (
+    "px2_m03_slice12_reanchor_from_continuation_stub_v1"
 )
 
 
@@ -43,12 +49,14 @@ def build_current_candidate_seal_basis(
     weight_mode_declared_hint: str,
     source_receipt_lineage: dict[str, Any],
     non_claims: list[str],
+    record_version: str | None = None,
 ) -> dict[str, Any]:
     """Logical fields sealed as ``current_candidate_sha256``."""
 
+    ver = record_version if record_version is not None else CURRENT_CANDIDATE_RECORD_VERSION
     return {
         "contract_id": PX2_SELF_PLAY_CURRENT_CANDIDATE_CONTRACT_ID,
-        "current_candidate_record_version": CURRENT_CANDIDATE_RECORD_VERSION,
+        "current_candidate_record_version": ver,
         "execution_kind": execution_kind,
         "campaign_id": campaign_id,
         "campaign_profile_id": campaign_profile_id,
@@ -90,6 +98,7 @@ def build_px2_self_play_current_candidate_artifacts(
     weight_mode_declared_hint: str,
     source_receipt_lineage: dict[str, Any],
     non_claims: list[str],
+    record_version: str | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Return current-candidate JSON + report with sealed hash."""
 
@@ -110,6 +119,7 @@ def build_px2_self_play_current_candidate_artifacts(
         weight_mode_declared_hint=weight_mode_declared_hint,
         source_receipt_lineage=source_receipt_lineage,
         non_claims=non_claims,
+        record_version=record_version,
     )
     seal = _seal_body(basis)
     root_posix = campaign_root_resolved.resolve().as_posix()

@@ -63,6 +63,9 @@ EXECUTION_KIND_SLICE10: Final[str] = "px2_m03_slice10_bounded_current_candidate_
 EXECUTION_KIND_SLICE11: Final[str] = (
     "px2_m03_slice11_bounded_continuation_run_consuming_candidate_v1"
 )
+EXECUTION_KIND_SLICE12: Final[str] = (
+    "px2_m03_slice12_bounded_current_candidate_reanchor_after_continuation_v1"
+)
 
 
 def _seal_continuity_body(body_without_seal: dict[str, Any]) -> str:
