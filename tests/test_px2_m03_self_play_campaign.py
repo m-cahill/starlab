@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–15 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–16 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -26,6 +26,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE13_REANCHOR,
     EXECUTION_KIND_SLICE14,
     EXECUTION_KIND_SLICE15,
+    EXECUTION_KIND_SLICE16,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -77,6 +78,19 @@ from starlab.sc2.px2.self_play.current_candidate_record import (
 from starlab.sc2.px2.self_play.execution_preflight import (
     PX2_SELF_PLAY_EXECUTION_PREFLIGHT_CONTRACT_ID,
     run_execution_preflight,
+)
+from starlab.sc2.px2.self_play.handoff_anchored_run import (
+    ANCHORED_OK,
+    HANDOFF_ANCHORED_RUN_JSON,
+    REJECTED_HANDOFF_NOT_OK,
+    REJECTED_HANDOFF_SEAL,
+    REJECTED_MISSING_HANDOFF,
+    run_bounded_handoff_anchored_operator_local_run,
+    verify_loaded_pointer_seeded_handoff_self_seal,
+)
+from starlab.sc2.px2.self_play.handoff_anchored_run_record import (
+    ANCHOR_SEMANTICS_DECLARED_FROM_SLICE15_HANDOFF_JSON_V1,
+    PX2_SELF_PLAY_HANDOFF_ANCHORED_RUN_CONTRACT_ID,
 )
 from starlab.sc2.px2.self_play.operator_local_real_run import (
     DEFAULT_SLICE7_CAMPAIGN_ID,
@@ -2223,6 +2237,189 @@ def test_emit_pointer_seeded_handoff_cli(tmp_path: Path) -> None:
     root = _campaign_root_with_slice14_pointer_seeded_ok(tmp_path, cid=cid, run_id="cli_ho_ps")
     assert main(["--campaign-root", str(root), "--campaign-id", cid]) == 0
     assert (root / POINTER_SEEDED_HANDOFF_JSON).is_file()
+
+
+def _campaign_root_with_slice15_handoff_ok(tmp_path: Path, *, cid: str, ps_run_id: str) -> Path:
+    root = _campaign_root_with_slice14_pointer_seeded_ok(tmp_path, cid=cid, run_id=ps_run_id)
+    summary = run_bounded_pointer_seeded_handoff(campaign_root=root, campaign_id=cid)
+    assert summary["handoff_status"] == HANDOFF_OK
+    return root
+
+
+def test_slice16_handoff_anchored_ok(tmp_path: Path) -> None:
+    cid = "px2_m03_slice16_ok"
+    root = _campaign_root_with_slice15_handoff_ok(tmp_path, cid=cid, ps_run_id="s16_ps")
+    ho = json.loads((root / POINTER_SEEDED_HANDOFF_JSON).read_text(encoding="utf-8"))
+    assert verify_loaded_pointer_seeded_handoff_self_seal(ho)[0] is True
+    summary = run_bounded_handoff_anchored_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        handoff_anchored_run_id="s16_ha",
+        init_only=True,
+        torch_seed=29,
+        continuity_step_count=2,
+    )
+    assert summary["anchoring_status"] == ANCHORED_OK
+    har = json.loads((root / HANDOFF_ANCHORED_RUN_JSON).read_text(encoding="utf-8"))
+    assert har["contract_id"] == PX2_SELF_PLAY_HANDOFF_ANCHORED_RUN_CONTRACT_ID
+    assert har["execution_kind"] == EXECUTION_KIND_SLICE16
+    assert har["anchor_semantics"] == ANCHOR_SEMANTICS_DECLARED_FROM_SLICE15_HANDOFF_JSON_V1
+    assert har["prior_pointer_seeded_handoff_sha256"] == ho["pointer_seeded_handoff_sha256"]
+    assert har["prior_pointer_seeded_run_sha256"] == ho["prior_pointer_seeded_run_sha256"]
+    assert (root / "px2_self_play_handoff_anchored_run_report.json").is_file()
+    cont = json.loads(
+        (root / "runs" / "s16_ha" / "px2_self_play_campaign_continuity.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert cont["execution_kind"] == EXECUTION_KIND_SLICE16
+    assert har["resulting_continuity_sha256"] == cont["continuity_sha256"]
+
+
+def test_slice16_rejects_missing_handoff(tmp_path: Path) -> None:
+    cid = "px2_m03_slice16_noh"
+    root = _campaign_root_with_slice14_pointer_seeded_ok(tmp_path, cid=cid, run_id="noh_ps")
+    s = run_bounded_handoff_anchored_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        handoff_anchored_run_id="s16_noh",
+        init_only=True,
+    )
+    assert s["anchoring_status"] == REJECTED_MISSING_HANDOFF
+
+
+def test_slice16_rejects_handoff_not_handed_off_ok(tmp_path: Path) -> None:
+    cid = "px2_m03_slice16_noho"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=["noho_a", "noho_b"],
+        torch_seed=2,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    run_bounded_pointer_seeded_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id="wrong_for_handoff",
+        pointer_seeded_run_id="noho_ps",
+        init_only=True,
+    )
+    run_bounded_pointer_seeded_handoff(campaign_root=root, campaign_id="wrong_for_handoff")
+    ho = json.loads((root / POINTER_SEEDED_HANDOFF_JSON).read_text(encoding="utf-8"))
+    assert ho["handoff_status"] == REJECTED_NOT_SEEDED_OK
+    s = run_bounded_handoff_anchored_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id="wrong_for_handoff",
+        handoff_anchored_run_id="s16_bad",
+        init_only=True,
+    )
+    assert s["anchoring_status"] == REJECTED_HANDOFF_NOT_OK
+
+
+def test_slice16_rejects_tampered_handoff_seal(tmp_path: Path) -> None:
+    cid = "px2_m03_slice16_tam"
+    root = _campaign_root_with_slice15_handoff_ok(tmp_path, cid=cid, ps_run_id="tam_ps")
+    ho_path = root / POINTER_SEEDED_HANDOFF_JSON
+    ho = json.loads(ho_path.read_text(encoding="utf-8"))
+    ho["pointer_seeded_handoff_sha256"] = "0" * 64
+    ho_path.write_text(json.dumps(ho, indent=2), encoding="utf-8")
+    s = run_bounded_handoff_anchored_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        handoff_anchored_run_id="s16_tam",
+        init_only=True,
+    )
+    assert s["anchoring_status"] == REJECTED_HANDOFF_SEAL
+
+
+def test_slice16_rejects_stale_manifest_after_handoff(tmp_path: Path) -> None:
+    cid = "px2_m03_slice16_stale"
+    root = _campaign_root_with_slice15_handoff_ok(tmp_path, cid=cid, ps_run_id="stale_ps")
+    man_path = root / "px2_self_play_campaign_root_manifest.json"
+    man = json.loads(man_path.read_text(encoding="utf-8"))
+    man["campaign_root_manifest_sha256"] = "1" * 64
+    man_path.write_text(json.dumps(man, indent=2), encoding="utf-8")
+    s = run_bounded_handoff_anchored_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        handoff_anchored_run_id="s16_stale",
+        init_only=True,
+    )
+    assert s["anchoring_status"] == REJECTED_LINEAGE_MISMATCH
+    assert "campaign_root_manifest_stale_or_mismatch_vs_handoff" in s["mismatch_reasons"]
+
+
+def test_slice16_rejects_campaign_id_mismatch(tmp_path: Path) -> None:
+    cid = "px2_m03_slice16_cid"
+    root = _campaign_root_with_slice15_handoff_ok(tmp_path, cid=cid, ps_run_id="cid_ps")
+    s = run_bounded_handoff_anchored_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id="other_id",
+        handoff_anchored_run_id="s16_bad",
+        init_only=True,
+    )
+    assert s["anchoring_status"] == REJECTED_CAMPAIGN_ID_MISMATCH
+
+
+def test_slice16_handoff_anchored_deterministic_parallel_roots(tmp_path: Path) -> None:
+    cid = "px2_m03_slice16_det"
+    pristine = _campaign_root_with_slice15_handoff_ok(
+        tmp_path / "prep", cid=cid, ps_run_id="det_ps"
+    )
+    shas: list[str] = []
+    for name in ("a", "b"):
+        root = tmp_path / name
+        shutil.copytree(pristine, root)
+        s = run_bounded_handoff_anchored_operator_local_run(
+            corpus_root=CORPUS,
+            campaign_root=root,
+            campaign_id=cid,
+            handoff_anchored_run_id="s16_det",
+            init_only=True,
+            torch_seed=41,
+            continuity_step_count=2,
+        )
+        assert s["anchoring_status"] == ANCHORED_OK
+        shas.append(s["handoff_anchored_run_sha256"])
+    assert shas[0] == shas[1]
+
+
+def test_emit_handoff_anchored_run_cli(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_handoff_anchored_run import main
+
+    cid = "px2_m03_slice16_cli"
+    root = _campaign_root_with_slice15_handoff_ok(tmp_path, cid=cid, ps_run_id="cli_ha")
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--campaign-root",
+                str(root),
+                "--campaign-id",
+                cid,
+                "--handoff-anchored-run-id",
+                "cli_ha",
+                "--init-only",
+                "--steps",
+                "2",
+                "--torch-seed",
+                "5",
+            ]
+        )
+        == 0
+    )
+    assert (root / HANDOFF_ANCHORED_RUN_JSON).is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
