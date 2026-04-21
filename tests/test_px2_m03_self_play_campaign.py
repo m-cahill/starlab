@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–11 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–12 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -21,6 +21,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE9,
     EXECUTION_KIND_SLICE10,
     EXECUTION_KIND_SLICE11,
+    EXECUTION_KIND_SLICE12,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -55,8 +56,17 @@ from starlab.sc2.px2.self_play.current_candidate import (
     next_run_preflight_hints_from_current_candidate,
     run_bounded_operator_local_session_transition_with_current_candidate,
 )
+from starlab.sc2.px2.self_play.current_candidate_reanchor import (
+    CURRENT_CANDIDATE_REANCHOR_JSON,
+    run_bounded_current_candidate_reanchor_after_continuation,
+)
+from starlab.sc2.px2.self_play.current_candidate_reanchor_record import (
+    PX2_SELF_PLAY_CURRENT_CANDIDATE_REANCHOR_CONTRACT_ID,
+)
 from starlab.sc2.px2.self_play.current_candidate_record import (
+    CURRENT_CANDIDATE_RECORD_VERSION_SLICE12,
     CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB,
+    CURRENT_CANDIDATE_RULE_REANCHOR_FROM_CONTINUATION_STUB,
     PX2_SELF_PLAY_CURRENT_CANDIDATE_CONTRACT_ID,
 )
 from starlab.sc2.px2.self_play.execution_preflight import (
@@ -1505,6 +1515,168 @@ def test_emit_continuation_run_cli_init_only(tmp_path: Path) -> None:
         == 0
     )
     assert (root / CONTINUATION_RUN_JSON).is_file()
+
+
+def test_slice12_reanchor_ok_links_continuation_and_refreshes_candidate(tmp_path: Path) -> None:
+    cid = "px2_m03_slice12_ci"
+    r1, r2 = "s12_a", "s12_b"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=[r1, r2],
+        torch_seed=11,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    prior_cc_sha = str(
+        json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))[
+            "current_candidate_sha256"
+        ]
+    )
+    run_bounded_continuation_run_consuming_current_candidate(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        continuation_run_id="s12_cont",
+        init_only=True,
+        torch_seed=11,
+        continuity_step_count=2,
+    )
+    cont_sha = str(
+        json.loads((root / CONTINUATION_RUN_JSON).read_text(encoding="utf-8"))[
+            "continuation_run_sha256"
+        ]
+    )
+    ra = run_bounded_current_candidate_reanchor_after_continuation(
+        campaign_root=root,
+        campaign_id=cid,
+    )
+    assert ra["reanchor_status"] == "reanchored_ok"
+    assert ra["prior_current_candidate_sha256"] == prior_cc_sha
+    assert ra["prior_continuation_run_sha256"] == cont_sha
+    rj = json.loads((root / CURRENT_CANDIDATE_REANCHOR_JSON).read_text(encoding="utf-8"))
+    assert rj["contract_id"] == PX2_SELF_PLAY_CURRENT_CANDIDATE_REANCHOR_CONTRACT_ID
+    assert rj["reanchor_status"] == "reanchored_ok"
+    assert rj["refreshed_current_candidate_sha256"] == ra["refreshed_current_candidate_sha256"]
+    cc = json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))
+    assert cc["execution_kind"] == EXECUTION_KIND_SLICE12
+    assert cc["current_candidate_record_version"] == CURRENT_CANDIDATE_RECORD_VERSION_SLICE12
+    assert cc["current_candidate_rule_id"] == CURRENT_CANDIDATE_RULE_REANCHOR_FROM_CONTINUATION_STUB
+    assert cc["current_run_id_after_transition"] == "s12_cont"
+    assert cc["current_candidate_sha256"] == ra["refreshed_current_candidate_sha256"]
+    assert cc["current_candidate_sha256"] != prior_cc_sha
+    assert cc["anchor"]["continuity_run_id"] == "s12_cont"
+
+
+def test_slice12_reanchor_rejects_when_continuation_not_consumed(tmp_path: Path) -> None:
+    cid = "px2_m03_slice12_rej"
+    wrong_cid = "wrong_id_for_rej"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=["rj_a", "rj_b"],
+        torch_seed=1,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    run_bounded_continuation_run_consuming_current_candidate(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=wrong_cid,
+        continuation_run_id="rj_cont",
+        init_only=True,
+    )
+    prior = json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))
+    prior_sha = str(prior["current_candidate_sha256"])
+    ra = run_bounded_current_candidate_reanchor_after_continuation(
+        campaign_root=root,
+        campaign_id=wrong_cid,
+    )
+    assert ra["reanchor_status"] == "rejected"
+    assert "continuation_not_consumed_ok" in ra["rejection_reasons"]
+    after = json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))
+    assert str(after["current_candidate_sha256"]) == prior_sha
+    rj = json.loads((root / CURRENT_CANDIDATE_REANCHOR_JSON).read_text(encoding="utf-8"))
+    assert rj["reanchor_status"] == "rejected"
+
+
+def test_slice12_reanchor_deterministic_across_roots(tmp_path: Path) -> None:
+    cid = "px2_m03_slice12_det"
+
+    def _full(base: Path) -> str:
+        run_bounded_operator_local_session_transition_with_current_candidate(
+            corpus_root=CORPUS,
+            transition_kind="promotion",
+            campaign_id=cid,
+            base_dir=base,
+            init_only=True,
+            run_ids=["x", "y"],
+            torch_seed=44,
+            continuity_step_count=2,
+        )
+        root = base / "out" / "px2_self_play_campaigns" / cid
+        run_bounded_continuation_run_consuming_current_candidate(
+            corpus_root=CORPUS,
+            campaign_root=root,
+            campaign_id=cid,
+            continuation_run_id="det_cont",
+            init_only=True,
+            torch_seed=44,
+            continuity_step_count=2,
+        )
+        run_bounded_current_candidate_reanchor_after_continuation(
+            campaign_root=root,
+            campaign_id=cid,
+        )
+        r = json.loads((root / CURRENT_CANDIDATE_REANCHOR_JSON).read_text(encoding="utf-8"))
+        return str(r["current_candidate_reanchor_sha256"])
+
+    assert _full(tmp_path / "a") == _full(tmp_path / "b")
+
+
+def test_emit_current_candidate_reanchor_cli(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_current_candidate_reanchor import main
+
+    cid = "px2_m03_slice12_cli"
+    base = tmp_path / "r12"
+    run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=["c12_a", "c12_b"],
+        torch_seed=3,
+        continuity_step_count=2,
+    )
+    root = base / "out" / "px2_self_play_campaigns" / cid
+    run_bounded_continuation_run_consuming_current_candidate(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        continuation_run_id="c12_cont",
+        init_only=True,
+        torch_seed=3,
+        continuity_step_count=2,
+    )
+    assert (
+        main(
+            [
+                "--campaign-root",
+                str(root),
+                "--campaign-id",
+                cid,
+            ]
+        )
+        == 0
+    )
+    assert (root / CURRENT_CANDIDATE_REANCHOR_JSON).is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:

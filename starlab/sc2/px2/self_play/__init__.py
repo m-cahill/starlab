@@ -1,4 +1,4 @@
-"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 11)."""
+"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 12)."""
 
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE9,
     EXECUTION_KIND_SLICE10,
     EXECUTION_KIND_SLICE11,
+    EXECUTION_KIND_SLICE12,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_REPORT_CONTRACT_ID,
     run_operator_local_campaign_continuity,
@@ -63,8 +64,21 @@ from starlab.sc2.px2.self_play.current_candidate import (
     next_run_preflight_hints_from_current_candidate,
     run_bounded_operator_local_session_transition_with_current_candidate,
 )
+from starlab.sc2.px2.self_play.current_candidate_reanchor import (
+    CURRENT_CANDIDATE_REANCHOR_JSON,
+    SLICE12_CAMPAIGN_PROFILE_ID,
+    run_bounded_current_candidate_reanchor_after_continuation,
+)
+from starlab.sc2.px2.self_play.current_candidate_reanchor_record import (
+    PX2_SELF_PLAY_CURRENT_CANDIDATE_REANCHOR_CONTRACT_ID,
+    PX2_SELF_PLAY_CURRENT_CANDIDATE_REANCHOR_REPORT_CONTRACT_ID,
+    REANCHOR_RULE_POST_CONTINUATION_STUB,
+    build_px2_self_play_current_candidate_reanchor_artifacts,
+)
 from starlab.sc2.px2.self_play.current_candidate_record import (
+    CURRENT_CANDIDATE_RECORD_VERSION_SLICE12,
     CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB,
+    CURRENT_CANDIDATE_RULE_REANCHOR_FROM_CONTINUATION_STUB,
     PX2_SELF_PLAY_CURRENT_CANDIDATE_CONTRACT_ID,
     PX2_SELF_PLAY_CURRENT_CANDIDATE_REPORT_CONTRACT_ID,
     build_px2_self_play_current_candidate_artifacts,
@@ -176,6 +190,7 @@ __all__ = [
     "EXECUTION_KIND_SLICE9",
     "EXECUTION_KIND_SLICE10",
     "EXECUTION_KIND_SLICE11",
+    "EXECUTION_KIND_SLICE12",
     "WEIGHT_MODE_INIT_ONLY",
     "WEIGHT_MODE_WEIGHTS_FILE",
     "OpponentPoolStub",
@@ -208,7 +223,14 @@ __all__ = [
     "CONTINUATION_RULE_CONSUME_CURRENT_CANDIDATE_STUB",
     "CONTINUATION_RUN_JSON",
     "SLICE11_CAMPAIGN_PROFILE_ID",
+    "CURRENT_CANDIDATE_REANCHOR_JSON",
+    "SLICE12_CAMPAIGN_PROFILE_ID",
+    "PX2_SELF_PLAY_CURRENT_CANDIDATE_REANCHOR_CONTRACT_ID",
+    "PX2_SELF_PLAY_CURRENT_CANDIDATE_REANCHOR_REPORT_CONTRACT_ID",
+    "REANCHOR_RULE_POST_CONTINUATION_STUB",
+    "CURRENT_CANDIDATE_RECORD_VERSION_SLICE12",
     "CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB",
+    "CURRENT_CANDIDATE_RULE_REANCHOR_FROM_CONTINUATION_STUB",
     "PX2_SELF_PLAY_PROMOTION_RECEIPT_CONTRACT_ID",
     "PX2_SELF_PLAY_PROMOTION_RECEIPT_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_ROLLBACK_RECEIPT_CONTRACT_ID",
@@ -223,6 +245,7 @@ __all__ = [
     "build_px2_self_play_operator_local_session_transition_artifacts",
     "build_px2_self_play_current_candidate_artifacts",
     "build_px2_self_play_continuation_run_artifacts",
+    "build_px2_self_play_current_candidate_reanchor_artifacts",
     "build_default_opponent_pool_stub",
     "build_px2_self_play_campaign_root_manifest_artifacts",
     "build_slice5_opponent_pool",
@@ -250,6 +273,7 @@ __all__ = [
     "run_bounded_operator_local_session_transition_with_current_candidate",
     "run_bounded_continuation_run_consuming_current_candidate",
     "validate_current_candidate_for_continuation_run",
+    "run_bounded_current_candidate_reanchor_after_continuation",
     "load_px2_self_play_current_candidate",
     "next_run_preflight_hints_from_current_candidate",
     "run_canonical_operator_local_campaign_root_smoke",
