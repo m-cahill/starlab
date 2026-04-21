@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Final, cast
 
 from starlab.sc2.px2.self_play.campaign_continuity import (
+    EXECUTION_KIND_BOUNDED_SUBSTANTIVE,
     EXECUTION_KIND_SLICE11,
     EXECUTION_KIND_SLICE13,
     EXECUTION_KIND_SLICE14,
@@ -162,6 +163,11 @@ def merge_campaign_root_manifest_after_continuation_run(
             "Not merge-gate default CI proof.",
         ]
         if execution_kind == EXECUTION_KIND_SLICE16
+        else [
+            "Bounded substantive execution — manifest append; not industrial campaign.",
+            "Not merge-gate default CI proof.",
+        ]
+        if execution_kind == EXECUTION_KIND_BOUNDED_SUBSTANTIVE
         else [
             "Slice-11 bounded continuation run — manifest append; not industrial campaign.",
             "Not merge-gate default CI proof.",

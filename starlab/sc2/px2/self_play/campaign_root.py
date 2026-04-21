@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Final
 
 from starlab.sc2.px2.self_play.campaign_continuity import (
+    EXECUTION_KIND_BOUNDED_SUBSTANTIVE,
     EXECUTION_KIND_SLICE5,
     EXECUTION_KIND_SLICE6,
     EXECUTION_KIND_SLICE7,
@@ -189,6 +190,12 @@ def run_slice5_operator_local_campaign(
             "Not PX2-M04 exploit closure; not merge-gate default CI proof.",
         ]
         if execution_kind == EXECUTION_KIND_SLICE16
+        else [
+            "Bounded substantive operator-local execution — deeper continuity than slices 1–16; "
+            "not industrial self-play campaign.",
+            "Not Blackwell-scale; not ladder strength; not merge-gate default CI proof.",
+        ]
+        if execution_kind == EXECUTION_KIND_BOUNDED_SUBSTANTIVE
         else [
             "Slice-5 operator-local campaign-root manifest — not industrial self-play campaign.",
             "Continuity runs are bounded; not Blackwell-scale; not merge-gate default CI proof.",
