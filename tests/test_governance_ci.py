@@ -43,10 +43,13 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert (
         "slice 12" in scan.lower()
         or "slice 13" in scan.lower()
+        or "slice 14" in scan.lower()
         or "re-anchor" in scan.lower()
         or "reanchor" in scan.lower()
         or "second-hop" in scan.lower()
         or "second_hop" in scan.lower()
+        or "pointer-seeded" in scan.lower()
+        or "pointer_seeded" in scan.lower()
     )
     assert "| Last closed milestone (PX2 arc) |" in scan
     assert "PX2-M02" in scan and "PX2-M01" in scan and "PX2-M00" in scan
