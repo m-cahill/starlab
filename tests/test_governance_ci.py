@@ -73,6 +73,10 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "tranche_b_operator_note.md" in scan or "PV1 execution evidence" in scan
     assert "| Post-PV1 (PX1) |" in scan
     assert "| Post-PX1 (PX2) |" in scan
+    assert (
+        "After slice 16, PX2-M03 exits lineage-surface expansion and enters bounded "
+        "substantive execution, still below industrial scale"
+    ) in scan
     assert "px2_autonomous_full_game_agent_charter_v1.md" in scan
     assert "| Last closed milestone (PX1 arc) |" in scan
     assert "| PX1 industrial run status (PX1-M01) |" in scan

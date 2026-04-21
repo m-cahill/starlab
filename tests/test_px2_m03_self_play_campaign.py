@@ -12,7 +12,17 @@ import torch
 from starlab.runs.json_util import sha256_hex_of_canonical_json
 from starlab.sc2.px2.bootstrap.feature_adapter import observation_feature_dim
 from starlab.sc2.px2.bootstrap.policy_model import BootstrapTerranPolicy
+from starlab.sc2.px2.self_play.bounded_substantive_execution import (
+    BOUNDED_SUBSTANTIVE_EXECUTION_JSON,
+    DEFAULT_BOUNDED_SUBSTANTIVE_CONTINUITY_STEPS,
+    run_bounded_substantive_operator_local_execution,
+)
+from starlab.sc2.px2.self_play.bounded_substantive_execution_record import (
+    PX2_SELF_PLAY_BOUNDED_SUBSTANTIVE_EXECUTION_CONTRACT_ID,
+    SUBSTANTIVE_LINEAGE_CAMPAIGN_ROOT_ONLY,
+)
 from starlab.sc2.px2.self_play.campaign_continuity import (
+    EXECUTION_KIND_BOUNDED_SUBSTANTIVE,
     EXECUTION_KIND_SLICE4,
     EXECUTION_KIND_SLICE5,
     EXECUTION_KIND_SLICE6,
@@ -2420,6 +2430,131 @@ def test_emit_handoff_anchored_run_cli(tmp_path: Path) -> None:
         == 0
     )
     assert (root / HANDOFF_ANCHORED_RUN_JSON).is_file()
+
+
+def test_bounded_substantive_fresh_campaign_init_only(tmp_path: Path) -> None:
+    cid = "px2_m03_bounded_sub_fresh"
+    root = tmp_path / "bs_fresh"
+    root.mkdir(parents=True)
+    s = run_bounded_substantive_operator_local_execution(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        substantive_run_id="bs_run_1",
+        init_only=True,
+        continuity_step_count=5,
+        torch_seed=7,
+    )
+    assert s["substantive_lineage_mode"] == SUBSTANTIVE_LINEAGE_CAMPAIGN_ROOT_ONLY
+    assert s["continuity_step_count_effective"] == 5
+    b = json.loads((root / BOUNDED_SUBSTANTIVE_EXECUTION_JSON).read_text(encoding="utf-8"))
+    assert b["contract_id"] == PX2_SELF_PLAY_BOUNDED_SUBSTANTIVE_EXECUTION_CONTRACT_ID
+    assert b["execution_kind"] == EXECUTION_KIND_BOUNDED_SUBSTANTIVE
+    cont = json.loads(
+        (root / "runs" / "bs_run_1" / "px2_self_play_campaign_continuity.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert cont["execution_kind"] == EXECUTION_KIND_BOUNDED_SUBSTANTIVE
+    assert (root / "px2_self_play_campaign_root_manifest.json").is_file()
+
+
+def test_bounded_substantive_default_continuity_steps_is_15(tmp_path: Path) -> None:
+    cid = "px2_m03_bounded_sub_default15"
+    root = tmp_path / "bs_def"
+    root.mkdir(parents=True)
+    s = run_bounded_substantive_operator_local_execution(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        substantive_run_id="bs_def",
+        init_only=True,
+    )
+    assert s["continuity_step_count_requested"] == DEFAULT_BOUNDED_SUBSTANTIVE_CONTINUITY_STEPS
+    assert s["continuity_step_count_effective"] == DEFAULT_BOUNDED_SUBSTANTIVE_CONTINUITY_STEPS
+
+
+def test_bounded_substantive_rejects_real_weights_without_path(tmp_path: Path) -> None:
+    root = tmp_path / "bs_now"
+    root.mkdir(parents=True)
+    with pytest.raises(ValueError, match="weights path"):
+        run_bounded_substantive_operator_local_execution(
+            corpus_root=CORPUS,
+            campaign_root=root,
+            campaign_id="x",
+            substantive_run_id="r1",
+            init_only=False,
+            weights_path=None,
+        )
+
+
+def test_bounded_substantive_clamps_steps_at_20(tmp_path: Path) -> None:
+    cid = "px2_m03_bounded_clamp"
+    root = tmp_path / "bs_clamp"
+    root.mkdir(parents=True)
+    s = run_bounded_substantive_operator_local_execution(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        substantive_run_id="bs_cl",
+        init_only=True,
+        continuity_step_count=99,
+    )
+    assert s["continuity_step_count_effective"] == 20
+
+
+def test_bounded_substantive_second_run_merges_manifest(tmp_path: Path) -> None:
+    cid = "px2_m03_bounded_merge"
+    root = tmp_path / "bs_merge"
+    root.mkdir(parents=True)
+    run_bounded_substantive_operator_local_execution(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        substantive_run_id="m1",
+        init_only=True,
+        continuity_step_count=4,
+    )
+    run_bounded_substantive_operator_local_execution(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        substantive_run_id="m2",
+        init_only=True,
+        continuity_step_count=4,
+    )
+    man = json.loads(
+        (root / "px2_self_play_campaign_root_manifest.json").read_text(encoding="utf-8")
+    )
+    refs = man["continuity_run_references"]
+    assert len(refs) == 2
+    assert {str(r["run_id"]) for r in refs} == {"m1", "m2"}
+
+
+def test_emit_bounded_substantive_execution_cli(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_bounded_substantive_execution import main
+
+    root = tmp_path / "bs_cli"
+    root.mkdir(parents=True)
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--campaign-root",
+                str(root),
+                "--campaign-id",
+                "px2_cli_bs",
+                "--substantive-run-id",
+                "cli_bs",
+                "--init-only",
+                "--steps",
+                "5",
+            ]
+        )
+        == 0
+    )
+    assert (root / BOUNDED_SUBSTANTIVE_EXECUTION_JSON).is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:

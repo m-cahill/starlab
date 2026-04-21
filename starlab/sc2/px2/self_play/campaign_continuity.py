@@ -79,6 +79,12 @@ EXECUTION_KIND_SLICE15: Final[str] = "px2_m03_slice15_bounded_post_pointer_seede
 EXECUTION_KIND_SLICE16: Final[str] = (
     "px2_m03_slice16_bounded_handoff_anchored_operator_local_run_v1"
 )
+EXECUTION_KIND_BOUNDED_SUBSTANTIVE: Final[str] = (
+    "px2_m03_bounded_substantive_operator_local_execution_v1"
+)
+
+MAX_CONTINUITY_STEPS_DEFAULT_BOUNDED: Final[int] = 3
+MAX_CONTINUITY_STEPS_BOUNDED_SUBSTANTIVE: Final[int] = 20
 
 
 def _seal_continuity_body(body_without_seal: dict[str, Any]) -> str:
@@ -107,13 +113,18 @@ def run_operator_local_campaign_continuity(
 ) -> dict[str, Any]:
     """Multi-step continuity proof: preflight → N bounded steps with sealed receipt chain.
 
-    ``continuity_step_count`` is clamped to ``[2, 3]`` for non-industrial bounds.
+    For most execution kinds, ``continuity_step_count`` is clamped to ``[2, 3]``.
+    For ``EXECUTION_KIND_BOUNDED_SUBSTANTIVE``, it is clamped to ``[2, 20]`` (bounded
+    substantive default 15 — not a scientific claim).
     """
 
     random.seed(torch_seed)
     torch.manual_seed(torch_seed)
 
-    n_steps = max(2, min(int(continuity_step_count), 3))
+    if execution_kind == EXECUTION_KIND_BOUNDED_SUBSTANTIVE:
+        n_steps = max(2, min(int(continuity_step_count), MAX_CONTINUITY_STEPS_BOUNDED_SUBSTANTIVE))
+    else:
+        n_steps = max(2, min(int(continuity_step_count), MAX_CONTINUITY_STEPS_DEFAULT_BOUNDED))
     rid = run_id or f"px2_cont_{uuid.uuid4().hex[:12]}"
 
     ok, preflight, preflight_report, errors = run_execution_preflight(
@@ -379,6 +390,13 @@ def run_operator_local_campaign_continuity(
             "pointer-seeded handoff JSON; not industrial self-play.",
             "Not PX2-M04 exploit closure; not Blackwell-scale; not merge-gate default CI proof.",
         ]
+    elif execution_kind == EXECUTION_KIND_BOUNDED_SUBSTANTIVE:
+        continuity_non_claims = [
+            "Bounded substantive operator-local execution — deeper continuity than slices 1–16 "
+            "micro-runs; not industrial self-play.",
+            "Not PX2-M04 exploit closure; not Blackwell-scale; not ladder strength; "
+            "not merge-gate default CI proof.",
+        ]
     elif execution_kind == EXECUTION_KIND_SLICE5:
         continuity_non_claims = [
             "Slice-5 operator-local campaign-root continuity — not industrial self-play campaign.",
@@ -463,6 +481,10 @@ def run_operator_local_campaign_continuity(
         cnote = (
             "PX2-M02 fixture corpus lineage; slice-16 bounded handoff-anchored operator-local "
             "proof."
+        )
+    elif execution_kind == EXECUTION_KIND_BOUNDED_SUBSTANTIVE:
+        cnote = (
+            "PX2-M02 fixture corpus lineage; bounded substantive operator-local execution proof."
         )
     else:
         cnote = "PX2-M02 fixture corpus lineage; slice-5 campaign-root continuity proof."
