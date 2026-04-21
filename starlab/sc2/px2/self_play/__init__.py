@@ -1,4 +1,4 @@
-"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 10)."""
+"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 11)."""
 
 from __future__ import annotations
 
@@ -10,6 +10,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE8,
     EXECUTION_KIND_SLICE9,
     EXECUTION_KIND_SLICE10,
+    EXECUTION_KIND_SLICE11,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_REPORT_CONTRACT_ID,
     run_operator_local_campaign_continuity,
@@ -43,6 +44,18 @@ from starlab.sc2.px2.self_play.canonical_operator_local_run import (
 from starlab.sc2.px2.self_play.checkpoint_receipts import (
     PX2_SELF_PLAY_CHECKPOINT_RECEIPT_CONTRACT_ID,
     PX2_SELF_PLAY_CHECKPOINT_RECEIPT_REPORT_CONTRACT_ID,
+)
+from starlab.sc2.px2.self_play.continuation_run import (
+    CONTINUATION_RUN_JSON,
+    SLICE11_CAMPAIGN_PROFILE_ID,
+    run_bounded_continuation_run_consuming_current_candidate,
+    validate_current_candidate_for_continuation_run,
+)
+from starlab.sc2.px2.self_play.continuation_run_record import (
+    CONTINUATION_RULE_CONSUME_CURRENT_CANDIDATE_STUB,
+    PX2_SELF_PLAY_CONTINUATION_RUN_CONTRACT_ID,
+    PX2_SELF_PLAY_CONTINUATION_RUN_REPORT_CONTRACT_ID,
+    build_px2_self_play_continuation_run_artifacts,
 )
 from starlab.sc2.px2.self_play.current_candidate import (
     DEFAULT_SLICE10_CAMPAIGN_ID,
@@ -162,6 +175,7 @@ __all__ = [
     "EXECUTION_KIND_SLICE8",
     "EXECUTION_KIND_SLICE9",
     "EXECUTION_KIND_SLICE10",
+    "EXECUTION_KIND_SLICE11",
     "WEIGHT_MODE_INIT_ONLY",
     "WEIGHT_MODE_WEIGHTS_FILE",
     "OpponentPoolStub",
@@ -189,6 +203,11 @@ __all__ = [
     "PX2_SELF_PLAY_OPERATOR_LOCAL_SESSION_TRANSITION_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_CURRENT_CANDIDATE_CONTRACT_ID",
     "PX2_SELF_PLAY_CURRENT_CANDIDATE_REPORT_CONTRACT_ID",
+    "PX2_SELF_PLAY_CONTINUATION_RUN_CONTRACT_ID",
+    "PX2_SELF_PLAY_CONTINUATION_RUN_REPORT_CONTRACT_ID",
+    "CONTINUATION_RULE_CONSUME_CURRENT_CANDIDATE_STUB",
+    "CONTINUATION_RUN_JSON",
+    "SLICE11_CAMPAIGN_PROFILE_ID",
     "CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB",
     "PX2_SELF_PLAY_PROMOTION_RECEIPT_CONTRACT_ID",
     "PX2_SELF_PLAY_PROMOTION_RECEIPT_REPORT_CONTRACT_ID",
@@ -203,6 +222,7 @@ __all__ = [
     "build_px2_self_play_operator_local_session_artifacts",
     "build_px2_self_play_operator_local_session_transition_artifacts",
     "build_px2_self_play_current_candidate_artifacts",
+    "build_px2_self_play_continuation_run_artifacts",
     "build_default_opponent_pool_stub",
     "build_px2_self_play_campaign_root_manifest_artifacts",
     "build_slice5_opponent_pool",
@@ -228,6 +248,8 @@ __all__ = [
     "run_bounded_operator_local_session",
     "run_bounded_operator_local_session_with_transition",
     "run_bounded_operator_local_session_transition_with_current_candidate",
+    "run_bounded_continuation_run_consuming_current_candidate",
+    "validate_current_candidate_for_continuation_run",
     "load_px2_self_play_current_candidate",
     "next_run_preflight_hints_from_current_candidate",
     "run_canonical_operator_local_campaign_root_smoke",

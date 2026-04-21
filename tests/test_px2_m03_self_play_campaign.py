@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–10 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–11 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -20,6 +20,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE8,
     EXECUTION_KIND_SLICE9,
     EXECUTION_KIND_SLICE10,
+    EXECUTION_KIND_SLICE11,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -40,6 +41,14 @@ from starlab.sc2.px2.self_play.campaign_run import (
 from starlab.sc2.px2.self_play.canonical_operator_local_run import (
     resolve_canonical_campaign_root,
     run_canonical_operator_local_campaign_root_smoke,
+)
+from starlab.sc2.px2.self_play.continuation_run import (
+    CONTINUATION_RUN_JSON,
+    run_bounded_continuation_run_consuming_current_candidate,
+)
+from starlab.sc2.px2.self_play.continuation_run_record import (
+    CONTINUATION_RULE_CONSUME_CURRENT_CANDIDATE_STUB,
+    PX2_SELF_PLAY_CONTINUATION_RUN_CONTRACT_ID,
 )
 from starlab.sc2.px2.self_play.current_candidate import (
     DEFAULT_SLICE10_CAMPAIGN_ID,
@@ -1354,6 +1363,148 @@ def test_emit_current_candidate_cli_init_only(tmp_path: Path) -> None:
     )
     root = base / "out" / "px2_self_play_campaigns" / DEFAULT_SLICE10_CAMPAIGN_ID
     assert (root / "px2_self_play_current_candidate.json").is_file()
+
+
+def test_slice11_consumption_consumed_ok_links_current_candidate(tmp_path: Path) -> None:
+    cid = "px2_m03_slice11_ci"
+    r1, r2 = "s11_a", "s11_b"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=[r1, r2],
+        torch_seed=7,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    cont = run_bounded_continuation_run_consuming_current_candidate(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        continuation_run_id="s11_cont",
+        init_only=True,
+        torch_seed=7,
+        continuity_step_count=2,
+    )
+    assert cont["consumption_status"] == "consumed_ok"
+    cr = json.loads((root / CONTINUATION_RUN_JSON).read_text(encoding="utf-8"))
+    assert cr["contract_id"] == PX2_SELF_PLAY_CONTINUATION_RUN_CONTRACT_ID
+    assert cr["execution_kind"] == EXECUTION_KIND_SLICE11
+    assert cr["continuation_rule_id"] == CONTINUATION_RULE_CONSUME_CURRENT_CANDIDATE_STUB
+    assert cr["consumption_status"] == "consumed_ok"
+    cc = json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))
+    assert cr["current_candidate_sha256"] == cc["current_candidate_sha256"]
+    cont_run = json.loads(
+        (root / "runs" / "s11_cont" / "px2_self_play_campaign_continuity.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert cont_run["execution_kind"] == EXECUTION_KIND_SLICE11
+    assert cr["continuation_continuity_sha256"] == cont_run["continuity_sha256"]
+    man = json.loads(
+        (root / "px2_self_play_campaign_root_manifest.json").read_text(encoding="utf-8")
+    )
+    assert len(man["continuity_run_references"]) == 3
+
+
+def test_slice11_rejects_campaign_id_mismatch(tmp_path: Path) -> None:
+    cid = "px2_m03_slice11_mm"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=["mm_a", "mm_b"],
+        torch_seed=3,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    cont = run_bounded_continuation_run_consuming_current_candidate(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id="wrong_campaign_id",
+        continuation_run_id="mm_cont",
+        init_only=True,
+    )
+    assert cont["consumption_status"] == "rejected_mismatch"
+    assert "campaign_id_mismatch" in cont["mismatch_reasons"]
+    cr = json.loads((root / CONTINUATION_RUN_JSON).read_text(encoding="utf-8"))
+    assert cr["consumption_status"] == "rejected_mismatch"
+    assert cr["continuation_continuity_sha256"] is None
+    assert "campaign_id_mismatch" in cr["mismatch_reasons"]
+
+
+def test_slice11_continuation_deterministic_across_roots(tmp_path: Path) -> None:
+    cid = "px2_m03_slice11_det"
+    ids = ["d_a", "d_b"]
+
+    def _once(base: Path) -> str:
+        run_bounded_operator_local_session_transition_with_current_candidate(
+            corpus_root=CORPUS,
+            transition_kind="promotion",
+            campaign_id=cid,
+            base_dir=base,
+            init_only=True,
+            run_ids=ids,
+            torch_seed=19,
+            continuity_step_count=2,
+        )
+        root = base / "out" / "px2_self_play_campaigns" / cid
+        run_bounded_continuation_run_consuming_current_candidate(
+            corpus_root=CORPUS,
+            campaign_root=root,
+            campaign_id=cid,
+            continuation_run_id="det_cont",
+            init_only=True,
+            torch_seed=19,
+            continuity_step_count=2,
+        )
+        cr = json.loads((root / CONTINUATION_RUN_JSON).read_text(encoding="utf-8"))
+        return str(cr["continuation_run_sha256"])
+
+    a = _once(tmp_path / "t1")
+    b = _once(tmp_path / "t2")
+    assert a == b
+
+
+def test_emit_continuation_run_cli_init_only(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_continuation_run import main
+
+    cid = "px2_m03_slice11_cli"
+    base = tmp_path / "prep"
+    run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=["cli_a", "cli_b"],
+        torch_seed=2,
+        continuity_step_count=2,
+    )
+    root = base / "out" / "px2_self_play_campaigns" / cid
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--campaign-root",
+                str(root),
+                "--campaign-id",
+                cid,
+                "--continuation-run-id",
+                "cli_cont",
+                "--init-only",
+                "--steps",
+                "2",
+            ]
+        )
+        == 0
+    )
+    assert (root / CONTINUATION_RUN_JSON).is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
