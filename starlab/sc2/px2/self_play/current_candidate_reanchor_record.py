@@ -15,9 +15,15 @@ PX2_SELF_PLAY_CURRENT_CANDIDATE_REANCHOR_REPORT_CONTRACT_ID: Final[str] = (
     "starlab.px2.self_play_current_candidate_reanchor_report.v1"
 )
 REANCHOR_RECORD_VERSION: Final[str] = "px2_m03_slice12_current_candidate_reanchor_v1"
+REANCHOR_RECORD_VERSION_SLICE13: Final[str] = (
+    "px2_m03_slice13_current_candidate_reanchor_second_hop_v1"
+)
 
 REANCHOR_RULE_POST_CONTINUATION_STUB: Final[str] = (
     "px2_m03_slice12_reanchor_after_consumed_continuation_stub_v1"
+)
+REANCHOR_RULE_POST_SECOND_HOP_STUB: Final[str] = (
+    "px2_m03_slice13_reanchor_after_consumed_second_hop_stub_v1"
 )
 
 
@@ -42,12 +48,20 @@ def build_current_candidate_reanchor_seal_basis(
     reanchor_status: str,
     rejection_reasons: list[str],
     non_claims: list[str],
+    current_candidate_reanchor_record_version: str | None = None,
+    prior_first_hop_continuation_run_sha256: str = "",
+    prior_slice12_reanchor_sha256: str = "",
 ) -> dict[str, Any]:
     """Logical fields sealed as ``current_candidate_reanchor_sha256``."""
 
+    rec_ver = (
+        current_candidate_reanchor_record_version
+        if current_candidate_reanchor_record_version is not None
+        else REANCHOR_RECORD_VERSION
+    )
     return {
         "contract_id": PX2_SELF_PLAY_CURRENT_CANDIDATE_REANCHOR_CONTRACT_ID,
-        "current_candidate_reanchor_record_version": REANCHOR_RECORD_VERSION,
+        "current_candidate_reanchor_record_version": rec_ver,
         "execution_kind": execution_kind,
         "campaign_id": campaign_id,
         "campaign_profile_id": campaign_profile_id,
@@ -66,6 +80,8 @@ def build_current_candidate_reanchor_seal_basis(
         "reanchor_status": reanchor_status,
         "rejection_reasons": list(rejection_reasons),
         "non_claims": non_claims,
+        "prior_first_hop_continuation_run_sha256": prior_first_hop_continuation_run_sha256,
+        "prior_slice12_reanchor_sha256": prior_slice12_reanchor_sha256,
     }
 
 
@@ -87,6 +103,9 @@ def build_px2_self_play_current_candidate_reanchor_artifacts(
     reanchor_status: str,
     rejection_reasons: list[str],
     non_claims: list[str],
+    current_candidate_reanchor_record_version: str | None = None,
+    prior_first_hop_continuation_run_sha256: str = "",
+    prior_slice12_reanchor_sha256: str = "",
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Return re-anchor JSON + report with sealed hash."""
 
@@ -106,6 +125,9 @@ def build_px2_self_play_current_candidate_reanchor_artifacts(
         reanchor_status=reanchor_status,
         rejection_reasons=rejection_reasons,
         non_claims=non_claims,
+        current_candidate_reanchor_record_version=current_candidate_reanchor_record_version,
+        prior_first_hop_continuation_run_sha256=prior_first_hop_continuation_run_sha256,
+        prior_slice12_reanchor_sha256=prior_slice12_reanchor_sha256,
     )
     seal = _seal_body(basis)
     root_posix = campaign_root_resolved.resolve().as_posix()

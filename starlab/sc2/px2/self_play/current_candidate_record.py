@@ -18,12 +18,18 @@ CURRENT_CANDIDATE_RECORD_VERSION: Final[str] = "px2_m03_slice10_current_candidat
 CURRENT_CANDIDATE_RECORD_VERSION_SLICE12: Final[str] = (
     "px2_m03_slice12_current_candidate_reanchor_after_continuation_v1"
 )
+CURRENT_CANDIDATE_RECORD_VERSION_SLICE13: Final[str] = (
+    "px2_m03_slice13_current_candidate_reanchor_after_second_hop_v1"
+)
 
 CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB: Final[str] = (
     "px2_m03_slice10_carry_forward_from_session_transition_stub_v1"
 )
 CURRENT_CANDIDATE_RULE_REANCHOR_FROM_CONTINUATION_STUB: Final[str] = (
     "px2_m03_slice12_reanchor_from_continuation_stub_v1"
+)
+CURRENT_CANDIDATE_RULE_REANCHOR_FROM_SECOND_HOP_STUB: Final[str] = (
+    "px2_m03_slice13_reanchor_from_second_hop_continuation_stub_v1"
 )
 
 

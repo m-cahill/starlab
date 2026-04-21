@@ -13,9 +13,13 @@ PX2_SELF_PLAY_CONTINUATION_RUN_REPORT_CONTRACT_ID: Final[str] = (
     "starlab.px2.self_play_continuation_run_report.v1"
 )
 CONTINUATION_RUN_RECORD_VERSION: Final[str] = "px2_m03_slice11_continuation_run_v1"
+CONTINUATION_RUN_RECORD_VERSION_SLICE13: Final[str] = "px2_m03_slice13_second_hop_continuation_v1"
 
 CONTINUATION_RULE_CONSUME_CURRENT_CANDIDATE_STUB: Final[str] = (
     "px2_m03_slice11_consume_current_candidate_stub_v1"
+)
+CONTINUATION_RULE_SECOND_HOP_CONSUME_CURRENT_CANDIDATE_STUB: Final[str] = (
+    "px2_m03_slice13_second_hop_consume_current_candidate_stub_v1"
 )
 
 
@@ -29,6 +33,7 @@ def build_continuation_run_seal_basis(
     campaign_id: str,
     campaign_profile_id: str,
     continuation_rule_id: str,
+    continuation_run_record_version: str | None,
     current_candidate_sha256: str,
     operator_local_session_sha256: str,
     operator_local_session_transition_sha256: str,
@@ -45,9 +50,14 @@ def build_continuation_run_seal_basis(
 ) -> dict[str, Any]:
     """Logical fields sealed as ``continuation_run_sha256``."""
 
+    ver = (
+        continuation_run_record_version
+        if continuation_run_record_version is not None
+        else CONTINUATION_RUN_RECORD_VERSION
+    )
     return {
         "contract_id": PX2_SELF_PLAY_CONTINUATION_RUN_CONTRACT_ID,
-        "continuation_run_record_version": CONTINUATION_RUN_RECORD_VERSION,
+        "continuation_run_record_version": ver,
         "execution_kind": execution_kind,
         "campaign_id": campaign_id,
         "campaign_profile_id": campaign_profile_id,
@@ -78,6 +88,7 @@ def build_px2_self_play_continuation_run_artifacts(
     campaign_profile_id: str,
     campaign_root_resolved: Path,
     continuation_rule_id: str,
+    continuation_run_record_version: str | None = None,
     current_candidate_sha256: str,
     operator_local_session_sha256: str,
     operator_local_session_transition_sha256: str,
@@ -99,6 +110,7 @@ def build_px2_self_play_continuation_run_artifacts(
         campaign_id=campaign_id,
         campaign_profile_id=campaign_profile_id,
         continuation_rule_id=continuation_rule_id,
+        continuation_run_record_version=continuation_run_record_version,
         current_candidate_sha256=current_candidate_sha256,
         operator_local_session_sha256=operator_local_session_sha256,
         operator_local_session_transition_sha256=operator_local_session_transition_sha256,

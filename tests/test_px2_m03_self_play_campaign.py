@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–12 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–13 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -22,6 +22,8 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE10,
     EXECUTION_KIND_SLICE11,
     EXECUTION_KIND_SLICE12,
+    EXECUTION_KIND_SLICE13,
+    EXECUTION_KIND_SLICE13_REANCHOR,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -65,6 +67,7 @@ from starlab.sc2.px2.self_play.current_candidate_reanchor_record import (
 )
 from starlab.sc2.px2.self_play.current_candidate_record import (
     CURRENT_CANDIDATE_RECORD_VERSION_SLICE12,
+    CURRENT_CANDIDATE_RECORD_VERSION_SLICE13,
     CURRENT_CANDIDATE_RULE_FROM_TRANSITION_STUB,
     CURRENT_CANDIDATE_RULE_REANCHOR_FROM_CONTINUATION_STUB,
     PX2_SELF_PLAY_CURRENT_CANDIDATE_CONTRACT_ID,
@@ -111,6 +114,13 @@ from starlab.sc2.px2.self_play.opponent_selection import (
 from starlab.sc2.px2.self_play.policy_runtime_bridge import bootstrap_policy_runtime_step
 from starlab.sc2.px2.self_play.promotion_receipts import PX2_SELF_PLAY_PROMOTION_RECEIPT_CONTRACT_ID
 from starlab.sc2.px2.self_play.rollback_receipts import PX2_SELF_PLAY_ROLLBACK_RECEIPT_CONTRACT_ID
+from starlab.sc2.px2.self_play.second_hop_continuation import (
+    SECOND_HOP_CONTINUATION_JSON,
+    run_bounded_second_hop_continuation_after_slice12,
+)
+from starlab.sc2.px2.self_play.second_hop_continuation_record import (
+    PX2_SELF_PLAY_SECOND_HOP_CONTINUATION_CONTRACT_ID,
+)
 from starlab.sc2.px2.self_play.smoke_run import (
     PX2_SELF_PLAY_SMOKE_RUN_CONTRACT_ID,
     run_px2_fixture_self_play_smoke,
@@ -1677,6 +1687,200 @@ def test_emit_current_candidate_reanchor_cli(tmp_path: Path) -> None:
         == 0
     )
     assert (root / CURRENT_CANDIDATE_REANCHOR_JSON).is_file()
+
+
+def test_slice13_second_hop_ok_links_lineage_and_symmetric_reanchor(tmp_path: Path) -> None:
+    cid = "px2_m03_slice13_ci"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=["s13_a", "s13_b"],
+        torch_seed=21,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    run_bounded_continuation_run_consuming_current_candidate(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        continuation_run_id="s13_first_hop",
+        init_only=True,
+        torch_seed=21,
+        continuity_step_count=2,
+    )
+    ra12 = run_bounded_current_candidate_reanchor_after_continuation(
+        campaign_root=root,
+        campaign_id=cid,
+    )
+    assert ra12["reanchor_status"] == "reanchored_ok"
+    prior_after_12 = str(
+        json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))[
+            "current_candidate_sha256"
+        ]
+    )
+    summary = run_bounded_second_hop_continuation_after_slice12(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        second_hop_continuation_run_id="s13_second_hop",
+        init_only=True,
+        torch_seed=21,
+        continuity_step_count=2,
+        symmetric_reanchor=True,
+    )
+    assert summary["second_hop_status"] == "second_hop_ok"
+    assert summary["continuation_consumption_status"] == "consumed_ok"
+    sym = summary.get("symmetric_reanchor") or {}
+    assert sym.get("reanchor_status") == "reanchored_ok"
+    sh = json.loads((root / SECOND_HOP_CONTINUATION_JSON).read_text(encoding="utf-8"))
+    assert sh["contract_id"] == PX2_SELF_PLAY_SECOND_HOP_CONTINUATION_CONTRACT_ID
+    assert sh["second_hop_status"] == "second_hop_ok"
+    assert sh["prior_post_slice12_current_candidate_sha256"] == prior_after_12
+    assert (
+        sh["prior_first_hop_continuation_run_sha256"]
+        == summary["prior_first_hop_continuation_run_sha256"]
+    )
+    cc = json.loads((root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8"))
+    assert cc["execution_kind"] == EXECUTION_KIND_SLICE13_REANCHOR
+    assert cc["current_candidate_record_version"] == CURRENT_CANDIDATE_RECORD_VERSION_SLICE13
+    assert cc["current_run_id_after_transition"] == "s13_second_hop"
+    cont = json.loads((root / CONTINUATION_RUN_JSON).read_text(encoding="utf-8"))
+    assert cont["execution_kind"] == EXECUTION_KIND_SLICE13
+    assert (root / "px2_self_play_first_hop_continuation_snapshot.json").is_file()
+    assert (root / "px2_self_play_slice12_reanchor_snapshot.json").is_file()
+
+
+def test_slice13_rejects_when_not_post_slice12(tmp_path: Path) -> None:
+    cid = "px2_m03_slice13_pre"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=["p_a", "p_b"],
+        torch_seed=1,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    run_bounded_continuation_run_consuming_current_candidate(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        continuation_run_id="p_cont",
+        init_only=True,
+    )
+    summary = run_bounded_second_hop_continuation_after_slice12(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        second_hop_continuation_run_id="p_hop2",
+        init_only=True,
+        symmetric_reanchor=True,
+    )
+    assert summary["second_hop_status"] == "rejected"
+    assert summary.get("symmetric_reanchor") is None
+    sh = json.loads((root / SECOND_HOP_CONTINUATION_JSON).read_text(encoding="utf-8"))
+    assert sh["second_hop_status"] == "rejected"
+
+
+def test_slice13_second_hop_deterministic_across_roots(tmp_path: Path) -> None:
+    cid = "px2_m03_slice13_det"
+
+    def _full(base: Path) -> str:
+        run_bounded_operator_local_session_transition_with_current_candidate(
+            corpus_root=CORPUS,
+            transition_kind="promotion",
+            campaign_id=cid,
+            base_dir=base,
+            init_only=True,
+            run_ids=["d_a", "d_b"],
+            torch_seed=55,
+            continuity_step_count=2,
+        )
+        root = base / "out" / "px2_self_play_campaigns" / cid
+        run_bounded_continuation_run_consuming_current_candidate(
+            corpus_root=CORPUS,
+            campaign_root=root,
+            campaign_id=cid,
+            continuation_run_id="d_h1",
+            init_only=True,
+            torch_seed=55,
+            continuity_step_count=2,
+        )
+        run_bounded_current_candidate_reanchor_after_continuation(
+            campaign_root=root,
+            campaign_id=cid,
+        )
+        run_bounded_second_hop_continuation_after_slice12(
+            corpus_root=CORPUS,
+            campaign_root=root,
+            campaign_id=cid,
+            second_hop_continuation_run_id="d_h2",
+            init_only=True,
+            torch_seed=55,
+            continuity_step_count=2,
+            symmetric_reanchor=True,
+        )
+        r = json.loads((root / SECOND_HOP_CONTINUATION_JSON).read_text(encoding="utf-8"))
+        return str(r["second_hop_continuation_sha256"])
+
+    assert _full(tmp_path / "a") == _full(tmp_path / "b")
+
+
+def test_emit_second_hop_continuation_cli(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_second_hop_continuation import main
+
+    cid = "px2_m03_slice13_cli"
+    base = tmp_path / "r13"
+    run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=["cli_a", "cli_b"],
+        torch_seed=7,
+        continuity_step_count=2,
+    )
+    root = base / "out" / "px2_self_play_campaigns" / cid
+    run_bounded_continuation_run_consuming_current_candidate(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        continuation_run_id="cli_h1",
+        init_only=True,
+        torch_seed=7,
+        continuity_step_count=2,
+    )
+    run_bounded_current_candidate_reanchor_after_continuation(
+        campaign_root=root,
+        campaign_id=cid,
+    )
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--campaign-root",
+                str(root),
+                "--campaign-id",
+                cid,
+                "--second-hop-continuation-run-id",
+                "cli_h2",
+                "--init-only",
+                "--steps",
+                "2",
+                "--torch-seed",
+                "7",
+            ]
+        )
+        == 0
+    )
+    assert (root / SECOND_HOP_CONTINUATION_JSON).is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
