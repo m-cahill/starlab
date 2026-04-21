@@ -75,6 +75,7 @@ EXECUTION_KIND_SLICE13_REANCHOR: Final[str] = (
 EXECUTION_KIND_SLICE14: Final[str] = (
     "px2_m03_slice14_bounded_pointer_seeded_from_current_candidate_v1"
 )
+EXECUTION_KIND_SLICE15: Final[str] = "px2_m03_slice15_bounded_post_pointer_seeded_handoff_v1"
 
 
 def _seal_continuity_body(body_without_seal: dict[str, Any]) -> str:

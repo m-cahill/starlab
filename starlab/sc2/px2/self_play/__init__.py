@@ -1,4 +1,4 @@
-"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 14)."""
+"""PX2-M03 — industrial self-play campaign surfaces (contract through slice 15)."""
 
 from __future__ import annotations
 
@@ -15,6 +15,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE13,
     EXECUTION_KIND_SLICE13_REANCHOR,
     EXECUTION_KIND_SLICE14,
+    EXECUTION_KIND_SLICE15,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_REPORT_CONTRACT_ID,
     run_operator_local_campaign_continuity,
@@ -149,6 +150,18 @@ from starlab.sc2.px2.self_play.path_identity import (
     output_dir_logical_posix,
     weights_path_logical_posix,
 )
+from starlab.sc2.px2.self_play.pointer_seeded_handoff import (
+    POINTER_SEEDED_HANDOFF_JSON,
+    run_bounded_pointer_seeded_handoff,
+    verify_loaded_pointer_seeded_run_self_seal,
+)
+from starlab.sc2.px2.self_play.pointer_seeded_handoff_record import (
+    DECLARED_NEXT_STEP_FROM_SLICE14_POINTER_SEEDED_V1,
+    POINTER_SEEDED_HANDOFF_RULE_AFTER_SLICE14_STUB,
+    PX2_SELF_PLAY_POINTER_SEEDED_HANDOFF_CONTRACT_ID,
+    PX2_SELF_PLAY_POINTER_SEEDED_HANDOFF_REPORT_CONTRACT_ID,
+    build_px2_self_play_pointer_seeded_handoff_artifacts,
+)
 from starlab.sc2.px2.self_play.pointer_seeded_run import (
     POINTER_SEEDED_RUN_JSON,
     run_bounded_pointer_seeded_operator_local_run,
@@ -228,6 +241,7 @@ __all__ = [
     "EXECUTION_KIND_SLICE13",
     "EXECUTION_KIND_SLICE13_REANCHOR",
     "EXECUTION_KIND_SLICE14",
+    "EXECUTION_KIND_SLICE15",
     "WEIGHT_MODE_INIT_ONLY",
     "WEIGHT_MODE_WEIGHTS_FILE",
     "OpponentPoolStub",
@@ -261,6 +275,11 @@ __all__ = [
     "PX2_SELF_PLAY_SECOND_HOP_CONTINUATION_REPORT_CONTRACT_ID",
     "PX2_SELF_PLAY_POINTER_SEEDED_RUN_CONTRACT_ID",
     "PX2_SELF_PLAY_POINTER_SEEDED_RUN_REPORT_CONTRACT_ID",
+    "PX2_SELF_PLAY_POINTER_SEEDED_HANDOFF_CONTRACT_ID",
+    "PX2_SELF_PLAY_POINTER_SEEDED_HANDOFF_REPORT_CONTRACT_ID",
+    "POINTER_SEEDED_HANDOFF_RULE_AFTER_SLICE14_STUB",
+    "DECLARED_NEXT_STEP_FROM_SLICE14_POINTER_SEEDED_V1",
+    "POINTER_SEEDED_HANDOFF_JSON",
     "POINTER_SEEDED_RUN_JSON",
     "POINTER_SEEDED_RUN_RULE_SEED_FROM_CURRENT_CANDIDATE_STUB",
     "SEED_SEMANTICS_DECLARED_FROM_LATEST_CURRENT_CANDIDATE_V1",
@@ -298,8 +317,11 @@ __all__ = [
     "build_px2_self_play_current_candidate_reanchor_artifacts",
     "build_px2_self_play_second_hop_continuation_artifacts",
     "build_px2_self_play_pointer_seeded_run_artifacts",
+    "build_px2_self_play_pointer_seeded_handoff_artifacts",
     "run_bounded_pointer_seeded_operator_local_run",
+    "run_bounded_pointer_seeded_handoff",
     "verify_loaded_current_candidate_self_seal",
+    "verify_loaded_pointer_seeded_run_self_seal",
     "build_default_opponent_pool_stub",
     "build_px2_self_play_campaign_root_manifest_artifacts",
     "build_slice5_opponent_pool",
