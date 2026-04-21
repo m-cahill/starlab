@@ -6,7 +6,10 @@ import json
 from pathlib import Path
 from typing import Any, Final, cast
 
-from starlab.sc2.px2.self_play.campaign_continuity import EXECUTION_KIND_SLICE11
+from starlab.sc2.px2.self_play.campaign_continuity import (
+    EXECUTION_KIND_SLICE11,
+    EXECUTION_KIND_SLICE13,
+)
 from starlab.sc2.px2.self_play.campaign_root import (
     DEFAULT_CAMPAIGN_ROOT_SUBDIRS,
     recommended_operator_out_campaign_root_path,
@@ -31,6 +34,7 @@ from starlab.sc2.px2.self_play.run_artifacts import (
 from starlab.sc2.px2.self_play.weight_loading import WEIGHT_MODE_INIT_ONLY, WEIGHT_MODE_WEIGHTS_FILE
 
 SLICE11_CAMPAIGN_PROFILE_ID: Final[str] = "px2_m03_slice11_continuation_run_v1"
+SLICE13_SECOND_HOP_CAMPAIGN_PROFILE_ID: Final[str] = "px2_m03_slice13_second_hop_continuation_v1"
 
 CONTINUATION_RUN_JSON: Final[str] = "px2_self_play_continuation_run.json"
 
@@ -120,6 +124,7 @@ def merge_campaign_root_manifest_after_continuation_run(
     new_run_id: str,
     new_continuity_sha256: str,
     opponent_selection_rule_id: str,
+    execution_kind: str = EXECUTION_KIND_SLICE11,
 ) -> tuple[str, dict[str, Any], dict[str, Any]]:
     """Append one run to the sealed campaign-root manifest (slice-11 continuation)."""
 
@@ -138,10 +143,18 @@ def merge_campaign_root_manifest_after_continuation_run(
         }
     )
     sub4 = default_operator_local_slice4_subdirs()
-    root_non_claims = [
-        "Slice-11 bounded continuation run — manifest append; not industrial campaign.",
-        "Not merge-gate default CI proof.",
-    ]
+    root_non_claims = (
+        [
+            "Slice-13 second-hop bounded continuation run — manifest append; "
+            "not industrial campaign.",
+            "Not merge-gate default CI proof.",
+        ]
+        if execution_kind == EXECUTION_KIND_SLICE13
+        else [
+            "Slice-11 bounded continuation run — manifest append; not industrial campaign.",
+            "Not merge-gate default CI proof.",
+        ]
+    )
     manifest, report = build_px2_self_play_campaign_root_manifest_artifacts(
         campaign_id=campaign_id,
         campaign_contract_sha256=str(man["campaign_contract_sha256"]),
@@ -171,6 +184,10 @@ def run_bounded_continuation_run_consuming_current_candidate(
     continuity_step_count: int = 2,
     device_intent: str = "cpu",
     map_location: str = "cpu",
+    execution_kind: str = EXECUTION_KIND_SLICE11,
+    campaign_profile_id: str = SLICE11_CAMPAIGN_PROFILE_ID,
+    continuation_rule_id: str = CONTINUATION_RULE_CONSUME_CURRENT_CANDIDATE_STUB,
+    continuation_run_record_version: str | None = None,
 ) -> dict[str, Any]:
     """One bounded continuity pass under ``campaign_root`` after validating current-candidate JSON.
 
@@ -195,11 +212,19 @@ def run_bounded_continuation_run_consuming_current_candidate(
         ck_sha = str(anchor.get("checkpoint_receipt_sha256", ""))
 
     prior_man = str(cc.get("campaign_root_manifest_sha256", ""))
-    base_non_claims = [
-        "Slice-11 bounded continuation run — current-candidate consumption record.",
-        "Not industrial execution; not PX2-M04 exploit closure; not ladder strength.",
-        "Not merge-gate default CI proof.",
-    ]
+    base_non_claims = (
+        [
+            "Slice-13 second-hop bounded continuation — current-candidate consumption record.",
+            "Not industrial execution; not PX2-M04 exploit closure; not ladder strength.",
+            "Not merge-gate default CI proof.",
+        ]
+        if execution_kind == EXECUTION_KIND_SLICE13
+        else [
+            "Slice-11 bounded continuation run — current-candidate consumption record.",
+            "Not industrial execution; not PX2-M04 exploit closure; not ladder strength.",
+            "Not merge-gate default CI proof.",
+        ]
+    )
 
     def _emit_record(
         *,
@@ -209,11 +234,12 @@ def run_bounded_continuation_run_consuming_current_candidate(
         updated_man_sha: str | None,
     ) -> tuple[dict[str, Any], dict[str, Any]]:
         return build_px2_self_play_continuation_run_artifacts(
-            execution_kind=EXECUTION_KIND_SLICE11,
+            execution_kind=execution_kind,
             campaign_id=campaign_id,
-            campaign_profile_id=SLICE11_CAMPAIGN_PROFILE_ID,
+            campaign_profile_id=campaign_profile_id,
             campaign_root_resolved=root,
-            continuation_rule_id=CONTINUATION_RULE_CONSUME_CURRENT_CANDIDATE_STUB,
+            continuation_rule_id=continuation_rule_id,
+            continuation_run_record_version=continuation_run_record_version,
             current_candidate_sha256=str(cc.get("current_candidate_sha256", "")),
             operator_local_session_sha256=str(cc.get("operator_local_session_sha256", "")),
             operator_local_session_transition_sha256=str(
@@ -255,14 +281,14 @@ def run_bounded_continuation_run_consuming_current_candidate(
         weights_path=weights_path,
         weight_bundle_ref=weight_bundle_ref,
         campaign_id=campaign_id,
-        campaign_profile_id=SLICE11_CAMPAIGN_PROFILE_ID,
+        campaign_profile_id=campaign_profile_id,
         torch_seed=torch_seed,
         run_id=continuation_run_id,
         continuity_step_count=continuity_step_count,
         device_intent=device_intent,
         map_location=map_location,
         opponent_selection_rule_id=OPPONENT_SELECTION_ROUND_ROBIN,
-        execution_kind=EXECUTION_KIND_SLICE11,
+        execution_kind=execution_kind,
         write_campaign_root_manifest=False,
     )
     cont_sha = str(inner["continuity_sha256"])
@@ -275,6 +301,7 @@ def run_bounded_continuation_run_consuming_current_candidate(
         new_run_id=continuation_run_id,
         new_continuity_sha256=cont_sha,
         opponent_selection_rule_id=opp_rule,
+        execution_kind=execution_kind,
     )
 
     tm_ok, tr_ok = _emit_record(

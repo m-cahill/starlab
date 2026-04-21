@@ -12,6 +12,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE7,
     EXECUTION_KIND_SLICE8,
     EXECUTION_KIND_SLICE11,
+    EXECUTION_KIND_SLICE13,
     run_operator_local_campaign_continuity,
 )
 from starlab.sc2.px2.self_play.campaign_root_manifest import (
@@ -168,6 +169,12 @@ def run_slice5_operator_local_campaign(
             "not merge-gate CI proof.",
         ]
         if execution_kind == EXECUTION_KIND_SLICE11
+        else [
+            "Slice-13 bounded second-hop continuation — post-slice-12 current-candidate pointer; "
+            "not industrial self-play campaign.",
+            "Repeatability; not PX2-M04 exploit closure; not merge-gate default CI proof.",
+        ]
+        if execution_kind == EXECUTION_KIND_SLICE13
         else [
             "Slice-5 operator-local campaign-root manifest — not industrial self-play campaign.",
             "Continuity runs are bounded; not Blackwell-scale; not merge-gate default CI proof.",

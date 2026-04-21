@@ -66,6 +66,12 @@ EXECUTION_KIND_SLICE11: Final[str] = (
 EXECUTION_KIND_SLICE12: Final[str] = (
     "px2_m03_slice12_bounded_current_candidate_reanchor_after_continuation_v1"
 )
+EXECUTION_KIND_SLICE13: Final[str] = (
+    "px2_m03_slice13_bounded_second_hop_continuation_consuming_candidate_v1"
+)
+EXECUTION_KIND_SLICE13_REANCHOR: Final[str] = (
+    "px2_m03_slice13_bounded_current_candidate_reanchor_after_second_hop_v1"
+)
 
 
 def _seal_continuity_body(body_without_seal: dict[str, Any]) -> str:
@@ -348,6 +354,12 @@ def run_operator_local_campaign_continuity(
             "not industrial self-play.",
             "Not PX2-M04 exploit closure; not Blackwell-scale; not merge-gate default CI proof.",
         ]
+    elif execution_kind == EXECUTION_KIND_SLICE13:
+        continuity_non_claims = [
+            "Slice-13 bounded second-hop continuation — post-slice-12 pointer; "
+            "not industrial self-play.",
+            "Repeatability bookkeeping; not PX2-M04 exploit closure; not merge-gate CI proof.",
+        ]
     elif execution_kind == EXECUTION_KIND_SLICE5:
         continuity_non_claims = [
             "Slice-5 operator-local campaign-root continuity — not industrial self-play campaign.",
@@ -420,6 +432,10 @@ def run_operator_local_campaign_continuity(
         cnote = "PX2-M02 fixture corpus lineage; slice-7 bounded operator-local real-run proof."
     elif execution_kind == EXECUTION_KIND_SLICE8:
         cnote = "PX2-M02 fixture corpus lineage; slice-8 bounded operator-local session proof."
+    elif execution_kind == EXECUTION_KIND_SLICE11:
+        cnote = "PX2-M02 fixture corpus lineage; slice-11 bounded continuation proof."
+    elif execution_kind == EXECUTION_KIND_SLICE13:
+        cnote = "PX2-M02 fixture corpus lineage; slice-13 bounded second-hop continuation proof."
     else:
         cnote = "PX2-M02 fixture corpus lineage; slice-5 campaign-root continuity proof."
 
