@@ -1,4 +1,4 @@
-"""PX2-M03 self-play tests for slices 1–13 (CPU fixtures)."""
+"""PX2-M03 self-play tests for slices 1–14 (CPU fixtures)."""
 
 from __future__ import annotations
 
@@ -24,6 +24,7 @@ from starlab.sc2.px2.self_play.campaign_continuity import (
     EXECUTION_KIND_SLICE12,
     EXECUTION_KIND_SLICE13,
     EXECUTION_KIND_SLICE13_REANCHOR,
+    EXECUTION_KIND_SLICE14,
     PX2_SELF_PLAY_CAMPAIGN_CONTINUITY_CONTRACT_ID,
     run_operator_local_campaign_continuity,
 )
@@ -110,6 +111,15 @@ from starlab.sc2.px2.self_play.opponent_selection import (
     OPPONENT_SELECTION_SELF_SNAPSHOT,
     OPPONENT_SELECTION_WEIGHTED_FROZEN_STUB,
     select_opponent_ref,
+)
+from starlab.sc2.px2.self_play.pointer_seeded_run import (
+    POINTER_SEEDED_RUN_JSON,
+    run_bounded_pointer_seeded_operator_local_run,
+)
+from starlab.sc2.px2.self_play.pointer_seeded_run_record import (
+    POINTER_SEEDED_RUN_RULE_SEED_FROM_CURRENT_CANDIDATE_STUB,
+    PX2_SELF_PLAY_POINTER_SEEDED_RUN_CONTRACT_ID,
+    SEED_SEMANTICS_DECLARED_FROM_LATEST_CURRENT_CANDIDATE_V1,
 )
 from starlab.sc2.px2.self_play.policy_runtime_bridge import bootstrap_policy_runtime_step
 from starlab.sc2.px2.self_play.promotion_receipts import PX2_SELF_PLAY_PROMOTION_RECEIPT_CONTRACT_ID
@@ -1881,6 +1891,193 @@ def test_emit_second_hop_continuation_cli(tmp_path: Path) -> None:
         == 0
     )
     assert (root / SECOND_HOP_CONTINUATION_JSON).is_file()
+
+
+def test_slice14_pointer_seeded_ok_binds_declared_seed_and_runs(tmp_path: Path) -> None:
+    cid = "px2_m03_slice14_ci"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=["s14_a", "s14_b"],
+        torch_seed=23,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    cc_before = json.loads(
+        (root / "px2_self_play_current_candidate.json").read_text(encoding="utf-8")
+    )
+    pr = run_bounded_pointer_seeded_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        pointer_seeded_run_id="s14_ps",
+        init_only=True,
+        torch_seed=23,
+        continuity_step_count=2,
+    )
+    assert pr["seeding_status"] == "seeded_ok"
+    ps = json.loads((root / POINTER_SEEDED_RUN_JSON).read_text(encoding="utf-8"))
+    assert ps["contract_id"] == PX2_SELF_PLAY_POINTER_SEEDED_RUN_CONTRACT_ID
+    assert ps["execution_kind"] == EXECUTION_KIND_SLICE14
+    assert ps["declared_seed_current_candidate_sha256"] == cc_before["current_candidate_sha256"]
+    assert (
+        ps["pointer_seeded_run_rule_id"] == POINTER_SEEDED_RUN_RULE_SEED_FROM_CURRENT_CANDIDATE_STUB
+    )
+    assert ps["seed_semantics"] == SEED_SEMANTICS_DECLARED_FROM_LATEST_CURRENT_CANDIDATE_V1
+    assert ps["resulting_continuity_sha256"] == pr["resulting_continuity_sha256"]
+    cont = json.loads(
+        (root / "runs" / "s14_ps" / "px2_self_play_campaign_continuity.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert cont["execution_kind"] == EXECUTION_KIND_SLICE14
+    assert ps["resulting_continuity_sha256"] == cont["continuity_sha256"]
+    adv = ps["seed_source_file_byte_sha256_advisory"]
+    assert len(adv) == 64
+
+
+def test_slice14_rejected_missing_current_candidate(tmp_path: Path) -> None:
+    root = tmp_path / "no_cc" / "px2_self_play_campaigns" / "nocc"
+    root.mkdir(parents=True)
+    pr = run_bounded_pointer_seeded_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id="nocc",
+        pointer_seeded_run_id="nocc_run",
+        init_only=True,
+    )
+    assert pr["seeding_status"] == "rejected_missing_pointer"
+    ps = json.loads((root / POINTER_SEEDED_RUN_JSON).read_text(encoding="utf-8"))
+    assert ps["seeding_status"] == "rejected_missing_pointer"
+    assert "missing_px2_self_play_current_candidate_json" in ps["mismatch_reasons"]
+
+
+def test_slice14_rejects_campaign_id_mismatch(tmp_path: Path) -> None:
+    cid = "px2_m03_slice14_mm"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=["mm_a", "mm_b"],
+        torch_seed=3,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    pr = run_bounded_pointer_seeded_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id="wrong_id",
+        pointer_seeded_run_id="mm_ps",
+        init_only=True,
+    )
+    assert pr["seeding_status"] == "rejected_mismatch"
+    assert "campaign_id_mismatch" in pr["mismatch_reasons"]
+    ps = json.loads((root / POINTER_SEEDED_RUN_JSON).read_text(encoding="utf-8"))
+    assert ps["seeding_status"] == "rejected_mismatch"
+    assert ps["resulting_continuity_sha256"] is None
+
+
+def test_slice14_rejects_tampered_current_candidate_seal(tmp_path: Path) -> None:
+    cid = "px2_m03_slice14_tamper"
+    out = run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=tmp_path,
+        init_only=True,
+        run_ids=["t_a", "t_b"],
+        torch_seed=1,
+        continuity_step_count=2,
+    )
+    root = Path(out["campaign_root"])
+    cc_path = root / "px2_self_play_current_candidate.json"
+    cc = json.loads(cc_path.read_text(encoding="utf-8"))
+    cc["current_candidate_sha256"] = "0" * 64
+    cc_path.write_text(json.dumps(cc, indent=2), encoding="utf-8")
+
+    pr = run_bounded_pointer_seeded_operator_local_run(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        pointer_seeded_run_id="t_ps",
+        init_only=True,
+    )
+    assert pr["seeding_status"] == "rejected_mismatch"
+    assert "current_candidate_self_seal_mismatch" in pr["mismatch_reasons"]
+
+
+def test_slice14_pointer_seeded_deterministic_across_roots(tmp_path: Path) -> None:
+    cid = "px2_m03_slice14_det"
+
+    def _once(base: Path) -> str:
+        run_bounded_operator_local_session_transition_with_current_candidate(
+            corpus_root=CORPUS,
+            transition_kind="promotion",
+            campaign_id=cid,
+            base_dir=base,
+            init_only=True,
+            run_ids=["d_a", "d_b"],
+            torch_seed=41,
+            continuity_step_count=2,
+        )
+        root = base / "out" / "px2_self_play_campaigns" / cid
+        run_bounded_pointer_seeded_operator_local_run(
+            corpus_root=CORPUS,
+            campaign_root=root,
+            campaign_id=cid,
+            pointer_seeded_run_id="d_ps",
+            init_only=True,
+            torch_seed=41,
+            continuity_step_count=2,
+        )
+        ps = json.loads((root / POINTER_SEEDED_RUN_JSON).read_text(encoding="utf-8"))
+        return str(ps["pointer_seeded_run_sha256"])
+
+    assert _once(tmp_path / "u1") == _once(tmp_path / "u2")
+
+
+def test_emit_pointer_seeded_run_cli(tmp_path: Path) -> None:
+    from starlab.sc2.px2.self_play.emit_px2_self_play_pointer_seeded_run import main
+
+    cid = "px2_m03_slice14_cli"
+    base = tmp_path / "prep14"
+    run_bounded_operator_local_session_transition_with_current_candidate(
+        corpus_root=CORPUS,
+        transition_kind="promotion",
+        campaign_id=cid,
+        base_dir=base,
+        init_only=True,
+        run_ids=["cli_a", "cli_b"],
+        torch_seed=5,
+        continuity_step_count=2,
+    )
+    root = base / "out" / "px2_self_play_campaigns" / cid
+    assert (
+        main(
+            [
+                "--corpus-root",
+                str(CORPUS),
+                "--campaign-root",
+                str(root),
+                "--campaign-id",
+                cid,
+                "--pointer-seeded-run-id",
+                "cli_ps",
+                "--init-only",
+                "--steps",
+                "2",
+                "--torch-seed",
+                "5",
+            ]
+        )
+        == 0
+    )
+    assert (root / POINTER_SEEDED_RUN_JSON).is_file()
 
 
 def test_slice5_weighted_rotation_trace(tmp_path: Path) -> None:
