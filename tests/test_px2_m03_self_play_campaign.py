@@ -18,6 +18,7 @@ from starlab.sc2.px2.self_play.bounded_substantive_execution import (
     run_bounded_substantive_operator_local_execution,
 )
 from starlab.sc2.px2.self_play.bounded_substantive_execution_record import (
+    BOUNDED_SUBSTANTIVE_EXECUTION_RECORD_VERSION,
     PX2_SELF_PLAY_BOUNDED_SUBSTANTIVE_EXECUTION_CONTRACT_ID,
     SUBSTANTIVE_LINEAGE_CAMPAIGN_ROOT_ONLY,
 )
@@ -182,6 +183,7 @@ from starlab.sc2.px2.self_play.snapshot_pool import (
     opponent_pool_identity_sha256,
 )
 from starlab.sc2.px2.self_play.weight_loading import (
+    WEIGHT_MODE_WEIGHTS_FILE,
     build_policy_operator_local,
     sha256_hex_file,
 )
@@ -2449,6 +2451,11 @@ def test_bounded_substantive_fresh_campaign_init_only(tmp_path: Path) -> None:
     assert s["continuity_step_count_effective"] == 5
     b = json.loads((root / BOUNDED_SUBSTANTIVE_EXECUTION_JSON).read_text(encoding="utf-8"))
     assert b["contract_id"] == PX2_SELF_PLAY_BOUNDED_SUBSTANTIVE_EXECUTION_CONTRACT_ID
+    assert (
+        b["bounded_substantive_execution_record_version"]
+        == BOUNDED_SUBSTANTIVE_EXECUTION_RECORD_VERSION
+    )
+    assert b["weights_file_sha256_declared"] == ""
     assert b["execution_kind"] == EXECUTION_KIND_BOUNDED_SUBSTANTIVE
     cont = json.loads(
         (root / "runs" / "bs_run_1" / "px2_self_play_campaign_continuity.json").read_text(
@@ -2486,6 +2493,32 @@ def test_bounded_substantive_rejects_real_weights_without_path(tmp_path: Path) -
             init_only=False,
             weights_path=None,
         )
+
+
+def test_bounded_substantive_real_weights_seals_weights_file_sha256(tmp_path: Path) -> None:
+    """Sealed record binds state_dict hash for real-weights path (operator-local story)."""
+    cid = "px2_m03_bounded_sub_real_w"
+    root = tmp_path / "bs_real"
+    root.mkdir(parents=True)
+    m0 = BootstrapTerranPolicy(input_dim=observation_feature_dim())
+    wpath = tmp_path / "bootstrap_like.pt"
+    torch.save(m0.state_dict(), wpath)
+    expected_sha = sha256_hex_file(wpath)
+    s = run_bounded_substantive_operator_local_execution(
+        corpus_root=CORPUS,
+        campaign_root=root,
+        campaign_id=cid,
+        substantive_run_id="bs_real_1",
+        init_only=False,
+        weights_path=wpath,
+        continuity_step_count=4,
+        torch_seed=21,
+    )
+    assert s["weight_mode_declared"] == WEIGHT_MODE_WEIGHTS_FILE
+    assert s["weights_file_sha256_declared"] == expected_sha
+    b = json.loads((root / BOUNDED_SUBSTANTIVE_EXECUTION_JSON).read_text(encoding="utf-8"))
+    assert b["weights_file_sha256_declared"] == expected_sha
+    assert b["weight_mode_declared"] == WEIGHT_MODE_WEIGHTS_FILE
 
 
 def test_bounded_substantive_clamps_steps_at_20(tmp_path: Path) -> None:

@@ -23,7 +23,11 @@ from starlab.sc2.px2.self_play.handoff_anchored_run import ANCHORED_OK, HANDOFF_
 from starlab.sc2.px2.self_play.opponent_selection import OPPONENT_SELECTION_ROUND_ROBIN
 from starlab.sc2.px2.self_play.pointer_seeded_handoff import HANDOFF_OK, POINTER_SEEDED_HANDOFF_JSON
 from starlab.sc2.px2.self_play.run_artifacts import write_json
-from starlab.sc2.px2.self_play.weight_loading import WEIGHT_MODE_INIT_ONLY, WEIGHT_MODE_WEIGHTS_FILE
+from starlab.sc2.px2.self_play.weight_loading import (
+    WEIGHT_MODE_INIT_ONLY,
+    WEIGHT_MODE_WEIGHTS_FILE,
+    sha256_hex_file,
+)
 
 BOUNDED_SUBSTANTIVE_PROFILE_ID: Final[str] = (
     "px2_m03_bounded_substantive_operator_local_execution_v1"
@@ -99,10 +103,12 @@ def run_bounded_substantive_operator_local_execution(
 
     wm = WEIGHT_MODE_INIT_ONLY if init_only else WEIGHT_MODE_WEIGHTS_FILE
     base_non_claims = [
-        "Bounded substantive operator-local execution — post–slice-16; deeper continuity than "
-        "2–3 step micro-runs; default 15 steps is a bounded default, not a scientific claim.",
-        "Not industrial self-play; not Blackwell-scale; not ladder strength; not PX2-M04 exploit "
-        "closure; not merge-gate default CI proof.",
+        "Bounded substantive operator-local execution evidence (sealed JSON under campaign root) — "
+        "post–slice-16; deeper continuity than 2–3 step micro-runs; default 15 steps is a bounded "
+        "default, not a scientific claim.",
+        "Not later industrial PX2-M03 long-run campaign evidence; not industrial self-play; "
+        "not Blackwell-scale; not ladder strength; not PX2-M04 exploit closure; "
+        "not merge-gate CI proof.",
         "Optional slice-15/16 artifacts bind only when present and status-OK; otherwise "
         "campaign-root-only lineage.",
     ]
@@ -148,6 +154,12 @@ def run_bounded_substantive_operator_local_execution(
 
     lin_mode, ho_s, ha_s = _collect_optional_substantive_lineage(root)
 
+    if init_only:
+        wsha_decl = ""
+    else:
+        assert weights_path is not None
+        wsha_decl = sha256_hex_file(weights_path.resolve())
+
     tm, tr = build_px2_self_play_bounded_substantive_execution_artifacts(
         campaign_root_resolved=root,
         execution_kind=EXECUTION_KIND_BOUNDED_SUBSTANTIVE,
@@ -163,6 +175,7 @@ def run_bounded_substantive_operator_local_execution(
         substantive_lineage_mode=lin_mode,
         optional_pointer_seeded_handoff_sha256=ho_s,
         optional_handoff_anchored_run_sha256=ha_s,
+        weights_file_sha256_declared=wsha_decl,
         non_claims=base_non_claims,
     )
     write_json(root / BOUNDED_SUBSTANTIVE_EXECUTION_JSON, tm)
@@ -177,5 +190,6 @@ def run_bounded_substantive_operator_local_execution(
         "resulting_continuity_sha256": new_cont_sha,
         "updated_campaign_root_manifest_sha256": updated_man_sha,
         "weight_mode_declared": wm,
+        "weights_file_sha256_declared": wsha_decl,
         "substantive_lineage_mode": lin_mode,
     }

@@ -1318,7 +1318,7 @@ M00 establishes hosting **conventions and governance** only. Naming Netlify and 
 
 **Slice 16 (handoff-anchored bounded run, not the industrial run):** **`run_bounded_handoff_anchored_operator_local_run`** + **`px2_self_play_handoff_anchored_run.json`** — **`docs/runtime/px2_industrial_self_play_campaign_v1.md`** §8p; **`verify_loaded_pointer_seeded_handoff_self_seal`**; CLI **`emit_px2_self_play_handoff_anchored_run`** — **declared anchor** = slice-15 **`px2_self_play_pointer_seeded_handoff.json`** (`handed_off_ok` + on-disk lineage) — **not** industrial execution; **not** **PX2-M04** exploit closure.
 
-**Bounded substantive execution (post–slice-16, not a numbered slice — not the industrial run):** **`run_bounded_substantive_operator_local_execution`** + **`px2_self_play_bounded_substantive_execution.json`** — **`docs/runtime/px2_industrial_self_play_campaign_v1.md`** §8q; **`EXECUTION_KIND_BOUNDED_SUBSTANTIVE`**; default **15** continuity steps (bounded default, not a scientific claim); operator real-weights mode requires explicit **`--weights`** path; optional binding to slice-15/16 artifacts when present — **not** industrial execution; **not** **PX2-M04** exploit closure.
+**Bounded substantive execution (post–slice-16, not a numbered slice — not the industrial run):** **`run_bounded_substantive_operator_local_execution`** + **`px2_self_play_bounded_substantive_execution.json`** — **`docs/runtime/px2_industrial_self_play_campaign_v1.md`** §8q (+ §8q evidence table); **`EXECUTION_KIND_BOUNDED_SUBSTANTIVE`**; default **15** continuity steps (bounded default, not a scientific claim); operator real-weights mode requires explicit **`--weights`** path; sealed **`weights_file_sha256_declared`** when using a real **PX2-M02** `state_dict` file; optional binding to slice-15/16 artifacts when present — **bounded substantive operator-local execution evidence** — **not** later industrial **`PX2-M03`** campaign evidence; **not** **PX2-M04** exploit closure.
 
 **After slice 16, PX2-M03 exits lineage-surface expansion and enters bounded substantive execution, still below industrial scale.**
 
@@ -2784,6 +2784,10 @@ It should always answer, with minimal ambiguity:
 ---
 
 ## 23. Changelog
+
+### 2026-04-21 — **PX2-M03** first real bounded substantive operator-local pass (evidence + weight seal)
+
+- **Delivered:** Sealed **`weights_file_sha256_declared`** in **`px2_self_play_bounded_substantive_execution.json`** (record **`px2_m03_bounded_substantive_operator_local_execution_v2`**); **§8q** table distinguishing **bounded substantive operator-local execution evidence** vs **later industrial `PX2-M03` execution evidence**; test **`test_bounded_substantive_real_weights_seals_weights_file_sha256`** (real **`state_dict`** path — **not** merge-gate operator repro). **not** industrial campaign; **not** **PX2-M04**; **PX2-M03** **open**.
 
 ### 2026-04-21 — **PX2-M03** bounded substantive operator-local execution (post–slice-16, not a micro-slice)
 

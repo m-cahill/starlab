@@ -15,7 +15,7 @@ PX2_SELF_PLAY_BOUNDED_SUBSTANTIVE_EXECUTION_REPORT_CONTRACT_ID: Final[str] = (
     "starlab.px2.self_play_bounded_substantive_execution_report.v1"
 )
 BOUNDED_SUBSTANTIVE_EXECUTION_RECORD_VERSION: Final[str] = (
-    "px2_m03_bounded_substantive_operator_local_execution_v1"
+    "px2_m03_bounded_substantive_operator_local_execution_v2"
 )
 
 BOUNDED_SUBSTANTIVE_RULE_STUB: Final[str] = (
@@ -53,6 +53,7 @@ def build_bounded_substantive_execution_seal_basis(
     substantive_lineage_mode: str,
     optional_pointer_seeded_handoff_sha256: str,
     optional_handoff_anchored_run_sha256: str,
+    weights_file_sha256_declared: str,
     non_claims: list[str],
 ) -> dict[str, Any]:
     """Logical fields sealed as ``bounded_substantive_execution_sha256``."""
@@ -74,6 +75,7 @@ def build_bounded_substantive_execution_seal_basis(
         "resulting_continuity_sha256": resulting_continuity_sha256,
         "updated_campaign_root_manifest_sha256": updated_campaign_root_manifest_sha256,
         "weight_mode_declared": weight_mode_declared,
+        "weights_file_sha256_declared": weights_file_sha256_declared,
         "substantive_lineage_mode": substantive_lineage_mode,
         "optional_pointer_seeded_handoff_sha256": optional_pointer_seeded_handoff_sha256,
         "optional_handoff_anchored_run_sha256": optional_handoff_anchored_run_sha256,
@@ -97,6 +99,7 @@ def build_px2_self_play_bounded_substantive_execution_artifacts(
     substantive_lineage_mode: str,
     optional_pointer_seeded_handoff_sha256: str,
     optional_handoff_anchored_run_sha256: str,
+    weights_file_sha256_declared: str,
     non_claims: list[str],
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Return bounded substantive execution JSON + report with sealed hash."""
@@ -115,6 +118,7 @@ def build_px2_self_play_bounded_substantive_execution_artifacts(
         substantive_lineage_mode=substantive_lineage_mode,
         optional_pointer_seeded_handoff_sha256=optional_pointer_seeded_handoff_sha256,
         optional_handoff_anchored_run_sha256=optional_handoff_anchored_run_sha256,
+        weights_file_sha256_declared=weights_file_sha256_declared,
         non_claims=non_claims,
     )
     seal = _seal_body(basis)
@@ -140,6 +144,7 @@ def build_px2_self_play_bounded_substantive_execution_artifacts(
             "continuity_step_count_effective": continuity_step_count_effective,
             "substantive_lineage_mode": substantive_lineage_mode,
             "weight_mode_declared": weight_mode_declared,
+            "weights_file_sha256_declared": weights_file_sha256_declared,
         },
         "operator_absolute_paths_advisory": {
             "campaign_root": root_posix,
