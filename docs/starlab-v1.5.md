@@ -1,7 +1,7 @@
 # STARLAB v1.5 — Authoritative Public Governance (V15)
 
 **Program phase:** v1.5 (milestone namespace **V15**)  
-**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **Next (not started):** **V15-M01** — await explicit plan approval.
+**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **Current:** **V15-M01** — Training-Scale Provenance and Asset Registers — **active** (public register templates + `starlab.v15.training_asset_registers.v1`); **does not** execute training or approve claim-critical assets.
 
 **Strategic moonshot anchor:** `docs/starlab-v1.5moonshot.md`  
 **Historical ledgers:** v1 / PV1 / PX1 / PX2 narrative remains in `docs/starlab.md` (concise pointer only—no duplication of this file’s full governance here).
@@ -57,6 +57,8 @@ Unless separately proved and scoped:
 
 **M00 non-claims:** No long GPU run completed in M00; no strong-agent, human-panel, or XAI completion claimed.
 
+**M01 non-claims:** No long GPU run; no environment lock; no checkpoint lineage **runtime**; no XAI contract freeze or XAI execution; no benchmark execution; no human-panel execution; no v2; no **PX2-M04** / **PX2-M05**; no claim-critical asset rows in public registers (templates only).
+
 ---
 
 ## 5. V15 milestone table (plan)
@@ -64,7 +66,7 @@ Unless separately proved and scoped:
 | Milestone | Title |
 | --- | --- |
 | **V15-M00** | Training Readiness Charter and Long GPU Run Gate — **closed** on `main` (PR #116) |
-| **V15-M01** | Training-Scale Provenance and Asset Registers — **not** started; awaits plan approval |
+| **V15-M01** | Training-Scale Provenance and Asset Registers — **active** (register surfaces + contract emission) |
 | **V15-M02** | Long GPU Run Environment Lock |
 | **V15-M03** | Checkpoint Lineage and Resume Discipline |
 | **V15-M04** | XAI Evidence Contract v1 |
@@ -78,13 +80,29 @@ Unless separately proved and scoped:
 | **V15-M12** | Showcase Agent Release Pack |
 | **V15-M13** | v2 Go / No-Go Decision |
 
+### V15 asset and register map (compact)
+
+Navigation aid — authoritative field lists and vocabulary live in `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and emitted `v15_training_asset_registers.json`.
+
+| Surface / register | Public doc | Private / local counterpart (typical) | Strongest allowed claim (until populated & reviewed) | Next dependent milestone |
+| --- | --- | --- | --- | --- |
+| `starlab.v15.training_readiness_charter.v1` | `docs/runtime/v15_training_readiness_charter_v1.md` | Local charter JSON emit only | `readiness_only` (gates defined, not satisfied) | **V15-M01+** |
+| Training asset register | `docs/training_asset_register.md` | Dataset manifests under `out/` / `docs/company_secrets/` (not raw commits) | `readiness_only` | **V15-M02** (environment lock) / later data gates |
+| Replay corpus register | `docs/replay_corpus_register.md` | Raw replays local; rights notes private | `readiness_only` | **V15-M02** / gate **C** |
+| Model weight register | `docs/model_weight_register.md` | Weight blobs local / external archive | `readiness_only` | **V15-M07**+ training shakedown |
+| Checkpoint register | `docs/checkpoint_asset_register.md` | Checkpoint files local / external archive | `readiness_only` | **V15-M03** lineage |
+| Human benchmark register | `docs/human_benchmark_register.md` | Human-panel records private by default | `readiness_only` | **V15-M06** protocol |
+| XAI evidence register | `docs/xai_evidence_register.md` | Operator-local packs until contract freeze | `readiness_only` | **V15-M04** contract |
+| Rights register | `docs/rights_register.md` | Supplemental rights under `docs/company_secrets/` | `readiness_only` | Ongoing |
+
 ---
 
 ## 6. Artifact family contract ids (governed names)
 
 These are the **intended** v1.5 contract identifiers (emission implemented per milestone; M00 defines names and charter JSON).
 
-- `starlab.v15.training_readiness_charter.v1`
+- `starlab.v15.training_readiness_charter.v1` (**M00**)
+- `starlab.v15.training_asset_registers.v1` (**M01** — register contract / vocabulary only)
 - `starlab.v15.long_gpu_training_manifest.v1`
 - `starlab.v15.checkpoint_lineage_manifest.v1`
 - `starlab.v15.training_run_receipt.v1`
@@ -94,6 +112,11 @@ These are the **intended** v1.5 contract identifiers (emission implemented per m
 - `starlab.v15.showcase_agent_release_pack.v1`
 
 **M00 emitter:** `python -m starlab.v15.emit_v15_training_readiness_charter --output-dir <path>` writes `v15_training_readiness_charter.json` and `v15_training_readiness_charter_report.json`.
+
+**M01 emitter:** `python -m starlab.v15.emit_v15_training_asset_registers --output-dir <path>` writes `v15_training_asset_registers.json` and `v15_training_asset_registers_report.json`.
+
+**M01 runtime narrative:** `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md`  
+**M01 public registers:** `docs/training_asset_register.md`, `docs/replay_corpus_register.md`, `docs/model_weight_register.md`, `docs/checkpoint_asset_register.md`, `docs/human_benchmark_register.md`, `docs/xai_evidence_register.md` (plus `docs/rights_register.md` V15 subsection).
 
 ---
 
@@ -133,9 +156,9 @@ Long runs must bind identity and environment fields (git SHA, branch, milestone,
 
 ---
 
-## 11. CI security note (M00, temporary)
+## 11. CI security note (M00–M01, temporary)
 
-The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain** (no fix on PyPI at time of mitigation). This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is available (track under **V15-M01** or a maintenance follow-up).
+The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain**. **M01 re-check (2026-04-24, CI-like env):** after `pip install --upgrade pip`, **`pip` 26.0.1** still reports **CVE-2026-3219** to **`pip-audit`** (no audit-clean upgrade path observed). **Leave** the narrow ignore in place; do **not** broaden exceptions. This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is published on PyPI.
 
 ---
 
