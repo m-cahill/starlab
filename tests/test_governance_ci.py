@@ -18,7 +18,7 @@ def test_ledger_header_points_to_v15_authority_doc() -> None:
 def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
-    assert "| Current milestone |" in scan and "**`V15-M00`**" in scan
+    assert "| Current milestone |" in scan and "**`V15-M01`**" in scan
     assert "docs/starlab-v1.5.md" in scan
     assert "v1.5" in scan or "**V15" in scan
     assert "px2_industrial_self_play_campaign_readiness_v1.md" in scan
@@ -284,10 +284,13 @@ def test_ledger_post_v1_pv1_section() -> None:
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "**`V15-M01`**" in section
     assert "**`V15-M00`**" in section
     assert "docs/starlab-v1.5.md" in section
+    assert "v15_training_scale_provenance_asset_registers_v1.md" in section
     assert "px2_industrial_self_play_campaign_readiness_v1.md" in section
     assert "px2_industrial_self_play_campaign_v1.md" in section
+    assert "### V15-M01 — Training-Scale Provenance and Asset Registers — **active**" in section
     assert "### V15-M00 — v1.5 Training Readiness Charter and Long GPU Run Gate" in section
     assert "### PX2-M03 — Industrial Self-Play Campaign — **closed**" in section
     assert "### PX2-M02 — Neural Bootstrap from Replays — **closed** on `main`" in section
