@@ -111,7 +111,7 @@ def test_starlab_v15_authority_mentions_m01_runtime_and_non_claims() -> None:
     text = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "docs/runtime/v15_training_scale_provenance_asset_registers_v1.md" in text
     assert "starlab.v15.training_asset_registers.v1" in text
-    assert "**M01 non-claims:**" in text
+    assert "**M01 non-claims" in text and "persist after M01 closure" in text
     assert "no checkpoint lineage **runtime**" in text
     assert "CVE-2026-3219" in text
 

@@ -291,7 +291,10 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "v15_training_scale_provenance_asset_registers_v1.md" in section
     assert "px2_industrial_self_play_campaign_readiness_v1.md" in section
     assert "px2_industrial_self_play_campaign_v1.md" in section
-    assert "### V15-M01 — Training-Scale Provenance and Asset Registers — **closed** on `main`" in section
+    assert (
+        "### V15-M01 — Training-Scale Provenance and Asset Registers — **closed** on `main`"
+        in section
+    )
     assert "**`V15-M02`**" in section
     assert "### V15-M00 — v1.5 Training Readiness Charter and Long GPU Run Gate" in section
     assert "### PX2-M03 — Industrial Self-Play Campaign — **closed**" in section
