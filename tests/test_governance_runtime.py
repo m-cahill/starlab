@@ -383,6 +383,16 @@ def test_m51_campaign_phase_receipt_module_exists() -> None:
     assert (tr / "campaign_phase_receipt.py").is_file()
 
 
+def test_v15_m00_training_readiness_charter_modules_exist() -> None:
+    v15 = REPO_ROOT / "starlab" / "v15"
+    for name in (
+        "training_readiness_charter_models.py",
+        "training_readiness_charter_io.py",
+        "emit_v15_training_readiness_charter.py",
+    ):
+        assert (v15 / name).is_file()
+
+
 def test_m52_equivalence_charter_modules_exist() -> None:
     eq = REPO_ROOT / "starlab" / "equivalence"
     for name in (
