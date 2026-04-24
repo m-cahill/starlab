@@ -6,6 +6,12 @@
 
 ---
 
+## Milestone closure (governance)
+
+**V15-M01** is **closed** on `main` (implementation [PR #117](https://github.com/m-cahill/starlab/pull/117), merge `f618a1f90d44e02879501ea067a079c760c20e6c`, **2026-04-24**). **Authoritative PR-head CI:** [`24914804421`](https://github.com/m-cahill/starlab/actions/runs/24914804421); **merge-boundary `main` CI:** [`24916076997`](https://github.com/m-cahill/starlab/actions/runs/24916076997) — **success**. Closure records merge/CI evidence and the **register contract** only — **not** approval of real assets, **not** GPU training execution, **not** satisfaction of long GPU run gates **A–G**.
+
+---
+
 ## Purpose
 
 This milestone defines the **training-scale provenance and public register surface** needed before STARLAB treats long GPU training, evaluation, XAI, or human-benchmark work as claim-ready. **V15-M01** establishes **schemas, vocabulary, and sparse public register documents** — not approval of any particular asset for claim-critical use.

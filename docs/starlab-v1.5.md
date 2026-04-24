@@ -1,7 +1,7 @@
 # STARLAB v1.5 — Authoritative Public Governance (V15)
 
 **Program phase:** v1.5 (milestone namespace **V15**)  
-**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **Current:** **V15-M01** — Training-Scale Provenance and Asset Registers — **active** (public register templates + `starlab.v15.training_asset_registers.v1`); **does not** execute training or approve claim-critical assets.
+**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **V15-M01** is **closed** on `main` ([PR #117](https://github.com/m-cahill/starlab/pull/117); merge `f618a1f90d44e02879501ea067a079c760c20e6c`). **Authoritative PR-head CI** [`24914804421`](https://github.com/m-cahill/starlab/actions/runs/24914804421) (head `8d4caf6cbc5c03e8e42e4aea62de6210b0947ae8`); **merge-boundary `main` CI** [`24916076997`](https://github.com/m-cahill/starlab/actions/runs/24916076997) on merge commit `f618a1f…` — **success**. M01 **does not** execute training or approve claim-critical assets; **M01 non-claims** below remain in force after closure. **Next (not started):** **V15-M02** — *Long GPU Run Environment Lock* — awaits **explicit** plan approval.
 
 **Strategic moonshot anchor:** `docs/starlab-v1.5moonshot.md`  
 **Historical ledgers:** v1 / PV1 / PX1 / PX2 narrative remains in `docs/starlab.md` (concise pointer only—no duplication of this file’s full governance here).
@@ -57,7 +57,7 @@ Unless separately proved and scoped:
 
 **M00 non-claims:** No long GPU run completed in M00; no strong-agent, human-panel, or XAI completion claimed.
 
-**M01 non-claims:** No long GPU run; no environment lock; no checkpoint lineage **runtime**; no XAI contract freeze or XAI execution; no benchmark execution; no human-panel execution; no v2; no **PX2-M04** / **PX2-M05**; no claim-critical asset rows in public registers (templates only).
+**M01 non-claims (persist after M01 closure):** No long GPU run; no environment lock; no checkpoint lineage **runtime**; no XAI contract freeze or XAI execution; no benchmark execution; no human-panel execution; no v2; no **PX2-M04** / **PX2-M05**; no claim-critical asset rows in public registers (templates only). Milestone closure records merge/CI evidence only — **not** asset approval for claim-critical use.
 
 ---
 
@@ -66,7 +66,7 @@ Unless separately proved and scoped:
 | Milestone | Title |
 | --- | --- |
 | **V15-M00** | Training Readiness Charter and Long GPU Run Gate — **closed** on `main` (PR #116) |
-| **V15-M01** | Training-Scale Provenance and Asset Registers — **active** (register surfaces + contract emission) |
+| **V15-M01** | Training-Scale Provenance and Asset Registers — **closed** on `main` (PR #117) |
 | **V15-M02** | Long GPU Run Environment Lock |
 | **V15-M03** | Checkpoint Lineage and Resume Discipline |
 | **V15-M04** | XAI Evidence Contract v1 |
