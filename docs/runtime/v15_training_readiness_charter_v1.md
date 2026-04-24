@@ -17,6 +17,8 @@ This document is the **runtime narrative** companion to the deterministic JSON c
 - **M00 emits** the training readiness charter and report only.
 - **M00 does not** execute a long GPU campaign, run benchmarks, or produce XAI inference artifacts.
 
+**Closure (governance, not training execution):** **`V15-M00`** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116)). This document remains the **runtime narrative** for the `starlab.v15.training_readiness_charter.v1` contract. Closure **does not** mean long GPU training was executed.
+
 ---
 
 ## Long GPU run gates (summary)

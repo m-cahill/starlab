@@ -1,7 +1,7 @@
 # STARLAB v1.5 — Authoritative Public Governance (V15)
 
 **Program phase:** v1.5 (milestone namespace **V15**)  
-**Status:** Active program line — **V15-M00** establishes charter, gates, and artifact names; it does **not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo.
+**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **Next (not started):** **V15-M01** — await explicit plan approval.
 
 **Strategic moonshot anchor:** `docs/starlab-v1.5moonshot.md`  
 **Historical ledgers:** v1 / PV1 / PX1 / PX2 narrative remains in `docs/starlab.md` (concise pointer only—no duplication of this file’s full governance here).
@@ -63,8 +63,8 @@ Unless separately proved and scoped:
 
 | Milestone | Title |
 | --- | --- |
-| **V15-M00** | Training Readiness Charter and Long GPU Run Gate |
-| **V15-M01** | Training-Scale Provenance and Asset Registers |
+| **V15-M00** | Training Readiness Charter and Long GPU Run Gate — **closed** on `main` (PR #116) |
+| **V15-M01** | Training-Scale Provenance and Asset Registers — **not** started; awaits plan approval |
 | **V15-M02** | Long GPU Run Environment Lock |
 | **V15-M03** | Checkpoint Lineage and Resume Discipline |
 | **V15-M04** | XAI Evidence Contract v1 |
@@ -133,7 +133,13 @@ Long runs must bind identity and environment fields (git SHA, branch, milestone,
 
 ---
 
-## 11. Open risks and carry-forward items (M32-family)
+## 11. CI security note (M00, temporary)
+
+The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain** (no fix on PyPI at time of mitigation). This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is available (track under **V15-M01** or a maintenance follow-up).
+
+---
+
+## 12. Open risks and carry-forward items (M32-family)
 
 Addressed or explicitly deferred in future **V15** milestones:
 
@@ -145,6 +151,6 @@ Addressed or explicitly deferred in future **V15** milestones:
 
 ---
 
-## 12. Document maintenance (per `.cursorrules`)
+## 13. Document maintenance (per `.cursorrules`)
 
 Any milestone that changes artifact shape, contract behavior, interface boundaries, environment pins, or replay/evaluation semantics must update **this file** in the same milestone. This document must stay synchronized with code, label **stable vs provisional** surfaces, and remain suitable as the first document an auditor reads for v1.5.
