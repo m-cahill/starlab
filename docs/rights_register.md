@@ -6,6 +6,10 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 **V15-M01** adds **public, template-only** asset registers (`docs/training_asset_register.md`, `docs/replay_corpus_register.md`, `docs/model_weight_register.md`, `docs/checkpoint_asset_register.md`, `docs/human_benchmark_register.md`, `docs/xai_evidence_register.md`) plus the runtime contract **`docs/runtime/v15_training_scale_provenance_asset_registers_v1.md`** and emitted JSON **`starlab.v15.training_asset_registers.v1`**. They define **required fields and vocabulary** for future rows; **M01 does not** register raw weights, bulk replays, checkpoints, or human identities in public docs. **Private** supplements (paths, participant details, uncleared corpora) stay under **`docs/company_secrets/`** or operator **`out/`** — **not** committed. Row-level **`rights_posture`** / **`redistribution_posture`** in those registers must stay consistent with this file.
 
+### V15-M02 — environment references (v1.5)
+
+**V15-M02** adds the environment-lock contract **`starlab.v15.long_gpu_environment_lock.v1`** and runtime **`docs/runtime/v15_long_gpu_run_environment_lock_v1.md`**. **SC2 client paths**, **map pool / on-disk map locations**, **GPU driver or machine-identifying details**, and other **operator-local environment facts** are **private by default** unless intentionally **sanitized** for public reference. Public surfaces should use **logical references** (map id, pool id, version strings) — not raw paths. The emitter **redacts** absolute path strings in operator `--probe-json` output; do not treat that as rights clearance for redistribution.
+
 | Asset / surface | Type | Source | Owner | License / terms | Redistribution allowed? | Commercial use allowed? | Public / private | Notes / risk | Status |
 |-----------------|------|--------|-------|-----------------|-------------------------|-------------------------|------------------|--------------|--------|
 | Repository code | code | First-party | Michael Cahill | `LICENSE` (source-available, eval/verification) | No (per `LICENSE`) | No (per `LICENSE`) | Public repo | Evaluation-only clone/run | Initial |
