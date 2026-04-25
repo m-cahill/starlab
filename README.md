@@ -157,7 +157,7 @@ Other supporting docs should stay aligned to it.
 | `docs/deployment/deployment_posture.md` | Future Netlify / Render posture (not active deployment) |
 | `CONTRIBUTING.md` | Contribution expectations |
 | `SECURITY.md` | Security reporting |
-| `docs/company_secrets/milestones/` | Milestone plans, toolcalls, audits, summaries (tracked; other `company_secrets` subfolders are gitignored) |
+| `docs/company_secrets/milestones/` | Milestone plans, toolcalls, audits, summaries — **private/local-only** (entire `docs/company_secrets/` tree is **gitignored**; **not** in a default clone) |
 
 ---
 
@@ -225,4 +225,4 @@ The standing objective:
 - M45 bootstrap (after M43 + M44 inputs exist locally): `python -m starlab.training.emit_self_play_rl_bootstrap_run --hierarchical-training-run-dir ... --match-config ... --output-dir out/rl_bootstrap_runs/<id>/ --runtime-mode fixture_stub_ci` — see `docs/runtime/self_play_rl_bootstrap_v1.md`.  
 - Run identity seed: `python -m starlab.runs.seed_from_proof ...` (no SC2 required for the seed artifacts).
 
-Historical M02/M03 closeout detail remains in `docs/starlab.md` §10 and milestone folders under `docs/company_secrets/milestones/`.
+Historical M02/M03 closeout detail remains in `docs/starlab.md` §10; **operator-local** copies of milestone folders may live under `docs/company_secrets/milestones/` (gitignored; not shipped in a default clone).

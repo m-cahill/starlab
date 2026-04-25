@@ -24,7 +24,7 @@ Committed in this repository and intended for review:
 
 Treated as sensitive or reserved until explicitly promoted:
 
-- **`docs/company_secrets/**` — not committed** (entire tree is **gitignored**; milestone plans, prompts, manuals, and audits are **local / operator** copies only — a default `git clone` does **not** include them)
+- **`docs/company_secrets/**` — not committed** (entire tree is **gitignored**; milestone plans, prompts, manuals, and audits are **local / operator** copies only — a default `git clone` does **not** include them). After **PR #131**, previously tracked files under this path were **removed from the git index** on `main`; the boundary is **untracked + ignored**, not “private files in the public history” as ongoing policy.
 - Future: core runtime, SC2 adapters, stabilization internals, ingestion pipelines, private corpora, labels, weights, proprietary evaluation internals
 
 ## Current repo mapping
