@@ -296,6 +296,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
         in section
     )
     assert "**`V15-M02`**" in section
+    assert "### V15-M02 — Long GPU Run Environment Lock" in section
     assert "### V15-M00 — v1.5 Training Readiness Charter and Long GPU Run Gate" in section
     assert "### PX2-M03 — Industrial Self-Play Campaign — **closed**" in section
     assert "### PX2-M02 — Neural Bootstrap from Replays — **closed** on `main`" in section

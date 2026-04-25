@@ -1,7 +1,7 @@
 # STARLAB v1.5 — Authoritative Public Governance (V15)
 
 **Program phase:** v1.5 (milestone namespace **V15**)  
-**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **V15-M01** is **closed** on `main` ([PR #117](https://github.com/m-cahill/starlab/pull/117); merge `f618a1f90d44e02879501ea067a079c760c20e6c`). **Authoritative PR-head CI** [`24914804421`](https://github.com/m-cahill/starlab/actions/runs/24914804421) (head `8d4caf6cbc5c03e8e42e4aea62de6210b0947ae8`); **merge-boundary `main` CI** [`24916076997`](https://github.com/m-cahill/starlab/actions/runs/24916076997) on merge commit `f618a1f…` — **success**. M01 **does not** execute training or approve claim-critical assets; **M01 non-claims** below remain in force after closure. **Next (not started):** **V15-M02** — *Long GPU Run Environment Lock* — awaits **explicit** plan approval.
+**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **V15-M01** is **closed** on `main` ([PR #117](https://github.com/m-cahill/starlab/pull/117); merge `f618a1f90d44e02879501ea067a079c760c20e6c`). **Authoritative PR-head CI** [`24914804421`](https://github.com/m-cahill/starlab/actions/runs/24914804421) (head `8d4caf6cbc5c03e8e42e4aea62de6210b0947ae8`); **merge-boundary `main` CI** [`24916076997`](https://github.com/m-cahill/starlab/actions/runs/24916076997) on merge commit `f618a1f…` — **success**. M01 **does not** execute training or approve claim-critical assets; **M01 non-claims** below remain in force after closure. **V15-M02** — *Long GPU Run Environment Lock* — is **in progress** (not closed on `main` until a merge PR); **M02** defines the environment-lock contract and **does not** execute GPU training, **does not** run GPU shakedown, and **does not** green-light a long run from fixture-only output — **M02 non-claims** below apply during and after this milestone.
 
 **Strategic moonshot anchor:** `docs/starlab-v1.5moonshot.md`  
 **Historical ledgers:** v1 / PV1 / PX1 / PX2 narrative remains in `docs/starlab.md` (concise pointer only—no duplication of this file’s full governance here).
@@ -57,7 +57,9 @@ Unless separately proved and scoped:
 
 **M00 non-claims:** No long GPU run completed in M00; no strong-agent, human-panel, or XAI completion claimed.
 
-**M01 non-claims (persist after M01 closure):** No long GPU run; no environment lock; no checkpoint lineage **runtime**; no XAI contract freeze or XAI execution; no benchmark execution; no human-panel execution; no v2; no **PX2-M04** / **PX2-M05**; no claim-critical asset rows in public registers (templates only). Milestone closure records merge/CI evidence only — **not** asset approval for claim-critical use.
+**M01 non-claims (persist after M01 closure):** No long GPU run; no **M01** environment lock surface (delivered in **M02**); no checkpoint lineage **runtime**; no XAI contract freeze or XAI execution; no benchmark execution; no human-panel execution; no v2; no **PX2-M04** / **PX2-M05**; no claim-critical asset rows in public registers (templates only). Milestone closure records merge/CI evidence only — **not** asset approval for claim-critical use.
+
+**M02 non-claims (during M02 and after a future M02 PR merge until superseded by later milestones):** V15-M02 defines and emits the long GPU run **environment-lock surface** and may normalize **supplied** operator probe JSON **or** run the **fixture** profile in CI. It does **not** execute GPU training; does **not** run GPU shakedown (**V15-M07**); does **not** alone satisfy Gate B for a program-valid long run; does **not** claim RTX 5090 / operator-local readiness unless operator evidence is supplied; does **not** run SC2, `nvidia-smi`, or map introspection in CI; does **not** implement checkpoint lineage; does **not** freeze XAI; does **not** run benchmarks, human panel, or XAI execution; does **not** open v2 or **PX2-M04** / **PX2-M05**. The field `long_gpu_run_authorized` in the M02 contract remains **false** — M02 does not grant program authorization.
 
 ---
 
@@ -67,7 +69,7 @@ Unless separately proved and scoped:
 | --- | --- |
 | **V15-M00** | Training Readiness Charter and Long GPU Run Gate — **closed** on `main` (PR #116) |
 | **V15-M01** | Training-Scale Provenance and Asset Registers — **closed** on `main` (PR #117) |
-| **V15-M02** | Long GPU Run Environment Lock |
+| **V15-M02** | Long GPU Run Environment Lock — **in progress** (not closed on `main` until merge) |
 | **V15-M03** | Checkpoint Lineage and Resume Discipline |
 | **V15-M04** | XAI Evidence Contract v1 |
 | **V15-M05** | Strong-Agent Benchmark Protocol |
@@ -95,6 +97,25 @@ Navigation aid — authoritative field lists and vocabulary live in `docs/runtim
 | XAI evidence register | `docs/xai_evidence_register.md` | Operator-local packs until contract freeze | `readiness_only` | **V15-M04** contract |
 | Rights register | `docs/rights_register.md` | Supplemental rights under `docs/company_secrets/` | `readiness_only` | Ongoing |
 
+### V15-M02 — Environment lock status (compact)
+
+Fixture CI proves **wiring and schema**; **operator-local** evidence is required to claim a real **Gate B** environment. Default operator-local status is **`not_evaluated`** until a probe is recorded.
+
+| Environment surface | Required evidence (operator) | CI fixture | Operator-local (default) | Public / private | Next |
+| --- | --- | --- | --- | --- | --- |
+| Repo identity | git SHA, branch, repo | `fixture` (stable placeholders) | `not_evaluated` | public-safe SHAs; no unsanitized paths | **M03+** |
+| Python | version, platform, venv policy | `fixture` | `not_evaluated` | public | ongoing |
+| Dependency lock / hash | fingerprint, lockfile refs | `fixture` | `not_evaluated` | public refs; private local paths | ongoing |
+| CUDA | version, driver posture | not evaluated in fixture | `not_evaluated` | mostly **private_local_only** in notes | **M07**+ |
+| PyTorch | torch build, CUDA build string | not evaluated in fixture | `not_evaluated` | public versions | **M07**+ |
+| GPU | name, mem, driver | not evaluated in fixture | `not_evaluated` | private by default (sanitize for public) | **M07**+ |
+| SC2 client | version, declared path posture | not evaluated in fixture | `not_evaluated` | **Blizzard TOS**; path **private** | **M07**+ |
+| Map pool | pool id, required map list | not evaluated in fixture | `not_evaluated` | logical refs; raw paths **private** | **C** / **M07**+ |
+| Disk / output root | policy, min free space | not evaluated in fixture | `not_evaluated` | **private** absolute roots | **M08**+ |
+| Operator notes | optional text | N/A in fixture | optional | `private_local_only` by default | ongoing |
+
+`long_gpu_run_authorized` in the M02 contract is **always false**; use **`operator_local_ready`** (with `--probe-json`) for “M02 check list satisfied,” not for program go-ahead.
+
 ---
 
 ## 6. Artifact family contract ids (governed names)
@@ -103,6 +124,7 @@ These are the **intended** v1.5 contract identifiers (emission implemented per m
 
 - `starlab.v15.training_readiness_charter.v1` (**M00**)
 - `starlab.v15.training_asset_registers.v1` (**M01** — register contract / vocabulary only)
+- `starlab.v15.long_gpu_environment_lock.v1` (**M02** — environment-lock contract; fixture and optional operator probe)
 - `starlab.v15.long_gpu_training_manifest.v1`
 - `starlab.v15.checkpoint_lineage_manifest.v1`
 - `starlab.v15.training_run_receipt.v1`
@@ -117,6 +139,10 @@ These are the **intended** v1.5 contract identifiers (emission implemented per m
 
 **M01 runtime narrative:** `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md`  
 **M01 public registers:** `docs/training_asset_register.md`, `docs/replay_corpus_register.md`, `docs/model_weight_register.md`, `docs/checkpoint_asset_register.md`, `docs/human_benchmark_register.md`, `docs/xai_evidence_register.md` (plus `docs/rights_register.md` V15 subsection).
+
+**M02 emitter:** `python -m starlab.v15.emit_v15_long_gpu_environment_lock --output-dir <path>` writes `v15_long_gpu_environment_lock.json` and `v15_long_gpu_environment_lock_report.json` (default profile **`fixture_ci`**; optional `--profile operator_local` and `--probe-json <path>`).
+
+**M02 runtime narrative:** `docs/runtime/v15_long_gpu_run_environment_lock_v1.md`
 
 ---
 
@@ -156,9 +182,9 @@ Long runs must bind identity and environment fields (git SHA, branch, milestone,
 
 ---
 
-## 11. CI security note (M00–M01, temporary)
+## 11. CI security note (M00–M02, temporary)
 
-The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain**. **M01 re-check (2026-04-24, CI-like env):** after `pip install --upgrade pip`, **`pip` 26.0.1** still reports **CVE-2026-3219** to **`pip-audit`** (no audit-clean upgrade path observed). **Leave** the narrow ignore in place; do **not** broaden exceptions. This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is published on PyPI.
+The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain**. **M01 re-check (2026-04-24, CI-like env):** after `pip install --upgrade pip`, **`pip` 26.0.1** still reported **CVE-2026-3219** to **`pip-audit`**. **M02 re-check (2026-04-25, CI-like local env):** same — **`pip` 26.0.1** still reports the CVE; **no** audit-clean **`pip`** upgrade path observed. **Leave** the narrow ignore in place; do **not** broaden exceptions. This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is published on PyPI.
 
 ---
 

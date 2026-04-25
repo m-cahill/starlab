@@ -1,1 +1,1 @@
-"""STARLAB v1.5 (V15) governed surfaces — charter, registers, and planning artifacts."""
+"""STARLAB v1.5 (V15) — charter, asset registers, environment lock, and planning artifacts."""
