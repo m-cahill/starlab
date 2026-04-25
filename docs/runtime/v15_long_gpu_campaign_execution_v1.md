@@ -124,3 +124,7 @@ M08 does **not** promote checkpoints, pass benchmarks, run human panels, perform
 ## Closeout
 
 Public closeout may record `closed — long campaign completed within declared scope`, `blocked`, or `failed with receipts` — **not** “completed” without a real receipt. Implementation-only PRs may remain `implementation_ready_preflight_blocked` or `implementation_ready_waiting_for_operator_run`.
+
+### Implementation PR (2026-04-25)
+
+**[PR #133](https://github.com/m-cahill/starlab/pull/133)** merged the **M08 implementation surface** to `main` (merge `33b277383d3383ada607039b7a7586859a5925a8`). **Authoritative PR-head CI:** [`24940027890`](https://github.com/m-cahill/starlab/actions/runs/24940027890); **merge-boundary `main` CI:** [`24940102671`](https://github.com/m-cahill/starlab/actions/runs/24940102671). **Recorded public status:** **`implementation_ready_waiting_for_operator_run`**. **No** operator-local long GPU campaign was executed for this merge; **`long_gpu_run_authorized`** remains **false** on fixture/default paths. **V15-M09** is **not started** publicly.

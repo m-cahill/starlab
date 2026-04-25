@@ -51,7 +51,7 @@ def test_v15_m08_governance_docs() -> None:
     assert "starlab.v15.long_gpu_training_manifest.v1" in v15
     assert "starlab.v15.long_gpu_campaign_receipt.v1" in v15
     assert "M08 non-claims" in v15
-    assert "implementation in progress" in v15.lower()
+    assert "implementation_ready_waiting_for_operator_run" in v15
     ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "v15_long_gpu_campaign_execution_v1.md" in ledger
     rt = REPO_ROOT / "docs" / "runtime" / "v15_long_gpu_campaign_execution_v1.md"
@@ -88,8 +88,10 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
+    assert "**`V15-M09`**" in scan
     assert "**`V15-M08`**" in scan and "**`V15-M07`**" in scan and "**`V15-M06`**" in scan
     assert "PR #116" in scan and "PR #125" in scan and "PR #127" in scan and "PR #129" in scan
+    assert "PR #133" in scan or "pull/133" in scan
     assert "PR #116–#120" in scan or "PR #120" in scan
     assert "**`V15-M01`**" in scan and "**`V15-M02`**" in scan
     assert "docs/starlab-v1.5.md" in scan
@@ -373,7 +375,12 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "v15_strong_agent_benchmark_protocol_v1.md" in section
     assert "v15_human_panel_benchmark_protocol_v1.md" in section
     assert "### V15-M05 — *Strong-Agent Benchmark Protocol* — **closed**" in section
-    assert "### V15-M08 — *Long GPU Campaign Execution* — **implementation in progress**" in section
+    m08_heading = (
+        "### V15-M08 — *Long GPU Campaign Execution* — **closed** on `main` "
+        "(**implementation surface**; **`implementation_ready_waiting_for_operator_run`**)"
+    )
+    assert m08_heading in section
+    assert "### V15-M09 — *Checkpoint Evaluation and Promotion* — **not started**" in section
     assert "v15_long_gpu_campaign_execution_v1.md" in section
     assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **closed**" in section
     assert "### V15-M06 — *Human Panel Benchmark Protocol* — **closed**" in section

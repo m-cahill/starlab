@@ -8,7 +8,7 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 ### V15-M08 — long GPU campaign (v1.5)
 
-**V15-M08** (**implementation in progress**) may bind training manifests, dataset references, and operator-local campaign trees under `out/v15_m08_campaigns/`. **Default:** long-campaign corpora, weights, logs, and uncleared paths remain **private** / **local_only**; `docs/company_secrets/**` stays **gitignored**. Public governance references **`docs/runtime/v15_long_gpu_campaign_execution_v1.md`** and **`docs/starlab-v1.5.md`** (M08 non-claims block) — **not** automatic rights clearance for redistribution.
+**V15-M08** (implementation surface **closed** on `main`, [PR #133](https://github.com/m-cahill/starlab/pull/133); **`implementation_ready_waiting_for_operator_run`**) may bind training manifests, dataset references, and operator-local campaign trees under `out/v15_m08_campaigns/` when an operator runs the guarded path. **Default:** long-campaign corpora, weights, logs, and uncleared paths remain **private** / **local_only**; `docs/company_secrets/**` stays **gitignored**. Public governance references **`docs/runtime/v15_long_gpu_campaign_execution_v1.md`** and **`docs/starlab-v1.5.md`** (M08 non-claims block) — **not** automatic rights clearance for redistribution.
 
 ### V15-M02 — environment references (v1.5)
 
