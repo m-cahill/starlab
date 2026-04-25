@@ -1,7 +1,7 @@
 # STARLAB v1.5 — Authoritative Public Governance (V15)
 
 **Program phase:** v1.5 (milestone namespace **V15**)  
-**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **V15-M01** is **closed** on `main` ([PR #117](https://github.com/m-cahill/starlab/pull/117); merge `f618a1f90d44e02879501ea067a079c760c20e6c`). **Authoritative PR-head CI** [`24914804421`](https://github.com/m-cahill/starlab/actions/runs/24914804421) (head `8d4caf6cbc5c03e8e42e4aea62de6210b0947ae8`); **merge-boundary `main` CI** [`24916076997`](https://github.com/m-cahill/starlab/actions/runs/24916076997) on merge commit `f618a1f…` — **success**. M01 **does not** execute training or approve claim-critical assets; **M01 non-claims** below remain in force after closure. **V15-M02** is **closed** on `main` ([PR #118](https://github.com/m-cahill/starlab/pull/118); merge `3f7e226ff0402cbb91b831e7c9397080cc8a77aa` merged **2026-04-25T00:53:35Z** UTC). **Authoritative PR-head CI** [`24918006750`](https://github.com/m-cahill/starlab/actions/runs/24918006750) (head `4aab910eb01f50f03e866630c34a3c91d772ad13`); **merge-boundary `main` CI** [`24918563270`](https://github.com/m-cahill/starlab/actions/runs/24918563270) on merge commit `3f7e226f…` — **success**. M02 **does not** execute GPU training, **does not** run GPU shakedown, and **does not** green-light a long run or operator-local RTX 5090 readiness from fixture-only output — **M02 non-claims** below apply after closure. **V15-M03** — *Checkpoint Lineage and Resume Discipline* — is **not** started (no implementation on `main`; **do not** begin until **explicit** plan approval).
+**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **V15-M01** is **closed** on `main` ([PR #117](https://github.com/m-cahill/starlab/pull/117); merge `f618a1f90d44e02879501ea067a079c760c20e6c`). **Authoritative PR-head CI** [`24914804421`](https://github.com/m-cahill/starlab/actions/runs/24914804421) (head `8d4caf6cbc5c03e8e42e4aea62de6210b0947ae8`); **merge-boundary `main` CI** [`24916076997`](https://github.com/m-cahill/starlab/actions/runs/24916076997) on merge commit `f618a1f…` — **success**. M01 **does not** execute training or approve claim-critical assets; **M01 non-claims** below remain in force after closure. **V15-M02** is **closed** on `main` ([PR #118](https://github.com/m-cahill/starlab/pull/118); merge `3f7e226ff0402cbb91b831e7c9397080cc8a77aa` merged **2026-04-25T00:53:35Z** UTC). **Authoritative PR-head CI** [`24918006750`](https://github.com/m-cahill/starlab/actions/runs/24918006750) (head `4aab910eb01f50f03e866630c34a3c91d772ad13`); **merge-boundary `main` CI** [`24918563270`](https://github.com/m-cahill/starlab/actions/runs/24918563270) on merge commit `3f7e226f…` — **success**. M02 **does not** execute GPU training, **does not** run GPU shakedown, and **does not** green-light a long run or operator-local RTX 5090 readiness from fixture-only output — **M02 non-claims** below apply after closure. **V15-M03** — *Checkpoint Lineage and Resume Discipline* — is **in progress** (contract + CLI + tests on implementation branch) — **not** **closed** on `main` until the M03 PR merges and **merge-boundary `main` CI** is **green**; see **M03 non-claims** and `docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md` (M03 is **lineage / resume *discipline* metadata** only — **not** GPU training, **not** checkpoint-blob I/O, **not** `long_gpu_run_authorized` **true**).
 
 **Strategic moonshot anchor:** `docs/starlab-v1.5moonshot.md`  
 **Historical ledgers:** v1 / PV1 / PX1 / PX2 narrative remains in `docs/starlab.md` (concise pointer only—no duplication of this file’s full governance here).
@@ -61,6 +61,8 @@ Unless separately proved and scoped:
 
 **M02 non-claims (after M02 closure on `main` until superseded by later milestones):** V15-M02 defines and emits the long GPU run **environment-lock surface** and may normalize **supplied** operator probe JSON **or** run the **fixture** profile in CI. **Fixture `fixture_ci` output does not imply operator-local readiness** (including RTX 5090–class). It does **not** execute GPU training; does **not** run GPU shakedown (**V15-M07**); does **not** grant **long_run** or program long-GPU **authorization**; does **not** alone satisfy Gate B for a program-valid long run; does **not** claim operator-local hardware readiness from CI fixture output; does **not** run SC2, `nvidia-smi`, or map introspection in CI; does **not** implement checkpoint lineage **runtime**; does **not** freeze XAI; does **not** run benchmarks, human panel, or XAI execution; does **not** approve claim-critical real assets; does **not** open v2 or **PX2-M04** / **PX2-M05**. The field `long_gpu_run_authorized` in the M02 contract remains **false** — M02 does not grant program authorization.
 
+**M03 non-claims (until closed on `main` and superseded by later milestones as applicable):** V15-M03 defines and emits the **checkpoint lineage and resume-discipline** manifest (`starlab.v15.checkpoint_lineage_manifest.v1`). It is **metadata and governance only**: it may normalize operator-declared **lineage JSON** and may bind an **M02** environment lock file by **canonical JSON SHA-256**; it does **not** read or hash on-disk **checkpoint weight blobs**; does **not** verify checkpoint bytes by default; does **not** execute **trainer** resume or rollback; does **not** set `resume_execution_verified` / `rollback_execution_verified` to true at the program-manifest root (M03 does not prove execution); does **not** run GPU training or shakedown; does **not** authorize a long GPU run (`long_gpu_run_authorized` remains **false**); does **not** promote a “strong” checkpoint; does **not** approve real assets for claim-critical public registers; does **not** open v2 or **PX2-M04** / **PX2-M05**. A lineage manifest is **not** proof that checkpoint bytes exist unless `hash_verification_status` and external scope say so. A **resume receipt** is **not** proof that training resumed unless an external path says so, and M03 does not independently verify that path.
+
 ---
 
 ## 5. V15 milestone table (plan)
@@ -70,7 +72,7 @@ Unless separately proved and scoped:
 | **V15-M00** | Training Readiness Charter and Long GPU Run Gate — **closed** on `main` (PR #116) |
 | **V15-M01** | Training-Scale Provenance and Asset Registers — **closed** on `main` (PR #117) |
 | **V15-M02** | Long GPU Run Environment Lock — **closed** on `main` (PR #118) |
-| **V15-M03** | Checkpoint Lineage and Resume Discipline — **not** started (await **explicit** plan approval) |
+| **V15-M03** | Checkpoint Lineage and Resume Discipline — **in progress** (not closed on `main` until M03 PR merge + green **merge-boundary** CI) |
 | **V15-M04** | XAI Evidence Contract v1 |
 | **V15-M05** | Strong-Agent Benchmark Protocol |
 | **V15-M06** | Human Panel Benchmark Protocol |
@@ -116,6 +118,23 @@ Fixture CI proves **wiring and schema**; **operator-local** evidence is required
 
 `long_gpu_run_authorized` in the M02 contract is **always false**; use **`operator_local_ready`** (with `--probe-json`) for “M02 check list satisfied,” not for program go-ahead.
 
+### V15-M03 — Checkpoint lineage status (compact)
+
+| Checkpoint surface | What M03 defines | Fixture (`fixture_ci`) | Operator-local (typical) | Public / private posture | Next dependent milestone |
+| --- | --- | --- | --- | --- | --- |
+| **Checkpoint identity** | `checkpoint_id`, roles, URI/ref | `fixture-root`, `fixture-child` (metadata only) | `not_evaluated` until declared | logical refs; paths **redacted** / **private** as needed | M07+ (shakedown) / M08+ |
+| **Parent/child lineage** | `parent_checkpoint_id` graph | `fixture` chain | `not_evaluated` / declared in lineage JSON | public-safe if no paths leaked | M08+ |
+| **Checkpoint hash reference** | `checkpoint_sha256` + `hash_verification_status` | all-zero placeholder; `fixture` status | `declared_only` / `verified_external` (pass-through) | hash refs public; **blobs** private | M09+ promotion |
+| **Model config binding** | `model_config_sha256` per row + ref | placeholder | `not_evaluated` / declared | public refs; private paths | M08+ |
+| **Dataset / register binding** | `dataset_manifest_sha256` + manifest refs | placeholder | `not_evaluated` / declared | public refs; private corpora | Gate **C** / M08+ |
+| **Environment lock binding** | `environment_lock_sha256` + optional M02 file bind | not bound to a real M02 file | `not_evaluated` / `--environment-lock-json` | public SHA only; no unsanitized paths | M02 evidence + M08+ |
+| **Interruption receipt** | `interruption_receipts[]` | fixture-shaped | operator-declared / external attestation (not verified by M03) | sanitize paths | M08+ |
+| **Resume receipt** | `resume_receipts[]` | `resume_verification_status` may be `fixture` (not execution) | `declared_only` / `not_executed` default | same | M07+ proves execution |
+| **Rollback receipt** | `rollback_receipts[]` | `fixture` (not execution) | `declared_only` / `not_executed` default | same | M09+ |
+| **Promotion status** | `promotion_status` + vocabulary | `fixture_only` for fixture rows | candidate / … per gate | public narrative only w/ non-claims | M09+ |
+
+`checkpoint_bytes_verified` is **true** only if **every** checkpoint row has `hash_verification_status == "verified_external"` (operator pass-through; M03 does not read blobs). `resume_execution_verified` and `rollback_execution_verified` are **false** in M03. `long_gpu_run_authorized` is **false**.
+
 ---
 
 ## 6. Artifact family contract ids (governed names)
@@ -126,7 +145,7 @@ These are the **intended** v1.5 contract identifiers (emission implemented per m
 - `starlab.v15.training_asset_registers.v1` (**M01** — register contract / vocabulary only)
 - `starlab.v15.long_gpu_environment_lock.v1` (**M02** — environment-lock contract; fixture and optional operator probe)
 - `starlab.v15.long_gpu_training_manifest.v1`
-- `starlab.v15.checkpoint_lineage_manifest.v1`
+- `starlab.v15.checkpoint_lineage_manifest.v1` (**M03** — checkpoint lineage + receipt vocabulary; **implemented** in M03; **not** a training or checkpoint I/O **runtime**)
 - `starlab.v15.training_run_receipt.v1`
 - `starlab.v15.strong_agent_scorecard.v1`
 - `starlab.v15.xai_evidence_pack.v1`
@@ -143,6 +162,10 @@ These are the **intended** v1.5 contract identifiers (emission implemented per m
 **M02 emitter:** `python -m starlab.v15.emit_v15_long_gpu_environment_lock --output-dir <path>` writes `v15_long_gpu_environment_lock.json` and `v15_long_gpu_environment_lock_report.json` (default profile **`fixture_ci`**; optional `--profile operator_local` and `--probe-json <path>`).
 
 **M02 runtime narrative:** `docs/runtime/v15_long_gpu_run_environment_lock_v1.md`
+
+**M03 emitter:** `python -m starlab.v15.emit_v15_checkpoint_lineage_manifest --output-dir <path>` writes `v15_checkpoint_lineage_manifest.json` and `v15_checkpoint_lineage_manifest_report.json` (default profile **`fixture_ci`**; optional `--profile operator_declared` with `--lineage-json <path>`; optional `--environment-lock-json <path>` to bind the canonical SHA-256 of an M02 environment lock file).
+
+**M03 runtime narrative:** `docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md`
 
 ---
 
@@ -182,9 +205,9 @@ Long runs must bind identity and environment fields (git SHA, branch, milestone,
 
 ---
 
-## 11. CI security note (M00–M02, temporary)
+## 11. CI security note (M00–M03, temporary)
 
-The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain**. **M01 re-check (2026-04-24, CI-like env):** after `pip install --upgrade pip`, **`pip` 26.0.1** still reported **CVE-2026-3219** to **`pip-audit`**. **M02 re-check (2026-04-25, CI-like local env):** same — **`pip` 26.0.1** still reports the CVE; **no** audit-clean **`pip`** upgrade path observed. **Leave** the narrow ignore in place; do **not** broaden exceptions. This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is published on PyPI.
+The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain**. **M01 re-check (2026-04-24, CI-like env):** after `pip install --upgrade pip`, **`pip` 26.0.1** still reported **CVE-2026-3219** to **`pip-audit`**. **M02 re-check (2026-04-25, CI-like local env):** same — **`pip` 26.0.1** still reports the CVE; **no** audit-clean **`pip`** upgrade path observed. **M03 re-check (2026-04-25, local env):** **`pip` 26.0.1** is still the latest on PyPI; **`pip-audit`** still flags **CVE-2026-3219** for **`pip`**. **Leave** the narrow ignore in place; do **not** broaden exceptions. This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is published on PyPI.
 
 ---
 
