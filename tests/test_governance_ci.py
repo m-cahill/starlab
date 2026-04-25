@@ -8,6 +8,23 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 @pytest.mark.smoke
+def test_v15_m06_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M06" in v15
+    assert "starlab.v15.human_panel_benchmark.v1" in v15
+    assert "M06 non-claims" in v15
+    assert "recruit" in v15 and "human participants" in v15
+    assert "no** new real participant **rows**" in v15
+    human_reg = (REPO_ROOT / "docs" / "human_benchmark_register.md").read_text(encoding="utf-8")
+    assert "V15-M06" in human_reg
+    assert "No rows" in human_reg or "*No rows.*" in human_reg
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_human_panel_benchmark_protocol_v1.md"
+    assert rt.is_file()
+    rtxt = rt.read_text(encoding="utf-8").lower()
+    assert "protocol" in rtxt and ("fixture only" in rtxt or "protocol contract only" in rtxt)
+
+
+@pytest.mark.smoke
 def test_ledger_header_points_to_v15_authority_doc() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     head = text.split("---", 1)[0]
@@ -298,8 +315,9 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     )
     assert "v15_xai_evidence_contract_v1.md" in section
     assert "v15_strong_agent_benchmark_protocol_v1.md" in section
+    assert "v15_human_panel_benchmark_protocol_v1.md" in section
     assert "### V15-M05 — *Strong-Agent Benchmark Protocol* — **closed**" in section
-    assert "### V15-M06 — *Human Panel Benchmark Protocol* — **not** started" in section
+    assert "### V15-M06 — *Human Panel Benchmark Protocol* — **in progress**" in section
     assert "**`V15-M05`**" in section
     assert "### V15-M04 — *XAI Evidence Contract v1* — **closed**" in section
     assert "### V15-M03 — *Checkpoint Lineage and Resume Discipline* — **closed**" in section

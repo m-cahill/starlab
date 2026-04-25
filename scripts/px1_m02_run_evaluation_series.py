@@ -18,9 +18,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
-STUB_WARNING = (
-    "local_live_sc2: real replay not copied; emitted deterministic stub replay instead"
-)
+STUB_WARNING = "local_live_sc2: real replay not copied; emitted deterministic stub replay instead"
 
 SCRIPTED = "px1_m02_opponent_scripted_style_v1"
 HEURISTIC = "px1_m02_opponent_heuristic_style_v1"
@@ -256,8 +254,7 @@ def main() -> int:
     )
     chk(
         "matches_heuristic",
-        a_heuristic["matches_played"]
-        >= fp["minimum_matches_per_candidate_per_opponent_profile"],
+        a_heuristic["matches_played"] >= fp["minimum_matches_per_candidate_per_opponent_profile"],
         "heuristic matches_played below minimum",
     )
     chk(
@@ -322,11 +319,7 @@ def main() -> int:
 
     # Operator notes (minimal; operator may expand)
     summary_path = series_root / "px1_play_quality_operator_note.md"
-    stub_any = any(
-        r.get("stub_replay")
-        for plist in per_prof.values()
-        for r in plist
-    )
+    stub_any = any(r.get("stub_replay") for plist in per_prof.values() for r in plist)
     summary_path.write_text(
         "\n".join(
             [
