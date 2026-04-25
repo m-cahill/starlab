@@ -4,6 +4,8 @@
 **Milestone:** V15-M02  
 **Status:** Governed environment-lock *surface* — **not** a training execution milestone.
 
+**Merge record (governance):** **V15-M02** implementation merged to `main` as [PR #118](https://github.com/m-cahill/starlab/pull/118) (merge commit `3f7e226ff0402cbb91b831e7c9397080cc8a77aa`). Authoritative **PR-head** CI [`24918006750`](https://github.com/m-cahill/starlab/actions/runs/24918006750); merge-boundary [`main` CI `24918563270`](https://github.com/m-cahill/starlab/actions/runs/24918563270). This closure **does not** assert long GPU **environment readiness** from fixture output and **does not** record training execution.
+
 ## 1. Purpose
 
 V15-M02 defines and emits a **deterministic environment-lock contract** for STARLAB v1.5. It records *what* must be known about the repository, Python stack, dependencies, CUDA/PyTorch, GPU, SC2, map pool, disk, and path posture **before** a long GPU run can be treated as *governed* program work.
