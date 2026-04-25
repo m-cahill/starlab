@@ -23,7 +23,7 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 **M01:** Surface only; **no** human benchmark execution claimed.
 
-**V15-M06:** Freezes the **human-panel benchmark protocol** and the **`starlab.v15.human_panel_benchmark.v1`** **fixture** contract (`v15_human_panel_benchmark.json` + report). It does **not** add real participant **rows** or public human-panel result **assets**; see `docs/runtime/v15_human_panel_benchmark_protocol_v1.md`.
+**V15-M06 (closed on `main`, [PR #127](https://github.com/m-cahill/starlab/pull/127)):** Freezes the **human-panel benchmark protocol** and the **`starlab.v15.human_panel_benchmark.v1`** **fixture** contract (`v15_human_panel_benchmark.json` + report; **authoritative PR-head** CI [`24924293130`](https://github.com/m-cahill/starlab/actions/runs/24924293130); **merge-boundary** [`24924371412`](https://github.com/m-cahill/starlab/actions/runs/24924371412)). It does **not** add real participant **rows** or public human-panel result **assets**; see `docs/runtime/v15_human_panel_benchmark_protocol_v1.md`.
 
 ## Current registered assets
 

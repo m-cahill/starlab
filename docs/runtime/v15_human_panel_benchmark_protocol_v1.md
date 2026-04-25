@@ -8,7 +8,7 @@
 
 > **V15-M06 freezes the human-panel benchmark protocol, privacy posture, and evidence vocabulary. It does not run a human panel, recruit participants, or authorize a “beats most humans” claim.**
 
-**Implementation status (this PR):** **in progress** on a working branch (awaiting merge, PR-head CI, and merge-boundary `main` CI). This document and the emitters are **protocol and fixture only**; they are **not** evidence of human-benchmark **execution** or **pass/fail** outcomes. **`benchmark_execution_performed`**, **`human_panel_execution_performed`**, **`human_benchmark_claim_authorized`**, **`strong_agent_claim_authorized`**, and **`long_gpu_run_authorized`** stay **false** in emitted M06 contracts.
+**Implementation status:** **closed** on `main` ([PR #127](https://github.com/m-cahill/starlab/pull/127); merge `994f24e605e32c0738f34eb4d09be2020d543c3c`). **Authoritative PR-head CI:** [`24924293130`](https://github.com/m-cahill/starlab/actions/runs/24924293130); **merge-boundary `main` CI:** [`24924371412`](https://github.com/m-cahill/starlab/actions/runs/24924371412) — **success**. This document and the emitters are **protocol and fixture only**; they are **not** evidence of human-benchmark **execution** or **pass/fail** outcomes. **`benchmark_execution_performed`**, **`human_panel_execution_performed`**, **`human_benchmark_claim_authorized`**, **`strong_agent_claim_authorized`**, and **`long_gpu_run_authorized`** stay **false** in emitted M06 contracts.
 
 ---
 
