@@ -1,7 +1,7 @@
 # STARLAB v1.5 — Authoritative Public Governance (V15)
 
 **Program phase:** v1.5 (milestone namespace **V15**)  
-**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **V15-M01** is **closed** on `main` ([PR #117](https://github.com/m-cahill/starlab/pull/117); merge `f618a1f90d44e02879501ea067a079c760c20e6c`). **Authoritative PR-head CI** [`24914804421`](https://github.com/m-cahill/starlab/actions/runs/24914804421) (head `8d4caf6cbc5c03e8e42e4aea62de6210b0947ae8`); **merge-boundary `main` CI** [`24916076997`](https://github.com/m-cahill/starlab/actions/runs/24916076997) on merge commit `f618a1f…` — **success**. M01 **does not** execute training or approve claim-critical assets; **M01 non-claims** below remain in force after closure. **V15-M02** is **closed** on `main` ([PR #118](https://github.com/m-cahill/starlab/pull/118); merge `3f7e226ff0402cbb91b831e7c9397080cc8a77aa` merged **2026-04-25T00:53:35Z** UTC). **Authoritative PR-head CI** [`24918006750`](https://github.com/m-cahill/starlab/actions/runs/24918006750) (head `4aab910eb01f50f03e866630c34a3c91d772ad13`); **merge-boundary `main` CI** [`24918563270`](https://github.com/m-cahill/starlab/actions/runs/24918563270) on merge commit `3f7e226f…` — **success**. M02 **does not** execute GPU training, **does not** run GPU shakedown, and **does not** green-light a long run or operator-local RTX 5090 readiness from fixture-only output — **M02 non-claims** below apply after closure. **V15-M03** is **closed** on `main` ([PR #120](https://github.com/m-cahill/starlab/pull/120); merge `47a3fcb0a58ad6280dadc8967297774ed94ab4ad` merged **2026-04-25T02:08:19Z** UTC). **Authoritative PR-head CI** [`24919300604`](https://github.com/m-cahill/starlab/actions/runs/24919300604) (head `68ff0556b43775b5cb78adebd357bfc918eabbfb`); **merge-boundary `main` CI** [`24920070670`](https://github.com/m-cahill/starlab/actions/runs/24920070670) on merge commit `47a3fcb0…` — **success**. M03 **does not** read or hash on-disk weight blobs, does **not** verify checkpoint bytes by default, does **not** execute trainer resume or rollback, does **not** promote a strong checkpoint, and does **not** authorize a long GPU run — **M03 non-claims** below apply after closure; see `docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md` (M03 is **lineage / resume *discipline* metadata** only — **not** GPU training, **not** checkpoint-blob I/O, **not** `long_gpu_run_authorized` **true**). **V15-M04** — *XAI Evidence Contract v1* — is **next** / **not** started (await **explicit** plan approval).
+**Status:** Active program line — **V15-M00** is **closed** on `main` ([PR #116](https://github.com/m-cahill/starlab/pull/116); merge `1391518eb4a4a7e90b5b1b81074d070e2957c8a3`). **Authoritative PR-head CI** [`24911939851`](https://github.com/m-cahill/starlab/actions/runs/24911939851) (head `aeabdb9274aea43e660dedf4d2090db0b6e24237`); **merge-boundary `main` CI** [`24913025515`](https://github.com/m-cahill/starlab/actions/runs/24913025515) on merge commit `1391518e…` — **success**. M00 **does not** claim a completed long GPU run, strong agent, human benchmark, or XAI demo. **V15-M01** is **closed** on `main` ([PR #117](https://github.com/m-cahill/starlab/pull/117); merge `f618a1f90d44e02879501ea067a079c760c20e6c`). **Authoritative PR-head CI** [`24914804421`](https://github.com/m-cahill/starlab/actions/runs/24914804421) (head `8d4caf6cbc5c03e8e42e4aea62de6210b0947ae8`); **merge-boundary `main` CI** [`24916076997`](https://github.com/m-cahill/starlab/actions/runs/24916076997) on merge commit `f618a1f…` — **success**. M01 **does not** execute training or approve claim-critical assets; **M01 non-claims** below remain in force after closure. **V15-M02** is **closed** on `main` ([PR #118](https://github.com/m-cahill/starlab/pull/118); merge `3f7e226ff0402cbb91b831e7c9397080cc8a77aa` merged **2026-04-25T00:53:35Z** UTC). **Authoritative PR-head CI** [`24918006750`](https://github.com/m-cahill/starlab/actions/runs/24918006750) (head `4aab910eb01f50f03e866630c34a3c91d772ad13`); **merge-boundary `main` CI** [`24918563270`](https://github.com/m-cahill/starlab/actions/runs/24918563270) on merge commit `3f7e226f…` — **success**. M02 **does not** execute GPU training, **does not** run GPU shakedown, and **does not** green-light a long run or operator-local RTX 5090 readiness from fixture-only output — **M02 non-claims** below apply after closure. **V15-M03** is **closed** on `main` ([PR #120](https://github.com/m-cahill/starlab/pull/120); merge `47a3fcb0a58ad6280dadc8967297774ed94ab4ad` merged **2026-04-25T02:08:19Z** UTC). **Authoritative PR-head CI** [`24919300604`](https://github.com/m-cahill/starlab/actions/runs/24919300604) (head `68ff0556b43775b5cb78adebd357bfc918eabbfb`); **merge-boundary `main` CI** [`24920070670`](https://github.com/m-cahill/starlab/actions/runs/24920070670) on merge commit `47a3fcb0…` — **success**. M03 **does not** read or hash on-disk weight blobs, does **not** verify checkpoint bytes by default, does **not** execute trainer resume or rollback, does **not** promote a strong checkpoint, and does **not** authorize a long GPU run — **M03 non-claims** below apply after closure; see `docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md` (M03 is **lineage / resume *discipline* metadata** only — **not** GPU training, **not** checkpoint-blob I/O, **not** `long_gpu_run_authorized` **true**). **V15-M04** — *XAI Evidence Contract v1* — is **in progress** (contract + fixture emitter in repo; `starlab.v15.xai_evidence_pack.v1`; runtime `docs/runtime/v15_xai_evidence_contract_v1.md`). **V15-M00–M03** remain **closed** on `main` as above. M04 **does not** execute XAI inference, **does not** prove explanation faithfulness, and **does not** authorize a long GPU run.
 
 **Strategic moonshot anchor:** `docs/starlab-v1.5moonshot.md`  
 **Historical ledgers:** v1 / PV1 / PX1 / PX2 narrative remains in `docs/starlab.md` (concise pointer only—no duplication of this file’s full governance here).
@@ -63,6 +63,8 @@ Unless separately proved and scoped:
 
 **M03 non-claims (after M03 closure on `main` until superseded by later milestones as applicable):** V15-M03 defines and emits the **checkpoint lineage and resume-discipline** manifest (`starlab.v15.checkpoint_lineage_manifest.v1`). It is **metadata and governance only**: it may normalize operator-declared **lineage JSON** and may bind an **M02** environment lock file by **canonical JSON SHA-256**; it does **not** read or hash on-disk **checkpoint weight blobs**; does **not** verify checkpoint bytes by default; does **not** execute **trainer** resume or rollback; does **not** set `resume_execution_verified` / `rollback_execution_verified` to true at the program-manifest root (M03 does not prove execution); does **not** run GPU training or shakedown; does **not** authorize a long GPU run (`long_gpu_run_authorized` remains **false**); does **not** promote a “strong” checkpoint; does **not** approve real assets for claim-critical public registers; does **not** open v2 or **PX2-M04** / **PX2-M05**. A lineage manifest is **not** proof that checkpoint bytes exist unless `hash_verification_status` and external scope say so. A **resume receipt** is **not** proof that training resumed unless an external path says so, and M03 does not independently verify that path.
 
+**M04 non-claims (while M04 is open / until superseded by later milestones):** V15-M04 defines and emits the **XAI evidence contract** (`starlab.v15.xai_evidence_pack.v1`) and **fixture** `v15_xai_evidence_pack.json` + report. It is **metadata and schema only**: it may validate operator-declared **evidence JSON** and redact path-like strings; it does **not** run model **inference**; does **not** generate real saliency, attribution, or concept activations; does **not** execute counterfactual **evaluation**; does **not** parse real **replays**; does **not** read checkpoint **blobs**; does **not** verify checkpoint **bytes** as an execution path; does **not** **prove** explanation **faithfulness**; does **not** run **benchmarks** or **human** evaluation; does **not** execute GPU **training** or **shakedown**; does **not** set `long_gpu_run_authorized` to **true**; does **not** approve real XAI assets for claim-critical public **registers**; does **not** open **v2** or **PX2-M04** / **PX2-M05**. A fixture pack is **not** an explanation of a trained agent. Public **`docs/xai_evidence_register.md`** gets **no** new real XAI **rows** in M04 (contract definition only).
+
 ---
 
 ## 5. V15 milestone table (plan)
@@ -73,7 +75,7 @@ Unless separately proved and scoped:
 | **V15-M01** | Training-Scale Provenance and Asset Registers — **closed** on `main` (PR #117) |
 | **V15-M02** | Long GPU Run Environment Lock — **closed** on `main` (PR #118) |
 | **V15-M03** | Checkpoint Lineage and Resume Discipline — **closed** on `main` ([PR #120](https://github.com/m-cahill/starlab/pull/120)) |
-| **V15-M04** | XAI Evidence Contract v1 — **not** started (next; await **explicit** plan approval) |
+| **V15-M04** | XAI Evidence Contract v1 — **in progress** (see runtime doc + emitter; not claim-closed on `main` until PR merge) |
 | **V15-M05** | Strong-Agent Benchmark Protocol |
 | **V15-M06** | Human Panel Benchmark Protocol |
 | **V15-M07** | Training Smoke and Short GPU Shakedown |
@@ -96,7 +98,7 @@ Navigation aid — authoritative field lists and vocabulary live in `docs/runtim
 | Model weight register | `docs/model_weight_register.md` | Weight blobs local / external archive | `readiness_only` | **V15-M07**+ training shakedown |
 | Checkpoint register | `docs/checkpoint_asset_register.md` | Checkpoint files local / external archive | `readiness_only` | **V15-M03** lineage |
 | Human benchmark register | `docs/human_benchmark_register.md` | Human-panel records private by default | `readiness_only` | **V15-M06** protocol |
-| XAI evidence register | `docs/xai_evidence_register.md` | Operator-local packs until contract freeze | `readiness_only` | **V15-M04** contract |
+| XAI evidence register | `docs/xai_evidence_register.md` | Operator-local packs until contract freeze | `readiness_only` | **V15-M04** contract / **M10** real demo |
 | Rights register | `docs/rights_register.md` | Supplemental rights under `docs/company_secrets/` | `readiness_only` | Ongoing |
 
 ### V15-M02 — Environment lock status (compact)
@@ -135,6 +137,27 @@ Fixture CI proves **wiring and schema**; **operator-local** evidence is required
 
 `checkpoint_bytes_verified` is **true** only if **every** checkpoint row has `hash_verification_status == "verified_external"` (operator pass-through; M03 does not read blobs). `resume_execution_verified` and `rollback_execution_verified` are **false** in M03. `long_gpu_run_authorized` is **false**.
 
+### V15-M04 — XAI evidence status (compact)
+
+M04 separates **schema exists** (CI fixture / contract), **real inference executed**, and **faithfulness validated** — future milestones own real XAI execution and validation paths.
+
+| XAI surface | What M04 defines | Fixture schema exists | Real inference executed | Faithfulness validated | Public / private posture | Next dependent milestone |
+| --- | --- | --- | --- | --- | --- | --- |
+| `xai_manifest` (logical) | Required logical name + pack identity | yes / fixture | false | false | public-safe | **M10** |
+| `replay_identity` | Row fields + binding vocabulary | yes / fixture | false | false | logical refs; paths **redacted** / **private** | **M10**+ |
+| `checkpoint_identity` | Row fields + hash/binding vocabulary | yes / fixture | false | false | hash refs public; **blobs** private | M03+ bind / **M10**+ |
+| `decision_trace` | Trace row schema | yes / fixture | false | false | public-safe in fixture; sanitize operator paths | **M10**+ |
+| `critical_decision_index` | Scene types + index rows | yes / fixture | false | false | public narrative with non-claims | **M10**+ |
+| `attribution_summary` | Attribution row schema (not maps) | yes / fixture | false | false | public-safe fixture only | **M10**+ |
+| `concept_activation_summary` | Concept row schema | yes / fixture | false | false | public-safe fixture only | **M10**+ |
+| `counterfactual_probe_results` | Counterfactual row schema | yes / fixture | false | false | public-safe fixture only | **M10**+ |
+| `alternative_action_rankings` | Ranking row schema | yes / fixture | false | false | public-safe fixture only | **M10**+ |
+| `uncertainty_report` | Uncertainty row schema | yes / fixture | false | false | public-safe fixture only | **M10**+ |
+| `replay_overlay_manifest` | Overlay metadata (no render in M04) | yes / fixture | false | false | **private** for raw media paths by default | **M10**+ |
+| `xai_explanation_report` | Report metadata (`.md` logical name) | yes / fixture | false | false | public summaries only w/ non-claims | **M10**+ |
+
+`long_gpu_run_authorized` in the M04 contract is **always false**.
+
 ---
 
 ## 6. Artifact family contract ids (governed names)
@@ -148,7 +171,7 @@ These are the **intended** v1.5 contract identifiers (emission implemented per m
 - `starlab.v15.checkpoint_lineage_manifest.v1` (**M03** — checkpoint lineage + receipt vocabulary; **implemented** in M03; **not** a training or checkpoint I/O **runtime**)
 - `starlab.v15.training_run_receipt.v1`
 - `starlab.v15.strong_agent_scorecard.v1`
-- `starlab.v15.xai_evidence_pack.v1`
+- `starlab.v15.xai_evidence_pack.v1` (**M04** — XAI pack contract; **implemented** in M04; **not** real XAI inference)
 - `starlab.v15.human_panel_benchmark.v1`
 - `starlab.v15.showcase_agent_release_pack.v1`
 
@@ -166,6 +189,10 @@ These are the **intended** v1.5 contract identifiers (emission implemented per m
 **M03 emitter:** `python -m starlab.v15.emit_v15_checkpoint_lineage_manifest --output-dir <path>` writes `v15_checkpoint_lineage_manifest.json` and `v15_checkpoint_lineage_manifest_report.json` (default profile **`fixture_ci`**; optional `--profile operator_declared` with `--lineage-json <path>`; optional `--environment-lock-json <path>` to bind the canonical SHA-256 of an M02 environment lock file).
 
 **M03 runtime narrative:** `docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md`
+
+**M04 emitter:** `python -m starlab.v15.emit_v15_xai_evidence_pack --output-dir <path>` writes `v15_xai_evidence_pack.json` and `v15_xai_evidence_pack_report.json` (default profile **`fixture_ci`**; optional `--profile operator_declared` with `--evidence-json <path>`; optional `--checkpoint-lineage-json` / `--environment-lock-json` for canonical JSON SHA binding only).
+
+**M04 runtime narrative:** `docs/runtime/v15_xai_evidence_contract_v1.md`
 
 ---
 
@@ -207,7 +234,7 @@ Long runs must bind identity and environment fields (git SHA, branch, milestone,
 
 ## 11. CI security note (M00–M03, temporary)
 
-The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain**. **M01 re-check (2026-04-24, CI-like env):** after `pip install --upgrade pip`, **`pip` 26.0.1** still reported **CVE-2026-3219** to **`pip-audit`**. **M02 re-check (2026-04-25, CI-like local env):** same — **`pip` 26.0.1** still reports the CVE; **no** audit-clean **`pip`** upgrade path observed. **M03 re-check (2026-04-25, local env):** **`pip` 26.0.1** is still the latest on PyPI; **`pip-audit`** still flags **CVE-2026-3219** for **`pip`**. **Leave** the narrow ignore in place; do **not** broaden exceptions. This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is published on PyPI.
+The default merge CI runs **`pip-audit`** with a **single** narrow ignore: **`--ignore-vuln CVE-2026-3219`** for the **`pip` toolchain**. **M01 re-check (2026-04-24, CI-like env):** after `pip install --upgrade pip`, **`pip` 26.0.1** still reported **CVE-2026-3219** to **`pip-audit`**. **M02 re-check (2026-04-25, CI-like local env):** same — **`pip` 26.0.1** still reports the CVE; **no** audit-clean **`pip`** upgrade path observed. **M03 re-check (2026-04-25, local env):** **`pip` 26.0.1** is still the latest on PyPI; **`pip-audit`** still flags **CVE-2026-3219** for **`pip`**. **M04 re-check (2026-04-25, local env):** **`pip index versions pip`** still shows **26.0.1** as latest; **no** newer audit-clean wheel observed — **leave** the **same** single narrow ignore. **Leave** the narrow ignore in place; do **not** broaden exceptions. This is **not** `continue-on-error`. **CycloneDX SBOM** generation, **SBOM upload**, **Gitleaks**, and the aggregate **governance** job still run. **Remove** the ignore when a fixed, audit-clean **`pip`** is published on PyPI.
 
 ---
 

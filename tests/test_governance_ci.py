@@ -296,6 +296,8 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
         "### V15-M01 — Training-Scale Provenance and Asset Registers — **closed** on `main`"
         in section
     )
+    assert "v15_xai_evidence_contract_v1.md" in section
+    assert "### V15-M04 — *XAI Evidence Contract v1* — **in progress**" in section
     assert "### V15-M03 — *Checkpoint Lineage and Resume Discipline* — **closed**" in section
     assert "**`V15-M03`**" in section
     assert "**`V15-M04`**" in section

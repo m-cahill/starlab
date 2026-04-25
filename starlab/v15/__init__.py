@@ -1,1 +1,1 @@
-"""STARLAB v1.5 (V15) — charter, registers, environment lock, checkpoint lineage, and planning."""
+"""STARLAB v1.5 (V15) — charter, registers, env lock, checkpoint lineage, XAI contract."""

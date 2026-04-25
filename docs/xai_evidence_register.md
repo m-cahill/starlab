@@ -9,7 +9,7 @@ Inventory **XAI evidence** artifacts (explanation packs, traces, reports) bound 
 ## Scope
 
 - `asset_class`: `xai_evidence` (and related `video_or_media` when tied to explanation deliverables).
-- Frozen artifact shapes are **V15-M04**; M01 does **not** freeze the evidence contract.
+- **V15-M04** freezes the **XAI evidence contract** (`starlab.v15.xai_evidence_pack.v1`) and fixture emitters — it does **not** register real operator XAI packs in this public table. M01 did **not** freeze the contract.
 
 ## Public / private boundary
 
