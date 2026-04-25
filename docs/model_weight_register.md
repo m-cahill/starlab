@@ -21,7 +21,7 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 ## Current status
 
-**M01:** Surface only; **no** promoted showcase weights registered publicly. **V15-M07** is **closed** on `main` ([PR #129](https://github.com/m-cahill/starlab/pull/129)); it may still produce **operator-local** shakedown weights/checkpoints under `out/` when run by an operator; the public register remains **no** real **claim-critical** **rows** unless explicitly reviewed and approved. **V15-M08** implementation surface **closed** on `main` ([PR #133](https://github.com/m-cahill/starlab/pull/133)); **`implementation_ready_waiting_for_operator_run`**. May produce **candidate** weight hashes **locally** only when an operator runs training; public rows (sanitized hash only, `pending_review`) require explicit approval — default remains **no rows**.
+**M01:** Surface only; **no** promoted showcase weights registered publicly. **V15-M07** is **closed** on `main` ([PR #129](https://github.com/m-cahill/starlab/pull/129)); it may still produce **operator-local** shakedown weights/checkpoints under `out/` when run by an operator; the public register remains **no** real **claim-critical** **rows** unless explicitly reviewed and approved. **V15-M08** implementation surface **closed** on `main` ([PR #133](https://github.com/m-cahill/starlab/pull/133)); **`implementation_ready_waiting_for_operator_run`**. May produce **candidate** weight hashes **locally** only when an operator runs training; public rows (sanitized hash only, `pending_review`) require explicit approval — default remains **no rows**. **V15-M09** adds checkpoint evaluation / promotion **governance** only; **no** new public model-weight **rows** by default.
 
 ## Current registered assets
 

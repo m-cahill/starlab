@@ -10,6 +10,10 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 **V15-M08** (implementation surface **closed** on `main`, [PR #133](https://github.com/m-cahill/starlab/pull/133); **`implementation_ready_waiting_for_operator_run`**) may bind training manifests, dataset references, and operator-local campaign trees under `out/v15_m08_campaigns/` when an operator runs the guarded path. **Default:** long-campaign corpora, weights, logs, and uncleared paths remain **private** / **local_only**; `docs/company_secrets/**` stays **gitignored**. Public governance references **`docs/runtime/v15_long_gpu_campaign_execution_v1.md`** and **`docs/starlab-v1.5.md`** (M08 non-claims block) — **not** automatic rights clearance for redistribution.
 
+### V15-M09 — checkpoint evaluation / promotion (v1.5)
+
+**V15-M09** defines `starlab.v15.checkpoint_evaluation.v1` and `starlab.v15.checkpoint_promotion_decision.v1` with **`docs/runtime/v15_checkpoint_evaluation_promotion_v1.md`**. Emissions use **SHA-only** JSON bindings for dataset/rights/descriptor inputs; they do **not** import uncleared media into the repo. Public-rights posture is **unchanged** by M09; **no** new public register rows are implied.
+
 ### V15-M02 — environment references (v1.5)
 
 **V15-M02** adds the environment-lock contract **`starlab.v15.long_gpu_environment_lock.v1`** and runtime **`docs/runtime/v15_long_gpu_run_environment_lock_v1.md`** (merged **2026-04-25** per **`docs/starlab-v1.5.md`**). **SC2 client paths**, **map pool / on-disk map locations**, **GPU driver or machine-identifying details**, and other **operator-local environment facts** are **private by default** unless intentionally **sanitized** for public reference. Public surfaces should use **logical references** (map id, pool id, version strings) — not raw paths. The emitter **redacts** absolute path strings in operator `--probe-json` output; do not treat that as rights clearance for redistribution. Milestone **closure** does not relax default **private** posture for operator paths or media.

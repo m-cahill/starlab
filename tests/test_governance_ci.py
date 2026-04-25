@@ -61,6 +61,28 @@ def test_v15_m08_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m09_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M09" in v15
+    assert "starlab.v15.checkpoint_evaluation.v1" in v15
+    assert "starlab.v15.checkpoint_promotion_decision.v1" in v15
+    assert "M09 non-claims" in v15
+    assert "blocked_missing_m08_campaign_receipt" in v15 or "governance routing" in v15
+    car = (REPO_ROOT / "docs" / "checkpoint_asset_register.md").read_text(encoding="utf-8")
+    assert "V15-M09" in car and "no" in car.lower() and "public" in car
+    mwr = (REPO_ROOT / "docs" / "model_weight_register.md").read_text(encoding="utf-8")
+    assert "V15-M09" in mwr
+    tar = (REPO_ROOT / "docs" / "training_asset_register.md").read_text(encoding="utf-8")
+    assert "V15-M09" in tar
+    rights = (REPO_ROOT / "docs" / "rights_register.md").read_text(encoding="utf-8")
+    assert "V15-M09" in rights
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_checkpoint_evaluation_promotion_v1.md"
+    assert rt.is_file()
+    rtxt = rt.read_text(encoding="utf-8").lower()
+    assert "checkpoint" in rtxt and "promotion" in rtxt
+
+
+@pytest.mark.smoke
 def test_docs_company_secrets_tree_not_tracked_by_git() -> None:
     proc = subprocess.run(
         ["git", "ls-files", "--", "docs/company_secrets"],
@@ -380,7 +402,11 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
         "(**implementation surface**; **`implementation_ready_waiting_for_operator_run`**)"
     )
     assert m08_heading in section
-    assert "### V15-M09 — *Checkpoint Evaluation and Promotion* — **not started**" in section
+    m09_heading = (
+        "### V15-M09 — *Checkpoint Evaluation and Promotion* — "
+        "**governance surface implemented (PR pending `main`)**"
+    )
+    assert m09_heading in section
     assert "v15_long_gpu_campaign_execution_v1.md" in section
     assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **closed**" in section
     assert "### V15-M06 — *Human Panel Benchmark Protocol* — **closed**" in section
