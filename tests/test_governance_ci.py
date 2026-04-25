@@ -83,6 +83,29 @@ def test_v15_m09_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m10_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M10" in v15
+    assert "starlab.v15.replay_native_xai_demonstration.v1" in v15
+    assert "M10 non-claims" in v15
+    xai_reg = (REPO_ROOT / "docs" / "xai_evidence_register.md").read_text(encoding="utf-8")
+    assert "V15-M10" in xai_reg
+    assert "No rows" in xai_reg or "*No rows.*" in xai_reg
+    car = (REPO_ROOT / "docs" / "checkpoint_asset_register.md").read_text(encoding="utf-8")
+    assert "V15-M10" in car
+    mwr = (REPO_ROOT / "docs" / "model_weight_register.md").read_text(encoding="utf-8")
+    assert "V15-M10" in mwr
+    tar = (REPO_ROOT / "docs" / "training_asset_register.md").read_text(encoding="utf-8")
+    assert "V15-M10" in tar
+    rights = (REPO_ROOT / "docs" / "rights_register.md").read_text(encoding="utf-8")
+    assert "V15-M10" in rights
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_replay_native_xai_demonstration_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "m04" in rtx and "governed" in rtx
+
+
+@pytest.mark.smoke
 def test_docs_company_secrets_tree_not_tracked_by_git() -> None:
     proc = subprocess.run(
         ["git", "ls-files", "--", "docs/company_secrets"],
@@ -410,6 +433,9 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
         "**closeout** **`blocked_missing_m08_campaign_receipt`**)"
     )
     assert m09_heading in section
+    m10_heading = "### V15-M10 — *Replay-Native XAI Demonstration* — **opened** (implementation)"
+    assert m10_heading in section
+    assert "v15_replay_native_xai_demonstration_v1.md" in section
     assert "v15_long_gpu_campaign_execution_v1.md" in section
     assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **closed**" in section
     assert "### V15-M06 — *Human Panel Benchmark Protocol* — **closed**" in section

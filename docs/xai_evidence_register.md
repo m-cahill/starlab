@@ -23,7 +23,7 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 **M01:** Surface only; **no** XAI demo completion claimed.
 
-**M04 (closed):** Contract `starlab.v15.xai_evidence_pack.v1` and fixture emitter are on `main`; this table remains **no real rows** — M04 does **not** register operator XAI packs for claim-critical use. **M05 (closed on `main`, [PR #125](https://github.com/m-cahill/starlab/pull/125))** may cite **XAI trace coverage** as a **future scorecard / protocol** requirement; M05 does **not** execute XAI **review** and does **not** add rows.
+**M04 (closed):** Contract `starlab.v15.xai_evidence_pack.v1` and fixture emitter are on `main`; this table remains **no real rows** — M04 does **not** register operator XAI packs for claim-critical use. **M05 (closed on `main`, [PR #125](https://github.com/m-cahill/starlab/pull/125))** may cite **XAI trace coverage** as a **future scorecard / protocol** requirement; M05 does **not** execute XAI **review** and does **not** add rows. **V15-M10** (**M10** implementation): `starlab.v15.replay_native_xai_demonstration.v1` and **`docs/runtime/v15_replay_native_xai_demonstration_v1.md`** add the **replay-native XAI demonstration/report** surface and deterministic Markdown; default path is **contract / report validation** and **no** new **claim-critical** public table rows; **not** real inference, **not** faithfulness proof.
 
 ## Current registered assets
 

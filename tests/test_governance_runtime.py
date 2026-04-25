@@ -445,6 +445,16 @@ def test_v15_m09_checkpoint_evaluation_modules_exist() -> None:
         assert (v15 / name).is_file()
 
 
+def test_v15_m10_replay_native_xai_demonstration_modules_exist() -> None:
+    v15 = REPO_ROOT / "starlab" / "v15"
+    for name in (
+        "xai_demonstration_models.py",
+        "xai_demonstration_io.py",
+        "emit_v15_replay_native_xai_demonstration.py",
+    ):
+        assert (v15 / name).is_file()
+
+
 def test_m52_equivalence_charter_modules_exist() -> None:
     eq = REPO_ROOT / "starlab" / "equivalence"
     for name in (
