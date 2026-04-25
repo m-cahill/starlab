@@ -10,7 +10,7 @@ This file is **subordinate** to `docs/starlab.md`. It preserves verbatim **§7 m
 
 **M01 note:** M01 is **merged** to `main` (see §18). “Complete” in the table reflects closed milestone scope on `main`.
 
-**M02 note:** M02 is **merged** to `main` (see §18). “Complete” reflects **bounded harness + deterministic proof artifact + CI** on `main`; the **narrow** same-machine harness claim is documented in `docs/company_secrets/milestones/M02/` (not a cross-host or replay-binding claim).
+**M02 note:** M02 is **merged** to `main` (see §18). “Complete” reflects **bounded harness + deterministic proof artifact + CI** on `main`; the **narrow** same-machine harness claim is documented in **operator-local** copies under `docs/company_secrets/milestones/M02/` (gitignored; not in a default clone — not a cross-host or replay-binding claim).
 
 **M03 note:** M03 is **merged** to `main` (see §18). “Complete” reflects **deterministic run spec / execution / lineage seed IDs**, stable **`run_identity.json` / `lineage_seed.json`** from normalized proof + config (fixtures in CI), and **`starlab/runs/`** + contract doc on `main` — **not** (by itself) replay binding, **not** canonical run artifact v0, **not** benchmark validity. **Replay binding** is **M04** (see §18).
 

@@ -29,7 +29,7 @@
 
 ## M34 resolutions
 
-**Merge evidence:** [PR #40](https://github.com/m-cahill/starlab/pull/40) — authoritative PR-head CI [`24261065226`](https://github.com/m-cahill/starlab/actions/runs/24261065226); merge-boundary `main` CI [`24261102337`](https://github.com/m-cahill/starlab/actions/runs/24261102337); tag **`v0.0.34-m34`** on merge commit `51e960d0c1c0eb20923836a8ac2400a59013bcc5`. Details: `docs/company_secrets/milestones/M34/M34_run1.md`.
+**Merge evidence:** [PR #40](https://github.com/m-cahill/starlab/pull/40) — authoritative PR-head CI [`24261065226`](https://github.com/m-cahill/starlab/actions/runs/24261065226); merge-boundary `main` CI [`24261102337`](https://github.com/m-cahill/starlab/actions/runs/24261102337); tag **`v0.0.34-m34`** on merge commit `51e960d0c1c0eb20923836a8ac2400a59013bcc5`. Further detail may exist in **operator-local** `docs/company_secrets/milestones/M34/M34_run1.md` (gitignored; not in a default clone).
 
 | ID | Resolution | Evidence |
 | -- | ----------- | -------- |

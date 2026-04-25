@@ -983,6 +983,8 @@ Changes to the following require **explicit milestone governance** (plan, scope,
 
 ### Proved vs not yet proved
 
+**Private milestone path references:** Rows below cite paths under `docs/company_secrets/…` as **expected local/operator basenames** for historical closeout evidence. That entire tree is **private**, **gitignored**, and **not** present in a default clone. Public review and CI do **not** require those files to exist; operators may keep supplements in private storage or a local checkout only.
+
 | Claim | Status |
 |-------|--------|
 | Canonical ledger exists | Proved (M00) |
@@ -2065,7 +2067,7 @@ This section should be filled as milestones close.
 | `main` after merge (`f9203dd…`) | `24015599413` | success | https://github.com/m-cahill/starlab/actions/runs/24015599413 |
 | `main` after M00 evidence finalization (`523993e…`) | `24015634285` | success | https://github.com/m-cahill/starlab/actions/runs/24015634285 |
 
-**M00 milestone artifacts:** `docs/company_secrets/milestones/M00/` (`M00_summary.md`, `M00_audit.md`, `M00_run1.md`, etc.)
+**M00 milestone artifacts:** `docs/company_secrets/milestones/M00/` (`M00_summary.md`, `M00_audit.md`, `M00_run1.md`, etc.) — **local only** — **not** in a default clone (gitignored).
 
 **M01 merge:** [PR #2](https://github.com/m-cahill/starlab/pull/2) merged **2026-04-06** (UTC `2026-04-06T20:26:27Z`) via **merge commit** `4a916033f55c6b8c4a582f985233a64ca039ead3`. Remote branch `m01-sc2-runtime-surface-env-lock` was **deleted** after merge.
 
@@ -2093,7 +2095,7 @@ Further commits on the PR after `88b06db…` had additional green PR-head runs o
 
 *Additional follow-up (ledger commit recording run 3):* `main` @ `8251cef…` — workflow run `24049998835` (success): https://github.com/m-cahill/starlab/actions/runs/24049998835
 
-**M01 milestone artifacts:** `docs/company_secrets/milestones/M01/` (`M01_plan.md`, `M01_toolcalls.md`, `M01_run1.md`, `M01_summary.md`, `M01_audit.md`, optional redacted probe sample, etc.)
+**M01 milestone artifacts:** `docs/company_secrets/milestones/M01/` (`M01_plan.md`, `M01_toolcalls.md`, `M01_run1.md`, `M01_summary.md`, `M01_audit.md`, optional redacted probe sample, etc.) — **local only** — **not** in a default clone (gitignored).
 
 **M02 merge:** [PR #3](https://github.com/m-cahill/starlab/pull/3) merged **2026-04-06** (UTC `2026-04-06T23:35:21Z`) via **merge commit** `53a24a4a6106168afe79e0a70d51a20bfef4ea18`. Remote branch `m02-deterministic-match-execution-harness` was **deleted** after merge. Final PR head before merge: `e88ca20424410cd99f834eeec92a5ec5d8034284`.
 
