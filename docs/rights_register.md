@@ -12,7 +12,7 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 ### V15-M09 — checkpoint evaluation / promotion (v1.5)
 
-**V15-M09** defines `starlab.v15.checkpoint_evaluation.v1` and `starlab.v15.checkpoint_promotion_decision.v1` with **`docs/runtime/v15_checkpoint_evaluation_promotion_v1.md`**. Emissions use **SHA-only** JSON bindings for dataset/rights/descriptor inputs; they do **not** import uncleared media into the repo. Public-rights posture is **unchanged** by M09; **no** new public register rows are implied.
+**V15-M09** is **closed** on `main` ([PR #135](https://github.com/m-cahill/starlab/pull/135)); defines `starlab.v15.checkpoint_evaluation.v1` and `starlab.v15.checkpoint_promotion_decision.v1` with **`docs/runtime/v15_checkpoint_evaluation_promotion_v1.md`**. Emissions use **SHA-only** JSON bindings for dataset/rights/descriptor inputs; they do **not** import uncleared media into the repo. Public-rights posture is **unchanged** by M09; **no** new public register rows are implied.
 
 ### V15-M02 — environment references (v1.5)
 

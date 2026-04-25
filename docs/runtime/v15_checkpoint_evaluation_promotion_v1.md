@@ -5,6 +5,8 @@
 **Profile:** `starlab.v15.checkpoint_evaluation_promotion.v1`  
 **Status:** Governance surface; **not** a replacement for a completed long-GPU campaign or strong-agent claim.
 
+**Public closeout (2026-04-25):** M09 **closed** on `main` (implementation [PR #135](https://github.com/m-cahill/starlab/pull/135); merge `eaa928d2177ca3f18caece3c2dac82b474203d08`; **authoritative PR-head CI** [`24942859847`](https://github.com/m-cahill/starlab/actions/runs/24942859847); **merge-boundary `main` CI** [`24942925570`](https://github.com/m-cahill/starlab/actions/runs/24942925570) — **success**). **Closeout status:** **`blocked_missing_m08_campaign_receipt`** — **no** checkpoint promoted; **no** public register rows. **V15-M10** not started; awaits explicit plan approval.
+
 ## Purpose
 
 Define deterministic **checkpoint evaluation** and **promotion decision** artifacts for STARLAB v1.5. M09 answers whether a candidate checkpoint is eligible, under recorded evidence, to be treated as a **promoted candidate for downstream v1.5 milestones** (M10+). Promotion here is a **governance routing label**, not “strong agent,” not “release-ready,” and not a benchmark pass.

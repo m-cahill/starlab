@@ -110,7 +110,9 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
+    assert "**`V15-M10`**" in scan
     assert "**`V15-M09`**" in scan
+    assert "PR #135" in scan or "pull/135" in scan
     assert "**`V15-M08`**" in scan and "**`V15-M07`**" in scan and "**`V15-M06`**" in scan
     assert "PR #116" in scan and "PR #125" in scan and "PR #127" in scan and "PR #129" in scan
     assert "PR #133" in scan or "pull/133" in scan
@@ -403,8 +405,9 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     )
     assert m08_heading in section
     m09_heading = (
-        "### V15-M09 — *Checkpoint Evaluation and Promotion* — "
-        "**governance surface implemented (PR pending `main`)**"
+        "### V15-M09 — *Checkpoint Evaluation and Promotion* — **closed** on `main` "
+        "(implementation [PR #135](https://github.com/m-cahill/starlab/pull/135); "
+        "**closeout** **`blocked_missing_m08_campaign_receipt`**)"
     )
     assert m09_heading in section
     assert "v15_long_gpu_campaign_execution_v1.md" in section
