@@ -423,6 +423,17 @@ def test_v15_m05_strong_agent_scorecard_modules_exist() -> None:
         assert (v15 / name).is_file()
 
 
+def test_v15_m08_long_gpu_campaign_modules_exist() -> None:
+    v15 = REPO_ROOT / "starlab" / "v15"
+    for name in (
+        "long_gpu_training_manifest_models.py",
+        "long_gpu_training_manifest_io.py",
+        "emit_v15_long_gpu_training_manifest.py",
+        "run_v15_long_gpu_campaign.py",
+    ):
+        assert (v15 / name).is_file()
+
+
 def test_m52_equivalence_charter_modules_exist() -> None:
     eq = REPO_ROOT / "starlab" / "equivalence"
     for name in (
