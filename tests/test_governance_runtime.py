@@ -413,6 +413,16 @@ def test_v15_m02_environment_lock_modules_exist() -> None:
         assert (v15 / name).is_file()
 
 
+def test_v15_m05_strong_agent_scorecard_modules_exist() -> None:
+    v15 = REPO_ROOT / "starlab" / "v15"
+    for name in (
+        "strong_agent_scorecard_models.py",
+        "strong_agent_scorecard_io.py",
+        "emit_v15_strong_agent_scorecard.py",
+    ):
+        assert (v15 / name).is_file()
+
+
 def test_m52_equivalence_charter_modules_exist() -> None:
     eq = REPO_ROOT / "starlab" / "equivalence"
     for name in (

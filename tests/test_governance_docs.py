@@ -79,6 +79,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/v15_long_gpu_run_environment_lock_v1.md",
     "docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md",
     "docs/runtime/v15_xai_evidence_contract_v1.md",
+    "docs/runtime/v15_strong_agent_benchmark_protocol_v1.md",
     "docs/training_asset_register.md",
     "docs/replay_corpus_register.md",
     "docs/model_weight_register.md",
