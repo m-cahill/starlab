@@ -24,7 +24,7 @@ Committed in this repository and intended for review:
 
 Treated as sensitive or reserved until explicitly promoted:
 
-- `docs/company_secrets/**` except **`docs/company_secrets/milestones/`** (milestone working artifacts are tracked for governance/CI; other subfolders remain local-only)
+- **`docs/company_secrets/**` — not committed** (entire tree is **gitignored**; milestone plans, prompts, manuals, and audits are **local / operator** copies only — a default `git clone` does **not** include them)
 - Future: core runtime, SC2 adapters, stabilization internals, ingestion pipelines, private corpora, labels, weights, proprietary evaluation internals
 
 ## Current repo mapping
@@ -32,8 +32,7 @@ Treated as sensitive or reserved until explicitly promoted:
 | Area | Posture |
 |------|---------|
 | Docs under `docs/` (non-secrets) | Public |
-| `docs/company_secrets/milestones/` | Tracked milestone plans, toolcalls, audits, summaries |
-| `docs/company_secrets/manuals/`, `prompts/`, `rediai33/`, `enhancements/` | Local-only (gitignored) |
+| `docs/company_secrets/**` | **Private** — must remain **untracked**; keep milestone notes, prompts, and operator evidence **locally** (or in separate private storage) — **not** public git contents |
 | `frontend/`, `backend/`, `ops/` | Placeholder roots; future code subject to same boundary rules |
 
 ## Promoting an internal surface to public

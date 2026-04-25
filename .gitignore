@@ -1,8 +1,5 @@
-# Company secrets — tracked in-repo (do not gitignore whole dirs; they are governance/prompt canon):
-#   docs/company_secrets/{prompts,manuals,enhancements,rediai33,milestones/…}
-# Only ignore truly local / machine-specific paths under milestones:
-docs/company_secrets/milestones/M02/_local_runs/
-docs/company_secrets/milestones/M02/_local_maps/
+# Private / operator-local documentation (not shipped in a default git checkout)
+docs/company_secrets/
 
 # Cursor
 .cursorrules
@@ -23,6 +20,12 @@ venv/
 coverage.xml
 pytest-junit.xml
 htmlcov/
+
+# Training / checkpoint blobs (local operator artifacts)
+*.pt
+*.pth
+*.ckpt
+*.joblib
 
 # Env (allow *.example)
 .env
@@ -51,24 +54,8 @@ backend/.venv/
 ops/.env
 ops/.env.*
 
-# Makefile field-test output (M32)
-out/fieldtest/
-
-# M39 flagship proof pack (local / CI artifact)
-out/flagship/
-
-# M40 agent training program contract (local emission)
-out/training_program/
-
-# M41 replay-imitation training runs (local-only weights + JSON)
-out/training_runs/
-
-# M43 hierarchical training runs (local-only weights + JSON)
-out/hierarchical_training_runs/
-
-# M44 local live-play validation runs (local outputs + JSON)
-out/live_validation_runs/
-out/rl_bootstrap_runs/
+# Local and CI output trees
+out/
 
 # Generated SBOM (CI artifact)
 sbom.json

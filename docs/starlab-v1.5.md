@@ -99,13 +99,13 @@ Navigation aid — authoritative field lists and vocabulary live in `docs/runtim
 | Surface / register | Public doc | Private / local counterpart (typical) | Strongest allowed claim (until populated & reviewed) | Next dependent milestone |
 | --- | --- | --- | --- | --- |
 | `starlab.v15.training_readiness_charter.v1` | `docs/runtime/v15_training_readiness_charter_v1.md` | Local charter JSON emit only | `readiness_only` (gates defined, not satisfied) | **V15-M01+** |
-| Training asset register | `docs/training_asset_register.md` | Dataset manifests under `out/` / `docs/company_secrets/` (not raw commits) | `readiness_only` | **V15-M02** (environment lock) / later data gates |
+| Training asset register | `docs/training_asset_register.md` | Dataset manifests under `out/` or **local** `docs/company_secrets/` (not raw commits; private tree not in default clone) | `readiness_only` | **V15-M02** (environment lock) / later data gates |
 | Replay corpus register | `docs/replay_corpus_register.md` | Raw replays local; rights notes private | `readiness_only` | **V15-M02** / gate **C** |
 | Model weight register | `docs/model_weight_register.md` | Weight blobs local / external archive | `readiness_only` | **V15-M07**+ training shakedown |
 | Checkpoint register | `docs/checkpoint_asset_register.md` | Checkpoint files local / external archive | `readiness_only` | **V15-M03** lineage |
 | Human benchmark register | `docs/human_benchmark_register.md` | Human-panel records private by default | `readiness_only` | **M06** protocol **closed**; human **execution** = **M11+** (roadmap) |
 | XAI evidence register | `docs/xai_evidence_register.md` | Operator-local packs until contract freeze | `readiness_only` | **V15-M04** contract / **M10** real demo |
-| Rights register | `docs/rights_register.md` | Supplemental rights under `docs/company_secrets/` | `readiness_only` | Ongoing |
+| Rights register | `docs/rights_register.md` | Supplemental rights under **local** `docs/company_secrets/` (private; not in default clone) | `readiness_only` | Ongoing |
 
 ### V15-M02 — Environment lock status (compact)
 
