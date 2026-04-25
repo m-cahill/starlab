@@ -1,8 +1,8 @@
-# V15-M07 — Plan stub (not started)
+# V15-M07 — Plan (superseded by implementation; milestone closed on `main`)
 
 **Title:** Training Smoke and Short GPU Shakedown  
 **Milestone id:** V15-M07  
-**Status:** **Not started** — do **not** begin implementation, **GPU** runs, shakedown execution, or public governance changes until the maintainer **explicitly approves** a full plan (separate from this stub).
+**Status:** **Complete** on `main` — implementation [PR #129](https://github.com/m-cahill/starlab/pull/129) (2026-04-25). The text below is **historical** plan intent; authoritative non-claims and scope are in `docs/starlab-v1.5.md` and `V15-M07_summary.md` / `V15-M07_audit.md`.
 
 ## Intent (high level, subject to recharter)
 
