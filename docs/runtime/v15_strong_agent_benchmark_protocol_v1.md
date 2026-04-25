@@ -8,6 +8,8 @@
 
 > **V15-M05 freezes the strong-agent benchmark protocol and scorecard contract. It does not run the benchmark and does not certify any checkpoint as strong.**
 
+**Closure (public):** **V15-M05** is **closed** on `main` ([PR #125](https://github.com/m-cahill/starlab/pull/125); merge `d7daee6e43613daf85e544ac5a25179cb5697c76`). This closure records **governance, contract, and CI** for the **protocol / scorecard** surface only. It is **not** a statement that a benchmark or tournament was **executed**; that a checkpoint was **evaluated** or **promoted**; or that a **strong-agent** claim is **authorized**. **`benchmark_execution_performed`**, **`strong_agent_claim_authorized`**, and **`long_gpu_run_authorized`** remain **false** in the emitted M05 contract.
+
 ---
 
 ## 1. Purpose of V15-M05
