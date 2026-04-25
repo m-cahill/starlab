@@ -77,6 +77,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/v15_training_readiness_charter_v1.md",
     "docs/runtime/v15_training_scale_provenance_asset_registers_v1.md",
     "docs/runtime/v15_long_gpu_run_environment_lock_v1.md",
+    "docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md",
     "docs/training_asset_register.md",
     "docs/replay_corpus_register.md",
     "docs/model_weight_register.md",

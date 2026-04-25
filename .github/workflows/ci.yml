@@ -148,7 +148,7 @@ jobs:
 
       # pip-audit narrow ignore — CVE-2026-3219, package: pip (CI runner / toolchain `pip` after
       # `pip install --upgrade pip`). Reason: no PyPI release with an audit-clean fix was available
-      # at time of mitigation (PyPI 26.0.1 was latest; 2026-04-24 M01 re-check; 2026-04-25 M02 re-check same).
+      # at time of mitigation (PyPI 26.0.1 was latest; 2026-04-24 M01 re-check; 2026-04-25 M02 + M03 re-check same).
       # Removal: delete this --ignore-vuln once a fixed pip is published and
       # `pip install pip==<version>` is audit-clean.
       - name: pip-audit

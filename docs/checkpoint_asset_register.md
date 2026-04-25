@@ -1,15 +1,15 @@
 # Checkpoint asset register (v1.5)
 
-**Milestone:** `V15-M01` — public register surface only.
+**Milestone:** `V15-M01` — public register surface only (introduced in M01). **V15-M03** adds the separate `starlab.v15.checkpoint_lineage_manifest.v1` **metadata** contract; it does **not** add rows to this table by itself.
 
 ## Purpose
 
-Track **checkpoints** (training saves, including optional optimizer state) that anchor evaluation, promotion, or XAI binds. Lineage and resume **runtime** are **V15-M03**; this register is the **inventory posture** for M01.
+Track **checkpoints** (training saves, including optional optimizer state) that anchor evaluation, promotion, or XAI binds. **V15-M03** defines the `starlab.v15.checkpoint_lineage_manifest.v1` **metadata** contract and receipt shapes (no real weight blobs in CI); that manifest is **not** a substitute for adding **reviewed** public rows here. This register is the **inventory posture** for M01+.
 
 ## Scope
 
 - `asset_class`: `checkpoint`.
-- Pairs with future `starlab.v15.checkpoint_lineage_manifest.v1` (not implemented in M01).
+- Pairs with `starlab.v15.checkpoint_lineage_manifest.v1` (V15-M03) for lineage discipline; the manifest still does **not** require registering real checkpoint blobs in this public table.
 
 ## Public / private boundary
 
@@ -31,4 +31,4 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 ## Non-claims
 
-M01 does **not** implement resume, rollback testing, or parent/child lineage automation.
+M01 did **not** implement resume, rollback testing, or parent/child lineage automation. **V15-M03** defines **metadata-only** lineage and resume/rollback **receipt shapes**; it still does **not** execute trainer resume, does **not** execute rollback, and does **not** verify checkpoint bytes by default—see `docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md`.
