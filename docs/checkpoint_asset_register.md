@@ -21,7 +21,7 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 ## Current status
 
-**M01:** Surface only; **no** long-run checkpoint lineage claimed. **V15-M03** is **closed** on `main` ([PR #120](https://github.com/m-cahill/starlab/pull/120)) with the `starlab.v15.checkpoint_lineage_manifest.v1` **metadata** contract; this table still has **no** new public **claim** rows (non-claims unchanged—see `docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md`).
+**M01:** Surface only; **no** long-run checkpoint lineage claimed. **V15-M03** is **closed** on `main` ([PR #120](https://github.com/m-cahill/starlab/pull/120)) with the `starlab.v15.checkpoint_lineage_manifest.v1` **metadata** contract; this table still has **no** new public **claim** rows (non-claims unchanged—see `docs/runtime/v15_checkpoint_lineage_resume_discipline_v1.md`). **V15-M05** may **reference** checkpoint ids / lineage manifest SHA in the **strong-agent benchmark protocol** (`starlab.v15.strong_agent_scorecard.v1`); M05 does **not** evaluate or promote any checkpoint and does **not** add rows here.
 
 ## Current registered assets
 
