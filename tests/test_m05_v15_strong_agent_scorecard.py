@@ -321,7 +321,11 @@ def test_operator_protocol_partial_is_incomplete(tmp_path: Path) -> None:
     )
     d = parse_protocol_json(p)
     m = merge_operator_protocol(d)
-    empty_binds = {"checkpoint_lineage": None, "xai_evidence": None, "environment_lock": None}
+    empty_binds: dict[str, str | None] = {
+        "checkpoint_lineage": None,
+        "xai_evidence": None,
+        "environment_lock": None,
+    }
     out = build_strong_agent_scorecard_body_operator(m, optional_bindings=empty_binds)
     assert out["benchmark_protocol_status"] == "operator_declared_incomplete"
     assert out["benchmark_execution_performed"] is False
@@ -455,7 +459,11 @@ def test_operator_path_redaction(tmp_path: Path) -> None:
 def test_operator_complete_status_without_execution() -> None:
     op = _complete_operator_protocol()
     m = merge_operator_protocol(op)
-    empty_binds = {"checkpoint_lineage": None, "xai_evidence": None, "environment_lock": None}
+    empty_binds: dict[str, str | None] = {
+        "checkpoint_lineage": None,
+        "xai_evidence": None,
+        "environment_lock": None,
+    }
     out = build_strong_agent_scorecard_body_operator(m, optional_bindings=empty_binds)
     assert out["benchmark_protocol_status"] == "operator_declared_complete"
     assert out["benchmark_execution_performed"] is False
