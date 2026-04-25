@@ -344,8 +344,10 @@ def compute_gates_for_preflight(
     return gates, base_status, gaps, receipt_valid
 
 
-def promotion_blocked_by_gates(evaluation_gates: list[dict[str, Any]]) -> tuple[bool, list[str]]:
-    """Returns (blocked, blockers) using frozen promotion requirements."""
+def promotion_blocked_by_gates(
+    evaluation_gates: list[dict[str, Any]],
+) -> tuple[bool, list[str], dict[str, str]]:
+    """Returns (blocked, blockers, gate_id_to_status) using frozen promotion requirements."""
 
     gmap = {str(x.get("gate_id", "")): str(x.get("status", "")) for x in evaluation_gates}
     blockers: list[str] = []
