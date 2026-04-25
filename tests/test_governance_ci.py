@@ -54,8 +54,9 @@ def test_ledger_header_points_to_v15_authority_doc() -> None:
 def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
-    assert "| Current milestone |" in scan and "**`V15-M07`**" in scan and "**`V15-M06`**" in scan
-    assert "PR #116" in scan and "PR #125" in scan and "PR #127" in scan
+    assert "| Current milestone |" in scan
+    assert "**`V15-M08`**" in scan and "**`V15-M07`**" in scan and "**`V15-M06`**" in scan
+    assert "PR #116" in scan and "PR #125" in scan and "PR #127" in scan and "PR #129" in scan
     assert "PR #116–#120" in scan or "PR #120" in scan
     assert "**`V15-M01`**" in scan and "**`V15-M02`**" in scan
     assert "docs/starlab-v1.5.md" in scan
@@ -337,7 +338,8 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "v15_strong_agent_benchmark_protocol_v1.md" in section
     assert "v15_human_panel_benchmark_protocol_v1.md" in section
     assert "### V15-M05 — *Strong-Agent Benchmark Protocol* — **closed**" in section
-    assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **in progress**" in section
+    assert "### V15-M08 — *Long GPU Campaign Execution* — **not** started" in section
+    assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **closed**" in section
     assert "### V15-M06 — *Human Panel Benchmark Protocol* — **closed**" in section
     assert "**`V15-M05`**" in section
     assert "### V15-M04 — *XAI Evidence Contract v1* — **closed**" in section

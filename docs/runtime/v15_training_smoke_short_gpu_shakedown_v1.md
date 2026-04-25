@@ -5,6 +5,8 @@
 **Milestone:** `V15-M07` — *Training Smoke and Short GPU Shakedown*  
 **Status:** Governs receipt emission and **bounded** shakedown only — **not** the long GPU campaign (V15-M08)
 
+**Closure on `main` (V15-M07):** Implementation merged [PR #129](https://github.com/m-cahill/starlab/pull/129) (2026-04-25). **Authoritative PR-head CI:** [`24925848388`](https://github.com/m-cahill/starlab/actions/runs/24925848388); **merge-boundary `main` CI:** [`24925929052`](https://github.com/m-cahill/starlab/actions/runs/24925929052). **Operator-local short-GPU shakedown** in the public program record: **not run** (`operator_local_short_gpu_not_run` — CUDA unavailable on closeout host). This doc’s **not** M08 posture is unchanged.
+
 ## Purpose
 
 Define the **governed training run receipt** for short training smoke, optional **operator-local** GPU or CPU shakedown, and **CI-safe fixture** output. M07 produces **`starlab.v15.training_run_receipt.v1`** with profile **`starlab.v15.training_smoke_short_gpu_shakedown.v1`**, files `v15_training_run_receipt.json` and `v15_training_run_receipt_report.json`.
