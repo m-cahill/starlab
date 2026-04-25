@@ -273,7 +273,7 @@ def test_report_includes_seal() -> None:
     assert rep[SEAL_KEY_STRONG_AGENT] == sealed[SEAL_KEY_STRONG_AGENT]
 
 
-GOLDEN_FIXTURE_SEAL = "da66143337bfca497ba0be8702285323521c638512bc33802c619d9d4aae4d97"
+GOLDEN_FIXTURE_SEAL = "c1fca80f8e7cbfadb2769ff0d52b8541fd1f9e51907a3fd5bc042a508b92951c"
 
 
 def test_determinism_and_golden_seal() -> None:

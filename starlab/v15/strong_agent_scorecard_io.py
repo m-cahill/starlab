@@ -299,7 +299,7 @@ def _carry_forward() -> list[dict[str, str]]:
         {
             "item_id": "pip_cve_2026_3219",
             "summary": (
-                "Re-check 2026-04-24 (M05): `pip index versions pip` still shows 26.0.1 as latest; "
+                "Re-check 2026-04-25 (M05): `pip index versions pip` still shows 26.0.1 as latest; "
                 "no newer audit-clean pip on PyPI observed — keep the single pip-audit "
                 "`--ignore-vuln CVE-2026-3219` until a fixed release exists."
             ),
