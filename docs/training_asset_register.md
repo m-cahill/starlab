@@ -21,7 +21,7 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 ## Current status
 
-**M01:** Register surface defined; **no** production training dataset registered publicly.
+**M01:** Register surface defined; **no** production training dataset registered publicly. **V15-M07** **fixture** uses **synthetic** / **fixture** data only; **operator-local** shakedown manifests remain **private** / **local** by default.
 
 ## Current registered assets
 

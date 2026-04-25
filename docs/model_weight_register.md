@@ -21,7 +21,7 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 ## Current status
 
-**M01:** Surface only; **no** promoted showcase weights registered publicly.
+**M01:** Surface only; **no** promoted showcase weights registered publicly. **V15-M07** may produce **operator-local** shakedown weights/checkpoints under `out/`; the public register remains **no** real **claim-critical** **rows** unless explicitly reviewed and approved.
 
 ## Current registered assets
 

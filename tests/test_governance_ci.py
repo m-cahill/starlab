@@ -25,6 +25,25 @@ def test_v15_m06_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m07_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M07" in v15
+    assert "starlab.v15.training_run_receipt.v1" in v15
+    assert "M07 non-claims" in v15
+    assert "V15-M08" in v15 and "long" in v15.lower()
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_training_smoke_short_gpu_shakedown_v1.md"
+    assert rt.is_file()
+    rtxt = rt.read_text(encoding="utf-8").lower()
+    assert "receipt" in rtxt and "shakedown" in rtxt
+    mwr = (REPO_ROOT / "docs" / "model_weight_register.md").read_text(encoding="utf-8")
+    car = (REPO_ROOT / "docs" / "checkpoint_asset_register.md").read_text(encoding="utf-8")
+    tar = (REPO_ROOT / "docs" / "training_asset_register.md").read_text(encoding="utf-8")
+    assert "V15-M07" in mwr and "claim-critical" in mwr
+    assert "V15-M07" in car
+    assert "V15-M07" in tar
+
+
+@pytest.mark.smoke
 def test_ledger_header_points_to_v15_authority_doc() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     head = text.split("---", 1)[0]
@@ -318,7 +337,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "v15_strong_agent_benchmark_protocol_v1.md" in section
     assert "v15_human_panel_benchmark_protocol_v1.md" in section
     assert "### V15-M05 — *Strong-Agent Benchmark Protocol* — **closed**" in section
-    assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **not** started" in section
+    assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **in progress**" in section
     assert "### V15-M06 — *Human Panel Benchmark Protocol* — **closed**" in section
     assert "**`V15-M05`**" in section
     assert "### V15-M04 — *XAI Evidence Contract v1* — **closed**" in section
