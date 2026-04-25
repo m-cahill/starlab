@@ -1,5 +1,6 @@
 """Governance tests: ledger, CI wiring, and high-signal smoke checks."""
 
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -41,6 +42,38 @@ def test_v15_m07_governance_docs() -> None:
     assert "V15-M07" in mwr and "claim-critical" in mwr
     assert "V15-M07" in car
     assert "V15-M07" in tar
+
+
+@pytest.mark.smoke
+def test_v15_m08_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M08" in v15
+    assert "starlab.v15.long_gpu_training_manifest.v1" in v15
+    assert "starlab.v15.long_gpu_campaign_receipt.v1" in v15
+    assert "M08 non-claims" in v15
+    assert "implementation in progress" in v15.lower()
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_long_gpu_campaign_execution_v1.md" in ledger
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_long_gpu_campaign_execution_v1.md"
+    assert rt.is_file()
+    rtxt = rt.read_text(encoding="utf-8").lower()
+    assert "preflight" in rtxt and "double" in rtxt and "guard" in rtxt
+
+
+@pytest.mark.smoke
+def test_docs_company_secrets_tree_not_tracked_by_git() -> None:
+    proc = subprocess.run(
+        ["git", "ls-files", "--", "docs/company_secrets"],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
+    )
+    if proc.returncode != 0:
+        pytest.skip("git ls-files unavailable (not a git checkout)")
+    tracked = [ln.strip() for ln in proc.stdout.splitlines() if ln.strip()]
+    assert not tracked, f"docs/company_secrets/ must not be tracked; got {tracked[:10]}"
 
 
 @pytest.mark.smoke
@@ -340,7 +373,8 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "v15_strong_agent_benchmark_protocol_v1.md" in section
     assert "v15_human_panel_benchmark_protocol_v1.md" in section
     assert "### V15-M05 — *Strong-Agent Benchmark Protocol* — **closed**" in section
-    assert "### V15-M08 — *Long GPU Campaign Execution* — **not** started" in section
+    assert "### V15-M08 — *Long GPU Campaign Execution* — **implementation in progress**" in section
+    assert "v15_long_gpu_campaign_execution_v1.md" in section
     assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **closed**" in section
     assert "### V15-M06 — *Human Panel Benchmark Protocol* — **closed**" in section
     assert "**`V15-M05`**" in section

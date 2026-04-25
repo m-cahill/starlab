@@ -21,7 +21,7 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 ## Current status
 
-**M01:** Surface only; **no** promoted showcase weights registered publicly. **V15-M07** is **closed** on `main` ([PR #129](https://github.com/m-cahill/starlab/pull/129)); it may still produce **operator-local** shakedown weights/checkpoints under `out/` when run by an operator; the public register remains **no** real **claim-critical** **rows** unless explicitly reviewed and approved.
+**M01:** Surface only; **no** promoted showcase weights registered publicly. **V15-M07** is **closed** on `main` ([PR #129](https://github.com/m-cahill/starlab/pull/129)); it may still produce **operator-local** shakedown weights/checkpoints under `out/` when run by an operator; the public register remains **no** real **claim-critical** **rows** unless explicitly reviewed and approved. **V15-M08** may produce **candidate** weight hashes **locally**; public rows (sanitized hash only, `pending_review`) require explicit approval — default remains **no rows**.
 
 ## Current registered assets
 
