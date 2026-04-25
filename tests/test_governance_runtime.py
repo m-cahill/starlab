@@ -434,6 +434,17 @@ def test_v15_m08_long_gpu_campaign_modules_exist() -> None:
         assert (v15 / name).is_file()
 
 
+def test_v15_m09_checkpoint_evaluation_modules_exist() -> None:
+    v15 = REPO_ROOT / "starlab" / "v15"
+    for name in (
+        "checkpoint_evaluation_models.py",
+        "checkpoint_evaluation_io.py",
+        "emit_v15_checkpoint_evaluation.py",
+        "emit_v15_checkpoint_promotion_decision.py",
+    ):
+        assert (v15 / name).is_file()
+
+
 def test_m52_equivalence_charter_modules_exist() -> None:
     eq = REPO_ROOT / "starlab" / "equivalence"
     for name in (
