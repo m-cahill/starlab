@@ -18,11 +18,7 @@ def test_ledger_header_points_to_v15_authority_doc() -> None:
 def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
-    assert (
-        "| Current milestone |" in scan
-        and "**`V15-M04`**" in scan
-        and "**`V15-M03`**" in scan
-    )
+    assert "| Current milestone |" in scan and "**`V15-M04`**" in scan and "**`V15-M03`**" in scan
     assert "PR #117" in scan and "PR #118" in scan and "PR #120" in scan
     assert "**`V15-M01`**" in scan and "**`V15-M02`**" in scan
     assert "docs/starlab-v1.5.md" in scan
