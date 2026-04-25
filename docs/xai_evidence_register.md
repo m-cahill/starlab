@@ -23,6 +23,8 @@ See `docs/runtime/v15_training_scale_provenance_asset_registers_v1.md` and `v15_
 
 **M01:** Surface only; **no** XAI demo completion claimed.
 
+**M04 (closed):** Contract `starlab.v15.xai_evidence_pack.v1` and fixture emitter are on `main`; this table remains **no real rows** — M04 does **not** register operator XAI packs for claim-critical use.
+
 ## Current registered assets
 
 | asset_id | asset_class | asset_name | claim_use | review_status | notes |

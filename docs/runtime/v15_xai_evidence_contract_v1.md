@@ -99,3 +99,9 @@ V15-M04 defines and emits the XAI evidence contract and fixture evidence-pack su
 
 - **V15-M05+:** Strong-agent benchmark protocol and later gates — not opened by M04.
 - **V15-M10:** Replay-native XAI *demonstration* (real packs, where protocol allows) — separate from M04 contract-only scope.
+
+---
+
+## Closure note (governance)
+
+**V15-M04** is **closed** on `main` ([PR #123](https://github.com/m-cahill/starlab/pull/123); merge `3bf4e2ca5343b116e4e979d5dc50213596b7519b`); **authoritative PR-head CI** [`24922143448`](https://github.com/m-cahill/starlab/actions/runs/24922143448); **merge-boundary `main` CI** [`24922278255`](https://github.com/m-cahill/starlab/actions/runs/24922278255). Closure records **contract + fixture emission + CI evidence** only. It does **not** assert that real model inference was executed, that explanation faithfulness was validated, or that real XAI assets were approved for claim-critical use. `long_gpu_run_authorized` remains **false** in this contract.
