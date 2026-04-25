@@ -85,3 +85,7 @@ python -m starlab.v15.emit_v15_checkpoint_lineage_manifest --output-dir <path> \
 ## Implementation note
 
 V15-M03 creates **checkpoint metadata and lineage discipline**, not checkpoint runtime execution in the trainer.
+
+## Governance closure (V15-M03 on `main`)
+
+**V15-M03** is **closed** on `main` as of [PR #120](https://github.com/m-cahill/starlab/pull/120) (merge `47a3fcb0a58ad6280dadc8967297774ed94ab4ad`, **2026-04-25**). Closure records the **metadata contract** and **merge/CI** evidence, per `docs/starlab-v1.5.md`. It does **not** assert on-disk **checkpoint byte** verification, **trainer resume** execution, or **rollback** execution; it does **not** imply a checkpoint was **promoted** as strong. **`long_gpu_run_authorized`** remains **false** in the M03 contract.
