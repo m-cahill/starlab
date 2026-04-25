@@ -256,7 +256,10 @@ _MILESTONE_FOLDERS: list[Any] = [
 
 
 def _assert_milestone_folder(spec: _MilestoneFolder) -> None:
-    d = REPO_ROOT / "docs" / "company_secrets" / "milestones" / spec.folder
+    root = REPO_ROOT / "docs" / "company_secrets" / "milestones"
+    if not root.is_dir():
+        pytest.skip("Private docs/company_secrets/milestones/ not in workspace (gitignored).")
+    d = root / spec.folder
     for name in spec.filenames:
         assert (d / name).is_file(), f"missing {d / name}"
 

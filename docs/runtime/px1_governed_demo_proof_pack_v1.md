@@ -38,7 +38,7 @@ The pack is **complete** when the private checklist (**`PX1-M04_pack_checklist.m
 | --- | --- | --- |
 | Runtime contract (this doc) | `docs/runtime/px1_governed_demo_proof_pack_v1.md` | Yes |
 | Ledger / narrative | `docs/starlab.md` | Yes |
-| Canonical selection memo | `docs/company_secrets/milestones/post-v1/PX1-M04/PX1-M04_canonical_demo_selection.md` | If tracked |
+| Canonical selection memo | `docs/company_secrets/milestones/post-v1/PX1-M04/PX1-M04_canonical_demo_selection.md` | Local-only copy (not in default clone; `docs/company_secrets/` is gitignored) |
 | PX1-M03 sealed run JSON | `…/runs/<label>/local_live_play_validation_run.json` | Operator-local |
 | Replay | `…/runs/<label>/*.SC2Replay` (or path in run JSON) | Operator-local |
 | Operator-captured video | e.g. `out/px1_m03_operator_watchable.mp4` | Operator-local (default) |
