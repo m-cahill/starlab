@@ -143,6 +143,23 @@ def test_v15_m12_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m13_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M13" in v15
+    assert "starlab.v15.v2_go_no_go_decision.v1" in v15
+    assert "v15-m13-v2-go-no-go-decision" in v15
+    assert "does not authorize v2" in v15.lower() or "does not authorize v2" in v15
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_v2_go_no_go_decision_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "v2" in rtx and ("no-go" in rtx or "go / no-go" in rtx)
+    rights = (REPO_ROOT / "docs" / "rights_register.md").read_text(encoding="utf-8")
+    assert "V15-M13" in rights
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_v2_go_no_go_decision_v1.md" in ledger
+
+
+@pytest.mark.smoke
 def test_v15_m10_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M10" in v15
@@ -196,7 +213,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
-    assert "**`V15-M12`**" in scan
+    assert "**`V15-M13`**" in scan
     assert "PR #137" in scan
     assert "PR #136" in scan
     assert "**`V15-M10`**" in scan
@@ -511,7 +528,13 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
         "(implementation [PR #138](https://github.com/m-cahill/starlab/pull/138); merge `1182b1bc"
     )
     assert m12_heading in section
+    m13_heading = (
+        "### V15-M13 — *v2 Go / No-Go Decision* — **implementation** (decision surface; **not** "
+        "v2 implementation)"
+    )
+    assert m13_heading in section
     assert "v15_showcase_agent_release_pack_v1.md" in section
+    assert "v15_v2_go_no_go_decision_v1.md" in section
     assert "v15_human_panel_bounded_benchmark_v1.md" in section
     assert "implementation [PR #137]" in section
     assert "implementation [PR #136]" in section
