@@ -16,7 +16,7 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 ### V15-M10 — replay-native XAI demonstration (v1.5)
 
-**V15-M10** adds **`docs/runtime/v15_replay_native_xai_demonstration_v1.md`** and `starlab.v15.replay_native_xai_demonstration.v1` — governance JSON + deterministic Markdown; **not** a commitment to public redistribution of **raw** replays, **videos**, **saliency** tensors, or **uncleared** XAI media. Explanations and overlay references remain subject to the same public/private and Blizzard/TOS rules as other SC2 and replay materials.
+**V15-M10** is **closed** on `main` ([PR #136](https://github.com/m-cahill/starlab/pull/136)); adds **`docs/runtime/v15_replay_native_xai_demonstration_v1.md`** and `starlab.v15.replay_native_xai_demonstration.v1` — governance JSON + deterministic Markdown; **not** a commitment to public redistribution of **raw** replays, **videos**, **saliency** tensors, or **uncleared** XAI media. Explanations and overlay references remain subject to the same public/private and Blizzard/TOS rules as other SC2 and replay materials. **V15-M11** not started; rights/public-private posture is otherwise **unchanged** except for the governed M10 surface and honest non-claims in **`docs/starlab-v1.5.md`**.
 
 ### V15-M02 — environment references (v1.5)
 

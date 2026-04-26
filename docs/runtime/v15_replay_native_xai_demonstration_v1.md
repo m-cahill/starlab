@@ -1,7 +1,7 @@
 # V15-M10 — Replay-Native XAI Demonstration (runtime contract v1)
 
 **Contract id:** `starlab.v15.replay_native_xai_demonstration.v1`  
-**Milestone:** `V15-M10`  
+**Milestone:** `V15-M10` **closed** on `main` (implementation [PR #136](https://github.com/m-cahill/starlab/pull/136); merge `a7e9b6e9af7c1cc084d4b73d2a64a2a05ac3cf1f` **2026-04-26T00:10:50Z** UTC; **authoritative PR-head CI** [`24943450910`](https://github.com/m-cahill/starlab/actions/runs/24943450910) head `142e13a8d6933f376818498d1a390cf3ba242101`; **merge-boundary `main` CI** [`24943955088`](https://github.com/m-cahill/starlab/actions/runs/24943955088)). **Public closeout posture:** default **`fixture_contract_only`** / **`blocked_missing_promoted_checkpoint`**; **real XAI inference executed:** **no**; **faithfulness validated:** **no**; **checkpoint promoted for XAI:** **no** on the default path; **strong-agent, ladder, human-benchmark, and v2 claim flags:** **false** in the honest public record; **claim-critical public register rows:** **no**; **raw** media, saliency, replays, weights, checkpoint blobs: **not** committed. **V15-M11:** **not started** / awaits explicit plan.  
 **XAI evidence family (M04):** `starlab.v15.xai_evidence_pack.v1` — M10 **consumes and binds** M04-family packs; it does **not** redefine M04 evidence-pack vocabulary except for M10-specific demonstration and reporting fields.
 
 ## Relationship to M04

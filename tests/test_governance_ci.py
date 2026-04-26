@@ -86,6 +86,9 @@ def test_v15_m09_governance_docs() -> None:
 def test_v15_m10_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M10" in v15
+    assert "PR #136" in v15
+    assert "24943450910" in v15
+    assert "24943955088" in v15
     assert "starlab.v15.replay_native_xai_demonstration.v1" in v15
     assert "M10 non-claims" in v15
     xai_reg = (REPO_ROOT / "docs" / "xai_evidence_register.md").read_text(encoding="utf-8")
@@ -133,6 +136,8 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
+    assert "**`V15-M11`**" in scan
+    assert "PR #136" in scan
     assert "**`V15-M10`**" in scan
     assert "**`V15-M09`**" in scan
     assert "PR #135" in scan or "pull/135" in scan
@@ -433,8 +438,9 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
         "**closeout** **`blocked_missing_m08_campaign_receipt`**)"
     )
     assert m09_heading in section
-    m10_heading = "### V15-M10 — *Replay-Native XAI Demonstration* — **opened** (implementation)"
+    m10_heading = "### V15-M10 — *Replay-Native XAI Demonstration* — **closed** on `main`"
     assert m10_heading in section
+    assert "implementation [PR #136]" in section
     assert "v15_replay_native_xai_demonstration_v1.md" in section
     assert "v15_long_gpu_campaign_execution_v1.md" in section
     assert "### V15-M07 — *Training Smoke and Short GPU Shakedown* — **closed**" in section
