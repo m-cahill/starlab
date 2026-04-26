@@ -26,6 +26,10 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 **V15-M12** adds **`docs/runtime/v15_showcase_agent_release_pack_v1.md`** and `starlab.v15.showcase_agent_release_pack.v1` — **SHA-only** upstream JSON bindings, gate table, and deterministic Markdown brief. It **does not** by itself clear rights for **raw** weights, checkpoints, replays, videos, saliency tensors, or participant materials for public redistribution. Default public register posture remains **unchanged** — **no** new **claim-critical** **rows** unless a later milestone explicitly reviews and adds them.
 
+### V15-M13 — v2 go / no-go decision (v1.5) — **implementation**
+
+**V15-M13** adds the v2 go/no-go decision surface; it does not by itself clear rights for raw weights, checkpoints, replays, videos, saliency tensors, participant materials, or private operator records, and does not authorize v2 on the default path. See **`docs/runtime/v15_v2_go_no_go_decision_v1.md`** and **`docs/starlab-v1.5.md`** (M13 non-claims).
+
 ### V15-M02 — environment references (v1.5)
 
 **V15-M02** adds the environment-lock contract **`starlab.v15.long_gpu_environment_lock.v1`** and runtime **`docs/runtime/v15_long_gpu_run_environment_lock_v1.md`** (merged **2026-04-25** per **`docs/starlab-v1.5.md`**). **SC2 client paths**, **map pool / on-disk map locations**, **GPU driver or machine-identifying details**, and other **operator-local environment facts** are **private by default** unless intentionally **sanitized** for public reference. Public surfaces should use **logical references** (map id, pool id, version strings) — not raw paths. The emitter **redacts** absolute path strings in operator `--probe-json` output; do not treat that as rights clearance for redistribution. Milestone **closure** does not relax default **private** posture for operator paths or media.

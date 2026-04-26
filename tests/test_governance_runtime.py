@@ -476,6 +476,16 @@ def test_v15_m12_showcase_agent_release_pack_modules_exist() -> None:
         assert (v15 / name).is_file()
 
 
+def test_v15_m13_v2_go_no_go_decision_modules_exist() -> None:
+    v15 = REPO_ROOT / "starlab" / "v15"
+    for name in (
+        "v2_decision_models.py",
+        "v2_decision_io.py",
+        "emit_v15_v2_go_no_go_decision.py",
+    ):
+        assert (v15 / name).is_file()
+
+
 def test_m52_equivalence_charter_modules_exist() -> None:
     eq = REPO_ROOT / "starlab" / "equivalence"
     for name in (
