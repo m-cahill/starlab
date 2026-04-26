@@ -14,6 +14,10 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 **V15-M09** is **closed** on `main` ([PR #135](https://github.com/m-cahill/starlab/pull/135)); defines `starlab.v15.checkpoint_evaluation.v1` and `starlab.v15.checkpoint_promotion_decision.v1` with **`docs/runtime/v15_checkpoint_evaluation_promotion_v1.md`**. Emissions use **SHA-only** JSON bindings for dataset/rights/descriptor inputs; they do **not** import uncleared media into the repo. Public-rights posture is **unchanged** by M09; **no** new public register rows are implied.
 
+### V15-M10 — replay-native XAI demonstration (v1.5)
+
+**V15-M10** adds **`docs/runtime/v15_replay_native_xai_demonstration_v1.md`** and `starlab.v15.replay_native_xai_demonstration.v1` — governance JSON + deterministic Markdown; **not** a commitment to public redistribution of **raw** replays, **videos**, **saliency** tensors, or **uncleared** XAI media. Explanations and overlay references remain subject to the same public/private and Blizzard/TOS rules as other SC2 and replay materials.
+
 ### V15-M02 — environment references (v1.5)
 
 **V15-M02** adds the environment-lock contract **`starlab.v15.long_gpu_environment_lock.v1`** and runtime **`docs/runtime/v15_long_gpu_run_environment_lock_v1.md`** (merged **2026-04-25** per **`docs/starlab-v1.5.md`**). **SC2 client paths**, **map pool / on-disk map locations**, **GPU driver or machine-identifying details**, and other **operator-local environment facts** are **private by default** unless intentionally **sanitized** for public reference. Public surfaces should use **logical references** (map id, pool id, version strings) — not raw paths. The emitter **redacts** absolute path strings in operator `--probe-json` output; do not treat that as rights clearance for redistribution. Milestone **closure** does not relax default **private** posture for operator paths or media.
