@@ -188,7 +188,10 @@ def test_v15_m14_governance_docs() -> None:
 def test_v15_m16_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M16" in v15
-    assert "opened / implementation" in v15 or "opened** / implementation" in v15
+    assert "PR #142" in v15
+    assert "24968275296" in v15
+    assert "24968604458" in v15
+    assert "closed on `main`" in v15 or "closed** on `main`" in v15
     assert "starlab.v15.short_gpu_environment_evidence.v1" in v15
     assert "M16 non-claims" in v15
     assert "emit_v15_short_gpu_environment_evidence" in v15
@@ -279,7 +282,8 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
-    assert "**`V15-M16`**" in scan
+    assert "**`V15-M17`**" in scan
+    assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
     assert "PR #140" in scan or "pull/140" in scan

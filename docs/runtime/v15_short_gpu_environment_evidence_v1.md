@@ -1,7 +1,7 @@
 # V15-M16 — Short GPU / environment evidence (runtime)
 
 **Milestone:** `V15-M16`  
-**Status:** opened / implementation (see `docs/starlab-v1.5.md` for authoritative program record)  
+**Status:** closed on `main` (see `docs/starlab-v1.5.md` for authoritative program record; [PR #142](https://github.com/m-cahill/starlab/pull/142); merge-boundary `main` CI [`24968604458`](https://github.com/m-cahill/starlab/actions/runs/24968604458))  
 **Contract:** `starlab.v15.short_gpu_environment_evidence.v1`
 
 ## Dependency on M15
@@ -103,4 +103,4 @@ M16 is **bounded environment / short-GPU evidence** only. It is **not** a comple
 
 ## Closeout expectations
 
-When M16 closes on `main`, this doc’s status line should move to **closed** with PR / CI references; **`docs/starlab-v1.5.md`** remains authoritative.
+**Closed on `main`** — [PR #142](https://github.com/m-cahill/starlab/pull/142); merge commit `bb7e6e11e800269b63ab80a7ade316dc1165c8a6`; PR-head CI [`24968275296`](https://github.com/m-cahill/starlab/actions/runs/24968275296); merge-boundary `main` CI [`24968604458`](https://github.com/m-cahill/starlab/actions/runs/24968604458). Public closeout documentation may follow in a separate docs commit (recorded in private milestone summary). **`docs/starlab-v1.5.md`** remains authoritative.
