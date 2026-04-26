@@ -163,6 +163,26 @@ def test_v15_m13_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m14_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M14" in v15
+    assert "starlab.v15.evidence_remediation_plan.v1" in v15
+    assert "M14 non-claims" in v15
+    assert "emit_v15_evidence_remediation_plan" in v15
+    assert "V15-M15" in v15 and "V15-M21" in v15
+    assert "proposed" in v15.lower() and "not started" in v15.lower()
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_evidence_remediation_operator_acquisition_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "remediation" in rtx and "m13" in rtx
+    rights = (REPO_ROOT / "docs" / "rights_register.md").read_text(encoding="utf-8")
+    assert "V15-M14" in rights
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_evidence_remediation_operator_acquisition_v1.md" in ledger
+    assert "v2" in ledger.lower() and "not" in ledger.lower()
+
+
+@pytest.mark.smoke
 def test_v15_m10_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M10" in v15
@@ -216,7 +236,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
-    assert "**`V15-M13`**" in scan
+    assert "**`V15-M14`**" in scan
     assert "PR #139" in scan or "pull/139" in scan
     assert "PR #137" in scan
     assert "PR #136" in scan
