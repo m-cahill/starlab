@@ -170,6 +170,8 @@ def test_v15_m14_governance_docs() -> None:
     assert "M14 non-claims" in v15
     assert "emit_v15_evidence_remediation_plan" in v15
     assert "V15-M15" in v15 and "V15-M21" in v15
+    # M16+ remain proposed on the public authority doc; M15 may be opened/implementation
+    assert "V15-M16" in v15
     assert "proposed" in v15.lower() and "not started" in v15.lower()
     rt = REPO_ROOT / "docs" / "runtime" / "v15_evidence_remediation_operator_acquisition_v1.md"
     assert rt.is_file()
@@ -180,6 +182,24 @@ def test_v15_m14_governance_docs() -> None:
     ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "v15_evidence_remediation_operator_acquisition_v1.md" in ledger
     assert "v2" in ledger.lower() and "not" in ledger.lower()
+
+
+@pytest.mark.smoke
+def test_v15_m15_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M15" in v15
+    assert "starlab.v15.operator_evidence_collection_preflight.v1" in v15
+    assert "M15 non-claims" in v15
+    assert "emit_v15_operator_evidence_collection_preflight" in v15
+    assert "V15-M16" in v15 and "V15-M21" in v15
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_operator_evidence_collection_preflight_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "preflight" in rtx and "p0" in rtx and "s0" in rtx
+    rights = (REPO_ROOT / "docs" / "rights_register.md").read_text(encoding="utf-8")
+    assert "V15-M15" in rights
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_operator_evidence_collection_preflight_v1.md" in ledger
 
 
 @pytest.mark.smoke
