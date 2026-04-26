@@ -83,6 +83,31 @@ def test_v15_m09_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m11_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M11" in v15
+    assert "starlab.v15.human_panel_execution.v1" in v15
+    assert "starlab.v15.human_benchmark_claim_decision.v1" in v15
+    assert "M11 non-claims" in v15
+    assert "recruit human participants" in v15
+    human_reg = (REPO_ROOT / "docs" / "human_benchmark_register.md").read_text(encoding="utf-8")
+    assert "V15-M11" in human_reg
+    assert "No rows" in human_reg or "*No rows.*" in human_reg
+    rights = (REPO_ROOT / "docs" / "rights_register.md").read_text(encoding="utf-8")
+    assert "V15-M11" in rights
+    car = (REPO_ROOT / "docs" / "checkpoint_asset_register.md").read_text(encoding="utf-8")
+    assert "V15-M11" in car
+    mwr = (REPO_ROOT / "docs" / "model_weight_register.md").read_text(encoding="utf-8")
+    assert "V15-M11" in mwr
+    xai = (REPO_ROOT / "docs" / "xai_evidence_register.md").read_text(encoding="utf-8")
+    assert "V15-M11" in xai
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_human_panel_bounded_benchmark_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert ("h0" in rtx and "fixture" in rtx) or "blocked" in rtx
+
+
+@pytest.mark.smoke
 def test_v15_m10_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M10" in v15
@@ -440,6 +465,12 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert m09_heading in section
     m10_heading = "### V15-M10 — *Replay-Native XAI Demonstration* — **closed** on `main`"
     assert m10_heading in section
+    m11_heading = (
+        "### V15-M11 — *Human Panel / Bounded Human Benchmark* — **implementation** "
+        "(governance **surface**)"
+    )
+    assert m11_heading in section
+    assert "v15_human_panel_bounded_benchmark_v1.md" in section
     assert "implementation [PR #136]" in section
     assert "v15_replay_native_xai_demonstration_v1.md" in section
     assert "v15_long_gpu_campaign_execution_v1.md" in section
