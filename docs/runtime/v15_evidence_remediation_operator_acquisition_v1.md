@@ -1,6 +1,7 @@
 # STARLAB v1.5 — V15-M14 Evidence Remediation / Operator Evidence Acquisition (runtime v1)
 
-**Milestone:** `V15-M14` — **opened / implementation** (branch `v15-m14-evidence-remediation-operator-acquisition`)  
+**Milestone:** `V15-M14` — **closed** on `main` (implementation [PR #140](https://github.com/m-cahill/starlab/pull/140), merge `656c07355dfbe2b02d11128cedf344a466b1a5b2` merged **2026-04-26T19:32:50Z** UTC)  
+**Authoritative PR-head CI:** [`24963376499`](https://github.com/m-cahill/starlab/actions/runs/24963376499) (head `b9d16183f35b5011e6764114b2ef35987490b5d6`); **merge-boundary `main` CI:** [`24965189902`](https://github.com/m-cahill/starlab/actions/runs/24965189902) on merge `656c0735…` — **success**  
 **Contract:** `starlab.v15.evidence_remediation_plan.v1`  
 **Emitter:** `python -m starlab.v15.emit_v15_evidence_remediation_plan`
 
@@ -99,5 +100,7 @@ python -m starlab.v15.emit_v15_evidence_remediation_plan \
 V15-M14 does not train a checkpoint; does not promote a checkpoint; does not execute a long GPU campaign; does not run a short GPU shakedown; does not run benchmarks; does not run live SC2; does not run XAI inference; does not run human-panel matches; does not release a showcase agent; does not authorize v2; does not collect operator evidence; and does not commit model weights, checkpoint blobs, raw replays, videos, saliency tensors, participant records, private operator notes, or private paths.
 
 ## Closeout expectations
+
+**Public closeout (recorded on `main`):** **`remediation_plan_ready`**; **`evidence_gap_inventory_only`**; **`operator_evidence_not_collected`**; **v2** **not** authorized; **M15**–**M21** **proposed / not started**; **no** long GPU run, short shakedown, checkpoint promotion, benchmark execution, XAI execution, human-panel execution, or showcase release in M14.
 
 At honest closeout, the public record should state **remediation plan ready** with **operator evidence not collected** unless separately evidenced; **v2** remains **not** authorized on the default M14 path; proposed **M15–M21** remain **proposed** until implemented under separate plans.

@@ -236,7 +236,9 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
+    assert "**`V15-M15`**" in scan
     assert "**`V15-M14`**" in scan
+    assert "PR #140" in scan or "pull/140" in scan
     assert "PR #139" in scan or "pull/139" in scan
     assert "PR #137" in scan
     assert "PR #136" in scan
