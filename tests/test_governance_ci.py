@@ -86,6 +86,12 @@ def test_v15_m09_governance_docs() -> None:
 def test_v15_m11_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M11" in v15
+    assert "PR #137" in v15
+    assert "24945588527" in v15
+    assert "24945647654" in v15
+    assert "468d90fc" in v15
+    assert "V15-M11" in v15
+    assert "— **closed**" in v15 or "closed** on `main`" in v15
     assert "starlab.v15.human_panel_execution.v1" in v15
     assert "starlab.v15.human_benchmark_claim_decision.v1" in v15
     assert "M11 non-claims" in v15
@@ -161,7 +167,8 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
-    assert "**`V15-M11`**" in scan
+    assert "**`V15-M12`**" in scan
+    assert "PR #137" in scan
     assert "PR #136" in scan
     assert "**`V15-M10`**" in scan
     assert "**`V15-M09`**" in scan
@@ -466,11 +473,12 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     m10_heading = "### V15-M10 — *Replay-Native XAI Demonstration* — **closed** on `main`"
     assert m10_heading in section
     m11_heading = (
-        "### V15-M11 — *Human Panel / Bounded Human Benchmark* — **implementation** "
-        "(governance **surface**)"
+        "### V15-M11 — *Human Panel / Bounded Human Benchmark* — **closed** on `main` "
+        "(implementation [PR #137](https://github.com/m-cahill/starlab/pull/137); merge `468d90fc"
     )
     assert m11_heading in section
     assert "v15_human_panel_bounded_benchmark_v1.md" in section
+    assert "implementation [PR #137]" in section
     assert "implementation [PR #136]" in section
     assert "v15_replay_native_xai_demonstration_v1.md" in section
     assert "v15_long_gpu_campaign_execution_v1.md" in section

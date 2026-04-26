@@ -1,8 +1,12 @@
 # V15-M11 — Human panel execution and bounded human-benchmark claim decision (runtime contract v1)
 
 **Contract ids:** `starlab.v15.human_panel_execution.v1`, `starlab.v15.human_benchmark_claim_decision.v1`  
-**Milestone:** `V15-M11` — **implementation** (governance **surface**; not a completed operator human-panel run).  
+**Milestone:** `V15-M11` — **closed** on `main` (governance **surface** only; not a completed operator human-panel run). **Implementation:** [PR #137](https://github.com/m-cahill/starlab/pull/137). **Authoritative PR-head CI:** [`24945588527`](https://github.com/m-cahill/starlab/actions/runs/24945588527); **merge-boundary `main` CI:** [`24945647654`](https://github.com/m-cahill/starlab/actions/runs/24945647654) on merge `468d90fc…`.  
 **Authority:** `docs/starlab-v1.5.md` (M11 non-claims block).
+
+## Public closeout (merge-boundary `main` CI green)
+
+**V15-M11** closed on `main`. **Default status:** `fixture_contract_only` / `blocked_missing_promoted_checkpoint` / `blocked_missing_human_panel_execution`. **Human panel execution performed:** no on default path. **Human benchmark claim authorized:** no. **Strong-agent claim authorized:** no. **Checkpoint promoted for human panel:** no on default path. **Participant identities committed:** no. **Claim-critical public human benchmark register rows:** no. **Raw replays / videos / private participant materials committed:** no. **V15-M12:** not started.
 
 ## Relationship to V15-M06 (human-panel protocol)
 
