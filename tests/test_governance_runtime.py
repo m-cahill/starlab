@@ -455,6 +455,17 @@ def test_v15_m10_replay_native_xai_demonstration_modules_exist() -> None:
         assert (v15 / name).is_file()
 
 
+def test_v15_m11_human_panel_bounded_benchmark_modules_exist() -> None:
+    v15 = REPO_ROOT / "starlab" / "v15"
+    for name in (
+        "human_panel_execution_models.py",
+        "human_panel_execution_io.py",
+        "emit_v15_human_panel_execution.py",
+        "emit_v15_human_benchmark_claim_decision.py",
+    ):
+        assert (v15 / name).is_file()
+
+
 def test_m52_equivalence_charter_modules_exist() -> None:
     eq = REPO_ROOT / "starlab" / "equivalence"
     for name in (
