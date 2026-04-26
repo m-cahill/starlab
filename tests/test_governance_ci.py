@@ -114,6 +114,31 @@ def test_v15_m11_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m12_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M12" in v15
+    assert "starlab.v15.showcase_agent_release_pack.v1" in v15
+    assert "M12 non-claims" in v15
+    assert "does not train a checkpoint" in v15
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_showcase_agent_release_pack_v1.md"
+    assert rt.is_file()
+    rtxt = rt.read_text(encoding="utf-8").lower()
+    assert "release pack" in rtxt
+    human_reg = (REPO_ROOT / "docs" / "human_benchmark_register.md").read_text(encoding="utf-8")
+    assert "V15-M12" in human_reg
+    rights = (REPO_ROOT / "docs" / "rights_register.md").read_text(encoding="utf-8")
+    assert "V15-M12" in rights
+    car = (REPO_ROOT / "docs" / "checkpoint_asset_register.md").read_text(encoding="utf-8")
+    assert "V15-M12" in car
+    mwr = (REPO_ROOT / "docs" / "model_weight_register.md").read_text(encoding="utf-8")
+    assert "V15-M12" in mwr
+    xai = (REPO_ROOT / "docs" / "xai_evidence_register.md").read_text(encoding="utf-8")
+    assert "V15-M12" in xai
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_showcase_agent_release_pack_v1.md" in ledger
+
+
+@pytest.mark.smoke
 def test_v15_m10_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M10" in v15
@@ -477,6 +502,11 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
         "(implementation [PR #137](https://github.com/m-cahill/starlab/pull/137); merge `468d90fc"
     )
     assert m11_heading in section
+    m12_heading = (
+        "### V15-M12 — *Showcase Agent Release Pack* — **implementation** (`main` PR pending)"
+    )
+    assert m12_heading in section
+    assert "v15_showcase_agent_release_pack_v1.md" in section
     assert "v15_human_panel_bounded_benchmark_v1.md" in section
     assert "implementation [PR #137]" in section
     assert "implementation [PR #136]" in section

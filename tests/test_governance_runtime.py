@@ -466,6 +466,16 @@ def test_v15_m11_human_panel_bounded_benchmark_modules_exist() -> None:
         assert (v15 / name).is_file()
 
 
+def test_v15_m12_showcase_agent_release_pack_modules_exist() -> None:
+    v15 = REPO_ROOT / "starlab" / "v15"
+    for name in (
+        "showcase_release_models.py",
+        "showcase_release_io.py",
+        "emit_v15_showcase_agent_release_pack.py",
+    ):
+        assert (v15 / name).is_file()
+
+
 def test_m52_equivalence_charter_modules_exist() -> None:
     eq = REPO_ROOT / "starlab" / "equivalence"
     for name in (
