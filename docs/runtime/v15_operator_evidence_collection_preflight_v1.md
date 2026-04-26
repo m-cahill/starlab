@@ -1,7 +1,7 @@
 # V15-M15 — Operator evidence collection preflight (contract v1)
 
 **Milestone:** `V15-M15`  
-**Status:** **opened** / **implementation** on `main` (merge / CI to be recorded at **closeout**).  
+**Status:** **closed** on `main` (implementation [PR #141](https://github.com/m-cahill/starlab/pull/141); merge `568fe5aa936a4bcc97a00ef3d2e1d587ee381953` **2026-04-26T21:03:54Z** UTC; **authoritative PR-head CI** [`24966701437`](https://github.com/m-cahill/starlab/actions/runs/24966701437); **merge-boundary `main` CI** [`24967008755`](https://github.com/m-cahill/starlab/actions/runs/24967008755) — **success**).  
 **Contract:** `starlab.v15.operator_evidence_collection_preflight.v1`  
 **Authority:** `docs/starlab-v1.5.md` (M15 non-claims, milestone table, artifact family)
 
@@ -124,6 +124,6 @@ M15 **does not** add claim-critical public register **rows**.
 - V15-M16–M21 entries in the artifact are **labels**, not completed work.  
 - See `docs/starlab-v1.5.md` M15 non-claims block for full text.
 
-## Closeout expectations (on `main` after implementation PR)
+## Closeout (on `main`)
 
-Record PR, PR-head CI, merge commit, merge `main` CI, and set this doc’s top status to **closed**; **V15-M16** remains **proposed** until opened. Private summary/audit under `docs/company_secrets/milestones/post-v1/V15-M15/` (untracked) per project workflow. Intended prompt sources: `summaryprompt.md`, `unifiedmilestoneauditpromptV2.md` (if present locally).
+M15 is **closed** as above. **V15-M16** remains **proposed / not started** until opened separately. Private summary/audit under `docs/company_secrets/milestones/post-v1/V15-M15/` (untracked) per project workflow. `summaryprompt.md` and `unifiedmilestoneauditpromptV2.md` were **not** present in the public repo; private notes follow the V15-M14 summary/audit format.

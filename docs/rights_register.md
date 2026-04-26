@@ -30,9 +30,9 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 **V15-M13** adds the v2 go/no-go decision surface; it does not clear rights for raw weights, checkpoints, replays, videos, saliency tensors, participant materials, or private operator records, and does not authorize v2 on the default path. See **`docs/runtime/v15_v2_go_no_go_decision_v1.md`** and **`docs/starlab-v1.5.md`** (M13 non-claims).
 
-### V15-M15 — operator evidence collection preflight (v1.5) — **opened** / **implementation**
+### V15-M15 — operator evidence collection preflight (v1.5) — **closed** on `main` ([PR #141](https://github.com/m-cahill/starlab/pull/141))
 
-**V15-M15** defines **operator** evidence **collection** **preflight** requirements and **register** **touchpoints** in **`starlab.v15.operator_evidence_collection_preflight.v1`**. It **does** **not** collect or clear **operator** evidence, **does** **not** add **claim-critical** public **rows**, and **does** **not** change default private/local-only posture for **weights**, **checkpoints**, **replays**, **videos**, **XAI** media, or **human-panel** materials. See **`docs/runtime/v15_operator_evidence_collection_preflight_v1.md`** and **`docs/starlab-v1.5.md`** (M15 non-claims). **M16**–**M21** remain **proposed** until opened separately.
+**V15-M15** defines **operator** evidence **collection** **preflight** requirements and **register** **touchpoints** in **`starlab.v15.operator_evidence_collection_preflight.v1`**. It **does** **not** collect or clear **operator** evidence, **does** **not** add **claim-critical** public **rows**, and **does** **not** change default private/local-only posture for **weights**, **checkpoints**, **replays**, **videos**, **XAI** media, or **human-panel** materials. See **`docs/runtime/v15_operator_evidence_collection_preflight_v1.md`** and **`docs/starlab-v1.5.md`** (M15 non-claims). **M16**–**M21** remain **proposed** until opened separately. **PR-head** [`24966701437`](https://github.com/m-cahill/starlab/actions/runs/24966701437); **merge** [`24967008755`](https://github.com/m-cahill/starlab/actions/runs/24967008755).
 
 ### V15-M14 — evidence remediation / operator evidence acquisition (v1.5) — **closed** on `main` ([PR #140](https://github.com/m-cahill/starlab/pull/140))
 
