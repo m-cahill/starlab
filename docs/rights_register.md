@@ -26,9 +26,9 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 **V15-M12** adds **`docs/runtime/v15_showcase_agent_release_pack_v1.md`** and `starlab.v15.showcase_agent_release_pack.v1` — **SHA-only** upstream JSON bindings, gate table, and deterministic Markdown brief. It **does not** by itself clear rights for **raw** weights, checkpoints, replays, videos, saliency tensors, or participant materials for public redistribution. Default public register posture remains **unchanged** — **no** new **claim-critical** **rows** unless a later milestone explicitly reviews and adds them.
 
-### V15-M13 — v2 go / no-go decision (v1.5) — **implementation**
+### V15-M13 — v2 go / no-go decision (v1.5) — **closed** on `main` ([PR #139](https://github.com/m-cahill/starlab/pull/139))
 
-**V15-M13** adds the v2 go/no-go decision surface; it does not by itself clear rights for raw weights, checkpoints, replays, videos, saliency tensors, participant materials, or private operator records, and does not authorize v2 on the default path. See **`docs/runtime/v15_v2_go_no_go_decision_v1.md`** and **`docs/starlab-v1.5.md`** (M13 non-claims).
+**V15-M13** adds the v2 go/no-go decision surface; it does not clear rights for raw weights, checkpoints, replays, videos, saliency tensors, participant materials, or private operator records, and does not authorize v2 on the default path. See **`docs/runtime/v15_v2_go_no_go_decision_v1.md`** and **`docs/starlab-v1.5.md`** (M13 non-claims).
 
 ### V15-M02 — environment references (v1.5)
 

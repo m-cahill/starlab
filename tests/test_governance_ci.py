@@ -146,6 +146,9 @@ def test_v15_m12_governance_docs() -> None:
 def test_v15_m13_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M13" in v15
+    assert "PR #139" in v15
+    assert "24948284106" in v15
+    assert "24948356222" in v15
     assert "starlab.v15.v2_go_no_go_decision.v1" in v15
     assert "v15-m13-v2-go-no-go-decision" in v15
     assert "does not authorize v2" in v15.lower() or "does not authorize v2" in v15
@@ -214,6 +217,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
     assert "**`V15-M13`**" in scan
+    assert "PR #139" in scan or "pull/139" in scan
     assert "PR #137" in scan
     assert "PR #136" in scan
     assert "**`V15-M10`**" in scan
@@ -529,8 +533,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     )
     assert m12_heading in section
     m13_heading = (
-        "### V15-M13 — *v2 Go / No-Go Decision* — **implementation** (decision surface; **not** "
-        "v2 implementation)"
+        "### V15-M13 — *v2 Go / No-Go Decision* — **closed** on `main` (implementation [PR #139]"
     )
     assert m13_heading in section
     assert "v15_showcase_agent_release_pack_v1.md" in section

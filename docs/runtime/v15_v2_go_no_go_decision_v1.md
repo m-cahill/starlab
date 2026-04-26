@@ -1,9 +1,11 @@
 # STARLAB v1.5 — V15-M13 v2 Go / No-Go Decision (runtime v1)
 
-**Milestone:** `V15-M13`  
+**Milestone:** `V15-M13` (**closed** on `main`; implementation [PR #139](https://github.com/m-cahill/starlab/pull/139); **authoritative PR-head CI** [`24948284106`](https://github.com/m-cahill/starlab/actions/runs/24948284106); **merge-boundary `main` CI** [`24948356222`](https://github.com/m-cahill/starlab/actions/runs/24948356222) on merge `f0af5a62…`)  
 **Contract:** `starlab.v15.v2_go_no_go_decision.v1`  
 **Optional operator evidence contract:** `starlab.v15.v2_decision_operator_evidence_declared.v1`  
 **Emitter:** `python -m starlab.v15.emit_v15_v2_go_no_go_decision`
+
+**Public closeout posture (default / fixture path):** `fixture_decision_only` / `no_go_insufficient_evidence` / `blocked_missing_showcase_release_authorization`; **`v2_authorized`:** false; **`v2_recharter_authorized`:** false; **recommended next step:** `collect_operator_evidence_before_v2` / `v1_5_hardening`. **Not** v2 implementation.
 
 ## Purpose
 
