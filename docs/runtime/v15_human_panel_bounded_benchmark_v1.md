@@ -6,7 +6,7 @@
 
 ## Public closeout (merge-boundary `main` CI green)
 
-**V15-M11** closed on `main`. **Default status:** `fixture_contract_only` / `blocked_missing_promoted_checkpoint` / `blocked_missing_human_panel_execution`. **Human panel execution performed:** no on default path. **Human benchmark claim authorized:** no. **Strong-agent claim authorized:** no. **Checkpoint promoted for human panel:** no on default path. **Participant identities committed:** no. **Claim-critical public human benchmark register rows:** no. **Raw replays / videos / private participant materials committed:** no. **V15-M12:** not started.
+**V15-M11** closed on `main`. **Default status:** `fixture_contract_only` / `blocked_missing_promoted_checkpoint` / `blocked_missing_human_panel_execution`. **Human panel execution performed:** no on default path. **Human benchmark claim authorized:** no. **Strong-agent claim authorized:** no. **Checkpoint promoted for human panel:** no on default path. **Participant identities committed:** no. **Claim-critical public human benchmark register rows:** no. **Raw replays / videos / private participant materials committed:** no. **V15-M12** closed on `main` ([PR #138](https://github.com/m-cahill/starlab/pull/138)) — showcase release-pack **surface** only; **not** a default showcase release. **V15-M13:** not started.
 
 ## Relationship to V15-M06 (human-panel protocol)
 
@@ -110,4 +110,4 @@ python -m starlab.v15.emit_v15_human_panel_execution \
 
 ---
 
-**V15-M12** (*Showcase Agent Release Pack*): **not** started in this public record; **M11** does not ship a release pack or v2 **authorization** unless **separately** **evidenced** under later **milestones**.
+**V15-M12** (*Showcase Agent Release Pack*): **closed** on `main` — see **`docs/runtime/v15_showcase_agent_release_pack_v1.md`**; **not** a default showcase-agent **release** or v2 **authorization**. **V15-M13** remains **not started**.

@@ -1,9 +1,13 @@
 # V15-M12 — Showcase Agent Release Pack (runtime contract v1)
 
-**Milestone:** `V15-M12`  
+**Milestone:** `V15-M12` — **closed** on `main` (implementation [PR #138](https://github.com/m-cahill/starlab/pull/138); merge `1182b1bc286e869449fe7187f6aeb855cfd5529f`). **Authoritative PR-head CI:** [`24946748829`](https://github.com/m-cahill/starlab/actions/runs/24946748829) (head `ebe3bd15ad8824260fdb40c64d2f56f4f3abaaec`); **merge-boundary `main` CI:** [`24946807747`](https://github.com/m-cahill/starlab/actions/runs/24946807747). **`V15-M13`** — **not started**.  
 **Contract:** `starlab.v15.showcase_agent_release_pack.v1`  
 **Optional operator evidence bundle:** `starlab.v15.showcase_operator_release_evidence_declared.v1`  
 **Status:** Governance / packaging surface — **not** a showcase-agent product release on the default path.
+
+## Public closeout (merge-boundary `main` CI green)
+
+**V15-M12** closed on `main`. **Default status:** `fixture_contract_only` / `blocked_missing_promoted_checkpoint` / `blocked_missing_release_evidence`. **Showcase agent release authorized:** no. **Public showcase claim authorized:** no. **Strong-agent claim authorized:** no. **Human-benchmark claim authorized:** no. **Ladder claim authorized:** no. **v2 authorized:** no. **Claim-critical public register rows:** no. **Raw weights / checkpoints / replays / videos / participant materials committed:** no. **V15-M13:** not started.
 
 ## 1. Purpose
 

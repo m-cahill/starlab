@@ -117,6 +117,10 @@ def test_v15_m11_governance_docs() -> None:
 def test_v15_m12_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M12" in v15
+    assert "PR #138" in v15
+    assert "24946748829" in v15
+    assert "24946807747" in v15
+    assert "1182b1bc" in v15
     assert "starlab.v15.showcase_agent_release_pack.v1" in v15
     assert "M12 non-claims" in v15
     assert "does not train a checkpoint" in v15
@@ -503,7 +507,8 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     )
     assert m11_heading in section
     m12_heading = (
-        "### V15-M12 — *Showcase Agent Release Pack* — **implementation** (`main` PR pending)"
+        "### V15-M12 — *Showcase Agent Release Pack* — **closed** on `main` "
+        "(implementation [PR #138](https://github.com/m-cahill/starlab/pull/138); merge `1182b1bc"
     )
     assert m12_heading in section
     assert "v15_showcase_agent_release_pack_v1.md" in section

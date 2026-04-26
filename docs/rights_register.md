@@ -22,7 +22,7 @@ Living inventory of major surfaces: ownership, terms, redistribution, and risk. 
 
 **V15-M11** adds **`docs/runtime/v15_human_panel_bounded_benchmark_v1.md`** and execution / claim-decision contracts — **SHA-only** bindings and redaction of operator paths and contact-like strings in emitted JSON; **does not** recruit participants, **does not** clear **raw** replays or **videos** for public commit, and **does not** by default add **claim-critical** **public** register **rows**. Participant **identities**, **consent** records, and **session** **notes** remain **private** by default (`out/` or local `docs/company_secrets/**`, **untracked**). Rights/public-private posture for human-benchmark content is otherwise **unchanged** except as described in **`docs/starlab-v1.5.md`** (M11 non-claims).
 
-### V15-M12 — showcase agent release pack (v1.5) — **implementation** (pre-merge)
+### V15-M12 — showcase agent release pack (v1.5) — **closed** on `main` ([PR #138](https://github.com/m-cahill/starlab/pull/138))
 
 **V15-M12** adds **`docs/runtime/v15_showcase_agent_release_pack_v1.md`** and `starlab.v15.showcase_agent_release_pack.v1` — **SHA-only** upstream JSON bindings, gate table, and deterministic Markdown brief. It **does not** by itself clear rights for **raw** weights, checkpoints, replays, videos, saliency tensors, or participant materials for public redistribution. Default public register posture remains **unchanged** — **no** new **claim-critical** **rows** unless a later milestone explicitly reviews and adds them.
 
