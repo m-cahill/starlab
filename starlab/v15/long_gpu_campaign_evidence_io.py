@@ -110,10 +110,27 @@ def parse_m16_short_gpu_environment_for_m17(path: Path) -> tuple[str, dict[str, 
         raise ValueError("M16 binding: v2_authorized must be false")
     if raw.get("v2_recharter_authorized") is not False:
         raise ValueError("M16 binding: v2_recharter_authorized must be false")
-    if raw.get("cuda_available") is not True:
-        raise ValueError("M16 binding: cuda_available must be true when present for M17 preflight")
-    if raw.get("torch_imported") is not True:
-        raise ValueError("M16 binding: torch_imported must be true when present for M17 preflight")
+    # M16 may record CUDA / torch only under `torch_cuda_summary` (no top-level keys).
+    # Prefer top-level `cuda_available` / `torch_imported` when present; fill from nested only
+    # when a top-level key is absent (None), not when it is explicitly false.
+    cuda_ok = raw.get("cuda_available")
+    torch_ok = raw.get("torch_imported")
+    tcs = raw.get("torch_cuda_summary")
+    if isinstance(tcs, dict):
+        if cuda_ok is None:
+            cuda_ok = tcs.get("cuda_available")
+        if torch_ok is None:
+            torch_ok = tcs.get("torch_imported")
+    if cuda_ok is not True:
+        raise ValueError(
+            "M16 binding: cuda_available must be true for M17 preflight "
+            "(top-level or torch_cuda_summary)"
+        )
+    if torch_ok is not True:
+        raise ValueError(
+            "M16 binding: torch_imported must be true for M17 preflight "
+            "(top-level or torch_cuda_summary)"
+        )
 
     sha = sha256_hex_of_canonical_json(raw)
     summary = {
