@@ -11,6 +11,7 @@ from starlab.runs.identity import compute_config_hash, normalize_match_config_fo
 from starlab.sc2.match_config import (
     BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY,
     BURNYSC2_DEFAULT_OPPONENT_MODE,
+    BURNYSC2_DEFAULT_SUPPRESS_ATTACK,
     BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
     BURNYSC2_POLICY_PASSIVE,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
@@ -60,6 +61,7 @@ def test_from_mapping_minimal() -> None:
     assert cfg.bounded_horizon.max_game_steps == 100
     assert cfg.computer_difficulty == BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY
     assert cfg.opponent_mode == BURNYSC2_DEFAULT_OPPONENT_MODE
+    assert cfg.burnysc2_suppress_attack is BURNYSC2_DEFAULT_SUPPRESS_ATTACK
 
 
 def test_load_fixture() -> None:
@@ -286,3 +288,106 @@ def test_fake_adapter_rejects_non_passive_burny_policy() -> None:
     )
     with pytest.raises(ValueError, match="burnysc2_policy"):
         cfg.validate()
+
+
+def test_burnysc2_suppress_attack_true_parses() -> None:
+    cfg = match_config_from_mapping(
+        {
+            "adapter": "burnysc2",
+            "bounded_horizon": {"game_step": 8, "max_game_steps": 10},
+            "burnysc2_policy": BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+            "burnysc2_suppress_attack": True,
+            "map": {"discover_under_maps_dir": True},
+            "schema_version": "1",
+            "seed": 1,
+        },
+    )
+    assert cfg.burnysc2_suppress_attack is True
+    m = match_config_to_mapping(cfg)
+    assert m["burnysc2_suppress_attack"] is True
+
+
+def test_burnysc2_suppress_attack_non_bool_raises() -> None:
+    with pytest.raises(ValueError, match="burnysc2_suppress_attack must be a boolean"):
+        match_config_from_mapping(
+            {
+                "adapter": "burnysc2",
+                "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+                "burnysc2_policy": BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+                "burnysc2_suppress_attack": "yes",
+                "map": {"discover_under_maps_dir": True},
+                "schema_version": "1",
+                "seed": 0,
+            },
+        )
+
+
+def test_burnysc2_suppress_attack_requires_hybrid_policy() -> None:
+    with pytest.raises(ValueError, match="burnysc2_suppress_attack requires"):
+        match_config_from_mapping(
+            {
+                "adapter": "burnysc2",
+                "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+                "burnysc2_suppress_attack": True,
+                "map": {"discover_under_maps_dir": True},
+                "schema_version": "1",
+                "seed": 0,
+            },
+        )
+
+
+def test_burnysc2_suppress_attack_requires_burny_adapter() -> None:
+    with pytest.raises(ValueError, match="burnysc2_suppress_attack may only be set"):
+        match_config_from_mapping(
+            {
+                "adapter": "fake",
+                "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+                "burnysc2_suppress_attack": True,
+                "map": {"discover_under_maps_dir": True},
+                "schema_version": "1",
+                "seed": 0,
+            },
+        )
+
+
+def test_match_config_to_mapping_omits_default_suppress_attack() -> None:
+    cfg = MatchConfig(
+        schema_version="1",
+        adapter="burnysc2",
+        seed=1,
+        bounded_horizon=BoundedHorizon(10, 1),
+        map=MapSpec(discover_under_maps_dir=True),
+        burnysc2_policy=BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+    )
+    m = match_config_to_mapping(cfg)
+    assert "burnysc2_suppress_attack" not in m
+
+
+def test_normalize_identity_unchanged_default_suppress_attack() -> None:
+    cfg = match_config_from_mapping(
+        {
+            "adapter": "burnysc2",
+            "bounded_horizon": {"game_step": 8, "max_game_steps": 10},
+            "burnysc2_policy": BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+            "map": {"discover_under_maps_dir": True},
+            "schema_version": "1",
+            "seed": 1,
+        },
+    )
+    n = normalize_match_config_for_identity(cfg)
+    assert "burnysc2_suppress_attack" not in n
+
+
+def test_normalize_and_hash_change_when_suppress_attack_true() -> None:
+    raw = {
+        "adapter": "burnysc2",
+        "bounded_horizon": {"game_step": 8, "max_game_steps": 10},
+        "burnysc2_policy": BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+        "map": {"discover_under_maps_dir": True},
+        "schema_version": "1",
+        "seed": 1,
+    }
+    base = match_config_from_mapping(dict(raw))
+    sup = match_config_from_mapping({**raw, "burnysc2_suppress_attack": True})
+    assert compute_config_hash(base) != compute_config_hash(sup)
+    assert normalize_match_config_for_identity(sup).get("burnysc2_suppress_attack") is True

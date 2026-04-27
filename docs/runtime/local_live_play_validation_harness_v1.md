@@ -65,6 +65,12 @@ Optional match-config field: **`opponent_mode`**. Omitted behavior matches the h
 
 Set **`passive_bot`** to use a second **idle human-style bot** as the opponent (no attack orders) for **operator-local watchability / scenario smokes** — not benchmark evidence, not ladder performance, and not a strong-agent claim.
 
+## M02 `burnysc2_suppress_attack` (BurnySc2 / `local_live_sc2`, hybrid only)
+
+Optional match-config field: **`burnysc2_suppress_attack`**. Default **`false`**: behavior matches existing hybrid runs (including throttled marine attack-move).
+
+When **`burnysc2_policy` is `px1_m03_hybrid_v1`** and **`burnysc2_suppress_attack` is `true`**, the hybrid Terran bot **does not issue marine attack-move orders** toward the enemy, while keeping worker/supply/military training, scouting, and M43 logging where applicable. Use this for **operator-local watchability / sandbox** validation when the goal is to observe macro and scout behavior without ending the match quickly via combat — **not** benchmark evidence, not ladder performance, and not a strong-agent claim.
+
 ## `match_execution` semantics (bounded burnysc2 vs fixture)
 
 - **`fixture_stub_ci` / `adapter=fake`:** `match_execution.final_status` is **`ok`** (deterministic harness; no SC2 client `Result`).

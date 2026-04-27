@@ -54,6 +54,9 @@ BURNYSC2_OPPONENT_MODES: tuple[str, ...] = (
     BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
 )
 
+# PX1-M03 hybrid: optional watchability — disable marine attack-move (default off).
+BURNYSC2_DEFAULT_SUPPRESS_ATTACK = False
+
 
 @dataclass(frozen=True, slots=True)
 class MatchConfig:
@@ -72,6 +75,8 @@ class MatchConfig:
     computer_difficulty: str = BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY
     # BurnySc2: `computer` = built-in AI; `passive_bot` = idle second bot (watchability only).
     opponent_mode: str = BURNYSC2_DEFAULT_OPPONENT_MODE
+    # BurnySc2 hybrid only: suppress marine attack-move for operator-local watchability smokes.
+    burnysc2_suppress_attack: bool = BURNYSC2_DEFAULT_SUPPRESS_ATTACK
 
     def validate(self) -> None:
         if self.schema_version != "1":
@@ -107,6 +112,15 @@ class MatchConfig:
             raise ValueError(
                 f"unsupported opponent_mode: {self.opponent_mode!r}; allowed: {oam}",
             )
+        if self.burnysc2_suppress_attack:
+            if self.adapter != "burnysc2":
+                raise ValueError(
+                    "burnysc2_suppress_attack may only be set when adapter is burnysc2",
+                )
+            if self.burnysc2_policy != BURNYSC2_POLICY_PX1_M03_HYBRID_V1:
+                raise ValueError(
+                    "burnysc2_suppress_attack requires burnysc2_policy 'px1_m03_hybrid_v1'",
+                )
 
 
 def _bounded_from_json(data: dict[str, Any]) -> BoundedHorizon:
@@ -155,6 +169,14 @@ def _opponent_mode_from_json(data: dict[str, Any]) -> str:
     return raw
 
 
+def _burnysc2_suppress_attack_from_json(data: dict[str, Any]) -> bool:
+    raw = data.get("burnysc2_suppress_attack", BURNYSC2_DEFAULT_SUPPRESS_ATTACK)
+    if not isinstance(raw, bool):
+        msg = f"burnysc2_suppress_attack must be a boolean, got {type(raw).__name__}"
+        raise ValueError(msg)
+    return raw
+
+
 def match_config_from_mapping(data: dict[str, Any]) -> MatchConfig:
     """Parse and validate a match config dict (typically from JSON)."""
 
@@ -171,6 +193,7 @@ def match_config_from_mapping(data: dict[str, Any]) -> MatchConfig:
         burnysc2_policy=bpol,
         computer_difficulty=_computer_difficulty_from_json(data),
         opponent_mode=_opponent_mode_from_json(data),
+        burnysc2_suppress_attack=_burnysc2_suppress_attack_from_json(data),
     )
     cfg.validate()
     return cfg
@@ -219,4 +242,6 @@ def match_config_to_mapping(cfg: MatchConfig) -> dict[str, Any]:
         out["computer_difficulty"] = cfg.computer_difficulty
     if cfg.opponent_mode != BURNYSC2_DEFAULT_OPPONENT_MODE:
         out["opponent_mode"] = cfg.opponent_mode
+    if cfg.burnysc2_suppress_attack:
+        out["burnysc2_suppress_attack"] = True
     return out

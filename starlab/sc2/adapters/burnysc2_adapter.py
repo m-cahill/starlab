@@ -141,6 +141,7 @@ def run_burnysc2_adapter(
             game_step=config.bounded_horizon.game_step,
             sink=sink,
             hierarchical_sklearn_bundle=hierarchical_sklearn_bundle,
+            suppress_attack=config.burnysc2_suppress_attack,
         )
         bot = bot_cls()
         bot_race = Race.Terran
@@ -223,11 +224,18 @@ def run_burnysc2_adapter(
     if isinstance(lbs, dict) and lbs:
         summary_out = dict(lbs)
         if use_hybrid:
-            summary_out["operator_readable_summary_v1"] = (
-                "PX1-M03 hybrid: hard-coded Terran worker/supply/barracks/marine scaffold; "
-                "one early scout move; throttled marine attack-move toward enemy start using "
-                "M43 coarse labels with periodic fallback — not full strategic play."
-            )
+            if config.burnysc2_suppress_attack:
+                summary_out["operator_readable_summary_v1"] = (
+                    "PX1-M03 hybrid (watchability: suppress_attack): hard-coded Terran worker/"
+                    "supply/barracks/marine scaffold; one early scout move; M43 labels logged; "
+                    "marine attack-move toward enemy is disabled — not full strategic play."
+                )
+            else:
+                summary_out["operator_readable_summary_v1"] = (
+                    "PX1-M03 hybrid: hard-coded Terran worker/supply/barracks/marine scaffold; "
+                    "one early scout move; throttled marine attack-move toward enemy start using "
+                    "M43 coarse labels with periodic fallback — not full strategic play."
+                )
 
     return ExecutionProofRecord(
         schema_version=PROOF_SCHEMA_VERSION,
