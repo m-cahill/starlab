@@ -25,7 +25,7 @@ M17 collects **governed** metadata and **preflight** evidence so an operator can
 - `operator_local_execution_performed` = true, `short_gpu_probe_performed` = true, `short_gpu_probe_result` = `success`
 - `m17_opening_recommendation` ∈ {`ready_for_m17_planning`, `ready_for_m17_operator_preflight_only`}
 - `long_gpu_run_authorized` = false, `v2_authorized` = false, `v2_recharter_authorized` = false
-- `cuda_available` = true, `torch_imported` = true (when used for M17 preflight)
+- `cuda_available` = true, `torch_imported` = true (when used for M17 preflight) — at the artifact **root**, **or** the same two booleans may be read from **`torch_cuda_summary`** when the top-level fields are **absent** (actual M16 `operator_local_short_gpu_probe` emit shape). This is validation-only metadata, **not** a long-GPU or v2 **claim**.
 
 Public documentation may state that **operator-local M16 short GPU probe evidence exists and is referenced privately by SHA** without publishing raw private paths.
 

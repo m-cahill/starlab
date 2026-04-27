@@ -58,6 +58,29 @@ def _success_m16_object() -> dict[str, object]:
     }
 
 
+def _m16_object_nested_torch_only() -> dict[str, object]:
+    """Shape matching actual M16 emit: CUDA/torch under `torch_cuda_summary` only."""
+    o = dict(_success_m16_object())
+    o.pop("cuda_available", None)
+    o.pop("torch_imported", None)
+    o.pop("gpu_name", None)
+    o.pop("gpu_memory_summary", None)
+    o.pop("torch_version", None)
+    o.pop("cuda_version", None)
+    o["torch_cuda_summary"] = {
+        "cuda_available": True,
+        "cuda_version": "12.8",
+        "torch_imported": True,
+        "torch_version": "2.11.0+cu128",
+    }
+    o["gpu_summary"] = {
+        "gpu_name": "NVIDIA GeForce RTX 5090",
+        "memory_summary": "34190458880",
+        "posture": "recorded_when_available",
+    }
+    return o
+
+
 def _write_m16(path: Path, extra: dict[str, object] | None = None) -> Path:
     d = _success_m16_object()
     if extra:
@@ -166,6 +189,74 @@ def test_m16_bind_failures(tmp_path: Path) -> None:
     p3.write_text(json.dumps(o), encoding="utf-8")
     with pytest.raises(ValueError, match="cuda_available"):
         parse_m16_short_gpu_environment_for_m17(p3)
+
+
+def test_parse_m16_accepts_nested_torch_cuda_summary(tmp_path: Path) -> None:
+    p = tmp_path / "m16_nested.json"
+    p.write_text(json.dumps(_m16_object_nested_torch_only()), encoding="utf-8")
+    sha, _summary = parse_m16_short_gpu_environment_for_m17(p)
+    assert len(sha) == 64
+    # Same bytes as a second write should give the same bound SHA
+    p2 = tmp_path / "m16_nested2.json"
+    p2.write_text(p.read_text(encoding="utf-8"), encoding="utf-8")
+    sha2, _ = parse_m16_short_gpu_environment_for_m17(p2)
+    assert sha == sha2
+
+
+def test_parse_m16_nested_cuda_false_fails(tmp_path: Path) -> None:
+    o = _m16_object_nested_torch_only()
+    o["torch_cuda_summary"] = {
+        "cuda_available": False,
+        "torch_imported": True,
+        "torch_version": "2.0.0",
+        "cuda_version": "0",
+    }
+    p = tmp_path / "m16.json"
+    p.write_text(json.dumps(o), encoding="utf-8")
+    with pytest.raises(ValueError, match="cuda_available"):
+        parse_m16_short_gpu_environment_for_m17(p)
+
+
+def test_parse_m16_nested_torch_imported_false_fails(tmp_path: Path) -> None:
+    o = _m16_object_nested_torch_only()
+    o["torch_cuda_summary"] = {
+        "cuda_available": True,
+        "torch_imported": False,
+        "torch_version": "2.0.0",
+        "cuda_version": "12.0",
+    }
+    p = tmp_path / "m16.json"
+    p.write_text(json.dumps(o), encoding="utf-8")
+    with pytest.raises(ValueError, match="torch_imported"):
+        parse_m16_short_gpu_environment_for_m17(p)
+
+
+def test_parse_m16_prefers_top_level_cuda_over_nested(tmp_path: Path) -> None:
+    """If top-level keys exist, they win (no fallback to nested for those keys)."""
+    o = _m16_object_nested_torch_only()
+    o["cuda_available"] = False
+    o["torch_imported"] = True
+    tcs = o["torch_cuda_summary"]
+    assert isinstance(tcs, dict)
+    o["torch_cuda_summary"] = {**tcs, "cuda_available": True}
+    p = tmp_path / "m16.json"
+    p.write_text(json.dumps(o), encoding="utf-8")
+    with pytest.raises(ValueError, match="cuda_available"):
+        parse_m16_short_gpu_environment_for_m17(p)
+
+
+def test_m16_operator_preflight_nested_shape_emit(tmp_path: Path) -> None:
+    p = tmp_path / "m16.json"
+    p.write_text(json.dumps(_m16_object_nested_torch_only()), encoding="utf-8")
+    outd = tmp_path / "m17out"
+    emit_v15_long_gpu_campaign_evidence(
+        outd,
+        profile=PROFILE_OPERATOR_PREFLIGHT,
+        m16_path=p,
+    )
+    j = json.loads((outd / FILENAME_LONG_GPU_CAMPAIGN_EVIDENCE).read_text(encoding="utf-8"))
+    assert j.get("campaign_evidence_status") == "operator_preflight_ready"
+    assert j.get("m16_json_canonical_sha256") != "0" * 64
 
 
 def test_cli_fixture(tmp_path: Path) -> None:
