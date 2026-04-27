@@ -46,6 +46,14 @@ BURNYSC2_COMPUTER_DIFFICULTY_VALUES: tuple[str, ...] = (
     "Hard",
 )
 
+# BurnySc2 opponent: built-in `Computer` AI (default) vs idle second `Bot` for watchability smokes.
+BURNYSC2_DEFAULT_OPPONENT_MODE = "computer"
+BURNYSC2_OPPONENT_MODE_PASSIVE_BOT = "passive_bot"
+BURNYSC2_OPPONENT_MODES: tuple[str, ...] = (
+    BURNYSC2_DEFAULT_OPPONENT_MODE,
+    BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
+)
+
 
 @dataclass(frozen=True, slots=True)
 class MatchConfig:
@@ -62,6 +70,8 @@ class MatchConfig:
     burnysc2_policy: str = BURNYSC2_POLICY_PASSIVE
     # BurnySc2 `Computer` opponent: maps to `sc2.data.Difficulty` by name (default matches legacy).
     computer_difficulty: str = BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY
+    # BurnySc2: `computer` = built-in AI; `passive_bot` = idle second bot (watchability only).
+    opponent_mode: str = BURNYSC2_DEFAULT_OPPONENT_MODE
 
     def validate(self) -> None:
         if self.schema_version != "1":
@@ -91,6 +101,11 @@ class MatchConfig:
             bad = self.computer_difficulty
             raise ValueError(
                 f"unsupported computer_difficulty: {bad!r}; allowed: {allowed}",
+            )
+        if self.opponent_mode not in BURNYSC2_OPPONENT_MODES:
+            oam = ", ".join(BURNYSC2_OPPONENT_MODES)
+            raise ValueError(
+                f"unsupported opponent_mode: {self.opponent_mode!r}; allowed: {oam}",
             )
 
 
@@ -132,6 +147,14 @@ def _computer_difficulty_from_json(data: dict[str, Any]) -> str:
     return raw
 
 
+def _opponent_mode_from_json(data: dict[str, Any]) -> str:
+    raw = data.get("opponent_mode", BURNYSC2_DEFAULT_OPPONENT_MODE)
+    if not isinstance(raw, str):
+        msg = f"opponent_mode must be a string, got {type(raw).__name__}"
+        raise ValueError(msg)
+    return raw
+
+
 def match_config_from_mapping(data: dict[str, Any]) -> MatchConfig:
     """Parse and validate a match config dict (typically from JSON)."""
 
@@ -147,6 +170,7 @@ def match_config_from_mapping(data: dict[str, Any]) -> MatchConfig:
         replay_filename=data.get("replay_filename"),
         burnysc2_policy=bpol,
         computer_difficulty=_computer_difficulty_from_json(data),
+        opponent_mode=_opponent_mode_from_json(data),
     )
     cfg.validate()
     return cfg
@@ -193,4 +217,6 @@ def match_config_to_mapping(cfg: MatchConfig) -> dict[str, Any]:
         out["burnysc2_policy"] = cfg.burnysc2_policy
     if cfg.computer_difficulty != BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY:
         out["computer_difficulty"] = cfg.computer_difficulty
+    if cfg.opponent_mode != BURNYSC2_DEFAULT_OPPONENT_MODE:
+        out["opponent_mode"] = cfg.opponent_mode
     return out

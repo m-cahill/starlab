@@ -65,6 +65,10 @@ module = "starlab.sc2.adapters.burnysc2_adapter"
 ignore_errors = true
 
 [[tool.mypy.overrides]]
+module = "tests.test_burnysc2_opponent_adapter"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
 module = "starlab.sc2.px1_m03_hybrid_terran_bot"
 ignore_errors = true
 
