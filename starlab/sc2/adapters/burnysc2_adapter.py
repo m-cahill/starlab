@@ -17,10 +17,14 @@ from starlab.sc2.maps import ResolvedMap, resolve_local_map_path
 from starlab.sc2.match_config import (
     BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+    BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
     MatchConfig,
 )
 from starlab.sc2.models import Sc2RuntimeSpec
 from starlab.sc2.px1_m03_hybrid_terran_bot import make_px1_m03_hybrid_terran_bot_class
+from starlab.sc2.px1_watchability_macro_scout_bot import (
+    make_px1_watchability_macro_scout_bot_class,
+)
 
 # Watchability: passive second player runs occasional non-combat economic heartbeat
 # (not a pressure opponent).
@@ -110,6 +114,7 @@ def run_burnysc2_adapter(
     }
 
     use_hybrid = config.burnysc2_policy == BURNYSC2_POLICY_PX1_M03_HYBRID_V1
+    use_watchability = config.burnysc2_policy == BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1
     if use_hybrid and hierarchical_sklearn_bundle is None:
         msg = "burnysc2_policy px1_m03_hybrid_v1 requires hierarchical_sklearn_bundle"
         raise RuntimeError(msg)
@@ -166,6 +171,14 @@ def run_burnysc2_adapter(
             sink=sink,
             hierarchical_sklearn_bundle=hierarchical_sklearn_bundle,
             suppress_attack=config.burnysc2_suppress_attack,
+        )
+        bot = bot_cls()
+        bot_race = Race.Terran
+    elif use_watchability:
+        bot_cls = make_px1_watchability_macro_scout_bot_class(
+            max_steps=config.bounded_horizon.max_game_steps,
+            game_step=config.bounded_horizon.game_step,
+            sink=sink,
         )
         bot = bot_cls()
         bot_race = Race.Terran
@@ -260,6 +273,11 @@ def run_burnysc2_adapter(
                     "one early scout move; throttled marine attack-move toward enemy start using "
                     "M43 coarse labels with periodic fallback — not full strategic play."
                 )
+        elif use_watchability:
+            summary_out["operator_readable_summary_v1"] = (
+                "policy: px1_watchability_macro_scout_v1; purpose: watchability/sandbox only; "
+                "attacks: disabled by design — scripted macro, scout, and patrol near base."
+            )
 
     return ExecutionProofRecord(
         schema_version=PROOF_SCHEMA_VERSION,

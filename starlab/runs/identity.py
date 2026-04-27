@@ -15,6 +15,7 @@ from starlab.sc2.match_config import (
     BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY,
     BURNYSC2_DEFAULT_OPPONENT_MODE,
     BURNYSC2_DEFAULT_SUPPRESS_ATTACK,
+    BURNYSC2_POLICY_PASSIVE,
     MatchConfig,
 )
 
@@ -69,6 +70,8 @@ def normalize_match_config_for_identity(cfg: MatchConfig) -> dict[str, Any]:
         out["opponent_mode"] = cfg.opponent_mode
     if cfg.burnysc2_suppress_attack != BURNYSC2_DEFAULT_SUPPRESS_ATTACK:
         out["burnysc2_suppress_attack"] = cfg.burnysc2_suppress_attack
+    if cfg.adapter == "burnysc2" and cfg.burnysc2_policy != BURNYSC2_POLICY_PASSIVE:
+        out["burnysc2_policy"] = cfg.burnysc2_policy
     return out
 
 

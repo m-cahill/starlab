@@ -71,6 +71,12 @@ Optional match-config field: **`burnysc2_suppress_attack`**. Default **`false`**
 
 When **`burnysc2_policy` is `px1_m03_hybrid_v1`** and **`burnysc2_suppress_attack` is `true`**, the hybrid Terran bot **does not issue marine attack-move orders** toward the enemy, while keeping worker/supply/military training, scouting, and M43 logging where applicable. Use this for **operator-local watchability / sandbox** validation when the goal is to observe macro and scout behavior without ending the match quickly via combat — **not** benchmark evidence, not ladder performance, and not a strong-agent claim.
 
+**`burnysc2_suppress_attack`** is **not** valid with **`px1_watchability_macro_scout_v1`** (schema rejects that combination): the watchability policy avoids attacks by design, so suppress-attack would be redundant.
+
+## M02 `burnysc2_policy` watchability macro/scout (BurnySc2 / `local_live_sc2` only)
+
+Optional value **`px1_watchability_macro_scout_v1`** runs a **deterministic scripted** Terran bot for **operator-local watchability / sandbox** smokes: worker/supply/barracks/marine scaffolding, worker redistribution, one scout-style move, and recurring **patrol** near the main base — **no** enemy attack commands. It is **not** trained-agent gameplay, **not** benchmark evidence, **not** ladder performance, and **not** a strong-agent claim. The M44 harness still loads M43 weights from the hierarchical training run directory for **`action_adapter_steps`** plumbing where configured; the watchability bot itself does **not** require M43 inference at runtime.
+
 ## `match_execution` semantics (bounded burnysc2 vs fixture)
 
 - **`fixture_stub_ci` / `adapter=fake`:** `match_execution.final_status` is **`ok`** (deterministic harness; no SC2 client `Result`).

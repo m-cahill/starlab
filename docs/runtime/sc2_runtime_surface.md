@@ -65,7 +65,9 @@ Scores: **H** high, **M** medium, **L** low, **N** not applicable / poor fit for
 
 Optional **`opponent_mode`** (default **`computer`**) may select a **`passive_bot`** second player instead of the built-in AI for **watchability-only** operator smokes. That bot does **not** issue attacks; the adapter may apply **light non-combat** economic heartbeats. This does **not** assert ladder or benchmark strength.
 
-Optional **`burnysc2_suppress_attack`** (default **`false`**, **`px1_m03_hybrid_v1` only**) disables marine **attack-move** in the hybrid Terran policy for **operator-local** watchability/sandbox smokes. It is **not** a performance, ladder, or benchmark claim.
+Optional **`burnysc2_suppress_attack`** (default **`false`**, **`px1_m03_hybrid_v1` only**) disables marine **attack-move** in the hybrid Terran policy for **operator-local** watchability/sandbox smokes. It is **not** a performance, ladder, or benchmark claim. Setting **`burnysc2_suppress_attack`** with other policies (including **`px1_watchability_macro_scout_v1`**) is invalid — reject at config validation.
+
+Optional **`burnysc2_policy`** value **`px1_watchability_macro_scout_v1`** selects a **scripted** Terran bot intended only for **operator-local visual validation**: macro, scouting, and **non-combat** patrol-style movement near the base — **no** attack orders by design. It does **not** use runtime M43 inference in the bot. It is **not** benchmark evidence, not ladder performance, and not a strong-agent claim.
 
 ### Deferred
 
