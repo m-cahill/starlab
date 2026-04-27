@@ -63,7 +63,7 @@ When `adapter=burnysc2`, allowed values are the python-sc2 **`Difficulty` names*
 
 Optional match-config field: **`opponent_mode`**. Omitted behavior matches the historical default: **`computer`** (built-in `Computer` AI opponent at the configured **`computer_difficulty`**).
 
-Set **`passive_bot`** to use a second **idle human-style bot** as the opponent (no attack orders) for **operator-local watchability / scenario smokes** — not benchmark evidence, not ladder performance, and not a strong-agent claim.
+Set **`passive_bot`** to use a second **low-pressure human-style bot** as the opponent (no attack orders) for **operator-local watchability / scenario smokes** — not benchmark evidence, not ladder performance, and not a strong-agent claim. The adapter may run **occasional non-combat** worker-assignment heartbeats (e.g. `distribute_workers`) so the game is not completely inert; that remains **watchability-only**, not a strength or ladder claim.
 
 ## M02 `burnysc2_suppress_attack` (BurnySc2 / `local_live_sc2`, hybrid only)
 

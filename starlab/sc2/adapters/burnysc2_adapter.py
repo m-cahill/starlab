@@ -22,6 +22,29 @@ from starlab.sc2.match_config import (
 from starlab.sc2.models import Sc2RuntimeSpec
 from starlab.sc2.px1_m03_hybrid_terran_bot import make_px1_m03_hybrid_terran_bot_class
 
+# Watchability: passive second player runs occasional non-combat economic heartbeat
+# (not a pressure opponent).
+_PASSIVE_OPPONENT_HEARTBEAT_EVERY: int = 48
+
+
+def passive_opponent_heartbeat_due(iteration: int) -> bool:
+    """Return True on periodic steps when the passive bot should run non-combat activity."""
+
+    return iteration > 0 and iteration % _PASSIVE_OPPONENT_HEARTBEAT_EVERY == 0
+
+
+async def run_passive_opponent_heartbeat(bot: Any) -> None:
+    """Assign workers via BotAI.distribute_workers; no attack or scout. Swallows API/race flukes."""
+
+    try:
+        if not bot.townhalls or not bot.townhalls.ready:
+            return
+        if not bot.workers or not bot.mineral_field:
+            return
+        await bot.distribute_workers()
+    except (AttributeError, IndexError, KeyError, TypeError, ValueError, RuntimeError):
+        return
+
 
 def _sha256_file(path: Path) -> str:
     h = hashlib.sha256()
@@ -120,7 +143,7 @@ def run_burnysc2_adapter(
                 await self.client.leave()
 
     class _PassiveOpponentBot(BotAI):
-        """Second-player idle bot: no attack orders (watchability / scenario smoke only)."""
+        """Second-player low-pressure bot: no attacks; optional economic heartbeat."""
 
         def __init__(self, game_step: int) -> None:
             super().__init__()
@@ -130,7 +153,8 @@ def run_burnysc2_adapter(
             self.client.game_step = self._game_step
 
         async def on_step(self, iteration: int) -> None:
-            return
+            if passive_opponent_heartbeat_due(iteration):
+                await run_passive_opponent_heartbeat(self)
 
     map_settings, logical_key, map_resolution = _resolve_map_for_burny(config, maps_root)
 

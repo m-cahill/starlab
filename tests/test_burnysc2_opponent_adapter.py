@@ -2,16 +2,21 @@
 
 from __future__ import annotations
 
+import asyncio
 from pathlib import Path
 from typing import Any
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
 pytest.importorskip("sc2", reason="python-sc2 not installed")
 
 from sc2.player import Bot, Computer
-from starlab.sc2.adapters.burnysc2_adapter import run_burnysc2_adapter
+from starlab.sc2.adapters.burnysc2_adapter import (
+    passive_opponent_heartbeat_due,
+    run_burnysc2_adapter,
+    run_passive_opponent_heartbeat,
+)
 from starlab.sc2.match_config import (
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
     match_config_from_mapping,
@@ -174,3 +179,59 @@ def test_hybrid_factory_receives_suppress_attack_true() -> None:
         )
     assert mk.call_args is not None
     assert mk.call_args.kwargs.get("suppress_attack") is True
+
+
+def test_passive_opponent_heartbeat_due_periodicity() -> None:
+    assert passive_opponent_heartbeat_due(0) is False
+    assert passive_opponent_heartbeat_due(1) is False
+    assert passive_opponent_heartbeat_due(48) is True
+    assert passive_opponent_heartbeat_due(96) is True
+    assert passive_opponent_heartbeat_due(47) is False
+
+
+def test_run_passive_opponent_heartbeat_skips_when_not_ready() -> None:
+    dist = AsyncMock()
+    bot = MagicMock()
+    bot.townhalls = None
+    bot.distribute_workers = dist
+    asyncio.run(run_passive_opponent_heartbeat(bot))
+    dist.assert_not_awaited()
+
+
+def test_run_passive_opponent_heartbeat_calls_distribute_workers_when_prereq_met() -> None:
+    dist = AsyncMock()
+    bot = MagicMock()
+    bot.townhalls = MagicMock()
+    bot.townhalls.ready = True
+    bot.workers = [MagicMock()]
+    bot.mineral_field = [MagicMock()]
+    bot.distribute_workers = dist
+    asyncio.run(run_passive_opponent_heartbeat(bot))
+    dist.assert_awaited_once()
+
+
+def test_run_passive_opponent_heartbeat_swallows_distribute_error() -> None:
+    bot = MagicMock()
+    bot.townhalls = MagicMock()
+    bot.townhalls.ready = True
+    bot.workers = [MagicMock()]
+    bot.mineral_field = [MagicMock()]
+    bot.distribute_workers = AsyncMock(side_effect=RuntimeError("simulated"))
+    asyncio.run(run_passive_opponent_heartbeat(bot))
+
+
+def test_run_passive_opponent_heartbeat_no_attack_path() -> None:
+    """Heartbeat uses distribute_workers only (non-combat)."""
+
+    dist = AsyncMock()
+    attack_mock = MagicMock()
+    bot = MagicMock()
+    bot.townhalls = MagicMock()
+    bot.townhalls.ready = True
+    bot.workers = [MagicMock()]
+    bot.mineral_field = [MagicMock()]
+    bot.attack = attack_mock
+    bot.distribute_workers = dist
+    asyncio.run(run_passive_opponent_heartbeat(bot))
+    dist.assert_awaited_once()
+    attack_mock.assert_not_called()
