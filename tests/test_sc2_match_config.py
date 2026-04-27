@@ -10,6 +10,8 @@ import pytest
 from starlab.runs.identity import compute_config_hash, normalize_match_config_for_identity
 from starlab.sc2.match_config import (
     BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY,
+    BURNYSC2_DEFAULT_OPPONENT_MODE,
+    BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
     BURNYSC2_POLICY_PASSIVE,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
     BoundedHorizon,
@@ -57,6 +59,7 @@ def test_from_mapping_minimal() -> None:
     )
     assert cfg.bounded_horizon.max_game_steps == 100
     assert cfg.computer_difficulty == BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY
+    assert cfg.opponent_mode == BURNYSC2_DEFAULT_OPPONENT_MODE
 
 
 def test_load_fixture() -> None:
@@ -179,6 +182,88 @@ def test_normalize_and_config_hash_change_with_nondefault_difficulty() -> None:
     assert compute_config_hash(easy_cfg) != compute_config_hash(very_cfg)
     vnorm = normalize_match_config_for_identity(very_cfg)
     assert vnorm.get("computer_difficulty") == "VeryEasy"
+
+
+def test_opponent_mode_computer_and_passive_parse() -> None:
+    c1 = match_config_from_mapping(
+        {
+            "adapter": "burnysc2",
+            "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+            "map": {"discover_under_maps_dir": True},
+            "opponent_mode": "computer",
+            "schema_version": "1",
+            "seed": 0,
+        },
+    )
+    assert c1.opponent_mode == "computer"
+    c2 = match_config_from_mapping(
+        {
+            "adapter": "burnysc2",
+            "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+            "map": {"discover_under_maps_dir": True},
+            "opponent_mode": BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
+            "schema_version": "1",
+            "seed": 0,
+        },
+    )
+    assert c2.opponent_mode == BURNYSC2_OPPONENT_MODE_PASSIVE_BOT
+
+
+def test_opponent_mode_invalid_raises() -> None:
+    with pytest.raises(ValueError, match="unsupported opponent_mode"):
+        match_config_from_mapping(
+            {
+                "adapter": "burnysc2",
+                "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+                "map": {"discover_under_maps_dir": True},
+                "opponent_mode": "cheat_insane",
+                "schema_version": "1",
+                "seed": 0,
+            },
+        )
+
+
+def test_opponent_mode_type_raises() -> None:
+    with pytest.raises(ValueError, match="opponent_mode must be a string"):
+        match_config_from_mapping(
+            {
+                "adapter": "burnysc2",
+                "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+                "map": {"discover_under_maps_dir": True},
+                "opponent_mode": 1,
+                "schema_version": "1",
+                "seed": 0,
+            },
+        )
+
+
+def test_match_config_to_mapping_omits_default_opponent_mode() -> None:
+    cfg = MatchConfig(
+        schema_version="1",
+        adapter="burnysc2",
+        seed=1,
+        bounded_horizon=BoundedHorizon(10, 1),
+        map=MapSpec(discover_under_maps_dir=True),
+    )
+    m = match_config_to_mapping(cfg)
+    assert "opponent_mode" not in m
+
+
+def test_normalize_and_config_hash_change_with_opponent_mode_passive() -> None:
+    raw = {
+        "adapter": "burnysc2",
+        "bounded_horizon": {"game_step": 8, "max_game_steps": 10},
+        "map": {"discover_under_maps_dir": True},
+        "schema_version": "1",
+        "seed": 1,
+    }
+    base = match_config_from_mapping(dict(raw))
+    passive = match_config_from_mapping(
+        {**raw, "opponent_mode": BURNYSC2_OPPONENT_MODE_PASSIVE_BOT},
+    )
+    assert compute_config_hash(base) != compute_config_hash(passive)
+    pn = normalize_match_config_for_identity(passive)
+    assert pn.get("opponent_mode") == BURNYSC2_OPPONENT_MODE_PASSIVE_BOT
 
 
 def test_burnysc2_computer_difficulty_names_exist_in_sc2_enum() -> None:

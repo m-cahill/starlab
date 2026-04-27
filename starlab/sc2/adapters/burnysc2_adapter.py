@@ -15,6 +15,7 @@ from starlab.sc2.artifacts import (
 from starlab.sc2.env_probe import run_probe
 from starlab.sc2.maps import ResolvedMap, resolve_local_map_path
 from starlab.sc2.match_config import (
+    BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
     MatchConfig,
 )
@@ -118,6 +119,19 @@ def run_burnysc2_adapter(
                 self._out["status_sequence"].append("bounded_exit")
                 await self.client.leave()
 
+    class _PassiveOpponentBot(BotAI):
+        """Second-player idle bot: no attack orders (watchability / scenario smoke only)."""
+
+        def __init__(self, game_step: int) -> None:
+            super().__init__()
+            self._game_step = game_step
+
+        async def on_start(self) -> None:
+            self.client.game_step = self._game_step
+
+        async def on_step(self, iteration: int) -> None:
+            return
+
     map_settings, logical_key, map_resolution = _resolve_map_for_burny(config, maps_root)
 
     if use_hybrid:
@@ -137,11 +151,13 @@ def run_burnysc2_adapter(
             sink,
         )
         bot_race = Race.Random
-    sc2_difficulty = getattr(Difficulty, config.computer_difficulty)
-    players = [
-        Bot(bot_race, bot),
-        Computer(Race.Random, sc2_difficulty),
-    ]
+    gstep = config.bounded_horizon.game_step
+    if config.opponent_mode == BURNYSC2_OPPONENT_MODE_PASSIVE_BOT:
+        passive_opp = _PassiveOpponentBot(gstep)
+        players = [Bot(bot_race, bot), Bot(Race.Random, passive_opp)]
+    else:
+        sc2_difficulty = getattr(Difficulty, config.computer_difficulty)
+        players = [Bot(bot_race, bot), Computer(Race.Random, sc2_difficulty)]
 
     save_replay_as: str | None = None
     if config.save_replay and output_dir is not None:

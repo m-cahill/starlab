@@ -63,6 +63,8 @@ Scores: **H** high, **M** medium, **L** low, **N** not applicable / poor fit for
 
 **BurnySc2 (optional harness):** the STARLAB M02 config may set optional **`computer_difficulty`** (default **`Easy`**) to select python-sc2 **`sc2.data.Difficulty`** values (`VeryEasy` … `Hard` in the supported allowlist) for the built-in computer opponent. This controls **local operator pressure** for bounded validation; it is **not** a performance or benchmark claim.
 
+Optional **`opponent_mode`** (default **`computer`**) may select a **`passive_bot`** second player instead of the built-in AI for **watchability-only** operator smokes. This does **not** assert ladder or benchmark strength.
+
 ### Deferred
 
 - **PySC2**-style RL environments as the **default** substrate (may be revisited for specific experiments under milestone governance).
