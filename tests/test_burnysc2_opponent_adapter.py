@@ -20,7 +20,12 @@ from starlab.sc2.match_config import (
 _PROBES = {"root": "C:/SC2", "maps_dir": "C:/SC2/Maps"}
 
 
-def _bot_player_stub(race: Any, ai: Any, name: str | None = None, fullscreen: bool = False) -> MagicMock:
+def _bot_player_stub(
+    race: Any,
+    ai: Any,
+    name: str | None = None,
+    fullscreen: bool = False,
+) -> MagicMock:
     """Avoid sc2.player.Bot's isinstance check when testing hybrid factory with MagicMock AIs."""
 
     p = MagicMock()
