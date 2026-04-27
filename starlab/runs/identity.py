@@ -11,7 +11,10 @@ from starlab.runs.models import (
     LINEAGE_SEED_KIND,
     RUN_SPEC_KIND,
 )
-from starlab.sc2.match_config import MatchConfig
+from starlab.sc2.match_config import (
+    BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY,
+    MatchConfig,
+)
 
 
 def _posix_path_name_for_identity(pathish: str) -> str:
@@ -40,7 +43,7 @@ def normalize_match_config_for_identity(cfg: MatchConfig) -> dict[str, Any]:
     replay_filename: str | None = None
     if cfg.replay_filename:
         replay_filename = _posix_path_name_for_identity(cfg.replay_filename)
-    return {
+    out: dict[str, Any] = {
         "adapter": cfg.adapter,
         "bounded_horizon": {
             "game_step": cfg.bounded_horizon.game_step,
@@ -58,6 +61,9 @@ def normalize_match_config_for_identity(cfg: MatchConfig) -> dict[str, Any]:
         "schema_version": cfg.schema_version,
         "seed": cfg.seed,
     }
+    if cfg.computer_difficulty != BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY:
+        out["computer_difficulty"] = cfg.computer_difficulty
+    return out
 
 
 def compute_config_hash(cfg: MatchConfig) -> str:

@@ -61,6 +61,8 @@ Scores: **H** high, **M** medium, **L** low, **N** not applicable / poor fit for
 - **`python-sc2`** (and similar wrappers) for developer ergonomics, **provided** they are isolated behind explicit adapter modules and do not replace the official protocol as the lab’s contract.
 - Future internal facades that **wrap** protobuf or file paths without claiming to be upstream.
 
+**BurnySc2 (optional harness):** the STARLAB M02 config may set optional **`computer_difficulty`** (default **`Easy`**) to select python-sc2 **`sc2.data.Difficulty`** values (`VeryEasy` … `Hard` in the supported allowlist) for the built-in computer opponent. This controls **local operator pressure** for bounded validation; it is **not** a performance or benchmark claim.
+
 ### Deferred
 
 - **PySC2**-style RL environments as the **default** substrate (may be revisited for specific experiments under milestone governance).

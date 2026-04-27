@@ -53,6 +53,12 @@ out/live_validation_runs/<run_id>/
 - **CI:** fixture-only CPU path — `runtime_mode=fixture_stub_ci`, `adapter=fake`, no GPU, no live SC2 — see `tests/test_m44_local_live_play_validation_harness.py`.
 - **Local:** real M43 run directory under `out/hierarchical_training_runs/` (or equivalent); weights stay **local sidecars**; use `local_live_sc2` only on an operator machine with SC2 + optional `sc2-harness` extras.
 
+## M02 `computer_difficulty` (BurnySc2 / `local_live_sc2` only)
+
+Optional match-config field: **`computer_difficulty`**. Omitted or unset behavior matches the historical default: **`Easy`** (python-sc2 `Difficulty.Easy`).
+
+When `adapter=burnysc2`, allowed values are the python-sc2 **`Difficulty` names** `VeryEasy`, `Easy`, `Medium`, and `Hard`. This is a **scenario / pressure-control** knob for operator-local validation (e.g. lower-pressure smokes, watchability) — not benchmark evidence, not ladder performance, and not a strong-agent claim.
+
 ## `match_execution` semantics (bounded burnysc2 vs fixture)
 
 - **`fixture_stub_ci` / `adapter=fake`:** `match_execution.final_status` is **`ok`** (deterministic harness; no SC2 client `Result`).

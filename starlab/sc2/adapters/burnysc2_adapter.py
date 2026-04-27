@@ -137,9 +137,10 @@ def run_burnysc2_adapter(
             sink,
         )
         bot_race = Race.Random
+    sc2_difficulty = getattr(Difficulty, config.computer_difficulty)
     players = [
         Bot(bot_race, bot),
-        Computer(Race.Random, Difficulty.Easy),
+        Computer(Race.Random, sc2_difficulty),
     ]
 
     save_replay_as: str | None = None

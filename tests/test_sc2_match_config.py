@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import importlib
 import json
 from pathlib import Path
 
 import pytest
+from starlab.runs.identity import compute_config_hash, normalize_match_config_for_identity
 from starlab.sc2.match_config import (
+    BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY,
     BURNYSC2_POLICY_PASSIVE,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
     BoundedHorizon,
@@ -53,6 +56,7 @@ def test_from_mapping_minimal() -> None:
         },
     )
     assert cfg.bounded_horizon.max_game_steps == 100
+    assert cfg.computer_difficulty == BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY
 
 
 def test_load_fixture() -> None:
@@ -73,6 +77,117 @@ def test_burnysc2_hybrid_policy_roundtrip() -> None:
     assert cfg.burnysc2_policy == BURNYSC2_POLICY_PX1_M03_HYBRID_V1
     m = match_config_to_mapping(cfg)
     assert m["burnysc2_policy"] == BURNYSC2_POLICY_PX1_M03_HYBRID_V1
+
+
+def test_computer_difficulty_nondefault_roundtrip() -> None:
+    cfg = match_config_from_mapping(
+        {
+            "adapter": "burnysc2",
+            "bounded_horizon": {"game_step": 8, "max_game_steps": 10},
+            "computer_difficulty": "VeryEasy",
+            "map": {"discover_under_maps_dir": True},
+            "schema_version": "1",
+            "seed": 1,
+        },
+    )
+    assert cfg.computer_difficulty == "VeryEasy"
+    m = match_config_to_mapping(cfg)
+    assert m["computer_difficulty"] == "VeryEasy"
+
+
+@pytest.mark.parametrize(
+    "difficulty",
+    ["VeryEasy", "Easy", "Medium", "Hard"],
+)
+def test_computer_difficulty_allowed_values_parse(difficulty: str) -> None:
+    cfg = match_config_from_mapping(
+        {
+            "adapter": "burnysc2",
+            "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+            "computer_difficulty": difficulty,
+            "map": {"discover_under_maps_dir": True},
+            "schema_version": "1",
+            "seed": 0,
+        },
+    )
+    assert cfg.computer_difficulty == difficulty
+
+
+def test_computer_difficulty_invalid_raises() -> None:
+    with pytest.raises(ValueError, match="unsupported computer_difficulty"):
+        match_config_from_mapping(
+            {
+                "adapter": "burnysc2",
+                "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+                "computer_difficulty": "CheatInsane",
+                "map": {"discover_under_maps_dir": True},
+                "schema_version": "1",
+                "seed": 0,
+            },
+        )
+
+
+def test_computer_difficulty_wrong_type_raises() -> None:
+    with pytest.raises(ValueError, match="computer_difficulty must be a string"):
+        match_config_from_mapping(
+            {
+                "adapter": "burnysc2",
+                "bounded_horizon": {"game_step": 1, "max_game_steps": 2},
+                "computer_difficulty": 3,
+                "map": {"discover_under_maps_dir": True},
+                "schema_version": "1",
+                "seed": 0,
+            },
+        )
+
+
+def test_match_config_to_mapping_omits_default_computer_difficulty() -> None:
+    cfg = MatchConfig(
+        schema_version="1",
+        adapter="burnysc2",
+        seed=1,
+        bounded_horizon=BoundedHorizon(10, 1),
+        map=MapSpec(discover_under_maps_dir=True),
+    )
+    m = match_config_to_mapping(cfg)
+    assert "computer_difficulty" not in m
+
+
+def test_normalize_identity_unchanged_for_default_difficulty() -> None:
+    cfg = match_config_from_mapping(
+        {
+            "adapter": "fake",
+            "map": {"discover_under_maps_dir": True},
+            "schema_version": "1",
+            "seed": 7,
+        },
+    )
+    base = normalize_match_config_for_identity(cfg)
+    assert "computer_difficulty" not in base
+
+
+def test_normalize_and_config_hash_change_with_nondefault_difficulty() -> None:
+    raw = {
+        "adapter": "burnysc2",
+        "bounded_horizon": {"game_step": 8, "max_game_steps": 10},
+        "map": {"discover_under_maps_dir": True},
+        "schema_version": "1",
+        "seed": 1,
+    }
+    easy_cfg = match_config_from_mapping(dict(raw))
+    very_cfg = match_config_from_mapping({**raw, "computer_difficulty": "VeryEasy"})
+    assert compute_config_hash(easy_cfg) != compute_config_hash(very_cfg)
+    vnorm = normalize_match_config_for_identity(very_cfg)
+    assert vnorm.get("computer_difficulty") == "VeryEasy"
+
+
+def test_burnysc2_computer_difficulty_names_exist_in_sc2_enum() -> None:
+    """Maps config strings to python-sc2 ``Difficulty`` (optional dep; skipped in CI)."""
+
+    pytest.importorskip("sc2", reason="python-sc2 not installed")
+    difficulty_cls = importlib.import_module("sc2.data").Difficulty
+    for name in ("VeryEasy", "Easy", "Medium", "Hard"):
+        assert getattr(difficulty_cls, name).name == name
 
 
 def test_fake_adapter_rejects_non_passive_burny_policy() -> None:
