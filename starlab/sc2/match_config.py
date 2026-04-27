@@ -37,6 +37,15 @@ class MapSpec:
 BURNYSC2_POLICY_PASSIVE = "passive"
 BURNYSC2_POLICY_PX1_M03_HYBRID_V1 = "px1_m03_hybrid_v1"
 
+# BurnySc2: python-sc2 `sc2.data.Difficulty` member names (VeryEasy, Easy, Medium, Hard).
+BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY = "Easy"
+BURNYSC2_COMPUTER_DIFFICULTY_VALUES: tuple[str, ...] = (
+    "VeryEasy",
+    "Easy",
+    "Medium",
+    "Hard",
+)
+
 
 @dataclass(frozen=True, slots=True)
 class MatchConfig:
@@ -51,6 +60,8 @@ class MatchConfig:
     save_replay: bool = False
     replay_filename: str | None = None
     burnysc2_policy: str = BURNYSC2_POLICY_PASSIVE
+    # BurnySc2 `Computer` opponent: maps to `sc2.data.Difficulty` by name (default matches legacy).
+    computer_difficulty: str = BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY
 
     def validate(self) -> None:
         if self.schema_version != "1":
@@ -74,6 +85,12 @@ class MatchConfig:
             raise ValueError(
                 "map selection must set exactly one of: path, discover_under_maps_dir, "
                 "battle_net_map_name",
+            )
+        if self.computer_difficulty not in BURNYSC2_COMPUTER_DIFFICULTY_VALUES:
+            allowed = ", ".join(BURNYSC2_COMPUTER_DIFFICULTY_VALUES)
+            bad = self.computer_difficulty
+            raise ValueError(
+                f"unsupported computer_difficulty: {bad!r}; allowed: {allowed}",
             )
 
 
@@ -107,6 +124,14 @@ def _iface_from_json(data: dict[str, Any]) -> InterfaceConfig:
     )
 
 
+def _computer_difficulty_from_json(data: dict[str, Any]) -> str:
+    raw = data.get("computer_difficulty", BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY)
+    if not isinstance(raw, str):
+        msg = f"computer_difficulty must be a string, got {type(raw).__name__}"
+        raise ValueError(msg)
+    return raw
+
+
 def match_config_from_mapping(data: dict[str, Any]) -> MatchConfig:
     """Parse and validate a match config dict (typically from JSON)."""
 
@@ -121,6 +146,7 @@ def match_config_from_mapping(data: dict[str, Any]) -> MatchConfig:
         save_replay=bool(data.get("save_replay", False)),
         replay_filename=data.get("replay_filename"),
         burnysc2_policy=bpol,
+        computer_difficulty=_computer_difficulty_from_json(data),
     )
     cfg.validate()
     return cfg
@@ -165,4 +191,6 @@ def match_config_to_mapping(cfg: MatchConfig) -> dict[str, Any]:
     out["map"] = m
     if cfg.burnysc2_policy != BURNYSC2_POLICY_PASSIVE:
         out["burnysc2_policy"] = cfg.burnysc2_policy
+    if cfg.computer_difficulty != BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY:
+        out["computer_difficulty"] = cfg.computer_difficulty
     return out
