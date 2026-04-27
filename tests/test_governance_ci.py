@@ -228,9 +228,14 @@ def test_v15_m18_governance_docs() -> None:
 def test_v15_m19_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M19" in v15
+    assert "PR #151" in v15
+    assert "25025083247" in v15
+    assert "25025427887" in v15
+    assert "closed" in v15
     assert "starlab.v15.candidate_checkpoint_evaluation_package.v1" in v15
     assert "M19 non-claims" in v15
     assert "emit_v15_candidate_checkpoint_evaluation_package" in v15
+    assert "recommended_m20_fork" in v15
     assert "V15-M20" in v15 and "V15-M21" in v15
     rt = REPO_ROOT / "docs" / "runtime" / "v15_candidate_checkpoint_evaluation_package_v1.md"
     assert rt.is_file()

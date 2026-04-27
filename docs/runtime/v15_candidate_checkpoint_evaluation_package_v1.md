@@ -1,7 +1,7 @@
 # V15-M19 — Candidate checkpoint evaluation **package** assembly (runtime)
 
 **Milestone:** `V15-M19`  
-**Status:** **active** in this repository (see `docs/starlab-v1.5.md` for authoritative program record)  
+**Status:** **closed** on `main` (see `docs/starlab-v1.5.md` for authoritative program record; [PR #151](https://github.com/m-cahill/starlab/pull/151); PR-head [`25025083247`](https://github.com/m-cahill/starlab/actions/runs/25025083247); merge-boundary [`25025427887`](https://github.com/m-cahill/starlab/actions/runs/25025427887))  
 **Contract:** `starlab.v15.candidate_checkpoint_evaluation_package.v1`
 
 ## Role
