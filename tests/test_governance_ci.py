@@ -207,6 +207,24 @@ def test_v15_m16_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m17_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M17" in v15
+    assert "starlab.v15.long_gpu_campaign_evidence.v1" in v15
+    assert "M17 non-claims" in v15
+    assert "emit_v15_long_gpu_campaign_evidence" in v15
+    assert "V15-M18" in v15 and "V15-M21" in v15
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_long_gpu_campaign_evidence_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "milestone" in rtx and "l0" in rtx and "contract" in rtx
+    rights = (REPO_ROOT / "docs" / "rights_register.md").read_text(encoding="utf-8")
+    assert "V15-M17" in rights
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_long_gpu_campaign_evidence_v1.md" in ledger
+
+
+@pytest.mark.smoke
 def test_v15_m15_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M15" in v15
