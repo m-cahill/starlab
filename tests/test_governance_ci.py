@@ -213,6 +213,8 @@ def test_v15_m18_governance_docs() -> None:
     assert "starlab.v15.checkpoint_evaluation_readiness.v1" in v15
     assert "M18 non-claims" in v15
     assert "emit_v15_checkpoint_evaluation_readiness" in v15
+    assert "25023439537" in v15
+    assert "25023582158" in v15
     assert "V15-M19" in v15 and "V15-M21" in v15
     rt = REPO_ROOT / "docs" / "runtime" / "v15_checkpoint_evaluation_readiness_v1.md"
     assert rt.is_file()
@@ -322,6 +324,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "| Current milestone |" in scan
     assert "**`V15-M17`**" in scan
     assert "**`V15-M18`**" in scan
+    assert "**`V15-M19`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -604,6 +607,8 @@ def test_ledger_post_v1_pv1_section() -> None:
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "**`V15-M19`**" in section
+    assert "**`V15-M18`**" in section
     assert "**`V15-M01`**" in section
     assert "**`V15-M00`**" in section
     assert "docs/starlab-v1.5.md" in section
