@@ -225,6 +225,22 @@ def test_v15_m18_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m19_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M19" in v15
+    assert "starlab.v15.candidate_checkpoint_evaluation_package.v1" in v15
+    assert "M19 non-claims" in v15
+    assert "emit_v15_candidate_checkpoint_evaluation_package" in v15
+    assert "V15-M20" in v15 and "V15-M21" in v15
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_candidate_checkpoint_evaluation_package_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "contract" in rtx and "package" in rtx and "p0" in rtx
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_candidate_checkpoint_evaluation_package_v1.md" in ledger
+
+
+@pytest.mark.smoke
 def test_v15_m17_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M17" in v15
