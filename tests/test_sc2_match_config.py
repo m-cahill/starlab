@@ -15,6 +15,7 @@ from starlab.sc2.match_config import (
     BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
     BURNYSC2_POLICY_PASSIVE,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+    BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
     BoundedHorizon,
     MapSpec,
     MatchConfig,
@@ -278,16 +279,72 @@ def test_burnysc2_computer_difficulty_names_exist_in_sc2_enum() -> None:
 
 
 def test_fake_adapter_rejects_non_passive_burny_policy() -> None:
-    cfg = MatchConfig(
-        schema_version="1",
-        adapter="fake",
-        seed=1,
-        bounded_horizon=BoundedHorizon(10, 1),
-        map=MapSpec(discover_under_maps_dir=True),
-        burnysc2_policy=BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+    for policy in (
+        BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+        BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+    ):
+        cfg = MatchConfig(
+            schema_version="1",
+            adapter="fake",
+            seed=1,
+            bounded_horizon=BoundedHorizon(10, 1),
+            map=MapSpec(discover_under_maps_dir=True),
+            burnysc2_policy=policy,
+        )
+        with pytest.raises(ValueError, match="burnysc2_policy"):
+            cfg.validate()
+
+
+def test_watchability_policy_roundtrip() -> None:
+    cfg = match_config_from_mapping(
+        {
+            "adapter": "burnysc2",
+            "bounded_horizon": {"game_step": 8, "max_game_steps": 100},
+            "burnysc2_policy": BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+            "map": {"discover_under_maps_dir": True},
+            "schema_version": "1",
+            "seed": 9,
+        },
     )
-    with pytest.raises(ValueError, match="burnysc2_policy"):
-        cfg.validate()
+    assert cfg.burnysc2_policy == BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1
+    m = match_config_to_mapping(cfg)
+    assert m["burnysc2_policy"] == BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1
+
+
+def test_watchability_suppress_attack_rejected() -> None:
+    with pytest.raises(ValueError, match="burnysc2_suppress_attack requires"):
+        match_config_from_mapping(
+            {
+                "adapter": "burnysc2",
+                "bounded_horizon": {"game_step": 8, "max_game_steps": 10},
+                "burnysc2_policy": BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+                "burnysc2_suppress_attack": True,
+                "map": {"discover_under_maps_dir": True},
+                "schema_version": "1",
+                "seed": 1,
+            },
+        )
+
+
+def test_config_hash_differs_watchability_vs_hybrid() -> None:
+    raw = {
+        "adapter": "burnysc2",
+        "bounded_horizon": {"game_step": 8, "max_game_steps": 8192},
+        "map": {"discover_under_maps_dir": True},
+        "schema_version": "1",
+        "seed": 4242,
+    }
+    hybrid = match_config_from_mapping(
+        {**raw, "burnysc2_policy": BURNYSC2_POLICY_PX1_M03_HYBRID_V1}
+    )
+    watch = match_config_from_mapping(
+        {**raw, "burnysc2_policy": BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1},
+    )
+    assert compute_config_hash(hybrid) != compute_config_hash(watch)
+    hn = normalize_match_config_for_identity(hybrid)
+    wn = normalize_match_config_for_identity(watch)
+    assert hn.get("burnysc2_policy") == BURNYSC2_POLICY_PX1_M03_HYBRID_V1
+    assert wn.get("burnysc2_policy") == BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1
 
 
 def test_burnysc2_suppress_attack_true_parses() -> None:

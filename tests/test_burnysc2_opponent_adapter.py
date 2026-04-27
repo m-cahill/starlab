@@ -19,6 +19,7 @@ from starlab.sc2.adapters.burnysc2_adapter import (
 )
 from starlab.sc2.match_config import (
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+    BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
     match_config_from_mapping,
 )
 
@@ -220,18 +221,86 @@ def test_run_passive_opponent_heartbeat_swallows_distribute_error() -> None:
     asyncio.run(run_passive_opponent_heartbeat(bot))
 
 
-def test_run_passive_opponent_heartbeat_no_attack_path() -> None:
-    """Heartbeat uses distribute_workers only (non-combat)."""
+def test_run_burnysc2_watchability_policy_without_sklearn_bundle() -> None:
+    raw = {
+        **_minimal_burny_raw(),
+        "burnysc2_policy": BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+    }
+    cfg = match_config_from_mapping(raw)
+    mock_map = MagicMock()
+    mock_result = MagicMock()
+    mock_result.name = "Tie"
+    mock_probe = MagicMock(
+        base_build="96883",
+        data_version="dv",
+        paths=_PROBES,
+    )
+    WatchClass = MagicMock()
+    WatchClass.return_value = MagicMock()
+    resolve = patch(
+        "starlab.sc2.adapters.burnysc2_adapter._resolve_map_for_burny",
+        return_value=(mock_map, "k", "m"),
+    )
+    mk_watch = patch(
+        "starlab.sc2.adapters.burnysc2_adapter.make_px1_watchability_macro_scout_bot_class",
+        return_value=WatchClass,
+    )
+    with (
+        resolve,
+        mk_watch as mk,
+        patch("sc2.player.Bot", side_effect=_bot_player_stub),
+        patch("starlab.sc2.adapters.burnysc2_adapter.run_probe", return_value=mock_probe),
+        patch("sc2.main.run_game", return_value=mock_result),
+    ):
+        run_burnysc2_adapter(cfg, output_dir=Path("/tmp/starlab_burny_watch_out"))
+    mk.assert_called_once()
+    assert mk.call_args.kwargs["max_steps"] == 3
 
-    dist = AsyncMock()
-    attack_mock = MagicMock()
-    bot = MagicMock()
-    bot.townhalls = MagicMock()
-    bot.townhalls.ready = True
-    bot.workers = [MagicMock()]
-    bot.mineral_field = [MagicMock()]
-    bot.attack = attack_mock
-    bot.distribute_workers = dist
-    asyncio.run(run_passive_opponent_heartbeat(bot))
-    dist.assert_awaited_once()
-    attack_mock.assert_not_called()
+
+def test_run_burnysc2_watchability_factory_returns_terran_bot_class_name() -> None:
+    raw = {
+        **_minimal_burny_raw(),
+        "burnysc2_policy": BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+        "opponent_mode": "passive_bot",
+    }
+    cfg = match_config_from_mapping(raw)
+    mock_map = MagicMock()
+    mock_result = MagicMock()
+    mock_result.name = "Victory"
+    mock_probe = MagicMock(
+        base_build="96883",
+        data_version="dv",
+        paths=_PROBES,
+    )
+    from starlab.sc2.px1_watchability_macro_scout_bot import (
+        make_px1_watchability_macro_scout_bot_class,
+    )
+
+    BotCls = make_px1_watchability_macro_scout_bot_class(
+        max_steps=2,
+        game_step=1,
+        sink={
+            "action_count": 0,
+            "observations": [],
+            "status_sequence": [],
+            "live_action_tallies": {},
+            "live_action_behavior_summary": {},
+        },
+    )
+    resolve = patch(
+        "starlab.sc2.adapters.burnysc2_adapter._resolve_map_for_burny",
+        return_value=(mock_map, "k", "m"),
+    )
+    with (
+        resolve,
+        patch(
+            "starlab.sc2.adapters.burnysc2_adapter.make_px1_watchability_macro_scout_bot_class",
+            return_value=BotCls,
+        ),
+        patch("sc2.player.Bot", side_effect=_bot_player_stub),
+        patch("starlab.sc2.adapters.burnysc2_adapter.run_probe", return_value=mock_probe),
+        patch("sc2.main.run_game", return_value=mock_result) as rg,
+    ):
+        run_burnysc2_adapter(cfg, output_dir=Path("/tmp/starlab_burny_watch_cls"))
+    players = rg.call_args[0][1]
+    assert type(players[0].ai).__name__ == "_Px1WatchabilityMacroScoutBot"

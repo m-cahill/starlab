@@ -36,6 +36,8 @@ class MapSpec:
 # BurnySc2 live policy: default passive harness; PX1-M03 hybrid = Terran scaffold + M43.
 BURNYSC2_POLICY_PASSIVE = "passive"
 BURNYSC2_POLICY_PX1_M03_HYBRID_V1 = "px1_m03_hybrid_v1"
+# Scripted watchability/demo — no M43 runtime; sandbox-only (see px1_watchability_macro_scout_bot).
+BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1 = "px1_watchability_macro_scout_v1"
 
 # BurnySc2: python-sc2 `sc2.data.Difficulty` member names (VeryEasy, Easy, Medium, Hard).
 BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY = "Easy"
@@ -83,7 +85,11 @@ class MatchConfig:
             raise ValueError(f"unsupported schema_version: {self.schema_version!r}")
         if self.adapter not in {"fake", "burnysc2"}:
             raise ValueError(f"unsupported adapter: {self.adapter!r}")
-        if self.burnysc2_policy not in {BURNYSC2_POLICY_PASSIVE, BURNYSC2_POLICY_PX1_M03_HYBRID_V1}:
+        if self.burnysc2_policy not in {
+            BURNYSC2_POLICY_PASSIVE,
+            BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
+            BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+        }:
             raise ValueError(f"unsupported burnysc2_policy: {self.burnysc2_policy!r}")
         if self.adapter != "burnysc2" and self.burnysc2_policy != BURNYSC2_POLICY_PASSIVE:
             raise ValueError("burnysc2_policy may only be set when adapter is burnysc2")

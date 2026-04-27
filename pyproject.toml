@@ -73,6 +73,10 @@ module = "starlab.sc2.px1_m03_hybrid_terran_bot"
 ignore_errors = true
 
 [[tool.mypy.overrides]]
+module = "starlab.sc2.px1_watchability_macro_scout_bot"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
 module = "starlab.replays.s2protocol_adapter"
 ignore_errors = true
 
@@ -101,6 +105,8 @@ source = ["starlab"]
 omit = [
     # PX1-M03: BurnySc2 live-match bot body — exercised in operator-local `local_live_sc2`, not default CI.
     "starlab/sc2/px1_m03_hybrid_terran_bot.py",
+    # PX1 watchability: scripted BurnySc2 bot — same rationale as hybrid live bot.
+    "starlab/sc2/px1_watchability_macro_scout_bot.py",
 ]
 
 [tool.coverage.report]
