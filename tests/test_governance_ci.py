@@ -210,6 +210,10 @@ def test_v15_m16_governance_docs() -> None:
 def test_v15_m17_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M17" in v15
+    assert "PR #143" in v15
+    assert "24971298575" in v15
+    assert "24971687346" in v15
+    assert "closed on `main`" in v15 or "closed** on `main`" in v15
     assert "starlab.v15.long_gpu_campaign_evidence.v1" in v15
     assert "M17 non-claims" in v15
     assert "emit_v15_long_gpu_campaign_evidence" in v15

@@ -1,7 +1,7 @@
 # V15-M17 — Long GPU Campaign Evidence (v1)
 
 **Milestone:** V15-M17  
-**Status:** V15-M17 — opened / implementation (not closed on `main` at this document revision)  
+**Status:** V15-M17 — **closed** on `main` (implementation [PR #143](https://github.com/m-cahill/starlab/pull/143); **authoritative PR-head CI** [`24971298575`](https://github.com/m-cahill/starlab/actions/runs/24971298575); **merge-boundary `main` CI** [`24971687346`](https://github.com/m-cahill/starlab/actions/runs/24971687346) on merge `d52e411c1b3900b481ee80e599716b547d1dcbcb` — **success**). **Public posture:** long GPU campaign **evidence / preflight** metadata surface **ready**; real training remains **M08** `run_v15_long_gpu_campaign` with operator guards. **M17** does **not** assert a real long campaign **executed** unless **separate** M08-consistent **receipts** exist.  
 **Contract:** `starlab.v15.long_gpu_campaign_evidence.v1`  
 **Campaign execution receipt (when a real run exists):** `starlab.v15.long_gpu_campaign_receipt.v1` (M08 family; M17 does not define a second receipt contract)
 
@@ -122,6 +122,6 @@ M18 owns **candidate checkpoint evaluation** evidence. M17 should leave enough l
 
 M17 is **not** a strong-agent pass, not a human benchmark, not XAI proof, not showcase release, not v2 authorization, not checkpoint promotion, and not a claim that a long run completed unless backed by M08 receipts and honest closeout. See **`docs/starlab-v1.5.md`** (M17 non-claims block).
 
-## Closeout expectations (when merging to `main`)
+## Closeout (on `main`)
 
-Update `docs/starlab-v1.5.md` with PR/CI/merge SHAs, whether a real long campaign was executed, and whether M18 should open next. This runtime doc’s status line moves from **opened / implementation** to **closed** with merge evidence.
+`docs/starlab-v1.5.md` and this file record [PR #143](https://github.com/m-cahill/starlab/pull/143) merge/CI: **no** real long campaign **executed** in the **implementation** PR/CI; **V15-M18**–**V15-M21** **proposed**; **M17** public closeout: evidence/preflight **surface** only. Optional **public** doc-only follow-up commits may add revision metadata after merge (same as other V15 milestones).
