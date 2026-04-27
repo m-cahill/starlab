@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib
 import json
 from pathlib import Path
 
@@ -184,10 +185,9 @@ def test_burnysc2_computer_difficulty_names_exist_in_sc2_enum() -> None:
     """Maps config strings to python-sc2 ``Difficulty`` (optional dep; skipped in CI)."""
 
     pytest.importorskip("sc2", reason="python-sc2 not installed")
-    from sc2.data import Difficulty
-
+    difficulty_cls = importlib.import_module("sc2.data").Difficulty
     for name in ("VeryEasy", "Easy", "Medium", "Hard"):
-        assert getattr(Difficulty, name).name == name
+        assert getattr(difficulty_cls, name).name == name
 
 
 def test_fake_adapter_rejects_non_passive_burny_policy() -> None:
