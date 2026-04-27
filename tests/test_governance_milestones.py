@@ -259,6 +259,15 @@ def _assert_milestone_folder(spec: _MilestoneFolder) -> None:
     root = REPO_ROOT / "docs" / "company_secrets" / "milestones"
     if not root.is_dir():
         pytest.skip("Private docs/company_secrets/milestones/ not in workspace (gitignored).")
+    # Operators may keep only post-v1 subtrees (e.g. V15-M18/) under milestones/. CI has no
+    # folder at all (gitignored). Require the canonical M03 anchor before enforcing the full
+    # legacy per-milestone layout so partial local trees do not fail the whole suite.
+    anchor = root / "M03" / "M03_plan.md"
+    if not anchor.is_file():
+        pytest.skip(
+            "docs/company_secrets/milestones/ exists but full legacy milestone mirror is absent "
+            "(missing M03/M03_plan.md); skipping per-folder file checks."
+        )
     d = root / spec.folder
     for name in spec.filenames:
         assert (d / name).is_file(), f"missing {d / name}"

@@ -207,6 +207,22 @@ def test_v15_m16_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m18_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M18" in v15
+    assert "starlab.v15.checkpoint_evaluation_readiness.v1" in v15
+    assert "M18 non-claims" in v15
+    assert "emit_v15_checkpoint_evaluation_readiness" in v15
+    assert "V15-M19" in v15 and "V15-M21" in v15
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_checkpoint_evaluation_readiness_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "contract id" in rtx and "readiness" in rtx and "refusal" in rtx
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_checkpoint_evaluation_readiness_v1.md" in ledger
+
+
+@pytest.mark.smoke
 def test_v15_m17_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M17" in v15
@@ -305,6 +321,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     scan = text.split("## Current truth (quick scan)")[1].split("##")[0]
     assert "| Current milestone |" in scan
     assert "**`V15-M17`**" in scan
+    assert "**`V15-M18`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
