@@ -65,6 +65,8 @@ Scores: **H** high, **M** medium, **L** low, **N** not applicable / poor fit for
 
 Optional **`opponent_mode`** (default **`computer`**) may select a **`passive_bot`** second player instead of the built-in AI for **watchability-only** operator smokes. This does **not** assert ladder or benchmark strength.
 
+Optional **`burnysc2_suppress_attack`** (default **`false`**, **`px1_m03_hybrid_v1` only**) disables marine **attack-move** in the hybrid Terran policy for **operator-local** watchability/sandbox smokes. It is **not** a performance, ladder, or benchmark claim.
+
 ### Deferred
 
 - **PySC2**-style RL environments as the **default** substrate (may be revisited for specific experiments under milestone governance).

@@ -16,6 +16,7 @@ TALLY_KEYS_APPLIED = (
     "military_structure_applied",
     "military_unit_applied",
     "combat_or_attack_move_applied",
+    "combat_or_attack_move_suppressed",
     "other_live_action_applied",
 )
 
@@ -49,6 +50,7 @@ def make_px1_m03_hybrid_terran_bot_class(
     game_step: int,
     sink: dict[str, Any],
     hierarchical_sklearn_bundle: dict[str, Any],
+    suppress_attack: bool = False,
 ) -> type:
     """Return a BurnySc2 ``BotAI`` subclass for PX1-M03 hybrid remediation."""
 
@@ -68,6 +70,7 @@ def make_px1_m03_hybrid_terran_bot_class(
             self._out = sink
             self._bundle = hierarchical_sklearn_bundle
             self._scout_done = False
+            self._suppress_attack = suppress_attack
 
         async def on_start(self) -> None:
             self.client.game_step = self._game_step
@@ -200,15 +203,19 @@ def make_px1_m03_hybrid_terran_bot_class(
                 model_attack = coarse_attack and (iteration % 16 == 0)
                 fallback_rule = iteration % 64 == 0 and iteration > 0
                 if model_attack or fallback_rule:
-                    _bump(tallies_local, "combat_or_attack_move_attempted")
-                    cmds = 0
-                    for m in ready_marines[:12]:
-                        self.do(m.attack(target))
-                        cmds += 1
-                    if cmds > 0:
-                        _bump(tallies_local, "combat_or_attack_move_applied", cmds)
-                        self._out["action_count"] = int(self._out.get("action_count", 0)) + cmds
-                        if summary.get("first_combat_or_attack_game_loop") is None:
-                            summary["first_combat_or_attack_game_loop"] = gl
+                    n_marine = min(12, len(ready_marines))
+                    if self._suppress_attack:
+                        _bump(tallies_local, "combat_or_attack_move_suppressed", n_marine)
+                    else:
+                        _bump(tallies_local, "combat_or_attack_move_attempted")
+                        cmds = 0
+                        for m in ready_marines[:12]:
+                            self.do(m.attack(target))
+                            cmds += 1
+                        if cmds > 0:
+                            _bump(tallies_local, "combat_or_attack_move_applied", cmds)
+                            self._out["action_count"] = int(self._out.get("action_count", 0)) + cmds
+                            if summary.get("first_combat_or_attack_game_loop") is None:
+                                summary["first_combat_or_attack_game_loop"] = gl
 
     return _Px1M03HybridTerranBot
