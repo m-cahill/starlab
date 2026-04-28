@@ -308,6 +308,7 @@ def test_v15_m23_governance_docs() -> None:
     assert "CUDA PyTorch Operator Environment Remediation" in v15
     assert "v15-m23-cuda-pytorch-operator-env-remediation" in v15
     assert "PR #156" in v15
+    assert "PR #157" in v15
     assert "25032909816" in v15
     assert "25033137726" in v15
     assert "7ceb750a" in v15
