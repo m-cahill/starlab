@@ -292,6 +292,51 @@ def emit_operator_preflight_gate(
     return emit_gate_artifacts(output_dir, body)
 
 
+def discover_m50_execution_dir_from_plan(
+    campaign_plan_path: Path,
+    execution_id: str,
+) -> Path | None:
+    """Resolve ``<campaign_root>/campaign_runs/<execution_id>`` using the plan's M49 contract path."""
+
+    try:
+        raw = json.loads(campaign_plan_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if not isinstance(raw, dict):
+        return None
+    rel = raw.get("m49_full_local_training_campaign_contract_path")
+    if not isinstance(rel, str) or not rel.strip():
+        return None
+    contract = Path(rel.strip())
+    if not contract.is_absolute():
+        contract = (Path.cwd() / contract).resolve()
+    if not contract.is_file():
+        return None
+    edir = contract.parent / "campaign_runs" / execution_id
+    return edir if edir.is_dir() else None
+
+
+def discover_pytorch_checkpoint_after_t1_m08_run(
+    *,
+    m08_subprocess_output_root: Path,
+    campaign_plan_path: Path,
+    execution_id: str,
+) -> Path | None:
+    """M50 writes under campaign_runs/<execution_id>; M08 also passes a (often empty) output root."""
+
+    ordered: list[Path | None] = [
+        discover_m50_execution_dir_from_plan(campaign_plan_path, execution_id),
+        m08_subprocess_output_root,
+    ]
+    for root in ordered:
+        if root is None or not root.is_dir():
+            continue
+        hit = discover_first_pytorch_checkpoint(root)
+        if hit is not None:
+            return hit
+    return None
+
+
 def discover_first_pytorch_checkpoint(root: Path) -> Path | None:
     found: list[Path] = []
     if not root.is_dir():
@@ -407,6 +452,8 @@ __all__ = [
     "derive_m18_status_str",
     "derive_m19_status_str",
     "discover_first_pytorch_checkpoint",
+    "discover_m50_execution_dir_from_plan",
+    "discover_pytorch_checkpoint_after_t1_m08_run",
     "emit_gate_artifacts",
     "emit_operator_preflight_gate",
     "map_m19_status_to_gate",

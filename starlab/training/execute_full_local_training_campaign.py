@@ -45,6 +45,9 @@ from starlab.training.industrial_hidden_rollout_models import (
     HIDDEN_ROLLOUT_CAMPAIGN_RUN_VERSION,
     resolve_visibility_posture_v1,
 )
+from starlab.training.t1_synthetic_cuda_training import (
+    execute_t1_synthetic_cuda_phases_after_bootstrap,
+)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -292,6 +295,7 @@ def main(argv: list[str] | None = None) -> int:
     phase_receipt_summaries: list[dict[str, Any]] = []
     planned_weighted_refit_executed = False
     refit_joblib_path: Path | None = None
+    synthetic_cuda_phase_results: list[dict[str, Any]] = []
 
     try:
         if args.post_bootstrap_protocol_phases:
@@ -337,6 +341,21 @@ def main(argv: list[str] | None = None) -> int:
                 phases=phases,
                 rt=rt,
             )
+            if exit_code == 0:
+                syn_code, synthetic_cuda_phase_results = (
+                    execute_t1_synthetic_cuda_phases_after_bootstrap(
+                        args=args,
+                        protocol=protocol,
+                        campaign_sha256=campaign_sha256,
+                        execution_id=execution_id,
+                        edir=edir,
+                        hb_path=hb_path,
+                        phase_results=phase_results,
+                    )
+                )
+                phase_results.extend(synthetic_cuda_phase_results)
+                if syn_code != 0:
+                    exit_code = syn_code
 
         status = "complete" if exit_code == 0 else "failed_or_partial"
         non_claims = sorted(
@@ -373,6 +392,8 @@ def main(argv: list[str] | None = None) -> int:
             pre_body["run_tier"] = args.run_tier
         if phase_receipt_summaries:
             pre_body["phase_receipts"] = phase_receipt_summaries
+        if synthetic_cuda_phase_results:
+            pre_body["t1_synthetic_cuda_phase_results"] = synthetic_cuda_phase_results
 
         if exit_code == 0:
             if args.post_bootstrap_protocol_phases:
@@ -384,11 +405,18 @@ def main(argv: list[str] | None = None) -> int:
                 )
             else:
                 pre_body["planned_weighted_refit_executed"] = False
-                pre_body["planned_weighted_refit_note"] = (
-                    "Default executor path runs bootstrap_episodes phases only; "
-                    "use --post-bootstrap-protocol-phases for M51 refit/compare/watchable "
-                    "orchestration."
-                )
+                if synthetic_cuda_phase_results:
+                    pre_body["planned_weighted_refit_note"] = (
+                        "Bootstrap_episodes phases ran, then optional t1_synthetic_cuda_training "
+                        "(run_tier=T1_30_MIN only) when listed in the M49 protocol; "
+                        "not M51 refit/compare/watchable."
+                    )
+                else:
+                    pre_body["planned_weighted_refit_note"] = (
+                        "Default executor path runs bootstrap_episodes phases only; "
+                        "use --post-bootstrap-protocol-phases for M51 refit/compare/watchable "
+                        "orchestration."
+                    )
         run = seal_hidden_rollout_campaign_run_body(pre_body)
         report = build_hidden_rollout_campaign_run_report(run)
         write_hidden_rollout_campaign_run_artifacts(

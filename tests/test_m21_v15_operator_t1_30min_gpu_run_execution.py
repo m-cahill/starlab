@@ -18,6 +18,7 @@ from starlab.v15.operator_t1_30min_gpu_run_execution_io import (
     build_execution_body_from_m20_gate_json,
     emit_execution_artifacts,
     emit_fixture_default,
+    map_m20_gate_status_to_execution_status,
     recommended_m22_fork_for_status,
     seal_operator_t1_execution_body,
 )
@@ -31,9 +32,13 @@ from starlab.v15.operator_t1_30min_gpu_run_execution_models import (
     STATUS_T1_PACKAGE_BLOCKED,
     STATUS_T1_PACKAGE_READY,
     STATUS_T1_RUN_FAILED,
+    STATUS_T1_RUN_FAILED_INSUFFICIENT_TRAINING,
 )
 from starlab.v15.real_candidate_checkpoint_production_gate_models import (
     STATUS_T1_COMPLETED_NO_CHECKPOINT as M20_NO_CK,
+)
+from starlab.v15.real_candidate_checkpoint_production_gate_models import (
+    STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD as M20_INSUFFICIENT,
 )
 from starlab.v15.real_candidate_checkpoint_production_gate_models import (
     STATUS_T1_PACKAGE_READY as M20_PKG_READY,
@@ -64,6 +69,17 @@ def test_fixture_deterministic_two_runs(tmp_path: Path) -> None:
     xa = (a / FILENAME_EXECUTION_JSON).read_text(encoding="utf-8")
     xb = (b / FILENAME_EXECUTION_JSON).read_text(encoding="utf-8")
     assert xa == xb
+
+
+def test_map_m20_insufficient_training_to_m21_execution_status() -> None:
+    got = map_m20_gate_status_to_execution_status(
+        gate_status=M20_INSUFFICIENT,
+        blocked_reasons=[],
+        dry_run_preflight_only=False,
+    )
+    assert got == STATUS_T1_RUN_FAILED_INSUFFICIENT_TRAINING
+    fork = recommended_m22_fork_for_status(got)
+    assert fork["fork_id"] == "t1_training_workload_remediation"
 
 
 def test_m21_runner_requires_dual_guards(tmp_path: Path) -> None:

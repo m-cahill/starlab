@@ -34,7 +34,7 @@ from starlab.v15.real_candidate_checkpoint_production_gate_io import (
     base_gate_body_template,
     build_candidate_manifest_body,
     build_operator_completed_campaign_receipt,
-    discover_first_pytorch_checkpoint,
+    discover_pytorch_checkpoint_after_t1_m08_run,
     emit_gate_artifacts,
     map_m19_status_to_gate,
     validate_m08_manifest,
@@ -48,8 +48,10 @@ from starlab.v15.real_candidate_checkpoint_production_gate_models import (
     RUN_TIER_T1_30_MIN,
     STATUS_OPERATOR_PREFLIGHT_BLOCKED,
     STATUS_T1_COMPLETED_NO_CHECKPOINT,
+    STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD,
     STATUS_T1_PACKAGE_BLOCKED,
     STATUS_T1_RUN_FAILED,
+    T1_MIN_OPERATOR_TRAINING_WORKLOAD_SECONDS,
 )
 from starlab.v15.strong_agent_scorecard_models import PROTOCOL_PROFILE_ID
 
@@ -249,7 +251,11 @@ def main(argv: list[str] | None = None) -> int:
     m08_dir = out_root / "m08"
     m08_dir.mkdir(parents=True, exist_ok=True)
 
-    ck_path = discover_first_pytorch_checkpoint(exec_root)
+    ck_path = discover_pytorch_checkpoint_after_t1_m08_run(
+        m08_subprocess_output_root=exec_root,
+        campaign_plan_path=plan_path,
+        execution_id=execution_id,
+    )
     ck_sha: str | None = sha256_hex_file(ck_path) if ck_path is not None else None
     cand_id = _candidate_id_from_lineage(lineage_obj, ck_sha or "")
 
@@ -299,6 +305,37 @@ def main(argv: list[str] | None = None) -> int:
         emit_gate_artifacts(out_root, body)
         return min(max(proc.returncode, 1), 8)
 
+    if ck_path is None and elapsed + 1e-6 < float(T1_MIN_OPERATOR_TRAINING_WORKLOAD_SECONDS):
+        body = base_gate_body_template(
+            gate_status=STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD,
+            operator_run_performed=True,
+            candidate_checkpoint_produced=False,
+            candidate_kind="none",
+            candidate_id=None,
+            candidate_checkpoint_sha256=None,
+            m08_campaign_receipt_sha256=receipt_sealed.get(SEAL_KEY_CAMPAIGN_RECEIPT),
+            m18_readiness_status=None,
+            m19_package_status=None,
+            ready_for_future_checkpoint_evaluation=False,
+            blocked_reasons=[
+                "insufficient_training_workload_duration_observed_below_t1_minimum",
+                "no_pytorch_checkpoint_artifact_under_execution_root",
+            ],
+            allowed_next_steps=[
+                "verify_m49_protocol_includes_t1_synthetic_cuda_training_when_expected",
+                "review_execution_logs_operator_local_only",
+            ],
+            operator_run_duration_observed_seconds=elapsed,
+            artifact_notes={
+                **gate_notes,
+                "t1_minimum_training_seconds": float(T1_MIN_OPERATOR_TRAINING_WORKLOAD_SECONDS),
+            },
+        )
+        body["profile"] = PROFILE_OPERATOR_PREFLIGHT
+        body["emitter_module"] = EMITTER_MODULE_REAL_CANDIDATE_GATE
+        emit_gate_artifacts(out_root, body)
+        return 9
+
     if ck_path is None:
         body = base_gate_body_template(
             gate_status=STATUS_T1_COMPLETED_NO_CHECKPOINT,
@@ -341,6 +378,11 @@ def main(argv: list[str] | None = None) -> int:
         source_campaign_receipt_sha256=str(receipt_sealed.get(SEAL_KEY_CAMPAIGN_RECEIPT)),
         source_training_manifest_sha256=manifest_sha_bind,
     )
+    if ck_path is not None and ck_path.name == "t1_synthetic_cuda_checkpoint.pt":
+        cand_body["artifact_notes"] = {
+            "lineage_binding_posture": "t1_operator_synthetic_no_m03_row",
+            "trainer_surface": "t1_synthetic_cuda_mlp",
+        }
 
     cand_manifest_path = cand_dir / "candidate_checkpoint_manifest.json"
     cand_manifest_path.write_text(
