@@ -5,6 +5,10 @@
 **Emitter:** `python -m starlab.v15.emit_v15_operator_t1_30min_gpu_run_execution`  
 **Thin wrapper runner:** `python -m starlab.v15.run_v15_m21_t1_30min_gpu_run_execution`
 
+**Status:** **closed** on `main` ([PR #153](https://github.com/m-cahill/starlab/pull/153); PR-head [`25029512815`](https://github.com/m-cahill/starlab/actions/runs/25029512815); merge-boundary [`25029902265`](https://github.com/m-cahill/starlab/actions/runs/25029902265)).
+
+**Public closeout:** tooling + CI-safe fixtures complete; private dry-run preflight passed; default / merge posture `t1_30min_run_not_started`; full T1 30-minute operator-local GPU run not performed as part of merge CI.
+
 ## Purpose
 
 V15-M21 is the first milestone intended to execute the **real** governed **T1 30-minute** operator-local GPU run **or** record an honest **preflight/run blocker**. It does **not** evaluate strength.
