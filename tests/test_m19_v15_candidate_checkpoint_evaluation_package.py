@@ -535,10 +535,10 @@ def test_governance_docs_point_to_m19() -> None:
     assert "v15_candidate_checkpoint_evaluation_package_v1.md" in sm
 
 
-def test_starlab_md_stays_concise_on_m19() -> None:
-    """v1.5 pointer line: M19 once; other starlab.md sections may mention V15-M19 in tables."""
+def test_starlab_md_v15_arc_pointer_current_milestone_id_once() -> None:
+    """The compact v1.5 arc pointer line carries exactly one active-milestone ID (now V15-M20)."""
     lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
     v15_lines = [ln for ln in lines if "docs/starlab-v1.5.md" in ln and "v1.5 arc (V15)" in ln]
     assert len(v15_lines) == 1, "expected a single v1.5 arc pointer line"
-    assert "V15-M19" in v15_lines[0]
-    assert v15_lines[0].count("V15-M19") == 1
+    assert "V15-M20" in v15_lines[0]
+    assert v15_lines[0].count("V15-M20") == 1

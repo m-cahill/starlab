@@ -82,6 +82,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/v15_strong_agent_benchmark_protocol_v1.md",
     "docs/runtime/v15_long_gpu_campaign_execution_v1.md",
     "docs/runtime/v15_checkpoint_evaluation_promotion_v1.md",
+    "docs/runtime/v15_real_candidate_checkpoint_production_gate_v1.md",
     "docs/training_asset_register.md",
     "docs/replay_corpus_register.md",
     "docs/model_weight_register.md",

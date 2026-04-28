@@ -7,6 +7,7 @@ import json
 import shutil
 import sys
 import threading
+import time
 import uuid
 from pathlib import Path
 from typing import Any, cast
@@ -126,8 +127,25 @@ def main(argv: list[str] | None = None) -> int:
             "and watchable M44 per M49 protocol order (fixture/eligibility rules apply)."
         ),
     )
+    parser.add_argument(
+        "--max-wall-clock-minutes",
+        type=float,
+        default=None,
+        metavar="MINUTES",
+        help=(
+            "Optional wall-clock budget for bootstrap/protocol phases — checked between phases "
+            "(not mid-episode)."
+        ),
+    )
+    parser.add_argument(
+        "--run-tier",
+        type=str,
+        default=None,
+        help="Optional tier label recorded in executor artifacts only (e.g. T1_30_MIN).",
+    )
     args = parser.parse_args(argv)
 
+    args._campaign_wall_clock_start_monotonic = time.monotonic()
     contract_path = args.campaign_contract.resolve()
     campaign_root = args.campaign_root.resolve() if args.campaign_root else contract_path.parent
     execution_id = args.execution_id or str(uuid.uuid4())
@@ -349,6 +367,10 @@ def main(argv: list[str] | None = None) -> int:
             "post_bootstrap_protocol_phases_enabled": bool(args.post_bootstrap_protocol_phases),
             "run_version": HIDDEN_ROLLOUT_CAMPAIGN_RUN_VERSION,
         }
+        if args.max_wall_clock_minutes is not None:
+            pre_body["max_wall_clock_minutes"] = args.max_wall_clock_minutes
+        if args.run_tier:
+            pre_body["run_tier"] = args.run_tier
         if phase_receipt_summaries:
             pre_body["phase_receipts"] = phase_receipt_summaries
 
