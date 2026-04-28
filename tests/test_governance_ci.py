@@ -325,6 +325,29 @@ def test_v15_m23_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m24_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M24" in v15
+    assert "operator_preflight_blocked" in v15
+    assert "missing_private_manifest_inputs" in v15
+    assert "M24 non-claims block" in v15
+    low = v15.lower()
+    assert "not strength evaluation" in low or "not_strength_evaluation" in low
+    assert "not checkpoint promotion" in low or "not_checkpoint_promotion" in low
+    m24_nc = v15.split("M24 non-claims block", 1)[1][:1200].lower()
+    assert "v2" in m24_nc
+    assert ".venv" in v15
+    assert "v15-m24-real-t1-30min-gpu-attempt" in v15
+    assert "V15-M25" in v15
+    assert "merge PR pending" not in v15
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M24" in ledger
+    assert "V15-M25" in ledger
+    assert "operator_preflight_blocked" in ledger
+    assert "missing_private_manifest_inputs" in ledger
+
+
+@pytest.mark.smoke
 def test_v15_m17_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M17" in v15
@@ -430,6 +453,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M22`**" in scan
     assert "**`V15-M23`**" in scan
     assert "**`V15-M24`**" in scan
+    assert "**`V15-M25`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -714,6 +738,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "**`V15-M22`**" in section
     assert "**`V15-M23`**" in section
     assert "**`V15-M24`**" in section
+    assert "**`V15-M25`**" in section
     assert "**`V15-M21`**" in section
     assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section
