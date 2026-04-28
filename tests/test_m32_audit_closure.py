@@ -83,7 +83,8 @@ def test_smoke_collection_count_in_target_band() -> None:
     """Bounded fast lane: ~25–35 smoke tests (see M32 plan; M33+ closeout adds governance rows).
 
     Upper band includes M10–M16 smoke governance tests (`test_v15_m10_governance_docs` through
-    `test_v15_m16_governance_docs`); nudged to 96 when M14–M16 governance rows exist (+ M20 smoke).
+    `test_v15_m16_governance_docs`); nudged to 97 when M14–M16 governance rows exist
+    (+ M20/M21 smoke).
     """
     proc = subprocess.run(
         [sys.executable, "-m", "pytest", "--collect-only", "-q", "-m", "smoke", "tests"],
@@ -99,8 +100,8 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    _msg = f"smoke count {n} outside 25–96 band (M14–M16 governance rows; band widened by count)"
-    assert 25 <= n <= 96, _msg
+    _msg = f"smoke count {n} outside 25–97 band (M14–M16 governance rows; band widened by count)"
+    assert 25 <= n <= 97, _msg
 
 
 def test_ledger_milestone_rows_m32_m47() -> None:

@@ -257,7 +257,7 @@ def test_v15_m20_governance_docs() -> None:
     assert "merge CI" in v15 or "merge ci" in v15.lower()
     assert "emit_v15_real_candidate_checkpoint_production_gate" in v15
     assert "run_v15_t1_30min_candidate_checkpoint_gate" in v15
-    assert "V15-M21" in v15 and "proposed" in v15
+    assert "V15-M21" in v15 and "starlab.v15.operator_t1_30min_gpu_run_execution.v1" in v15
     rt = REPO_ROOT / "docs" / "runtime" / "v15_real_candidate_checkpoint_production_gate_v1.md"
     assert rt.is_file()
     rtx = rt.read_text(encoding="utf-8").lower()
@@ -265,6 +265,23 @@ def test_v15_m20_governance_docs() -> None:
     assert "status" in rtx and "closed" in rtx
     ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "v15_real_candidate_checkpoint_production_gate_v1.md" in ledger
+
+
+@pytest.mark.smoke
+def test_v15_m21_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M21" in v15
+    assert "starlab.v15.operator_t1_30min_gpu_run_execution.v1" in v15
+    assert "M21 non-claims" in v15
+    assert "emit_v15_operator_t1_30min_gpu_run_execution" in v15
+    assert "run_v15_m21_t1_30min_gpu_run_execution" in v15
+    assert "run_v15_t1_30min_candidate_checkpoint_gate" in v15
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_operator_t1_30min_gpu_run_execution_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "contract id" in rtx and "t1" in rtx and "30" in rtx
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_operator_t1_30min_gpu_run_execution_v1.md" in ledger
 
 
 @pytest.mark.smoke
