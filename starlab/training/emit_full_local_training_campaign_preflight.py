@@ -31,10 +31,19 @@ def main(argv: list[str] | None = None) -> int:
         type=Path,
         help="Directory for campaign_preflight_receipt.json (e.g. same as campaign root).",
     )
+    parser.add_argument(
+        "--m27-sc2-rollout-json",
+        type=Path,
+        default=None,
+        help="Optional path to v15_sc2_rollout_training_loop_integration.json (V15-M27 binding).",
+    )
     args = parser.parse_args(argv)
 
     try:
-        ok, receipt = run_campaign_preflight(contract_path=args.campaign_contract)
+        ok, receipt = run_campaign_preflight(
+            contract_path=args.campaign_contract,
+            m27_sc2_rollout_json=args.m27_sc2_rollout_json,
+        )
     except (OSError, ValueError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 2

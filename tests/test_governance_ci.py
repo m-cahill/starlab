@@ -405,6 +405,30 @@ def test_v15_m26_governance_docs() -> None:
     assert narrative in ledger.replace("\n", " ")
 
 
+@pytest.mark.smoke
+def test_v15_m27_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M27" in v15
+    assert "V15-M27" in ledger
+    assert "SC2 Rollout Duration and Training-Loop Integration Fix" in v15
+    assert "starlab.v15.sc2_rollout_training_loop_integration.v1" in v15
+    assert "v15_m27_nontrivial_macro_smoke_policy_v1" in v15
+    assert "sc2_rollout_training_loop_integration_completed" in v15
+    assert "sc2_rollout_training_loop_integration_completed" in ledger
+    assert "sc2_rollout_fixture_only" in v15
+    assert "action_count" in v15
+    assert "training_loop_binding" in v15 or "training_update_executed" in v15
+    low = v15.lower()
+    assert "m27 non-claims" in low
+    assert "not strength" in low or "not benchmark" in low
+    assert ("integration_smoke" in low) or ("integration-smoke" in v15)
+    assert ("not strength evaluation" in low) or ("not strength" in low)
+    assert "not v2" in low or "not_v2" in low
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_sc2_rollout_training_loop_integration_v1.md"
+    assert rt.is_file()
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15

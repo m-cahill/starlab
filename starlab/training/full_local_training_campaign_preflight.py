@@ -22,6 +22,9 @@ from starlab.training.full_local_training_campaign_models import (
     FULL_LOCAL_TRAINING_CAMPAIGN_VERSION,
 )
 from starlab.training.training_program_io import load_agent_training_program_contract_from_path
+from starlab.v15.sc2_rollout_training_loop_integration_io import (
+    integration_json_for_preflight_checks,
+)
 
 
 def _load_contract(path: Path) -> dict[str, Any]:
@@ -68,8 +71,16 @@ def _check_sc2_install_probe() -> tuple[bool, str]:
     return True, f"SC2 probe root: {root}"
 
 
-def run_campaign_preflight(*, contract_path: Path) -> tuple[bool, dict[str, Any]]:
-    """Run all preflight checks; return (ok, receipt_dict)."""
+def run_campaign_preflight(
+    *,
+    contract_path: Path,
+    m27_sc2_rollout_json: Path | None = None,
+) -> tuple[bool, dict[str, Any]]:
+    """Run all preflight checks; return (ok, receipt_dict).
+
+    When ``m27_sc2_rollout_json`` is set, validate the V15-M27 integration artifact
+    contract and record a binding check (training-loop integration evidence).
+    """
 
     contract = _load_contract(contract_path)
     checks: list[dict[str, Any]] = []
@@ -224,6 +235,21 @@ def run_campaign_preflight(*, contract_path: Path) -> tuple[bool, dict[str, Any]
             True,
             "planned_weighted_refit false — M26/M14 refit paths not required",
         )
+
+    if m27_sc2_rollout_json is not None:
+        jp = m27_sc2_rollout_json
+        try:
+            verified = integration_json_for_preflight_checks(jp)
+            bind = verified.get("training_loop_binding") or {}
+            sha = str(verified.get("artifact_sha256") or "")
+            bind_st = str(bind.get("status", ""))
+            add(
+                "m27_sc2_rollout_integration",
+                True,
+                f"contract ok; binding_status={bind_st}; artifact_sha256={sha}",
+            )
+        except (OSError, ValueError) as exc:
+            add("m27_sc2_rollout_integration", False, str(exc))
 
     ok = all(bool(c.get("ok")) for c in checks)
     receipt = _receipt_body(contract, checks, ok=ok)
