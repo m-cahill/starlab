@@ -5,6 +5,10 @@
 **Emitter:** `python -m starlab.v15.emit_v15_real_candidate_checkpoint_production_gate`  
 **Operator orchestrator:** `python -m starlab.v15.run_v15_t1_30min_candidate_checkpoint_gate`
 
+**Status:** **closed** on `main` ([PR #152](https://github.com/m-cahill/starlab/pull/152); PR-head [`25027412708`](https://github.com/m-cahill/starlab/actions/runs/25027412708); merge-boundary [`25027870414`](https://github.com/m-cahill/starlab/actions/runs/25027870414) on merge `018e2dd242bfc565e29117affe7d545e356a41fc`).
+
+**Public closeout:** tooling + CI-safe fixtures complete; default **`fixture_no_operator_run`**; private dry-run preflight passed; full T1 30-minute operator-local GPU run **not** performed as part of merge CI.
+
 ## Purpose
 
 V15-M20 is the first **real candidate checkpoint production gate** after M19 closed with default **`blocked_missing_candidate_checkpoint_evidence`**. It targets a bounded **30-minute** operator-local GPU run (`T1_30_MIN`) using the existing **M08** campaign runner (`run_v15_long_gpu_campaign`) with forwarded wall-clock limits — **no** separate training stack.

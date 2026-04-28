@@ -536,7 +536,7 @@ def test_governance_docs_point_to_m19() -> None:
 
 
 def test_starlab_md_v15_arc_pointer_current_milestone_id_once() -> None:
-    """The compact v1.5 arc pointer line carries exactly one active-milestone ID (now V15-M20)."""
+    """Arc pointer line: exactly one V15-M20 cite (follow-on V15-M21 elsewhere in ledger)."""
     lines = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8").splitlines()
     v15_lines = [ln for ln in lines if "docs/starlab-v1.5.md" in ln and "v1.5 arc (V15)" in ln]
     assert len(v15_lines) == 1, "expected a single v1.5 arc pointer line"

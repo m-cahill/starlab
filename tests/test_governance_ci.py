@@ -249,13 +249,20 @@ def test_v15_m19_governance_docs() -> None:
 def test_v15_m20_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M20" in v15
+    assert "PR #152" in v15
+    assert "25027412708" in v15
+    assert "25027870414" in v15
     assert "starlab.v15.real_candidate_checkpoint_production_gate.v1" in v15
+    assert "fixture_no_operator_run" in v15
+    assert "merge CI" in v15 or "merge ci" in v15.lower()
     assert "emit_v15_real_candidate_checkpoint_production_gate" in v15
     assert "run_v15_t1_30min_candidate_checkpoint_gate" in v15
+    assert "V15-M21" in v15 and "proposed" in v15
     rt = REPO_ROOT / "docs" / "runtime" / "v15_real_candidate_checkpoint_production_gate_v1.md"
     assert rt.is_file()
     rtx = rt.read_text(encoding="utf-8").lower()
     assert "contract id" in rtx and "t1" in rtx and "30" in rtx
+    assert "status" in rtx and "closed" in rtx
     ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "v15_real_candidate_checkpoint_production_gate_v1.md" in ledger
 
@@ -362,6 +369,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M18`**" in scan
     assert "**`V15-M19`**" in scan
     assert "**`V15-M20`**" in scan
+    assert "**`V15-M21`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -373,9 +381,8 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M09`**" in scan
     assert "PR #135" in scan or "pull/135" in scan
     assert "**`V15-M08`**" in scan and "**`V15-M07`**" in scan and "**`V15-M06`**" in scan
-    assert "PR #116" in scan and "PR #125" in scan and "PR #127" in scan and "PR #129" in scan
     assert "PR #133" in scan or "pull/133" in scan
-    assert "PR #116–#120" in scan or "PR #120" in scan
+    assert "PR #152" in scan or "pull/152" in scan
     assert "**`V15-M01`**" in scan and "**`V15-M02`**" in scan
     assert "docs/starlab-v1.5.md" in scan
     assert "v1.5" in scan or "**V15" in scan
@@ -644,6 +651,7 @@ def test_ledger_post_v1_pv1_section() -> None:
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "**`V15-M21`**" in section
     assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section
     assert "**`V15-M18`**" in section
