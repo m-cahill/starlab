@@ -283,6 +283,9 @@ def test_v15_m21_governance_docs() -> None:
     assert "dry-run preflight" in v15.lower()
     assert "full operator-local T1 30-minute GPU run was not performed" in v15.replace("\n", " ")
     assert "V15-M22" in v15
+    assert "PR #154" in v15
+    assert "25031597888" in v15
+    assert "25031726394" in v15
     assert (
         "operator_preflight_blocked" in v15
         or "torch_cuda_unavailable" in v15
@@ -683,6 +686,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
     assert "**`V15-M22`**" in section
+    assert "**`V15-M23`**" in section
     assert "**`V15-M21`**" in section
     assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section
