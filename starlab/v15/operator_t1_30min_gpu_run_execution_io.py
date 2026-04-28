@@ -35,6 +35,7 @@ from starlab.v15.operator_t1_30min_gpu_run_execution_models import (
     STATUS_T1_PACKAGE_BLOCKED,
     STATUS_T1_PACKAGE_READY,
     STATUS_T1_RUN_FAILED,
+    STATUS_T1_RUN_FAILED_INSUFFICIENT_TRAINING,
     STRONGEST_ALLOWED_CLAIM_M21,
     UPSTREAM_M20_CONTRACT_REFERENCE,
 )
@@ -53,6 +54,9 @@ from starlab.v15.real_candidate_checkpoint_production_gate_models import (
 )
 from starlab.v15.real_candidate_checkpoint_production_gate_models import (
     STATUS_T1_COMPLETED_NO_CHECKPOINT as M20_STATUS_T1_COMPLETED_NO_CHECKPOINT,
+)
+from starlab.v15.real_candidate_checkpoint_production_gate_models import (
+    STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD as M20_STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD,
 )
 from starlab.v15.real_candidate_checkpoint_production_gate_models import (
     STATUS_T1_NOT_STARTED as M20_STATUS_T1_NOT_STARTED,
@@ -126,6 +130,15 @@ def recommended_m22_fork_for_status(execution_status: str) -> dict[str, Any]:
             "title": "V15-M22 — Operator GPU Run Failure Remediation",
             "rationale": "T1 run began but failed before a valid candidate checkpoint.",
         }
+    if execution_status == STATUS_T1_RUN_FAILED_INSUFFICIENT_TRAINING:
+        return {
+            "fork_id": "t1_training_workload_remediation",
+            "title": "V15-M22 — T1 Training Workload / Duration Remediation",
+            "rationale": (
+                "Operator T1 completed without a checkpoint and below minimum bounded training "
+                "duration — diagnose campaign protocol, synthetic CUDA phase, or wall-clock caps."
+            ),
+        }
     if execution_status == STATUS_OPERATOR_PREFLIGHT_BLOCKED:
         return {
             "fork_id": "preflight_remediation",
@@ -159,6 +172,8 @@ def map_m20_gate_status_to_execution_status(
         return STATUS_T1_NOT_STARTED
     if gate_status == M20_STATUS_T1_RUN_FAILED:
         return STATUS_T1_RUN_FAILED
+    if gate_status == M20_STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD:
+        return STATUS_T1_RUN_FAILED_INSUFFICIENT_TRAINING
     if gate_status == M20_STATUS_T1_COMPLETED_NO_CHECKPOINT:
         return STATUS_T1_COMPLETED_NO_CHECKPOINT
     if gate_status == M20_STATUS_T1_PACKAGE_BLOCKED:

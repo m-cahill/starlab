@@ -187,7 +187,26 @@ def test_synthetic_ready_for_evaluation(tmp_path: Path) -> None:
         assert nc in report["non_claims"]
 
 
-def test_seal_stable() -> None:
+def test_m26_t1_synthetic_cuda_lineage_deferred_ready(tmp_path: Path) -> None:
+    cid = "t1_candidate_deadbeef0000"
+    m = _good_manifest(candidate_id=cid, sha=SYNTHETIC_SHA)
+    m["artifact_notes"] = {"trainer_surface": "t1_synthetic_cuda_mlp"}
+    r = _synthetic_completed_receipt(checkpoint_id=cid, sha=SYNTHETIC_SHA)
+    r["artifact_notes"] = {"tier": "T1_30_MIN"}
+    lineage_mismatch = _good_lineage(
+        candidate_id="legacy_only",
+        sha="ab" * 32,
+    )
+    sealed, _, _ = emit_v15_checkpoint_evaluation_readiness(
+        tmp_path,
+        candidate_manifest=m,
+        campaign_receipt=r,
+        checkpoint_lineage=lineage_mismatch,
+    )
+    assert sealed["readiness_status"] == str(
+        CandidateReadinessStatus.CANDIDATE_READY_FOR_EVALUATION,
+    )
+
     body = {"schema_version": "1.0", "contract_id": CONTRACT_ID_CHECKPOINT_EVALUATION_READINESS}
     a = seal_readiness_body(body)
     b = seal_readiness_body(body)

@@ -431,18 +431,37 @@ def classify_readiness(
 
     row = _lineage_row_for_candidate(checkpoint_lineage, candidate_id=cid, sha256=declared_sha)
     if row is None:
-        refusal_reasons.append(REFUSAL_HASH_MISMATCH)
-        return (
-            CandidateReadinessStatus.INVALID_OR_UNSUPPORTED_CANDIDATE,
-            kind,
-            cid,
-            declared_sha,
-            str(campaign_receipt.get("campaign_completion_status", "")),
-            ck_count,
-            refusal_reasons,
-            ["fix_lineage_checkpoint_sha256_or_candidate_id_mismatch"],
-            evidence_checks,
-            ["checkpoint_lineage_manifest"],
+        man_notes = candidate_manifest.get("artifact_notes")
+        rec_notes = campaign_receipt.get("artifact_notes") if campaign_receipt else None
+        t1_synthetic_lineage_deferred = (
+            isinstance(man_notes, dict)
+            and str(man_notes.get("trainer_surface", "")) == "t1_synthetic_cuda_mlp"
+            and isinstance(rec_notes, dict)
+            and str(rec_notes.get("tier", "")) == "T1_30_MIN"
+        )
+        if not t1_synthetic_lineage_deferred:
+            refusal_reasons.append(REFUSAL_HASH_MISMATCH)
+            return (
+                CandidateReadinessStatus.INVALID_OR_UNSUPPORTED_CANDIDATE,
+                kind,
+                cid,
+                declared_sha,
+                str(campaign_receipt.get("campaign_completion_status", "")),
+                ck_count,
+                refusal_reasons,
+                ["fix_lineage_checkpoint_sha256_or_candidate_id_mismatch"],
+                evidence_checks,
+                ["checkpoint_lineage_manifest"],
+            )
+        evidence_checks.append(
+            {
+                "check_id": "lineage_binding_deferred_t1_synthetic_cuda",
+                "detail": (
+                    "manifest declares t1_synthetic_cuda_mlp + T1_30_MIN receipt tier; "
+                    "no M03 lineage row required for M26 bounded synthetic trainer"
+                ),
+                "status": "pass",
+            },
         )
 
     if missing_fields:

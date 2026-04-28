@@ -32,6 +32,9 @@ STATUS_FIXTURE_NO_OPERATOR_RUN: Final[str] = "fixture_no_operator_run"
 STATUS_OPERATOR_PREFLIGHT_BLOCKED: Final[str] = "operator_preflight_blocked"
 STATUS_T1_NOT_STARTED: Final[str] = "t1_30min_run_not_started"
 STATUS_T1_RUN_FAILED: Final[str] = "t1_30min_run_failed"
+STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD: Final[str] = (
+    "t1_30min_run_failed_insufficient_training_workload"
+)
 STATUS_T1_COMPLETED_NO_CHECKPOINT: Final[str] = "t1_30min_run_completed_no_checkpoint"
 STATUS_T1_PACKAGE_BLOCKED: Final[str] = "t1_30min_checkpoint_produced_package_blocked"
 STATUS_T1_PACKAGE_READY: Final[str] = "t1_30min_checkpoint_produced_package_ready"
@@ -54,6 +57,8 @@ DEFAULT_BLOCKED_REASON_MISSING_M16: Final[str] = (
 DEFAULT_BLOCKED_REASON_M16_NOT_PROBE_SUCCESS: Final[str] = (
     "m16_environment_evidence_not_operator_local"
 )
+
+T1_MIN_OPERATOR_TRAINING_WORKLOAD_SECONDS: Final[float] = 300.0
 
 RECOMMENDED_NEXT_FORK_FIELD: Final[str] = "real_candidate_checkpoint_production_gate"
 

@@ -35,6 +35,9 @@ PROFILE_OPERATOR_PREFLIGHT: Final[str] = "operator_preflight"
 STATUS_OPERATOR_PREFLIGHT_BLOCKED: Final[str] = "operator_preflight_blocked"
 STATUS_T1_NOT_STARTED: Final[str] = "t1_30min_run_not_started"
 STATUS_T1_RUN_FAILED: Final[str] = "t1_30min_run_failed"
+STATUS_T1_RUN_FAILED_INSUFFICIENT_TRAINING: Final[str] = (
+    "t1_30min_run_failed_insufficient_training_workload"
+)
 STATUS_T1_COMPLETED_NO_CHECKPOINT: Final[str] = "t1_30min_run_completed_no_checkpoint"
 STATUS_T1_PACKAGE_BLOCKED: Final[str] = "t1_30min_checkpoint_produced_package_blocked"
 STATUS_T1_PACKAGE_READY: Final[str] = "t1_30min_checkpoint_produced_package_ready"

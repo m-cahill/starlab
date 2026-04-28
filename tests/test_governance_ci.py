@@ -348,6 +348,57 @@ def test_v15_m24_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m26_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    low = v15.lower()
+    assert "V15-M26" in v15
+    assert "PR #162" in v15
+    assert "M26 non-claims block" in v15
+    assert "t1_30min_completed_without_candidate_checkpoint" in v15
+    assert "t1_30min_checkpoint_produced_package_ready" in v15
+    assert "t1_checkpoint_plumbing_completed_but_sc2_training_not_yet_meaningful" in v15
+    assert "t1_30min_completed_with_candidate_checkpoint" in v15
+    assert "no_pytorch_checkpoint_artifact_under_execution_root" in v15
+    assert "not meaningful sc2 agent training" in low or "meaningful sc2" in low
+    assert "synthetic cuda" in low
+    assert "sc2 rollout path" in low
+    assert "not yet meaningful sc2 training" in low or "not meaningful sc2 training" in low
+    assert "cb375b77a92f6f07b406d8579a60f3539568be12877808d600826c049e146e78" in v15
+    compact_v15 = v15.replace("*", "").lower()
+    assert "no promotion" in compact_v15
+    assert "V15-M27" in v15
+    assert "SC2 Rollout Duration and Training-Loop Integration Fix" in v15
+    assert "v15-m26-real-t1-30min-gpu-run" in v15
+    assert "**open** on [PR #162]" in v15
+    assert "dry_run_preflight_performed" in low or "non-dry-run" in v15.lower()
+    assert "not strength" in low or "not_strength" in low
+    assert "not checkpoint promotion" in low or "not_checkpoint_promotion" in low
+    assert "merge PR pending" not in v15
+    assert "sc2-harness" in low or "sc2-harness" in v15
+    narrative = (
+        "M26 completed T1 checkpoint-production plumbing and produced a candidate checkpoint "
+        "via synthetic CUDA, but the SC2 rollout path remained bounded smoke/bootstrap only "
+        "and is not yet meaningful SC2 training."
+    )
+    assert narrative in v15.replace("\n", " ")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    led_low = ledger.lower()
+    assert "V15-M26" in ledger
+    assert "V15-M27" in ledger
+    assert "PR #162" in ledger
+    assert "t1_30min_completed_without_candidate_checkpoint" in ledger
+    assert "t1_30min_checkpoint_produced_package_ready" in ledger
+    assert "t1_checkpoint_plumbing_completed_but_sc2_training_not_yet_meaningful" in ledger
+    assert "synthetic cuda" in led_low
+    assert "sc2 rollout path" in led_low
+    assert "not yet meaningful sc2 training" in led_low or "not meaningful sc2 training" in led_low
+    assert "cb375b77a92f6f07b406d8579a60f3539568be12877808d600826c049e146e78" in ledger
+    assert "no promotion" in ledger.replace("*", "").lower()
+    assert "SC2 Rollout Duration and Training-Loop Integration Fix" in ledger
+    assert narrative in ledger.replace("\n", " ")
+
+
+@pytest.mark.smoke
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
@@ -477,6 +528,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M24`**" in scan
     assert "**`V15-M25`**" in scan
     assert "**`V15-M26`**" in scan
+    assert "**`V15-M27`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -763,6 +815,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "**`V15-M24`**" in section
     assert "**`V15-M25`**" in section
     assert "**`V15-M26`**" in section
+    assert "**`V15-M27`**" in section
     assert "**`V15-M21`**" in section
     assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section

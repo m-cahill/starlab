@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -11,6 +12,8 @@ from starlab.v15.candidate_checkpoint_evaluation_package_models import PackageSt
 from starlab.v15.real_candidate_checkpoint_production_gate_io import (
     base_gate_body_template,
     discover_first_pytorch_checkpoint,
+    discover_m50_execution_dir_from_plan,
+    discover_pytorch_checkpoint_after_t1_m08_run,
     emit_fixture_default,
     map_m19_status_to_gate,
     seal_real_candidate_gate_body,
@@ -23,9 +26,11 @@ from starlab.v15.real_candidate_checkpoint_production_gate_models import (
     RUN_TIER_T1_30_MIN,
     STATUS_FIXTURE_NO_OPERATOR_RUN,
     STATUS_T1_COMPLETED_NO_CHECKPOINT,
+    STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD,
     STATUS_T1_PACKAGE_BLOCKED,
     STATUS_T1_PACKAGE_READY,
     STATUS_T1_RUN_FAILED,
+    T1_MIN_OPERATOR_TRAINING_WORKLOAD_SECONDS,
 )
 from starlab.v15.short_gpu_environment_models import (
     CONTRACT_ID_SHORT_GPU_ENVIRONMENT_EVIDENCE,
@@ -166,6 +171,76 @@ def test_discover_prefers_sorted_pt(tmp_path: Path) -> None:
     got = discover_first_pytorch_checkpoint(tmp_path)
     assert got is not None
     assert got.name == "a.pt"
+
+
+def test_discover_m50_execution_dir_from_plan_resolves_campaign_runs(tmp_path: Path) -> None:
+    import os
+
+    cwd = Path.cwd()
+    try:
+        os.chdir(tmp_path)
+        campaign_root = tmp_path / "m49"
+        campaign_root.mkdir(parents=True, exist_ok=True)
+        contract = campaign_root / "full_local_training_campaign_contract.json"
+        contract.write_text('{"x": 1}', encoding="utf-8")
+        run_id = "exec-test-1"
+        pt = campaign_root / "campaign_runs" / run_id / "phases" / "p1" / "c.pt"
+        pt.parent.mkdir(parents=True, exist_ok=True)
+        pt.write_bytes(b"x")
+        plan = tmp_path / "campaign_plan.json"
+        plan.write_text(
+            json.dumps(
+                {
+                    "m49_full_local_training_campaign_contract_path": str(
+                        contract.relative_to(tmp_path).as_posix(),
+                    ),
+                },
+            ),
+            encoding="utf-8",
+        )
+        got = discover_m50_execution_dir_from_plan(plan, run_id)
+        assert got == campaign_root / "campaign_runs" / run_id
+        assert (
+            discover_pytorch_checkpoint_after_t1_m08_run(
+                m08_subprocess_output_root=tmp_path / "empty_m08",
+                campaign_plan_path=plan,
+                execution_id=run_id,
+            )
+            == pt
+        )
+    finally:
+        os.chdir(cwd)
+
+
+def test_discover_pytorch_checkpoint_falls_back_to_m08_root(tmp_path: Path) -> None:
+    import os
+
+    cwd = Path.cwd()
+    try:
+        os.chdir(tmp_path)
+        plan = tmp_path / "campaign_plan.json"
+        plan.write_text(
+            json.dumps({"m49_full_local_training_campaign_contract_path": "missing.json"}),
+            encoding="utf-8",
+        )
+        m08 = tmp_path / "m08_out"
+        m08.mkdir(parents=True, exist_ok=True)
+        (m08 / "x.pt").write_bytes(b"z")
+        assert (
+            discover_pytorch_checkpoint_after_t1_m08_run(
+                m08_subprocess_output_root=m08,
+                campaign_plan_path=plan,
+                execution_id="nope",
+            )
+            == m08 / "x.pt"
+        )
+    finally:
+        os.chdir(cwd)
+
+
+def test_insufficient_training_gate_status_constant() -> None:
+    assert STATUS_T1_INSUFFICIENT_TRAINING_WORKLOAD.startswith("t1_30min_run_failed")
+    assert T1_MIN_OPERATOR_TRAINING_WORKLOAD_SECONDS == 300.0
 
 
 def test_map_m19_ready_vs_blocked() -> None:
