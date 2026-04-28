@@ -416,9 +416,16 @@ def test_v15_m27_governance_surface() -> None:
     assert "v15_m27_nontrivial_macro_smoke_policy_v1" in v15
     assert "sc2_rollout_training_loop_integration_completed" in v15
     assert "sc2_rollout_training_loop_integration_completed" in ledger
+    assert "PR #163" in ledger
+    assert "25078974410" in ledger
+    assert "25079150705" in ledger
     assert "sc2_rollout_fixture_only" in v15
     assert "action_count" in v15
     assert "training_loop_binding" in v15 or "training_update_executed" in v15
+    assert "PR #163" in v15
+    assert "25078974410" in v15
+    assert "25079150705" in v15
+    assert "960f925a" in v15.lower() or "960f925afb2d1913055fe3ae18dc0b76a4c0951f" in v15.lower()
     low = v15.lower()
     assert "m27 non-claims" in low
     assert "not strength" in low or "not benchmark" in low
@@ -559,6 +566,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M25`**" in scan
     assert "**`V15-M26`**" in scan
     assert "**`V15-M27`**" in scan
+    assert "**`V15-M28`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -846,6 +854,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "**`V15-M25`**" in section
     assert "**`V15-M26`**" in section
     assert "**`V15-M27`**" in section
+    assert "**`V15-M28`**" in section
     assert "**`V15-M21`**" in section
     assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section
