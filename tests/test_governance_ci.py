@@ -452,6 +452,11 @@ def test_v15_m28_governance_surface() -> None:
     assert "sc2_backed_features_used" in v15.lower()
     assert "fixture_only" in v15.lower()
     assert "71897cfff94fba7209e667dd44e040eabc705e686c6a579cd26e13015f00ecc8" in v15
+    assert "PR #164" in v15
+    assert "25083196925" in v15
+    assert "25083354466" in v15
+    assert "40550e64" in v15.lower() or "40550e6481c6f5988cd72e210e2a17d16f533e81" in v15.lower()
+    assert "35d59f11" in v15.lower() or "35d59f11e64b5b8fcb2c2937572478bfa9f37863" in v15.lower()
     low = v15.lower()
     assert "m28 non-claims" in low
     assert "not strength evaluation" in low or "not_strength_evaluation" in low
