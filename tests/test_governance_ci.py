@@ -426,6 +426,8 @@ def test_v15_m27_governance_surface() -> None:
     assert "25078974410" in v15
     assert "25079150705" in v15
     assert "960f925a" in v15.lower() or "960f925afb2d1913055fe3ae18dc0b76a4c0951f" in v15.lower()
+    assert "d3c53b1c" in v15.lower() or "d3c53b1cb322f2080d2ed3991a80ddcc7968425f" in v15.lower()
+    assert "25079519363" in v15
     low = v15.lower()
     assert "m27 non-claims" in low
     assert "not strength" in low or "not benchmark" in low

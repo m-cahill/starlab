@@ -257,7 +257,7 @@ Implementation branch: `v15-m26-real-t1-30min-gpu-run` (governance PR [PR #162](
 
 **Distinction vs M26:** **M26** synthetic CUDA checkpoint plumbing did **not** prove meaningful **SC2** training. **V15-M27** is **rollout duration + training-loop integration evidence** — **not** agent skill.
 
-**Merged implementation branch:** **`v15-m27-sc2-rollout-training-loop-integration`** — **[PR #163](https://github.com/m-cahill/starlab/pull/163)**; merge **`960f925afb2d1913055fe3ae18dc0b76a4c0951f`** (**2026-04-28T21:41:00Z** UTC); **PR-head CI** [`25078974410`](https://github.com/m-cahill/starlab/actions/runs/25078974410); **merge-boundary `main` CI** [`25079150705`](https://github.com/m-cahill/starlab/actions/runs/25079150705) — **success**.
+**Merged implementation branch:** **`v15-m27-sc2-rollout-training-loop-integration`** — **[PR #163](https://github.com/m-cahill/starlab/pull/163)**; merge **`960f925afb2d1913055fe3ae18dc0b76a4c0951f`** (**2026-04-28T21:41:00Z** UTC); **PR-head CI** [`25078974410`](https://github.com/m-cahill/starlab/actions/runs/25078974410); **merge-boundary `main` CI** [`25079150705`](https://github.com/m-cahill/starlab/actions/runs/25079150705) — **success**. **Post-merge public ledger alignment** (canonical narrative + **`tests/test_governance_ci.py`** only): commit **`d3c53b1cb322f2080d2ed3991a80ddcc7968425f`** — **CI** [`25079519363`](https://github.com/m-cahill/starlab/actions/runs/25079519363) — **success**.
 
 **Contract:** **`starlab.v15.sc2_rollout_training_loop_integration.v1`** — **`docs/runtime/v15_sc2_rollout_training_loop_integration_v1.md`** — **`python -m starlab.v15.run_v15_m27_sc2_rollout_training_loop_integration`**.
 
