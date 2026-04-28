@@ -438,6 +438,30 @@ def test_v15_m27_governance_surface() -> None:
     assert rt.is_file()
 
 
+@pytest.mark.smoke
+def test_v15_m28_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M28" in v15
+    assert "V15-M28" in ledger
+    assert "SC2-Backed T1 Candidate Training Attempt" in v15
+    assert "starlab.v15.sc2_backed_t1_candidate_training.v1" in v15
+    assert "run_v15_m28_sc2_backed_t1_candidate_training" in v15
+    assert "f9c2ca5aca7a3b15df0567358c1f207f99e112cd8d816f5ac1a1c6ff04022227" in v15
+    assert "sc2_backed_candidate_training_completed_with_candidate_checkpoint" in v15
+    assert "sc2_backed_features_used" in v15.lower()
+    assert "fixture_only" in v15.lower()
+    assert "71897cfff94fba7209e667dd44e040eabc705e686c6a579cd26e13015f00ecc8" in v15
+    low = v15.lower()
+    assert "m28 non-claims" in low
+    assert "not strength evaluation" in low or "not_strength_evaluation" in low
+    assert "not benchmark pass" in low or "not_benchmark_pass" in low
+    assert "not checkpoint promotion" in low or "not_checkpoint_promotion" in low
+    assert "not v2" in low or "not_v2_authorization" in low
+    rt28 = REPO_ROOT / "docs" / "runtime" / "v15_sc2_backed_t1_candidate_training_v1.md"
+    assert rt28.is_file()
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
