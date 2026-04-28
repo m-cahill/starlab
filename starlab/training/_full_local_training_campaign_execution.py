@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import time
 from pathlib import Path
 from typing import Any
 
@@ -73,6 +74,16 @@ def _stop_requested(edir: Path) -> bool:
     return (edir / STOP_REQUEST_FILENAME).is_file()
 
 
+def _wall_clock_budget_exceeded(args: argparse.Namespace) -> bool:
+    mins = getattr(args, "max_wall_clock_minutes", None)
+    if mins is None:
+        return False
+    start = getattr(args, "_campaign_wall_clock_start_monotonic", None)
+    if start is None:
+        return False
+    return (time.monotonic() - float(start)) >= float(mins) * 60.0
+
+
 def _refit_output_joblib_path(phase_out: Path) -> Path:
     return phase_out / UPDATED_POLICY_SUBDIR / UPDATED_BUNDLE_BASENAME
 
@@ -95,6 +106,20 @@ def execute_m50_bootstrap_only(
     exit_code = 0
     for idx, phase in enumerate(phases):
         phase_name = str(phase.get("phase", f"phase_{idx}"))
+        if _wall_clock_budget_exceeded(args):
+            write_resume_state(
+                campaign_sha256=campaign_sha256,
+                detail="max_wall_clock_minutes budget exceeded before phase",
+                execution_dir=edir,
+                execution_id=execution_id,
+                phase=phase_name,
+                status="stopped_graceful",
+            )
+            exit_code = 8
+            phase_results.append(
+                {"phase": phase_name, "status": "wall_clock_budget_exceeded"},
+            )
+            break
         if _stop_requested(edir):
             write_resume_state(
                 campaign_sha256=campaign_sha256,
@@ -194,6 +219,21 @@ def execute_m51_protocol_phases(
             break
         phase_name = str(phase.get("phase", f"phase_{order_idx}"))
         kind = str(phase.get("kind", ""))
+
+        if _wall_clock_budget_exceeded(args):
+            write_resume_state(
+                campaign_sha256=campaign_sha256,
+                detail="max_wall_clock_minutes budget exceeded before phase",
+                execution_dir=edir,
+                execution_id=execution_id,
+                phase=phase_name,
+                status="stopped_graceful",
+            )
+            exit_code = 8
+            phase_results.append(
+                {"phase": phase_name, "status": "wall_clock_budget_exceeded"},
+            )
+            break
 
         if _stop_requested(edir):
             write_resume_state(

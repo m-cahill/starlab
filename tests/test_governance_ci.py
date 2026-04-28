@@ -246,6 +246,21 @@ def test_v15_m19_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m20_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M20" in v15
+    assert "starlab.v15.real_candidate_checkpoint_production_gate.v1" in v15
+    assert "emit_v15_real_candidate_checkpoint_production_gate" in v15
+    assert "run_v15_t1_30min_candidate_checkpoint_gate" in v15
+    rt = REPO_ROOT / "docs" / "runtime" / "v15_real_candidate_checkpoint_production_gate_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8").lower()
+    assert "contract id" in rtx and "t1" in rtx and "30" in rtx
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_real_candidate_checkpoint_production_gate_v1.md" in ledger
+
+
+@pytest.mark.smoke
 def test_v15_m17_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M17" in v15
@@ -346,6 +361,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M17`**" in scan
     assert "**`V15-M18`**" in scan
     assert "**`V15-M19`**" in scan
+    assert "**`V15-M20`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -628,6 +644,7 @@ def test_ledger_post_v1_pv1_section() -> None:
 def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     section = text.split("## 11. Current milestone")[1].split("## 12")[0]
+    assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section
     assert "**`V15-M18`**" in section
     assert "**`V15-M01`**" in section

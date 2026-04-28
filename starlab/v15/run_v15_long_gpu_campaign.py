@@ -61,6 +61,19 @@ def main(argv: list[str] | None = None) -> int:
         help="Required guard: authorizes this milestone's long campaign attempt.",
     )
     parser.add_argument(
+        "--max-wall-clock-minutes",
+        type=float,
+        default=None,
+        metavar="MINUTES",
+        help="Forwarded to execute_full_local_training_campaign (between-phase budget).",
+    )
+    parser.add_argument(
+        "--run-tier",
+        type=str,
+        default=None,
+        help="Forwarded to execute_full_local_training_campaign (artifact metadata only).",
+    )
+    parser.add_argument(
         "--governance-override-m07-shakedown",
         action="store_true",
         help=(
@@ -165,6 +178,10 @@ def main(argv: list[str] | None = None) -> int:
     ]
     if args.post_bootstrap_protocol_phases:
         exec_argv.append("--post-bootstrap-protocol-phases")
+    if args.max_wall_clock_minutes is not None:
+        exec_argv.extend(["--max-wall-clock-minutes", str(args.max_wall_clock_minutes)])
+    if args.run_tier:
+        exec_argv.extend(["--run-tier", args.run_tier])
 
     from starlab.training.execute_full_local_training_campaign import main as m50_main
 
