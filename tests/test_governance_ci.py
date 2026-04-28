@@ -369,7 +369,12 @@ def test_v15_m26_governance_docs() -> None:
     assert "V15-M27" in v15
     assert "SC2 Rollout Duration and Training-Loop Integration Fix" in v15
     assert "v15-m26-real-t1-30min-gpu-run" in v15
-    assert "**open** on [PR #162]" in v15
+    assert "393adb7f" in v15
+    assert "25046959088" in v15
+    assert "25047132158" in v15
+    assert "9d877da2" in v15
+    assert "closed on `main`" in v15.lower() or "closed** on `main`" in v15
+    assert "open** on [PR #162]" not in v15
     assert "dry_run_preflight_performed" in low or "non-dry-run" in v15.lower()
     assert "not strength" in low or "not_strength" in low
     assert "not checkpoint promotion" in low or "not_checkpoint_promotion" in low
@@ -395,10 +400,11 @@ def test_v15_m26_governance_docs() -> None:
     assert "cb375b77a92f6f07b406d8579a60f3539568be12877808d600826c049e146e78" in ledger
     assert "no promotion" in ledger.replace("*", "").lower()
     assert "SC2 Rollout Duration and Training-Loop Integration Fix" in ledger
+    assert "393adb7f" in ledger
+    assert "25046959088" in ledger or "25047132158" in ledger
     assert narrative in ledger.replace("\n", " ")
 
 
-@pytest.mark.smoke
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
