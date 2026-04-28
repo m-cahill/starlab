@@ -16,6 +16,7 @@ from starlab.sc2.match_config import (
     BURNYSC2_POLICY_PASSIVE,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
     BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+    BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
     BoundedHorizon,
     MapSpec,
     MatchConfig,
@@ -282,6 +283,7 @@ def test_fake_adapter_rejects_non_passive_burny_policy() -> None:
     for policy in (
         BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
         BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+        BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
     ):
         cfg = MatchConfig(
             schema_version="1",
@@ -309,6 +311,22 @@ def test_watchability_policy_roundtrip() -> None:
     assert cfg.burnysc2_policy == BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1
     m = match_config_to_mapping(cfg)
     assert m["burnysc2_policy"] == BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1
+
+
+def test_v15_m27_macro_smoke_policy_roundtrip() -> None:
+    cfg = match_config_from_mapping(
+        {
+            "adapter": "burnysc2",
+            "bounded_horizon": {"game_step": 8, "max_game_steps": 2048},
+            "burnysc2_policy": BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
+            "map": {"discover_under_maps_dir": True},
+            "schema_version": "1",
+            "seed": 11,
+        },
+    )
+    assert cfg.burnysc2_policy == BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1
+    m = match_config_to_mapping(cfg)
+    assert m["burnysc2_policy"] == BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1
 
 
 def test_watchability_suppress_attack_rejected() -> None:

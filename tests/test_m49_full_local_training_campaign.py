@@ -24,6 +24,9 @@ from starlab.training.full_local_training_campaign_models import (
 )
 from starlab.training.full_local_training_campaign_preflight import run_campaign_preflight
 from starlab.training.training_program_io import build_agent_training_program_contract
+from starlab.v15.run_v15_m27_sc2_rollout_training_loop_integration import (
+    main as m27_integration_main,
+)
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 M14_FIX = REPO_ROOT / "tests" / "fixtures" / "m14"
@@ -105,6 +108,39 @@ def test_m49_campaign_emit_and_preflight_fixture_mode(tmp_path: Path) -> None:
     assert ok
     assert receipt["preflight_ok"] is True
     assert all(x["ok"] for x in receipt["checks"])
+
+
+def test_m49_preflight_accepts_optional_m27_rollout_json(tmp_path: Path) -> None:
+    """V15-M27 rollout artifact binds into M49 preflight checks when supplied."""
+
+    m43_dir, _bundle = _build_m43_run_dir(tmp_path)
+    shutil.copy(MATCH_FAKE, tmp_path / "match.json")
+    bench = M28_FIX / "benchmark_contract_m28.json"
+    out = tmp_path / "campaign"
+    emit_full_local_training_campaign(
+        benchmark_contract_path=bench,
+        campaign_id="with_m27",
+        hierarchical_training_run_dir=m43_dir,
+        match_config_path=tmp_path / "match.json",
+        output_dir=out,
+        planned_weighted_refit=False,
+        runtime_mode="fixture_stub_ci",
+        training_program_contract_path=None,
+    )
+    m27_dir = tmp_path / "m27"
+    assert m27_integration_main(["--fixture-only", "--output-dir", str(m27_dir)]) == 0
+    m27_p = m27_dir / "v15_sc2_rollout_training_loop_integration.json"
+    ok, receipt = run_campaign_preflight(
+        contract_path=out / "full_local_training_campaign_contract.json",
+        m27_sc2_rollout_json=m27_p,
+    )
+    assert ok
+    chk = next(
+        (x for x in receipt["checks"] if x.get("check_id") == "m27_sc2_rollout_integration"),
+        None,
+    )
+    assert chk is not None
+    assert chk.get("ok") is True
 
 
 def test_m49_campaign_deterministic_same_paths(tmp_path: Path) -> None:

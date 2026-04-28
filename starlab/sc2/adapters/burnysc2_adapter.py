@@ -18,6 +18,7 @@ from starlab.sc2.match_config import (
     BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
     BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+    BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
     MatchConfig,
 )
 from starlab.sc2.models import Sc2RuntimeSpec
@@ -114,7 +115,10 @@ def run_burnysc2_adapter(
     }
 
     use_hybrid = config.burnysc2_policy == BURNYSC2_POLICY_PX1_M03_HYBRID_V1
-    use_watchability = config.burnysc2_policy == BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1
+    use_watchability = config.burnysc2_policy in (
+        BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+        BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
+    )
     if use_hybrid and hierarchical_sklearn_bundle is None:
         msg = "burnysc2_policy px1_m03_hybrid_v1 requires hierarchical_sklearn_bundle"
         raise RuntimeError(msg)
@@ -274,10 +278,17 @@ def run_burnysc2_adapter(
                     "M43 coarse labels with periodic fallback — not full strategic play."
                 )
         elif use_watchability:
-            summary_out["operator_readable_summary_v1"] = (
-                "policy: px1_watchability_macro_scout_v1; purpose: watchability/sandbox only; "
-                "attacks: disabled by design — scripted macro, scout, and patrol near base."
-            )
+            if config.burnysc2_policy == BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1:
+                summary_out["operator_readable_summary_v1"] = (
+                    "policy_id: v15_m27_nontrivial_macro_smoke_policy_v1; implementation: "
+                    "PX1 watchability macro/scout Terran scaffold (governed reuse); not strength; "
+                    "attacks disabled by design — nonzero macro/scout actions for rollout evidence."
+                )
+            else:
+                summary_out["operator_readable_summary_v1"] = (
+                    "policy: px1_watchability_macro_scout_v1; purpose: watchability/sandbox only; "
+                    "attacks: disabled by design — scripted macro, scout, and patrol near base."
+                )
 
     return ExecutionProofRecord(
         schema_version=PROOF_SCHEMA_VERSION,

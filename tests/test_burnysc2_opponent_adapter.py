@@ -20,6 +20,7 @@ from starlab.sc2.adapters.burnysc2_adapter import (
 from starlab.sc2.match_config import (
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
     BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
+    BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
     match_config_from_mapping,
 )
 
@@ -304,3 +305,38 @@ def test_run_burnysc2_watchability_factory_returns_terran_bot_class_name() -> No
         run_burnysc2_adapter(cfg, output_dir=Path("/tmp/starlab_burny_watch_cls"))
     players = rg.call_args[0][1]
     assert type(players[0].ai).__name__ == "_Px1WatchabilityMacroScoutBot"
+
+
+def test_run_burnysc2_v15_m27_macro_smoke_uses_watchability_factory() -> None:
+    raw = {
+        **_minimal_burny_raw(),
+        "burnysc2_policy": BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
+    }
+    cfg = match_config_from_mapping(raw)
+    mock_map = MagicMock()
+    mock_result = MagicMock()
+    mock_result.name = "Tie"
+    mock_probe = MagicMock(
+        base_build="96883",
+        data_version="dv",
+        paths=_PROBES,
+    )
+    WatchClass = MagicMock()
+    WatchClass.return_value = MagicMock()
+    resolve = patch(
+        "starlab.sc2.adapters.burnysc2_adapter._resolve_map_for_burny",
+        return_value=(mock_map, "k", "m"),
+    )
+    mk_watch = patch(
+        "starlab.sc2.adapters.burnysc2_adapter.make_px1_watchability_macro_scout_bot_class",
+        return_value=WatchClass,
+    )
+    with (
+        resolve,
+        mk_watch as mk,
+        patch("sc2.player.Bot", side_effect=_bot_player_stub),
+        patch("starlab.sc2.adapters.burnysc2_adapter.run_probe", return_value=mock_probe),
+        patch("sc2.main.run_game", return_value=mock_result),
+    ):
+        run_burnysc2_adapter(cfg, output_dir=Path("/tmp/starlab_burny_m27_out"))
+    mk.assert_called_once()
