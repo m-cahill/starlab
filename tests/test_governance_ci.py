@@ -351,6 +351,8 @@ def test_v15_m24_governance_docs() -> None:
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
+    assert "25039367953" in v15
+    assert "e4ecc95e" in v15
     assert "m21_dry_run_preflight_passed" in v15
     assert "ready_for_v15_m26_t1_attempt" in v15
     assert "M25 non-claims block" in v15
@@ -363,7 +365,8 @@ def test_v15_m25_governance_docs() -> None:
     ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "V15-M25" in ledger
     assert "V15-M26" in ledger
-    assert "v15-m25-operator-preflight-json-manifest-alignment" in ledger
+    assert "PR #160" in ledger
+    assert "25039367953" in ledger
 
 
 @pytest.mark.smoke
