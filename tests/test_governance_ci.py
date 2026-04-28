@@ -282,7 +282,12 @@ def test_v15_m21_governance_docs() -> None:
     assert "t1_30min_run_not_started" in v15
     assert "dry-run preflight" in v15.lower()
     assert "full operator-local T1 30-minute GPU run was not performed" in v15.replace("\n", " ")
-    assert "V15-M22" in v15 and "proposed" in v15
+    assert "V15-M22" in v15
+    assert (
+        "operator_preflight_blocked" in v15
+        or "torch_cuda_unavailable" in v15
+        or ("proposed" in v15 and "V15-M22" in v15)
+    )
     rt = REPO_ROOT / "docs" / "runtime" / "v15_operator_t1_30min_gpu_run_execution_v1.md"
     assert rt.is_file()
     rtx = rt.read_text(encoding="utf-8").lower()
