@@ -348,6 +348,28 @@ def test_v15_m24_governance_docs() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m26_governance_docs() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    assert "V15-M26" in v15
+    assert "PR #162" in v15
+    assert "M26 non-claims block" in v15
+    assert "t1_30min_completed_without_candidate_checkpoint" in v15
+    assert "no_pytorch_checkpoint_artifact_under_execution_root" in v15
+    assert "v15-m26-real-t1-30min-gpu-run" in v15
+    assert "dry_run_preflight_performed" in v15.lower() or "non-dry-run" in v15.lower()
+    low = v15.lower()
+    assert "not strength" in low or "not_strength" in low
+    assert "not checkpoint promotion" in low or "not_checkpoint_promotion" in low
+    assert "merge PR pending" not in v15
+    assert "sc2-harness" in v15.lower() or "sc2-harness" in v15
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M26" in ledger
+    assert "V15-M27" in ledger
+    assert "PR #162" in ledger
+    assert "t1_30min_completed_without_candidate_checkpoint" in ledger
+
+
+@pytest.mark.smoke
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
@@ -477,6 +499,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M24`**" in scan
     assert "**`V15-M25`**" in scan
     assert "**`V15-M26`**" in scan
+    assert "**`V15-M27`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -763,6 +786,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "**`V15-M24`**" in section
     assert "**`V15-M25`**" in section
     assert "**`V15-M26`**" in section
+    assert "**`V15-M27`**" in section
     assert "**`V15-M21`**" in section
     assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section
