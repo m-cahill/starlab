@@ -107,6 +107,8 @@ omit = [
     "starlab/sc2/px1_m03_hybrid_terran_bot.py",
     # PX1 watchability: scripted BurnySc2 bot — same rationale as hybrid live bot.
     "starlab/sc2/px1_watchability_macro_scout_bot.py",
+    # V15-M27: operator-local BurnySC2 rollout runner — real SC2 path not run in merge CI; fixture tests cover io/models/training_step.
+    "starlab/v15/run_v15_m27_sc2_rollout_training_loop_integration.py",
 ]
 
 [tool.coverage.report]
