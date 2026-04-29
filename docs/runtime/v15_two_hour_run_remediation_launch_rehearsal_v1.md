@@ -2,7 +2,11 @@
 
 ## Governance status
 
-Milestone **implementation** on branch `v15-m38-two-hour-run-remediation-launch-rehearsal`. Merge commit and authoritative GitHub Actions run IDs are recorded at closeout in `docs/starlab-v1.5.md` and `docs/starlab.md`.
+Milestone **closed** on `main` as of merge commit `9cf2944d8ff1f9ca2ad1a9c9bce3a4b3641296fd` (**2026-04-29**). Authoritative GitHub Actions workflow **CI** runs: pull_request head `5843bbdf…` and merge-boundary push on `9cf2944d…`. Full PR links, run IDs, and non-claims are recorded in **`docs/starlab-v1.5.md`** and **`docs/starlab.md`** (public ledger).
+
+**Strongest allowed claim:** V15-M38 **remediates or explicitly defers** material **M37** blockers, **adds/checks** checkpoint **retention** for the **2-hour** path, **freezes** a governed **M39** launch command/runbook, and provides a **launch rehearsal** surface.
+
+**Required public wording:** V15-M38 **does not** execute the **2-hour** run. It **does not** execute **T2**/**T3**, **claim** benchmark pass, **evaluate** strength, **promote** checkpoints, **produce** scorecard results, **run** XAI or human-panel evaluation, **release** a showcase agent, or **authorize** **v2**.
 
 ## Purpose
 

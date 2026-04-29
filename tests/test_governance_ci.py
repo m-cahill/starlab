@@ -637,8 +637,10 @@ def test_v15_m37_governance_surface() -> None:
     low = v15.lower().replace("`", "")
     assert "m37 non-claims" in low
     assert "v15-m38" in low or "V15-M38" in v15
+    assert "PR #174" in v15
     assert "blocker-discovery/readiness-audit" in v15.replace("\n", " ").lower()
     assert "PR #173" in ledger
+    assert "PR #174" in ledger
     assert "25136254104" in ledger
     assert "25136423879" in ledger
     assert "blocker discovery" in ledger.lower() or "2-hour" in ledger.lower()
@@ -653,13 +655,25 @@ def test_v15_m38_governance_surface() -> None:
     rt_body = rt38.read_text(encoding="utf-8")
     assert "starlab.v15.two_hour_run_remediation_launch_rehearsal.v1" in rt_body
     assert "PR #" not in rt_body
+    assert "5843bbdf" in rt_body
+    assert "9cf2944d" in rt_body
     assert "V15-M38" in v15
     assert "V15-M38" in ledger
     assert "emit_v15_m38_two_hour_run_remediation_launch_rehearsal" in v15.replace("\n", " ")
     assert "V15-M39" in v15
+    assert "V15-M39" in ledger
+    assert "PR #174" in v15
+    assert "25138210391" in v15
+    assert "25138442045" in v15
+    assert "9cf2944d" in v15
+    assert "5843bbdf" in v15
+    assert "PR #174" in ledger
+    assert "25138210391" in ledger
+    assert "25138442045" in ledger
     low = v15.lower().replace("`", "")
     assert "m38 non-claims" in low
     assert "fixture_schema_only_no_operator_rehearsal" in rt_body.lower()
+    assert "v15-m39" in low or "V15-M39" in v15
 
 
 def test_v15_m25_governance_docs() -> None:
