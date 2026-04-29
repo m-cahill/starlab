@@ -655,6 +655,7 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M29`**" in scan
     assert "**`V15-M30`**" in scan
     assert "**`V15-M31`**" in scan
+    assert "**`V15-M32`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -944,6 +945,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "**`V15-M27`**" in section
     assert "**`V15-M28`**" in section
     assert "**`V15-M31`**" in section
+    assert "**`V15-M32`**" in section
     assert "**`V15-M21`**" in section
     assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section
