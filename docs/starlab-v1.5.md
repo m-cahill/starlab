@@ -497,6 +497,8 @@ Consumes sealed **`v15_candidate_checkpoint_evaluation_execution.json`** from **
 
 **Public closeout:** merge `9cf2944d8ff1f9ca2ad1a9c9bce3a4b3641296fd` merged **2026-04-29T23:05:27Z** UTC; **authoritative PR-head CI** [`25138210391`](https://github.com/m-cahill/starlab/actions/runs/25138210391) (head `5843bbdf58f5ffc666e6109d9edd7261d8e1bcf4`); **merge-boundary `main` CI** [`25138442045`](https://github.com/m-cahill/starlab/actions/runs/25138442045) — **success**. **Merge method:** GitHub **merge commit**.
 
+**Governance ledger closeout:** commit `c70eeea160ceaa7e0950d8996b66b2ed081ba975`; **merge-boundary `main` CI** [`25138661725`](https://github.com/m-cahill/starlab/actions/runs/25138661725) — **success**.
+
 **Contract:** **`starlab.v15.two_hour_run_remediation_launch_rehearsal.v1`** — **`starlab.v15.m38.two_hour_run_remediation_launch_rehearsal.v1`** — **`python -m starlab.v15.emit_v15_m38_two_hour_run_remediation_launch_rehearsal`** — **`docs/runtime/v15_two_hour_run_remediation_launch_rehearsal_v1.md`**.
 
 **Artifacts:** **`v15_two_hour_run_remediation_launch_rehearsal.json`**, **`v15_two_hour_run_remediation_launch_rehearsal_report.json`**, **`v15_two_hour_run_remediation_launch_rehearsal_checklist.md`**, **`v15_m39_launch_runbook.md`**, **`v15_m39_launch_command.txt`**, **`v15_m39_operator_stop_resume_card.md`**.
