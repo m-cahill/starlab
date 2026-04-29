@@ -166,6 +166,12 @@ def build_m33_checklist_md(sealed: dict[str, Any]) -> str:
     ok = st == STATUS_PROBE_COMPLETED
     mk = "[x]" if ok else "[ ]"
     br_txt = ", ".join(str(x) for x in br) if br else "(none)"
+    nc_raw = sealed.get("non_claims") or []
+    nc_lines = (
+        "\n".join(f"- {item}" for item in nc_raw)
+        if isinstance(nc_raw, list) and nc_raw
+        else "(none)"
+    )
     return (
         "# V15-M33 — candidate checkpoint model-load / CUDA probe checklist\n\n"
         f"**`probe_status`:** `{st}`  \n"
@@ -176,6 +182,8 @@ def build_m33_checklist_md(sealed: dict[str, Any]) -> str:
         f"| P1 — Checkpoint blob SHA matches expected | {mk} |\n"
         f"| P2 — Model load (M28/M29 checkpoint format) | {mk} |\n"
         f"| P3 — CUDA / inference probe (per device) | {mk} |\n\n"
+        "## Non-claims\n\n"
+        f"{nc_lines}\n\n"
         "M33 proves wiring only — not strength, benchmark pass, or promotion.\n"
     )
 

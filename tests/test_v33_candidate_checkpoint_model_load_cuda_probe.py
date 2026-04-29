@@ -295,4 +295,7 @@ def test_cuda_path_unavailable_monkeypatch(tmp_path: Path, monkeypatch: pytest.M
 
 def test_governance_non_claims_in_fixture_json(tmp_path: Path) -> None:
     sealed, *_ = emit_m33_candidate_checkpoint_model_load_cuda_probe_fixture(tmp_path / "g")
-    assert "not_seventy_two_hour_campaign" in sealed["non_claims"]
+    nc = sealed["non_claims"]
+    assert isinstance(nc, list)
+    assert "no 72-hour campaign" in nc
+    assert "no benchmark pass" in nc
