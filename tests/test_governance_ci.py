@@ -521,6 +521,22 @@ def test_v15_m31_governance_surface() -> None:
     assert rt31.is_file()
 
 
+@pytest.mark.smoke
+def test_v15_m32_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M32" in v15
+    assert "V15-M32" in ledger
+    assert "starlab.v15.candidate_checkpoint_evaluation_execution.v1" in v15
+    assert "emit_v15_m32_candidate_checkpoint_evaluation_execution" in v15.replace("\n", " ")
+    low = v15.lower().replace("`", "")
+    assert "m32 non-claims" in low
+    assert "not benchmark pass" in low or "not_benchmark_pass" in low
+    assert "v15-m33" in low or "V15-M33" in v15
+    rt32 = REPO_ROOT / "docs" / "runtime" / "v15_candidate_checkpoint_evaluation_execution_v1.md"
+    assert rt32.is_file()
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
