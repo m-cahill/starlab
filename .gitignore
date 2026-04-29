@@ -1,6 +1,9 @@
 # Private / operator-local documentation (not shipped in a default git checkout)
 docs/company_secrets/
 
+# One-off recovery snapshots (never commit)
+local_recovery_backups/
+
 # Cursor
 .cursorrules
 
