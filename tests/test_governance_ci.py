@@ -573,6 +573,11 @@ def test_v15_m35_governance_surface() -> None:
     ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "V15-M35" in v15
     assert "V15-M35" in ledger
+    assert "PR #171" in v15
+    assert "25129363401" in v15
+    assert "25129578504" in v15
+    assert "3bf3fa46" in v15
+    assert "PR #171" in ledger
     assert "starlab.v15.candidate_checkpoint_smoke_benchmark_readiness.v1" in v15
     assert "emit_v15_m35_candidate_checkpoint_smoke_benchmark_readiness" in v15.replace("\n", " ")
     low = v15.lower().replace("`", "")
@@ -581,6 +586,9 @@ def test_v15_m35_governance_surface() -> None:
     assert "v15-m36" in low or "V15-M36" in v15
     rt35 = REPO_ROOT / "docs/runtime/v15_candidate_checkpoint_smoke_benchmark_readiness_v1.md"
     assert rt35.is_file()
+    rt35_text = rt35.read_text(encoding="utf-8")
+    assert "PR #171" in rt35_text
+    assert "25129363401" in rt35_text
 
 
 def test_v15_m25_governance_docs() -> None:

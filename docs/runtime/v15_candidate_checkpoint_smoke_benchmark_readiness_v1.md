@@ -36,6 +36,12 @@ M35 **does not** execute benchmark matches; **does not** produce scorecard **res
 - `v15_candidate_checkpoint_smoke_benchmark_readiness_report.json`
 - `v15_candidate_checkpoint_smoke_benchmark_readiness_checklist.md`
 
+## Public closeout (ledger)
+
+**Closed on `main`:** [PR #171](https://github.com/m-cahill/starlab/pull/171); merge commit **`3bf3fa461e07f023869d511525883a6066f2451c`**; **authoritative PR-head CI** [`25129363401`](https://github.com/m-cahill/starlab/actions/runs/25129363401) (head **`159723009b82c11c86961617d7860add624ae1e0`**); **merge-boundary `main` CI** [`25129578504`](https://github.com/m-cahill/starlab/actions/runs/25129578504) — **success**. **Merge method:** GitHub **merge commit** (**not** squash/rebase). **Superseded failed runs:** none recorded as merge authority for the merged PR-head tip.
+
+**Strongest allowed claim (unchanged):** this contract emits **readiness/refusal** showing whether the **M34** CUDA-probed candidate checkpoint is **structurally ready** for a **future** smoke-benchmark **execution** surface — **readiness does not equal** benchmark execution, benchmark pass, strength evaluation, or checkpoint promotion.
+
 ## Related
 
 - **`docs/starlab-v1.5.md`** — **§V15-M35**, **M35 non-claims block**
