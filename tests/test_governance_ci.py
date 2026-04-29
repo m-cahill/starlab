@@ -567,6 +567,22 @@ def test_v15_m34_governance_surface() -> None:
     assert "v15-m35" in low or "V15-M35" in v15
 
 
+@pytest.mark.smoke
+def test_v15_m35_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M35" in v15
+    assert "V15-M35" in ledger
+    assert "starlab.v15.candidate_checkpoint_smoke_benchmark_readiness.v1" in v15
+    assert "emit_v15_m35_candidate_checkpoint_smoke_benchmark_readiness" in v15.replace("\n", " ")
+    low = v15.lower().replace("`", "")
+    assert "m35 non-claims" in low
+    assert "fixture_schema_only_no_benchmark_execution" in low
+    assert "v15-m36" in low or "V15-M36" in v15
+    rt35 = REPO_ROOT / "docs/runtime/v15_candidate_checkpoint_smoke_benchmark_readiness_v1.md"
+    assert rt35.is_file()
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
