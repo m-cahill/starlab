@@ -146,4 +146,4 @@ See **`docs/starlab-v1.5.md`** — **M36 non-claims block**.
 
 ## Ledger
 
-Governance telemetry (**PR**, **CI**, merge SHAs): **`docs/starlab-v1.5.md`** — **§V15-M36** (authoritative).
+**Public closeout (`main`):** [PR #172](https://github.com/m-cahill/starlab/pull/172); merge `aa0adba4406b5977020c5b8f66255fd198fb0816`; **authoritative PR-head CI** [`25131688817`](https://github.com/m-cahill/starlab/actions/runs/25131688817) (head `f06d9721cc50413f2cb282574bf033e5cc79d3ff`); **merge-boundary `main` CI** [`25131917336`](https://github.com/m-cahill/starlab/actions/runs/25131917336) — **success**. **Merge method:** squash merge. Full narrative and non-claims: **`docs/starlab-v1.5.md`** — **§V15-M36**.

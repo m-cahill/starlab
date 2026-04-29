@@ -597,6 +597,11 @@ def test_v15_m36_governance_surface() -> None:
     ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
     assert "V15-M36" in v15
     assert "V15-M36" in ledger
+    assert "PR #172" in v15
+    assert "PR #172" in ledger
+    assert "25131688817" in v15
+    assert "25131917336" in v15
+    assert "aa0adba4" in v15
     assert "starlab.v15.smoke_benchmark_execution.v1" in v15
     assert "emit_v15_m36_smoke_benchmark_execution" in v15.replace("\n", " ")
     low = v15.lower().replace("`", "")
@@ -605,7 +610,9 @@ def test_v15_m36_governance_surface() -> None:
     assert "v15-m37" in low or "V15-M37" in v15
     rt36 = REPO_ROOT / "docs/runtime/v15_smoke_benchmark_execution_surface_v1.md"
     assert rt36.is_file()
-    rt_text = rt36.read_text(encoding="utf-8").lower()
+    rt_body = rt36.read_text(encoding="utf-8")
+    rt_text = rt_body.lower()
+    assert "PR #172" in rt_body
     assert "not a 2-hour run" in rt_text or "2-hour" in rt_text
 
 
