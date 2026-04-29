@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 import time
 from datetime import UTC, datetime
@@ -84,6 +85,14 @@ def _emit_blocked(
     return 3 if "blocked" in m28_outcome else 1
 
 
+def _default_max_retained_checkpoints() -> int:
+    raw = os.environ.get("STARLAB_MAX_RETAINED_CHECKPOINTS", "128")
+    try:
+        return max(1, int(raw, 10))
+    except ValueError:
+        return 128
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="python -m starlab.v15.run_v15_m28_sc2_backed_t1_candidate_training",
@@ -130,6 +139,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--min-training-updates", type=int, default=10)
     parser.add_argument("--max-training-updates", type=int, default=200)
     parser.add_argument("--checkpoint-cadence-updates", type=int, default=50)
+    parser.add_argument(
+        "--max-retained-checkpoints",
+        type=int,
+        default=_default_max_retained_checkpoints(),
+        help=(
+            "Cap checkpoints retained on disk after each save (prunes intermediates; "
+            "always keeps first+last step when cap>=2). "
+            "Override default via STARLAB_MAX_RETAINED_CHECKPOINTS."
+        ),
+    )
     parser.add_argument(
         "--device",
         choices=("auto", "cuda", "cpu"),
@@ -281,10 +300,12 @@ def main(argv: list[str] | None = None) -> int:
     min_u = int(args.min_training_updates)
     max_u = int(args.max_training_updates)
     cadence = int(args.checkpoint_cadence_updates)
+    max_retained = int(args.max_retained_checkpoints)
     if args.fixture_only:
         min_u = 3
         max_u = 12
         cadence = 6
+        max_retained = min(max_retained, 32)
 
     require_full_horizon = bool(args.require_full_wall_clock and not args.fixture_only)
 
@@ -300,6 +321,7 @@ def main(argv: list[str] | None = None) -> int:
         disable_loss_floor_early_stop=bool(args.disable_loss_floor_early_stop)
         or bool(require_full_horizon),
         require_full_wall_clock=bool(require_full_horizon),
+        max_retained_checkpoints=max_retained,
     )
     wall_obs = time.monotonic() - t_run
 
@@ -524,6 +546,10 @@ def _training_block(
         "candidate_checkpoint_sha256": cand_sha,
         "training_condition_label": TRAINING_CONDITION_LABEL,
         "checkpoint_cadence_updates": int(args.checkpoint_cadence_updates),
+        "max_retained_checkpoints": int(args.max_retained_checkpoints),
+        "checkpoint_retention_max_applied": train_rec.get("checkpoint_retention_max_retained"),
+        "checkpoints_written_total": int(train_rec.get("checkpoints_written_total") or 0),
+        "checkpoints_pruned_total": int(train_rec.get("checkpoints_pruned_total") or 0),
         "min_training_updates": int(args.min_training_updates),
         "max_training_updates": int(args.max_training_updates),
         "device_observed": train_rec.get("device"),
