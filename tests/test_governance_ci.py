@@ -553,6 +553,20 @@ def test_v15_m33_governance_surface() -> None:
     assert rt33.is_file()
 
 
+@pytest.mark.smoke
+def test_v15_m34_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M34" in v15
+    assert "V15-M34" in ledger
+    assert "PR #170" in v15
+    low = v15.lower().replace("`", "")
+    assert "m34 non-claims" in low
+    assert "eac6fc1f37aa958279a80209822765ecfa6aa2525ed64a8bee88c0ac2be13d26" in v15
+    assert "candidate_model_load_cuda_probe_completed" in v15
+    assert "v15-m35" in low or "V15-M35" in v15
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15

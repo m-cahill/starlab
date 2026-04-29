@@ -31,22 +31,22 @@ M32_EXECUTION_STATUSES_OK: Final[frozenset[str]] = frozenset(
     },
 )
 
-RECOMMENDED_NEXT_SUCCESS: Final[str] = "V15-M34_short_sustained_candidate_evaluation_rehearsal_gate"
-RECOMMENDED_NEXT_LOADER_REMEDIATION: Final[str] = "V15-M34_candidate_checkpoint_loader_remediation"
+RECOMMENDED_NEXT_SUCCESS: Final[str] = "V15-M35_candidate_checkpoint_smoke_benchmark_readiness"
+RECOMMENDED_NEXT_LOADER_REMEDIATION: Final[str] = "V15-M35_candidate_checkpoint_probe_remediation"
 
 NON_CLAIMS_M33: Final[tuple[str, ...]] = (
-    "not_training",
-    "not_seventy_two_hour_campaign",
-    "not_live_sc2_evaluation",
-    "not_benchmark_pass",
-    "not_scorecard_execution",
-    "not_strength_evaluation",
-    "not_checkpoint_promotion",
-    "not_xai_execution",
-    "not_human_panel_execution",
-    "not_showcase_release",
-    "not_v2_authorization",
-    "not_t2_or_t3_authorization",
+    "no training",
+    "no 72-hour campaign",
+    "no live SC2 execution",
+    "no benchmark pass",
+    "no scorecard execution",
+    "no strength evaluation",
+    "no checkpoint promotion",
+    "no XAI execution",
+    "no human-panel execution",
+    "no showcase release",
+    "no v2 authorization",
+    "no T2/T3 claim",
 )
 
 EXPECTED_PUBLIC_CANDIDATE_SHA256: Final[str] = (
