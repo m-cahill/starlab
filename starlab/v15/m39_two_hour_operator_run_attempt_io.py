@@ -644,6 +644,7 @@ def emit_m39_operator_run_receipt(
             output_dir=output_dir,
         )
     )
+    output_dir.mkdir(parents=True, exist_ok=True)
 
     if pre.status != STATUS_PREFLIGHT_READY:
         body = build_fixture_body(repo_root=repo_root, m38_obj=pre.m38_obj)
