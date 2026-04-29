@@ -84,6 +84,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/v15_checkpoint_evaluation_promotion_v1.md",
     "docs/runtime/v15_real_candidate_checkpoint_production_gate_v1.md",
     "docs/runtime/v15_sc2_backed_candidate_checkpoint_evaluation_package_v1.md",
+    "docs/runtime/v15_candidate_checkpoint_evaluation_harness_gate_v1.md",
     "docs/training_asset_register.md",
     "docs/replay_corpus_register.md",
     "docs/model_weight_register.md",
