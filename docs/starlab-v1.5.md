@@ -115,6 +115,8 @@ Unless separately proved and scoped:
 
 **M28 non-claims block:** V15-M28 is **SC2 rollout JSON → feature-conditioned bounded candidate training receipts** — **not** strength evaluation, **not** benchmark execution, **not** checkpoint promotion, **not** proof that **SC2-backed** training beats synthetic-only plumbing as gameplay skill, **not** XAI / human-panel / showcase / **v2** / **T2**/**T3** authorization. **`sc2_rollout_feature_conditioned_training_smoke_not_strength_learning`** — **not** “meaningful learning” unless separately evidenced. Fixture **`fixture_only`** is **not** operator-local M27 consumption on disk. Candidate **`.pt`** artifacts are **candidate only** — **hashed**, **not promoted**.
 
+**M29 non-claims block:** V15-M29 targets **proof of full-wall-clock execution** (**~30 minutes**) for the **same SC2 rollout–conditioned bounded candidate-training path**, **without** asserting strength evaluation, benchmark pass, checkpoint promotion (candidate **`.pt`** hashes only), XAI inference, human-panel execution, showcase release, **v2**, **long GPU campaign**, **or** gameplay skill beyond controlled wiring receipts. Fixture **`--fixture-only-m29`** is **bounded seconds-scale** CI wiring — **not** the operator horizon. **`sc2_backed_t1_full_30min_completed_*`** classifications require **`observed_wall_clock_seconds`** near **≥ 1800s** (**±bounded tolerance**) — **early-stop-only** runs **cannot** authorize full-horizon closeout semantics.
+
 ---
 
 ## 5. V15 milestone table (plan)
@@ -150,6 +152,7 @@ Unless separately proved and scoped:
 | **V15-M26** | *Real Operator T1 30-Minute GPU Run Attempt After Manifest Alignment* — **closed** on `main` ([PR #162](https://github.com/m-cahill/starlab/pull/162); merge `393adb7fb91536c16927b93216bc7045981061e5`; **authoritative PR-head CI** [`25046959088`](https://github.com/m-cahill/starlab/actions/runs/25046959088) (head `9d877da21bd94df1d0685215ca9f29aac808ac98`); **merge-boundary `main` CI** [`25047132158`](https://github.com/m-cahill/starlab/actions/runs/25047132158) on merge commit `393adb7f…` — **success**); **§V15-M26** | **`t1_checkpoint_plumbing_completed_but_sc2_training_not_yet_meaningful`** — **synthetic CUDA** **`.pt`** **plumbing** (**not** SC2 gameplay learning); **SC2 rollout path** **bounded smoke/bootstrap**; **V15-M27 — closed ([PR #163](https://github.com/m-cahill/starlab/pull/163))**; **V15-M28 — closed ([PR #164](https://github.com/m-cahill/starlab/pull/164))** — **§V15-M28** |
 | **V15-M27** | *SC2 Rollout Duration and Training-Loop Integration Fix* — **closed** on `main` ([PR #163](https://github.com/m-cahill/starlab/pull/163); merge `960f925afb2d1913055fe3ae18dc0b76a4c0951f`; **authoritative PR-head CI** [`25078974410`](https://github.com/m-cahill/starlab/actions/runs/25078974410) (head `f5915527b7bc8e3c64cb617b6a83d08b9e70a074`); **merge-boundary `main` CI** [`25079150705`](https://github.com/m-cahill/starlab/actions/runs/25079150705) on merge commit `960f925a…` — **success**) — **`starlab.v15.sc2_rollout_training_loop_integration.v1`**; **`run_v15_m27_sc2_rollout_training_loop_integration`**; outcome **`sc2_rollout_training_loop_integration_completed`** (operator-local dual-guard SC2 **`out/v15_m27/sc2_rollout_integration_run1`**; **§V15-M27**) | **Fixture default:** **`sc2_rollout_fixture_only`** (**not** this closeout record). **Training-loop binding:** **`training_update_executed`** (integration smoke only). **`v15_m27_nontrivial_macro_smoke_policy_v1`** — **PX1 watchability** scaffold; **nonzero `action_count`** per episode (**not `_HarnessBot` smoke**); **not** strength; **§V15-M27** |
 | **V15-M28** | *SC2-Backed T1 Candidate Training Attempt* — **closed** on `main` ([PR #164](https://github.com/m-cahill/starlab/pull/164); merge `35d59f11e64b5b8fcb2c2937572478bfa9f37863`; **authoritative PR-head CI** [`25083196925`](https://github.com/m-cahill/starlab/actions/runs/25083196925) (head `40550e6481c6f5988cd72e210e2a17d16f533e81`); **merge-boundary `main` CI** [`25083354466`](https://github.com/m-cahill/starlab/actions/runs/25083354466) — **success**) — **`starlab.v15.sc2_backed_t1_candidate_training.v1`**; **`run_v15_m28_sc2_backed_t1_candidate_training`** — **§V15-M28** | **Fixture CI:** **`fixture_only`**. **Operator-local:** consumes sealed **M27** **`artifact_sha256`** **`f9c2ca5aca7a3b15df0567358c1f207f99e112cd8d816f5ac1a1c6ff04022227`**; **`sc2_backed_candidate_training_completed_with_candidate_checkpoint`** (sample); **`sc2_backed_features_used`** **true**; candidate **`.pt`** **`71897cfff94fba7209e667dd44e040eabc705e686c6a579cd26e13015f00ecc8`** (**not promoted**); **not** strength |
+| **V15-M29** | *Full 30-Minute SC2-Backed T1 Candidate Run & Evaluation Package Gate* — **operator-local full-wall-clock receipts recorded** — **`starlab.v15.full_30min_sc2_backed_t1_run.v1`**; **`run_v15_m29_full_30min_sc2_backed_t1_run`** (**§V15-M29**); **`m29_outcome`** **`sc2_backed_t1_full_30min_completed_with_candidate_checkpoint`** — **candidate only** (**not promoted**) — **bounded SC2 rollout–conditioned T1 receipts** (**not strength**) | **`--fixture-only-m29`** remains **bounded seconds-scale** (**CI**) — **not** the operator horizon. **Operator receipts (example path `out/v15_m29/full_30min_sc2_backed_t1_run1`):** **`profile`** **`operator_local_full_wall_clock`** — **`requested`/`observed` wall-clock** **1800.0** s — **`full_wall_clock_satisfied`** **true** — **`sc2_backed_features_used`** **true** — sealed **`87d7d00b0fd19bb9f9d85180af9a0245957449ef0160575de146a71dd2ee4ea0`** — upstream **M28** **`de214a02f95edd0b281852cd6340fca155c7d839ca52094e8c473d26c62f7c8e`** — **M27** **`f9c2ca5aca7a3b15df0567358c1f207f99e112cd8d816f5ac1a1c6ff04022227`** — candidate **`.pt`** **`eac6fc1f37aa958279a80209822765ecfa6aa2525ed64a8bee88c0ac2be13d26`**. **`§V15-M30`** next |
 
 ### Post-M13 remediation roadmap
 
@@ -169,7 +172,7 @@ M13 closed with v2 not authorized on the default public path. The following mile
 | V15-M23 | *CUDA PyTorch Operator Environment Remediation* — **closed** on `main` ([PR #156](https://github.com/m-cahill/starlab/pull/156); public ledger closeout [PR #157](https://github.com/m-cahill/starlab/pull/157)) | **CPU-only** **`torch_cuda_unavailable`** gap from **M22** remediated in repo **`.venv`**; PATH **Python** remains CPU-only; **M21** dry-run **not** rerun in **M23** on public record |
 | V15-M24 | *Real Operator T1 30-Minute GPU Run Attempt & Evidence Capture* — **closed** on `main` ([PR #159](https://github.com/m-cahill/starlab/pull/159); PR-head [`25036985830`](https://github.com/m-cahill/starlab/actions/runs/25036985830); merge-boundary [`25037125881`](https://github.com/m-cahill/starlab/actions/runs/25037125881); merge `4d8e8464…`) | **Blocked:** **`operator_preflight_blocked` / `missing_private_manifest_inputs`**; **M21** dry-run **not** executed; **T1** **not** entered; **`.venv`** CUDA OK |
 | V15-M25 | *Operator Evidence Collection Preflight JSON & M21 Manifest Alignment* — **[PR #160](https://github.com/m-cahill/starlab/pull/160)**; merge `e4ecc95e222b99ccc4d5bb69bb2fac9ec107cec5`; PR-head [`25039149033`](https://github.com/m-cahill/starlab/actions/runs/25039149033) — **success**; merge-boundary [`25039367953`](https://github.com/m-cahill/starlab/actions/runs/25039367953) — **success** | **`m21_dry_run_preflight_passed`** / **`ready_for_v15_m26_t1_attempt`** operator-locally; **`emit_v15_operator_evidence_collection_preflight`** **M15** JSON + aligned argv; **M21** **`--dry-run-preflight-only`**; **not** real **T1**; **V15-M26** next |
-| V15-M26 | *Real Operator T1 30-Minute GPU Run Attempt After Manifest Alignment* — **[PR #162](https://github.com/m-cahill/starlab/pull/162)**; merge `393adb7fb91536c16927b93216bc7045981061e5`; PR-head [`25046959088`](https://github.com/m-cahill/starlab/actions/runs/25046959088) — **success**; merge-boundary [`25047132158`](https://github.com/m-cahill/starlab/actions/runs/25047132158) — **success** | **`t1_checkpoint_plumbing_completed_but_sc2_training_not_yet_meaningful`**; **synthetic CUDA** candidate **`.pt`** only; **SC2 rollout path** smoke/bootstrap; **V15-M27** **[PR #163](https://github.com/m-cahill/starlab/pull/163)**; **V15-M29** next |
+| V15-M26 | *Real Operator T1 30-Minute GPU Run Attempt After Manifest Alignment* — **[PR #162](https://github.com/m-cahill/starlab/pull/162)**; merge `393adb7fb91536c16927b93216bc7045981061e5`; PR-head [`25046959088`](https://github.com/m-cahill/starlab/actions/runs/25046959088) — **success**; merge-boundary [`25047132158`](https://github.com/m-cahill/starlab/actions/runs/25047132158) — **success** | **`t1_checkpoint_plumbing_completed_but_sc2_training_not_yet_meaningful`**; **synthetic CUDA** candidate **`.pt`** only; **SC2 rollout path** smoke/bootstrap; **V15-M27** **[PR #163](https://github.com/m-cahill/starlab/pull/163)** — follow-on chain **`V15-M29`** **§V15-M29** (operator receipts) — **`§V15-M30`** next |
 | V15-M27 | *SC2 Rollout Duration and Training-Loop Integration Fix* — **closed** on **`main`** ([PR #163](https://github.com/m-cahill/starlab/pull/163)); contract `starlab.v15.sc2_rollout_training_loop_integration.v1`; operator-local outcome **`sc2_rollout_training_loop_integration_completed`**; **3**× episodes, **`game_step` 8**, **`max_game_steps` 2048**; **`action_count`** per episode **236 / 236 / 230**; **`training_loop_binding.status`** **`training_update_executed`** | **SC2** rollout + integration-smoke training step (not meaningful learning); **M49** preflight consumed M27 JSON (**`preflight_ok` true**); **not** strength / benchmark / v2 |
 | V15-M28 | *SC2-Backed T1 Candidate Training Attempt* — **closed** on `main` ([PR #164](https://github.com/m-cahill/starlab/pull/164); merge `35d59f11…`; PR-head [`25083196925`](https://github.com/m-cahill/starlab/actions/runs/25083196925); merge-boundary [`25083354466`](https://github.com/m-cahill/starlab/actions/runs/25083354466)); contract `starlab.v15.sc2_backed_t1_candidate_training.v1`; operator-local sample outcome **`sc2_backed_candidate_training_completed_with_candidate_checkpoint`**; **M27** upstream seal **`f9c2ca5aca7a3b15df0567358c1f207f99e112cd8d816f5ac1a1c6ff04022227`** | **`sc2_backed_features_used`** **true** (operator-local); candidate **`.pt`** **`71897cfff94fba7209e667dd44e040eabc705e686c6a579cd26e13015f00ecc8`** (**not promoted**); **fixture_only** in CI; **not** strength / benchmark / v2 |
 
@@ -290,7 +293,8 @@ Implementation branch: `v15-m26-real-t1-30min-gpu-run` (governance PR [PR #162](
 
 **M49 consumption (optional):** **`emit_full_local_training_campaign_preflight`** with **`--campaign-contract`** **`out/v15_m26/t1_campaign_plan/m49_root/full_local_training_campaign_contract.json`** and **`--m27-sc2-rollout-json`** → **`preflight_ok`:** **`true`** ( **`out/v15_m27/m49_preflight_with_m27_rollout/campaign_preflight_receipt.json`** — local tree).
 
-**Recommended next:** **V15-M29** — seed from **§V15-M28** closeout (evaluation package vs cadence analysis vs blocker remediation); optional secondary: *T1 No-Checkpoint Analysis & Trainer Adjustment*; follow **M18/M19** for **candidate** evaluation discipline (**not** auto-promotion).
+
+**Recommended next:** **`§V15-M30`** — **SC2-Backed Candidate Checkpoint Evaluation Package**: bind **`starlab.v15.candidate_checkpoint_evaluation_package.v1`** ( **`§V15-M19`**) to lineage from **`§V15-M27`**, **`§V15-M28`**, and **`§V15-M29`** operator receipts (**not** strength evaluation by default).
 
 ### V15-M28 — SC2-Backed T1 Candidate Training Attempt
 
@@ -306,12 +310,64 @@ Implementation branch: `v15-m26-real-t1-30min-gpu-run` (governance PR [PR #162](
 
 - **`sc2_backed_features_used`:** **true** when episodes + tallies feed the feature tensor.
 - **`m28_outcome` (operator-local sample):** **`sc2_backed_candidate_training_completed_with_candidate_checkpoint`**.
-- **Training updates observed (sample):** **170** (bounded loop may stop early on loss floor — **not** a strength signal).
+- **Training updates observed (sample):** **170** — **bounded smoke** permits early stop (**`max_training_updates`**, **loss-floor**, **`wall_clock_budget`**) unless operator uses **`--require-full-wall-clock`** / aligned flags — **not** standalone proof operator execution consumed **`~≥1800` seconds**.
 - **Candidate checkpoint `.pt` SHA-256 (sample, final cadence-bound artifact):** **`71897cfff94fba7209e667dd44e040eabc705e686c6a579cd26e13015f00ecc8`** (**candidate only**, **no promotion**).
 - **Sealed M28 JSON SHA-256 (sample operator emit):** **`3d73fad35fb4af0273272d03b5eace6131de4346e2ad645270edc970a1821e79`** — **local `out/v15_m28/**` — **not committed**.
-- **`m20_m21_gate_integration`:** **`m20_m21_candidate_gate_integration_deferred_to_m29`** (non-blocking).
+- **`m20_m21_gate_integration`:** **`m20_m21_candidate_gate_integration_deferred_to_m30`** (non-blocking).
 
 **Fixture CI:** **`fixture_only`** — **no** upstream M27 path required; **no** live **SC2** in CI.
+
+### V15-M29 — Full 30-minute SC2-backed T1 candidate run & evaluation package gate
+
+**Distinction vs M28:** **M28** can exit early (**loss floor**, **`max_updates`**, **`wall_clock_budget`**) unless operator enables **explicit full-horizon training flags**. **M29** records whether operator-local execution satisfies **`observed_wall_clock_seconds`** against the configured **`requested_min_wall_clock_seconds`** (**default target ~1800s**, **±bounded tolerance** on classification paths) via **`starlab.v15.full_30min_sc2_backed_t1_run.v1`** (`python -m starlab.v15.run_v15_m29_full_30min_sc2_backed_t1_run`) — **delegates** to **`run_v15_m28_sc2_backed_t1_candidate_training`** with **opt-in** `--require-full-wall-clock` semantics by default through the wrapper.
+
+#### Operator-local closeout receipts (honest bounded claim)
+
+**Evidence root (operator-local `out/` — not committed):** **`out/v15_m29/full_30min_sc2_backed_t1_run1/`** (paired **M29** sealed JSON + delegated **M28** artifact + **`m29_operator_transcript.txt`**).
+
+| Field | Value |
+| ----- | ----- |
+| **`contract_id`** | **`starlab.v15.full_30min_sc2_backed_t1_run.v1`** |
+| **`profile`** | **`operator_local_full_wall_clock`** |
+| **`m29_outcome`** | **`sc2_backed_t1_full_30min_completed_with_candidate_checkpoint`** |
+| **`requested_min_wall_clock_seconds`** | **1800.0** |
+| **`observed_wall_clock_seconds`** | **1800.0** |
+| **`full_wall_clock_satisfied`** | **true** |
+| **`sc2_backed_features_used`** | **true** |
+| **`training_update_count`** (delegated **M28** telemetry) | **2,476,886** |
+| **`checkpoint_count`** | **49,537** |
+| **`promotion_status`** | **`not_promoted_candidate_only`** |
+| **`candidate_checkpoint` SHA-256** | **`eac6fc1f37aa958279a80209822765ecfa6aa2525ed64a8bee88c0ac2be13d26`** |
+| **Sealed M29 JSON SHA-256** (`artifact_sha256`) | **`87d7d00b0fd19bb9f9d85180af9a0245957449ef0160575de146a71dd2ee4ea0`** |
+| **Sealed delegated M28 JSON SHA-256** (same bundle) | **`de214a02f95edd0b281852cd6340fca155c7d839ca52094e8c473d26c62f7c8e`** |
+| **Upstream M27 rollout artifact seal** (via **M28**) | **`f9c2ca5aca7a3b15df0567358c1f207f99e112cd8d816f5ac1a1c6ff04022227`** |
+
+**Governed success posture (narrow):** **Full-wall-clock (~30-minute)** SC2 rollout–conditioned **T1 candidate-training** execution completed with **`sc2_rollout_feature_conditioned_training_smoke_not_strength_learning`** — **not meaningful ladder skill**, **not** benchmark pass, **not** promotion beyond candidate hash bookkeeping. **Launcher failures**, **missing upstream M27**, device blockers, or **fixture-only** horizons remain valid **blocked** narratives — see **`M29 non-claims block`** at the top of this document.
+
+#### Non-claims (explicit, preserved)
+
+**Not** promoted; **not** strength-evaluated; **not** benchmark-passed; **not** XAI execution; **not** human-panel execution; **not** showcase release; **not** **v2** authorization; **not** **T2**/**T3** authorization unless separately chartered.
+
+
+**Artifacts (operator-local bundle):**
+
+- **`v15_full_30min_sc2_backed_t1_run.json`** + report — sealed **parallel** to delegated **`v15_sc2_backed_t1_candidate_training.json`**.
+- **`m29_operator_transcript.txt`** — subprocess stdout/stderr capture (**local `out/`**, **not** committed).
+
+
+### V15-M30 stub (next milestone)
+
+Working title: **SC2-Backed Candidate Checkpoint Evaluation Package**. Authoritative contract surface remains **`docs/runtime/v15_candidate_checkpoint_evaluation_package_v1.md`**; scope is packaged evaluation **readiness** and cross-SHA bookkeeping keyed to sealed **M27**/**M28**/closeout **M29** receipts where applicable (**not** promoted checkpoint; **not** showcase; **not** **v2** unless separately chartered).
+
+#### Consolidated seal index (compact, same operator bundle)
+
+| Receipt | Canonical `artifact_sha256` |
+| --- | --- |
+| **`v15_full_30min_sc2_backed_t1_run`** (M29) | **`87d7d00b0fd19bb9f9d85180af9a0245957449ef0160575de146a71dd2ee4ea0`** |
+| **`v15_sc2_backed_t1_candidate_training`** delegated from M29 run (M28 body) | **`de214a02f95edd0b281852cd6340fca155c7d839ca52094e8c473d26c62f7c8e`** |
+| **`upstream_m27_rollout`** seal | **`f9c2ca5aca7a3b15df0567358c1f207f99e112cd8d816f5ac1a1c6ff04022227`** |
+| **`candidate_checkpoint`** (candidate weights; **hashed**) | **`eac6fc1f37aa958279a80209822765ecfa6aa2525ed64a8bee88c0ac2be13d26`** |
+
 
 ### V15 asset and register map (compact)
 
@@ -453,6 +509,10 @@ These are the **intended** v1.5 contract identifiers (emission implemented per m
 - `starlab.v15.candidate_checkpoint_manifest.v1` (**M18** — optional logical manifest shape for operator-supplied inputs; **metadata only**)
 - `starlab.v15.real_candidate_checkpoint_production_gate.v1` (**M20** — T1 checkpoint-production **gate** vocabulary + orchestrator wiring)
 - `starlab.v15.operator_t1_30min_gpu_run_execution.v1` (**M21** — operator **T1** execution / evidence framing; delegates training path to **M20** orchestrator)
+- `starlab.v15.sc2_rollout_training_loop_integration.v1` (**M27** — SC2 rollout + integration-smoke training binding receipts)
+- `starlab.v15.sc2_backed_t1_candidate_training.v1` (**M28** — SC2 rollout features → bounded PyTorch trainer; **`long_gpu_run_authorized`** false unless separately evidenced)
+- `starlab.v15.full_30min_sc2_backed_t1_run.v1` (**M29** — full-wall-clock SC2-backed T1 candidate-training receipts wrapper; binds M27/M28 SHAs **without strength/benchmark promotion claims**)
+
 
 **M00 emitter:** `python -m starlab.v15.emit_v15_training_readiness_charter --output-dir <path>` writes `v15_training_readiness_charter.json` and `v15_training_readiness_charter_report.json`.
 

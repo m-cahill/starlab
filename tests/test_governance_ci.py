@@ -467,6 +467,25 @@ def test_v15_m28_governance_surface() -> None:
     assert rt28.is_file()
 
 
+@pytest.mark.smoke
+def test_v15_m29_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M29" in v15
+    assert "V15-M29" in ledger
+    assert "Full 30-Minute SC2-Backed T1 Candidate Run" in v15 or "full 30-minute" in v15.lower()
+    assert "V15-M30" in v15
+    assert "starlab.v15.full_30min_sc2_backed_t1_run.v1" in v15
+    assert "run_v15_m29_full_30min_sc2_backed_t1_run" in v15
+    low = v15.lower().replace("`", "")
+    assert "observed_wall_clock_seconds" in low or "full_wall_clock_satisfied" in low
+    assert "m29 non-claims" in low
+    assert "not benchmark pass" in low or "not_benchmark_pass" in low
+    assert "not strength" in low
+    rt29 = REPO_ROOT / "docs" / "runtime" / "v15_full_30min_sc2_backed_t1_run_v1.md"
+    assert rt29.is_file()
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
