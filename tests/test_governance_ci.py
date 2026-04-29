@@ -630,9 +630,17 @@ def test_v15_m37_governance_surface() -> None:
     assert "V15-M37" in ledger
     assert "two_hour_run_blocker_discovery" in v15.replace("\n", " ")
     assert "emit_v15_m37_two_hour_run_blocker_discovery" in v15.replace("\n", " ")
+    assert "PR #173" in v15
+    assert "25136254104" in v15
+    assert "25136423879" in v15
+    assert "291aa417" in v15
     low = v15.lower().replace("`", "")
     assert "m37 non-claims" in low
     assert "v15-m38" in low or "V15-M38" in v15
+    assert "blocker-discovery/readiness-audit" in v15.replace("\n", " ").lower()
+    assert "PR #173" in ledger
+    assert "25136254104" in ledger
+    assert "25136423879" in ledger
     assert "blocker discovery" in ledger.lower() or "2-hour" in ledger.lower()
 
 

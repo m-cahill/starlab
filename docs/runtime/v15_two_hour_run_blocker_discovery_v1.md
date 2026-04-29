@@ -1,5 +1,9 @@
 # V15-M37 — Two-hour run blocker discovery (`starlab.v15.two_hour_run_blocker_discovery.v1`)
 
+## Governance status
+
+Milestone **closed** on `main` with merge commit `291aa417a95e5fe7e1047b3406bfbf8296972a4a`. Authoritative PR-head CI [`25136254104`](https://github.com/m-cahill/starlab/actions/runs/25136254104) (head `03e8def63967361de26e06d85b48e38bc1673a1c`); merge-boundary `main` CI [`25136423879`](https://github.com/m-cahill/starlab/actions/runs/25136423879) — **success**. Superseded PR-head attempts [`25135628928`](https://github.com/m-cahill/starlab/actions/runs/25135628928), [`25135999735`](https://github.com/m-cahill/starlab/actions/runs/25135999735) are **not** merge authority. Full narrative + strongest-allowed claim live in **`docs/starlab-v1.5.md`**.
+
 ## Purpose
 
 **V15-M37 does not execute the 2-hour run.** It discovers blockers and readiness gaps for a future **V15-M39** operator-local attempt (**7200 seconds** SC2-backed T1 continuation / candidate-training posture aligned with the **M29/M34** candidate lineage).
