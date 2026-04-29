@@ -46,6 +46,12 @@ python -m starlab.v15.run_v15_m28_sc2_backed_t1_candidate_training \
   --output-dir out/v15_m28/sc2_backed_t1_fixture_ci
 ```
 
+### Full-wall-clock mode (operator-only, opt-in)
+
+Smoke runs may stop earlier (loss-floor early stop / update budgets). When a **≤30‑minute bounded** run is insufficient, governance may require explicitly **full-wall** training with **`--require-full-wall-clock`** (paired with **`--disable-loss-floor-early-stop`** and related flags). Default behavior unchanged without these flags.
+
+**V15‑M29** wraps this path for governed full-wall-clock bundles (`python -m starlab.v15.run_v15_m29_full_30min_sc2_backed_t1_run`); closeout posture and seal index are recorded publicly in **`docs/starlab-v1.5.md`** **§V15-M29**.
+
 ## Guards
 
 Operator-local execution requires **both** `--allow-operator-local-execution` and `--authorize-sc2-backed-t1-candidate-training`.
@@ -56,4 +62,4 @@ Mirrors other V15 operator milestones: no strength evaluation, benchmark pass, c
 
 ## M20 / M21 integration
 
-Deferred unless trivial glue exists — recorded as `m20_m21_candidate_gate_integration_deferred_to_m29` on emitted artifacts.
+Deferred unless trivial glue exists — recorded as `m20_m21_candidate_gate_integration_deferred_to_m30` on emitted artifacts (V15-M29 rechartered; full-wall-clock evidence gates precede downstream gate glue).

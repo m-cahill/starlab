@@ -26,6 +26,7 @@ from starlab.v15.sc2_backed_t1_candidate_training_models import (
     OUTCOME_BLOCKED_MISSING_M27,
     OUTCOME_BLOCKED_SHA_MISMATCH,
     OUTCOME_BLOCKED_TRAINING_LOOP,
+    OUTCOME_BLOCKED_WALL_CLOCK_SHORT,
     OUTCOME_FIXTURE_ONLY,
     OUTCOME_STARTED_FAILED,
     OUTCOME_WITH_CHECKPOINT,
@@ -117,6 +118,15 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--max-wall-clock-minutes", type=float, default=30.0)
+    parser.add_argument(
+        "--min-wall-clock-minutes",
+        type=float,
+        default=None,
+        help=(
+            "Optional minimum observed wall-clock (seconds recorded in training_attempt). "
+            "When omitted, defaults to --max-wall-clock-minutes."
+        ),
+    )
     parser.add_argument("--min-training-updates", type=int, default=10)
     parser.add_argument("--max-training-updates", type=int, default=200)
     parser.add_argument("--checkpoint-cadence-updates", type=int, default=50)
@@ -132,12 +142,49 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="Allow non-completed m27_outcome when governance explicitly permits.",
     )
+    parser.add_argument(
+        "--require-full-wall-clock",
+        action="store_true",
+        help=(
+            "Training loop exits only when --max-wall-clock-minutes elapsed "
+            "(unless torch fails). Disables max-updates as stopping bound; "
+            "disables loss-floor early stop by default semantics."
+        ),
+    )
+    parser.add_argument(
+        "--disable-loss-floor-early-stop",
+        action="store_true",
+        help="Do not break when loss crosses the tiny synthetic loss floor threshold.",
+    )
+    parser.add_argument(
+        "--continue-after-checkpoint",
+        action="store_true",
+        help=(
+            "Telemetry-only: operator attests checkpoints are not terminal "
+            "(default training already continues)."
+        ),
+    )
     args = parser.parse_args(argv)
+
+    if args.require_full_wall_clock:
+        min_w = float(args.min_wall_clock_minutes or args.max_wall_clock_minutes)
+        if float(args.max_wall_clock_minutes) + 1e-9 < min_w:
+            sys.stderr.write(
+                "error: --require-full-wall-clock requires --max-wall-clock-minutes >= "
+                "effective minimum wall-clock (use --min-wall-clock-minutes)\n",
+            )
+            return 2
 
     out_dir = args.output_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
 
     wall_secs = float(args.max_wall_clock_minutes) * 60.0
+    effective_min_wall_minutes = float(
+        args.min_wall_clock_minutes
+        if args.min_wall_clock_minutes is not None
+        else args.max_wall_clock_minutes,
+    )
+    requested_min_wall_seconds = float(effective_min_wall_minutes) * 60.0
 
     if args.fixture_only:
         m27 = build_fixture_m27_like_dict_for_ci()
@@ -239,6 +286,8 @@ def main(argv: list[str] | None = None) -> int:
         max_u = 12
         cadence = 6
 
+    require_full_horizon = bool(args.require_full_wall_clock and not args.fixture_only)
+
     train_rec = run_bounded_rollout_feature_training(
         feats,
         min_updates=min_u,
@@ -248,6 +297,9 @@ def main(argv: list[str] | None = None) -> int:
         wall_budget_seconds=wall_secs,
         seed=int(args.seed),
         device_pref=args.device,
+        disable_loss_floor_early_stop=bool(args.disable_loss_floor_early_stop)
+        or bool(require_full_horizon),
+        require_full_wall_clock=bool(require_full_horizon),
     )
     wall_obs = time.monotonic() - t_run
 
@@ -270,6 +322,8 @@ def main(argv: list[str] | None = None) -> int:
                 cp_count=0,
                 cand_sha=None,
                 train_rec=train_rec,
+                requested_min_wall_seconds=requested_min_wall_seconds,
+                require_full_horizon=require_full_horizon,
             ),
             "candidate_checkpoint": {
                 "produced": False,
@@ -297,6 +351,40 @@ def main(argv: list[str] | None = None) -> int:
             },
         )
 
+    obs_sec_primary = float(train_rec.get("wall_clock_seconds_observed") or wall_obs)
+    _tol = 10.0  # bounded tolerance when comparing against requested minimum seconds
+    if require_full_horizon and obs_sec_primary + 1e-9 < requested_min_wall_seconds - _tol:
+        body_horizon = {
+            "contract_id": CONTRACT_ID,
+            "milestone": MILESTONE_LABEL,
+            "profile": profile,
+            "m28_outcome": OUTCOME_BLOCKED_WALL_CLOCK_SHORT,
+            "upstream_m27_rollout": _upstream_block(m27, m27_path_note),
+            "training_attempt": _training_block(
+                args,
+                upd,
+                wall_obs,
+                feats_used=sc2_used,
+                cp_count=len(cp_list),
+                cand_sha=(cp_list[-1]["sha256"] if cp_list else None),
+                train_rec=train_rec,
+                requested_min_wall_seconds=requested_min_wall_seconds,
+                require_full_horizon=require_full_horizon,
+                horizon_tolerance_seconds=_tol,
+            ),
+            "candidate_checkpoint": {
+                "produced": bool(cp_list),
+                "sha256": cp_list[-1]["sha256"] if cp_list else None,
+                "promotion_status": "not_promoted_candidate_only",
+            },
+            "feature_derivation": feat_meta,
+            "m20_m21_gate_integration": M20_M21_DEFERRED,
+            "non_claims": list(NON_CLAIM_DEFAULTS),
+        }
+        sealed_h = seal_m28_body(_stamp_emit_ts(body_horizon))
+        write_m28_artifacts(out_dir, sealed_h)
+        return 7
+
     if upd < min_u:
         m28_outcome = OUTCOME_BLOCKED_TRAINING_LOOP if failure else OUTCOME_STARTED_FAILED
         body_bad = {
@@ -313,6 +401,8 @@ def main(argv: list[str] | None = None) -> int:
                 cp_count=len(cp_list),
                 cand_sha=(cp_list[-1]["sha256"] if cp_list else None),
                 train_rec=train_rec,
+                requested_min_wall_seconds=requested_min_wall_seconds,
+                require_full_horizon=require_full_horizon,
             ),
             "candidate_checkpoint": {
                 "produced": bool(cp_list),
@@ -350,6 +440,8 @@ def main(argv: list[str] | None = None) -> int:
             cp_count=len(cp_list),
             cand_sha=primary_sha,
             train_rec=train_rec,
+            requested_min_wall_seconds=requested_min_wall_seconds,
+            require_full_horizon=require_full_horizon,
         ),
         "candidate_checkpoint": {
             "produced": bool(cp_list),
@@ -397,15 +489,37 @@ def _training_block(
     cp_count: int,
     cand_sha: str | None,
     train_rec: dict[str, Any],
+    requested_min_wall_seconds: float | None = None,
+    require_full_horizon: bool | None = None,
+    horizon_tolerance_seconds: float = 10.0,
 ) -> dict[str, Any]:
+    req_min = (
+        requested_min_wall_seconds
+        if requested_min_wall_seconds is not None
+        else (float(args.min_wall_clock_minutes or args.max_wall_clock_minutes)) * 60.0
+    )
+    if require_full_horizon is None:
+        rh = bool(args.require_full_wall_clock and not args.fixture_only)
+    else:
+        rh = require_full_horizon
+    clock_rec = round(float(train_rec.get("wall_clock_seconds_observed") or wall_obs), 3)
+    full_ok = (not rh) or (clock_rec + 1e-9 >= req_min - horizon_tolerance_seconds)
     return {
         "run_tier": RUN_TIER_T1_30_MIN,
         "max_wall_clock_minutes": float(args.max_wall_clock_minutes),
+        "effective_min_wall_clock_minutes": float(
+            args.min_wall_clock_minutes
+            if args.min_wall_clock_minutes is not None
+            else args.max_wall_clock_minutes,
+        ),
+        "requested_min_wall_clock_seconds": req_min,
+        "require_full_wall_clock": rh,
+        "continue_after_checkpoint": bool(args.continue_after_checkpoint),
+        "disable_loss_floor_early_stop": bool(train_rec.get("disable_loss_floor_early_stop")),
+        "full_wall_clock_satisfied": full_ok,
         "sc2_backed_features_used": feats_used,
         "training_update_count": upd,
-        "wall_clock_seconds": round(
-            float(train_rec.get("wall_clock_seconds_observed") or wall_obs), 3
-        ),
+        "wall_clock_seconds": clock_rec,
         "checkpoint_count": cp_count,
         "candidate_checkpoint_sha256": cand_sha,
         "training_condition_label": TRAINING_CONDITION_LABEL,
@@ -414,6 +528,7 @@ def _training_block(
         "max_training_updates": int(args.max_training_updates),
         "device_observed": train_rec.get("device"),
         "loss_tail": train_rec.get("loss_tail"),
+        "early_stop_reason": train_rec.get("early_stop_reason"),
     }
 
 

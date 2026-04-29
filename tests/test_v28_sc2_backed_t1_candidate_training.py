@@ -144,5 +144,5 @@ def test_m20_m21_deferred_field_present(tmp_path: Path) -> None:
     )
     assert (
         sealed.get("m20_m21_gate_integration")
-        == "m20_m21_candidate_gate_integration_deferred_to_m29"
+        == "m20_m21_candidate_gate_integration_deferred_to_m30"
     )

@@ -21,11 +21,14 @@ OUTCOME_STARTED_FAILED = "sc2_backed_candidate_training_started_failed"
 OUTCOME_BLOCKED_MISSING_M27 = "sc2_backed_candidate_training_blocked_missing_m27_rollout"
 OUTCOME_BLOCKED_SHA_MISMATCH = "sc2_backed_candidate_training_blocked_m27_rollout_sha_mismatch"
 OUTCOME_BLOCKED_TRAINING_LOOP = "sc2_backed_candidate_training_blocked_by_training_loop"
+OUTCOME_BLOCKED_WALL_CLOCK_SHORT = (
+    "sc2_backed_candidate_training_blocked_wall_clock_below_required_minimum"
+)
 OUTCOME_FIXTURE_ONLY = "fixture_only"
 
 TRAINING_CONDITION_LABEL = "sc2_rollout_feature_conditioned_training_smoke_not_strength_learning"
 
-M20_M21_DEFERRED = "m20_m21_candidate_gate_integration_deferred_to_m29"
+M20_M21_DEFERRED = "m20_m21_candidate_gate_integration_deferred_to_m30"
 
 NON_CLAIM_DEFAULTS: tuple[str, ...] = (
     "not_strength_evaluation",

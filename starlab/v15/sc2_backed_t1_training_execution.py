@@ -43,6 +43,8 @@ def run_bounded_rollout_feature_training(
     wall_budget_seconds: float,
     seed: int,
     device_pref: str,
+    disable_loss_floor_early_stop: bool = False,
+    require_full_wall_clock: bool = False,
 ) -> dict[str, Any]:
     """Train a tiny network using rollout-derived features as batch input.
 
@@ -63,6 +65,8 @@ def run_bounded_rollout_feature_training(
         "device": None,
         "failure_reason": None,
         "loss_tail": None,
+        "disable_loss_floor_early_stop": disable_loss_floor_early_stop,
+        "require_full_wall_clock_training": bool(require_full_wall_clock),
     }
 
     try:
@@ -98,8 +102,16 @@ def run_bounded_rollout_feature_training(
     t0 = time.monotonic()
     loss_tail = None
 
-    for step in range(max_updates):
-        if time.monotonic() - t0 > wall_budget_seconds:
+    # Full-horizon mode: iterate until wall_budget_seconds elapses unless a safety ceiling
+    # is hit — default M28 budgets use max_updates as the tighter bound.
+    if require_full_wall_clock:
+        effective_cap = max(10**9, int(max_updates))
+    else:
+        effective_cap = int(max_updates)
+
+    for step in range(effective_cap):
+        elapsed = time.monotonic() - t0
+        if elapsed >= wall_budget_seconds:
             out["early_stop_reason"] = "wall_clock_budget"
             break
 
@@ -125,7 +137,8 @@ def run_bounded_rollout_feature_training(
                 {"path": str(ck_path.resolve()), "sha256": cp_sha, "training_step": n_updates},
             )
 
-        if n_updates >= min_updates and loss_tail < 1e-12:
+        skip_loss_floor = bool(disable_loss_floor_early_stop) or bool(require_full_wall_clock)
+        if (not skip_loss_floor) and n_updates >= min_updates and loss_tail < 1e-12:
             # Extremely unlikely — kept for symmetry / deterministic convergence probes.
             out["early_stop_reason"] = "loss_floor_not_claim_learning"
             break
