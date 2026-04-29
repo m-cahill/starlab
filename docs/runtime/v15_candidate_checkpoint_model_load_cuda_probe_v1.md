@@ -11,6 +11,8 @@ M33 is the first milestone that may **read checkpoint blobs**, **load** a govern
 1. The **`--expected-candidate-sha256`** CLI argument (must match **M32** `candidate_checkpoint.sha256`), and  
 2. The on-disk file hash.
 
+**Load order:** verification of (1) and (2) completes **before** any **`torch.load`** of checkpoint bytes.
+
 M32 execution JSON must be a sealed **`starlab.v15.candidate_checkpoint_evaluation_execution.v1`** with `execution_status` in the completed fixture or operator-local metadata set, with **`benchmark_passed`**, **`strength_evaluated`**, **`checkpoint_promoted`**, and **`scorecard_execution_performed`** all **`false`**.
 
 ## Modes
