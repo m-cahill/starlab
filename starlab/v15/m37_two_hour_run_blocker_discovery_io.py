@@ -465,8 +465,9 @@ def _environment_probe_allow_imports() -> dict[str, Any]:
         snap["torch_probe_error"] = str(exc)
 
     try:
-        import sc2  # noqa: F401  # type: ignore[import-not-found]
+        import importlib
 
+        importlib.import_module("sc2")
         snap["sc2_import_ok"] = True
     except Exception as exc:
         snap["sc2_import_ok"] = False
