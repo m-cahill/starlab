@@ -82,9 +82,8 @@ def test_fieldtest_emit_replay_explorer_fixture_path(tmp_path: Path) -> None:
 def test_smoke_collection_count_in_target_band() -> None:
     """Bounded fast lane: ~25–35 smoke tests (see M32 plan; M33+ closeout adds governance rows).
 
-    Upper band includes M10–M16 smoke governance tests (`test_v15_m10_governance_docs` through
-    `test_v15_m16_governance_docs`); nudged to 106 when M14–M16 governance rows exist
-    (+ M20/M21/M23/M24/M25/M31 smoke).
+    Upper band widened over time as M10–M16, M17–M25, M27–M31, **M32** smoke governance rows landed
+    (+ M20/M21/M23/M24/M25/M31/M32 smoke).
     """
     proc = subprocess.run(
         [sys.executable, "-m", "pytest", "--collect-only", "-q", "-m", "smoke", "tests"],
@@ -100,8 +99,8 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    _msg = f"smoke count {n} outside 25–106 band (M14–M16 governance rows; band widened by count)"
-    assert 25 <= n <= 106, _msg
+    _msg = f"smoke count {n} outside 25–107 band (M14–M16 governance rows; band widened by count)"
+    assert 25 <= n <= 107, _msg
 
 
 def test_ledger_milestone_rows_m32_m47() -> None:
