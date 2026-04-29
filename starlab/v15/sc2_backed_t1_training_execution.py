@@ -13,6 +13,39 @@ from starlab.hierarchy.hierarchical_training_io import sha256_hex_file
 from starlab.v15.sc2_backed_t1_candidate_training_models import TRAINING_CONDITION_LABEL
 
 
+def _apply_checkpoint_retention(
+    entries: list[dict[str, Any]],
+    max_retained: int | None,
+) -> tuple[list[dict[str, Any]], int]:
+    """Enforce an on-disk checkpoint cap while preserving boundary checkpoints.
+
+    When *max_retained* is 1, only the newest checkpoint (highest *training_step*) is kept.
+    When *max_retained* >= 2, the lowest and highest *training_step* are protected; oldest
+    intermediates are deleted first until the cap is satisfied.
+    Returns ``(retained_entries, pruned_count)``.
+    """
+
+    if max_retained is None or len(entries) <= max_retained:
+        return entries, 0
+    cap = max(1, int(max_retained))
+    pruned = 0
+    work = sorted(entries, key=lambda e: int(e["training_step"]))
+    while len(work) > cap:
+        if cap == 1:
+            idx = 0
+        elif len(work) <= 2:
+            break
+        else:
+            idx = 1
+        victim = work.pop(idx)
+        try:
+            Path(str(victim["path"])).unlink(missing_ok=True)
+        except OSError:
+            pass
+        pruned += 1
+    return work, pruned
+
+
 def _pick_device(device_pref: str) -> tuple[Any, str]:
     """Return (torch.device, device_label_str)."""
 
@@ -45,6 +78,7 @@ def run_bounded_rollout_feature_training(
     device_pref: str,
     disable_loss_floor_early_stop: bool = False,
     require_full_wall_clock: bool = False,
+    max_retained_checkpoints: int | None = None,
 ) -> dict[str, Any]:
     """Train a tiny network using rollout-derived features as batch input.
 
@@ -67,6 +101,10 @@ def run_bounded_rollout_feature_training(
         "loss_tail": None,
         "disable_loss_floor_early_stop": disable_loss_floor_early_stop,
         "require_full_wall_clock_training": bool(require_full_wall_clock),
+        # checkpoint_retention: bounded on-disk volume (M38 / M39 launch safety)
+        "checkpoint_retention_max_retained": max_retained_checkpoints,
+        "checkpoints_written_total": 0,
+        "checkpoints_pruned_total": 0,
     }
 
     try:
@@ -131,11 +169,19 @@ def run_bounded_rollout_feature_training(
         if at_boundary:
             ck_path = checkpoint_dir / f"candidate_checkpoint_step_{n_updates}.pt"
             torch.save({"model_state_dict": model.state_dict()}, ck_path)
+            out["checkpoints_written_total"] = int(out["checkpoints_written_total"]) + 1
             out["checkpoint_count"] = int(out["checkpoint_count"]) + 1
             cp_sha = sha256_hex_file(ck_path)
             out["checkpoint_paths_with_sha256"].append(
                 {"path": str(ck_path.resolve()), "sha256": cp_sha, "training_step": n_updates},
             )
+            retained, pr = _apply_checkpoint_retention(
+                list(out["checkpoint_paths_with_sha256"]),
+                max_retained_checkpoints,
+            )
+            out["checkpoint_paths_with_sha256"] = retained
+            out["checkpoints_pruned_total"] = int(out["checkpoints_pruned_total"]) + pr
+            out["checkpoint_count"] = len(retained)
 
         skip_loss_floor = bool(disable_loss_floor_early_stop) or bool(require_full_wall_clock)
         if (not skip_loss_floor) and n_updates >= min_updates and loss_tail < 1e-12:
@@ -143,8 +189,26 @@ def run_bounded_rollout_feature_training(
             out["early_stop_reason"] = "loss_floor_not_claim_learning"
             break
 
-    out["wall_clock_seconds_observed"] = round(time.monotonic() - t0, 3)
     out["loss_tail"] = loss_tail
+
+    # Final-step checkpoint when the last update is not already persisted at cadence.
+    final_n = int(out["training_update_count"])
+    cps: list[dict[str, Any]] = list(out["checkpoint_paths_with_sha256"])
+    last_saved_step = int(cps[-1]["training_step"]) if cps else -1
+    if final_n > 0 and last_saved_step != final_n and out.get("failure_reason") is None:
+        ck_path = checkpoint_dir / f"candidate_checkpoint_step_{final_n}_final.pt"
+        torch.save({"model_state_dict": model.state_dict()}, ck_path)
+        out["checkpoints_written_total"] = int(out["checkpoints_written_total"]) + 1
+        cp_sha = sha256_hex_file(ck_path)
+        cps.append(
+            {"path": str(ck_path.resolve()), "sha256": cp_sha, "training_step": final_n},
+        )
+        retained, pr = _apply_checkpoint_retention(cps, max_retained_checkpoints)
+        out["checkpoint_paths_with_sha256"] = retained
+        out["checkpoints_pruned_total"] = int(out["checkpoints_pruned_total"]) + pr
+        out["checkpoint_count"] = len(retained)
+
+    out["wall_clock_seconds_observed"] = round(time.monotonic() - t0, 3)
 
     if out["training_update_count"] < min_updates:
         out["failure_reason"] = out["failure_reason"] or "stopped_before_min_training_updates"

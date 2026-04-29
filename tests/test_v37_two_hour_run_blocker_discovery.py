@@ -126,7 +126,7 @@ def test_operator_audit_clean_chain_no_sha_errors(
     assert sealed["audit_status"] == STATUS_COMPLETED_READY_M38
     ids = {b["blocker_id"] for b in sealed["blockers"]}
     assert "candidate_lineage_mismatch" not in ids
-    assert "checkpoint_cadence_too_high" in ids
+    assert "checkpoint_cadence_too_high" not in ids
     assert "m29_wrapper_name_or_contract_too_30min_specific" in ids
 
 
@@ -233,12 +233,22 @@ def test_checkpoint_file_hash_authorization_verifies_sha(
 
 
 def test_extrapolated_checkpoint_volume_flags_without_retention_controls(tmp_path: Path) -> None:
+    fake_root = tmp_path / "r"
+    (fake_root / "starlab" / "v15").mkdir(parents=True)
+    (fake_root / "starlab" / "v15" / "sc2_backed_t1_training_execution.py").write_text(
+        "# no retention needles\n",
+        encoding="utf-8",
+    )
+    (fake_root / "starlab" / "v15" / "run_v15_m28_sc2_backed_t1_candidate_training.py").write_text(
+        "# no retention needles\n",
+        encoding="utf-8",
+    )
     tel, blocker = extrapolate_checkpoint_storage_risk(
         observed_wall_clock_seconds=1800.0,
         checkpoint_count=49537.0,
         target_wall_clock_seconds=7200.0,
         cadence_source="ledger_fallback_constants",
-        repo_root=REPO_ROOT,
+        repo_root=fake_root,
     )
     assert blocker is not None
     assert blocker["blocker_id"] == "checkpoint_cadence_too_high"

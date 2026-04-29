@@ -67,6 +67,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--min-wall-clock-minutes", type=float, default=None)
     parser.add_argument("--checkpoint-cadence-updates", type=int, default=50)
     parser.add_argument(
+        "--max-retained-checkpoints",
+        type=int,
+        default=256,
+        help="Forwarded to M28; cap on checkpoint files retained on disk.",
+    )
+    parser.add_argument(
         "--device",
         choices=("auto", "cuda", "cpu"),
         default="auto",
@@ -147,6 +153,8 @@ def main(argv: list[str] | None = None) -> int:
         str(float(min_eff)),
         "--checkpoint-cadence-updates",
         str(args.checkpoint_cadence_updates),
+        "--max-retained-checkpoints",
+        str(int(args.max_retained_checkpoints)),
         "--device",
         args.device,
         "--seed",

@@ -181,6 +181,7 @@ def _has_explicit_checkpoint_volume_controls(repo_root: Path) -> bool:
     needles = (
         "checkpoint_retention",
         "max_checkpoint",
+        "max_retained",
         "prune_checkpoint",
         "delete_checkpoint",
         "checkpoint_budget",
