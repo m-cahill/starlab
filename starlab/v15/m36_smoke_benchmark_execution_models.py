@@ -39,7 +39,9 @@ SMOKE_POLICY_SYNTHETIC_BOUNDED: Final[str] = (
     "starlab.v15.m36.synthetic_bounded_smoke_bookkeeping_only.v1"
 )
 
-RECOMMENDED_NEXT_SUCCESS: Final[str] = "V15-M37_bounded_operator_smoke_benchmark_attempt"
+RECOMMENDED_NEXT_SUCCESS: Final[str] = (
+    "V15-M37_two_hour_run_blocker_discovery_and_operator_readiness_audit"
+)
 
 NON_CLAIMS_M36: Final[tuple[str, ...]] = (
     "not_benchmark_pass",

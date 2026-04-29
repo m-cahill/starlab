@@ -616,6 +616,26 @@ def test_v15_m36_governance_surface() -> None:
     assert "not a 2-hour run" in rt_text or "2-hour" in rt_text
 
 
+@pytest.mark.smoke
+def test_v15_m37_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    rt37 = REPO_ROOT / "docs/runtime/v15_two_hour_run_blocker_discovery_v1.md"
+    assert rt37.is_file()
+    rt_body = rt37.read_text(encoding="utf-8")
+    assert "starlab.v15.two_hour_run_blocker_discovery.v1" in rt_body
+    assert "fixture_schema_only_no_operator_audit" in rt_body.lower()
+    assert "PR #" not in rt_body
+    assert "V15-M37" in v15
+    assert "V15-M37" in ledger
+    assert "two_hour_run_blocker_discovery" in v15.replace("\n", " ")
+    assert "emit_v15_m37_two_hour_run_blocker_discovery" in v15.replace("\n", " ")
+    low = v15.lower().replace("`", "")
+    assert "m37 non-claims" in low
+    assert "v15-m38" in low or "V15-M38" in v15
+    assert "blocker discovery" in ledger.lower() or "2-hour" in ledger.lower()
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
