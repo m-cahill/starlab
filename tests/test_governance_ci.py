@@ -583,12 +583,30 @@ def test_v15_m35_governance_surface() -> None:
     low = v15.lower().replace("`", "")
     assert "m35 non-claims" in low
     assert "fixture_schema_only_no_benchmark_execution" in low
-    assert "v15-m36" in low or "V15-M36" in v15
+    assert "v15-m37" in low or "V15-M37" in v15
     rt35 = REPO_ROOT / "docs/runtime/v15_candidate_checkpoint_smoke_benchmark_readiness_v1.md"
     assert rt35.is_file()
     rt35_text = rt35.read_text(encoding="utf-8")
     assert "PR #171" in rt35_text
     assert "25129363401" in rt35_text
+
+
+@pytest.mark.smoke
+def test_v15_m36_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M36" in v15
+    assert "V15-M36" in ledger
+    assert "starlab.v15.smoke_benchmark_execution.v1" in v15
+    assert "emit_v15_m36_smoke_benchmark_execution" in v15.replace("\n", " ")
+    low = v15.lower().replace("`", "")
+    assert "m36 non-claims" in low
+    assert "fixture_schema_only_no_candidate_execution" in low
+    assert "v15-m37" in low or "V15-M37" in v15
+    rt36 = REPO_ROOT / "docs/runtime/v15_smoke_benchmark_execution_surface_v1.md"
+    assert rt36.is_file()
+    rt_text = rt36.read_text(encoding="utf-8").lower()
+    assert "not a 2-hour run" in rt_text or "2-hour" in rt_text
 
 
 def test_v15_m25_governance_docs() -> None:

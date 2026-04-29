@@ -80,7 +80,7 @@ def test_fieldtest_emit_replay_explorer_fixture_path(tmp_path: Path) -> None:
 
 
 def test_smoke_collection_count_in_target_band() -> None:
-    """Bounded fast lane: ~25–35 smoke tests (see M32 plan; M33+ closeout adds governance rows).
+    """Bounded fast lane: ~25–112 smoke tests (see M32 plan; M33+ closeout adds governance rows).
 
     Upper band widened over time as M10–M16, M17–M25, M27–M31, **M32** smoke governance rows landed
     (+ M20/M21/M23/M24/M25/M31/M32/M33/M34 smoke).
@@ -99,8 +99,8 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    _msg = f"smoke count {n} outside 25–110 band (M14–M16 governance rows; band widened by count)"
-    assert 25 <= n <= 110, _msg
+    _msg = f"smoke count {n} outside 25–112 band (M14–M16 governance rows; band widened by count)"
+    assert 25 <= n <= 112, _msg
 
 
 def test_ledger_milestone_rows_m32_m47() -> None:
