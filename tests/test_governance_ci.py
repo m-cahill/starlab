@@ -507,6 +507,20 @@ def test_v15_m30_governance_surface() -> None:
     assert rt30.is_file()
 
 
+@pytest.mark.smoke
+def test_v15_m31_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "V15-M31" in v15
+    assert "V15-M31" in ledger
+    assert "starlab.v15.candidate_checkpoint_evaluation_harness_gate.v1" in v15
+    assert "emit_v15_m31_candidate_checkpoint_evaluation_harness_gate" in v15.replace("\n", " ")
+    low = v15.lower().replace("`", "")
+    assert "m31 non-claims" in low or "evaluation_harness_ready" in low
+    rt31 = REPO_ROOT / "docs" / "runtime" / "v15_candidate_checkpoint_evaluation_harness_gate_v1.md"
+    assert rt31.is_file()
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
@@ -638,6 +652,9 @@ def test_ledger_quick_scan_px1_m03_current_px1_m02_closed_threshold_met() -> Non
     assert "**`V15-M26`**" in scan
     assert "**`V15-M27`**" in scan
     assert "**`V15-M28`**" in scan
+    assert "**`V15-M29`**" in scan
+    assert "**`V15-M30`**" in scan
+    assert "**`V15-M31`**" in scan
     assert "PR #142" in scan or "pull/142" in scan
     assert "PR #141" in scan or "pull/141" in scan
     assert "**`V15-M14`**" in scan
@@ -926,6 +943,7 @@ def test_current_milestone_section_covers_m47_and_closed_phase_vi() -> None:
     assert "**`V15-M26`**" in section
     assert "**`V15-M27`**" in section
     assert "**`V15-M28`**" in section
+    assert "**`V15-M31`**" in section
     assert "**`V15-M21`**" in section
     assert "**`V15-M20`**" in section
     assert "**`V15-M19`**" in section
