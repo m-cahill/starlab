@@ -753,6 +753,33 @@ def test_v15_m40_governance_surface() -> None:
     assert "PR #" not in rt39
 
 
+@pytest.mark.smoke
+def test_v15_m41_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    rt41 = REPO_ROOT / "docs/runtime/v15_two_hour_run_package_evaluation_readiness_v1.md"
+    assert rt41.is_file()
+    rt_body = rt41.read_text(encoding="utf-8")
+    assert "starlab.v15.two_hour_run_package_evaluation_readiness.v1" in rt_body
+    assert "PR #" not in rt_body
+    assert "package_ready_for_future_evaluation" in rt_body.replace("\n", " ")
+    assert "675ae631ff2fa8a9f71f2c03a93f3abbffbfe0c45fcb49a59c933920330b010c" in rt_body.replace(
+        "\n",
+        " ",
+    )
+    assert "51cea94ed5324087863b246b7b31a21021eba286924aea4609aa09466430a943" in rt_body.replace(
+        "\n",
+        " ",
+    )
+    assert "V15-M41" in v15
+    assert "V15-M41" in ledger
+    assert "emit_v15_m41_two_hour_run_package_evaluation_readiness" in v15.replace("\n", " ")
+    low = v15.lower().replace("`", "")
+    assert "m41 non-claims" in low
+    assert "v15-m42" in low or "V15-M42" in v15
+    assert "fixture_schema_only_no_operator_package" in rt_body.lower()
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
