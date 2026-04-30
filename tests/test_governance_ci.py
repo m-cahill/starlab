@@ -688,6 +688,11 @@ def test_v15_m39_governance_surface() -> None:
     assert "explicit operator guards" in rt_body
     assert "operator_run_not_started_pending_post_merge_authorization" in rt_body.replace("\n", " ")
     assert "operator_preflight_blocked_missing_m38_rehearsal" in rt_body.replace("\n", " ")
+    assert "two_hour_operator_run_completed_with_candidate_checkpoint" in rt_body.replace("\n", " ")
+    assert "675ae631ff2fa8a9f71f2c03a93f3abbffbfe0c45fcb49a59c933920330b010c" in rt_body.replace(
+        "\n", " "
+    )
+    assert "full_wall_clock_satisfied" in rt_body.replace("\n", " ")
     assert "V15-M39" in v15
     assert "V15-M39" in ledger
     assert "emit_v15_m39_two_hour_operator_run_attempt" in v15.replace("\n", " ")
@@ -703,9 +708,17 @@ def test_v15_m39_governance_surface() -> None:
     assert "ada97dda" in v15
     assert "operator_run_not_started_pending_post_merge_authorization" in v15.replace("\n", " ")
     assert "operator_preflight_blocked_missing_m38_rehearsal" in v15.replace("\n", " ")
+    assert "two_hour_operator_run_completed_with_candidate_checkpoint" in v15.replace("\n", " ")
+    assert "675ae631ff2fa8a9f71f2c03a93f3abbffbfe0c45fcb49a59c933920330b010c" in v15.replace(
+        "\n", " "
+    )
     assert "PR #175" in ledger
     assert "25140098888" in ledger or "25140243730" in ledger
     assert "operator_preflight_blocked_missing_m38_rehearsal" in ledger.replace("\n", " ")
+    assert "two_hour_operator_run_completed_with_candidate_checkpoint" in ledger.replace("\n", " ")
+    assert "675ae631ff2fa8a9f71f2c03a93f3abbffbfe0c45fcb49a59c933920330b010c" in ledger.replace(
+        "\n", " "
+    )
 
 
 @pytest.mark.smoke
