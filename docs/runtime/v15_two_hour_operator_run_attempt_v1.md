@@ -8,6 +8,8 @@
 
 **Phase B operator attempt (2026-04-30):** **`operator_preflight_blocked_missing_m38_rehearsal`** — Phase B stopped before **`emit_v15_m39`** **`operator_preflight`** when locating sealed **M38** launch inputs under the operator **`out/`** tree (and no sealed **`v15_two_hour_run_blocker_discovery.json`** to regenerate **M38**). **7200s** subprocess **not** started.
 
+**V15-M40 remediation (operator-local, post–Phase B first attempt):** sealed **M37→M38→M39 preflight** chain **restored** using **real** upstream **M27/M28/M29/M34/M35** JSON on a CUDA/**SC2**-verified **`.venv`** — **`operator_preflight_ready_for_2hour_attempt`**. **7200s** run **not** executed in **M40** — public program posture **`m39_operator_preflight_ready_awaiting_7200s_launch_authorization`** (explicit dual-guard launch decision is **outside** **V15-M40**).
+
 **Required public wording:** V15-M39 **Phase A** does **not** execute the **2-hour** run. It does **not** claim benchmark pass, evaluate strength, promote checkpoints, produce scorecard results, execute **T2**/**T3**, run XAI or human-panel evaluation, release a showcase agent, or authorize **v2**. **Phase B** may execute the **7200-second** operator-local run only under explicit operator guards (**`--allow-operator-local-execution`** and **`--authorize-2hour-operator-run`** on the runner). A completed M39 run is **execution evidence**, not benchmark pass, strength evaluation, checkpoint promotion, scorecard result, XAI, human-panel, showcase release, **v2** authorization, or **T2**/**T3** authorization.
 
 ## Purpose
