@@ -719,9 +719,13 @@ def test_v15_m40_governance_surface() -> None:
     assert "V15-M40" in ledger
     assert "PR #176" in v15
     assert "PR #176" in ledger
+    assert "7f16a9a9" in v15
+    assert "25142710989" in v15
+    assert "25142983709" in v15
     low = v15.lower().replace("`", "")
     assert "m40 non-claims block" in low
     assert "v15-m40-two-hour-run-remediation-retry-gate" in low.replace(" ", "")
+    assert "*2-Hour Run Remediation / Retry Gate* — **closed** on `main`" in v15
     assert "operator_preflight_ready_for_2hour_attempt" in v15.replace("\n", " ")
     assert "m39_operator_preflight_ready_awaiting_7200s_launch_authorization" in v15.replace(
         "\n", " "
@@ -730,6 +734,9 @@ def test_v15_m40_governance_surface() -> None:
         "\n", " "
     )
     assert "operator_preflight_ready_for_2hour_attempt" in rt39.replace("\n", " ")
+    assert "25142710989" in ledger
+    assert "25142983709" in ledger
+    assert "7f16a9a9" in ledger
     assert "PR #" not in rt39
 
 
