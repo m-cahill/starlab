@@ -925,6 +925,7 @@ def test_v15_m45_governance_surface() -> None:
         "V15-M45",
         "25190918123",
         "25191304029",
+        "25191672913",
         "starlab.v15.bounded_candidate_evaluation_execution.v1",
         "bounded_candidate_evaluation_execution_surface_ready",
         "bounded_candidate_evaluation_execution_completed_synthetic",
