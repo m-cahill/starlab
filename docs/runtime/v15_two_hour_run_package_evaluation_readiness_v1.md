@@ -140,5 +140,6 @@ Operator preflight (paths and SHAs supplied explicitly):
 
 ## Provisional next
 
-- **Success path:** `V15-M42_candidate_checkpoint_evaluation_package_from_two_hour_run`
-- **Blocked / remediation path:** `V15-M42_2Hour_Run_Package_Remediation`
+- **Success path:** **`§V15-M42`** — *Candidate Checkpoint Evaluation Package from 2-Hour Run* — **`docs/runtime/v15_two_hour_candidate_checkpoint_evaluation_package_v1.md`** (M41-mandatory packaging)
+- **Then:** **`§V15-M43`** — bounded evaluation gate for the two-hour candidate
+- **Blocked / remediation path:** `V15-M43_2Hour_Candidate_Evaluation_Package_Remediation`
