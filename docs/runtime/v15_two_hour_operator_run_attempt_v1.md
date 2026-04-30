@@ -6,6 +6,8 @@
 
 **Operator run classification (Phase A):** **`operator_run_not_started_pending_post_merge_authorization`** — the governed **7200-second** operator-local run has **not** been executed; Phase A delivers fixture CI, **`operator_preflight`**, receipt vocabulary, and runtime/docs on `main` only.
 
+**Phase B operator attempt (2026-04-30):** **`operator_preflight_blocked_missing_m38_rehearsal`** — Phase B stopped before **`emit_v15_m39`** **`operator_preflight`** when locating sealed **M38** launch inputs under the operator **`out/`** tree (and no sealed **`v15_two_hour_run_blocker_discovery.json`** to regenerate **M38**). **7200s** subprocess **not** started.
+
 **Required public wording:** V15-M39 **Phase A** does **not** execute the **2-hour** run. It does **not** claim benchmark pass, evaluate strength, promote checkpoints, produce scorecard results, execute **T2**/**T3**, run XAI or human-panel evaluation, release a showcase agent, or authorize **v2**. **Phase B** may execute the **7200-second** operator-local run only under explicit operator guards (**`--allow-operator-local-execution`** and **`--authorize-2hour-operator-run`** on the runner). A completed M39 run is **execution evidence**, not benchmark pass, strength evaluation, checkpoint promotion, scorecard result, XAI, human-panel, showcase release, **v2** authorization, or **T2**/**T3** authorization.
 
 ## Purpose
