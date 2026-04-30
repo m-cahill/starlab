@@ -844,6 +844,33 @@ def test_v15_m42_governance_surface() -> None:
     assert "v15_two_hour_candidate_checkpoint_evaluation_package_v1.md" in ledger
 
 
+@pytest.mark.smoke
+def test_v15_m43_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    rt_gate = REPO_ROOT / "docs/runtime/v15_bounded_evaluation_gate_v1.md"
+    assert rt_gate.is_file()
+    gate_md = rt_gate.read_text(encoding="utf-8")
+    required = (
+        "V15-M43",
+        "starlab.v15.bounded_evaluation_gate.v1",
+        "bounded_evaluation_gate_ready",
+        "refused_m42_package_not_ready",
+        "evaluation_executed",
+        "checkpoint_loaded",
+        "promotion_decision_made",
+    )
+    low = v15.lower().replace("`", "")
+    for needle in required:
+        assert needle.lower() in gate_md.lower().replace("`", "")
+        assert needle in v15 or needle.lower() in low
+    assert "PR #" not in gate_md
+    low2 = v15.lower().replace("`", "")
+    assert "m43 non-claims" in low2 or "m43 non-claims block" in low2
+    assert "emit_v15_m43_bounded_evaluation_gate" in v15.replace("\n", " ")
+    assert "v15_bounded_evaluation_gate_v1.md" in ledger
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
