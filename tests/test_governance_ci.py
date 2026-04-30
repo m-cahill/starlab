@@ -762,6 +762,10 @@ def test_v15_m41_governance_surface() -> None:
     rt_body = rt41.read_text(encoding="utf-8")
     assert "starlab.v15.two_hour_run_package_evaluation_readiness.v1" in rt_body
     assert "PR #" not in rt_body
+    assert "25148366193" in rt_body.replace("\n", " ")
+    assert "25148496084" in rt_body.replace("\n", " ")
+    assert "71973d7a" in rt_body.replace("\n", " ")
+    assert "f7318bae" in rt_body.replace("\n", " ")
     assert "package_ready_for_future_evaluation" in rt_body.replace("\n", " ")
     assert "675ae631ff2fa8a9f71f2c03a93f3abbffbfe0c45fcb49a59c933920330b010c" in rt_body.replace(
         "\n",
@@ -773,6 +777,16 @@ def test_v15_m41_governance_surface() -> None:
     )
     assert "V15-M41" in v15
     assert "V15-M41" in ledger
+    assert "PR #177" in v15
+    assert "PR #177" in ledger
+    assert "25148366193" in v15.replace("\n", " ")
+    assert "25148496084" in v15.replace("\n", " ")
+    assert "25148366193" in ledger.replace("\n", " ")
+    assert "25148496084" in ledger.replace("\n", " ")
+    assert "71973d7a" in v15.replace("\n", " ")
+    assert "71973d7a" in ledger.replace("\n", " ")
+    assert "f7318bae" in v15.replace("\n", " ")
+    assert "f7318bae" in ledger.replace("\n", " ")
     assert "emit_v15_m41_two_hour_run_package_evaluation_readiness" in v15.replace("\n", " ")
     low = v15.lower().replace("`", "")
     assert "m41 non-claims" in low

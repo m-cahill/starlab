@@ -6,6 +6,16 @@ V15-M41 packages the completed **V15-M39** **7200-second** operator-local SC2-ba
 
 V15-M41 packages the completed V15-M39 two-hour run for future evaluation routing. It does not execute benchmark matches, evaluate strength, promote checkpoints, produce scorecard results, run XAI or human-panel evaluation, release a showcase agent, authorize v2, or execute T2/T3.
 
+## Public merge closeout
+
+Authoritative merge narrative, numbered GitHub pull request reference, and full CI hyperlinks live in **`docs/starlab-v1.5.md`** (**§V15-M41** milestone table row) and **`docs/starlab.md`** (quick-scan table). This runtime doc records **identifier-only** telemetry (this file must not embed pull-request markdown patterns):
+
+- Merge commit on `main`: **`71973d7afb8a1dff46f659da60591de41aec01d4`** (merged **2026-04-30T05:08:24Z** UTC).
+- Final branch head commit before merge: **`f7318bae9a3bcdacfe0a8241cb4a2951aa8306ad`**.
+- Required merge-gate workflow run on that head: **`25148366193`** — **success** (`https://github.com/m-cahill/starlab/actions/runs/25148366193`).
+- Merge-boundary **`main`** workflow run on merge push: **`25148496084`** — **success** (`https://github.com/m-cahill/starlab/actions/runs/25148496084`).
+- Operator success posture (when companions validate): **`package_ready_for_future_evaluation`**. Merge CI fixture posture remains **`fixture_schema_only_no_operator_package`**.
+
 ## Contract / profile
 
 - **Contract:** `starlab.v15.two_hour_run_package_evaluation_readiness.v1`
