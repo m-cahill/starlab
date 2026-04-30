@@ -708,6 +708,31 @@ def test_v15_m39_governance_surface() -> None:
     assert "operator_preflight_blocked_missing_m38_rehearsal" in ledger.replace("\n", " ")
 
 
+@pytest.mark.smoke
+def test_v15_m40_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    rt39 = (REPO_ROOT / "docs" / "runtime" / "v15_two_hour_operator_run_attempt_v1.md").read_text(
+        encoding="utf-8"
+    )
+    assert "V15-M40" in v15
+    assert "V15-M40" in ledger
+    assert "PR #176" in v15
+    assert "PR #176" in ledger
+    low = v15.lower().replace("`", "")
+    assert "m40 non-claims block" in low
+    assert "v15-m40-two-hour-run-remediation-retry-gate" in low.replace(" ", "")
+    assert "operator_preflight_ready_for_2hour_attempt" in v15.replace("\n", " ")
+    assert "m39_operator_preflight_ready_awaiting_7200s_launch_authorization" in v15.replace(
+        "\n", " "
+    )
+    assert "m39_operator_preflight_ready_awaiting_7200s_launch_authorization" in rt39.replace(
+        "\n", " "
+    )
+    assert "operator_preflight_ready_for_2hour_attempt" in rt39.replace("\n", " ")
+    assert "PR #" not in rt39
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
