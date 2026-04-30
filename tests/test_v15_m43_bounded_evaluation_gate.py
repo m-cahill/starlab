@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+import pytest
 from starlab.runs.json_util import canonical_json_dumps
 from starlab.v15.m42_two_hour_candidate_checkpoint_evaluation_package_io import seal_m42_body
 from starlab.v15.m42_two_hour_candidate_checkpoint_evaluation_package_models import (
@@ -34,7 +35,9 @@ from starlab.v15.m43_bounded_evaluation_gate_models import (
     REFUSED_CANDIDATE_NOT_CANDIDATE_ONLY,
     REFUSED_DISALLOWED_EXECUTION_REQUEST,
     REFUSED_ENVIRONMENT_PREREQUISITE_MISSING,
+    REFUSED_INVALID_M42_PACKAGE,
     REFUSED_M42_PACKAGE_NOT_READY,
+    REFUSED_MISSING_M42_PACKAGE,
     STATUS_GATE_NOT_READY,
     STATUS_GATE_READY,
     STATUS_GATE_READY_WITH_WARNINGS,
@@ -198,3 +201,107 @@ def test_m43_redacts_operator_windows_path_hint(tmp_path: Path) -> None:
     blob = (outp / "v15_bounded_evaluation_gate.json").read_text(encoding="utf-8")
     assert r"C:\Users\fixture_operator" not in blob
     assert "<REDACTED" in blob.upper() or "REDACTED" in blob
+
+
+def test_emit_m43_operator_missing_m42_file(tmp_path: Path) -> None:
+    out = tmp_path / "out"
+    missing = tmp_path / "missing_m42.json"
+    proto = tmp_path / "prot.json"
+    env = tmp_path / "env.json"
+    proto.write_text(
+        canonical_json_dumps(build_fixture_benchmark_protocol_sealed()),
+        encoding="utf-8",
+    )
+    env.write_text(
+        canonical_json_dumps(build_fixture_environment_manifest_sealed()),
+        encoding="utf-8",
+    )
+    sealed, _paths = emit_m43_operator(
+        out,
+        profile=PROFILE_OPERATOR_PREFLIGHT,
+        m42_package_path=missing,
+        benchmark_protocol_path=proto,
+        environment_manifest_path=env,
+    )
+    assert sealed["gate_status"] == REFUSED_MISSING_M42_PACKAGE
+
+
+def test_emit_m43_operator_invalid_m42_json_raises(tmp_path: Path) -> None:
+    out = tmp_path / "out"
+    bad = tmp_path / "bad_m42.json"
+    bad.write_text("{not valid json", encoding="utf-8")
+    proto = tmp_path / "prot.json"
+    env = tmp_path / "env.json"
+    proto.write_text(
+        canonical_json_dumps(build_fixture_benchmark_protocol_sealed()),
+        encoding="utf-8",
+    )
+    env.write_text(
+        canonical_json_dumps(build_fixture_environment_manifest_sealed()),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="m42_package_invalid_json"):
+        emit_m43_operator(
+            out,
+            profile=PROFILE_OPERATOR_PREFLIGHT,
+            m42_package_path=bad,
+            benchmark_protocol_path=proto,
+            environment_manifest_path=env,
+        )
+
+
+def test_emit_m43_operator_declared_records_protocol_sha_when_file_only(tmp_path: Path) -> None:
+    pkg = tmp_path / "v15_m42_two_hour_candidate_checkpoint_evaluation_package.json"
+    pkg.write_text(canonical_json_dumps(_sealed_ready_m42()), encoding="utf-8")
+    proto = tmp_path / "prot.json"
+    proto.write_text(
+        canonical_json_dumps(build_fixture_benchmark_protocol_sealed()),
+        encoding="utf-8",
+    )
+    out = tmp_path / "emit"
+    sealed, _paths = emit_m43_operator(
+        out,
+        profile=PROFILE_OPERATOR_DECLARED,
+        m42_package_path=pkg,
+        benchmark_protocol_path=proto,
+        environment_manifest_path=None,
+    )
+    assert sealed["gate_status"] == STATUS_GATE_NOT_READY
+    rmd = sealed.get("routing_metadata_sha256_only") or {}
+    assert "benchmark_protocol_artifact_sha256" in rmd
+    assert "environment_manifest_artifact_sha256" not in rmd
+    codes = {r["code"] for r in sealed["refusals"]}
+    assert REFUSED_ENVIRONMENT_PREREQUISITE_MISSING in codes
+
+
+def test_decide_gate_invalid_m42_contract_id(tmp_path: Path) -> None:
+    body = dict(build_synthetic_m42_package_ready_unsealed())
+    body["contract_id"] = "starlab.v15.not_m42.v1"
+    m42 = seal_m42_body(body)
+    proto = build_fixture_benchmark_protocol_sealed()
+    env = build_fixture_environment_manifest_sealed()
+    st, _, refusals, _ = decide_gate(
+        profile=PROFILE_OPERATOR_PREFLIGHT,
+        m42=m42,
+        protocol=proto,
+        env=env,
+        m42_path_for_prereq=None,
+    )
+    assert st == REFUSED_INVALID_M42_PACKAGE
+    assert refusals and refusals[0]["code"] == REFUSED_INVALID_M42_PACKAGE
+
+
+def test_decide_gate_operator_declared_warnings_without_list_refused() -> None:
+    body = dict(build_synthetic_m42_package_ready_unsealed())
+    body["package_status"] = M42_STATUS_READY_WARNINGS
+    body["noncritical_warnings"] = []
+    m42 = seal_m42_body(body)
+    st, _, refusals, _ = decide_gate(
+        profile=PROFILE_OPERATOR_DECLARED,
+        m42=m42,
+        protocol=None,
+        env=None,
+        m42_path_for_prereq=None,
+    )
+    assert st == REFUSED_M42_PACKAGE_NOT_READY
+    assert any(r["code"] == REFUSED_M42_PACKAGE_NOT_READY for r in refusals)
