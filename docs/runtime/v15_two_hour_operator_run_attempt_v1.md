@@ -2,9 +2,11 @@
 
 ## Governance status
 
-Milestone **implementation surface** (Phase A): fixture CI, operator preflight, sealed receipt vocabulary, and runtime documentation on `main` following merge of the M39 PR. **7200-second operator execution** is **not** part of merge-gate CI and runs only post-merge when operator policy and **M38** **`m39_launch_ready`** gated artifacts allow.
+**Phase A (merge-gate) — closed on `main`:** merge commit **`ada97dda5d32bc97541fa4a5386add8b4c241693`** merged **2026-04-30T00:03:14Z** UTC (GitHub **merge commit**). Authoritative GitHub Actions workflow **CI** runs: pull_request head **`e7ef910a9c13ad989e84978a1392073f60dd4e82`** ([`25140098888`](https://github.com/m-cahill/starlab/actions/runs/25140098888); superseded head **`0f9c6475c49d49ef7c4c74f0dfdcd91249246e0c`** — [`25139836736`](https://github.com/m-cahill/starlab/actions/runs/25139836736) — **failure**, coverage gate — **not** merge authority) and merge-boundary push on **`ada97dda…`** ([`25140243730`](https://github.com/m-cahill/starlab/actions/runs/25140243730)). Full PR links and ledger copy: **`docs/starlab-v1.5.md`** / **`docs/starlab.md`**.
 
-**Required public wording:** V15-M39 may execute the **7200-second** operator-local run only under explicit operator guards (**`--allow-operator-local-execution`** and **`--authorize-2hour-operator-run`** on the runner). A completed M39 run is **execution evidence**, not benchmark pass, strength evaluation, checkpoint promotion, scorecard result, XAI, human-panel, showcase release, **v2** authorization, or **T2**/**T3** authorization.
+**Operator run classification (Phase A):** **`operator_run_not_started_pending_post_merge_authorization`** — the governed **7200-second** operator-local run has **not** been executed; Phase A delivers fixture CI, **`operator_preflight`**, receipt vocabulary, and runtime/docs on `main` only.
+
+**Required public wording:** V15-M39 **Phase A** does **not** execute the **2-hour** run. It does **not** claim benchmark pass, evaluate strength, promote checkpoints, produce scorecard results, execute **T2**/**T3**, run XAI or human-panel evaluation, release a showcase agent, or authorize **v2**. **Phase B** may execute the **7200-second** operator-local run only under explicit operator guards (**`--allow-operator-local-execution`** and **`--authorize-2hour-operator-run`** on the runner). A completed M39 run is **execution evidence**, not benchmark pass, strength evaluation, checkpoint promotion, scorecard result, XAI, human-panel, showcase release, **v2** authorization, or **T2**/**T3** authorization.
 
 ## Purpose
 

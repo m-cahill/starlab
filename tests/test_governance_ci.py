@@ -686,6 +686,7 @@ def test_v15_m39_governance_surface() -> None:
     assert "starlab.v15.two_hour_operator_run_attempt.v1" in rt_body
     assert "PR #" not in rt_body
     assert "explicit operator guards" in rt_body
+    assert "operator_run_not_started_pending_post_merge_authorization" in rt_body.replace("\n", " ")
     assert "V15-M39" in v15
     assert "V15-M39" in ledger
     assert "emit_v15_m39_two_hour_operator_run_attempt" in v15.replace("\n", " ")
@@ -694,6 +695,15 @@ def test_v15_m39_governance_surface() -> None:
     assert "m39 non-claims" in low
     assert "fixture_schema_only_no_operator_run" in rt_body.lower()
     assert "v15-m40" in low or "V15-M40" in v15
+    assert "PR #175" in v15
+    assert "25140098888" in v15
+    assert "25140243730" in v15
+    assert "e7ef910a" in v15
+    assert "ada97dda" in v15
+    assert "operator_run_not_started_pending_post_merge_authorization" in v15.replace("\n", " ")
+    assert "PR #175" in ledger
+    assert "25140098888" in ledger or "25140243730" in ledger
+    assert "operator_run_not_started_pending_post_merge_authorization" in ledger.replace("\n", " ")
 
 
 def test_v15_m25_governance_docs() -> None:
