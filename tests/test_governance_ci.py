@@ -676,6 +676,26 @@ def test_v15_m38_governance_surface() -> None:
     assert "v15-m39" in low or "V15-M39" in v15
 
 
+@pytest.mark.smoke
+def test_v15_m39_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    rt39 = REPO_ROOT / "docs/runtime/v15_two_hour_operator_run_attempt_v1.md"
+    assert rt39.is_file()
+    rt_body = rt39.read_text(encoding="utf-8")
+    assert "starlab.v15.two_hour_operator_run_attempt.v1" in rt_body
+    assert "PR #" not in rt_body
+    assert "explicit operator guards" in rt_body
+    assert "V15-M39" in v15
+    assert "V15-M39" in ledger
+    assert "emit_v15_m39_two_hour_operator_run_attempt" in v15.replace("\n", " ")
+    assert "run_v15_m39_two_hour_operator_run_attempt" in v15.replace("\n", " ")
+    low = v15.lower().replace("`", "")
+    assert "m39 non-claims" in low
+    assert "fixture_schema_only_no_operator_run" in rt_body.lower()
+    assert "v15-m40" in low or "V15-M40" in v15
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
