@@ -964,14 +964,20 @@ def test_v15_m46_governance_surface() -> None:
         assert needle.lower() in low_rt
     required_v15 = (
         "V15-M46",
+        "25193641388",
+        "25193802506",
+        "25190918123",
+        "25191304029",
         "starlab.v15.bounded_evaluation_readout_decision.v1",
         "starlab.v15.m46.bounded_evaluation_readout_promotion_refusal.v1",
         "bounded_evaluation_readout_completed",
+        "bounded_evaluation_readout_completed_with_synthetic_only_warning",
         "bounded_evaluation_readout_refused",
         "route_to_bounded_real_benchmark_design",
         "route_to_m45_remediation_or_reemit",
         "recommended_not_executed",
         "refused_m45_execution_not_ready",
+        "refused_scorecard_results_claim",
         "promotion_refused_insufficient_evidence",
     )
     low15 = v15.lower().replace("`", "")
@@ -982,6 +988,9 @@ def test_v15_m46_governance_surface() -> None:
     assert "m46 non-claims" in low15 or "m46 non-claims block" in low15
     assert "emit_v15_m46_bounded_evaluation_readout_decision" in v15.replace("\n", " ")
     assert "v15_bounded_evaluation_readout_decision_v1.md" in ledger
+    assert "PR #182" in v15
+    assert "f5472c91" in v15.lower()
+    assert "ea77cdc4" in v15.lower()
 
 
 def test_v15_m25_governance_docs() -> None:
