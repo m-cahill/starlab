@@ -239,6 +239,41 @@ def test_m42_fixture_claim_flags_false(tmp_path: Path) -> None:
     assert all(not v for v in sealed["claim_flags"].values())
 
 
+def test_emit_m42_cli_fixture_ci(tmp_path: Path) -> None:
+    out = tmp_path / "cli_fixture"
+    rc = emit_m42_main(["--fixture-ci", "--output-dir", str(out)])
+    assert rc == 0
+    assert (out / FILENAME_MAIN_JSON).is_file()
+
+
+def test_emit_m42_cli_operator_preflight_ok(tmp_path: Path) -> None:
+    bundle, m41p, digest_m39 = _write_completed_m41_bundle(tmp_path)
+    digest_m41 = json.loads(m41p.read_text(encoding="utf-8"))[M41_GATE]
+    out = tmp_path / "cli_operator"
+    rc = emit_m42_main(
+        [
+            "--profile",
+            "operator_preflight",
+            "--m41-package-json",
+            str(m41p),
+            "--expected-m41-package-sha256",
+            str(digest_m41),
+            "--expected-m39-artifact-sha256",
+            digest_m39,
+            "--expected-source-candidate-sha256",
+            SOURCE_CANDIDATE_LINEAGE_SHA256,
+            "--expected-final-candidate-sha256",
+            FINAL_OK,
+            "--m39-run-json",
+            str(bundle / "v15_two_hour_operator_run_attempt.json"),
+            "--output-dir",
+            str(out),
+        ],
+    )
+    assert rc == 0
+    assert (out / FILENAME_MAIN_JSON).is_file()
+
+
 def test_m42_fixture_cli(tmp_path: Path) -> None:
     rc = emit_m42_main(["--fixture-ci", "--output-dir", str(tmp_path / "o")])
     assert rc == 0
