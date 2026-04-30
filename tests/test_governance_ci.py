@@ -946,6 +946,44 @@ def test_v15_m45_governance_surface() -> None:
     assert "c5c5abdc" in v15.lower()
 
 
+@pytest.mark.smoke
+def test_v15_m46_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    rt = REPO_ROOT / "docs/runtime/v15_bounded_evaluation_readout_decision_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8")
+    low_rt = rtx.lower().replace("`", "")
+    for needle in (
+        "route_to_bounded_real_benchmark_design",
+        "route_to_m45_remediation_or_reemit",
+        "recommended_not_executed",
+        "torch.load",
+        "benchmark_passed",
+    ):
+        assert needle.lower() in low_rt
+    required_v15 = (
+        "V15-M46",
+        "starlab.v15.bounded_evaluation_readout_decision.v1",
+        "starlab.v15.m46.bounded_evaluation_readout_promotion_refusal.v1",
+        "bounded_evaluation_readout_completed",
+        "bounded_evaluation_readout_refused",
+        "route_to_bounded_real_benchmark_design",
+        "route_to_m45_remediation_or_reemit",
+        "recommended_not_executed",
+        "refused_m45_execution_not_ready",
+        "promotion_refused_insufficient_evidence",
+    )
+    low15 = v15.lower().replace("`", "")
+    for needle in required_v15:
+        assert needle.lower() in low15
+        assert needle in v15 or needle.lower() in low15
+    assert "PR #" not in rtx
+    assert "m46 non-claims" in low15 or "m46 non-claims block" in low15
+    assert "emit_v15_m46_bounded_evaluation_readout_decision" in v15.replace("\n", " ")
+    assert "v15_bounded_evaluation_readout_decision_v1.md" in ledger
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
