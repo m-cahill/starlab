@@ -83,7 +83,7 @@ def test_smoke_collection_count_in_target_band() -> None:
     """Bounded fast lane: ~25–125 smoke tests (see M32 plan; M33+ closeout adds governance rows).
 
     Upper band widened over time as M10–M16, M17–M25, M27–M31, **M32** smoke governance rows landed
-    (+ M20/M21/M23/M24/M25/M31/M32/M33/M34/M38/M39/M40/M41/M42/M43/M44/M45 smoke).
+    (+ M20/M21/M23/M24/M25/M31/M32/M33/M34/M38/M39/M40/M41/M42/M43/M44/M45/**M46 V15**) smoke).
     """
     proc = subprocess.run(
         [sys.executable, "-m", "pytest", "--collect-only", "-q", "-m", "smoke", "tests"],
@@ -105,6 +105,7 @@ def test_smoke_collection_count_in_target_band() -> None:
 
 def test_ledger_milestone_rows_m32_m47() -> None:
     text = (REPO_ROOT / "docs" / "starlab.md").read_text(encoding="utf-8")
+    assert "v15_bounded_evaluation_readout_decision_v1.md" in text
     assert "| M32 | Audit Closure I" in text
     assert "| M33 | Audit Closure II" in text
     assert "| M34 | Audit Closure III" in text
