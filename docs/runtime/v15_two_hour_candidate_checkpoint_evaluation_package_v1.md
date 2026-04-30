@@ -8,7 +8,13 @@ V15-M42 does not execute benchmark matches, evaluate strength, promote checkpoin
 
 ## Public merge closeout
 
-Authoritative numbered pull-request references and CI run identifiers belong in **`docs/starlab-v1.5.md`** (**§V15-M42** milestone row) and **`docs/starlab.md`** (quick-scan table). **This runtime doc must not embed GitHub PR markdown patterns.**
+Authoritative numbered pull-request markdown lives in **`docs/starlab-v1.5.md`** (**§5** table) and **`docs/starlab.md`** (quick-scan). **This runtime doc remains PR-pattern-free** and records **identifier-only** telemetry:
+
+- Merge commit on `main`: **`8c9039a1d535135f6c1e2e910b71db8df903bdd9`** (merged **2026-04-30T07:43:35Z** UTC).
+- Final PR-head commit under **authoritative merge-gate CI**: **`a7ad4c5551d1ada195fecbc572f759e529b380d2`**.
+- Required merge-gate workflow run on that head: **`25153445769`** — **success** (`https://github.com/m-cahill/starlab/actions/runs/25153445769`).
+- Superseded PR-head runs (**not** merge authority): **`25152833597`**, **`25153128543`** — **failure** (coverage `fail_under` gate / threshold boundary on earlier tips).
+- Merge-boundary **`main`** workflow run on merge push: **`25153637517`** — **success** (`https://github.com/m-cahill/starlab/actions/runs/25153637517`).
 
 ## Contract / profile
 

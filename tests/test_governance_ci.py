@@ -811,12 +811,31 @@ def test_v15_m42_governance_surface() -> None:
         "\n",
         " ",
     )
+    assert "eac6fc1f37aa958279a80209822765ecfa6aa2525ed64a8bee88c0ac2be13d26" in rt_body.replace(
+        "\n",
+        " ",
+    )
     assert "51cea94ed5324087863b246b7b31a21021eba286924aea4609aa09466430a943" in rt_body.replace(
         "\n",
         " ",
     )
+    assert "25153445769" in rt_body.replace("\n", " ")
+    assert "25153637517" in rt_body.replace("\n", " ")
+    assert "25152833597" in rt_body.replace("\n", " ")
+    assert "25153128543" in rt_body.replace("\n", " ")
+    assert "8c9039a1" in rt_body.replace("\n", " ")
+    assert "a7ad4c55" in rt_body.replace("\n", " ")
+    assert "package_ready_for_future_candidate_evaluation" in rt_body.replace("\n", " ")
     assert "V15-M42" in v15
     assert "V15-M42" in ledger
+    assert "PR #178" in v15
+    assert "PR #178" in ledger
+    assert "25153445769" in v15.replace("\n", " ")
+    assert "25153445769" in ledger.replace("\n", " ")
+    assert "25153637517" in v15.replace("\n", " ")
+    assert "25153637517" in ledger.replace("\n", " ")
+    assert "8c9039a1" in v15.replace("\n", " ")
+    assert "8c9039a1" in ledger.replace("\n", " ")
     assert "emit_v15_m42_two_hour_candidate_checkpoint_evaluation_package" in v15.replace("\n", " ")
     low = v15.lower().replace("`", "")
     assert "m42 non-claims" in low
