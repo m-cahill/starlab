@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 from pathlib import Path
 
+import pytest
 from starlab.runs.json_util import canonical_json_dumps, sha256_hex_of_canonical_json
 from starlab.v15.emit_v15_m42_two_hour_candidate_checkpoint_evaluation_package import (
     main as emit_m42_main,
@@ -243,7 +246,10 @@ def test_emit_m42_cli_fixture_ci(tmp_path: Path) -> None:
     out = tmp_path / "cli_fixture"
     rc = emit_m42_main(["--fixture-ci", "--output-dir", str(out)])
     assert rc == 0
-    assert (out / FILENAME_MAIN_JSON).is_file()
+    p_main = out / FILENAME_MAIN_JSON
+    assert p_main.is_file()
+    js = json.loads(p_main.read_text(encoding="utf-8"))
+    assert js["profile"] == PROFILE_FIXTURE_CI
 
 
 def test_emit_m42_cli_operator_preflight_ok(tmp_path: Path) -> None:
@@ -274,11 +280,36 @@ def test_emit_m42_cli_operator_preflight_ok(tmp_path: Path) -> None:
     assert (out / FILENAME_MAIN_JSON).is_file()
 
 
-def test_m42_fixture_cli(tmp_path: Path) -> None:
-    rc = emit_m42_main(["--fixture-ci", "--output-dir", str(tmp_path / "o")])
-    assert rc == 0
-    js = json.loads((tmp_path / "o" / FILENAME_MAIN_JSON).read_text(encoding="utf-8"))
-    assert js["profile"] == PROFILE_FIXTURE_CI
+def test_emit_m42_cli_missing_operator_args_exits(tmp_path: Path) -> None:
+    with pytest.raises(SystemExit, match="operator_preflight requires"):
+        emit_m42_main(
+            [
+                "--profile",
+                "operator_preflight",
+                "--output-dir",
+                str(tmp_path / "missing_args_out"),
+            ],
+        )
+
+
+def test_emit_m42_module_invocation_fixture_ci(tmp_path: Path) -> None:
+    out = tmp_path / "mod_invoke"
+    res = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "starlab.v15.emit_v15_m42_two_hour_candidate_checkpoint_evaluation_package",
+            "--fixture-ci",
+            "--output-dir",
+            str(out),
+        ],
+        cwd=str(REPO_ROOT),
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert res.returncode == 0
+    assert (out / FILENAME_MAIN_JSON).is_file()
 
 
 def test_operator_preflight_ok_with_synthetic_m41(tmp_path: Path) -> None:
