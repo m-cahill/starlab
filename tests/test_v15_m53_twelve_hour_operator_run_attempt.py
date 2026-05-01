@@ -7,6 +7,7 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 from unittest.mock import MagicMock
 
 import pytest
@@ -28,8 +29,14 @@ from starlab.v15.m53_twelve_hour_operator_run_attempt_io import (
     BLOCKED_M52_NOT_READY,
     BLOCKED_M52_SHA,
     BLOCKED_PHASE_A_MISSING,
+    FAILED_FINAL_CKPT,
+    FAILED_SUBPROCESS,
+    FAILED_TRANSCRIPT,
+    M53PreflightOutcome,
+    classify_phase_b_status,
     emit_m53_fixture_ci,
     emit_m53_forbidden_refusal,
+    emit_m53_operator_preflight_bundle,
     emit_m53_phase_b_operator_receipt,
     evaluate_m53_operator_preflight,
     load_m52a_phase_gate,
@@ -43,7 +50,12 @@ from starlab.v15.m53_twelve_hour_operator_run_attempt_models import (
     NON_CLAIMS_M53,
     RUNNER_MODULE_M53,
     STATUS_12H_COMPLETED_CKPT,
+    STATUS_12H_COMPLETED_NO_CKPT,
+    STATUS_12H_COMPLETED_WARNINGS,
+    STATUS_12H_FAILED,
+    STATUS_12H_INTERRUPTED_NO_RESUME,
     STATUS_12H_INTERRUPTED_RESUME,
+    STATUS_PREFLIGHT_READY,
 )
 from starlab.v15.m53_twelve_hour_operator_run_attempt_models import (
     STATUS_FIXTURE_ONLY as M53_FIXTURE,
@@ -391,3 +403,163 @@ def test_runner_phase_b_forbidden(tmp_path: Path, repo_root: Path) -> None:
         text=True,
     )
     assert res.returncode == 0
+
+
+_HEX64 = "a" * 64
+
+
+def _base_classify_kw() -> dict[str, Any]:
+    return {
+        "return_code": 0,
+        "observed_seconds": 45000.0,
+        "target_seconds": 43200.0,
+        "interrupted": False,
+        "inventory": {"checkpoint_files": ["c.pt"]},
+        "m28_hints": {
+            "checkpoints_written_total": 1,
+            "sc2_backed_features_used": True,
+            "checkpoint_retention_max_retained": 256,
+            "training_update_count": 10,
+        },
+        "retention_max_retained": 256,
+        "transcript_non_empty": True,
+        "transcript_required_strict": False,
+    }
+
+
+def test_classify_phase_b_interrupted() -> None:
+    st, reasons = classify_phase_b_status(**{**_base_classify_kw(), "interrupted": True})
+    assert st == STATUS_12H_INTERRUPTED_RESUME
+    assert "operator_interrupt" in reasons[0]
+
+
+def test_classify_phase_b_subprocess_fail() -> None:
+    st, reasons = classify_phase_b_status(**{**_base_classify_kw(), "return_code": 2})
+    assert st == STATUS_12H_FAILED
+    assert FAILED_SUBPROCESS in reasons
+
+
+def test_classify_phase_b_strict_transcript_fail() -> None:
+    st, reasons = classify_phase_b_status(
+        **{
+            **_base_classify_kw(),
+            "transcript_non_empty": False,
+            "transcript_required_strict": True,
+        },
+    )
+    assert st == STATUS_12H_FAILED
+    assert FAILED_TRANSCRIPT in reasons
+
+
+def test_classify_phase_b_wall_short() -> None:
+    st, reasons = classify_phase_b_status(
+        **{**_base_classify_kw(), "observed_seconds": 100.0},
+    )
+    assert st == STATUS_12H_INTERRUPTED_NO_RESUME
+    assert "wall_clock_short" in reasons[0]
+
+
+def test_classify_phase_b_completed_no_checkpoint_no_updates() -> None:
+    st, reasons = classify_phase_b_status(
+        **{
+            **_base_classify_kw(),
+            "inventory": {},
+            "m28_hints": {
+                "checkpoints_written_total": 0,
+                "sc2_backed_features_used": False,
+                "checkpoint_retention_max_retained": 0,
+                "training_update_count": 0,
+            },
+            "transcript_non_empty": True,
+        },
+    )
+    assert st == STATUS_12H_COMPLETED_NO_CKPT
+    assert FAILED_FINAL_CKPT in reasons
+
+
+def test_classify_phase_b_completed_with_warnings() -> None:
+    st, reasons = classify_phase_b_status(
+        **{
+            **_base_classify_kw(),
+            "transcript_non_empty": False,
+            "transcript_required_strict": False,
+        },
+    )
+    assert st == STATUS_12H_COMPLETED_WARNINGS
+    assert FAILED_TRANSCRIPT in reasons
+
+
+def test_classify_phase_b_completed_ckpt_clean() -> None:
+    st, reasons = classify_phase_b_status(**_base_classify_kw())
+    assert st == STATUS_12H_COMPLETED_CKPT
+    assert reasons == []
+
+
+def test_classify_phase_b_not_final_persisted() -> None:
+    st, reasons = classify_phase_b_status(
+        **{
+            **_base_classify_kw(),
+            "inventory": {},
+            "m28_hints": {
+                "checkpoints_written_total": 0,
+                "sc2_backed_features_used": True,
+                "checkpoint_retention_max_retained": 256,
+                "training_update_count": 5,
+            },
+        },
+    )
+    assert st == STATUS_12H_FAILED
+    assert FAILED_FINAL_CKPT in reasons
+
+
+def test_classify_phase_b_fallback_completed_no_ckpt() -> None:
+    st, reasons = classify_phase_b_status(
+        **{
+            **_base_classify_kw(),
+            "inventory": {"checkpoint_files": ["c.pt"]},
+            "m28_hints": {
+                "checkpoints_written_total": 0,
+                "sc2_backed_features_used": False,
+                "checkpoint_retention_max_retained": 256,
+                "training_update_count": 3,
+            },
+        },
+    )
+    assert st == STATUS_12H_COMPLETED_NO_CKPT
+
+
+def test_emit_m53_operator_preflight_bundle_ok(tmp_path: Path) -> None:
+    pre = M53PreflightOutcome(
+        True,
+        STATUS_PREFLIGHT_READY,
+        "ok",
+        (),
+        {"contract_id": CONTRACT_ID_M52B, "rehearsal_status": STATUS_READY},
+        _HEX64,
+    )
+    sealed, _paths = emit_m53_operator_preflight_bundle(
+        tmp_path / "pf_ok",
+        pre=pre,
+        profile_short="operator_preflight",
+        wall_clock_seconds=43200,
+    )
+    assert sealed["run_status"] == STATUS_PREFLIGHT_READY
+    assert sealed["m52_binding"]["artifact_sha256"] == _HEX64
+
+
+def test_emit_m53_operator_preflight_bundle_blocked(tmp_path: Path) -> None:
+    pre = M53PreflightOutcome(
+        False,
+        STATUS_12H_FAILED,
+        "bad",
+        ("blocked_disk",),
+        None,
+        None,
+    )
+    sealed, _paths = emit_m53_operator_preflight_bundle(
+        tmp_path / "pf_bad",
+        pre=pre,
+        profile_short="operator_preflight",
+    )
+    assert sealed["run_status"] != STATUS_PREFLIGHT_READY
+    assert "blocked_disk" in sealed["blockers"]
