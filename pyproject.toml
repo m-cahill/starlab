@@ -113,6 +113,10 @@ omit = [
     "starlab/sc2/px1_watchability_macro_scout_bot.py",
     # V15-M52A: scripted BurnySc2 bot — exercised only under operator-local live SC2; not default CI.
     "starlab/sc2/m52a_candidate_projection_spike_bot.py",
+    # V15-M52A: lazy torch checkpoint projection — operator runner path only in merge CI.
+    "starlab/v15/m52_candidate_live_adapter_spike_projection.py",
+    # V15-M52A: dual-guarded operator runner — real SC2 path not run in merge CI (see M51 run omit pattern).
+    "starlab/v15/run_v15_m52_candidate_live_adapter_spike.py",
     # V15-M27: operator-local BurnySC2 rollout runner — real SC2 path not run in merge CI; fixture tests cover io/models/training_step.
     "starlab/v15/run_v15_m27_sc2_rollout_training_loop_integration.py",
 ]
