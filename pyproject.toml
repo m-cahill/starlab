@@ -77,6 +77,10 @@ module = "starlab.sc2.px1_watchability_macro_scout_bot"
 ignore_errors = true
 
 [[tool.mypy.overrides]]
+module = "starlab.sc2.m52a_candidate_projection_spike_bot"
+ignore_errors = true
+
+[[tool.mypy.overrides]]
 module = "starlab.replays.s2protocol_adapter"
 ignore_errors = true
 
@@ -107,6 +111,8 @@ omit = [
     "starlab/sc2/px1_m03_hybrid_terran_bot.py",
     # PX1 watchability: scripted BurnySc2 bot — same rationale as hybrid live bot.
     "starlab/sc2/px1_watchability_macro_scout_bot.py",
+    # V15-M52A: scripted BurnySc2 bot — exercised only under operator-local live SC2; not default CI.
+    "starlab/sc2/m52a_candidate_projection_spike_bot.py",
     # V15-M27: operator-local BurnySC2 rollout runner — real SC2 path not run in merge CI; fixture tests cover io/models/training_step.
     "starlab/v15/run_v15_m27_sc2_rollout_training_loop_integration.py",
 ]

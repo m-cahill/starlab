@@ -43,6 +43,8 @@ V15-M52 rehearses and freezes the governed 12-hour operator-run path. It does no
 
 Classify issues under: `environment`, `sc2_runtime`, `map_pool`, `candidate_checkpoint`, `candidate_live_adapter`, `launch_command`, `disk_budget`, `checkpoint_retention`, `telemetry_capture`, `stop_resume`, `operator_authorization`, `public_private_boundary`.
 
+Some blocker vocabulary in the sealed JSON models (`blocked_candidate_not_watchable`, `blocked_stop_resume_plan_missing`, `blocked_launch_command_not_frozen`, `blocked_public_private_boundary_risk`, and related codes) is **reserved** for future operator-local inspections and **may not** be emitted by `fixture_ci` or the current default preflight path. Fixture and CI receipts remain honest about what they actually evaluated.
+
 ## Disk budget
 
 - CI fixture: `disk_budget_status = fixture_not_inspected`.
