@@ -24,6 +24,7 @@ def run_match_execution(
     *,
     output_dir: Path | None = None,
     hierarchical_sklearn_bundle: dict[str, Any] | None = None,
+    m52a_candidate_spike_bundle: dict[str, Any] | None = None,
 ) -> HarnessResult:
     """Execute one bounded match and build a proof record."""
 
@@ -35,6 +36,7 @@ def run_match_execution(
                 config,
                 output_dir,
                 hierarchical_sklearn_bundle=hierarchical_sklearn_bundle,
+                m52a_candidate_spike_bundle=m52a_candidate_spike_bundle,
             )
         else:
             return HarnessResult(

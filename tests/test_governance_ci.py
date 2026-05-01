@@ -1157,6 +1157,81 @@ def test_v15_m51_live_watchability_governance_surface() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m52a_candidate_adapter_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
+    rt = REPO_ROOT / "docs/runtime/v15_candidate_live_adapter_spike_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8")
+    low_rt = rtx.lower().replace("`", "")
+    for needle in (
+        "candidate_live_adapter_spike.v1",
+        "recommended_not_executed",
+        "route_to_12_hour_blocker_discovery_launch_rehearsal",
+        "torch.load",
+        "emit_v15_m52_candidate_live_adapter_spike",
+        "run_v15_m52_candidate_live_adapter_spike",
+    ):
+        assert needle.lower() in low_rt
+    required_v15 = (
+        "V15-M52A",
+        "V15-M52",
+        "starlab.v15.candidate_live_adapter_spike.v1",
+        "emit_v15_m52_candidate_live_adapter_spike",
+        "run_v15_m52_candidate_live_adapter_spike",
+        "candidate_live_adapter_spike",
+        "recommended_not_executed",
+        "route_to_12_hour_blocker_discovery_launch_rehearsal",
+        "M52A non-claims",
+    )
+    low15 = v15.lower().replace("`", "")
+    for needle in required_v15:
+        assert needle.lower() in low15
+        assert needle in v15 or needle.lower() in low15
+    assert "PR #" not in rtx
+    assert "v15_candidate_live_adapter_spike_v1.md" in v15.replace("\n", " ")
+    assert "v15_candidate_live_adapter_spike_v1.md" in ledger.lower()
+    assert "emit_v15_m52_candidate_live_adapter_spike" in ledger.lower()
+
+
+@pytest.mark.smoke
+def test_v15_m52b_launch_rehearsal_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
+    rt = REPO_ROOT / "docs/runtime/v15_twelve_hour_blocker_discovery_launch_rehearsal_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8")
+    low_rt = rtx.lower().replace("`", "")
+    for needle in (
+        "twelve_hour_blocker_discovery_launch_rehearsal.v1",
+        "v15_m53_launch_command.txt",
+        "execute-12-hour-run",
+        "emit_v15_m52_twelve_hour_launch_rehearsal",
+        "fixture_not_inspected",
+    ):
+        assert needle.lower() in low_rt
+    required_v15 = (
+        "V15-M52B",
+        "V15-M52",
+        "V15-M53",
+        "starlab.v15.twelve_hour_blocker_discovery_launch_rehearsal.v1",
+        "emit_v15_m52_twelve_hour_launch_rehearsal",
+        "v15_m53_launch_command.txt",
+        "recommended_not_executed",
+        "M52 non-claims",
+        "owns any actual 12-hour operator-run attempt",
+    )
+    low15 = v15.lower().replace("`", "")
+    for needle in required_v15:
+        assert needle.lower() in low15
+        assert needle in v15 or needle.lower() in low15
+    assert "PR #" not in rtx
+    assert "v15_twelve_hour_blocker_discovery_launch_rehearsal_v1.md" in v15.replace("\n", " ")
+    assert "v15_twelve_hour_blocker_discovery_launch_rehearsal_v1.md" in ledger.lower()
+    assert "emit_v15_m52_twelve_hour_launch_rehearsal" in ledger.lower()
+
+
+@pytest.mark.smoke
 def test_v15_m48_governance_surface() -> None:
     v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
     ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")

@@ -40,6 +40,10 @@ BURNYSC2_POLICY_PX1_M03_HYBRID_V1 = "px1_m03_hybrid_v1"
 BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1 = "px1_watchability_macro_scout_v1"
 # V15-M27 governed ID — implementation reuses PX1 watchability Terran scaffold (same action path).
 BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1 = "v15_m27_nontrivial_macro_smoke_policy_v1"
+# V15-M52A — candidate checkpoint drives a minimal safe action projection (watchability spike only).
+BURNYSC2_POLICY_V15_M52A_CANDIDATE_PROJECTION_SPIKE_V1 = (
+    "v15_m52a_candidate_projection_spike_policy_v1"
+)
 
 # BurnySc2: python-sc2 `sc2.data.Difficulty` member names (VeryEasy, Easy, Medium, Hard).
 BURNYSC2_DEFAULT_COMPUTER_DIFFICULTY = "Easy"
@@ -92,6 +96,7 @@ class MatchConfig:
             BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
             BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
             BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
+            BURNYSC2_POLICY_V15_M52A_CANDIDATE_PROJECTION_SPIKE_V1,
         }:
             raise ValueError(f"unsupported burnysc2_policy: {self.burnysc2_policy!r}")
         if self.adapter != "burnysc2" and self.burnysc2_policy != BURNYSC2_POLICY_PASSIVE:
