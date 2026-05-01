@@ -135,13 +135,15 @@ def build_m52b_report(sealed: dict[str, Any]) -> dict[str, Any]:
 def _freeze_m53_launch_command() -> str:
     return (
         "python -m starlab.v15.run_v15_m53_twelve_hour_operator_run_attempt \\\n"
+        "  --phase full-12hour \\\n"
         "  --m52-launch-rehearsal-json <path-to-v15_twelve_hour_launch_rehearsal.json> \\\n"
+        "  --m52a-adapter-spike-json <path-to-v15_candidate_live_adapter_spike.json> \\\n"
+        "  --m53-training-launch-command <path-to-resolved-m28-training-launch.txt> \\\n"
         "  --candidate-checkpoint-path <path-to-candidate.pt> \\\n"
         "  --expected-candidate-checkpoint-sha256 <sha256> \\\n"
         '  --sc2-root "<SC2_ROOT>" \\\n'
         '  --map-path "<MAP_PATH>" \\\n'
         "  --wall-clock-seconds 43200 \\\n"
-        "  --game-step 8 \\\n"
         "  --max-retained-checkpoints 256 \\\n"
         "  --output-dir out/v15_m53/<run_id> \\\n"
         "  --allow-operator-local-execution \\\n"
