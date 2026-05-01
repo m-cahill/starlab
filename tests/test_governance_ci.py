@@ -1116,6 +1116,47 @@ def test_v15_m50_governance_surface() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m51_live_watchability_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
+    rt = REPO_ROOT / "docs/runtime/v15_live_candidate_watchability_harness_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8")
+    low_rt = rtx.lower().replace("`", "")
+    for needle in (
+        "live_candidate_watchability_harness.v1",
+        "recommended_not_executed",
+        "twelve-hour",
+        "benchmark harness",
+        "route_to_12_hour_blocker_discovery_launch_rehearsal",
+        "watchability_blocked_missing_candidate_live_policy_adapter",
+        "starlab.v15.m51.live_candidate_watchability_harness.v1",
+    ):
+        assert needle.lower() in low_rt
+    required_v15 = (
+        "V15-M51",
+        "starlab.v15.live_candidate_watchability_harness.v1",
+        "emit_v15_m51_live_candidate_watchability_harness",
+        "run_v15_m51_live_candidate_watchability_harness",
+        "watchability_blocked_missing_candidate_live_policy_adapter",
+        "route_to_12_hour_blocker_discovery_launch_rehearsal",
+        "M51 non-claims",
+        "recommended_not_executed",
+    )
+    low15 = v15.lower().replace("`", "")
+    for needle in required_v15:
+        assert needle.lower() in low15
+        assert needle in v15 or needle.lower() in low15
+    assert "PR #" not in rtx
+    assert "v15_live_candidate_watchability_harness_v1.md" in v15.replace("\n", " ")
+    assert "v15_live_candidate_watchability_harness_v1.md" in ledger.lower()
+    low_ledger = ledger.lower()
+    assert "ensure all documentation is updated as necessary" in low_ledger
+    assert "emit_v15_m51_live_candidate_watchability_harness" in ledger.lower()
+    assert "run_v15_m51_live_candidate_watchability_harness" in ledger.lower()
+
+
+@pytest.mark.smoke
 def test_v15_m48_governance_surface() -> None:
     v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
     ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
