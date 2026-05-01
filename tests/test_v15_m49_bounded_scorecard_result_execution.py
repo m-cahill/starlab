@@ -14,6 +14,10 @@ from starlab.v15.m48_bounded_scorecard_execution_preflight_io import (
     seal_m48_body,
 )
 from starlab.v15.m48_bounded_scorecard_execution_preflight_models import (
+    CONTRACT_ID_M48_PREFLIGHT,
+    PROFILE_M48_EVIDENCE_GATE,
+)
+from starlab.v15.m48_bounded_scorecard_execution_preflight_models import (
     DIGEST_FIELD as M48_DIGEST_FIELD,
 )
 from starlab.v15.m48_bounded_scorecard_execution_preflight_models import (
@@ -24,12 +28,14 @@ from starlab.v15.m49_bounded_scorecard_result_execution_io import (
     decide_m49_from_m48_and_evidence,
     emit_m49_fixture_ci,
     emit_m49_forbidden_flag_refusal,
+    emit_m49_operator_declared,
     emit_m49_operator_preflight,
     evaluate_scorecard_result_evidence,
     upstream_candidate_sha_from_m48,
 )
 from starlab.v15.m49_bounded_scorecard_result_execution_models import (
     CONTRACT_ID_M49_RESULT,
+    FIXTURE_ARTIFACT_SHA_PLACEHOLDER,
     FORBIDDEN_FLAG_AUTHORIZE_V2,
     FORBIDDEN_FLAG_CLAIM_BENCHMARK_PASS,
     FORBIDDEN_FLAG_CLAIM_STRENGTH,
@@ -40,10 +46,13 @@ from starlab.v15.m49_bounded_scorecard_result_execution_models import (
     FORBIDDEN_FLAG_RUN_HUMAN_PANEL,
     FORBIDDEN_FLAG_RUN_LIVE_SC2,
     FORBIDDEN_FLAG_RUN_XAI,
+    M48_STATUS_READY,
     PROFILE_M49_SURFACE,
+    PROFILE_OPERATOR_DECLARED,
     REFUSED_BENCHMARK_PASS_CLAIM,
     REFUSED_CANDIDATE_MISMATCH,
     REFUSED_CHECKPOINT_LOAD,
+    REFUSED_DECLARED_SHAPE,
     REFUSED_INVALID_METRICS,
     REFUSED_INVALID_RESULT_EVIDENCE,
     REFUSED_LIVE_SC2,
@@ -56,6 +65,7 @@ from starlab.v15.m49_bounded_scorecard_result_execution_models import (
     REFUSED_MISSING_THRESHOLD,
     REFUSED_ROUTE_OUT_OF_SCOPE,
     RESULT_MODE_OPERATOR_BOUND,
+    ROUTE_READOUT_PROMOTION_REFUSAL,
     STATUS_RESULT_COMPLETED,
     STATUS_RESULT_COMPLETED_WARNINGS,
     STATUS_RESULT_REFUSED,
@@ -534,6 +544,194 @@ def test_m49_upstream_candidate_warn_when_missing(tmp_path: Path) -> None:
     )
     assert d.result_status == STATUS_RESULT_COMPLETED_WARNINGS
     assert any(WARN_CANDIDATE_UPSTREAM_UNAVAILABLE in w for w in d.warnings)
+
+
+def _sha64_char(c: str = "c") -> str:
+    return (c * 64).lower()
+
+
+def _minimal_operator_declared_m49() -> dict[str, object]:
+    return {
+        "contract_id": CONTRACT_ID_M49_RESULT,
+        "profile_id": PROFILE_M49_SURFACE,
+        "result_status": STATUS_RESULT_COMPLETED,
+        "m48_binding": {
+            "contract_id": CONTRACT_ID_M48_PREFLIGHT,
+            "profile_id": PROFILE_M48_EVIDENCE_GATE,
+            "artifact_sha256": _sha64_char("c"),
+            "preflight_status": M48_STATUS_READY,
+        },
+        "scorecard_result": {
+            "candidate_checkpoint_sha256": FIXTURE_ARTIFACT_SHA_PLACEHOLDER,
+            "scorecard_total": 0.5,
+            "win_rate": 0.25,
+            "episode_count": 4,
+            "valid_episode_count": 1,
+            "threshold_policy": {
+                "policy_id": "declared_bounded_threshold_policy_v1",
+                "pass_threshold": 0.0,
+            },
+            "metric_results": {},
+        },
+    }
+
+
+def _write_declared_json(tmp_path: Path, payload: dict[str, object]) -> Path:
+    p = tmp_path / "declared.json"
+    p.write_text(canonical_json_dumps(payload), encoding="utf-8")
+    return p
+
+
+def test_m49_operator_declared_completed(tmp_path: Path) -> None:
+    dpath = _write_declared_json(tmp_path, _minimal_operator_declared_m49())
+    sealed, _paths = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_COMPLETED
+    assert sealed["profile"] == PROFILE_OPERATOR_DECLARED
+    assert (tmp_path / "od" / "v15_bounded_scorecard_result_execution.json").is_file()
+
+
+def test_m49_operator_declared_completed_with_warnings(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["result_status"] = STATUS_RESULT_COMPLETED_WARNINGS
+    blob["warnings"] = ["declared_warning"]
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_COMPLETED_WARNINGS
+    w = [str(x) for x in (sealed.get("warnings") or [])]
+    assert "declared_warning" in w
+
+
+def test_m49_operator_declared_contract_mismatch(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["contract_id"] = "wrong.contract"
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any(r["code"] == REFUSED_DECLARED_SHAPE for r in sealed["refusals"])
+
+
+def test_m49_operator_declared_overclaim(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["benchmark_passed"] = True
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any(r["code"] == REFUSED_DECLARED_SHAPE for r in sealed["refusals"])
+    assert "declared_overclaim" in (sealed["refusals"][0].get("detail") or "")
+
+
+def test_m49_operator_declared_invalid_m48_binding(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["m48_binding"] = {"artifact_sha256": ""}
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any(
+        r["code"] == REFUSED_DECLARED_SHAPE and "m48_binding" in (r.get("detail") or "")
+        for r in sealed["refusals"]
+    )
+
+
+def test_m49_operator_declared_refused_passthrough(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["result_status"] = STATUS_RESULT_REFUSED
+    blob["refusals"] = [{"code": "synthetic_declared_refusal", "detail": "x"}]
+    blob["route_recommendation"] = {"next_route": ROUTE_READOUT_PROMOTION_REFUSAL}
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any(r["code"] == "synthetic_declared_refusal" for r in sealed["refusals"])
+
+
+def test_m49_operator_declared_refused_missing_refs(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["result_status"] = STATUS_RESULT_REFUSED
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any(
+        "declared_refused_without_refusals" in (r.get("detail") or "") for r in sealed["refusals"]
+    )
+
+
+def test_m49_operator_declared_invalid_result_status(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["result_status"] = "not_a_valid_status"
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any("invalid_result_status" in (r.get("detail") or "") for r in sealed["refusals"])
+
+
+def test_m49_operator_declared_metrics_invalid(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    scr = blob["scorecard_result"]
+    assert isinstance(scr, dict)
+    scr["win_rate"] = 2.0
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any(
+        "scorecard_result_metric_fields_invalid" in (r.get("detail") or "")
+        for r in sealed["refusals"]
+    )
+
+
+def test_m49_operator_declared_non_claims_merge(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["non_claims"] = ["operator_supplied_non_claim"]
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    ncl = sealed.get("non_claims") or []
+    flat = " ".join(str(x) for x in ncl)
+    assert "operator_supplied_non_claim" in flat
+
+
+def test_m49_operator_declared_m48_interpretation_preserved(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    mb = blob["m48_binding"]
+    assert isinstance(mb, dict)
+    mb["interpretation"] = "operator_m48_binding_interpretation"
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    m48b = sealed.get("m48_binding")
+    assert isinstance(m48b, dict)
+    assert m48b.get("interpretation") == "operator_m48_binding_interpretation"
+
+
+def test_m49_operator_declared_disallowed_claim_decision(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    blob["claim_decisions"] = {"scorecard_results": "not_an_allowed_claim_token"}
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    det = " ".join(str(r.get("detail") or "") for r in sealed["refusals"])
+    assert "disallowed_claim_decision" in det
+
+
+def test_m49_operator_declared_scorecard_block_missing(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    del blob["scorecard_result"]
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any(
+        "scorecard_result_missing_or_invalid" in (r.get("detail") or "") for r in sealed["refusals"]
+    )
+
+
+def test_m49_operator_declared_candidate_required(tmp_path: Path) -> None:
+    blob = _minimal_operator_declared_m49()
+    scr = blob["scorecard_result"]
+    assert isinstance(scr, dict)
+    scr["candidate_checkpoint_sha256"] = "short"
+    dpath = _write_declared_json(tmp_path, blob)
+    sealed, _ = emit_m49_operator_declared(tmp_path / "od", declared_result_path=dpath)
+    assert sealed["result_status"] == STATUS_RESULT_REFUSED
+    assert any(
+        "candidate_checkpoint_sha256_required" in (r.get("detail") or "")
+        for r in sealed["refusals"]
+    )
 
 
 def test_evaluate_evidence_binding_mismatch(tmp_path: Path) -> None:
