@@ -1075,6 +1075,47 @@ def test_v15_m49_governance_surface() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m50_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
+    rt = REPO_ROOT / "docs/runtime/v15_scorecard_result_readout_decision_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8")
+    low_rt = rtx.lower().replace("`", "")
+    for needle in (
+        "scorecard_result_readout_decision.v1",
+        "recommended_not_executed",
+        "torch.load",
+        "benchmark pass/fail",
+        "route_to_live_candidate_watchability_harness",
+    ):
+        assert needle.lower() in low_rt
+    required_v15 = (
+        "V15-M50",
+        "starlab.v15.scorecard_result_readout_decision.v1",
+        "starlab.v15.m50.scorecard_result_readout_benchmark_pass_fail_refusal.v1",
+        "scorecard_result_readout_completed",
+        "scorecard_result_readout_completed_with_warnings",
+        "scorecard_result_readout_refused",
+        "benchmark_pass_fail_refused_m49_bounded_only",
+        "route_to_live_candidate_watchability_harness",
+        "recommended_not_executed",
+        "emit_v15_m50_scorecard_result_readout_decision",
+        "V15-M51",
+    )
+    low15 = v15.lower().replace("`", "")
+    for needle in required_v15:
+        assert needle.lower() in low15
+        assert needle in v15 or needle.lower() in low15
+    assert "PR #" not in rtx
+    assert "m50 non-claims" in low15 or "v15-m50" in low15
+    assert "emit_v15_m50_scorecard_result_readout_decision" in v15.replace("\n", " ")
+    assert "v15_scorecard_result_readout_decision_v1.md" in ledger
+    low_ledger = ledger.lower()
+    assert "ensure all documentation is updated as necessary" in low_ledger
+
+
+@pytest.mark.smoke
 def test_v15_m48_governance_surface() -> None:
     v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
     ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
