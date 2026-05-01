@@ -13,12 +13,16 @@ from starlab.sc2.artifacts import (
     ReplayMetadata,
 )
 from starlab.sc2.env_probe import run_probe
+from starlab.sc2.m52a_candidate_projection_spike_bot import (
+    make_m52a_candidate_projection_spike_bot_class,
+)
 from starlab.sc2.maps import ResolvedMap, resolve_local_map_path
 from starlab.sc2.match_config import (
     BURNYSC2_OPPONENT_MODE_PASSIVE_BOT,
     BURNYSC2_POLICY_PX1_M03_HYBRID_V1,
     BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
     BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
+    BURNYSC2_POLICY_V15_M52A_CANDIDATE_PROJECTION_SPIKE_V1,
     MatchConfig,
 )
 from starlab.sc2.models import Sc2RuntimeSpec
@@ -83,6 +87,7 @@ def run_burnysc2_adapter(
     output_dir: Path | None = None,
     *,
     hierarchical_sklearn_bundle: dict[str, Any] | None = None,
+    m52a_candidate_spike_bundle: dict[str, Any] | None = None,
 ) -> ExecutionProofRecord:
     """Run a bounded bot-vs-AI game via BurnySc2.
 
@@ -119,9 +124,21 @@ def run_burnysc2_adapter(
         BURNYSC2_POLICY_PX1_WATCHABILITY_MACRO_SCOUT_V1,
         BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1,
     )
+    use_m52a_spike = (
+        config.burnysc2_policy == BURNYSC2_POLICY_V15_M52A_CANDIDATE_PROJECTION_SPIKE_V1
+    )
     if use_hybrid and hierarchical_sklearn_bundle is None:
         msg = "burnysc2_policy px1_m03_hybrid_v1 requires hierarchical_sklearn_bundle"
         raise RuntimeError(msg)
+    if use_m52a_spike:
+        if m52a_candidate_spike_bundle is None:
+            raise RuntimeError(
+                "burnysc2_policy v15_m52a_candidate_projection_spike_policy_v1 requires "
+                "m52a_candidate_spike_bundle",
+            )
+        pick = m52a_candidate_spike_bundle.get("pick_action_index")
+        if not callable(pick):
+            raise RuntimeError("m52a_candidate_spike_bundle missing callable pick_action_index")
 
     class _HarnessBot(BotAI):
         def __init__(self, max_steps: int, game_step: int, out: dict[str, Any]) -> None:
@@ -175,6 +192,17 @@ def run_burnysc2_adapter(
             sink=sink,
             hierarchical_sklearn_bundle=hierarchical_sklearn_bundle,
             suppress_attack=config.burnysc2_suppress_attack,
+        )
+        bot = bot_cls()
+        bot_race = Race.Terran
+    elif use_m52a_spike:
+        assert m52a_candidate_spike_bundle is not None
+        pick_fn = m52a_candidate_spike_bundle["pick_action_index"]
+        bot_cls = make_m52a_candidate_projection_spike_bot_class(
+            max_steps=config.bounded_horizon.max_game_steps,
+            game_step=config.bounded_horizon.game_step,
+            sink=sink,
+            pick_action_index=pick_fn,
         )
         bot = bot_cls()
         bot_race = Race.Terran
@@ -277,6 +305,12 @@ def run_burnysc2_adapter(
                     "one early scout move; throttled marine attack-move toward enemy start using "
                     "M43 coarse labels with periodic fallback — not full strategic play."
                 )
+        elif use_m52a_spike:
+            summary_out["operator_readable_summary_v1"] = (
+                "policy_id: v15_m52a_candidate_projection_spike_policy_v1; "
+                "real_candidate_live_adapter_spike: provisional_safe_action_projection_v1 drives "
+                "bounded Terran macro/scout-style steps — watchability only, not strength."
+            )
         elif use_watchability:
             if config.burnysc2_policy == BURNYSC2_POLICY_V15_M27_NONTRIVIAL_MACRO_SMOKE_V1:
                 summary_out["operator_readable_summary_v1"] = (
