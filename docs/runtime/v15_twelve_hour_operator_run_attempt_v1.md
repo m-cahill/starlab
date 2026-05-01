@@ -26,6 +26,10 @@ Acceptable sealed M52A **`adapter_status`** values for Phase B include completed
 
 **Skip (loud):** `--acknowledge-skip-candidate-watch-smoke` sets Phase A status to `candidate_watch_smoke_skipped_with_operator_acknowledgment` — **use sparingly**.
 
+### After Phase A — rebind M52B and M53 preflight (recommended)
+
+Planning-time **M52B** is often emitted against an **`operator_preflight`** M52A (different **`artifact_sha256`** than the **Phase A** smoke emission). For a sealed chain that matches the successful smoke artifact, **re-emit** **`emit_v15_m52_twelve_hour_launch_rehearsal`** with **`--m52a-adapter-spike-json`** set to the Phase A **`v15_candidate_live_adapter_spike.json`** and matching **`--expected-m52a-adapter-spike-sha256`**. Then resolve a **fresh** **`v15_m53_launch_command*.txt`** copy (do not edit sealed M52B JSON in place), and **re-run** **`emit_v15_m53_twelve_hour_operator_run_attempt --profile operator_preflight`** against the refreshed M52B + the same M52A path/digest before **`--phase full-12hour`**.
+
 ## Phase B — 12-hour attempt
 
 - **Runner:** `--phase full-12hour`  
