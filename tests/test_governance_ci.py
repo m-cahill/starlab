@@ -1031,6 +1031,50 @@ def test_v15_m47_governance_surface() -> None:
     assert "ensure all documentation is updated as necessary" in low_ledger
 
 
+@pytest.mark.smoke
+def test_v15_m48_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
+    rt = REPO_ROOT / "docs/runtime/v15_bounded_scorecard_execution_preflight_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8")
+    low_rt = rtx.lower().replace("`", "")
+    for needle in (
+        "bounded_scorecard_execution_preflight.v1",
+        "recommended_not_executed",
+        "torch.load",
+        "evidence_manifest",
+    ):
+        assert needle.lower() in low_rt
+    required_v15 = (
+        "V15-M48",
+        "starlab.v15.bounded_scorecard_execution_preflight.v1",
+        "starlab.v15.m48.bounded_scorecard_execution_preflight_evidence_requirements_gate.v1",
+        "bounded_scorecard_execution_preflight_ready",
+        "bounded_scorecard_execution_preflight_refused",
+        "evidence_requirements_satisfied_for_future_preflight",
+        "scorecard_results_refused_not_executed",
+        "benchmark_pass_fail_refused_not_executed",
+        "promotion_refused_no_scorecard_execution",
+        "refused_m47_design_not_ready",
+        "refused_m47_future_surface_allowed",
+        "refused_required_evidence_missing",
+        "refused_scorecard_total_claim",
+        "emit_v15_m48_bounded_scorecard_execution_preflight",
+        "V15-M49",
+    )
+    low15 = v15.lower().replace("`", "")
+    for needle in required_v15:
+        assert needle.lower() in low15
+        assert needle in v15 or needle.lower() in low15
+    assert "PR #" not in rtx
+    assert "m48 non-claims" in low15 or "m48 non-claims block" in low15
+    assert "emit_v15_m48_bounded_scorecard_execution_preflight" in v15.replace("\n", " ")
+    assert "v15_bounded_scorecard_execution_preflight_v1.md" in ledger
+    low_ledger = ledger.lower()
+    assert "ensure all documentation is updated as necessary" in low_ledger
+
+
 def test_v15_m25_governance_docs() -> None:
     v15 = (REPO_ROOT / "docs" / "starlab-v1.5.md").read_text(encoding="utf-8")
     assert "V15-M25" in v15
