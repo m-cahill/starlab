@@ -1032,6 +1032,49 @@ def test_v15_m47_governance_surface() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m49_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
+    rt = REPO_ROOT / "docs/runtime/v15_bounded_scorecard_result_execution_surface_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8")
+    low_rt = rtx.lower().replace("`", "")
+    for needle in (
+        "bounded_scorecard_result_execution.v1",
+        "recommended_not_executed",
+        "torch.load",
+        "benchmark pass/fail",
+    ):
+        assert needle.lower() in low_rt
+    required_v15 = (
+        "V15-M49",
+        "starlab.v15.bounded_scorecard_result_execution.v1",
+        "starlab.v15.m49.bounded_scorecard_result_execution_surface.v1",
+        "bounded_scorecard_result_execution_completed",
+        "bounded_scorecard_result_execution_refused",
+        "scorecard_results_emitted_bounded",
+        "benchmark_pass_fail_refused_pending_threshold_readout",
+        "promotion_refused_pending_scorecard_readout",
+        "refused_m48_preflight_not_ready",
+        "refused_invalid_scorecard_result_evidence",
+        "refused_candidate_identity_mismatch",
+        "refused_missing_metric_results",
+        "emit_v15_m49_bounded_scorecard_result_execution",
+        "V15-M50",
+    )
+    low15 = v15.lower().replace("`", "")
+    for needle in required_v15:
+        assert needle.lower() in low15
+        assert needle in v15 or needle.lower() in low15
+    assert "PR #" not in rtx
+    assert "m49 non-claims" in low15 or "v15-m49" in low15
+    assert "emit_v15_m49_bounded_scorecard_result_execution" in v15.replace("\n", " ")
+    assert "v15_bounded_scorecard_result_execution_surface_v1.md" in ledger
+    low_ledger = ledger.lower()
+    assert "ensure all documentation is updated as necessary" in low_ledger
+
+
+@pytest.mark.smoke
 def test_v15_m48_governance_surface() -> None:
     v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
     ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
@@ -1061,7 +1104,7 @@ def test_v15_m48_governance_surface() -> None:
         "refused_required_evidence_missing",
         "refused_scorecard_total_claim",
         "emit_v15_m48_bounded_scorecard_execution_preflight",
-        "V15-M49",
+        "V15-M50",
     )
     low15 = v15.lower().replace("`", "")
     for needle in required_v15:

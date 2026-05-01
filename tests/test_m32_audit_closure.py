@@ -84,7 +84,7 @@ def test_smoke_collection_count_in_target_band() -> None:
 
     Upper band widened over time as M10–M16, M17–M25, M27–M31, **M32** smoke governance rows landed
     (+ M20/M21/M23/M24/M25/M31/M32/M33/M34/M38/M39/M40/M41/M42/M43/M44/M45/M46/M47/
-    **M48 V15**) smoke).
+    **M48/M49 V15**) smoke).
     """
     proc = subprocess.run(
         [sys.executable, "-m", "pytest", "--collect-only", "-q", "-m", "smoke", "tests"],
@@ -100,8 +100,8 @@ def test_smoke_collection_count_in_target_band() -> None:
     )
     assert m, out
     n = int(m.group(1))
-    _msg = f"smoke count {n} outside 25–130 band (M14–M16 governance rows; band widened by count)"
-    assert 25 <= n <= 130, _msg
+    _msg = f"smoke count {n} outside 25–135 band (M14–M16 governance rows; band widened by count)"
+    assert 25 <= n <= 135, _msg
 
 
 def test_ledger_milestone_rows_m32_m47() -> None:
