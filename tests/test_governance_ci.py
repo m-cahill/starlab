@@ -1274,6 +1274,54 @@ def test_v15_m53_twelve_hour_operator_run_governance_surface() -> None:
 
 
 @pytest.mark.smoke
+def test_v15_m54_twelve_hour_run_package_readiness_governance_surface() -> None:
+    v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
+    ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
+    rt = REPO_ROOT / "docs/runtime/v15_twelve_hour_run_package_evaluation_readiness_v1.md"
+    assert rt.is_file()
+    rtx = rt.read_text(encoding="utf-8")
+    low_rt = rtx.lower().replace("`", "")
+    for needle in (
+        "twelve_hour_run_package_evaluation_readiness.v1",
+        "torch.load",
+        "emit_v15_m54_twelve_hour_run_package_readiness",
+        "route_to_bounded_evaluation_package_preflight",
+        "fixture_schema_only_no_package_evidence",
+        "candidate_checkpoint_step_59858688_final.pt",
+    ):
+        assert needle.lower() in low_rt
+    required_v15 = (
+        "V15-M55",
+        "V15-M54",
+        "V15-M53",
+        "starlab.v15.twelve_hour_run_package_evaluation_readiness.v1",
+        "starlab.v15.m54.twelve_hour_run_package_evaluation_readiness.v1",
+        "emit_v15_m54_twelve_hour_run_package_readiness",
+        "v15_twelve_hour_run_package_evaluation_readiness_v1.md",
+        "M54 non-claims block",
+        "twelve_hour_run_package_ready_for_bounded_evaluation_readiness",
+        "route_to_bounded_evaluation_package_preflight",
+        "7c91a4b7cec6b14d160c00bec768c4fb3199bd8bf0228b2436bd7fbc5dc6ea90",
+        "not Phase VI",
+    )
+    low15 = v15.lower().replace("`", "")
+    for needle in required_v15:
+        assert needle.lower() in low15
+        assert needle in v15 or needle.lower() in low15
+    nc = (
+        "does not execute benchmark matches",
+        "does not promote checkpoints",
+        "does not execute T2–T5",
+    )
+    for n in nc:
+        assert n.lower() in low15
+    assert "PR #" not in rtx
+    assert "v15_twelve_hour_run_package_evaluation_readiness_v1.md" in v15.replace("\n", " ")
+    assert "v15_twelve_hour_run_package_evaluation_readiness_v1.md" in ledger.lower()
+    assert "emit_v15_m54_twelve_hour_run_package_readiness" in ledger.lower()
+
+
+@pytest.mark.smoke
 def test_v15_m48_governance_surface() -> None:
     v15 = (REPO_ROOT / "docs/starlab-v1.5.md").read_text(encoding="utf-8")
     ledger = (REPO_ROOT / "docs/starlab.md").read_text(encoding="utf-8")
