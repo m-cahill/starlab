@@ -23,6 +23,10 @@ def test_v15_m55_governance_docs() -> None:
         "emit_v15_m55_bounded_evaluation_package_preflight",
         "no evaluation execution",
         "no benchmark pass/fail",
+        "pr #194",
+        "25264719836",
+        "25264812955",
+        "v15-m56",
     )
     for needle in needles:
         assert needle in low
