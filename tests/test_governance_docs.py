@@ -97,6 +97,7 @@ _GOVERNANCE_DOCS = [
     "docs/runtime/v15_candidate_live_adapter_spike_v1.md",
     "docs/runtime/v15_twelve_hour_blocker_discovery_launch_rehearsal_v1.md",
     "docs/runtime/v15_twelve_hour_operator_run_attempt_v1.md",
+    "docs/runtime/v15_twelve_hour_run_package_evaluation_readiness_v1.md",
     "docs/training_asset_register.md",
     "docs/replay_corpus_register.md",
     "docs/model_weight_register.md",
