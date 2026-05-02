@@ -1288,6 +1288,9 @@ def test_v15_m54_twelve_hour_run_package_readiness_governance_surface() -> None:
         "route_to_bounded_evaluation_package_preflight",
         "fixture_schema_only_no_package_evidence",
         "candidate_checkpoint_step_59858688_final.pt",
+        "blocked_phase_a_proof_hash_mismatch",
+        "proof_raw_file_sha256",
+        "artifact_hash",
     ):
         assert needle.lower() in low_rt
     required_v15 = (

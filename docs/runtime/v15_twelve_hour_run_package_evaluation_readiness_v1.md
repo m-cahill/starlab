@@ -41,7 +41,7 @@ Validates sealed **`v15_twelve_hour_operator_run_attempt.json`** and companion a
 **Optional:**
 
 - `--raw-m53-file-sha256` — when supplied as valid hex64, compared to **raw file** SHA-256 of `--m53-run-json`; mismatch **blocks**. When omitted, emits **`warning_raw_artifact_hash_missing`** (does **not** block).
-- `--expected-phase-a-proof-sha256` — defaults to the ledger anchor for the closed operator proof hash when omitted.
+- `--expected-phase-a-proof-sha256` — defaults to the ledger anchor for the Phase A proof **`artifact_hash`** (harness semantic digest) when omitted; matching raw file SHA is accepted when **`artifact_hash`** is absent or does not match.
 
 ### `operator_declared`
 
@@ -72,13 +72,22 @@ Preflight requires:
 - **`phase_b_12hour_run.full_wall_clock_satisfied`** **true**
 - **`phase_b_12hour_run.final_step_checkpoint_persisted`** **true**
 
-### Phase A proof binding
+### Phase A proof hash binding
 
-When `--phase-a-match-proof-json` is supplied, its **raw file SHA-256** must match **`--expected-phase-a-proof-sha256`** (or the ledger anchor default). Missing proof path **blocks** (`blocked_phase_a_proof_missing`).
+The governed Phase A proof anchor (`07923255659d0d09798f5e051ece295de77fdb527698313ec69c8df46b1be2aa` in the public ledger) refers to the proof JSON's embedded **`artifact_hash`** — the harness **semantic** digest — **not** necessarily the raw serialized file SHA-256.
+
+When `--phase-a-match-proof-json` is supplied, **V15-M54**:
+
+- Computes **`proof_raw_file_sha256`** (SHA-256 over raw proof file bytes) for provenance.
+- Reads **`artifact_hash`** from the proof JSON when present and hex64-valid.
+- When **`--expected-phase-a-proof-sha256`** is supplied (or defaults to the ledger anchor), accepts a match against **`artifact_hash`** first; otherwise accepts a match against the raw file SHA.
+- Blocks with **`blocked_phase_a_proof_hash_mismatch`** only when neither matches (detail object records expected, embedded `artifact_hash`, and raw file SHA).
+
+Missing proof path, unreadable file, or invalid JSON when the proof must be inspected **blocks** with **`blocked_phase_a_proof_missing`**.
+
+The sealed body includes **`phase_a_binding.proof_artifact_hash`** (semantic, when present), **`proof_raw_file_sha256`**, **`proof_hash_binding_kind`** (`artifact_hash` or `raw_file_sha256`), and backward-compatible **`proof_hash_actual`** (the matched digest for this milestone cycle).
 
 ### Final checkpoint binding
-
-The checkpoint inventory **must** list exactly:
 
 ```text
 m28_training/checkpoints/candidate_checkpoint_step_59858688_final.pt
