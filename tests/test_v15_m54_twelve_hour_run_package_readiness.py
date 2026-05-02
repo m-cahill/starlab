@@ -31,6 +31,8 @@ from starlab.v15.m54_twelve_hour_run_package_readiness_io import (
 from starlab.v15.m54_twelve_hour_run_package_readiness_models import (
     ANCHOR_INPUT_CANDIDATE_CHECKPOINT_SHA256,
     BINDING_FILENAME,
+    BINDING_KIND_PHASE_A_ARTIFACT_HASH,
+    BINDING_KIND_PHASE_A_RAW_FILE_SHA256,
     BLOCKED_FINAL_CKPT_MISSING,
     BLOCKED_FINAL_CKPT_NOT_PERSISTED_M53,
     BLOCKED_FULL_WALL_CLOCK,
@@ -41,6 +43,8 @@ from starlab.v15.m54_twelve_hour_run_package_readiness_models import (
     BLOCKED_M53_NOT_COMPLETED,
     BLOCKED_M53_SHA_MISMATCH,
     BLOCKED_PHASE_A_PROOF,
+    BLOCKED_PHASE_A_PROOF_HASH_MISMATCH,
+    BLOCKED_PHASE_A_PROOF_MISSING,
     BLOCKED_RAW_SHA_MISMATCH,
     BLOCKED_TELEMETRY_MISSING,
     BLOCKED_TRANSCRIPT_MISSING,
@@ -186,6 +190,12 @@ def test_m54_preflight_happy_path(tmp_path: Path) -> None:
     )
     assert sealed["readiness_decision"]["route_to"] == ROUTE_BOUNDED_EVAL_PREFLIGHT
     assert sealed["recommended_next"] == RECOMMENDED_NEXT_SUCCESS
+    pab = sealed["phase_a_binding"]
+    assert isinstance(pab, dict)
+    assert pab["proof_hash_binding_kind"] == BINDING_KIND_PHASE_A_RAW_FILE_SHA256
+    assert pab["proof_hash_actual"] == proof_digest.lower()
+    assert pab["proof_raw_file_sha256"] == proof_digest.lower()
+    assert pab.get("proof_artifact_hash") is None
 
 
 def test_m53_sha_mismatch_blocks(tmp_path: Path) -> None:
@@ -514,7 +524,177 @@ def test_phase_a_proof_missing_blocks(tmp_path: Path) -> None:
             expected_final_candidate_checkpoint_sha256=ck_sha,
         ),
     )
+    assert BLOCKED_PHASE_A_PROOF_MISSING in body["blockers"]
     assert BLOCKED_PHASE_A_PROOF in body["blockers"]
+
+
+def test_phase_a_proof_embedded_artifact_hash_binding(tmp_path: Path) -> None:
+    semantic = "aa11bb22" * 8
+    ck_bytes = b"m54_ckpt_semantic_proof"
+    ck_sha = _sha256_bytes(ck_bytes)
+    inp_sha = _INP_CKPT
+    m53p = tmp_path / "v15_twelve_hour_operator_run_attempt.json"
+    digest = _write_sealed_m53(m53p, ck_sha=ck_sha, inp_sha=inp_sha)
+    proof_p = tmp_path / "match_execution_proof.json"
+    proof_p.write_text(
+        json.dumps({"replay_saved": True, "artifact_hash": semantic, "note": "unit"}),
+        encoding="utf-8",
+    )
+    raw_sha = sha256_file_hex(proof_p).lower()
+    assert raw_sha != semantic
+    inv_p = tmp_path / "inv.json"
+    inv_p.write_text(json.dumps(_inventory_rows(ck_sha)), encoding="utf-8")
+    tel_p = tmp_path / "tel.json"
+    tel_p.write_text(json.dumps({"ok": True}), encoding="utf-8")
+    tr_p = tmp_path / "tr.txt"
+    tr_p.write_text("x" * 200 + "\noperator transcript line\n", encoding="utf-8")
+    ck_p = tmp_path / FINAL_CHECKPOINT_RELATIVE_PATH.replace("/", "__")
+    ck_p.parent.mkdir(parents=True, exist_ok=True)
+    ck_p.write_bytes(ck_bytes)
+    sealed, _, ok_pack = emit_m54_operator_preflight_bundle(
+        tmp_path / "out_sem",
+        inputs=M54PreflightInputs(
+            m53_run_json=m53p,
+            expected_m53_run_sha256=digest,
+            raw_m53_file_sha256=None,
+            m53_checkpoint_inventory_json=inv_p,
+            m53_telemetry_summary_json=tel_p,
+            m53_transcript_path=tr_p,
+            phase_a_match_proof_json=proof_p,
+            expected_phase_a_proof_sha256=semantic,
+            final_candidate_checkpoint_path=ck_p,
+            expected_final_candidate_checkpoint_sha256=ck_sha,
+        ),
+    )
+    assert ok_pack
+    pab = sealed["phase_a_binding"]
+    assert pab["proof_hash_binding_kind"] == BINDING_KIND_PHASE_A_ARTIFACT_HASH
+    assert pab["proof_artifact_hash"] == semantic
+    assert pab["proof_raw_file_sha256"] == raw_sha
+    assert pab["proof_hash_actual"] == semantic
+
+
+def test_phase_a_proof_raw_binding_when_embedded_differs(tmp_path: Path) -> None:
+    wrong_semantic = "bb11aa22" * 8
+    ck_bytes = b"m54_ckpt_raw_fallback"
+    ck_sha = _sha256_bytes(ck_bytes)
+    m53p = tmp_path / "m53.json"
+    digest = _write_sealed_m53(m53p, ck_sha=ck_sha, inp_sha=_INP_CKPT)
+    proof_p = tmp_path / "proof.json"
+    proof_p.write_text(
+        json.dumps({"replay_saved": False, "artifact_hash": wrong_semantic}),
+        encoding="utf-8",
+    )
+    raw_sha = sha256_file_hex(proof_p).lower()
+    inv_p = tmp_path / "inv.json"
+    inv_p.write_text(json.dumps(_inventory_rows(ck_sha)), encoding="utf-8")
+    tel_p = tmp_path / "tel.json"
+    tel_p.write_text("{}", encoding="utf-8")
+    tr_p = tmp_path / "tr.txt"
+    tr_p.write_text("u" * 200 + "\n", encoding="utf-8")
+    ck_p = tmp_path / "f.pt"
+    ck_p.write_bytes(ck_bytes)
+    sealed, _, ok_pack = emit_m54_operator_preflight_bundle(
+        tmp_path / "out_rawfb",
+        inputs=M54PreflightInputs(
+            m53_run_json=m53p,
+            expected_m53_run_sha256=digest,
+            raw_m53_file_sha256=None,
+            m53_checkpoint_inventory_json=inv_p,
+            m53_telemetry_summary_json=tel_p,
+            m53_transcript_path=tr_p,
+            phase_a_match_proof_json=proof_p,
+            expected_phase_a_proof_sha256=raw_sha,
+            final_candidate_checkpoint_path=ck_p,
+            expected_final_candidate_checkpoint_sha256=ck_sha,
+        ),
+    )
+    assert ok_pack
+    pab = sealed["phase_a_binding"]
+    assert pab["proof_hash_binding_kind"] == BINDING_KIND_PHASE_A_RAW_FILE_SHA256
+    assert pab["proof_hash_actual"] == raw_sha
+    assert pab["proof_artifact_hash"] == wrong_semantic
+
+
+def test_phase_a_proof_hash_mismatch_blocks(tmp_path: Path) -> None:
+    semantic = "aa11bb22" * 8
+    ck_sha = _sha256_bytes(b"z")
+    m53p = tmp_path / "m53.json"
+    digest = _write_sealed_m53(m53p, ck_sha=ck_sha, inp_sha=_INP_CKPT)
+    proof_p = tmp_path / "proof.json"
+    proof_p.write_text(json.dumps({"artifact_hash": semantic}), encoding="utf-8")
+    raw_sha = sha256_file_hex(proof_p).lower()
+    expected_wrong = "cc22dd44" * 8
+    assert expected_wrong not in (semantic, raw_sha)
+    body = evaluate_m54_operator_preflight(
+        M54PreflightInputs(
+            m53_run_json=m53p,
+            expected_m53_run_sha256=digest,
+            raw_m53_file_sha256=None,
+            m53_checkpoint_inventory_json=None,
+            m53_telemetry_summary_json=None,
+            m53_transcript_path=None,
+            phase_a_match_proof_json=proof_p,
+            expected_phase_a_proof_sha256=expected_wrong,
+            final_candidate_checkpoint_path=None,
+            expected_final_candidate_checkpoint_sha256=ck_sha,
+        ),
+    )
+    assert BLOCKED_PHASE_A_PROOF_HASH_MISMATCH in body["blockers"]
+    detail = body["phase_a_proof_hash_mismatch_detail"]
+    assert detail["expected_phase_a_proof_sha256"] == expected_wrong
+    assert detail["embedded_artifact_hash"] == semantic
+    assert detail["raw_file_sha256"] == raw_sha
+
+
+def test_phase_a_proof_invalid_json_missing(tmp_path: Path) -> None:
+    ck_sha = _sha256_bytes(b"invjson")
+    m53p = tmp_path / "m53.json"
+    digest = _write_sealed_m53(m53p, ck_sha=ck_sha, inp_sha=_INP_CKPT)
+    proof_p = tmp_path / "bad_proof.json"
+    proof_p.write_bytes(b"{not-json")
+    body = evaluate_m54_operator_preflight(
+        M54PreflightInputs(
+            m53_run_json=m53p,
+            expected_m53_run_sha256=digest,
+            raw_m53_file_sha256=None,
+            m53_checkpoint_inventory_json=None,
+            m53_telemetry_summary_json=None,
+            m53_transcript_path=None,
+            phase_a_match_proof_json=proof_p,
+            expected_phase_a_proof_sha256=None,
+            final_candidate_checkpoint_path=None,
+            expected_final_candidate_checkpoint_sha256=ck_sha,
+        ),
+    )
+    assert BLOCKED_PHASE_A_PROOF_MISSING in body["blockers"]
+
+
+def test_phase_a_expected_hash_invalid_hex_blocks(tmp_path: Path) -> None:
+    ck_sha = _sha256_bytes(b"badexp")
+    m53p = tmp_path / "m53.json"
+    digest = _write_sealed_m53(m53p, ck_sha=ck_sha, inp_sha=_INP_CKPT)
+    proof_p = tmp_path / "proof.json"
+    proof_p.write_text('{"replay_saved":false}', encoding="utf-8")
+    body = evaluate_m54_operator_preflight(
+        M54PreflightInputs(
+            m53_run_json=m53p,
+            expected_m53_run_sha256=digest,
+            raw_m53_file_sha256=None,
+            m53_checkpoint_inventory_json=None,
+            m53_telemetry_summary_json=None,
+            m53_transcript_path=None,
+            phase_a_match_proof_json=proof_p,
+            expected_phase_a_proof_sha256="not-a-hex64-value-at-all--------------",
+            final_candidate_checkpoint_path=None,
+            expected_final_candidate_checkpoint_sha256=ck_sha,
+        ),
+    )
+    assert BLOCKED_PHASE_A_PROOF_HASH_MISMATCH in body["blockers"]
+    assert (
+        body["phase_a_proof_hash_mismatch_detail"]["reason"]
+        == "expected_phase_a_proof_sha256_not_hex64"
+    )
 
 
 def test_short_transcript_warning(tmp_path: Path) -> None:

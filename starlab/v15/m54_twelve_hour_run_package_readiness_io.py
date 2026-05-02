@@ -22,6 +22,8 @@ from starlab.v15.m54_twelve_hour_run_package_readiness_models import (
     ANCHOR_INPUT_CANDIDATE_CHECKPOINT_SHA256,
     ANCHOR_PHASE_A_MATCH_PROOF_SHA256,
     BINDING_FILENAME,
+    BINDING_KIND_PHASE_A_ARTIFACT_HASH,
+    BINDING_KIND_PHASE_A_RAW_FILE_SHA256,
     BINDING_REQUIRED_SENTENCE,
     BLOCKED_FINAL_CKPT_MISSING,
     BLOCKED_FINAL_CKPT_NOT_PERSISTED_M53,
@@ -35,7 +37,8 @@ from starlab.v15.m54_twelve_hour_run_package_readiness_models import (
     BLOCKED_M53_NOT_COMPLETED,
     BLOCKED_M53_SHA_MISMATCH,
     BLOCKED_MISSING_M53_JSON,
-    BLOCKED_PHASE_A_PROOF,
+    BLOCKED_PHASE_A_PROOF_HASH_MISMATCH,
+    BLOCKED_PHASE_A_PROOF_MISSING,
     BLOCKED_RAW_SHA_MISMATCH,
     BLOCKED_TELEMETRY_MISSING,
     BLOCKED_TRANSCRIPT_MISSING,
@@ -90,6 +93,14 @@ def _parse_json_object(path: Path) -> dict[str, Any]:
     if not isinstance(raw, dict):
         raise ValueError("JSON root must be an object")
     return raw
+
+
+def _phase_a_embedded_artifact_hash(proof_obj: dict[str, Any]) -> str | None:
+    ah = proof_obj.get("artifact_hash")
+    if ah is None:
+        return None
+    t = str(ah).strip().lower()
+    return t if _is_hex64(t) else None
 
 
 def sha256_file_hex(path: Path, *, chunk_size: int = 1024 * 1024) -> str:
@@ -299,6 +310,9 @@ def build_fixture_m54_body(*, package_status: str | None = None) -> dict[str, An
         "phase_a_binding": {
             "status": None,
             "proof_artifact_hash": None,
+            "proof_raw_file_sha256": None,
+            "proof_hash_binding_kind": None,
+            "proof_hash_actual": None,
             "live_sc2_executed": False,
             "watchability_only": True,
         },
@@ -467,18 +481,25 @@ def evaluate_m54_operator_preflight(inputs: M54PreflightInputs) -> dict[str, Any
         phase_a = {}
 
     proof_path = inputs.phase_a_match_proof_json
-    proof_hash_actual: str | None = None
+    proof_raw_sha: str | None = None
+    proof_semantic_hash: str | None = None
     phase_a_replay_saved = False
     if proof_path is None or not proof_path.is_file():
-        blockers.append(BLOCKED_PHASE_A_PROOF)
+        blockers.append(BLOCKED_PHASE_A_PROOF_MISSING)
+        return _finalize_blocked(blockers)
+    resolved_proof = Path(proof_path).resolve()
+    try:
+        proof_raw_sha = sha256_file_hex(resolved_proof).lower()
+    except OSError:
+        blockers.append(BLOCKED_PHASE_A_PROOF_MISSING)
         return _finalize_blocked(blockers)
     try:
-        proof_hash_actual = sha256_file_hex(Path(proof_path).resolve()).lower()
-        proof_obj = _parse_json_object(Path(proof_path).resolve())
-        phase_a_replay_saved = bool(proof_obj.get("replay_saved"))
+        proof_obj = _parse_json_object(resolved_proof)
     except (OSError, ValueError, json.JSONDecodeError):
-        blockers.append(BLOCKED_PHASE_A_PROOF)
+        blockers.append(BLOCKED_PHASE_A_PROOF_MISSING)
         return _finalize_blocked(blockers)
+    proof_semantic_hash = _phase_a_embedded_artifact_hash(proof_obj)
+    phase_a_replay_saved = bool(proof_obj.get("replay_saved"))
 
     exp_proof = (
         str(
@@ -487,8 +508,52 @@ def evaluate_m54_operator_preflight(inputs: M54PreflightInputs) -> dict[str, Any
         .strip()
         .lower()
     )
-    if _is_hex64(exp_proof) and proof_hash_actual != exp_proof:
-        blockers.append(BLOCKED_PHASE_A_PROOF)
+    proof_hash_actual: str | None = None
+    proof_binding_kind: str | None = None
+
+    if not _is_hex64(exp_proof):
+        blockers.append(BLOCKED_PHASE_A_PROOF_HASH_MISMATCH)
+        body["phase_a_proof_hash_mismatch_detail"] = {
+            "expected_phase_a_proof_sha256": exp_proof,
+            "embedded_artifact_hash": proof_semantic_hash,
+            "raw_file_sha256": proof_raw_sha,
+            "reason": "expected_phase_a_proof_sha256_not_hex64",
+        }
+        pab = body.get("phase_a_binding")
+        if isinstance(pab, dict):
+            pab.update(
+                {
+                    "proof_artifact_hash": proof_semantic_hash,
+                    "proof_raw_file_sha256": proof_raw_sha,
+                    "proof_hash_binding_kind": None,
+                    "proof_hash_actual": None,
+                },
+            )
+        return _finalize_blocked(blockers)
+
+    if proof_semantic_hash is not None and proof_semantic_hash == exp_proof:
+        proof_binding_kind = BINDING_KIND_PHASE_A_ARTIFACT_HASH
+        proof_hash_actual = proof_semantic_hash
+    elif proof_raw_sha == exp_proof:
+        proof_binding_kind = BINDING_KIND_PHASE_A_RAW_FILE_SHA256
+        proof_hash_actual = proof_raw_sha
+    else:
+        blockers.append(BLOCKED_PHASE_A_PROOF_HASH_MISMATCH)
+        body["phase_a_proof_hash_mismatch_detail"] = {
+            "expected_phase_a_proof_sha256": exp_proof,
+            "embedded_artifact_hash": proof_semantic_hash,
+            "raw_file_sha256": proof_raw_sha,
+        }
+        pab = body.get("phase_a_binding")
+        if isinstance(pab, dict):
+            pab.update(
+                {
+                    "proof_artifact_hash": proof_semantic_hash,
+                    "proof_raw_file_sha256": proof_raw_sha,
+                    "proof_hash_binding_kind": None,
+                    "proof_hash_actual": None,
+                },
+            )
         return _finalize_blocked(blockers)
 
     inv_path = inputs.m53_checkpoint_inventory_json
@@ -576,7 +641,10 @@ def evaluate_m54_operator_preflight(inputs: M54PreflightInputs) -> dict[str, Any
             },
             "phase_a_binding": {
                 "status": phase_status,
-                "proof_artifact_hash": proof_hash_actual,
+                "proof_artifact_hash": proof_semantic_hash,
+                "proof_raw_file_sha256": proof_raw_sha,
+                "proof_hash_binding_kind": proof_binding_kind,
+                "proof_hash_actual": proof_hash_actual,
                 "live_sc2_executed": bool(phase_a.get("live_sc2_executed")),
                 "watchability_only": True,
             },

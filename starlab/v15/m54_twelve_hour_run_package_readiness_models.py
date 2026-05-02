@@ -100,7 +100,10 @@ BLOCKED_INVENTORY_MISSING_FINAL: Final[str] = (
 )
 BLOCKED_TELEMETRY_MISSING: Final[str] = "blocked_telemetry_summary_missing"
 BLOCKED_TRANSCRIPT_MISSING: Final[str] = "blocked_transcript_missing"
-BLOCKED_PHASE_A_PROOF: Final[str] = "blocked_phase_a_proof_missing"
+BLOCKED_PHASE_A_PROOF_MISSING: Final[str] = "blocked_phase_a_proof_missing"
+BLOCKED_PHASE_A_PROOF_HASH_MISMATCH: Final[str] = "blocked_phase_a_proof_hash_mismatch"
+# Deprecated alias — prefer BLOCKED_PHASE_A_PROOF_MISSING (same string).
+BLOCKED_PHASE_A_PROOF: Final[str] = BLOCKED_PHASE_A_PROOF_MISSING
 BLOCKED_PUBLIC_PRIVATE: Final[str] = "blocked_public_private_boundary_risk"
 BLOCKED_RAW_SHA_MISMATCH: Final[str] = "blocked_raw_artifact_hash_mismatch"
 
@@ -139,3 +142,8 @@ FORBIDDEN_CLI_FLAGS: Final[tuple[str, ...]] = (
 )
 
 TRANSCRIPT_SHORT_WARN_BYTES: Final[int] = 160
+
+# Phase A proof `--expected-phase-a-proof-sha256` binding kinds
+# (`phase_a_binding.proof_hash_binding_kind`).
+BINDING_KIND_PHASE_A_ARTIFACT_HASH: Final[str] = "artifact_hash"
+BINDING_KIND_PHASE_A_RAW_FILE_SHA256: Final[str] = "raw_file_sha256"
