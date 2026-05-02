@@ -1249,18 +1249,19 @@ def test_v15_m53_twelve_hour_operator_run_governance_surface() -> None:
         "v15_m53_operator_transcript.txt",
     ):
         assert needle.lower() in low_rt
-    required_v15 = (
-        "V15-M53",
-        "V15-M52",
-        "starlab.v15.twelve_hour_operator_run_attempt.v1",
-        "starlab.v15.m53.twelve_hour_operator_run_attempt.v1",
-        "emit_v15_m53_twelve_hour_operator_run_attempt",
-        "run_v15_m53_twelve_hour_operator_run_attempt",
-        "v15_twelve_hour_operator_run_attempt_v1.md",
-        "M53 non-claims block",
-        "owns the governed 12-hour operator run attempt",
-        "not Phase VI",
-    )
+        required_v15 = (
+            "V15-M54",
+            "V15-M53",
+            "V15-M52",
+            "starlab.v15.twelve_hour_operator_run_attempt.v1",
+            "starlab.v15.m53.twelve_hour_operator_run_attempt.v1",
+            "emit_v15_m53_twelve_hour_operator_run_attempt",
+            "run_v15_m53_twelve_hour_operator_run_attempt",
+            "v15_twelve_hour_operator_run_attempt_v1.md",
+            "M53 non-claims block",
+            "owns the governed 12-hour operator run attempt",
+            "not Phase VI",
+        )
     low15 = v15.lower().replace("`", "")
     for needle in required_v15:
         assert needle.lower() in low15
