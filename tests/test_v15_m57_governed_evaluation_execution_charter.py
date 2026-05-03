@@ -38,6 +38,8 @@ from starlab.v15.m57_governed_evaluation_execution_charter_models import (
     FILENAME_MAIN_JSON,
     FORBIDDEN_FLAG_CLAIM_BENCHMARK,
     PROFILE_FIXTURE_CI,
+    PROFILE_OPERATOR_DECLARED,
+    PROFILE_OPERATOR_PREFLIGHT,
     REPORT_FILENAME,
     ROUTE_M58,
     ROUTE_STATUS_RECOMMENDED_NOT_EXECUTED,
@@ -302,6 +304,137 @@ def test_emit_cli_forbidden_flag(tmp_path: Path) -> None:
     )
     main_j = json.loads((tmp_path / "f" / FILENAME_MAIN_JSON).read_text(encoding="utf-8"))
     assert main_j["evaluation_charter"]["charter_status"] == CHARTER_BLOCKED
+
+
+def test_emit_cli_preflight_missing_inputs_returns_2(tmp_path: Path) -> None:
+    assert (
+        emit_m57_main(
+            [
+                "--profile",
+                PROFILE_OPERATOR_PREFLIGHT,
+                "--output-dir",
+                str(tmp_path / "o"),
+            ],
+        )
+        == 2
+    )
+
+
+@pytest.mark.skipif(not OP1_M57A.is_file(), reason="OP1 M57A fixture missing")
+@pytest.mark.skipif(not OP1_M52A.is_file(), reason="OP1 M52A fixture missing")
+def test_emit_cli_preflight_invalid_expected_sha_returns_2(tmp_path: Path) -> None:
+    assert (
+        emit_m57_main(
+            [
+                "--profile",
+                PROFILE_OPERATOR_PREFLIGHT,
+                "--output-dir",
+                str(tmp_path / "o"),
+                "--m57a-watch-session-json",
+                str(OP1_M57A),
+                "--m52a-adapter-json",
+                str(OP1_M52A),
+                "--expected-candidate-sha256",
+                "not-a-sha",
+            ],
+        )
+        == 2
+    )
+
+
+@pytest.mark.skipif(not OP1_M57A.is_file(), reason="OP1 M57A fixture missing")
+@pytest.mark.skipif(not OP1_M52A.is_file(), reason="OP1 M52A fixture missing")
+def test_emit_cli_preflight_op1_returns_0(tmp_path: Path) -> None:
+    o = tmp_path / "pf"
+    assert (
+        emit_m57_main(
+            [
+                "--profile",
+                PROFILE_OPERATOR_PREFLIGHT,
+                "--output-dir",
+                str(o),
+                "--m57a-watch-session-json",
+                str(OP1_M57A),
+                "--m52a-adapter-json",
+                str(OP1_M52A),
+            ],
+        )
+        == 0
+    )
+
+
+def test_emit_cli_preflight_missing_files_returns_3(tmp_path: Path) -> None:
+    out = tmp_path / "pf_missing"
+    assert (
+        emit_m57_main(
+            [
+                "--profile",
+                PROFILE_OPERATOR_PREFLIGHT,
+                "--output-dir",
+                str(out),
+                "--m57a-watch-session-json",
+                str(tmp_path / "missing_m57a.json"),
+                "--m52a-adapter-json",
+                str(tmp_path / "missing_m52a.json"),
+            ],
+        )
+        == 3
+    )
+
+
+def test_emit_cli_declared_missing_inputs_returns_2(tmp_path: Path) -> None:
+    assert (
+        emit_m57_main(
+            [
+                "--profile",
+                PROFILE_OPERATOR_DECLARED,
+                "--output-dir",
+                str(tmp_path / "od"),
+            ],
+        )
+        == 2
+    )
+
+
+@pytest.mark.skipif(not OP1_M57A.is_file(), reason="OP1 M57A fixture missing")
+@pytest.mark.skipif(not DECLARED_MIN.is_file(), reason="Declared fixture missing")
+def test_emit_cli_declared_op1_returns_0(tmp_path: Path) -> None:
+    assert (
+        emit_m57_main(
+            [
+                "--profile",
+                PROFILE_OPERATOR_DECLARED,
+                "--output-dir",
+                str(tmp_path / "decl_ok"),
+                "--declared-charter-json",
+                str(DECLARED_MIN),
+                "--m57a-watch-session-json",
+                str(OP1_M57A),
+            ],
+        )
+        == 0
+    )
+
+
+@pytest.mark.skipif(not OP1_M57A.is_file(), reason="OP1 M57A fixture missing")
+def test_emit_cli_declared_blocked_returns_3(tmp_path: Path) -> None:
+    bad_decl = tmp_path / "decl_bad.json"
+    bad_decl.write_text("{}", encoding="utf-8")
+    assert (
+        emit_m57_main(
+            [
+                "--profile",
+                PROFILE_OPERATOR_DECLARED,
+                "--output-dir",
+                str(tmp_path / "decl_blk"),
+                "--declared-charter-json",
+                str(bad_decl),
+                "--m57a-watch-session-json",
+                str(OP1_M57A),
+            ],
+        )
+        == 3
+    )
 
 
 def test_blocked_charter_skips_m58_command_file(tmp_path: Path) -> None:
