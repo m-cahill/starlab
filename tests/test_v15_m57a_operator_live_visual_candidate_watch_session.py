@@ -47,6 +47,8 @@ from starlab.v15.run_v15_m57a_operator_live_visual_candidate_watch_session impor
     main as m57a_runner_main,
 )
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
+
 
 def test_fixture_three_artifacts_and_claims(tmp_path: Path) -> None:
     sealed, paths = write_watch_session_artifacts(
@@ -172,7 +174,7 @@ def test_runner_requires_guards(tmp_path: Path) -> None:
             "--candidate-checkpoint",
             str(ck),
         ],
-        cwd=tmp_path,
+        cwd=str(REPO_ROOT),
         capture_output=True,
         text=True,
         check=False,
