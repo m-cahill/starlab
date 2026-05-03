@@ -7,6 +7,9 @@ from pathlib import Path
 from typing import Any
 
 from starlab.runs.json_util import canonical_json_dumps, sha256_hex_of_canonical_json
+from starlab.v15.emit_v15_m56_bounded_evaluation_package_readout_decision import (
+    main as emit_m56_main,
+)
 from starlab.v15.m54_twelve_hour_run_package_readiness_io import (
     build_fixture_m54_body,
     seal_m54_body,
@@ -49,6 +52,8 @@ from starlab.v15.m56_bounded_evaluation_package_readout_decision_models import (
     DECISION_BLOCKED_MISSING_M55,
     DECISION_BLOCKED_PRIVATE_BOUNDARY,
     DECISION_READY,
+    FILENAME_MAIN_JSON,
+    FORBIDDEN_FLAG_RUN_BENCHMARK,
     ROUTE_STATUS,
 )
 from starlab.v15.m56a_latest_candidate_visual_watchability_confirmation_models import (
@@ -409,3 +414,238 @@ def test_operator_declared_candidate_mismatch(tmp_path: Path) -> None:
         ),
     )
     assert body["readout"]["decision_status"] == DECISION_BLOCKED_CANDIDATE_MISMATCH
+
+
+def test_emit_m56_cli_fixture_ci_writes_main_json(tmp_path: Path) -> None:
+    out = tmp_path / "out"
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "fixture_ci",
+                "--output-dir",
+                str(out),
+            ],
+        )
+        == 0
+    )
+    main_p = out / FILENAME_MAIN_JSON
+    assert main_p.is_file()
+    sealed = json.loads(main_p.read_text(encoding="utf-8"))
+    assert sealed["readout"]["decision_status"] == DECISION_READY
+
+
+def test_emit_m56_cli_operator_preflight_missing_args(tmp_path: Path) -> None:
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "operator_preflight",
+                "--output-dir",
+                str(tmp_path / "o"),
+            ],
+        )
+        == 2
+    )
+
+
+def test_emit_m56_cli_operator_preflight_invalid_candidate_hex(tmp_path: Path) -> None:
+    m55_dir = tmp_path / "m55"
+    write_preflight_artifacts(m55_dir, body_unsealed=build_fixture_preflight())
+    m55_path = m55_dir / "v15_bounded_evaluation_package_preflight.json"
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "operator_preflight",
+                "--output-dir",
+                str(tmp_path / "o"),
+                "--m55-preflight-json",
+                str(m55_path),
+                "--expected-m54-package-sha256",
+                CANONICAL_M54_PACKAGE_SHA256,
+                "--expected-m53-run-artifact-sha256",
+                CANONICAL_M53_RUN_ARTIFACT_SHA256,
+                "--expected-candidate-sha256",
+                "not_hex",
+            ],
+        )
+        == 2
+    )
+
+
+def test_emit_m56_cli_operator_preflight_happy(tmp_path: Path) -> None:
+    m55_dir = tmp_path / "m55"
+    write_preflight_artifacts(m55_dir, body_unsealed=build_fixture_preflight())
+    m55_path = m55_dir / "v15_bounded_evaluation_package_preflight.json"
+    out = tmp_path / "out"
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "operator_preflight",
+                "--output-dir",
+                str(out),
+                "--m55-preflight-json",
+                str(m55_path),
+                "--expected-m54-package-sha256",
+                CANONICAL_M54_PACKAGE_SHA256,
+                "--expected-m53-run-artifact-sha256",
+                CANONICAL_M53_RUN_ARTIFACT_SHA256,
+                "--expected-candidate-sha256",
+                CANONICAL_CANDIDATE_CHECKPOINT_SHA256,
+            ],
+        )
+        == 0
+    )
+    sealed = json.loads((out / FILENAME_MAIN_JSON).read_text(encoding="utf-8"))
+    assert sealed["readout"]["decision_status"] == DECISION_READY
+
+
+def test_emit_m56_cli_operator_preflight_blocked_exit_3(tmp_path: Path) -> None:
+    write_preflight_artifacts(tmp_path / "m", body_unsealed=build_fixture_preflight())
+    p = tmp_path / "m" / "v15_bounded_evaluation_package_preflight.json"
+    obj = json.loads(p.read_text(encoding="utf-8"))
+    obj[M55_DIGEST] = "c" * 64
+    p.write_text(canonical_json_dumps(obj), encoding="utf-8")
+    out = tmp_path / "out"
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "operator_preflight",
+                "--output-dir",
+                str(out),
+                "--m55-preflight-json",
+                str(p),
+                "--expected-m54-package-sha256",
+                CANONICAL_M54_PACKAGE_SHA256,
+                "--expected-m53-run-artifact-sha256",
+                CANONICAL_M53_RUN_ARTIFACT_SHA256,
+                "--expected-candidate-sha256",
+                CANONICAL_CANDIDATE_CHECKPOINT_SHA256,
+            ],
+        )
+        == 3
+    )
+
+
+def test_emit_m56_cli_forbidden_flag_emits_blocked_readout(tmp_path: Path) -> None:
+    out = tmp_path / "out"
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "fixture_ci",
+                "--output-dir",
+                str(out),
+                FORBIDDEN_FLAG_RUN_BENCHMARK,
+            ],
+        )
+        == 0
+    )
+    sealed = json.loads((out / FILENAME_MAIN_JSON).read_text(encoding="utf-8"))
+    assert sealed["readout"]["decision_status"] == DECISION_BLOCKED_CLAIM_FLAGS
+
+
+def test_emit_m56_cli_operator_declared_missing_args(tmp_path: Path) -> None:
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "operator_declared",
+                "--output-dir",
+                str(tmp_path / "o"),
+            ],
+        )
+        == 2
+    )
+
+
+def test_emit_m56_cli_operator_declared_happy(tmp_path: Path) -> None:
+    m55_dir = tmp_path / "m55"
+    man = tmp_path / "man.json"
+    cand = tmp_path / "cand.json"
+    score = tmp_path / "score.json"
+    man.write_text(json.dumps({"kind": "m"}), encoding="utf-8")
+    cand.write_text(json.dumps({"kind": "c"}), encoding="utf-8")
+    score.write_text(json.dumps({"kind": "s"}), encoding="utf-8")
+    from starlab.v15.m55_bounded_evaluation_package_preflight_io import (
+        evaluation_package_binding_sha256,
+        sha256_file_hex,
+    )
+
+    md, cd, sd = sha256_file_hex(man), sha256_file_hex(cand), sha256_file_hex(score)
+    pkg = evaluation_package_binding_sha256(
+        manifest_sha256=md,
+        candidate_sha256=cd,
+        scorecard_sha256=sd,
+    )
+    write_preflight_artifacts(
+        m55_dir,
+        body_unsealed=build_operator_declared_preflight(
+            OperatorDeclaredInputs(
+                evaluation_package_id="e.test",
+                evaluation_package_sha256=pkg,
+                upstream_m54_package_id=CANONICAL_UPSTREAM_M54_PACKAGE_ID,
+                upstream_m54_package_sha256=CANONICAL_UPSTREAM_M54_PACKAGE_SHA256,
+                evaluation_package_manifest=man,
+                candidate_identity=cand,
+                scorecard_readout_plan=score,
+            ),
+        ),
+    )
+    m55_path = m55_dir / "v15_bounded_evaluation_package_preflight.json"
+    decl = tmp_path / "decl.json"
+    decl.write_text(
+        json.dumps(
+            {"declared_candidate_checkpoint_sha256": CANONICAL_CANDIDATE_CHECKPOINT_SHA256},
+        ),
+        encoding="utf-8",
+    )
+    out = tmp_path / "out"
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "operator_declared",
+                "--output-dir",
+                str(out),
+                "--declared-readout-json",
+                str(decl),
+                "--m55-preflight-json",
+                str(m55_path),
+                "--expected-candidate-sha256",
+                CANONICAL_CANDIDATE_CHECKPOINT_SHA256,
+            ],
+        )
+        == 0
+    )
+    sealed = json.loads((out / FILENAME_MAIN_JSON).read_text(encoding="utf-8"))
+    assert sealed["readout"]["decision_status"] == DECISION_READY
+
+
+def test_emit_m56_cli_operator_declared_blocked_exit_3(tmp_path: Path) -> None:
+    decl = tmp_path / "decl.json"
+    decl.write_text(json.dumps({"evaluation_executed": True}), encoding="utf-8")
+    m55_dir = tmp_path / "m55"
+    write_preflight_artifacts(m55_dir, body_unsealed=build_fixture_preflight())
+    m55_path = m55_dir / "v15_bounded_evaluation_package_preflight.json"
+    out = tmp_path / "out"
+    assert (
+        emit_m56_main(
+            [
+                "--profile",
+                "operator_declared",
+                "--output-dir",
+                str(out),
+                "--declared-readout-json",
+                str(decl),
+                "--m55-preflight-json",
+                str(m55_path),
+                "--expected-candidate-sha256",
+                CANONICAL_CANDIDATE_CHECKPOINT_SHA256,
+            ],
+        )
+        == 3
+    )
