@@ -1,0 +1,75 @@
+{
+  "adapter": {
+    "action_vocabulary_size": 8,
+    "adapter_id": "provisional_candidate_live_adapter_spike_v1",
+    "candidate_output_projection": "provisional_safe_action_projection_v1",
+    "checkpoint_blob_loaded": true,
+    "model_loaded": true,
+    "torch_load_invoked": true
+  },
+  "adapter_kind": "real_candidate_live_adapter_spike",
+  "adapter_status": "candidate_live_adapter_spike_completed",
+  "artifact_sha256": "7458f5c370be4b04465a2d4f9d85321b313c34ef0ab0e6d48124ff0dadd7fa47",
+  "benchmark_pass_fail_emitted": false,
+  "benchmark_passed": false,
+  "candidate_identity": {
+    "candidate_checkpoint_sha256": "7c91a4b7cec6b14d160c00bec768c4fb3199bd8bf0228b2436bd7fbc5dc6ea90",
+    "candidate_source": "declared",
+    "promotion_status": "not_promoted_candidate_only"
+  },
+  "checkpoint_blob_loaded": true,
+  "checkpoint_promoted": false,
+  "contract_id": "starlab.v15.candidate_live_adapter_spike.v1",
+  "emitter_module": "starlab.v15.emit_v15_m52_candidate_live_adapter_spike",
+  "human_panel_executed": false,
+  "live_sc2_executed": true,
+  "m51_binding": {
+    "artifact_sha256": "cb80202efc50f59851a38a1a9e39a7e11a80efbda878f07b93e4924f6afb2012",
+    "contract_id": "starlab.v15.live_candidate_watchability_harness.v1",
+    "route": "route_to_12_hour_blocker_discovery_launch_rehearsal",
+    "route_status": "recommended_not_executed"
+  },
+  "milestone": "V15-M52A",
+  "non_claims": [
+    "not_benchmark_execution",
+    "not_benchmark_pass_fail",
+    "not_strength_evaluation",
+    "not_checkpoint_promotion",
+    "not_twelve_hour_run",
+    "not_xai",
+    "not_human_panel",
+    "not_showcase_release",
+    "not_v2_authorization",
+    "not_t2_t3_t4_t5_execution",
+    "watchability_adapter_spike_only",
+    "candidate_adapter_distinct_from_scaffold_watchability",
+    "route_recommendation_advisory_only_recommended_not_executed"
+  ],
+  "profile": "operator_local_adapter_spike",
+  "profile_id": "starlab.v15.m52a.profile.operator_local_adapter_spike.v1",
+  "profile_surface": "starlab.v15.m52a.candidate_to_live_policy_adapter_spike.v1",
+  "refusals": [],
+  "route_recommendation": {
+    "route": "route_to_12_hour_blocker_discovery_launch_rehearsal",
+    "route_status": "recommended_not_executed"
+  },
+  "runner_module": "starlab.v15.run_v15_m52_candidate_live_adapter_spike",
+  "schema_version": "1.0",
+  "showcase_released": false,
+  "strength_evaluated": false,
+  "t2_t3_t4_t5_executed": false,
+  "torch_load_invoked": true,
+  "twelve_hour_run_executed": false,
+  "v2_authorized": false,
+  "warnings": [],
+  "watchability_run": {
+    "action_count": 1173,
+    "game_step": 8,
+    "live_sc2_executed": true,
+    "max_game_steps": 2048,
+    "observation_count": 2048,
+    "replay_saved": true,
+    "run_mode": "operator_local_candidate_adapter_spike"
+  },
+  "xai_executed": false
+}

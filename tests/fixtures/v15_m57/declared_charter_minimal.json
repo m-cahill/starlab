@@ -1,0 +1,9 @@
+{
+  "input_bindings": {
+    "m57a_watch_session_artifact_sha256": "1b2b8704743354540e8f389a847315aa2bd8c8ead47b63edd81cd91a61df430c",
+    "m52a_adapter_artifact_sha256": "7458f5c370be4b04465a2d4f9d85321b313c34ef0ab0e6d48124ff0dadd7fa47",
+    "m54_package_sha256": "bbe08673aa85beb0ae7e51a627a68c67fd95a930176d174d2c60bb96e4a278d6",
+    "m53_run_artifact_sha256": "18a1e6c39bb372c3f7edc595919963d12442467a74dd329e56f7cf0d0c816ec8",
+    "candidate_checkpoint_sha256": "7c91a4b7cec6b14d160c00bec768c4fb3199bd8bf0228b2436bd7fbc5dc6ea90"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "artifact_references": {
+    "operator_notes_reference": null,
+    "replay_file_reference": "m52a_delegate/candidate_live_adapter_watch/replay/validation.SC2Replay",
+    "replay_sha256": "c0d88e54cdbc7eed7df27ddfcb4ae7e1b642993287a7e75c83d755097fbd89fa",
+    "video_metadata_reference": null,
+    "watch_session_raw_receipt_sha256": "7458f5c370be4b04465a2d4f9d85321b313c34ef0ab0e6d48124ff0dadd7fa47"
+  },
+  "artifact_sha256": "1b2b8704743354540e8f389a847315aa2bd8c8ead47b63edd81cd91a61df430c",
+  "claim_flags": {
+    "benchmark_execution_performed": false,
+    "benchmark_pass_fail_emitted": false,
+    "benchmark_passed": false,
+    "candidate_policy_control_confirmed": true,
+    "checkpoint_promoted": false,
+    "checkpoint_rejected_as_strength_decision": false,
+    "human_panel_executed": false,
+    "live_sc2_executed": true,
+    "scaffold_policy_used": false,
+    "scorecard_results_produced": false,
+    "scorecard_total_computed": false,
+    "showcase_released": false,
+    "strength_evaluated": false,
+    "t2_t3_t4_t5_executed": false,
+    "v2_authorized": false,
+    "visual_watch_session_attempted": true,
+    "win_rate_computed": false,
+    "xai_executed": false
+  },
+  "contract_id": "starlab.v15.operator_live_visual_candidate_watch_session.v1",
+  "emitter_module": "starlab.v15.emit_v15_m57a_operator_live_visual_candidate_watch_session",
+  "input_bindings": {
+    "candidate_checkpoint_path_reference": null,
+    "candidate_checkpoint_sha256": "7c91a4b7cec6b14d160c00bec768c4fb3199bd8bf0228b2436bd7fbc5dc6ea90",
+    "m51_watchability_json_sha256": null,
+    "m52a_adapter_json_sha256": "7458f5c370be4b04465a2d4f9d85321b313c34ef0ab0e6d48124ff0dadd7fa47",
+    "m53_run_artifact_sha256": "18a1e6c39bb372c3f7edc595919963d12442467a74dd329e56f7cf0d0c816ec8",
+    "m54_package_sha256": "bbe08673aa85beb0ae7e51a627a68c67fd95a930176d174d2c60bb96e4a278d6",
+    "m55_preflight_artifact_sha256": null,
+    "m56_readout_artifact_sha256": null,
+    "m56a_context_sha256": null
+  },
+  "milestone": "V15-M57A",
+  "non_claims": [
+    "Visual watchability is observation evidence only.",
+    "This is not benchmark execution.",
+    "This is not benchmark pass/fail.",
+    "This is not scorecard results.",
+    "This is not strength evaluation.",
+    "This is not checkpoint promotion.",
+    "Scaffold watchability, if used, is not evidence that the trained candidate policy controlled gameplay."
+  ],
+  "profile_id": "starlab.v15.m57a.operator_live_visual_candidate_watch_session.v1",
+  "route_recommendation": {
+    "recommended_next_milestone": "V15-M57",
+    "route": "route_to_v15_m57_governed_evaluation_execution_charter_dry_run_gate",
+    "route_note": "Future evaluation remains separately chartered.",
+    "route_status": "recommended_not_executed"
+  },
+  "schema_version": "1.0",
+  "visual_classification": {
+    "classification": "candidate_live_visual_watch_completed",
+    "classification_reason": "M52A candidate-live adapter spike completed with live SC2 (watchability only).",
+    "is_benchmark_evidence": false,
+    "is_candidate_policy_control_confirmed": true,
+    "is_scaffold_policy": false
+  },
+  "watch_session": {
+    "action_count": 1173,
+    "candidate_policy_adapter_status": "loaded",
+    "checkpoint_blob_loaded_for_watchability_adapter": true,
+    "duration_seconds": null,
+    "game_steps_observed": 2048,
+    "live_sc2_invoked": true,
+    "map": null,
+    "operator_visual_observation_supplied": false,
+    "opponent_mode": "burnysc2_passive_bot",
+    "policy_source": "candidate_live_adapter",
+    "replay_saved": true,
+    "sc2_result": "completed",
+    "session_status": "candidate_live_visual_watch_completed",
+    "torch_load_invoked_for_watchability_adapter": true,
+    "video_metadata_supplied": false
+  }
+}
