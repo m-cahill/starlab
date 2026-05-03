@@ -11,6 +11,9 @@ from unittest.mock import patch
 
 import pytest
 from starlab.runs.json_util import sha256_hex_of_canonical_json
+from starlab.v15.emit_v15_m57a_operator_live_visual_candidate_watch_session import (
+    main as emit_m57a_main,
+)
 from starlab.v15.m52_candidate_live_adapter_spike_io import emit_m52a_fixture_ci
 from starlab.v15.m52_candidate_live_adapter_spike_models import (
     ADAPTER_SPIKE_LABEL,
@@ -34,8 +37,10 @@ from starlab.v15.m57a_operator_live_visual_candidate_watch_session_models import
     CLASSIFICATION_PREFLIGHT_BLOCKED,
     CONTRACT_ID,
     FILENAME_MAIN_JSON,
+    FORBIDDEN_FLAG_CLAIM_BENCHMARK,
     GUARD_ALLOW_OPERATOR_LOCAL,
     GUARD_AUTHORIZE_SESSION,
+    PROFILE_FIXTURE_CI,
     REPORT_FILENAME,
     ROUTE_M57,
     ROUTE_STATUS_RECOMMENDED_NOT_EXECUTED,
@@ -77,6 +82,42 @@ def test_seal_roundtrip() -> None:
     digest = sealed["artifact_sha256"]
     base = {k: v for k, v in sealed.items() if k != "artifact_sha256"}
     assert digest == sha256_hex_of_canonical_json(base)
+
+
+def test_emit_m57a_cli_fixture_ci_writes_main_json(tmp_path: Path) -> None:
+    out = tmp_path / "emit_out"
+    assert (
+        emit_m57a_main(
+            [
+                "--profile",
+                PROFILE_FIXTURE_CI,
+                "--output-dir",
+                str(out),
+            ],
+        )
+        == 0
+    )
+    main_p = out / FILENAME_MAIN_JSON
+    assert main_p.is_file()
+    sealed = json.loads(main_p.read_text(encoding="utf-8"))
+    assert sealed["contract_id"] == CONTRACT_ID
+
+
+def test_emit_m57a_cli_forbidden_flag_writes_refusal(tmp_path: Path) -> None:
+    out = tmp_path / "refusal_out"
+    assert (
+        emit_m57a_main(
+            [
+                "--profile",
+                PROFILE_FIXTURE_CI,
+                "--output-dir",
+                str(out),
+                FORBIDDEN_FLAG_CLAIM_BENCHMARK,
+            ],
+        )
+        == 0
+    )
+    assert any(out.iterdir())
 
 
 def test_preflight_neither_m51_nor_m52(tmp_path: Path) -> None:
