@@ -45,20 +45,21 @@ from starlab.v15.m58_bounded_candidate_adapter_evaluation_execution_io import (
     validate_execution_claim_flags,
 )
 from starlab.v15.m58_bounded_candidate_adapter_evaluation_execution_models import (
+    BLOCKED_ATTEMPT_COUNT,
     BLOCKED_CLAIM_FLAGS_VIOLATION,
     BLOCKED_DUAL_GUARD_MISSING,
     CANONICAL_CANDIDATE_CHECKPOINT_SHA256,
     CONTRACT_ID,
+    FORBIDDEN_FLAG_RUN_BENCHMARK,
     PROFILE_FIXTURE_CI,
+    PROFILE_OPERATOR_DECLARED,
+    PROFILE_OPERATOR_PREFLIGHT,
     STATUS_FIXTURE_SCHEMA_ONLY,
     STATUS_PREFLIGHT_BLOCKED,
     STATUS_PREFLIGHT_READY,
 )
 from starlab.v15.m58_bounded_candidate_adapter_evaluation_execution_models import (
     FILENAME_MAIN_JSON as M58_MAIN,
-)
-from starlab.v15.run_v15_m58_bounded_candidate_adapter_evaluation_execution_attempt import (
-    main as run_m58_main,
 )
 
 
@@ -217,7 +218,7 @@ def test_runner_no_dual_guard(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
     ck.write_bytes(b"data")
 
     outd = tmp_path / "o_no_guard"
-    rc = run_m58_main(
+    rc = run_mod.main(
         [
             "--m57-charter-json",
             str(charter_p),
@@ -274,7 +275,7 @@ def test_runner_success_mock(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) ->
     ck.write_bytes(b"checkpoint-bytes-placeholder")
 
     outd = tmp_path / "o_ok"
-    rc = run_m58_main(
+    rc = run_mod.main(
         [
             "--allow-operator-local-execution",
             "--authorize-bounded-candidate-adapter-evaluation",
@@ -314,6 +315,228 @@ def test_runner_success_mock(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) ->
     )
     blob = canonical_json_dumps(merged)
     assert BLOCKED_CLAIM_FLAGS_VIOLATION in blob
+
+
+def test_emit_operator_preflight_cli_missing_charter_stderr(tmp_path: Path) -> None:
+    rc = emit_m58_main(
+        ["--profile", PROFILE_OPERATOR_PREFLIGHT, "--output-dir", str(tmp_path / "bad")],
+    )
+    assert rc == 2
+
+
+def test_emit_operator_preflight_cli_invalid_expected_sha_stderr(tmp_path: Path) -> None:
+    charter_p = _m57_fixture_path(tmp_path)
+    rc = emit_m58_main(
+        [
+            "--profile",
+            PROFILE_OPERATOR_PREFLIGHT,
+            "--output-dir",
+            str(tmp_path / "pref"),
+            "--m57-charter-json",
+            str(charter_p),
+            "--expected-candidate-sha256",
+            "not_valid_hex",
+        ],
+    )
+    assert rc == 2
+
+
+def test_emit_operator_preflight_cli_writes_execution(tmp_path: Path) -> None:
+    charter_p = _m57_fixture_path(tmp_path)
+    (tmp_path / "sc2").mkdir()
+    pmap = tmp_path / "Waterfall.SC2Map"
+    pmap.write_bytes(b"map")
+    out = tmp_path / "ep_cli"
+    rc = emit_m58_main(
+        [
+            "--profile",
+            PROFILE_OPERATOR_PREFLIGHT,
+            "--output-dir",
+            str(out),
+            "--m57-charter-json",
+            str(charter_p),
+            "--sc2-root",
+            str(tmp_path / "sc2"),
+            "--map-path",
+            str(pmap),
+        ],
+    )
+    assert rc in (0, 3)
+    assert (out / M58_MAIN).is_file()
+
+
+def test_emit_forbidden_cli_flag_refusal_fixture(tmp_path: Path) -> None:
+    out = tmp_path / "forbid"
+    rc = emit_m58_main(
+        [
+            FORBIDDEN_FLAG_RUN_BENCHMARK,
+            "--profile",
+            PROFILE_FIXTURE_CI,
+            "--output-dir",
+            str(out),
+        ],
+    )
+    assert rc == 0
+    body = json.loads((out / M58_MAIN).read_text(encoding="utf-8"))
+    assert (
+        STATUS_PREFLIGHT_BLOCKED
+        == cast(dict[str, Any], body["execution_result"])["execution_status"]
+    )
+
+
+def test_emit_operator_declared_cli_writes(tmp_path: Path) -> None:
+    charter_p = _m57_fixture_path(tmp_path)
+    dec = tmp_path / "decl.json"
+    dec.write_text(
+        canonical_json_dumps(
+            {
+                "input_bindings": {
+                    "candidate_checkpoint_sha256": CANONICAL_CANDIDATE_CHECKPOINT_SHA256,
+                },
+            },
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    out = tmp_path / "decl_out"
+    rc = emit_m58_main(
+        [
+            "--profile",
+            PROFILE_OPERATOR_DECLARED,
+            "--output-dir",
+            str(out),
+            "--m57-charter-json",
+            str(charter_p),
+            "--declared-execution-json",
+            str(dec),
+            "--expected-candidate-sha256",
+            CANONICAL_CANDIDATE_CHECKPOINT_SHA256,
+        ],
+    )
+    assert rc in (0, 3)
+    assert (out / M58_MAIN).is_file()
+
+
+def _runner_locals(tmp_path: Path) -> tuple[Path, Path, Path]:
+    charter_p = _m57_fixture_path(tmp_path)
+    (tmp_path / "sc2").mkdir()
+    pmap = tmp_path / "Waterfall.SC2Map"
+    pmap.write_bytes(b"x")
+    ck = tmp_path / "c.pt"
+    ck.write_bytes(b"checkpoint-bytes")
+    return charter_p, pmap, ck
+
+
+def test_runner_forbidden_cli_with_guards_writes_refusal(tmp_path: Path) -> None:
+    charter_p, pmap, ck = _runner_locals(tmp_path)
+    outd = tmp_path / "out_forbid"
+    rc = run_mod.main(
+        [
+            "--authorize-bounded-candidate-adapter-evaluation",
+            "--allow-operator-local-execution",
+            FORBIDDEN_FLAG_RUN_BENCHMARK,
+            "--m57-charter-json",
+            str(charter_p),
+            "--m51-watchability-json",
+            str(pmap),
+            "--candidate-checkpoint",
+            str(ck),
+            "--sc2-root",
+            str(tmp_path / "sc2"),
+            "--map-path",
+            str(pmap),
+            "--save-replay",
+            "--output-dir",
+            str(outd),
+        ],
+    )
+    assert rc == 0
+    body = json.loads((outd / M58_MAIN).read_text(encoding="utf-8"))
+    blk = cast(list[Any], cast(dict[str, Any], body["execution_result"])["blocked_reasons"])
+    assert any(str(x).startswith("forbidden_cli_flag:") for x in blk)
+
+
+def test_runner_invalid_expected_sha_with_guards(tmp_path: Path) -> None:
+    charter_p, pmap, ck = _runner_locals(tmp_path)
+    outd = tmp_path / "out_bad_sha"
+    rc = run_mod.main(
+        [
+            "--authorize-bounded-candidate-adapter-evaluation",
+            "--allow-operator-local-execution",
+            "--m57-charter-json",
+            str(charter_p),
+            "--m51-watchability-json",
+            str(pmap),
+            "--candidate-checkpoint",
+            str(ck),
+            "--expected-candidate-sha256",
+            "zz",
+            "--sc2-root",
+            str(tmp_path / "sc2"),
+            "--map-path",
+            str(pmap),
+            "--save-replay",
+            "--output-dir",
+            str(outd),
+        ],
+    )
+    assert rc == 3
+
+
+def test_runner_disallowed_opponent_with_guards(tmp_path: Path) -> None:
+    charter_p, pmap, ck = _runner_locals(tmp_path)
+    outd = tmp_path / "out_opp"
+    rc = run_mod.main(
+        [
+            "--authorize-bounded-candidate-adapter-evaluation",
+            "--allow-operator-local-execution",
+            "--m57-charter-json",
+            str(charter_p),
+            "--m51-watchability-json",
+            str(pmap),
+            "--candidate-checkpoint",
+            str(ck),
+            "--sc2-root",
+            str(tmp_path / "sc2"),
+            "--map-path",
+            str(pmap),
+            "--opponent-mode",
+            "cheese_ladder_terran",
+            "--save-replay",
+            "--output-dir",
+            str(outd),
+        ],
+    )
+    assert rc == 3
+
+
+def test_runner_attempt_count_out_of_bounds(tmp_path: Path) -> None:
+    charter_p, pmap, ck = _runner_locals(tmp_path)
+    outd = tmp_path / "out_att"
+    rc = run_mod.main(
+        [
+            "--authorize-bounded-candidate-adapter-evaluation",
+            "--allow-operator-local-execution",
+            "--m57-charter-json",
+            str(charter_p),
+            "--m51-watchability-json",
+            str(pmap),
+            "--candidate-checkpoint",
+            str(ck),
+            "--sc2-root",
+            str(tmp_path / "sc2"),
+            "--map-path",
+            str(pmap),
+            "--attempt-count",
+            "99",
+            "--save-replay",
+            "--output-dir",
+            str(outd),
+        ],
+    )
+    assert rc == 3
+    blob = json.loads((outd / M58_MAIN).read_text(encoding="utf-8"))
+    assert BLOCKED_ATTEMPT_COUNT in canonical_json_dumps(blob)
 
 
 def test_deep_claim_walk() -> None:
